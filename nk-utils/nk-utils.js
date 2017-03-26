@@ -5,7 +5,7 @@
     {
         if ( _c < _min ) return _min;
         else if ( _c > _max ) return _max;
-        else return _c;
+        return _c;
     };
     nk.Utils.ToBinaryString = function ( _val )
     {
