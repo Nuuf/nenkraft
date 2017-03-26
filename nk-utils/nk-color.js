@@ -35,7 +35,7 @@
         this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
     };
 
-    Color.prototype.ConvertToHSLA = function ()
+    Color.prototype.ConvertToHSLA = function ( _round )
     {
         var r = this.channel[ 0 ] / 255, g = this.channel[ 1 ] / 255, b = this.channel[ 2 ] / 255;
         var max = Math.max( r, g, b ), min = Math.min( r, g, b ), maxnmin = max - min, maxpmin = max + min;
@@ -52,6 +52,12 @@
             h /= 6;
         }
         this.channel[ 0 ] = h * 360, this.channel[ 1 ] = s * 100, this.channel[ 2 ] = l * 100;
+        if ( _round === true ) 
+        {
+            this.channel[ 0 ] = Math.round( this.channel[ 0 ] );
+            this.channel[ 1 ] = Math.round( this.channel[ 1 ] );
+            this.channel[ 2 ] = Math.round( this.channel[ 2 ] );
+        }
         this.currentConversion = 'hsl';
         this.ComputeValueHSLA();
     };

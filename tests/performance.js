@@ -5,13 +5,24 @@ var rc = c.getContext( '2d' );
 var WIDTH = c.width;
 var HEIGHT = c.height;
 
-var Draw = nk.Debug.Draw.Polygon;
+var DrawPolygon = nk.Debug.Draw.Polygon;
+var DrawText = nk.Debug.Draw.Text;
 
-var drawStyle = {
-    lineWidth: 0.5,
-    strokeStyle: '#00FF00',
-    fillStyle: '#FF0000'
-};
+var drawStyle = new nk.Style( {
+    strokeStyle: '#FF0000',
+    lineCap: nk.Style.LINE_CAP.SQUARE,
+    lineJoin: nk.Style.LINE_JOIN.MITER,
+    miterLimit: 2,
+    lineWidth: 5,
+    font: '30px Arial'
+} );
+
+var text = 'Hello Geometry';
+var textPoint = {x: 100, y: 100};
+
+
+var color = new nk.Color( 100, 200, 0 );
+color.ConvertToHSLA( true );
 
 var objects = [];
 
@@ -21,13 +32,10 @@ var i = 0, l = 1;
 for ( i; i < l; ++i )
 {
     var po = new nk.Polygon2D();
-    nk.Polygon2D.Construct.Rectangular( po, 0.5 * WIDTH, 0.5 * HEIGHT, 100, 100, 2, 0.3, 0.3, 0.3 );
+    nk.Polygon2D.Construct.Circlic( po, 0.5 * WIDTH, 0.5 * HEIGHT, 100, 9);
     objects.push( po );
     totalVertices += po.vertices.length;
 }
-
-var color = new nk.Color( 100, 200, 0 );
-color.ConvertToHSLA();
 
 
 var then = 0;
@@ -55,8 +63,10 @@ function Update()
     for ( i; i < l; ++i )
     {
         objects[ i ].Rotate( Math.PI / 180, 0.5, 0.5, false );
-        Draw( rc, objects[ i ], drawStyle, false )
+        DrawPolygon( rc, objects[ i ], drawStyle, false );
     }
+
+    DrawText( rc, textPoint, text, drawStyle);
 
     if ( counter++ > counterStop ) 
     {
