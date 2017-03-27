@@ -10,5 +10,8 @@ var nk = {
     },
     Utils: {
 
+    },
+    Entity: {
+        
     }
 };

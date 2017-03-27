@@ -1,6 +1,7 @@
 ( function ()
 {
     "use strict";
+    var HexMap = nk.Utils.B16ToB10;
     function Color( _r, _g, _b, _a )
     {
         if ( this instanceof Color )
@@ -72,6 +73,7 @@
     };
     Color.prototype.SetHex = function ( _hex )
     {
+        _hex = _hex.replace(/#/g, '');
         var strs = _hex.match( /.{2}/g );
         strs = strs.map( HexMap );
         this.SetRGB( strs[ 0 ], strs[ 1 ], strs[ 2 ] );
@@ -82,11 +84,6 @@
         if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
         else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
     };
-
-    function HexMap( _value )
-    {
-        return nk.Utils.B16ToB10( _value );
-    }
 
     nk.Color = Color;
 }() );

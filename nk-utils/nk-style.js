@@ -1,6 +1,9 @@
 ( function ()
 {
     "use strict";
+    /*
+    * @parameter _props: Object
+    */
     function Style( _props )
     {
         if ( this instanceof Style )
