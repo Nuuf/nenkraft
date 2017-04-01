@@ -2,6 +2,9 @@ var nk = {
     Geom: {
 
     },
+    Style: {
+
+    },
     Debug: {
         Draw: {}
     },
@@ -12,6 +15,9 @@ var nk = {
 
     },
     Entity: {
-        
+
+    },
+    Path: {
+
     }
 };
