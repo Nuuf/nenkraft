@@ -32,11 +32,25 @@
       }
     }
   };
-  nk.Utils.NestedAccess = {};
-  nk.Utils.NestedAccess.Get = function ( _obj, _prop ) {
-
-  };
-  nk.Utils.NestedAccess.Set = function ( _obj, _prop ) {
-
+  nk.Utils.NestedAccess = function ( _obj, _string, _set, _value ) {
+    if ( typeof _string === 'string' ) {
+      _string = _string.split( '.' );
+    }
+    var key;
+    if ( _string.length > 1 ) {
+      key = _string.shift();
+      if ( _obj[ key ] !== undefined ) {
+        nk.Utils.NestedAccess( _obj[ key ], _string, _set, _value );
+      }
+    } else {
+      key = _string.shift();
+      if ( _obj[ key ] !== undefined ) {
+        if ( _set === true ) {
+          _obj[ key ] = _value;
+        } else {
+          return _obj[ key ];
+        }
+      }
+    }
   };
 }() );

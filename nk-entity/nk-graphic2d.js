@@ -7,8 +7,8 @@
       this.anchor = new nk.Vector2D();
       if ( _texture !== undefined ) {
         this.texture = _texture;
-        this.w = _texture.w;
-        this.h = _texture.h;
+        this.w = _texture.w === undefined ? 0 : _texture.w;
+        this.h = _texture.h === undefined ? 0 : _texture.h;
       } else {
         this.texture = null;
         this.w = 0;

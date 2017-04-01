@@ -12,7 +12,7 @@
   AABB2D.prototype = Object.create( Super.prototype );
   AABB2D.prototype.constructor = AABB2D;
   AABB2D.prototype.Draw = function ( _rc ) {
-    var tl = this.tl, br = this.br, style = this.style, fill = style.fill, line = style.line, shadow = style.shadow;
+    var tl = this.tl, br = this.br, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
     _rc.beginPath();
     _rc.moveTo( tl.x, tl.y );
     _rc.lineTo( br.x, tl.y );
@@ -24,8 +24,8 @@
       fill.Apply( _rc );
       _rc.fill();
     }
-    if ( line.applied === true ) {
-      line.Apply( _rc );
+    if ( stroke.applied === true ) {
+      stroke.Apply( _rc );
       _rc.stroke();
     }
   };
