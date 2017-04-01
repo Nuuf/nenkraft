@@ -11,79 +11,58 @@ var H = c.height, HH = H * 0.5;
 
 var container = new nk.Container2D( HW, HH );
 
-var color = new nk.Color( 255, 0, 0 );
+var color = new nk.Color( 0, 255, 0 );
 color.ConvertToHSLA();
 
-var path = new nk.Path.AABB2D( -50, -50, 50, 50 );
-path.style.shadow.applied = true;
-var child1 = new nk.Graphic2D( 0, 0, path );
+var path = new nk.Path.Polygon2D();
+//path.style.shadow.applied = true;
+nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 100, 50, 8 );
 
-var child2 = new nk.Graphic2D( 0, 0, path );
+var bfly = new nk.Path.Polygon2D();
+//bfly.style.shadow.applied = true;
+bfly.style.stroke.lineWidth = 0.5;
+bfly.style.fill.applied = false;
+nk.Geom.Polygon2D.Construct.Butterfly( bfly, 0, 0, 150, 40 );
 
-var child3 = new nk.Graphic2D( 0, 0, path );
+var child = new nk.Graphic2D( 0, -HH * 0.5, path );
+var child_ = new nk.Graphic2D( 0, 0, bfly );
 
-var child4 = new nk.Graphic2D( 0, 0, path );
+child.AddChild( child_ );
 
-var angle1 = 0;
-var speed1 = 0;
+child.visible = false;
 
-var angle2 = 0;
-var speed2 = 0;
+container.AddChild( child );
 
-var line = new nk.Path.Line2D( -100, 0, 100, 0 );
-line.style.shadow.applied = true;
-line.style.stroke.strokeStyle = '#000';
-var child$1 = new nk.Graphic2D( 0, 0, line );
-var child$2 = new nk.Graphic2D( 0, 0, line );
-var child$3 = new nk.Graphic2D( 0, 0, line );
-var child$4 = new nk.Graphic2D( 0, 0, line );
+var angle = 0;
+var speed = 3;
 
-container.AddChildren( child1, child2, child3, child4 );
 
-child1.AddChild( child$1 );
-child2.AddChild( child$2 );
-child3.AddChild( child$3 );
-child4.AddChild( child$4 );
+var text = new nk.Text( 0, 0, 'Hello. My name\'s bat. James Bat.' );
+text.style.text.textAlign = nk.Style.TEXT_ALIGN.CENTER;
+text.style.text.textBaseline = nk.Style.TEXT_BASELINE.MIDDLE;
+text.style.text.font = '56px Arial';
+
+container.AddChild( text );
 
 function Update() {
 
-  path.style.fill.fillStyle = color.value;
+  color.IncreaseChannel( 0, 0.1 );
 
-  color.IncreaseChannel( 0, 1 );
+  bfly.style.stroke.strokeStyle = color.value;
+  text.style.text.fillStyle = color.value;
 
-  var a1 = nk.Math.DTR( angle1 );
-  var a2 = nk.Math.DTR( angle2 );
+  var a = nk.Math.DTR( angle );
 
-  child1.x += Math.cos( a1 ) * speed1;
-  child1.y += Math.sin( a1 ) * speed1;
-  child2.x -= Math.cos( a1 ) * speed1;
-  child2.y -= Math.sin( a1 ) * speed1;
+  child.x += Math.cos( a ) * speed;
+  child.y += Math.sin( a ) * speed;
 
-  child3.x += Math.cos( a2 ) * speed2;
-  child3.y += Math.sin( a2 ) * speed2;
-  child4.x -= Math.cos( a2 ) * speed2;
-  child4.y -= Math.sin( a2 ) * speed2;
+  text.y += Math.sin( a ) * speed;
 
-  child1.rotation = -a1;
-  child2.rotation = -a1;
-  child3.rotation = -a2;
-  child4.rotation = -a2;
+  child.rotation = a;
 
-  angle1 += 1;
+  angle++;
 
-  angle2 -= 1;
-
-  speed1 += 0.01;
-
-  speed2 += 0.01;
-
-  speed1 = nk.Utils.InverseClamp( speed1, -5, 5 );
-  speed2 = nk.Utils.InverseClamp( speed2, -5, 5 );
-
-  angle1 = nk.Utils.InverseClamp( angle1, 0, 359 );
-  angle2 = nk.Utils.InverseClamp( angle2, -359, 0 );
-
-  rc.fillStyle = 'rgba(255, 255, 255, 0.001)';
+  rc.fillStyle = 'rgba(255, 255, 255, 0.1)';
   rc.fillRect( 0, 0, W, H );
 
   container.Draw( rc );
@@ -92,49 +71,3 @@ function Update() {
 }
 
 setInterval( Update, 1 );
-
-
-
-var a = {
-  a: {
-
-  },
-  b: {
-    b: {
-
-    },
-    c: {
-      d: {
-        e: {
-          f: {
-            g: {
-              h: {
-                i: {
-                  j: {
-                    k: {
-                      l: {
-                        m: {
-                          n: {
-                            o: {
-                              p: {
-                                q: 10
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-nk.Utils.NestedAccess( a, 'b.c.d.e.f..g.h.i.j.k.l.m.n.o.p.q' );
-nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q', true, 20 );
-nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q' );

@@ -2,9 +2,9 @@
   "use strict";
   function Text( _props ) {
     if ( this instanceof Text ) {
-      this.fillStyle = null;
+      this.fillStyle = '#000000';
       this.strokeStyle = null;
-      this.font = '16px Arial';
+      this.font = '22px Arial';
       this.textAlign = nk.Style.TEXT_ALIGN.LEFT;
       this.textBaseline = nk.Style.TEXT_BASELINE.TOP;
       this.applied = true;

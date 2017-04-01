@@ -1,15 +1,13 @@
-( function ()
-{
-    "use strict";
-    function Class()
-    {
-        if ( this instanceof Class )
-        {
-            //Super.call(this);
-        }
-        else return new Class();
+( function () {
+  "use strict";
+  //var Super = null;
+  function Class() {
+    if ( this instanceof Class ) {
+      //Super.call(this);
     }
-    Class.prototype = Object.create( null /*Super.prototype*/ );
-    Class.prototype.constructor = Class;
-    nk.Class = Class;
+    else return new Class();
+  }
+  Class.prototype = Object.create( null /*Super.prototype*/ );
+  Class.prototype.constructor = Class;
+  nk.Class = Class;
 }() );

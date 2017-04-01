@@ -50,9 +50,7 @@
   Polygon2D.prototype.ContainsPoint = function ( _v ) {
     if ( this.dirtyBounds === true ) this.ComputeBounds();
     if ( this.aabb.IntersectsPoint( _v ) === false ) return false;
-    else {
-
-    }
+    return true;
   };
   Polygon2D.Construct = {};
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {

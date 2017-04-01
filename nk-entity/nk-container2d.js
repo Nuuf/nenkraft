@@ -7,19 +7,22 @@
       this.rotation = 0;
       this.parent = null;
       this.children = [];
+      this.render = true;
     }
     else return new Container( _x, _y );
   }
   Container2D.prototype = Object.create( null );
   Container2D.prototype.constructor = Container2D;
   Container2D.prototype.Draw = function ( _rc ) {
-    var position = this.position, scale = this.scale;
-    _rc.save();
-    _rc.translate( position.x, position.y );
-    _rc.rotate( this.rotation );
-    _rc.scale( scale.x, scale.y );
-    this.DrawChildren( _rc );
-    _rc.restore();
+    if ( this.render === true ) {
+      var position = this.position, scale = this.scale;
+      _rc.save();
+      _rc.translate( position.x, position.y );
+      _rc.rotate( this.rotation );
+      _rc.scale( scale.x, scale.y );
+      this.DrawChildren( _rc );
+      _rc.restore();
+    }
   };
   Container2D.prototype.DrawChildren = function ( _rc ) {
     for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {

@@ -4,8 +4,7 @@
   function AABB2D( _arg0, _arg1, _arg2, _arg3 ) {
     if ( this instanceof AABB2D ) {
       Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-      this.style = nk.Style.Create();
-      delete this.style.text;
+      this.style = nk.Style.CreateFSSa();
     }
     else return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
   }

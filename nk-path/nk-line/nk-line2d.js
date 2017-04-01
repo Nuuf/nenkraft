@@ -4,9 +4,7 @@
   function Line2D( _arg0, _arg1, _arg2, _arg3 ) {
     if ( this instanceof Line2D ) {
       Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-      this.style = nk.Style.Create();
-      delete this.style.text;
-      delete this.style.fill;
+      this.style = nk.Style.CreateSSa();
     }
     else return new Line2D( _arg0, _arg1, _arg2, _arg3 );
   }
