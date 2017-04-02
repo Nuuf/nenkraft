@@ -1,0 +1,12 @@
+{
+  "name": "nenkraft",
+  "description": "none",
+  "author": "Nuuf",
+  "version": "0.0.1",
+  "devDependencies": {
+    "jshint": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint tests/playground.js"
+  }
+}
