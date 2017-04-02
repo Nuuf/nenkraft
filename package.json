@@ -4,9 +4,14 @@
   "author": "Nuuf",
   "version": "0.0.1",
   "devDependencies": {
-    "jshint": "*"
+    "webpack": "^2.*",
+    "webpack-dev-server": "^2.*",
+    "rimraf": "*",
+    "html-webpack-plugin": "^2.*"
   },
   "scripts": {
-    "test": "./node_modules/jshint/bin/jshint tests/playground.js"
+    "serve": "SET NODE_ENV=development&& node deve-server.js",
+    "build": "rimraf dist && SET NODE_ENV=production&& webpack",
+    "clean": "rimraf dist"
   }
 }
