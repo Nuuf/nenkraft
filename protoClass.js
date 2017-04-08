@@ -1,4 +1,4 @@
-( function () {
+module.exports = function () {
   "use strict";
   //var Super = null;
   function Class() {
@@ -10,4 +10,4 @@
   Class.prototype = Object.create( null /*Super.prototype*/ );
   Class.prototype.constructor = Class;
   nk.Class = Class;
-}() );
+};

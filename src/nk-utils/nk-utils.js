@@ -19,9 +19,9 @@ module.exports = function ( nk ) {
   nk.Utils.B16ToB10 = function ( _str ) {
     return parseInt( _str, 16 );
   };
-  nk.Utils.IntegerNotation = function ( _val, _roof ) {
+  nk.Utils.IntegerNotation = function ( _val, _roof, _splitter ) {
     var vrm = _val % _roof, vrd = _val / _roof;
-    return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + '.' + ( 1 + vrm );
+    return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
   };
   nk.Utils.ApplyProperties = function ( _obj, _props ) {
     if ( _props !== undefined ) {
@@ -52,5 +52,17 @@ module.exports = function ( nk ) {
         }
       }
     }
+  };
+  nk.Utils.ArrayGetRandom = function ( _array, _amount ) {
+    var array = [], control = {}, _al = _array.length;
+    for ( var i = 0, l = _amount; i < l; ++i ) {
+      var ix = Math.floor( Math.random() * _al );
+      if ( control[ ix ] === undefined ) {
+        control[ ix ] = null;
+        array.push( _array[ ix ] );
+      }
+      else i--;
+    }
+    return array;
   };
 };

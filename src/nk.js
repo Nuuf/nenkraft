@@ -9,6 +9,7 @@ require( './nk-style/nk-stroke' )( ns );
 require( './nk-style/nk-text' )( ns );
 require( './nk-style/nk-style' )( ns );
 require( './nk-math/nk-vector/nk-vector2d' )( ns );
+require( './nk-math/nk-vector/nk-limit-vector2d' )( ns );
 require( './nk-math/nk-math' )( ns );
 require( './nk-math/nk-intersect' )( ns );
 require( './nk-debug/nk-debug' )( ns );

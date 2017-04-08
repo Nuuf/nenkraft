@@ -6,9 +6,15 @@ module.exports = function ( nk ) {
         this.x = _arg0.x;
         this.y = _arg0.y;
       }
-      else if ( _arg0 !== undefined && _arg1 !== undefined ) {
-        this.x = _arg0;
-        this.y = _arg1;
+      else if ( _arg0 !== undefined ) {
+        if ( _arg1 === undefined ) {
+          this.x = _arg0;
+          this.y = _arg0;
+        }
+        else {
+          this.x = _arg0;
+          this.y = _arg1;
+        }
       }
       else {
         this.x = 0;

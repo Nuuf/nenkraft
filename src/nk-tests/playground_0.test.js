@@ -46,7 +46,7 @@ module.exports = function () {
     var speed = 3;
 
 
-    var text = new nk.Text( 0, 0, 'Hello. My name\'s bat. James Bat.' );
+    var text = new nk.Text( 0, 0, 'Stop trying to hit me and hit me!' );
     text.style.text.textAlign = nk.Style.TEXT_ALIGN.CENTER;
     text.style.text.textBaseline = nk.Style.TEXT_BASELINE.MIDDLE;
     text.style.text.font = '56px Arial';
@@ -71,7 +71,7 @@ module.exports = function () {
 
       angle++;
 
-      rc.fillStyle = 'rgba(255, 255, 255, 0.1)';
+      rc.fillStyle = 'rgba(255, 255, 255, 0.5)';
       rc.fillRect( 0, 0, W, H );
 
       container.Draw( rc );
@@ -80,6 +80,50 @@ module.exports = function () {
     }
 
     setInterval( Update, 1 );
+
+    var a = {
+      a: {
+
+      },
+      b: {
+        b: {
+
+        },
+        c: {
+          d: {
+            e: {
+              f: {
+                g: {
+                  h: {
+                    i: {
+                      j: {
+                        k: {
+                          l: {
+                            m: {
+                              n: {
+                                o: {
+                                  p: {
+                                    q: 10
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    nk.Utils.NestedAccess( a, 'b.c.d.e.f..g.h.i.j.k.l.m.n.o.p.q' );
+    nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q', true, 20 );
+    nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q' );
 
     document.body.removeChild( buttonContainer );
   }

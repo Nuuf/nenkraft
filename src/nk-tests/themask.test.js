@@ -103,52 +103,6 @@ module.exports = function () {
 
     setInterval( Update, 1 );
 
-
-
-    var a = {
-      a: {
-
-      },
-      b: {
-        b: {
-
-        },
-        c: {
-          d: {
-            e: {
-              f: {
-                g: {
-                  h: {
-                    i: {
-                      j: {
-                        k: {
-                          l: {
-                            m: {
-                              n: {
-                                o: {
-                                  p: {
-                                    q: 10
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    nk.Utils.NestedAccess( a, 'b.c.d.e.f..g.h.i.j.k.l.m.n.o.p.q' );
-    nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q', true, 20 );
-    nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q' );
-
     document.body.removeChild( buttonContainer );
   }
 };

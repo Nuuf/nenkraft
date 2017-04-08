@@ -18,19 +18,56 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var container = new nk.Container2D( HW, HH );
+    var container = new nk.Container2D( 0, 0 );
+
+    var starTexture = new nk.Path.Polygon2D();
+    starTexture.style.stroke.applied = false;
+    starTexture.style.fill.fillStyle = 'white';
+    nk.Geom.Polygon2D.Construct.Star( starTexture, 0, 0, 1, 2, 6 );
+
+    //Create stars
+    for ( var i = 0, l = parseInt( W / H * 100 ); i < l; ++i ) {
+      var graphic = new nk.Graphic2D( 0, 0, starTexture );
+      container.AddChild( graphic );
+      graphic.scale = new nk.LimitVector2D( Math.random(), undefined, -4, -4, 4, 4 );
+      graphic.position = new nk.LimitVector2D( Math.random() * W, Math.random() * H, 0, 0, W, H );
+      graphic.scale.invert = true;
+      graphic.position.invert = true;
+    }
+
+    var rChildren = nk.Utils.ArrayGetRandom( container.children, 4 );
+    var rrChildren = nk.Utils.ArrayGetRandom( container.children, 4 );
+
+    var scaleSpeed = new nk.Vector2D( 0.01 );
+    var fallSpeed = new nk.Vector2D( 2, 4 );
+
+    console.log( container.children.length );
 
     function Update() {
 
-      rc.fillStyle = 'rgba(255, 255, 255, 1)';
+      rc.fillStyle = 'rgba(0, 0, 0, 0.1)';
       rc.fillRect( 0, 0, W, H );
 
-      container.Draw( rc );
+      for ( var i = 0, l = rChildren.length, child; i < l; ++i ) {
+        child = rChildren[ i ];
+        if ( child ) {
+          child.position.AddV( fallSpeed );
+          child.position.Limit();
+        }
+      }
 
-      requestAnimationFrame( Update );
+      for ( var i = 0, l = rrChildren.length, child; i < l; ++i ) {
+        child = rrChildren[ i ];
+        if ( child ) {
+          child.scale.AddV( scaleSpeed );
+          child.scale.Limit();
+        }
+      }
+
+      container.Draw( rc );
     }
 
-    Update();
+    setInterval( Update, 1 );
 
     document.body.removeChild( buttonContainer );
   }
