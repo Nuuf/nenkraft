@@ -1,4 +1,3 @@
-
 var webpack = require( 'webpack' ),
   path = require( 'path' ),
   HTMLWebpackPlugin = require( 'html-webpack-plugin' ),
@@ -6,14 +5,22 @@ var webpack = require( 'webpack' ),
   DEVELOPMENT = !PRODUCTION;
 
 var entry = PRODUCTION
-  ? [
-    './src/index.js'
-  ]
-  : [
-    './src/index.js',
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080'
-  ];
+  ? {
+    nk: [
+      './src/nk.js'
+    ],
+    tests: [
+      './src/tests.js',
+    ]
+  }
+  : {
+    nk: [
+      './src/nk.js',
+      './src/tests.js',
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080'
+    ]
+  };
 
 var plugins = PRODUCTION
   ? [
@@ -33,22 +40,21 @@ plugins.push(
   } )
 );
 
-console.log( JSON.stringify( entry ) );
+console.log( JSON.stringify( entry.nk ) );
+console.log( JSON.stringify( entry.tests ) );
 console.log( JSON.stringify( plugins ) );
 
 module.exports = {
   devtool: 'source-map',
   entry: entry,
   plugins: plugins,
-  externals: {
-
-  },
+  externals: {},
   module: {
     rules: []
   },
   output: {
     path: path.join( __dirname, 'dist' ),
     publicPath: PRODUCTION ? './' : '/dist/',
-    filename: PRODUCTION ? 'nk.min.js' : 'nk.min.js'
+    filename: PRODUCTION ? '[name].min.js' : '[name].min.js'
   }
 };

@@ -11,7 +11,7 @@ module.exports = function ( nk ) {
   Polygon2D.prototype = Object.create( Super.prototype );
   Polygon2D.prototype.constructor = Polygon2D;
   Polygon2D.prototype.Draw = function ( _rc ) {
-    var s = this.s, e = this.e, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
+    var style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
     var vertices = this.vertices, vertex = vertices[ 0 ];
     _rc.beginPath();
     _rc.moveTo( vertex.x, vertex.y );

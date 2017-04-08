@@ -7,7 +7,8 @@
     "webpack": "^2.*",
     "webpack-dev-server": "^2.*",
     "rimraf": "*",
-    "html-webpack-plugin": "^2.*"
+    "html-webpack-plugin": "^2.*",
+    "file-loader": "*"
   },
   "scripts": {
     "serve": "SET NODE_ENV=development&& node deve-server.js",

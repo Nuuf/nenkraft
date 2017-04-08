@@ -2,20 +2,29 @@
 <html>
 
 <head>
+  <style>
+    #buttons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+    }
+    
+    #buttons input {
+      display: list-item;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
   <canvas></canvas>
 
-  <script src="dist/nk.min.js"></script>
+  <div id="buttons">
 
-  <!--
-		<script src="./tests/performance.js"></script>
-		<script src="./tests/playground_0.js"></script>
-    <script src="./tests/playground_1.js"></script>
-    <script src="./tests/themask.js"></script>
-	-->
-  <script src="./tests/themask.js"></script>
+  </div>
+
+  <script src="dist/nk.min.js"></script>
 </body>
 
 </html>
