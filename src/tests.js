@@ -1,3 +1,5 @@
+require( './../style/default.css' );
+
 var tests = [];
 
 tests.push(

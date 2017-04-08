@@ -7,8 +7,14 @@
     "webpack": "^2.*",
     "webpack-dev-server": "^2.*",
     "rimraf": "*",
-    "html-webpack-plugin": "^2.*",
-    "file-loader": "*"
+    "autoprefixer": "*",
+    "css-loader": "*",
+    "file-loader": "*",
+    "style-loader": "*",
+    "url-loader": "*",
+    "postcss-loader": "*",
+    "extract-text-webpack-plugin": "^2.*",
+    "html-webpack-plugin": "^2.*"
   },
   "scripts": {
     "serve": "SET NODE_ENV=development&& node deve-server.js",

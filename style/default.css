@@ -1,0 +1,11 @@
+#buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+}
+    
+#buttons input {
+  display: list-item;
+  width: 100%;
+}
