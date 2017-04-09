@@ -6,7 +6,8 @@ tests.push(
   require( './nk-tests/themask.test' ),
   require( './nk-tests/performance.test' ),
   require( './nk-tests/playground_0.test' ),
-  require( './nk-tests/playground_1.test' )
+  require( './nk-tests/playground_1.test' ),
+  require( './nk-tests/playground_2.test' )
 );
 
 for ( var i = 0, l = tests.length; i < l; ++i ) {

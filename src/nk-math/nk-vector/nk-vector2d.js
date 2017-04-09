@@ -158,6 +158,16 @@ module.exports = function ( nk ) {
     d.Subtract( _x, _y );
     return d.GetMagnitude();
   };
+  Vector2D.prototype.GetDistanceSquaredV = function ( _v ) {
+    var d = this.Copy();
+    d.Subtract( _v );
+    return d.GetMagnitudeSquared();
+  };
+  Vector2D.prototype.GetDistanceSquared = function ( _x, _y ) {
+    var d = this.Copy();
+    d.Subtract( _x, _y );
+    return d.GetMagnitudeSquared();
+  };
   Vector2D.prototype.GetLength = Vector2D.prototype.GetMagnitude;
   Vector2D.prototype.GetLengthSquared = Vector2D.prototype.GetMagnitudeSquared;
 

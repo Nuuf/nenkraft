@@ -10,5 +10,8 @@ module.exports = function ( nk ) {
   nk.Utils = {};
   nk.Entity = {};
   nk.Path = {};
-  nk.VERSION = '0.0.1';
+  nk.Event = {};
+  nk.Time = {};
+  nk.Input = {};
+  nk.VERSION = '0.0.2 (Omega)';
 };

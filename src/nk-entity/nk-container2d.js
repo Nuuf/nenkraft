@@ -69,13 +69,16 @@ module.exports = function ( nk ) {
       }
     }
   };
+  Container2D.prototype.Dump = function () {
+    this.children.length = 0;
+  };
   nk.Entity.Container2D = Container2D;
   nk.Container2D = Container2D;
   Object.defineProperty( Container2D.prototype, 'x', {
     set: function ( _value ) {
       this.position.x = _value;
     },
-    get: function ( _value ) {
+    get: function () {
       return this.position.x;
     }
   } );
@@ -83,7 +86,7 @@ module.exports = function ( nk ) {
     set: function ( _value ) {
       this.position.y = _value;
     },
-    get: function ( _value ) {
+    get: function () {
       return this.position.y;
     }
   } );

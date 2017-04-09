@@ -22,7 +22,7 @@ module.exports = function ( nk ) {
   * @parameter _prec: Integer
   */
   nk.Math.PrecisionRound = function ( _val, _prec ) {
-    var dvis = Math.pow( 10, _p );
+    var dvis = Math.pow( 10, _prec );
     return Math.round( dvis * _val ) / dvis;
   };
   nk.Math.PR = nk.Math.PrecisionRound;
