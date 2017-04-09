@@ -12,7 +12,7 @@ var container = nk.Container2D();
 //Create a texture
 var texture = nk.Path.Polygon2D();
 //Construct texture
-nk.Geom.Polygon2D.Construct.Circlic( path, 0, 0, 100, 30 );
+nk.Geom.Polygon2D.Construct.Circlic( texture, 0, 0, 100, 30 );
 //Create a graphic object
 var graphic = nk.Graphic2D( 0, 0, texture );
 //Add to container
