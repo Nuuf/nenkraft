@@ -4,7 +4,7 @@ module.exports = function () {
     if ( this instanceof Mouse ) {
       this.element = _element;
       this.position = new nk.Vector2D( 0, 0 );
-      _element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
+      this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
     }
     else return new Mouse( _element );
   }

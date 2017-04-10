@@ -4,14 +4,15 @@ module.exports = function ( nk ) {
     if ( this instanceof Circle ) {
       this.position = new nk.Vector2D( _x, _y );
       this.radiusSquared = 0;
-      this.radiusUnsquared = _radius === undefined ? 32 : _radius;
+      this.radiusUnsquared = 0;
+      this.radius = _radius === undefined ? 32 : _radius;
     }
     else return new Circle();
   }
   Circle.prototype = Object.create( null );
   Circle.prototype.constructor = Circle;
   Circle.prototype.IntersectsPoint = function ( _v ) {
-    var distance = this.position.GetDistancSquaredV( _v );
+    var distance = this.position.GetDistanceSquaredV( _v );
     if ( ( this.radiusSquared ) > distance ) {
       return true;
     }

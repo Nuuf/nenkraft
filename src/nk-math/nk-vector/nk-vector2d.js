@@ -2,7 +2,7 @@ module.exports = function ( nk ) {
   "use strict";
   function Vector2D( _arg0, _arg1 ) {
     if ( this instanceof Vector2D ) {
-      if ( _arg0 !== undefined && _arg0.x && _arg0.y ) {
+      if ( _arg0 !== undefined && _arg0.x !== undefined && _arg0.y !== undefined ) {
         this.x = _arg0.x;
         this.y = _arg0.y;
       }
@@ -150,7 +150,7 @@ module.exports = function ( nk ) {
   };
   Vector2D.prototype.GetDistanceV = function ( _v ) {
     var d = this.Copy();
-    d.Subtract( _v );
+    d.SubtractV( _v );
     return d.GetMagnitude();
   };
   Vector2D.prototype.GetDistance = function ( _x, _y ) {
@@ -160,7 +160,7 @@ module.exports = function ( nk ) {
   };
   Vector2D.prototype.GetDistanceSquaredV = function ( _v ) {
     var d = this.Copy();
-    d.Subtract( _v );
+    d.SubtractV( _v );
     return d.GetMagnitudeSquared();
   };
   Vector2D.prototype.GetDistanceSquared = function ( _x, _y ) {

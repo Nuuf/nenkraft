@@ -22,17 +22,26 @@ module.exports = function () {
 
     var ticker = new nk.Ticker( Update );
 
-    var container = new nk.Container2D( HW, HH );
+    var container = new nk.Container2D( 0, 0 );
 
     var texture = new nk.Path.Circle( 0, 0, 100 );
-    var graphic = new nk.Graphic2D( 0, 0, texture );
+    var graphic = new nk.Graphic2D( HW, HH, texture );
 
     container.AddChild( graphic );
+
+
 
     function Update() {
 
       rc.fillStyle = 'rgba(0, 0, 0, 0.1)';
       rc.fillRect( 0, 0, W, H );
+
+      var gpc = graphic.position.Copy();
+      gpc.SubtractV( mouse.position );
+
+      if ( texture.IntersectsPoint( gpc ) ) {
+        console.log( 'x' );
+      }
 
       container.Draw( rc );
     }
