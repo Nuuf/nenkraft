@@ -65,4 +65,11 @@ module.exports = function ( nk ) {
     }
     return array;
   };
+  nk.Utils.ArrayRemove = function ( _array, _obj ) {
+    var ix = _array.indexOf( _obj );
+    if ( ix !== -1 ) {
+      return _array.splice( ix, 1 );
+    }
+    return null;
+  };
 };
