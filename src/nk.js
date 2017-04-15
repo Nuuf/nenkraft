@@ -30,6 +30,7 @@ require( './nk-path/nk-circle/nk-circle' )( ns );
 require( './nk-entity/nk-container2d' )( ns );
 require( './nk-entity/nk-graphic2d' )( ns );
 require( './nk-entity/nk-text' )( ns );
+require( './nk-cp/nk-option' )( ns );
 require( './nk-cp/nk-command' )( ns );
 require( './nk-cp/nk-register' )( ns );
 
