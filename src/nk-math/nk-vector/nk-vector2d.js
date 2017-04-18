@@ -41,6 +41,9 @@ module.exports = function ( nk ) {
       this.y = _y;
     }
   };
+  Vector2D.prototype.Is0 = function () {
+    return this.x === 0 && this.y === 0;
+  };
   Vector2D.prototype.AddV = function ( _v ) {
     this.x += _v.x;
     this.y += _v.y;

@@ -18,33 +18,48 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var mouse = new nk.Input.Mouse( c );
+    var stage = new nk.Stage2D( c );
 
-    var ticker = new nk.Ticker( Update );
+    var text = new nk.Text( 100, 100, 'Grab and drag' );
 
-    var container = new nk.Container2D( 0, 0 );
+    var graphicCircle = new nk.Graphic2D( 350, 150, new nk.Path.Circle( 0, 0, 100 ) );
+    var graphicRectangle = new nk.Graphic2D( 450, 200, new nk.Path.AABB2D( 0, 0, 200, 200 ) );
+    graphicRectangle.anchor.Set( 0.5 );
 
-    var texture = new nk.Path.Circle( 0, 0, 100 );
-    var graphic = new nk.Graphic2D( HW, HH, texture );
+    var dragger = null;
 
-    container.AddChild( graphic );
+    stage.AddChild( text );
+    stage.AddChild( graphicCircle );
+    stage.AddChild( graphicRectangle );
 
-
-
-    function Update() {
-
-      rc.fillStyle = 'rgba(0, 0, 0, 0.1)';
-      rc.fillRect( 0, 0, W, H );
-
-      var gpc = graphic.position.Copy();
-      gpc.SubtractV( mouse.position );
-
-      if ( texture.IntersectsPoint( gpc ) ) {
-        console.log( 'x' );
-      }
-
-      container.Draw( rc );
+    var t = 10;
+    while ( --t ) {
+      stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( 0, 0, 200, 200 ) ) );
     }
+
+    stage.mouse.onMove.Add( function ( _event ) {
+      if ( dragger !== null ) {
+        dragger.x = _event.data.x;
+        dragger.y = _event.data.y;
+      }
+    }, stage );
+    stage.mouse.onDown.Add( function ( _event ) {
+      var p = _event.data;
+      for ( var i = stage.children.length; --i; ) {
+        if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragger = stage.children[ i ];
+
+          _event.stopPropagation = true;
+
+          dragger.SendToFront();
+          break;
+        }
+      }
+    }, stage );
+    stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) dragger = null;
+    } );
+
 
     document.body.removeChild( buttonContainer );
   }

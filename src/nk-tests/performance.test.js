@@ -20,19 +20,23 @@ module.exports = function () {
 
     var container = new nk.Container2D( HW, HH );
     var texture = new nk.Path.Polygon2D();
-    nk.Geom.Polygon2D.Construct.Circlic( texture, 0, 0, 50, 4 );
+    nk.Geom.Polygon2D.Construct.Circlic( texture, 0, 0, 30, 3 );
 
     var ticker = new nk.Ticker( Update );
 
-    var numTimes = 50;
-    var fps = 30;
+    var numTimes = 20;
+    var fps = 24;
 
     var childrenMDC = [];
 
     var timer = new nk.Timer();
     timer.onStop.Add( function () {
-      var graphic = new nk.Graphic2D( Math.random() * W - HW, Math.random() * H - HH, texture );
-      container.AddChild( graphic );
+      var i = 50;
+      while ( --i ) {
+        var graphic = new nk.Graphic2D( Math.random() * W - HW, Math.random() * H - HH, texture );
+        container.AddChild( graphic );
+      }
+
       if ( ticker.GetTPS() > fps ) this.Start( 1 );
       else {
         var numChildren = container.children.length;
@@ -46,7 +50,7 @@ module.exports = function () {
           childrenMDC.sort( function ( a, b ) {
             return a - b;
           } );
-          console.log( childrenMDC, 'MIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+          console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
         }
       }
     }, timer );
@@ -61,8 +65,6 @@ module.exports = function () {
       container.Draw( rc );
       timer.Process();
     }
-
-    setInterval( Update, 1 );
 
     document.body.removeChild( buttonContainer );
   }

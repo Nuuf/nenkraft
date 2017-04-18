@@ -11,7 +11,9 @@ module.exports = function ( nk ) {
   }
   Circle.prototype = Object.create( null );
   Circle.prototype.constructor = Circle;
-  Circle.prototype.IntersectsPoint = function ( _v ) {
+  Circle.prototype.IntersectsPoint = function ( _v, _anchor, _w, _h ) {
+    if ( _anchor.x !== 0 ) _v.x -= _anchor.x * _w;
+    if ( _anchor.y !== 0 ) _v.y -= _anchor.y * _h;
     var distance = this.position.GetDistanceSquaredV( _v );
     if ( ( this.radiusSquared ) > distance ) {
       return true;

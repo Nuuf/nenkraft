@@ -4,6 +4,7 @@ module.exports = function () {
     if ( this instanceof Option ) {
       this.id = _id.split( ' ' );
       this.handle = _handle;
+      this.command = null;
       this.info = _info;
       this.priority = _priority === undefined ? 0 : _priority;
       this.breakIfExecuted = _breakIfExecuted === undefined ? false : _breakIfExecuted;

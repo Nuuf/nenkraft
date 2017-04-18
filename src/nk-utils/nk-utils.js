@@ -1,5 +1,17 @@
 module.exports = function ( nk ) {
   "use strict";
+  nk.Utils.RandomInteger = function ( _min, _max ) {
+    return Math.floor( Math.random() * ( _max - _min + 1 ) + _min );
+  };
+  nk.Utils.RandomFloat = function ( _min, _max ) {
+    return Math.random() * ( _max - _min ) + _min;
+  };
+  nk.Utils.IsInteger = function ( _val ) {
+    return Number( _val ) === _val && _val % 1 === 0;
+  };
+  nk.Utils.IsFloat = function ( _val ) {
+    return Number( _val ) === _val && _val % 1 !== 0;
+  };
   nk.Utils.Clamp = function ( _c, _min, _max ) {
     if ( _c < _min ) return _min;
     else if ( _c > _max ) return _max;
@@ -10,22 +22,42 @@ module.exports = function ( nk ) {
     else if ( _c > _max ) return _min;
     return _c;
   };
-  nk.Utils.ToBinaryString = function ( _val ) {
-    return _val.toString( 2 );
-  };
-  nk.Utils.ToHexString = function ( _val ) {
-    return _val.toString( 16 );
-  }
-  nk.Utils.B16ToB10 = function ( _str ) {
-    return parseInt( _str, 16 );
-  };
   nk.Utils.IntegerNotation = function ( _val, _roof, _splitter ) {
     var vrm = _val % _roof, vrd = _val / _roof;
     return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
   };
-  nk.Utils.RandomInt = function ( _min, _max ) {
-    return Math.floor( Math.random() * ( _max - _min + 1 ) + _min );
+  nk.Utils.UUID = function ( _length, _parts, _charSetIndex, _separator ) {
+    _length = _length === undefined ? 32 : _length;
+    _parts = _parts === undefined ? 4 : _parts;
+    _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
+    _separator = _separator === undefined ? '-' : _separator;
+    var id = '';
+    for (
+      var i = 0,
+      lpd = Math.floor( _length / _parts ),
+      ilpdd,
+      at,
+      charset = nk.Utils.CharacterSets[ _charSetIndex ]
+      ; i < _length
+      ; ++i
+    ) {
+      ilpdd = i / lpd;
+      if ( ilpdd !== 0 && Number.isInteger( ilpdd ) ) id += _separator;
+      else {
+        at = nk.Utils.RandomInteger( 1, charset.length - 1 );
+        id += charset.charAt( at );
+      }
+    }
+    return id;
   };
+  nk.Utils.CharacterSets = [
+    '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz',
+    '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz!?#$%@',
+    '0123456789',
+    'ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz',
+    'ABCDEFGHJIKLMNOPQRSTUWVXYZ',
+    'abcdefghijklmnopqrstuwvxyz'
+  ];
   nk.Utils.ApplyProperties = function ( _obj, _props ) {
     if ( _props !== undefined ) {
       var key;
@@ -35,7 +67,7 @@ module.exports = function ( nk ) {
       }
     }
   };
-  nk.Utils.NestedAccess = function ( _obj, _string, _set, _value ) {
+  nk.Utils.NestedStringAccess = function ( _obj, _string, _set, _value ) {
     if ( typeof _string === 'string' ) {
       _string = _string.split( '.' );
     }
@@ -43,7 +75,7 @@ module.exports = function ( nk ) {
     if ( _string.length > 1 ) {
       key = _string.shift();
       if ( _obj[ key ] !== undefined ) {
-        nk.Utils.NestedAccess( _obj[ key ], _string, _set, _value );
+        nk.Utils.NestedStringAccess( _obj[ key ], _string, _set, _value );
       }
     } else {
       key = _string.shift();
@@ -86,7 +118,7 @@ module.exports = function ( nk ) {
     for ( var i = 0, chrs = _str.split( '' ), l = chrs.length, chr, otn; i < l; ++i ) {
       chr = chrs[ i ];
       chr = ( chr.charCodeAt( 0 ) + _cci ).toString( 2 );
-      otn = nk.Utils.RandomInt( 1, 9 );
+      otn = nk.Utils.RandomInteger( 1, 9 );
       output.push( otn + 'x' + chr.replace( /1/g, otn ) );
     }
     return output.join( ' ' );

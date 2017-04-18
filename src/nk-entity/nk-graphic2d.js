@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  var Super = nk.Container2D;
+  var Super = nk.Entity.Container2D;
   function Graphic2D( _x, _y, _texture ) {
     if ( this instanceof Graphic2D ) {
       Super.call( this, _x, _y );
@@ -8,8 +8,12 @@ module.exports = function ( nk ) {
       this.visible = true;
       if ( _texture !== undefined ) {
         this.texture = _texture;
-        this.w = _texture.w === undefined ? 0 : _texture.w;
-        this.h = _texture.h === undefined ? 0 : _texture.h;
+        if ( _texture.radius !== undefined ) {
+          this.w = this.h = _texture.radius * 2;
+        } else {
+          this.w = _texture.w === undefined ? 0 : _texture.w;
+          this.h = _texture.h === undefined ? 0 : _texture.h;
+        }
       } else {
         this.texture = null;
         this.w = 0;
@@ -33,6 +37,11 @@ module.exports = function ( nk ) {
       this.DrawChildren( _rc );
       _rc.restore();
     }
+  };
+  Graphic2D.prototype.IntersectsPoint = function ( _v ) {
+    var cv = _v.Copy();
+    cv.SubtractV( this.position );
+    return this.texture.IntersectsPoint( cv, this.anchor, this.w, this.h );
   };
   nk.Entity.Graphic2D = Graphic2D;
   nk.Graphic2D = Graphic2D;

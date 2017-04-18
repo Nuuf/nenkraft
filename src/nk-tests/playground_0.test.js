@@ -121,9 +121,9 @@ module.exports = function () {
       }
     }
 
-    nk.Utils.NestedAccess( a, 'b.c.d.e.f..g.h.i.j.k.l.m.n.o.p.q' );
-    nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q', true, 20 );
-    nk.Utils.NestedAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q' );
+    nk.Utils.NestedStringAccess( a, 'b.c.d.e.f..g.h.i.j.k.l.m.n.o.p.q' );
+    nk.Utils.NestedStringAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q', true, 20 );
+    nk.Utils.NestedStringAccess( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q' );
 
     document.body.removeChild( buttonContainer );
   }

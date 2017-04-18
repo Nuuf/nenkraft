@@ -8,6 +8,7 @@ module.exports = function ( nk ) {
       this.parent = null;
       this.children = [];
       this.render = true;
+      this.data = {};
     }
     else return new Container( _x, _y );
   }
@@ -66,6 +67,24 @@ module.exports = function ( nk ) {
       if ( ix !== -1 ) {
         children.splice( ix, 1 );
         child.parent = this;
+      }
+    }
+  };
+  Container2D.prototype.SendToFront = function () {
+    if ( this.parent !== null ) {
+      var pChildren = this.parent.children;
+      var ix = pChildren.indexOf( this );
+      if ( ix !== -1 ) {
+        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+      }
+    }
+  };
+  Container2D.prototype.SendToBack = function () {
+    if ( this.parent !== null ) {
+      var pChildren = this.parent.children;
+      var ix = pChildren.indexOf( this );
+      if ( ix !== -1 ) {
+        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
       }
     }
   };

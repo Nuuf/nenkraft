@@ -44,17 +44,17 @@ module.exports = function ( nk ) {
     this.w = this.br.x - this.tl.x;
     this.h = this.br.y - this.tl.y;
   };
-  AABB2D.prototype.IntersectsPoint = function ( _v ) {
-    var tl = this.tl, br = this.br;
-    if ( _v.x < tl.x ) return false;
-    if ( _v.x > br.x ) return false;
-    if ( _v.y < tl.y ) return false;
-    if ( _v.y > br.y ) return false;
+  AABB2D.prototype.IntersectsPoint = function ( _v, _anchor, _w, _h ) {
+    if ( _anchor.x !== 0 ) _v.x += _anchor.x * _w;
+    if ( _anchor.y !== 0 ) _v.y += _anchor.y * _h;
+    if ( _v.x < this.tl.x ) return false;
+    if ( _v.x > this.br.x ) return false;
+    if ( _v.y < this.tl.y ) return false;
+    if ( _v.y > this.br.y ) return false;
     return true;
   };
   AABB2D.prototype.ContainsPoint = function ( _v ) {
-    var tl = this.tl, br = this.br;
-    if ( _v.x > tl.x && _v.x < br.x && _v.y > tl.y && _v.y < br.y ) return true;
+    if ( _v.x > this.tl.x && _v.x < this.br.x && _v.y > this.tl.y && _v.y < this.br.y ) return true;
     else return false;
   };
   nk.Geom.AABB2D = AABB2D;

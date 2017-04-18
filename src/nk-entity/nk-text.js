@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  var Super = nk.Container2D;
+  var Super = nk.Entity.Container2D;
   function Text( _x, _y, _text ) {
     if ( this instanceof Text ) {
       Super.call( this, _x, _y );
@@ -26,12 +26,16 @@ module.exports = function ( nk ) {
         }
         if ( style.text.applied === true ) {
           style.text.Apply( _rc );
-          _rc.fillText( this.text, 0, 0 );
+          _rc.fillText( this.text, 0, 0, this.maxWidth );
+          _rc.strokeText( this.text, 0, 0, this.maxWidth );
         }
       }
       this.DrawChildren( _rc );
       _rc.restore();
     }
+  };
+  Text.prototype.IntersectsPoint = function ( _v ) {
+    return false;
   };
   nk.Entity.Text = Text;
   nk.Text = Text;

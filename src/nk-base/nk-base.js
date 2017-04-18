@@ -14,5 +14,5 @@ module.exports = function ( nk ) {
   nk.Time = {};
   nk.Input = {};
   nk.CP = {};
-  nk.VERSION = '0.0.21 (Omega)';
+  nk.VERSION = '0.0.3 (Omega)';
 };

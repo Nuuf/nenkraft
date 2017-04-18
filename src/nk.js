@@ -28,6 +28,7 @@ require( './nk-path/nk-aabb/nk-aabb2d' )( ns );
 require( './nk-path/nk-polygon/nk-polygon2d' )( ns );
 require( './nk-path/nk-circle/nk-circle' )( ns );
 require( './nk-entity/nk-container2d' )( ns );
+require( './nk-entity/nk-stage2d' )( ns );
 require( './nk-entity/nk-graphic2d' )( ns );
 require( './nk-entity/nk-text' )( ns );
 require( './nk-cp/nk-option' )( ns );
