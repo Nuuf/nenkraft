@@ -2,7 +2,7 @@ module.exports = function ( nk ) {
   "use strict";
   function AABB2D( _arg0, _arg1, _arg2, _arg3 ) {
     if ( this instanceof AABB2D ) {
-      if ( _arg0 instanceof nk.Vector2D && _arg1 instanceof Vector2D ) {
+      if ( _arg0 instanceof nk.Vector2D && _arg1 instanceof nk.Vector2D ) {
         this.tl = _arg0;
         this.br = _arg1;
       }
@@ -55,7 +55,7 @@ module.exports = function ( nk ) {
   };
   AABB2D.prototype.ContainsPoint = function ( _v ) {
     if ( _v.x > this.tl.x && _v.x < this.br.x && _v.y > this.tl.y && _v.y < this.br.y ) return true;
-    else return false;
+    return false;
   };
   nk.Geom.AABB2D = AABB2D;
 };
