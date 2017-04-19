@@ -25,7 +25,7 @@ module.exports = function () {
     var ticker = new nk.Ticker( Update );
 
     var numTimes = 20;
-    var fps = 24;
+    var fps = 48;
 
     var childrenMDC = [];
 
