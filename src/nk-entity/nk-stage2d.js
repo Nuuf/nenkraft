@@ -11,7 +11,7 @@ module.exports = function () {
       this.h = _canvas.height;
       this.ticker = new nk.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
       this.onProcess = new nk.Event.LocalEvent();
-      this.mouse = new nk.Input.Mouse( _canvas );
+      this.mouse = new nk.Input.Mouse( _canvas, _x, _y );
     }
     else return new Stage2D( _canvas, _x, _y, _doNotStart );
   }

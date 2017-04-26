@@ -152,5 +152,6 @@ module.exports = function ( nk ) {
     _A: 1,
     _B: 1
   };
+  Polygon2D.prototype.TYPE = Polygon2D.TYPE = 3;
   nk.Geom.Polygon2D = Polygon2D;
 };

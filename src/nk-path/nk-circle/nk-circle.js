@@ -6,7 +6,7 @@ module.exports = function ( nk ) {
       Super.call( this, _x, _y, _radius );
       this.style = nk.Style.CreateFSSa();
     }
-    else return new Circle();
+    else return new Circle( _x, _y, _radius );
   }
   Circle.prototype = Object.create( Super.prototype );
   Circle.prototype.constructor = Circle;

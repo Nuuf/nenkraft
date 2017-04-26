@@ -4,9 +4,7 @@ module.exports = function ( nk ) {
   nk.Debug = {
     Draw: {}
   };
-  nk.Math = {
-    Intersect: {}
-  };
+  nk.Math = {};
   nk.Utils = {};
   nk.Entity = {};
   nk.Path = {};
@@ -14,5 +12,5 @@ module.exports = function ( nk ) {
   nk.Time = {};
   nk.Input = {};
   nk.CP = {};
-  nk.VERSION = '0.0.3 (Omega)';
+  nk.VERSION = '0.0.31 (Omega)';
 };

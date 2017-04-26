@@ -12,6 +12,11 @@ module.exports = function () {
   }
   LimitVector2D.prototype = Object.create( Super.prototype );
   LimitVector2D.prototype.constructor = LimitVector2D;
+  LimitVector2D.prototype.Copy = function () {
+    var cp = new LimitVector2D( this.x, this.y, this.floor.x, this.floor.y, this.ceil.x, this.ceil.y );
+    cp.invert = this.invert;
+    return cp;
+  };
   LimitVector2D.prototype.Limit = function () {
     var Clamp = this.invert === false ? nk.Utils.Clamp : nk.Utils.InverseClamp, f = this.floor, c = this.ceil;
     this.x = Clamp( this.x, f.x, c.x );

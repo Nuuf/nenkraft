@@ -45,17 +45,23 @@ module.exports = function ( nk ) {
     this.h = this.br.y - this.tl.y;
   };
   AABB2D.prototype.IntersectsPoint = function ( _v, _anchor, _w, _h ) {
-    if ( _anchor.x !== 0 ) _v.x += _anchor.x * _w;
-    if ( _anchor.y !== 0 ) _v.y += _anchor.y * _h;
+    if ( _anchor !== undefined ) {
+      if ( _anchor.x !== 0 ) _v.x += _anchor.x * _w;
+      if ( _anchor.y !== 0 ) _v.y += _anchor.y * _h;
+    }
     if ( _v.x < this.tl.x ) return false;
     if ( _v.x > this.br.x ) return false;
     if ( _v.y < this.tl.y ) return false;
     if ( _v.y > this.br.y ) return false;
     return true;
   };
-  AABB2D.prototype.ContainsPoint = function ( _v ) {
-    if ( _v.x > this.tl.x && _v.x < this.br.x && _v.y > this.tl.y && _v.y < this.br.y ) return true;
-    return false;
+  AABB2D.prototype.ContainsPoint = function ( _v, _anchor, _w, _h ) {
+    if ( _anchor !== undefined ) {
+      if ( _anchor.x !== 0 ) _v.x += _anchor.x * _w;
+      if ( _anchor.y !== 0 ) _v.y += _anchor.y * _h;
+    }
+    return ( _v.x > this.tl.x && _v.x < this.br.x && _v.y > this.tl.y && _v.y < this.br.y );
   };
+  AABB2D.prototype.TYPE = AABB2D.TYPE = 1;
   nk.Geom.AABB2D = AABB2D;
 };

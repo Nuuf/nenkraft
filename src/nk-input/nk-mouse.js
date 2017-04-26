@@ -1,31 +1,51 @@
 module.exports = function () {
   "use strict";
-  function Mouse( _element ) {
+  function Mouse( _element, _offsetX, _offsetY ) {
     if ( this instanceof Mouse ) {
       this.element = _element;
-      this.position = new nk.Vector2D( 0, 0 );
+      this.position = new nk.Vector2D();
+      this.scale = new nk.Vector2D( 1, 1 );
+      this.anchor = new nk.Vector2D();
+      this.offset = new nk.Vector2D( _offsetX, _offsetY );
+
       this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
       this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
       this.element.addEventListener( 'mouseup', this.OnUp.bind( this ) );
+      this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
 
       this.onMove = new nk.Event.LocalEvent();
       this.onDown = new nk.Event.LocalEvent();
       this.onUp = new nk.Event.LocalEvent();
+      this.onLeave = new nk.Event.LocalEvent();
     }
-    else return new Mouse( _element );
+    else return new Mouse( _element, _offsetX, _offsetY );
   }
   Mouse.prototype = Object.create( null );
   Mouse.prototype.constructor = Mouse;
   Mouse.prototype.OnMove = function ( _event ) {
-    var element = this.element;
-    this.position.Set( _event.pageX - element.offsetLeft, _event.pageY - element.offsetTop );
-    this.onMove.Dispatch( this, this.position );
+    _event.preventDefault();
+    _event.stopPropagation();
+    var element = this.element, pos = this.position;
+    pos.Set( _event.pageX, _event.pageY );
+    pos.Subtract( element.offsetLeft, element.offsetTop );
+    pos.SubtractV( this.offset );
+    pos.DivideV( this.scale );
+    this.onMove.Dispatch( this, pos );
   };
   Mouse.prototype.OnDown = function ( _event ) {
+    _event.preventDefault();
+    _event.stopPropagation();
     this.onDown.Dispatch( this, this.position );
   };
   Mouse.prototype.OnUp = function ( _event ) {
+    _event.preventDefault();
+    _event.stopPropagation();
     this.onUp.Dispatch( this, this.position );
+  };
+  Mouse.prototype.OnLeave = function ( _event ) {
+    _event.preventDefault();
+    _event.stopPropagation();
+    this.onLeave.Dispatch( this, this.position );
   };
   nk.Input.Mouse = Mouse;
   Object.defineProperty( Mouse.prototype, 'x', {

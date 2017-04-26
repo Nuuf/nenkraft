@@ -1,46 +1,63 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'Playground 2' );
+  button.setAttribute( 'value', 'Playground 3' );
   button.setAttribute( 'type', 'button' );
-  button.addEventListener( 'click', RunPlayground_2 );
+  button.addEventListener( 'click', RunPlayground_3 );
   buttonContainer.appendChild( button );
 
-  function RunPlayground_2() {
+  function RunPlayground_3() {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
     c.style.position = 'absolute';
-    c.style.top = 0;
-    c.style.left = 0;
+    c.style.top = '100px';
+    c.style.left = '100px';
     var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c );
+    var stage = new nk.Stage2D( c, 0, 0 );
+    stage.scale.Set( 1, 1 );
+    stage.mouse.scale.SetV( stage.scale );
 
-    var text = new nk.Text( 100, 100, 'Grab and drag' );
 
-    var graphicCircle = new nk.Graphic2D( 350, 150, new nk.Path.Circle( 0, 0, 100 ) );
-    var graphicRectangle = new nk.Graphic2D( 450, 200, new nk.Path.AABB2D( 0, 0, 200, 200 ) );
-    graphicRectangle.anchor.Set( 0.5 );
+    var text = new nk.Text( 0, 0, 'Put them together!' );
 
-    var dragger = null;
+    var aabbg1 = new nk.Graphic2D( 300, 100, new nk.Path.AABB2D( 0, 0, 50, 50 ) );
+    var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 100, 100 ) );
+    aabbg1.anchor.Set( 0.3 );
+    aabbg2.anchor.Set( 0.5 );
+
+    stage.AddChild( aabbg1 );
+    stage.AddChild( aabbg2 );
 
     stage.AddChild( text );
-    stage.AddChild( graphicCircle );
-    stage.AddChild( graphicRectangle );
 
-    var t = 10;
-    while ( --t ) {
-      stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( 0, 0, 200, 200 ) ) );
-    }
+    var dragger = null;
+    var test = null;
+
+    var obj1 = {
+      aabb: aabbg1.path,
+      relative: aabbg1.position,
+      anchor: aabbg1.anchor
+    };
+
+    var obj2 = {
+      aabb: aabbg2.path,
+      relative: aabbg2.position,
+      anchor: aabbg2.anchor
+    };
 
     stage.mouse.onMove.Add( function ( _event ) {
       if ( dragger !== null ) {
         dragger.x = _event.data.x;
         dragger.y = _event.data.y;
+
+        if ( nk.Math.Collision.RelativeAABB2DvsAABB2D( obj1, obj2 ) ) {
+          text.text = 'Well done!';
+        } else text.text = 'Put them together!';
       }
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
@@ -57,6 +74,9 @@ module.exports = function () {
       }
     }, stage );
     stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) dragger = null;
+    } );
+    stage.mouse.onLeave.Add( function ( _event ) {
       if ( dragger ) dragger = null;
     } );
 

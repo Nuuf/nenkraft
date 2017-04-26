@@ -31,5 +31,6 @@ module.exports = function ( nk ) {
     this.s.RotateAroundV( ap, _a );
     this.e.RotateAroundV( ap, _a );
   };
+  Line2D.prototype.TYPE = Line2D.TYPE = 0;
   nk.Geom.Line2D = Line2D;
 };

@@ -16,11 +16,10 @@ module.exports = function ( nk ) {
   Container2D.prototype.constructor = Container2D;
   Container2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
-      var position = this.position, scale = this.scale;
       _rc.save();
-      _rc.translate( position.x, position.y );
+      _rc.translate( this.position.x, this.position.y );
       _rc.rotate( this.rotation );
-      _rc.scale( scale.x, scale.y );
+      _rc.scale( this.scale.x, this.scale.y );
       this.DrawChildren( _rc );
       _rc.restore();
     }
