@@ -11,7 +11,7 @@ module.exports = function () {
       this.SetDesiredRate( _rate );
       this.supplyDelta = true;
       this.onProcess = _onProcess;
-      if ( _doNotStart === undefined ) {
+      if ( _doNotStart === undefined || _doNotStart === false ) {
         this.Start();
       }
     }
