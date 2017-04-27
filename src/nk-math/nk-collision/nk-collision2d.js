@@ -1,6 +1,9 @@
 module.exports = function ( nk ) {
   "use strict";
   var Collision2D = { Intersect: {} };
+  Collision2D.VectorSortMinMag = function ( _a, _b ) {
+    return _a.GetMagnitude() - _b.GetMagnitude();
+  };
   Collision2D.Intersect.AABB2DvsAABB2D = function ( _aabb1, _aabb2 ) {
     var tl1 = _aabb1.tl, tl2 = _aabb2.tl;
     if (
@@ -12,9 +15,6 @@ module.exports = function ( nk ) {
       return true;
     }
     return false;
-  };
-  Collision2D.VectorSort = function ( _a, _b ) {
-    return _a.GetMagnitude() - _b.GetMagnitude();
   };
   Collision2D.AABB2DvsAABB2D = function ( _aabb1, _aabb2 ) {
     var tl1 = _aabb1.tl, tl2 = _aabb2.tl, br1 = _aabb1.br, br2 = _aabb2.br;
@@ -34,7 +34,7 @@ module.exports = function ( nk ) {
         new nk.Vector2D( 0, tl1.y - br2yh ),
         new nk.Vector2D( 0, br1yh - tl2.y )
       ];
-      vecs.sort( Collision2D.VectorSort );
+      vecs.sort( Collision2D.VectorSortMinMag );
       return vecs[ 0 ];
     }
     return null;
@@ -102,7 +102,7 @@ module.exports = function ( nk ) {
         new nk.Vector2D( 0, tl1.y - br2yh ),
         new nk.Vector2D( 0, br1yh - tl2.y )
       ];
-      vecs.sort( Collision2D.VectorSort );
+      vecs.sort( Collision2D.VectorSortMinMag );
       return vecs[ 0 ];
     }
     return null;
