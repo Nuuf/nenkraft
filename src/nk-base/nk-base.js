@@ -12,5 +12,6 @@ module.exports = function ( nk ) {
   nk.Time = {};
   nk.Input = {};
   nk.CP = {};
-  nk.VERSION = '0.0.31 (Omega)';
+  nk.VERSION = '0.0.35 (Omega)';
+  console.log( '%cnenkraft %cversion %c' + nk.VERSION, 'color:red', 'color:green', 'color:blue' );
 };

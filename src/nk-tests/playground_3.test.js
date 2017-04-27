@@ -26,7 +26,7 @@ module.exports = function () {
     var text = new nk.Text( 0, 0, 'Put them together!' );
 
     var aabbg1 = new nk.Graphic2D( 300, 100, new nk.Path.AABB2D( 0, 0, 50, 50 ) );
-    var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 100, 100 ) );
+    var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 400, 100 ) );
     aabbg1.anchor.Set( 0.3 );
     aabbg2.anchor.Set( 0.5 );
 
@@ -55,9 +55,12 @@ module.exports = function () {
         dragger.x = _event.data.x;
         dragger.y = _event.data.y;
 
-        if ( nk.Math.Collision.RelativeAABB2DvsAABB2D( obj1, obj2 ) ) {
+        mtv = nk.Math.Collision2D.RelativeAABB2DvsAABB2D( obj1, obj2 );
+
+        if ( mtv !== null ) {
           text.text = 'Well done!';
-        } else text.text = 'Put them together!';
+          aabbg1.position.AddV( mtv );
+        } else text.text = 'Collide them!';
       }
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
