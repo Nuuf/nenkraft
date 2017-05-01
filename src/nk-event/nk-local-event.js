@@ -1,16 +1,18 @@
 module.exports = function () {
   "use strict";;
   function LocalEvent() {
-    if ( this instanceof LocalEvent ) {
-      this.listeners = [];
-      this.stopPropagation = false;
-      this.target = null;
-      this.data = null;
-    }
-    else return new LocalEvent();
+    if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
+    this.listeners = [];
   }
   LocalEvent.prototype = Object.create( null );
   LocalEvent.prototype.constructor = LocalEvent;
+  //Static
+
+  //Members
+  LocalEvent.prototype.stopPropagation = false;
+  LocalEvent.prototype.target = null;
+  LocalEvent.prototype.data = null;
+  //Methods
   LocalEvent.prototype.GetListenerIndex = function ( _handle, _context ) {
     var listeners = this.listeners;
     if ( listeners.length === 0 ) return -1;
@@ -77,8 +79,8 @@ module.exports = function () {
       listener.Execute( this );
       if ( this.stopPropagation === true ) break;
     }
-    this.target = null;
-    this.data = null;
+    delete this.target;
+    delete this.data;
   };
   nk.Event.LocalEvent = LocalEvent;
   nk.LocalEvent = LocalEvent;

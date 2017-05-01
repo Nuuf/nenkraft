@@ -1,22 +1,27 @@
 module.exports = function () {
   "use strict";
   function Command( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
-    if ( this instanceof Command ) {
-      this.id = _id.split( ' ' );
-      this.handle = _handle;
-      this.info = _info;
-      this.options = null;
-      this.allOptionIds = null;
-      this.data = {};
-      this.dataSeparator = '=';
-      this.optionPrefix = _optionPrefix === undefined ? null : _optionPrefix;
-      this.continueToPrime = _continueToPrime === undefined ? true : _continueToPrime;
-      this.fullInfo = null;
-    }
-    else return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
+    if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
+
+    this.id = _id.split( ' ' );
+    this.handle = _handle;
+    this.info = _info;
+    this.data = {};
+    if ( _optionPrefix !== undefined ) this.optionPrefix = _optionPrefix;
+    if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
   }
   Command.prototype = Object.create( null );
   Command.prototype.constructor = Command;
+  //Static
+
+  //Members
+  Command.prototype.dataSeparator = '=';
+  Command.prototype.options = null;
+  Command.prototype.allOptionIds = null;
+  Command.prototype.fullInfo = null;
+  Command.prototype.optionPrefix = null;
+  Command.prototype.continueToPrime = true;
+  //Methods
   Command.prototype.Execute = function ( _dataStrs, _data ) {
     this.HandleData( _dataStrs, _data );
     if ( this.HandleOptions( _dataStrs, _data ) === true ) {

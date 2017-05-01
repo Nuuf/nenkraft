@@ -2,21 +2,23 @@ module.exports = function ( nk ) {
   "use strict";
   var HexMap = nk.Utils.B16ToB10;
   function Color( _r, _g, _b, _a ) {
-    if ( this instanceof Color ) {
-      this.channel = [
-        _r === undefined ? 0 : _r,
-        _g === undefined ? 0 : _g,
-        _b === undefined ? 0 : _b,
-        _a === undefined ? 1 : _a,
-      ];
-      this.value = '';
-      this.currentConversion = '';
-      this.ComputeValueRGBA();
-    }
-    else return new Color( _r, _g, _b, _a );
+    if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
+    this.channel = [
+      _r === undefined ? 0 : _r,
+      _g === undefined ? 0 : _g,
+      _b === undefined ? 0 : _b,
+      _a === undefined ? 1 : _a,
+    ];
+    this.ComputeValueRGBA();
   }
   Color.prototype = Object.create( null );
   Color.prototype.constructor = Color;
+  //Static
+
+  //Members
+  Color.prototype.value = '';
+  Color.prototype.currentConversion = '';
+  //Methods
   Color.prototype.Copy = function () {
     var color = new Color( this.channel[ 0 ], this.channel[ 1 ], this.channel[ 2 ], this.channel[ 3 ] );
     color.value = this.value;

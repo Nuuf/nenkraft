@@ -2,14 +2,17 @@ module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.AABB2D;
   function AABB2D( _arg0, _arg1, _arg2, _arg3 ) {
-    if ( this instanceof AABB2D ) {
-      Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-      this.style = nk.Style.CreateFSSa();
-    }
-    else return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
+    if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
+    Super.call( this, _arg0, _arg1, _arg2, _arg3 );
+    this.style = nk.Style.CreateFSSa();
   }
   AABB2D.prototype = Object.create( Super.prototype );
   AABB2D.prototype.constructor = AABB2D;
+  //Static
+
+  //Members
+
+  //Methods
   AABB2D.prototype.Draw = function ( _rc ) {
     var tl = this.tl, br = this.br, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
     _rc.beginPath();

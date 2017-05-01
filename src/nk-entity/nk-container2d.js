@@ -1,19 +1,21 @@
 module.exports = function ( nk ) {
   "use strict";
   function Container2D( _x, _y ) {
-    if ( this instanceof Container2D ) {
-      this.position = new nk.Vector2D( _x, _y );
-      this.scale = new nk.Vector2D( 1, 1 );
-      this.rotation = 0;
-      this.parent = null;
-      this.children = [];
-      this.render = true;
-      this.data = {};
-    }
-    else return new Container( _x, _y );
+    if ( !( this instanceof Container2D ) ) return new Container( _x, _y );
+    this.position = new nk.Vector2D( _x, _y );
+    this.scale = new nk.Vector2D( 1, 1 );
+    this.children = [];
+    this.data = {};
   }
   Container2D.prototype = Object.create( null );
   Container2D.prototype.constructor = Container2D;
+  //Static
+
+  //Members
+  Container2D.prototype.render = true;
+  Container2D.prototype.rotation = 0;
+  Container2D.prototype.parent = null;
+  //Methods
   Container2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
       _rc.save();

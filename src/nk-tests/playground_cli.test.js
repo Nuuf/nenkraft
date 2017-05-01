@@ -100,7 +100,7 @@ module.exports = function () {
     };
 
     ////////.....
-    var register = new nk.CP.Register();
+    var register = nk.CP.Register();
     register.Add(
       nk.CP.Command(
         //CREATE
@@ -151,13 +151,13 @@ module.exports = function () {
         'start s',
         function ( _dataStrs, _data ) {
           stage.ticker.SetDesiredRate( _data.rate );
-          stage.ticker.Start();
+          stage.ticker.StartAF();
         },
         'Start the ticker', 0, true ).
         AddOption(
         'stop',
         function ( _dataStrs, _data ) {
-          ticker.Stop();
+          stage.ticker.Stop();
         },
         'Stop the ticker', 0, true ).
         AddOption(

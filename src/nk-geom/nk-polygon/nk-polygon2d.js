@@ -1,57 +1,13 @@
 module.exports = function ( nk ) {
   "use strict";
   function Polygon2D() {
-    if ( this instanceof Polygon2D ) {
-      this.vertices = [];
-      this.aabb = null;
-      this.dirtyBounds = true;
-    }
-    else return new Polygon2D();
+    if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
+    this.vertices = [];
   }
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
-  Polygon2D.prototype.AddPoint = function ( _p ) {
-    this.vertices.push( _p );
-  };
-  Polygon2D.prototype.AddPoints = function ( _ps ) {
-    this.vertices = this.vertices.concat( _ps );
-  };
-  Polygon2D.prototype.Recreate = function ( _ps ) {
-    this.vertices = _ps;
-  };
-  Polygon2D.prototype.ComputeBounds = function () {
-    if ( this.aabb === null ) this.aabb = new nk.Geom.AABB2D();
-    var mix = Infinity, max = -Infinity, miy = Infinity, may = -Infinity;
-    for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
-      p = ps[ i ];
-      if ( p.x < mix ) mix = p.x;
-      if ( p.x > max ) max = p.x;
-      if ( p.y < miy ) miy = p.y;
-      if ( p.y > may ) may = p.y;
-    }
-    this.aabb.Set( mix, miy, max, may );
-    this.dirtyBounds = false;
-  };
-  Polygon2D.prototype.Rotate = function ( _a, _anX, _anY, _uAABB ) {
-    if ( this.dirtyBounds === true && _uAABB === true ) this.ComputeBounds();
-    else if ( this.aabb === null ) this.ComputeBounds();
-    var aabb = this.aabb;
-    var ap = aabb.tl.Copy();
-    ap.AddV( aabb.br );
-    ap.Multiply( _anX, _anY === undefined ? _anX : _anY );
-    var i = 0, ps = this.vertices, l = ps.length, p;
-    _a = _a;
-    for ( i; i < l; ++i ) {
-      p = ps[ i ];
-      p.RotateAroundV( ap, _a );
-    }
-    this.dirtyBounds = true;
-  };
-  Polygon2D.prototype.ContainsPoint = function ( _v ) {
-    if ( this.dirtyBounds === true ) this.ComputeBounds();
-    if ( this.aabb.IntersectsPoint( _v ) === false ) return false;
-    return true;
-  };
+  //Static
+  Polygon2D.TYPE = 3;
   Polygon2D.Construct = {};
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
     var tl = new nk.Vector2D( _x, _y );
@@ -102,6 +58,20 @@ module.exports = function ( nk ) {
     }
     _po.ComputeBounds();
   };
+  Polygon2D.Construct.Butterfly.C = {
+    _1: 24,
+    _2: 2,
+    _3: 4,
+    _4: 12,
+    _5: 5,
+    Reset: function () {
+      this._1 = 24;
+      this._2 = 2;
+      this._3 = 4;
+      this._4 = 12;
+      this._5 = 5;
+    }
+  };
   Polygon2D.Construct.Supershape = function ( _po, _x, _y, _ra, _acc, _m, _n1, _n2, _n3 ) {
     _n1 = _n1 === undefined ? 1 : _n1;
     _n2 = _n2 === undefined ? 1 : _n2;
@@ -134,24 +104,56 @@ module.exports = function ( nk ) {
     }
     _po.ComputeBounds();
   };
-  Polygon2D.Construct.Butterfly.C = {
-    _1: 24,
-    _2: 2,
-    _3: 4,
-    _4: 12,
-    _5: 5,
-    Reset: function () {
-      this._1 = 24;
-      this._2 = 2;
-      this._3 = 4;
-      this._4 = 12;
-      this._5 = 5;
-    }
-  };
   Polygon2D.Construct.Supershape.C = {
     _A: 1,
     _B: 1
   };
-  Polygon2D.prototype.TYPE = Polygon2D.TYPE = 3;
+  //Members
+  Polygon2D.prototype.TYPE = Polygon2D.TYPE;
+  Polygon2D.prototype.aabb = null;
+  Polygon2D.prototype.dirtyBounds = true;
+  //Methods
+  Polygon2D.prototype.AddPoint = function ( _p ) {
+    this.vertices.push( _p );
+  };
+  Polygon2D.prototype.AddPoints = function ( _ps ) {
+    this.vertices = this.vertices.concat( _ps );
+  };
+  Polygon2D.prototype.Recreate = function ( _ps ) {
+    this.vertices = _ps;
+  };
+  Polygon2D.prototype.ComputeBounds = function () {
+    if ( this.aabb === null ) this.aabb = new nk.Geom.AABB2D();
+    var mix = Infinity, max = -Infinity, miy = Infinity, may = -Infinity;
+    for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
+      p = ps[ i ];
+      if ( p.x < mix ) mix = p.x;
+      if ( p.x > max ) max = p.x;
+      if ( p.y < miy ) miy = p.y;
+      if ( p.y > may ) may = p.y;
+    }
+    this.aabb.Set( mix, miy, max, may );
+    this.dirtyBounds = false;
+  };
+  Polygon2D.prototype.Rotate = function ( _a, _anX, _anY, _uAABB ) {
+    if ( this.dirtyBounds === true && _uAABB === true ) this.ComputeBounds();
+    else if ( this.aabb === null ) this.ComputeBounds();
+    var aabb = this.aabb;
+    var ap = aabb.tl.Copy();
+    ap.AddV( aabb.br );
+    ap.Multiply( _anX, _anY === undefined ? _anX : _anY );
+    var i = 0, ps = this.vertices, l = ps.length, p;
+    _a = _a;
+    for ( i; i < l; ++i ) {
+      p = ps[ i ];
+      p.RotateAroundV( ap, _a );
+    }
+    this.dirtyBounds = true;
+  };
+  Polygon2D.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.dirtyBounds === true ) this.ComputeBounds();
+    if ( this.aabb.IntersectsPoint( _v ) === false ) return false;
+    return true;
+  };
   nk.Geom.Polygon2D = Polygon2D;
 };

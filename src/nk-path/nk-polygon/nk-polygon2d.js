@@ -2,14 +2,17 @@ module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.Polygon2D;
   function Polygon2D() {
-    if ( this instanceof Polygon2D ) {
-      Super.call( this );
-      this.style = nk.Style.CreateFSSa();
-    }
-    else return new Polygon2D();
+    if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
+    Super.call( this );
+    this.style = nk.Style.CreateFSSa();
   }
   Polygon2D.prototype = Object.create( Super.prototype );
   Polygon2D.prototype.constructor = Polygon2D;
+  //Static
+
+  //Members
+
+  //Methods
   Polygon2D.prototype.Draw = function ( _rc ) {
     var style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
     var vertices = this.vertices, vertex = vertices[ 0 ];

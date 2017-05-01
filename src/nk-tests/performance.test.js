@@ -21,23 +21,26 @@ module.exports = function () {
     var container = new nk.Container2D( HW, HH );
     var texture = new nk.Path.Polygon2D();
     nk.Geom.Polygon2D.Construct.Circlic( texture, 0, 0, 30, 3 );
+    //texture.style.fill.applied = false;
 
     var ticker = new nk.Ticker( Update );
 
     var numTimes = 20;
-    var fps = 48;
+    var fps = 42;
 
     var childrenMDC = [];
 
     var timer = new nk.Timer();
     timer.onStop.Add( function () {
-      var i = 50;
+      var i = 35;
       while ( --i ) {
         var graphic = new nk.Graphic2D( Math.random() * W - HW, Math.random() * H - HH, texture );
         container.AddChild( graphic );
       }
 
-      if ( ticker.GetTPS() > fps ) this.Start( 1 );
+      if ( ticker.GetTPS() > fps ) {
+        this.Start( 1 );
+      }
       else {
         var numChildren = container.children.length;
         console.log( numChildren );

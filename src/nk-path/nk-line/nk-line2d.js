@@ -2,14 +2,17 @@ module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.Line2D;
   function Line2D( _arg0, _arg1, _arg2, _arg3 ) {
-    if ( this instanceof Line2D ) {
-      Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-      this.style = nk.Style.CreateSSa();
-    }
-    else return new Line2D( _arg0, _arg1, _arg2, _arg3 );
+    if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
+    Super.call( this, _arg0, _arg1, _arg2, _arg3 );
+    this.style = nk.Style.CreateSSa();
   }
   Line2D.prototype = Object.create( Super.prototype );
   Line2D.prototype.constructor = Line2D;
+  //Static
+
+  //Members
+
+  //Methods
   Line2D.prototype.Draw = function ( _rc ) {
     var s = this.s, e = this.e, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
     _rc.beginPath();

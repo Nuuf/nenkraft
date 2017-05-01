@@ -1,30 +1,30 @@
 module.exports = function ( nk ) {
   "use strict";
   function Vector2D( _arg0, _arg1 ) {
-    if ( this instanceof Vector2D ) {
-      if ( _arg0 !== undefined && _arg0.x !== undefined && _arg0.y !== undefined ) {
-        this.x = _arg0.x;
-        this.y = _arg0.y;
-      }
-      else if ( _arg0 !== undefined ) {
-        if ( _arg1 === undefined ) {
-          this.x = _arg0;
-          this.y = _arg0;
-        }
-        else {
-          this.x = _arg0;
-          this.y = _arg1;
-        }
+    if ( !( this instanceof Vector2D ) ) return new Vector2D( _arg0, _arg1 );
+    if ( _arg0 !== undefined && _arg0.x !== undefined && _arg0.y !== undefined ) {
+      this.x = _arg0.x;
+      this.y = _arg0.y;
+    }
+    else if ( _arg0 !== undefined ) {
+      if ( _arg1 === undefined ) {
+        this.x = _arg0;
+        this.y = _arg0;
       }
       else {
-        this.x = 0;
-        this.y = 0;
+        this.x = _arg0;
+        this.y = _arg1;
       }
     }
-    else return new Vector2D( _arg0, _arg1 );
   }
   Vector2D.prototype = Object.create( null );
   Vector2D.prototype.constructor = Vector2D;
+  //Static
+
+  //Members
+  Vector2D.prototype.x = 0;
+  Vector2D.prototype.y = 0;
+  //Methods
   Vector2D.prototype.Copy = function () {
     return new Vector2D( this );
   };

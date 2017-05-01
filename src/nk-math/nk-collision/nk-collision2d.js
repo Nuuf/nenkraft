@@ -39,6 +39,17 @@ module.exports = function ( nk ) {
     }
     return null;
   };
+  Collision2D.Intersect.CirclevsCircle = function ( _circle1, _circle2 ) {
+    var radii = _circle1.radius + _circle2.radius;
+    return ( radii * radii >= _circle1.center.GetDistanceSquaredV( _circle2.center ) );
+  };
+  Collision2D.CirclevsCircle = function ( _circle1, _circle2 ) {
+    var radii = _circle1.radius + _circle2.radius;
+    if ( radii * radii >= _circle1.center.GetDistanceSquaredV( _circle2.center ) ) {
+      return _circle1.center.SubtractVC( _circle2.center );
+    }
+    return null;
+  };
   /*
   * @parameter: _obj1: {}
   * @parameter: _obj2: {}
@@ -96,14 +107,53 @@ module.exports = function ( nk ) {
       tl1.y < br2yh &&
       tl2.y < br1yh
     ) {
-      var vecs = [
+      var tvs = [
         new nk.Vector2D( tl1.x - tl2xw, 0 ),
         new nk.Vector2D( tl1xw - tl2.x, 0 ),
         new nk.Vector2D( 0, tl1.y - br2yh ),
         new nk.Vector2D( 0, br1yh - tl2.y )
       ];
-      vecs.sort( Collision2D.VectorSortMinMag );
-      return vecs[ 0 ];
+      tvs.sort( Collision2D.VectorSortMinMag );
+      return tvs[ 0 ];
+    }
+    return null;
+  };
+  Collision2D.Intersect.RelativeCirclevsCircle = function ( _obj1, _obj2 ) {
+    var c1 = _obj1.circle, c2 = _obj2.circle;
+    var radii = c1.radius + c2.radius;
+    var anchor1 = _obj1.anchor, anchor2 = _obj2.anchor;
+    var rel1 = _obj1.relative.Copy();
+    var rel2 = _obj2.relative.Copy();
+    if ( anchor1 !== undefined ) {
+      if ( anchor1.x !== 0 ) rel1.x -= anchor1.x * c1.diameter;
+      if ( anchor1.y !== 0 ) rel1.y -= anchor1.y * c1.diameter;
+    }
+    if ( anchor2 !== undefined ) {
+      if ( anchor2.x !== 0 ) rel2.x -= anchor2.x * c2.diameter;
+      if ( anchor2.y !== 0 ) rel2.y -= anchor2.y * c2.diameter;
+    }
+    return ( radii * radii >= rel1.GetDistanceSquaredV( rel2 ) );
+  };
+  Collision2D.RelativeCirclevsCircle = function ( _obj1, _obj2 ) {
+    var c1 = _obj1.circle, c2 = _obj2.circle;
+    var radii = c1.radius + c2.radius;
+    var anchor1 = _obj1.anchor, anchor2 = _obj2.anchor;
+    var rel1 = _obj1.relative.Copy();
+    var rel2 = _obj2.relative.Copy();
+    if ( anchor1 !== undefined ) {
+      if ( anchor1.x !== 0 ) rel1.x += anchor1.x * c1.diameter;
+      if ( anchor1.y !== 0 ) rel1.y += anchor1.y * c1.diameter;
+    }
+    if ( anchor2 !== undefined ) {
+      if ( anchor2.x !== 0 ) rel2.x += anchor2.x * c2.diameter;
+      if ( anchor2.y !== 0 ) rel2.y += anchor2.y * c2.diameter;
+    }
+    var distanceSq = rel2.GetDistanceSquaredV( rel1 );
+    if ( radii * radii > distanceSq ) {
+      var poc = new nk.Vector2D(( ( rel1.x * c1.radius ) + ( rel2.x * c2.radius ) ) / radii, ( ( rel1.y * c1.radius ) + ( rel2.y * c2.radius ) ) / radii );
+      var mtv = rel1.SubtractVC( rel2 );
+      mtv.Divide( radii, radii );
+      return { poc: poc, mtv: mtv };
     }
     return null;
   };

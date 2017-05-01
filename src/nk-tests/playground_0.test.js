@@ -50,6 +50,7 @@ module.exports = function () {
     text.style.text.textAlign = nk.Style.TEXT_ALIGN.CENTER;
     text.style.text.textBaseline = nk.Style.TEXT_BASELINE.MIDDLE;
     text.style.text.font = '56px Arial';
+    text.style.text.strokeStyle = '#000';
 
     container.AddChild( text );
 

@@ -2,17 +2,20 @@ module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Entity.Container2D;
   function Text( _x, _y, _text ) {
-    if ( this instanceof Text ) {
-      Super.call( this, _x, _y );
-      this.visible = true;
-      this.text = _text === undefined ? 'Empty' : _text;
-      this.maxWidth = undefined;
-      this.style = nk.Style.CreateSaT();
-    }
-    else return new Text( _x, _y );
+    if ( !( this instanceof Text ) ) return new Text( _x, _y );
+    Super.call( this, _x, _y );
+    if ( _text !== undefined ) this.text = _text;
+    this.style = nk.Style.CreateSaT();
   }
   Text.prototype = Object.create( Super.prototype );
   Text.prototype.constructor = Text;
+  //Static
+
+  //Members
+  Text.prototype.text = '';
+  Text.prototype.visible = true;
+  Text.prototype.maxWidth = undefined;
+  //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
       var position = this.position, scale = this.scale, style = this.style;

@@ -1,77 +1,81 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'Playground 3' );
+  button.setAttribute( 'value', 'Playground 4' );
   button.setAttribute( 'type', 'button' );
-  button.addEventListener( 'click', RunPlayground_3 );
+  button.addEventListener( 'click', RunPlayground_4 );
   buttonContainer.appendChild( button );
 
-  function RunPlayground_3() {
+  function RunPlayground_4() {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
     c.style.position = 'absolute';
-    c.style.top = '100px';
-    c.style.left = '100px';
+    c.style.top = '0';
+    c.style.left = '0';
     var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( c, 0, 0, true );
+    stage.ticker.StartAF();
+    stage.ticker.StartAF();
+    stage.ticker.Stop();
+    stage.ticker.Start();
+    stage.ticker.Start();
     stage.scale.Set( 1, 1 );
     stage.mouse.scale.SetV( stage.scale );
 
+    var dragger = null;
 
     var text = new nk.Text( 0, 0, 'Collide them!' );
 
-    var aabbg1 = new nk.Graphic2D( 300, 100, new nk.Path.AABB2D( 0, 0, 50, 50 ) );
-    var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 400, 100 ) );
-    aabbg1.anchor.Set( 0.5 );
-    aabbg2.anchor.Set( 0.56 );
+    var c1 = new nk.Graphic2D( 100, 100, new nk.Path.Circle( 0, 0, 50 ) );
+    var c2 = new nk.Graphic2D( 200, 200, new nk.Path.Circle( 0, 0, 250 ) );
+    c1.anchor.Set( 0 );
+    c2.anchor.Set( 0 );
 
     var lineC = new nk.Graphic2D( 0, 0, new nk.Path.Line2D() );
 
-    stage.AddChild( aabbg1 );
-    stage.AddChild( aabbg2 );
+    stage.AddChild( c1 );
+    stage.AddChild( c2 );
 
     stage.AddChild( text );
 
     stage.AddChild( lineC );
 
-    var dragger = null;
-    var test = null;
-
     var obj1 = {
-      aabb: aabbg1.path,
-      relative: aabbg1.position,
-      anchor: aabbg1.anchor
+      circle: c1.path,
+      relative: c1.position,
+      anchor: c1.anchor
     };
 
     var obj2 = {
-      aabb: aabbg2.path,
-      relative: aabbg2.position,
-      anchor: aabbg2.anchor
+      circle: c2.path,
+      relative: c2.position,
+      anchor: c2.anchor
     };
 
-    lineC.path.s.SetV( aabbg1.position );
-    lineC.path.e.SetV( aabbg2.position );
+    lineC.path.s.SetV( c1.position );
+    lineC.path.e.SetV( c2.position );
 
     stage.mouse.onMove.Add( function ( _event ) {
       if ( dragger !== null ) {
         dragger.x = _event.data.x;
         dragger.y = _event.data.y;
 
-        mtv = nk.Math.Collision2D.RelativeAABB2DvsAABB2D( obj1, obj2 );
+        var result = nk.Math.Collision2D.RelativeCirclevsCircle( obj1, obj2 );
 
-        lineC.path.s.SetV( aabbg1.position );
-        lineC.path.e.SetV( aabbg2.position );
+        lineC.path.s.SetV( c1.position );
+        lineC.path.e.SetV( c2.position );
 
         lineC.SendToFront();
 
-        if ( mtv !== null ) {
+        if ( result ) {
           text.text = 'Well done!';
-          aabbg1.position.AddV( mtv );
+          c1.position.AddV( result.mtv );
+          c2.position.SubtractV( result.mtv );
         } else text.text = 'Collide them!';
       }
     }, stage );

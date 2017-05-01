@@ -12,6 +12,11 @@ module.exports = function ( nk ) {
   nk.Time = {};
   nk.Input = {};
   nk.CP = {};
-  nk.VERSION = '0.0.35 (Omega)';
-  console.log( '%cnenkraft %cversion %c' + nk.VERSION, 'color:red', 'color:green', 'color:blue' );
+  nk.VERSION = '0.0.4 (Omega)';
+  console.log(
+    '%cnenkraft %cversion %c' + nk.VERSION,
+    'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
+    'color:magenta;background-color:black;font-family:Arial;font-size:16px;',
+    'color:yellow;background-color:black;font-family:Arial;font-size:18px;'
+  );
 };

@@ -2,24 +2,26 @@ module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Entity.Container2D;
   function Graphic2D( _x, _y, _path ) {
-    if ( this instanceof Graphic2D ) {
-      Super.call( this, _x, _y );
-      this.anchor = new nk.Vector2D();
-      this.visible = true;
-      if ( _path !== undefined ) {
-        this.path = _path;
-        this.w = _path.w === undefined ? 0 : _path.w;
-        this.h = _path.h === undefined ? 0 : _path.h;
-      } else {
-        this.path = null;
-        this.w = 0;
-        this.h = 0;
-      }
+    if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
+    Super.call( this, _x, _y );
+    this.anchor = new nk.Vector2D();
+    if ( _path !== undefined ) {
+      if ( _path.w !== undefined ) this.w = _path.w;
+      if ( _path.h !== undefined ) this.h = _path.h;
+      if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
+      this.path = _path;
     }
-    else return new Graphic2D( _x, _y, _path );
   }
   Graphic2D.prototype = Object.create( Super.prototype );
   Graphic2D.prototype.constructor = Graphic2D;
+  //Static
+
+  //Members
+  Graphic2D.prototype.w = 0;
+  Graphic2D.prototype.h = 0;
+  Graphic2D.prototype.path = null;
+  Graphic2D.prototype.visible = true;
+  //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
       var position = this.position, scale = this.scale, anchor = this.anchor, path = this.path;
