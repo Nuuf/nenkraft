@@ -6,7 +6,7 @@ module.exports = function () {
   button.addEventListener( 'click', RunPlayground_4 );
   buttonContainer.appendChild( button );
 
-  function RunPlayground_4() {
+  function RunPlayground_4 () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -18,13 +18,13 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0, true );
+    var stage = new nk.Stage2D( c, HW, HH, true );
     stage.ticker.StartAF();
     stage.ticker.StartAF();
     stage.ticker.Stop();
     stage.ticker.Start();
     stage.ticker.Start();
-    stage.scale.Set( 1, 1 );
+    stage.scale.Set( 1, -1 );
     stage.mouse.scale.SetV( stage.scale );
 
     var dragger = null;
@@ -32,11 +32,21 @@ module.exports = function () {
     var text = new nk.Text( 0, 0, 'Collide them!' );
 
     var c1 = new nk.Graphic2D( 100, 100, new nk.Path.Circle( 0, 0, 50 ) );
-    var c2 = new nk.Graphic2D( 200, 200, new nk.Path.Circle( 0, 0, 250 ) );
+    var c2 = new nk.Graphic2D( 200, 200, new nk.Path.Circle( 0, 0, 100 ) );
     c1.anchor.Set( 0 );
     c2.anchor.Set( 0 );
 
     var lineC = new nk.Graphic2D( 0, 0, new nk.Path.Line2D() );
+
+    var poc1 = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 4 ) );
+    poc1.path.style.fill.fillStyle = '#FF00FF';
+    poc1.path.style.stroke.applied = false;
+    var poc2 = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 4 ) );
+    poc2.path.style.fill.fillStyle = '#FFFF00';
+    poc2.path.style.stroke.applied = false;
+    var poc3 = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 4 ) );
+    poc3.path.style.fill.fillStyle = '#00FFFF';
+    poc3.path.style.stroke.applied = false;
 
     stage.AddChild( c1 );
     stage.AddChild( c2 );
@@ -45,14 +55,16 @@ module.exports = function () {
 
     stage.AddChild( lineC );
 
+    stage.AddChildren( poc1, poc2, poc3 );
+
     var obj1 = {
-      circle: c1.path,
+      shape: c1.path,
       relative: c1.position,
       anchor: c1.anchor
     };
 
     var obj2 = {
-      circle: c2.path,
+      shape: c2.path,
       relative: c2.position,
       anchor: c2.anchor
     };
@@ -65,7 +77,7 @@ module.exports = function () {
         dragger.x = _event.data.x;
         dragger.y = _event.data.y;
 
-        var result = nk.Math.Collision2D.RelativeCirclevsCircle( obj1, obj2 );
+        var result = nk.Math.Collision2D.CirclevsCircle.Relative.Collide( obj1, obj2 );
 
         lineC.path.s.SetV( c1.position );
         lineC.path.e.SetV( c2.position );
@@ -74,6 +86,15 @@ module.exports = function () {
 
         if ( result ) {
           text.text = 'Well done!';
+          poc1.position.SetV( result.poc[ 0 ] );
+          poc1.SendToFront();
+
+          poc2.position.SetV( result.poc[ 1 ] );
+          poc2.SendToFront();
+
+          poc3.position.SetV( result.poc[ 2 ] );
+          poc3.SendToFront();
+
           c1.position.AddV( result.mtv );
           c2.position.SubtractV( result.mtv );
         } else text.text = 'Collide them!';

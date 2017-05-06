@@ -31,8 +31,10 @@ require( './nk-entity/nk-container2d' )( namespace );
 require( './nk-entity/nk-stage2d' )( namespace );
 require( './nk-entity/nk-graphic2d' )( namespace );
 require( './nk-entity/nk-text' )( namespace );
+require( './nk-entity/nk-sprite' )( namespace );
 require( './nk-cp/nk-option' )( namespace );
 require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
+require( './nk-load/nk-texture-loader' )( namespace );
 
 if ( DEVELOPMENT && module.hot ) module.hot.accept();

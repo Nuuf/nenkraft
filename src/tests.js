@@ -10,6 +10,8 @@ tests.push(
   require( './nk-tests/playground_2.test' ),
   require( './nk-tests/playground_3.test' ),
   require( './nk-tests/playground_4.test' ),
+  require( './nk-tests/playground_5.test' ),
+  require( './nk-tests/playground_6.test' ),
   require( './nk-tests/playground_cli.test' )
 );
 

@@ -6,7 +6,7 @@ module.exports = function () {
   button.addEventListener( 'click', RunPlayground_3 );
   buttonContainer.appendChild( button );
 
-  function RunPlayground_3() {
+  function RunPlayground_3 () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -43,13 +43,13 @@ module.exports = function () {
     var test = null;
 
     var obj1 = {
-      aabb: aabbg1.path,
+      shape: aabbg1.path,
       relative: aabbg1.position,
       anchor: aabbg1.anchor
     };
 
     var obj2 = {
-      aabb: aabbg2.path,
+      shape: aabbg2.path,
       relative: aabbg2.position,
       anchor: aabbg2.anchor
     };
@@ -62,7 +62,7 @@ module.exports = function () {
         dragger.x = _event.data.x;
         dragger.y = _event.data.y;
 
-        mtv = nk.Math.Collision2D.RelativeAABB2DvsAABB2D( obj1, obj2 );
+        mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2 );
 
         lineC.path.s.SetV( aabbg1.position );
         lineC.path.e.SetV( aabbg2.position );

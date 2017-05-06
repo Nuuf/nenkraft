@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  function Vector2D( _arg0, _arg1 ) {
+  function Vector2D ( _arg0, _arg1 ) {
     if ( !( this instanceof Vector2D ) ) return new Vector2D( _arg0, _arg1 );
     if ( _arg0 !== undefined && _arg0.x !== undefined && _arg0.y !== undefined ) {
       this.x = _arg0.x;
@@ -204,6 +204,13 @@ module.exports = function ( nk ) {
     var d = this.Copy();
     d.Subtract( _x, _y );
     return d.GetMagnitudeSquared();
+  };
+  //|||||
+  Vector2D.prototype.IsEqualTo = function ( _x, _y ) {
+    return ( this.x === _x && this.y === _y );
+  };
+  Vector2D.prototype.IsEqualToV = function ( _v ) {
+    return ( this.x === _v.x && this.y === _v.y );
   };
   //|||||
   Vector2D.prototype.GetLength = Vector2D.prototype.GetMagnitude;
