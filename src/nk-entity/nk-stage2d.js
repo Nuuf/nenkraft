@@ -1,7 +1,7 @@
 module.exports = function () {
   "use strict";
   var Super = nk.Entity.Container2D;
-  function Stage2D( _canvas, _x, _y, _doNotStart ) {
+  function Stage2D ( _canvas, _x, _y, _doNotStart ) {
     if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart );
     Super.call( this, _x, _y );
     this.canvas = _canvas;
@@ -18,10 +18,17 @@ module.exports = function () {
 
   //Members
   Stage2D.prototype.backgroundColor = 'rgba(0,0,0,1)';
+  Stage2D.prototype.clear = true;
   //Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
-    _rc.fillStyle = this.backgroundColor;
-    _rc.fillRect( 0, 0, this.w, this.h );
+    _rc.setTransform( 1, 0, 0, 1, 0, 0 );
+    if ( this.clear === true ) {
+      _rc.clearRect( 0, 0, this.w, this.h );
+    }
+    else {
+      _rc.fillStyle = this.backgroundColor;
+      _rc.fillRect( 0, 0, this.w, this.h );
+    }
   };
   Stage2D.prototype.Process = function ( _delta ) {
     var rc = this.rc;

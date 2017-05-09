@@ -7,10 +7,11 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
 
-  function RunTheMask() {
+  function RunTheMask () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = 0;
@@ -55,7 +56,7 @@ module.exports = function () {
     child3.AddChild( child$3 );
     child4.AddChild( child$4 );
 
-    function Update() {
+    function Update () {
 
       path.style.fill.fillStyle = color.value;
 
@@ -92,6 +93,8 @@ module.exports = function () {
 
       angle1 = nk.Utils.InverseClamp( angle1, 0, 359 );
       angle2 = nk.Utils.InverseClamp( angle2, -359, 0 );
+
+      rc.setTransform( 1, 0, 0, 1, 0, 0 );
 
       rc.fillStyle = 'rgba(255, 255, 255, 0.001)';
       rc.fillRect( 0, 0, W, H );

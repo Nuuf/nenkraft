@@ -6,10 +6,11 @@ module.exports = function () {
   button.addEventListener( 'click', RunPerformance );
   buttonContainer.appendChild( button );
 
-  function RunPerformance() {
+  function RunPerformance () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = 0;
@@ -26,7 +27,7 @@ module.exports = function () {
     var ticker = new nk.Ticker( Update );
 
     var numTimes = 20;
-    var fps = 42;
+    var fps = 50;
 
     var childrenMDC = [];
 
@@ -62,7 +63,8 @@ module.exports = function () {
 
 
 
-    function Update() {
+    function Update () {
+      rc.setTransform( 1, 0, 0, 1, 0, 0 );
       rc.fillStyle = 'rgba(0, 0, 0, 1)';
       rc.fillRect( 0, 0, W, H );
       container.Draw( rc );

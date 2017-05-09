@@ -22,3 +22,7 @@
 #buttons input:hover {
   color: grey;
 }
+canvas {
+  background-color: #000;
+  display: none;
+}

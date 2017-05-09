@@ -1,15 +1,16 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'Playground 2' );
+  button.setAttribute( 'value', 'GrabnDrag' );
   button.setAttribute( 'type', 'button' );
-  button.addEventListener( 'click', RunPlayground_2 );
+  button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
 
-  function RunPlayground_2() {
+  function Run () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = 0;

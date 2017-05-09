@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
   function TextureLoader ( _objs ) {
-    if ( !this instanceof TextureLoader ) return new TextureLoader( _objs );
+    if ( !( this instanceof TextureLoader ) ) return new TextureLoader( _objs );
     this.cache = [];
     this.onTextureLoaded = new nk.Event.LocalEvent();
     this.onComplete = new nk.Event.LocalEvent();

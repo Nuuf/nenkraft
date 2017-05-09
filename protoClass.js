@@ -1,8 +1,8 @@
 module.exports = function ( namespace ) {
   "use strict";
   //var Super = null;
-  function Class( param ) {
-    if ( !this instanceof Class ) return new Class( param );
+  function Class ( param ) {
+    if ( !( this instanceof Class ) ) return new Class( param );
     //Super.call(this, param);
     this.memExO = {};
   }

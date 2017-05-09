@@ -1,30 +1,57 @@
 module.exports = function ( nk ) {
   "use strict";
-  function Container2D( _x, _y ) {
+  function Container2D ( _x, _y ) {
     if ( !( this instanceof Container2D ) ) return new Container( _x, _y );
     this.position = new nk.Vector2D( _x, _y );
+    this.transform = new nk.Math.TransformationMatrix2D();
     this.scale = new nk.Vector2D( 1, 1 );
+    this.anchor = new nk.Vector2D();
     this.children = [];
     this.data = {};
   }
   Container2D.prototype = Object.create( null );
   Container2D.prototype.constructor = Container2D;
   //Static
+  Container2D.ApplySimpleTransformation = function ( _rc ) {
 
+  };
   //Members
+  Container2D.prototype.w = 0;
+  Container2D.prototype.h = 0;
   Container2D.prototype.render = true;
   Container2D.prototype.rotation = 0;
   Container2D.prototype.parent = null;
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
-      _rc.save();
-      _rc.translate( this.position.x, this.position.y );
-      _rc.rotate( this.rotation );
-      _rc.scale( this.scale.x, this.scale.y );
+      this.ApplyTransformation( _rc );
       this.DrawChildren( _rc );
-      _rc.restore();
     }
+  };
+  Container2D.prototype.ApplyTransformation = function ( _rc ) {
+    var scale = this.scale;
+    var position = this.position;
+    var anchor = this.anchor;
+    var transform = this.transform;
+    var parent = this.parent;
+    var x, y, sx, sy, skx = 0, sky = 0, rot;
+    if ( parent !== null ) {
+      var parentTransform = parent.transform;
+      x = transform.SetAndGetX( position.x + parentTransform.GetX() - anchor.x * this.w );
+      y = transform.SetAndGetY( position.y + parentTransform.GetY() - anchor.y * this.h );
+      sx = transform.SetAndGetScaleX( scale.x * parentTransform.GetScaleX() );
+      sy = transform.SetAndGetScaleY( scale.y * parentTransform.GetScaleY() );
+      rot = transform.SetAndGetRotation( this.rotation + parentTransform.GetRotation() );
+    }
+    else {
+      x = transform.SetAndGetX( position.x - anchor.x * this.w );
+      y = transform.SetAndGetY( position.y - anchor.y * this.h );
+      sx = transform.SetAndGetScaleX( scale.x );
+      sy = transform.SetAndGetScaleY( scale.y );
+      rot = transform.SetAndGetRotation( this.rotation );
+    }
+    _rc.setTransform( sx, skx, sky, sy, x, y );
+    _rc.rotate( rot );
   };
   Container2D.prototype.DrawChildren = function ( _rc ) {
     for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {

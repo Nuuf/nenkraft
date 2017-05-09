@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Entity.Container2D;
-  function Text( _x, _y, _text ) {
+  function Text ( _x, _y, _text ) {
     if ( !( this instanceof Text ) ) return new Text( _x, _y );
     Super.call( this, _x, _y );
     if ( _text !== undefined ) this.text = _text;
@@ -18,11 +18,8 @@ module.exports = function ( nk ) {
   //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
-      var position = this.position, scale = this.scale, style = this.style;
-      _rc.save();
-      _rc.translate( position.x, position.y );
-      _rc.rotate( this.rotation );
-      _rc.scale( scale.x, scale.y );
+      this.ApplyTransformation( _rc );
+      var style = this.style;
       if ( this.visible === true ) {
         if ( style.shadow.applied === true ) {
           style.shadow.Apply( _rc );
@@ -34,7 +31,6 @@ module.exports = function ( nk ) {
         }
       }
       this.DrawChildren( _rc );
-      _rc.restore();
     }
   };
   Text.prototype.IntersectsPoint = function ( _v ) {

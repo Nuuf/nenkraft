@@ -3,10 +3,10 @@ module.exports = function () {
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Playground CLI' );
   button.setAttribute( 'type', 'button' );
-  button.addEventListener( 'click', RunPlayground_CLI );
+  button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
 
-  function RunPlayground_CLI() {
+  function Run () {
 
     var CE = {
       UNKNOWN_COMMAND: '<span style="color: red;">Unknown command: DATA</span>',
@@ -80,6 +80,7 @@ module.exports = function () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth - 500 );
     c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = '500px';
@@ -233,14 +234,14 @@ module.exports = function () {
     );
     ////////......
 
-    function insertParagraph( _str ) {
+    function insertParagraph ( _str ) {
       var p = document.createElement( 'p' );
       p.className = 'paragraph';
       p.innerHTML = _str;
       cb.insertBefore( p, ci );
     }
 
-    function onInputKeyDown( event ) {
+    function onInputKeyDown ( event ) {
       var stop = false;
       if ( event.keyCode === 13 ) {
         stop = true;
@@ -271,7 +272,7 @@ module.exports = function () {
       }
     }
 
-    function onCommandboxClick( event ) {
+    function onCommandboxClick ( event ) {
       ci.focus();
     }
 

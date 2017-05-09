@@ -1,9 +1,7 @@
 module.exports = function ( nk ) {
   nk.Geom = {};
   nk.Style = {};
-  nk.Debug = {
-    Draw: {}
-  };
+  nk.Debug = {};
   nk.Math = {};
   nk.Utils = {};
   nk.Entity = {};
@@ -13,7 +11,8 @@ module.exports = function ( nk ) {
   nk.Input = {};
   nk.CP = {};
   nk.Load = {};
-  nk.VERSION = '0.0.5 (Omega)';
+  nk.Animator = {};
+  nk.VERSION = '0.0.6 (Omega)';
   console.log(
     '%cnenkraft %cversion %c' + nk.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',

@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
-
   var PII = nk.Math.PII;
+  nk.Debug.Draw = {};
   /*
   * @parameter _rc: RenderingContext
   * @parameter _po: Polygon

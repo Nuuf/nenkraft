@@ -5,13 +5,14 @@ var tests = [];
 tests.push(
   require( './nk-tests/themask.test' ),
   require( './nk-tests/performance.test' ),
-  require( './nk-tests/playground_0.test' ),
-  require( './nk-tests/playground_1.test' ),
-  require( './nk-tests/playground_2.test' ),
-  require( './nk-tests/playground_3.test' ),
-  require( './nk-tests/playground_4.test' ),
-  require( './nk-tests/playground_5.test' ),
-  require( './nk-tests/playground_6.test' ),
+  require( './nk-tests/playground_nightsky.test' ),
+  require( './nk-tests/playground_butterflyish.test' ),
+  require( './nk-tests/playground_grabndrag.test' ),
+  require( './nk-tests/playground_aabbcollision.test' ),
+  require( './nk-tests/playground_circlecollision.test' ),
+  require( './nk-tests/playground_elasticcollision.test' ),
+  require( './nk-tests/playground_sprite.test' ),
+  require( './nk-tests/playground_animation.test' ),
   require( './nk-tests/playground_cli.test' )
 );
 
