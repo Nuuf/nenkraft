@@ -1,6 +1,6 @@
 module.exports = function () {
   "use strict";
-  function Ticker( _onProcess, _rate, _doNotStart ) {
+  function Ticker ( _onProcess, _rate, _doNotStart ) {
     if ( !( this instanceof Ticker ) ) return new Ticker( _onProcess, _rate, _doNotStart );
     if ( typeof _onProcess !== 'function' ) throw new Error( 'Ticker: An onProcess function is required!' );
     this.SetDesiredRate( _rate );
@@ -34,6 +34,7 @@ module.exports = function () {
   Ticker.prototype.ProcessAF = function () {
     this.ComputeDelta();
     this.onProcess( this.delta );
+    if ( this.afId === null ) return;
     this.afId = requestAnimationFrame( this.ProcessAF );
   };
   Ticker.prototype.ComputeDelta = function () {

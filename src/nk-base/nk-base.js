@@ -12,7 +12,7 @@ module.exports = function ( nk ) {
   nk.CP = {};
   nk.Load = {};
   nk.Animator = {};
-  nk.VERSION = '0.0.7 (Omega)';
+  nk.VERSION = '0.0.71 (Omega)';
   console.log(
     '%cnenkraft %cversion %c' + nk.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',

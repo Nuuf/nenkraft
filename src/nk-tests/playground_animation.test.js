@@ -37,22 +37,21 @@ module.exports = function () {
       sprite.anchor.Set( 0.5 );
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.AddAnimation( 'test', 20 );
-      animation.AddFrame( 0, 0, 64, 64 );
-      animation.AddFrame( 64, 0, 64, 64 );
-      animation.AddFrame( 64 * 2, 0, 64, 64, 40 );
-      animation.AddFrame( 64 * 3, 0, 64, 64 );
-      animation.AddFrame( 64 * 4, 0, 64, 64, 40 );
-      animation.AddFrame( 64 * 5, 0, 64, 64 );
-      animation.AddFrame( 64 * 6, 0, 64, 64 );
-      animation.AddFrame( 64 * 7, 0, 64, 64 );
-      ac.PlayAnimation( 'test' );
+      animation.GenerateFrames( 64, 64, 512, 64, 8, {
+        '0': 60
+      } );
+      animation.reverse = true;
+      animation.onEnd.Add( function () {
+        stage.ticker.Stop();
+      }, animation );
+      ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef );
 
       timer.onStop.Add( function () {
         sprite.animationController.StopCurrentAnimation();
       } );
 
-      timer.Start( 400 );
+      //timer.Start( 400 );
 
       stage.onProcess.Add( function () {
         sprite.animationController.Process();

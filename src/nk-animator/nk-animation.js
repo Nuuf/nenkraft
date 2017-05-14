@@ -5,6 +5,9 @@ module.exports = function ( nk ) {
     this.frames = [];
     this.controller = _controller
     this.id = _id;
+    this.onEnd = new nk.Event.LocalEvent();
+    this.onStop = new nk.Event.LocalEvent();
+    this.onStart = new nk.Event.LocalEvent();
     if ( _rate !== undefined ) this.rate = _rate;
   }
   Animation.prototype = Object.create( null );
@@ -17,31 +20,55 @@ module.exports = function ( nk ) {
   Animation.prototype.playing = false;
   Animation.prototype.id = null;
   Animation.prototype.rate = 60;
+  Animation.prototype.reverse = false;
   //Methods
   Animation.prototype.AddFrame = function ( _x, _y, _w, _h, _rate ) {
     _rate = _rate === undefined ? this.rate : _rate;
     this.frames.push( new nk.Animator.Frame( _x, _y, _w, _h, _rate, this.controller.sprite ) );
   };
-  Animation.prototype.SetFrame = function ( _id ) {
-    this.currentFrame = _id;
-    this.playing = false;
+  Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
+    for ( var i = 0, x, y, w, h, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
+      x = ( i % columns ) * _frameWidth;
+      y = Math.floor( i / columns ) * _frameHeight;
+      rate = _data[ i ];
+      this.AddFrame( x, y, _frameWidth, _frameHeight, rate );
+    }
+  };
+  Animation.prototype.SetFrame = function ( _index ) {
+    _index = _index === undefined ? 0 : _index;
+    var frame = this.frames[ _index ];
+    if ( frame !== undefined ) {
+      this.currentFrame = frame;
+      this.currentFrameIndex = _index;
+      this.currentFrame.Apply();
+    }
   };
   Animation.prototype.Start = function () {
     this.playing = true;
+    this.onStart.Dispatch();
   };
   Animation.prototype.Stop = function () {
     this.playing = false;
+    this.onStop.Dispatch();
   };
   Animation.prototype.Process = function () {
     if ( this.playing === true ) {
-      var currentFrame = this.currentFrame, frames = this.frames;
+      var currentFrame = this.currentFrame, frames = this.frames, done = false;
       if ( currentFrame.Process() === true ) {
-        var currentFrameIndex = ++this.currentFrameIndex;
+        var currentFrameIndex;
+        if ( this.reverse === false ) currentFrameIndex = ++this.currentFrameIndex;
+        else currentFrameIndex = --this.currentFrameIndex;
         if ( currentFrameIndex >= frames.length ) {
           currentFrameIndex = this.currentFrameIndex = 0;
+          done = true;
+        }
+        else if ( currentFrameIndex < 0 ) {
+          currentFrameIndex = this.currentFrameIndex = this.frames.length - 1;
+          done = true;
         }
         this.currentFrame = frames[ currentFrameIndex ];
         this.currentFrame.Apply();
+        if ( done === true ) this.onEnd.Dispatch();
       }
     }
   };
@@ -51,10 +78,8 @@ module.exports = function ( nk ) {
     delete this.playing;
     delete this.currentFrameIndex;
   };
-  Animation.prototype.Restart = function () {
-    this.currentFrameIndex = 0;
-    this.currentFrame = this.frames[ 0 ];
-    this.currentFrame.Apply();
+  Animation.prototype.Restart = function ( _index ) {
+    this.SetFrame( _index );
     this.ResetAllFrames();
     this.Start();
   };

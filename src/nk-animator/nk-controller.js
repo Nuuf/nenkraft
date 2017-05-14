@@ -25,11 +25,11 @@ module.exports = function ( nk ) {
     }
     return null;
   };
-  Controller.prototype.PlayAnimation = function ( _id ) {
+  Controller.prototype.PlayAnimation = function ( _id, _index ) {
     var animation = this.GetAnimation( _id );
     if ( animation !== null ) {
       this.currentAnimation = animation;
-      animation.Restart();
+      animation.Restart( _index );
     }
   };
   Controller.prototype.StopCurrentAnimation = function () {

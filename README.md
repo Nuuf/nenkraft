@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.0.7 (Omega)
+# Version 0.0.71 (Omega)
 
 [logo]: ./images/nenkraft-banner.png "nenkraft"
 
