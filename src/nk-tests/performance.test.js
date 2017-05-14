@@ -21,7 +21,7 @@ module.exports = function () {
 
     var container = new nk.Container2D( HW, HH );
     var texture = new nk.Path.Polygon2D();
-    nk.Geom.Polygon2D.Construct.Circlic( texture, 0, 0, 30, 3 );
+    nk.Geom.Polygon2D.Construct.Cyclic( texture, 0, 0, 30, 3 );
     //texture.style.fill.applied = false;
 
     var ticker = new nk.Ticker( Update );

@@ -10,6 +10,7 @@ module.exports = function () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
+    c.style.backgroundColor = '#FFF';
     c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = '0';
@@ -20,8 +21,8 @@ module.exports = function () {
     var H = c.height, HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, HW, HH, true );
-    stage.backgroundColor = 'rgba(255,255,255,0.05)';
-    stage.clear = false;
+    //stage.backgroundColor = 'rgba(255,255,255,0)';
+    //stage.clear = false;
     stage.ticker.StartAF();
 
     var fps = new nk.Text( 0, 0, '' );
@@ -37,6 +38,7 @@ module.exports = function () {
       p.style.stroke.strokeStyle = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
       p.style.stroke.lineWidth = mass / 5;
       var g = new nk.Graphic2D( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), p );
+      g.ApplyTransformation = nk.Container2D.SimpleTransformation;
       g.data.mass = mass;
       g.data.body = {
         relative: g.position,
@@ -85,7 +87,7 @@ module.exports = function () {
           }
         }
       }
-      fps.text = stage.ticker.GetTPS();
+      fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );

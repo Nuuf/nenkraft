@@ -25,6 +25,7 @@ module.exports = function () {
     var sprite1 = null;
     var sprite2 = null;
     var sprite3 = null;
+    var sprite4 = null;
 
     var imageCache = new nk.Load.TextureLoader();
     imageCache.onComplete.Add( function ( _event ) {
@@ -36,7 +37,10 @@ module.exports = function () {
       sprite3 = new nk.Sprite( -100, 100, imageCache.Get( 'gobj' ) );
       sprite3.anchor.Set( 0.5 );
       sprite3.clip.tl.Set( 0, 64 );
-      stage.AddChildren( sprite1, sprite2, sprite3 );
+      sprite4 = new nk.Sprite( 100, 100 );
+      sprite4.anchor.Set( 0.5 );
+
+      stage.AddChildren( sprite1, sprite2, sprite3, sprite4 );
     } );
     imageCache.onTextureLoaded.Add( function ( _event ) {
       console.log( _event.target, _event.data, 'loaded' );

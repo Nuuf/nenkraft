@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  function Polygon2D() {
+  function Polygon2D () {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     this.vertices = [];
   }
@@ -24,7 +24,7 @@ module.exports = function ( nk ) {
     _po.Recreate( [ tm, br, bl ] );
     _po.ComputeBounds();
   };
-  Polygon2D.Construct.Circlic = function ( _po, _x, _y, _ra, _acc ) {
+  Polygon2D.Construct.Cyclic = function ( _po, _x, _y, _ra, _acc ) {
     _po.Recreate( [] );
     var i = 0, l = _acc, x, y, th, an = Math.PI * 2 / l;
     for ( i; i < l; ++i ) {

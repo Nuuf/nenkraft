@@ -5,9 +5,15 @@ module.exports = function ( nk ) {
     if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
     Super.call( this, _x, _y );
     if ( _path !== undefined ) {
-      if ( _path.w !== undefined ) this.w = _path.w;
-      if ( _path.h !== undefined ) this.h = _path.h;
-      if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
+      if ( _path.w !== undefined && _path.h !== undefined ) {
+        this.w = _path.w;
+        this.h = _path.h;
+      }
+      else if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
+      else if ( _path.aabb !== undefined ) {
+        this.w = _path.aabb.w;
+        this.h = _path.aabb.h;
+      }
       this.path = _path;
     }
   }

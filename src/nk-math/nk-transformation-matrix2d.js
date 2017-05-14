@@ -3,6 +3,7 @@ module.exports = function ( nk ) {
   function TransformationMatrix2D () {
     if ( !( this instanceof TransformationMatrix2D ) ) return new TransformationMatrix2D();
     this.matrix = new Float32Array( 7 );
+    this.matrix[ 0 ] = this.matrix[ 1 ] = 1;
   }
   TransformationMatrix2D.prototype = Object.create( null );
   TransformationMatrix2D.prototype.constructor = TransformationMatrix2D;
