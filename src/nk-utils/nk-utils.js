@@ -133,15 +133,13 @@ module.exports = function ( nk ) {
     }
     return output.join( '' );
   };
-  nk.Utils.GenerateTexture = function ( _callback ) {
-    var drawable = _callback();
+  nk.Utils.GenerateSimpleTexture = function ( _textureFunction ) {
+    var drawable = _textureFunction();
     var canvas = document.createElement( 'canvas' );
     canvas.width = drawable.w;
     canvas.height = drawable.h;
     drawable.Draw( canvas.getContext( '2d' ) );
-    var texture = new Image();
-    texture.src = canvas.toDataURL( 'image/png' );
-    return texture;
+    return canvas.toDataURL( 'image/png' );
   };
   nk.Utils.TextureFromDataURL = function ( _url ) {
     var texture = new Image();

@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  function Stroke( _props ) {
+  function Stroke ( _props ) {
     if ( !( this instanceof Stroke ) ) return new Stroke( _props );
     nk.Utils.ApplyProperties( this, _props );
   }
@@ -18,7 +18,7 @@ module.exports = function ( nk ) {
     MITER: 'miter'
   };
   //Members
-  Stroke.prototype.strokeStyle = '#00FF00';
+  Stroke.prototype.color = '#00FF00';
   Stroke.prototype.lineCap = nk.Style.LINE_CAP.ROUND;
   Stroke.prototype.lineJoin = nk.Style.LINE_JOIN.ROUND;
   Stroke.prototype.lineWidth = 1;
@@ -26,7 +26,7 @@ module.exports = function ( nk ) {
   Stroke.prototype.applied = true;
   //Methods
   Stroke.prototype.Apply = function ( _rc ) {
-    _rc.strokeStyle = this.strokeStyle;
+    _rc.strokeStyle = this.color;
     _rc.lineCap = this.lineCap;
     _rc.lineJoin = this.lineJoin;
     _rc.lineWidth = this.lineWidth;

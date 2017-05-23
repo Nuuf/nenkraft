@@ -1,6 +1,7 @@
 var namespace = global.nk = global.Nenkraft = {};
 
 require( './nk-base/nk-base' )( namespace );
+require( './nk-math/nk-math' )( namespace );
 require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-color' )( namespace );
 require( './nk-style/nk-fill' )( namespace );
@@ -14,7 +15,6 @@ require( './nk-time/nk-ticker/nk-ticker.js' )( namespace );
 require( './nk-time/nk-timer/nk-timer.js' )( namespace );
 require( './nk-math/nk-vector/nk-vector2d' )( namespace );
 require( './nk-math/nk-vector/nk-limit-vector2d' )( namespace );
-require( './nk-math/nk-math' )( namespace );
 require( './nk-math/nk-transformation-matrix2d' )( namespace );
 require( './nk-math/nk-collision/nk-collision2d.js' )( namespace );
 require( './nk-geom/nk-line/nk-line2d' )( namespace );

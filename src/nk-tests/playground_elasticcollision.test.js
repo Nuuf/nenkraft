@@ -26,8 +26,8 @@ module.exports = function () {
     stage.ticker.StartAF();
 
     var fps = new nk.Text( 0, 0, '' );
-    fps.style.text.fillStyle = '#000';
-    fps.style.text.strokeStyle = '#000';
+    fps.style.text.fillColor = '#000';
+    fps.style.text.strokeColor = '#000';
 
     var colliders = [];
 
@@ -35,7 +35,7 @@ module.exports = function () {
       var mass = nk.Utils.RandomInteger( 5, 20 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
-      p.style.stroke.strokeStyle = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
+      p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
       p.style.stroke.lineWidth = mass / 5;
       var g = new nk.Graphic2D( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), p );
       g.ApplyTransformation = nk.Container2D.SimpleTransformation;
@@ -45,7 +45,7 @@ module.exports = function () {
         anchor: g.anchor,
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -5, 5 ), nk.Utils.RandomInteger( -5, 5 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -2, 2 ), nk.Utils.RandomInteger( -2, 2 ) )
       };
       colliders.push( g );
       stage.AddChild( g );

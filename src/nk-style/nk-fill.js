@@ -3,7 +3,7 @@ module.exports = function ( nk ) {
   /*
   * @parameter _props: Object
   */
-  function Fill( _props ) {
+  function Fill ( _props ) {
     if ( !( this instanceof Fill ) ) return new Fill( _props );
     nk.Utils.ApplyProperties( this, _props );
   }
@@ -12,11 +12,11 @@ module.exports = function ( nk ) {
   //Static
 
   //Members
-  Fill.prototype.fillStyle = '#440066';
+  Fill.prototype.color = '#440066';
   Fill.prototype.applied = true;
   //Methods
   Fill.prototype.Apply = function ( _rc ) {
-    _rc.fillStyle = this.fillStyle;
+    _rc.fillStyle = this.color;
   };
   nk.Style.Fill = Fill;
 };

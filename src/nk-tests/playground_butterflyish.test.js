@@ -48,10 +48,10 @@ module.exports = function () {
 
 
     var text = new nk.Text( 0, 0, 'Stop trying to hit me and hit me!' );
-    text.style.text.textAlign = nk.Style.TEXT_ALIGN.CENTER;
-    text.style.text.textBaseline = nk.Style.TEXT_BASELINE.MIDDLE;
+    text.style.text.align = nk.Style.TEXT_ALIGN.CENTER;
+    text.style.text.baseline = nk.Style.TEXT_BASELINE.MIDDLE;
     text.style.text.font = '56px Arial';
-    text.style.text.strokeStyle = '#000';
+    text.style.text.strokeColor = '#000';
 
     container.AddChild( text );
 
@@ -59,8 +59,8 @@ module.exports = function () {
 
       color.IncreaseChannel( 0, 0.1 );
 
-      bfly.style.stroke.strokeStyle = color.value;
-      text.style.text.fillStyle = color.value;
+      bfly.style.stroke.color = color.value;
+      text.style.text.fillColor = color.value;
 
       var a = nk.Math.DTR( angle );
 

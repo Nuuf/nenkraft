@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  function Shadow( _props ) {
+  function Shadow ( _props ) {
     if ( !( this instanceof Shadow ) ) return new Shadow( _props );
     nk.Utils.ApplyProperties( this, _props );
   }
@@ -9,17 +9,17 @@ module.exports = function ( nk ) {
   //Static
 
   //Members
-  Shadow.prototype.shadowColor = '#000000';
-  Shadow.prototype.shadowBlur = 5;
-  Shadow.prototype.shadowOffsetX = 5;
-  Shadow.prototype.shadowOffsetY = 5;
+  Shadow.prototype.color = '#000000';
+  Shadow.prototype.blur = 5;
+  Shadow.prototype.offsetX = 0;
+  Shadow.prototype.offsetY = 0;
   Shadow.prototype.applied = false;
   //Methods
   Shadow.prototype.Apply = function ( _rc ) {
-    _rc.shadowColor = this.shadowColor;
-    _rc.shadowBlur = this.shadowBlur;
-    _rc.shadowOffsetX = this.shadowOffsetX;
-    _rc.shadowOffsetY = this.shadowOffsetY;
+    _rc.shadowColor = this.color;
+    _rc.shadowBlur = this.blur;
+    _rc.shadowOffsetX = this.offsetX;
+    _rc.shadowOffsetY = this.offsetY;
   };
   nk.Style.Shadow = Shadow;
 };

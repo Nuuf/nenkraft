@@ -10,23 +10,24 @@ module.exports = function ( nk ) {
   Sprite.prototype = Object.create( Super.prototype );
   Sprite.prototype.constructor = Sprite;
   //Static
-  Sprite.DEFAULT_TEXTURE = nk.Utils.GenerateTexture( function () {
+  Sprite.DEFAULT_TEXTURE = new Image();
+  Sprite.DEFAULT_TEXTURE.src = nk.Utils.GenerateSimpleTexture( function () {
     //Oooh what fun.
     var path = new nk.Path.Polygon2D();
     path.AddPoint( new nk.Vector2D( 0, 0 ) );
-    path.AddPoint( new nk.Vector2D( 100, 0 ) );
-    path.AddPoint( new nk.Vector2D( 100, 100 ) );
-    path.AddPoint( new nk.Vector2D( 0, 100 ) );
+    path.AddPoint( new nk.Vector2D( 64, 0 ) );
+    path.AddPoint( new nk.Vector2D( 64, 64 ) );
+    path.AddPoint( new nk.Vector2D( 0, 64 ) );
     path.AddPoint( new nk.Vector2D( 0, 0 ) );
-    path.AddPoint( new nk.Vector2D( 50, 50 ) );
-    path.AddPoint( new nk.Vector2D( 100, 0 ) );
-    path.AddPoint( new nk.Vector2D( 50, 50 ) );
-    path.AddPoint( new nk.Vector2D( 100, 100 ) );
-    path.AddPoint( new nk.Vector2D( 50, 50 ) );
-    path.AddPoint( new nk.Vector2D( 0, 100 ) );
+    path.AddPoint( new nk.Vector2D( 32, 32 ) );
+    path.AddPoint( new nk.Vector2D( 64, 0 ) );
+    path.AddPoint( new nk.Vector2D( 32, 32 ) );
+    path.AddPoint( new nk.Vector2D( 64, 64 ) );
+    path.AddPoint( new nk.Vector2D( 32, 32 ) );
+    path.AddPoint( new nk.Vector2D( 0, 64 ) );
     path.ComputeBounds();
-    path.style.fill.fillStyle = 'rgba(66,00,66,0.5)';
-    path.style.stroke.strokeStyle = '#F00';
+    path.style.fill.color = 'rgba(66,00,66,0.5)';
+    path.style.stroke.color = '#F00';
     path.style.stroke.lineWidth = 3;
     return new nk.Graphic2D( 0, 0, path );
   } );

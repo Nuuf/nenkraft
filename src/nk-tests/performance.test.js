@@ -27,6 +27,8 @@ module.exports = function () {
     var ticker = new nk.Ticker( Update );
 
     var numTimes = 20;
+    var hold = 20;
+    var holdCounter = 0;
     var fps = 50;
 
     var childrenMDC = [];
@@ -39,13 +41,14 @@ module.exports = function () {
         container.AddChild( graphic );
       }
 
-      if ( ticker.GetTPS() > fps ) {
+      if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
         this.Start( 1 );
       }
       else {
         var numChildren = container.children.length;
-        console.log( numChildren );
+        console.log( numChildren, ticker.GetTPS() );
         container.Dump();
+        holdCounter = 0;
         childrenMDC.push( numChildren );
         numTimes--;
         if ( numTimes > 0 ) {

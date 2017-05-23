@@ -16,13 +16,15 @@ module.exports = function ( nk ) {
     var bl = new nk.Vector2D( _x, _y + _h );
     _po.Recreate( [ tl, tr, br, bl ] );
     _po.ComputeBounds();
+    return _po;
   };
-  Polygon2D.Construct.Triangular = function ( _po, _x, _y, _w, _h ) {
+  Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _w, _h ) {
     var tm = new nk.Vector2D( _x, _y );
     var br = new nk.Vector2D( _x + _w * 0.5, _y + _h );
     var bl = new nk.Vector2D( _x - _w * 0.5, _y + _h );
     _po.Recreate( [ tm, br, bl ] );
     _po.ComputeBounds();
+    return _po;
   };
   Polygon2D.Construct.Cyclic = function ( _po, _x, _y, _ra, _acc ) {
     _po.Recreate( [] );
@@ -34,6 +36,7 @@ module.exports = function ( nk ) {
       _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    return _po;
   };
   Polygon2D.Construct.Star = function ( _po, _x, _y, _ora, _ira, _cors ) {
     _po.Recreate( [] );
@@ -46,6 +49,7 @@ module.exports = function ( nk ) {
       _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    return _po;
   };
   Polygon2D.Construct.Butterfly = function ( _po, _x, _y, _n, _ra ) {
     _po.Recreate( [] );
@@ -57,6 +61,7 @@ module.exports = function ( nk ) {
       _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    return _po;
   };
   Polygon2D.Construct.Butterfly.C = {
     _1: 24,
@@ -103,6 +108,7 @@ module.exports = function ( nk ) {
       _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    return _po;
   };
   Polygon2D.Construct.Supershape.C = {
     _A: 1,
@@ -120,7 +126,8 @@ module.exports = function ( nk ) {
     this.vertices = this.vertices.concat( _ps );
   };
   Polygon2D.prototype.Recreate = function ( _ps ) {
-    this.vertices = _ps;
+    if ( _ps !== undefined ) this.vertices = _ps;
+    else this.vertices.length = 0;
   };
   Polygon2D.prototype.ComputeBounds = function () {
     if ( this.aabb === null ) this.aabb = new nk.Geom.AABB2D();

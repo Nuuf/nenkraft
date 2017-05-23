@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  function Text( _props ) {
+  function Text ( _props ) {
     if ( !( this instanceof Text ) ) return new Text( _props );
     nk.Utils.ApplyProperties( this, _props );
   }
@@ -23,19 +23,19 @@ module.exports = function ( nk ) {
     BOTTOM: 'bottom'
   };
   //Members
-  Text.prototype.fillStyle = '#000000';
-  Text.prototype.strokeStyle = '#FFFFFF';
+  Text.prototype.fillColor = '#000000';
+  Text.prototype.strokeColor = '#FFFFFF';
   Text.prototype.font = '22px Arial';
-  Text.prototype.textAlign = nk.Style.TEXT_ALIGN.LEFT;
-  Text.prototype.textBaseline = nk.Style.TEXT_BASELINE.TOP;
+  Text.prototype.align = nk.Style.TEXT_ALIGN.LEFT;
+  Text.prototype.baseline = nk.Style.TEXT_BASELINE.TOP;
   Text.prototype.applied = true;
   //Methods
   Text.prototype.Apply = function ( _rc ) {
-    _rc.fillStyle = this.fillStyle;
-    _rc.strokeStyle = this.strokeStyle;
+    _rc.fillStyle = this.fillColor;
+    _rc.strokeStyle = this.strokeColor;
     _rc.font = this.font;
-    _rc.textAlign = this.textAlign;
-    _rc.textBaseline = this.textBaseline;
+    _rc.textAlign = this.align;
+    _rc.textBaseline = this.baseline;
   };
 
   nk.Style.Text = Text;

@@ -8,7 +8,7 @@ module.exports = function ( nk ) {
     this.skew = new nk.Vector2D( 0, 0 );
     this.anchor = new nk.Vector2D();
     this.children = [];
-    this.data = {};
+    this.data = Object.create( null );
   }
   Container2D.prototype = Object.create( null );
   Container2D.prototype.constructor = Container2D;
@@ -37,22 +37,22 @@ module.exports = function ( nk ) {
     var anchor = this.anchor;
     var transform = this.transform;
     var parent = this.parent;
-    var x, y, sx, sy, skx = 0, sky = 0, rot;
+    var x, y, sx, sy, skx, sky, rot;
     if ( parent !== null ) {
       var parentTransform = parent.transform;
-      x = transform.SetAndGetX( position.x + parentTransform.GetX() - anchor.x * this.w );
-      y = transform.SetAndGetY( position.y + parentTransform.GetY() - anchor.y * this.h );
       sx = transform.SetAndGetScaleX( scale.x * parentTransform.GetScaleX() );
       sy = transform.SetAndGetScaleY( scale.y * parentTransform.GetScaleY() );
+      x = transform.SetAndGetX( position.x + parentTransform.GetX() - anchor.x * this.w * sx );
+      y = transform.SetAndGetY( position.y + parentTransform.GetY() - anchor.y * this.h * sy );
       skx = transform.SetAndGetSkewX( skew.x + parentTransform.GetSkewX() );
       sky = transform.SetAndGetSkewY( skew.y + parentTransform.GetSkewY() );
       rot = transform.SetAndGetRotation( this.rotation + parentTransform.GetRotation() );
     }
     else {
-      x = transform.SetAndGetX( position.x - anchor.x * this.w );
-      y = transform.SetAndGetY( position.y - anchor.y * this.h );
       sx = transform.SetAndGetScaleX( scale.x );
       sy = transform.SetAndGetScaleY( scale.y );
+      x = transform.SetAndGetX( position.x - anchor.x * this.w * sx );
+      y = transform.SetAndGetY( position.y - anchor.y * this.h * sy );
       skx = transform.SetAndGetSkewX( skew.x );
       sky = transform.SetAndGetSkewY( skew.y );
       rot = transform.SetAndGetRotation( this.rotation );

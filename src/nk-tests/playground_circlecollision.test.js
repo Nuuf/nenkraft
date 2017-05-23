@@ -40,13 +40,13 @@ module.exports = function () {
     var lineC = new nk.Graphic2D( 0, 0, new nk.Path.Line2D() );
 
     var poc1 = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 4 ) );
-    poc1.path.style.fill.fillStyle = '#FF00FF';
+    poc1.path.style.fill.color = '#FF00FF';
     poc1.path.style.stroke.applied = false;
     var poc2 = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 4 ) );
-    poc2.path.style.fill.fillStyle = '#FFFF00';
+    poc2.path.style.fill.color = '#FFFF00';
     poc2.path.style.stroke.applied = false;
     var poc3 = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 4 ) );
-    poc3.path.style.fill.fillStyle = '#00FFFF';
+    poc3.path.style.fill.color = '#00FFFF';
     poc3.path.style.stroke.applied = false;
 
     stage.AddChild( c1 );

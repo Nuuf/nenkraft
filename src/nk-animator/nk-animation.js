@@ -27,7 +27,7 @@ module.exports = function ( nk ) {
     this.frames.push( new nk.Animator.Frame( _x, _y, _w, _h, _rate, this.controller.sprite ) );
   };
   Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
-    for ( var i = 0, x, y, w, h, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
+    for ( var i = 0, x, y, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
       x = ( i % columns ) * _frameWidth;
       y = Math.floor( i / columns ) * _frameHeight;
       rate = _data[ i ];

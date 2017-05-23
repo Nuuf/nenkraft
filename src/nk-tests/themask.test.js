@@ -43,7 +43,7 @@ module.exports = function () {
 
     var line = new nk.Path.Line2D( -100, 0, 100, 0 );
     line.style.shadow.applied = true;
-    line.style.stroke.strokeStyle = '#000';
+    line.style.stroke.color = '#000';
     var child$1 = new nk.Graphic2D( 0, 0, line );
     var child$2 = new nk.Graphic2D( 0, 0, line );
     var child$3 = new nk.Graphic2D( 0, 0, line );
@@ -58,7 +58,7 @@ module.exports = function () {
 
     function Update () {
 
-      path.style.fill.fillStyle = color.value;
+      path.style.fill.color = color.value;
 
       color.IncreaseChannel( 0, 1 );
 

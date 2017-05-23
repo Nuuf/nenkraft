@@ -12,63 +12,81 @@ module.exports = function () {
     c.setAttribute( 'height', window.innerHeight );
     c.style.display = 'initial';
     c.style.position = 'absolute';
-    c.style.top = 0;
-    c.style.left = 0;
+    c.style.top = '0';
+    c.style.left = '0';
     var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
+    var widthByHeight = W / H;
 
-    var container = new nk.Container2D( 0, 0 );
+    var stage = new nk.Stage2D( c, HW, HH, true );
+    stage.ticker.StartAF();
 
-    var starTexture = new nk.Path.Polygon2D();
-    starTexture.style.stroke.applied = false;
-    starTexture.style.fill.fillStyle = 'white';
-    nk.Geom.Polygon2D.Construct.Star( starTexture, 0, 0, 1, 2, 6 );
+    var staticStars = [];
 
-    //Create stars
-    for ( var i = 0, l = parseInt( W / H * 100 ); i < l; ++i ) {
-      var graphic = new nk.Graphic2D( 0, 0, starTexture );
-      container.AddChild( graphic );
-      graphic.scale = new nk.LimitVector2D( Math.random(), undefined, -4, -4, 4, 4 );
-      graphic.position = new nk.LimitVector2D( Math.random() * W, Math.random() * H, 0, 0, W, H );
-      graphic.scale.invert = true;
-      graphic.position.invert = true;
+
+    var imageCache = new nk.Load.TextureLoader( [ {
+      id: 'butterfly',
+      src: nk.Utils.GenerateSimpleTexture( Butterfly )
+    }, {
+      id: 'staticStar',
+      src: nk.Utils.GenerateSimpleTexture( StaticStar )
+    }] );
+    imageCache.onComplete.Add( function () {
+      Go();
+    } );
+
+    function Go () {
+      CreateSprites( { x: -HW, y: HW }, { x: -HH, y: HH }, 'staticStar', W / H * 500, staticStars, stage, 0.01 );
+      stage.onProcess.Add( function () {
+        for ( var i = 0, l = staticStars.length, star; i < l; ++i ) {
+          star = staticStars[ i ];
+          star.position.AddV( star.data.velocity );
+          star.data.velocity.Rotate( nk.Math.DTR( star.data.torque ) );
+        }
+      }, stage );
     }
 
-    var rChildren = nk.Utils.ArrayGetRandom( container.children, 4 );
-    var rrChildren = nk.Utils.ArrayGetRandom( container.children, 4 );
-
-    var scaleSpeed = new nk.Vector2D( 0.01 );
-    var fallSpeed = new nk.Vector2D( 2, 4 );
-
-    console.log( container.children.length );
-
-    function Update () {
-
-      rc.fillStyle = 'rgba(0, 0, 0, 0.1)';
-      rc.fillRect( 0, 0, W, H );
-
-      for ( var i = 0, l = rChildren.length, child; i < l; ++i ) {
-        child = rChildren[ i ];
-        if ( child ) {
-          child.position.AddV( fallSpeed );
-          child.position.Limit();
-        }
+    function CreateSprites ( xv, yv, img, am, store, parent, scale ) {
+      for ( var i = 0; i < am; ++i ) {
+        var x = nk.Utils.RandomInteger( xv.x, xv.y );
+        var y = nk.Utils.RandomInteger( yv.x, yv.y );
+        var sprite = new nk.Sprite( x, y, imageCache.Get( img ) );
+        sprite.anchor.Set( 0.5 );
+        sprite.scale.Set( scale );
+        sprite.rotation = nk.Utils.RandomFloat( 0, nk.Math.PII );
+        sprite.data.velocity = new nk.Vector2D( x / 500, y / 500 );
+        sprite.data.torque = ( x + y ) / 500 * nk.Utils.RandomInteger( -1, 1 );
+        store.push( sprite );
+        parent.AddChild( sprite );
       }
-
-      for ( var i = 0, l = rrChildren.length, child; i < l; ++i ) {
-        child = rrChildren[ i ];
-        if ( child ) {
-          child.scale.AddV( scaleSpeed );
-          child.scale.Limit();
-        }
-      }
-
-      container.Draw( rc );
+      console.log( i );
     }
 
-    setInterval( Update, 1 );
+
+    function Butterfly () {
+      var path = new nk.Path.Polygon2D();
+      path.style.fill.color = '#FFF';
+      path.style.stroke.color = '#000';
+      path.style.stroke.lineWidth = 3;
+      nk.Geom.Polygon2D.Construct.Butterfly( path, 0, 0, 4000, 50 );
+      var x = ( Math.abs( path.aabb.tl.x ) - Math.abs( path.aabb.br.x ) ) * 0.5;
+      var t = new nk.Graphic2D( x, 0, path );
+      t.anchor.Set( -0.5 );
+      return t;
+    }
+    function StaticStar () {
+      var path = new nk.Path.Polygon2D();
+      path.style.fill.color = '#FFF';
+      path.style.stroke.color = '#000';
+      path.style.stroke.lineWidth = 3;
+      nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 800, 400, 5 );
+      var x = ( Math.abs( path.aabb.tl.x ) - Math.abs( path.aabb.br.x ) ) * 0.5;
+      var t = new nk.Graphic2D( x, 0, path );
+      t.anchor.Set( -0.5 );
+      return t;
+    }
 
     document.body.removeChild( buttonContainer );
   }

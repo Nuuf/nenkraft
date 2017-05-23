@@ -118,7 +118,9 @@ module.exports = function () {
             return;
           }
           var tex = new nk.Path.Circle( 0, 0, _data.radius );
-          var gr = new nk.Graphic2D( _data.x, _data.y, tex );
+          console.log( _data );
+          var gr = new nk.Graphic2D( parseInt( _data.x ), parseInt( _data.y ), tex );
+          console.log( gr );
           stage.AddChild( gr );
         },
         'Create a circle', 0, true ).
@@ -130,7 +132,7 @@ module.exports = function () {
             return;
           }
           var tex = new nk.Path.AABB2D( 0, 0, _data.width, _data.height );
-          var gr = new nk.Graphic2D( _data.x, _data.y, tex );
+          var gr = new nk.Graphic2D( parseInt( _data.x ), parseInt( _data.y ), tex );
           stage.AddChild( gr );
         },
         'Create a rectangle', 0, true ).
