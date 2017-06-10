@@ -28,8 +28,6 @@ module.exports = function () {
 
     var aabbg1 = new nk.Graphic2D( 300, 100, new nk.Path.AABB2D( 0, 0, 50, 50 ) );
     var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 400, 100 ) );
-    aabbg1.anchor.Set( 0.5 );
-    aabbg2.anchor.Set( 0.56 );
 
     var lineC = new nk.Graphic2D( 0, 0, new nk.Path.Line2D() );
 

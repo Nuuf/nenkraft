@@ -3,10 +3,10 @@ module.exports = function () {
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Performance' );
   button.setAttribute( 'type', 'button' );
-  button.addEventListener( 'click', RunPerformance );
+  button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
 
-  function RunPerformance () {
+  function Run () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -20,9 +20,16 @@ module.exports = function () {
     var H = c.height, HH = H * 0.5;
 
     var container = new nk.Container2D( HW, HH );
-    var texture = new nk.Path.Polygon2D();
-    nk.Geom.Polygon2D.Construct.Cyclic( texture, 0, 0, 30, 3 );
-    //texture.style.fill.applied = false;
+
+    var texture = null;
+
+    function CreateTexture () {
+      var path = new nk.Path.Polygon2D();
+      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 3 );
+      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      return t;
+    }
 
     var ticker = new nk.Ticker( Update );
 
@@ -37,8 +44,8 @@ module.exports = function () {
     timer.onStop.Add( function () {
       var i = 35;
       while ( --i ) {
-        var graphic = new nk.Graphic2D( Math.random() * W - HW, Math.random() * H - HH, texture );
-        container.AddChild( graphic );
+        var sprite = new nk.Sprite( Math.random() * W - HW, Math.random() * H - HH, texture );
+        container.AddChild( sprite );
       }
 
       if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
@@ -62,9 +69,14 @@ module.exports = function () {
       }
     }, timer );
 
-    timer.Start( 120 );
-
-
+    var imageCache = new nk.Load.TextureLoader( [ {
+      id: 'tex',
+      src: nk.Utils.GenerateSimpleTexture( CreateTexture )
+    }] );
+    imageCache.onComplete.Add( function () {
+      texture = imageCache.Get( 'tex' );
+      timer.Start( 120 );
+    } );
 
     function Update () {
       rc.setTransform( 1, 0, 0, 1, 0, 0 );

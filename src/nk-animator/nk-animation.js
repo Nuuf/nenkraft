@@ -29,7 +29,7 @@ module.exports = function ( nk ) {
   Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
     for ( var i = 0, x, y, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
       x = ( i % columns ) * _frameWidth;
-      y = Math.floor( i / columns ) * _frameHeight;
+      y = ( ( i / columns ) | 0 ) * _frameHeight;
       rate = _data[ i ];
       this.AddFrame( x, y, _frameWidth, _frameHeight, rate );
     }

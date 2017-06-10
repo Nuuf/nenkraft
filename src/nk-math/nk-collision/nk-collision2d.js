@@ -1,6 +1,10 @@
 module.exports = function ( nk ) {
   "use strict";
-  var Collision2D = { AABB2DvsAABB2D: { Relative: {} }, CirclevsCircle: { Relative: {} } };
+  var Collision2D = Object.create( null );
+  Collision2D.AABB2DvsAABB2D = Object.create( null );
+  Collision2D.AABB2DvsAABB2D.Relative = Object.create( null );
+  Collision2D.CirclevsCircle = Object.create( null );
+  Collision2D.CirclevsCircle.Relative = Object.create( null );
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
     return _a.GetMagnitude() - _b.GetMagnitude();
   };

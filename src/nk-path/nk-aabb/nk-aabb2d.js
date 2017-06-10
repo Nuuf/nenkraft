@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.AABB2D;
-  function AABB2D( _arg0, _arg1, _arg2, _arg3 ) {
+  function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
     Super.call( this, _arg0, _arg1, _arg2, _arg3 );
     this.style = nk.Style.CreateFSSa();

@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.Circle;
-  function Circle( _x, _y, _radius ) {
+  function Circle ( _x, _y, _radius ) {
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
     Super.call( this, _x, _y, _radius );
     this.style = nk.Style.CreateFSSa();

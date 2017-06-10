@@ -93,7 +93,6 @@ module.exports = function () {
     var cIndex = -1;
     var cHistory = [];
 
-    var mouse = new nk.Input.Mouse( c );
     var stage = new nk.Stage2D( c, HW, HH, true );
 
     var gobjects = {
@@ -117,10 +116,8 @@ module.exports = function () {
             insertParagraph( CE.DATA_MISSING.replace( /DATA/g, 'radius' ) );
             return;
           }
-          var tex = new nk.Path.Circle( 0, 0, _data.radius );
-          console.log( _data );
-          var gr = new nk.Graphic2D( parseInt( _data.x ), parseInt( _data.y ), tex );
-          console.log( gr );
+          var tex = new nk.Path.Circle( 0, 0, parseInt( _data.radius ) );
+          var gr = new nk.Graphic2D( parseInt( _data.x ) || 0, parseInt( _data.y ) || 0, tex );
           stage.AddChild( gr );
         },
         'Create a circle', 0, true ).

@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
   "use strict";
-  function AABB2D( _arg0, _arg1, _arg2, _arg3 ) {
+  function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
     if ( _arg0 instanceof nk.Vector2D && _arg1 instanceof nk.Vector2D ) {
       this.tl = _arg0;
@@ -43,23 +43,18 @@ module.exports = function ( nk ) {
     this.br.y = _h;
     this.CalculateWH();
   };
+  AABB2D.prototype.SetC = function ( _aabb2d ) {
+    this.Set( _aabb2d.tl.x, _aabb2d.tl.y, _aabb2d.br.x, _aabb2d.br.y );
+  };
   AABB2D.prototype.CalculateWH = function () {
     this.w = this.br.x - this.tl.x;
     this.h = this.br.y - this.tl.y;
   };
-  AABB2D.prototype.IntersectsPoint = function ( _v, _anchor, _w, _h ) {
-    if ( _anchor !== undefined ) {
-      if ( _anchor.x !== 0 ) _v.x += _anchor.x * _w;
-      if ( _anchor.y !== 0 ) _v.y += _anchor.y * _h;
-    }
+  AABB2D.prototype.IntersectsPoint = function ( _v ) {
     if ( _v.x < this.tl.x || _v.x > this.br.x || _v.y < this.tl.y || _v.y > this.br.y ) return false;
     return true;
   };
-  AABB2D.prototype.ContainsPoint = function ( _v, _anchor, _w, _h ) {
-    if ( _anchor !== undefined ) {
-      if ( _anchor.x !== 0 ) _v.x += _anchor.x * _w;
-      if ( _anchor.y !== 0 ) _v.y += _anchor.y * _h;
-    }
+  AABB2D.prototype.ContainsPoint = function ( _v ) {
     return ( _v.x > this.tl.x && _v.x < this.br.x && _v.y > this.tl.y && _v.y < this.br.y );
   };
 

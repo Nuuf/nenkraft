@@ -4,6 +4,9 @@ module.exports = function ( nk ) {
   function Sprite ( _x, _y, _texture ) {
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
     Super.call( this, _x, _y );
+    this.anchor = new nk.Vector2D();
+    this.clip = new nk.Geom.AABB2D();
+    this.shape = new nk.Geom.AABB2D();
     if ( _texture === undefined ) _texture = Sprite.DEFAULT_TEXTURE;
     this.SetTexture( _texture );
   }
@@ -35,29 +38,28 @@ module.exports = function ( nk ) {
   Sprite.prototype.shape = null;
   Sprite.prototype.clip = null;
   Sprite.prototype.texture = null;
-  Sprite.prototype.visible = true;
+  Sprite.prototype.anchor = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
-    if ( this.render === true ) {
-      this.ApplyTransformation( _rc );
-      var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h;
-      _rc.drawImage(
-        this.texture,
-        tl.x, tl.y, br.x, br.y, 0, 0, w, h
-      );
-      this.DrawChildren( _rc );
-    }
+    this.UpdateAndApplyTransform( _rc );
+    var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
+    _rc.drawImage(
+      this.texture,
+      tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
+    );
+    this.DrawChildren( _rc );
   };
   Sprite.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );
-    return this.shape.IntersectsPoint( cv, this.anchor, this.w, this.h );
+    cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
+    return this.shape.IntersectsPoint( cv );
   };
   Sprite.prototype.SetTexture = function ( _texture ) {
     this.texture = _texture;
     this.w = _texture.naturalWidth;
     this.h = _texture.naturalHeight;
-    this.clip = new nk.Geom.AABB2D( 0, 0, this.w, this.h );
-    this.shape = new nk.Geom.AABB2D( 0, 0, this.w, this.h );
+    this.clip.Set( 0, 0, this.w, this.h );
+    this.shape.SetC( this.clip );
   };
   nk.Entity.Sprite = Sprite;
   nk.Sprite = Sprite;

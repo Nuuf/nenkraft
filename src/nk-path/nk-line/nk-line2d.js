@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.Line2D;
-  function Line2D( _arg0, _arg1, _arg2, _arg3 ) {
+  function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
     Super.call( this, _arg0, _arg1, _arg2, _arg3 );
     this.style = nk.Style.CreateSSa();

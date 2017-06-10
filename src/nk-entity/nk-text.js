@@ -17,21 +17,17 @@ module.exports = function ( nk ) {
   Text.prototype.maxWidth = undefined;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
-    if ( this.render === true ) {
-      this.ApplyTransformation( _rc );
-      var style = this.style;
-      if ( this.visible === true ) {
-        if ( style.shadow.applied === true ) {
-          style.shadow.Apply( _rc );
-        }
-        if ( style.text.applied === true ) {
-          style.text.Apply( _rc );
-          _rc.fillText( this.text, 0, 0, this.maxWidth );
-          _rc.strokeText( this.text, 0, 0, this.maxWidth );
-        }
-      }
-      this.DrawChildren( _rc );
+    this.UpdateAndApplyTransform( _rc );
+    var style = this.style;
+    if ( style.shadow.applied === true ) {
+      style.shadow.Apply( _rc );
     }
+    if ( style.text.applied === true ) {
+      style.text.Apply( _rc );
+      _rc.fillText( this.text, 0, 0, this.maxWidth );
+      _rc.strokeText( this.text, 0, 0, this.maxWidth );
+    }
+    this.DrawChildren( _rc );
   };
   Text.prototype.IntersectsPoint = function ( _v ) {
     return false;

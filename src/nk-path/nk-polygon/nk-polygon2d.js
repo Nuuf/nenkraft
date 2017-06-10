@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   "use strict";
   var Super = nk.Geom.Polygon2D;
-  function Polygon2D() {
+  function Polygon2D () {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     Super.call( this );
     this.style = nk.Style.CreateFSSa();

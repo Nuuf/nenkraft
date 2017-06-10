@@ -16,6 +16,7 @@ module.exports = function ( nk ) {
       }
       this.path = _path;
     }
+    this.anchor = new nk.Vector2D();
   }
   Graphic2D.prototype = Object.create( Super.prototype );
   Graphic2D.prototype.constructor = Graphic2D;
@@ -23,21 +24,19 @@ module.exports = function ( nk ) {
 
   //Members
   Graphic2D.prototype.path = null;
-  Graphic2D.prototype.visible = true;
+  Graphic2D.prototype.anchor = null;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
-    if ( this.render === true ) {
-      var path = this.path;
-      this.ApplyTransformation( _rc );
-      if ( path && path.Draw && this.visible === true ) {
-        path.Draw( _rc );
-      }
-      this.DrawChildren( _rc );
+    var path = this.path;
+    this.UpdateAndApplyTransform( _rc );
+    if ( path && path.Draw ) {
+      path.Draw( _rc );
     }
+    this.DrawChildren( _rc );
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );
-    return this.path.IntersectsPoint( cv, this.anchor, this.w, this.h );
+    return this.path.IntersectsPoint( cv );
   };
   nk.Entity.Graphic2D = Graphic2D;
   nk.Graphic2D = Graphic2D;

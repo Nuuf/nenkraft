@@ -38,7 +38,7 @@ module.exports = function () {
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.AddAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
-        '0': 60
+        '5': 120
       } );
       animation.reverse = true;
       animation.onEnd.Add( function () {

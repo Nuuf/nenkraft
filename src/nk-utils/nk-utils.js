@@ -1,29 +1,29 @@
 module.exports = function ( nk ) {
   "use strict";
   nk.Utils.RandomInteger = function ( _min, _max ) {
-    return Math.floor( Math.random() * ( _max - _min + 1 ) + _min );
+    return ( Math.random() * ( _max - _min + 1 ) + _min ) | 0;
   };
   nk.Utils.RandomFloat = function ( _min, _max ) {
     return Math.random() * ( _max - _min ) + _min;
   };
-  nk.Utils.IsInteger = function ( _val ) {
-    return Number( _val ) === _val && _val % 1 === 0;
+  nk.Utils.IsInteger = function ( _value ) {
+    return Number( _value ) === _value && _value % 1 === 0;
   };
-  nk.Utils.IsFloat = function ( _val ) {
-    return Number( _val ) === _val && _val % 1 !== 0;
+  nk.Utils.IsFloat = function ( _value ) {
+    return Number( _value ) === _value && _value % 1 !== 0;
   };
-  nk.Utils.Clamp = function ( _c, _min, _max ) {
-    if ( _c < _min ) return _min;
-    else if ( _c > _max ) return _max;
-    return _c;
+  nk.Utils.Clamp = function ( _value, _min, _max ) {
+    if ( _value < _min ) return _min;
+    else if ( _value > _max ) return _max;
+    return _value;
   };
-  nk.Utils.InverseClamp = function ( _c, _min, _max ) {
-    if ( _c < _min ) return _max;
-    else if ( _c > _max ) return _min;
-    return _c;
+  nk.Utils.InverseClamp = function ( _value, _min, _max ) {
+    if ( _value < _min ) return _max;
+    else if ( _value > _max ) return _min;
+    return _value;
   };
-  nk.Utils.IntegerNotation = function ( _val, _roof, _splitter ) {
-    var vrm = _val % _roof, vrd = _val / _roof;
+  nk.Utils.IntegerNotation = function ( _value, _roof, _splitter ) {
+    var vrm = _value % _roof, vrd = _value / _roof;
     return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
   };
   nk.Utils.UUID = function ( _length, _parts, _charSetIndex, _separator ) {
@@ -34,7 +34,7 @@ module.exports = function ( nk ) {
     var id = '';
     for (
       var i = 0,
-      lpd = Math.floor( _length / _parts ),
+      lpd = ( _length / _parts ) | 0,
       ilpdd,
       at,
       charset = nk.Utils.CharacterSets[ _charSetIndex ]
@@ -67,31 +67,35 @@ module.exports = function ( nk ) {
       }
     }
   };
-  nk.Utils.NestedStringAccess = function ( _obj, _string, _set, _value ) {
+  nk.Utils.Nested = function ( _obj, _string, _getObjectHolding, _set, _value, _splitter ) {
     if ( typeof _string === 'string' ) {
-      _string = _string.split( '.' );
+      _splitter = _splitter === undefined ? '.' : _splitter;
+      _string = _string.split( _splitter );
     }
     var key;
     if ( _string.length > 1 ) {
       key = _string.shift();
       if ( _obj[ key ] !== undefined ) {
-        nk.Utils.NestedStringAccess( _obj[ key ], _string, _set, _value );
+        return nk.Utils.Nested( _obj[ key ], _string, _getObjectHolding, _set, _value, _splitter );
       }
     } else {
       key = _string.shift();
       if ( _obj[ key ] !== undefined ) {
         if ( _set === true ) {
           _obj[ key ] = _value;
-        } else {
-          return _obj[ key ];
+          return;
         }
+        if ( _getObjectHolding === true ) {
+          return _obj;
+        }
+        return _obj[ key ];
       }
     }
   };
   nk.Utils.ArrayGetRandom = function ( _array, _amount ) {
     var array = [], control = {}, _al = _array.length;
     for ( var i = 0, l = _amount; i < l; ++i ) {
-      var ix = Math.floor( Math.random() * _al );
+      var ix = ( Math.random() * _al ) | 0;
       if ( control[ ix ] === undefined ) {
         control[ ix ] = null;
         array.push( _array[ ix ] );

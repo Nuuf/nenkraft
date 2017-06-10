@@ -28,6 +28,9 @@ module.exports = function ( nk ) {
   Vector2D.prototype.Copy = function () {
     return new Vector2D( this );
   };
+  Vector2D.prototype.AbsoluteCopy = function () {
+    return new Vector2D( Math.abs( this.x ), Math.abs( this.y ) );
+  };
   //|||||
   Vector2D.prototype.SetV = function ( _v ) {
     this.x = _v.x;

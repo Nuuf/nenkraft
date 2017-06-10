@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.0.72",
+  "version": "0.1.0",
   "devDependencies": {
     "webpack": "^2.*",
     "webpack-dev-server": "^2.*",

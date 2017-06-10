@@ -25,9 +25,9 @@ module.exports = function () {
     //stage.clear = false;
     stage.ticker.StartAF();
 
-    var fps = new nk.Text( 0, 0, '' );
-    fps.style.text.fillColor = '#000';
-    fps.style.text.strokeColor = '#000';
+    //var fps = new nk.Text( 0, 0, '' );
+    //fps.style.text.fillColor = '#000';
+    //fps.style.text.strokeColor = '#000';
 
     var colliders = [];
 
@@ -87,7 +87,7 @@ module.exports = function () {
           }
         }
       }
-      fps.text = Math.round( stage.ticker.GetTPS() );
+      //fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );
@@ -96,7 +96,7 @@ module.exports = function () {
       Collider();
     }
 
-    stage.AddChild( fps );
+    //stage.AddChild( fps );
 
 
     document.body.removeChild( buttonContainer );

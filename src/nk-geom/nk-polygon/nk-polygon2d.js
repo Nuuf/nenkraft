@@ -8,7 +8,7 @@ module.exports = function ( nk ) {
   Polygon2D.prototype.constructor = Polygon2D;
   //Static
   Polygon2D.TYPE = 3;
-  Polygon2D.Construct = {};
+  Polygon2D.Construct = Object.create( null );
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
     var tl = new nk.Vector2D( _x, _y );
     var tr = new nk.Vector2D( _x + _w, _y );
@@ -156,6 +156,15 @@ module.exports = function ( nk ) {
       p.RotateAroundV( ap, _a );
     }
     this.dirtyBounds = true;
+  };
+  Polygon2D.prototype.GetCentroid = function () {
+    var centroid = new nk.Vector2D();
+    for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
+      p = ps[ i ];
+      centroid.AddV( p );
+    }
+    centroid.Divide( l, l );
+    return centroid;
   };
   Polygon2D.prototype.IntersectsPoint = function ( _v ) {
     if ( this.dirtyBounds === true ) this.ComputeBounds();

@@ -71,9 +71,9 @@ module.exports = function () {
       path.style.stroke.color = '#000';
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Butterfly( path, 0, 0, 4000, 50 );
-      var x = ( Math.abs( path.aabb.tl.x ) - Math.abs( path.aabb.br.x ) ) * 0.5;
-      var t = new nk.Graphic2D( x, 0, path );
-      t.anchor.Set( -0.5 );
+      //To get the difference in x,y
+      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
     function StaticStar () {
@@ -82,9 +82,8 @@ module.exports = function () {
       path.style.stroke.color = '#000';
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 800, 400, 5 );
-      var x = ( Math.abs( path.aabb.tl.x ) - Math.abs( path.aabb.br.x ) ) * 0.5;
-      var t = new nk.Graphic2D( x, 0, path );
-      t.anchor.Set( -0.5 );
+      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
 
