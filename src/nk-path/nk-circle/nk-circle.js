@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   var Super = nk.Geom.Circle;
   function Circle ( _x, _y, _radius ) {
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );

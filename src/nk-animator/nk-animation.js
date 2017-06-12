@@ -1,9 +1,9 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Animation ( _controller, _id, _rate ) {
     if ( !( this instanceof Animation ) ) return new Animation( _controller, _id );
     this.frames = [];
-    this.controller = _controller
+    this.controller = _controller;
     this.id = _id;
     this.onEnd = new nk.Event.LocalEvent();
     this.onStop = new nk.Event.LocalEvent();

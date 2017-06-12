@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Matrix2D () {
     if ( !( this instanceof Matrix2D ) ) return new Matrix2D();
   }

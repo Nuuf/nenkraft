@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   nk.Math.PII = Math.PI * 2;
   nk.Math.DEGREES_TO_RADIANS = Math.PI / 180;
   nk.Math.RADIANS_TO_DEGREES = 180 / Math.PI;

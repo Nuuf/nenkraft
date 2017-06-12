@@ -1,5 +1,5 @@
 module.exports = function () {
-  "use strict";
+  'use strict';
   var Super = nk.Entity.Container2D;
   function Stage2D ( _canvas, _x, _y, _doNotStart ) {
     if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart );

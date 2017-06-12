@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Frame ( _x, _y, _w, _h, _rate, _sprite ) {
     if ( !( this instanceof Frame ) ) return new Frame( _x, _y, _w, _h, _rate, _sprite );
     this.sprite = _sprite;

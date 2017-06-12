@@ -26,6 +26,21 @@ module.exports = function () {
     stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Line2D( -HW, 0, HW, 0 ) ) );
     stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Line2D( 0, -HH, 0, HH ) ) );
 
+    var box = stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( -50, -50, 50, 50 ) ) );
+    stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 50 ) ) );
+
+    var equil = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Equilateral( new nk.Path.Polygon2D(), 0, -50, 100, 100 ) ) );
+
+    var star = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Star( new nk.Path.Polygon2D(), 0, 0, 50, 25, 5 ) ) );
+
+    var cyclic = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Cyclic( new nk.Path.Polygon2D(), 0, 0, 50, 3 ) ) );
+
+    stage.onProcess.Add( function () {
+      star.rotation -= nk.Math.RADIAN;
+      box.rotation += nk.Math.RADIAN;
+      equil.rotation -= nk.Math.RADIAN * 2;
+    } );
+
     document.body.removeChild( buttonContainer );
   }
 };

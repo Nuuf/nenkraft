@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   var Super = nk.Entity.Container2D;
   function Sprite ( _x, _y, _texture ) {
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
@@ -41,13 +41,17 @@ module.exports = function ( nk ) {
   Sprite.prototype.anchor = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
-    this.UpdateAndApplyTransform( _rc );
-    var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
-    _rc.drawImage(
-      this.texture,
-      tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
-    );
-    this.DrawChildren( _rc );
+    if ( this.display === true ) {
+      this.UpdateAndApplyTransform( _rc );
+      if ( this.render === true ) {
+        var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
+        _rc.drawImage(
+          this.texture,
+          tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
+        );
+      }
+      this.DrawChildren( _rc );
+    }
   };
   Sprite.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );

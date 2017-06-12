@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Transform2D ( _x, _y ) {
     if ( !( this instanceof Transform2D ) ) return new Transform2D();
     this.position = new nk.Vector2D( _x, _y );
@@ -34,7 +34,15 @@ module.exports = function ( nk ) {
     return localTransform;
   };
   Transform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
-    var localTransform = this.UpdateLocal(), worldTransform = this.worldTransform;
+    var localTransform = this.localTransform, worldTransform = this.worldTransform, position = this.position, scale = this.scale, skew = this.skew, pivot = this.pivot;
+
+    localTransform.a = this.skewCX * scale.x;
+    localTransform.b = this.skewSX * scale.x;
+    localTransform.c = this.skewCY * scale.y;
+    localTransform.d = this.skewSY * scale.y;
+
+    localTransform.e = position.x - ( ( pivot.x * localTransform.a ) + ( pivot.y * localTransform.c ) );
+    localTransform.f = position.y - ( ( pivot.y * localTransform.b ) + ( pivot.y * localTransform.d ) );
 
     worldTransform.a = ( localTransform.a * _parentWorldTransform.a ) + ( localTransform.b * _parentWorldTransform.c );
     worldTransform.b = ( localTransform.a * _parentWorldTransform.b ) + ( localTransform.b * _parentWorldTransform.d );

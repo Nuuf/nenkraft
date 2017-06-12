@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function FlagList () {
     if ( !( this instanceof FlagList ) ) return new FlagList();
   }

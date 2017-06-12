@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   nk.Math.Ease = Object.create( null );
   nk.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
     return _amplitude * _time / _duration + _startValue;

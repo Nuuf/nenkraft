@@ -1,7 +1,7 @@
 module.exports = function () {
-  "use strict";
+  'use strict';
   var Super = nk.Vector2D;
-  function LimitVector2D( _x, _y, _xf, _yf, _xc, _fc ) {
+  function LimitVector2D ( _x, _y, _xf, _yf, _xc, _fc ) {
     if ( !( this instanceof LimitVector2D ) ) return new LimitVector2D( _x, _y, _xf, _yf, _xc, _fc );
     Super.call( this, _x, _y );
     this.floor = new nk.Vector2D( _xf, _yf );

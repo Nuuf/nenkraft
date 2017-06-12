@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   var HexMap = nk.Utils.B16ToB10;
-  function Color( _r, _g, _b, _a ) {
+  function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
     this.channel = [
       _r === undefined ? 0 : _r,

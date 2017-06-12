@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Stroke ( _props ) {
     if ( !( this instanceof Stroke ) ) return new Stroke( _props );
     nk.Utils.ApplyProperties( this, _props );

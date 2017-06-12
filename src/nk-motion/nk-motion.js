@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
     if ( !( this instanceof Motion ) ) return new Motion();
     this.id = _id;
@@ -45,7 +45,7 @@ module.exports = function ( nk ) {
     if ( this.running === true ) {
       this.propertyObject[ this.property ] = this.easing( this.time, this.startValue, this.change, this.duration );
       if ( ++this.time >= this.duration ) {
-        this.running = false
+        this.running = false;
         this.propertyObject[ this.property ] = this.value;
         this.onEnd.Dispatch( this, null );
       }

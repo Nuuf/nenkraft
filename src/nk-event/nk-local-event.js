@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";;
-  function LocalEvent() {
+  'use strict';
+  function LocalEvent () {
     if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
     this.listeners = [];
   }
@@ -16,13 +16,7 @@ module.exports = function () {
   LocalEvent.prototype.GetListenerIndex = function ( _handle, _context ) {
     var listeners = this.listeners;
     if ( listeners.length === 0 ) return -1;
-    for (
-      var i = 0,
-      l = listeners.length,
-      listener
-      ; i < l
-      ; ++i
-    ) {
+    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
       listener = listeners[ i ];
       if ( listener.context === _context && listener.handle === _handle ) {
         return i;
@@ -44,13 +38,7 @@ module.exports = function () {
     var listeners = this.listeners;
     if ( listeners.length === 0 ) return -1;
     if ( _context !== undefined ) {
-      for (
-        var i = 0,
-        l = listeners.length,
-        listener
-        ; i < l
-        ; ++i
-      ) {
+      for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
         listener = listeners[ i ];
         if ( listener.context === _context ) {
           this.listeners.splice( i, 1 );
@@ -68,13 +56,7 @@ module.exports = function () {
     this.stopPropagation = false;
     this.target = _target;
     this.data = _data;
-    for (
-      var i = 0,
-      l = listeners.length,
-      listener
-      ; i < l
-      ; ++i
-    ) {
+    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
       listener = listeners[ i ];
       listener.Execute( this );
       if ( this.stopPropagation === true ) break;

@@ -2,23 +2,26 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "devDependencies": {
-    "webpack": "^2.*",
-    "webpack-dev-server": "^2.*",
-    "rimraf": "*",
     "autoprefixer": "*",
     "css-loader": "*",
+    "eslint": "^4.0.0",
+    "extract-text-webpack-plugin": "^2.*",
     "file-loader": "*",
+    "html-webpack-plugin": "^2.*",
+    "postcss-loader": "*",
+    "rimraf": "*",
     "style-loader": "*",
     "url-loader": "*",
-    "postcss-loader": "*",
-    "extract-text-webpack-plugin": "^2.*",
-    "html-webpack-plugin": "^2.*"
+    "webpack": "^2.*",
+    "webpack-dev-server": "^2.*"
   },
   "scripts": {
     "serve": "SET NODE_ENV=development&& node deve-server.js",
     "build": "rimraf dist && SET NODE_ENV=production&& webpack",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "lint": "eslint src",
+    "lint-init": "eslint --init"
   }
 }

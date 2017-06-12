@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Polygon2D () {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     this.vertices = [];

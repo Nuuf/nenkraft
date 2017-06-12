@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Shadow ( _props ) {
     if ( !( this instanceof Shadow ) ) return new Shadow( _props );
     nk.Utils.ApplyProperties( this, _props );

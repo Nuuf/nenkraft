@@ -1,8 +1,8 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   var Super = nk.Entity.Displayentity2D;
   function Container2D ( _x, _y ) {
-    if ( !( this instanceof Container2D ) ) return new Container( _x, _y );
+    if ( !( this instanceof Container2D ) ) return new Container2D( _x, _y );
     Super.call( this, _x, _y );
     this.children = [];
   }
@@ -11,11 +11,14 @@ module.exports = function ( nk ) {
   //Static
 
   //Members
-
+  Container2D.prototype.render = true;
+  Container2D.prototype.display = true;
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
-    this.UpdateAndApplyTransform( _rc );
-    this.DrawChildren( _rc );
+    if ( this.display === true ) {
+      this.UpdateAndApplyTransform( _rc );
+      this.DrawChildren( _rc );
+    }
   };
   Container2D.prototype.DrawChildren = function ( _rc ) {
     for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
@@ -30,6 +33,7 @@ module.exports = function ( nk ) {
     }
     this.children.push( _child );
     _child.parent = this;
+    return _child;
   };
   Container2D.prototype.AddChildren = function () {
     for ( var i = 0, l = arguments.length, child, parent; i < l; ++i ) {

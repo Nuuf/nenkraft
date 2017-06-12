@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   var Super = nk.Entity.Container2D;
   function Graphic2D ( _x, _y, _path ) {
     if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
@@ -27,12 +27,14 @@ module.exports = function ( nk ) {
   Graphic2D.prototype.anchor = null;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
-    var path = this.path;
-    this.UpdateAndApplyTransform( _rc );
-    if ( path && path.Draw ) {
-      path.Draw( _rc );
+    if ( this.display === true ) {
+      this.UpdateAndApplyTransform( _rc );
+      var path = this.path;
+      if ( path && path.Draw && this.render === true ) {
+        path.Draw( _rc );
+      }
+      this.DrawChildren( _rc );
     }
-    this.DrawChildren( _rc );
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );

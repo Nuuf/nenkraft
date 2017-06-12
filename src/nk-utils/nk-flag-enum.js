@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function FlagEnum () {
     if ( !( this instanceof FlagEnum ) ) return new FlagEnum();
   }

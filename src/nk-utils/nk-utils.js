@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   nk.Utils.RandomInteger = function ( _min, _max ) {
     return ( Math.random() * ( _max - _min + 1 ) + _min ) | 0;
   };
@@ -32,15 +32,7 @@ module.exports = function ( nk ) {
     _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
     _separator = _separator === undefined ? '-' : _separator;
     var id = '';
-    for (
-      var i = 0,
-      lpd = ( _length / _parts ) | 0,
-      ilpdd,
-      at,
-      charset = nk.Utils.CharacterSets[ _charSetIndex ]
-      ; i < _length
-      ; ++i
-    ) {
+    for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = nk.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
       ilpdd = i / lpd;
       if ( ilpdd !== 0 && Number.isInteger( ilpdd ) ) id += _separator;
       else {

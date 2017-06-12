@@ -24,7 +24,7 @@ module.exports = function () {
     var text = new nk.Text( 100, 100, 'Grab and drag' );
 
     var graphicCircle = new nk.Graphic2D( 350, 150, new nk.Path.Circle( 0, 0, 100 ) );
-    var graphicRectangle = new nk.Graphic2D( 450, 200, new nk.Path.AABB2D( 0, 0, 200, 200 ) );
+    var graphicRectangle = new nk.Graphic2D( 450, 200, new nk.Path.AABB2D( -100, -100, 100, 100 ) );
 
     var dragger = null;
 
@@ -34,7 +34,7 @@ module.exports = function () {
 
     var t = 10;
     while ( --t ) {
-      stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( 0, 0, 200, 200 ) ) );
+      stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( -100, -100, 100, 100 ) ) );
     }
 
     stage.mouse.onMove.Add( function ( _event ) {

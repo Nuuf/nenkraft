@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
     if ( _arg0 instanceof nk.Vector2D && _arg1 instanceof nk.Vector2D ) {

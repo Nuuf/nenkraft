@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";
-  function Keyboard( _element ) {
+  'use strict';
+  function Keyboard ( _element ) {
     if ( !( this instanceof Keyboard ) ) return new Keyboard( _element );
     this.element = _element;
   }

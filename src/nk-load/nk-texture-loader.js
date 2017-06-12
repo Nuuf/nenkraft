@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function TextureLoader ( _objs ) {
     if ( !( this instanceof TextureLoader ) ) return new TextureLoader( _objs );
     this.cache = [];
@@ -43,7 +43,7 @@ module.exports = function ( nk ) {
     }
   };
   TextureLoader.prototype.OnLoad = function ( _event ) {
-    var texture = { id: _event.target.data.id, image: _event.target }
+    var texture = { id: _event.target.data.id, image: _event.target };
     this.cache.push( texture );
     delete _event.target.data;
     this.onTextureLoaded.Dispatch( texture, { count: this.count } );

@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Controller ( _sprite ) {
     if ( !( this instanceof Controller ) ) return new Controller( _sprite );
     this.animations = [];

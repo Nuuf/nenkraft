@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Vector2D ( _arg0, _arg1 ) {
     if ( !( this instanceof Vector2D ) ) return new Vector2D( _arg0, _arg1 );
     if ( _arg0 !== undefined && _arg0.x !== undefined && _arg0.y !== undefined ) {
@@ -29,7 +29,9 @@ module.exports = function ( nk ) {
     return new Vector2D( this );
   };
   Vector2D.prototype.AbsoluteCopy = function () {
-    return new Vector2D( Math.abs( this.x ), Math.abs( this.y ) );
+    var v = this.Copy();
+    v.Positive();
+    return v;
   };
   //|||||
   Vector2D.prototype.SetV = function ( _v ) {

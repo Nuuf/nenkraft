@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Text ( _props ) {
     if ( !( this instanceof Text ) ) return new Text( _props );
     nk.Utils.ApplyProperties( this, _props );

@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   var Collision2D = Object.create( null );
   Collision2D.AABB2DvsAABB2D = Object.create( null );
   Collision2D.AABB2DvsAABB2D.Relative = Object.create( null );

@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";;
-  function LocalListener( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
+  'use strict';
+  function LocalListener ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
     if ( !( this instanceof LocalListener ) ) return new LocalListener( _holderContext, _listenerContex, _handle, _removeOnNextCall );
     this.context = _listenerContext;
     this.holderContext = _holderContext;

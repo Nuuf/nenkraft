@@ -1,6 +1,6 @@
 module.exports = function ( nk ) {
-  "use strict";
-  function Line2D( _arg0, _arg1, _arg2, _arg3 ) {
+  'use strict';
+  function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
     if ( _arg0 !== undefined && _arg0.x && _arg0.y && _arg1 !== undefined && _arg1.x && _arg1.y ) {
       this.s = _arg0;

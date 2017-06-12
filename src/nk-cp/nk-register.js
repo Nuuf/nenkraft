@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";
-  function Register( _options ) {
+  'use strict';
+  function Register ( _options ) {
     if ( !( this instanceof Register ) ) return new Register( _options );
 
     this.commands = [];

@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function MotionManager ( _target ) {
     if ( !( this instanceof MotionManager ) ) return new MotionManager();
     this.motions = [];

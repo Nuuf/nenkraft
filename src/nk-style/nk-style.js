@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   nk.Style.CreateAll = function () {
     return { fill: new nk.Style.Fill(), stroke: new nk.Style.Stroke(), shadow: new nk.Style.Shadow(), text: new nk.Style.Text() };
   };

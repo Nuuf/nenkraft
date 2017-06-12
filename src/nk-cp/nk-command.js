@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";
-  function Command( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
+  'use strict';
+  function Command ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
     if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
 
     this.id = _id.split( ' ' );
@@ -85,7 +85,7 @@ module.exports = function () {
     return allOptionIds;
   };
   Command.prototype.GetAndRemoveMatchingOptionIds = function ( _dataStrs ) {
-    var allOptionIds = this.allOptionIds
+    var allOptionIds = this.allOptionIds;
     if ( allOptionIds === null ) return null;
     var optionIds = [];
     for ( var i = 0, l = allOptionIds.length; i < l; ++i ) {

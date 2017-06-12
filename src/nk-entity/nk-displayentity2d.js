@@ -1,5 +1,5 @@
 module.exports = function ( nk ) {
-  "use strict";
+  'use strict';
   function Displayentity2D ( _x, _y ) {
     if ( !( this instanceof Displayentity2D ) ) return new Displayentity2D( _x, _y );
     this.transform = new nk.Math.Transform2D( _x, _y );
@@ -11,8 +11,6 @@ module.exports = function ( nk ) {
   Displayentity2D.NULL_TRANSFORM = new nk.Math.Transform2D();
   //Members
   Displayentity2D.prototype.parent = null;
-  Displayentity2D.prototype.render = true;
-  Displayentity2D.prototype.display = true;
   //Methods
   Displayentity2D.prototype.UpdateTransform = function () {
     if ( this.parent ) {

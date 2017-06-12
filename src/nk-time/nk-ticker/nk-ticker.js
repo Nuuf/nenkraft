@@ -1,5 +1,5 @@
 module.exports = function () {
-  "use strict";
+  'use strict';
   function Ticker ( _onProcess, _rate, _doNotStart ) {
     if ( !( this instanceof Ticker ) ) return new Ticker( _onProcess, _rate, _doNotStart );
     if ( typeof _onProcess !== 'function' ) throw new Error( 'Ticker: An onProcess function is required!' );
@@ -13,7 +13,7 @@ module.exports = function () {
   Ticker.prototype.constructor = Ticker;
   //Static
   Ticker.LOG = true;
-  Ticker.GLOBAL_CSS = 'background-color:black;font-family:Arial;font-size:18px;'
+  Ticker.GLOBAL_CSS = 'background-color:black;font-family:Arial;font-size:18px;';
   Ticker.Log = function () {
     if ( Ticker.LOG === false ) return;
     console.log.apply( null, arguments );

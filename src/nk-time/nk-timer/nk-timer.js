@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";
-  function Timer( _stopTime ) {
+  'use strict';
+  function Timer ( _stopTime ) {
     if ( !( this instanceof Timer ) ) return new Timer( _stopTime );
     this.stopTime = Math.round( _stopTime === undefined ? null : _stopTime );
     this.onStop = new nk.LocalEvent();

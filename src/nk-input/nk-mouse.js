@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";
-  function Mouse( _element, _offsetX, _offsetY ) {
+  'use strict';
+  function Mouse ( _element, _offsetX, _offsetY ) {
     if ( !( this instanceof Mouse ) ) return new Mouse( _element, _offsetX, _offsetY );
     this.element = _element;
     this.position = new nk.Vector2D();

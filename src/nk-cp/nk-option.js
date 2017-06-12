@@ -1,6 +1,6 @@
 module.exports = function () {
-  "use strict";
-  function Option( _id, _handle, _info, _priority, _breakIfExecuted ) {
+  'use strict';
+  function Option ( _id, _handle, _info, _priority, _breakIfExecuted ) {
     if ( !( this instanceof Option ) ) return new Option( _id, _handle, _info, _priority, _breakIfExecuted );
 
     this.id = _id.split( ' ' );
