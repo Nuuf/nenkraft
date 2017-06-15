@@ -18,7 +18,11 @@ module.exports = function ( nk ) {
   //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.display === true ) {
-      this.UpdateAndApplyTransform( _rc );
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      this.transform.ApplyWorld( _rc );
       if ( this.render === true ) {
         var style = this.style;
         if ( style.shadow.applied === true ) {

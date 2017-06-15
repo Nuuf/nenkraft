@@ -42,7 +42,11 @@ module.exports = function ( nk ) {
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
     if ( this.display === true ) {
-      this.UpdateAndApplyTransform( _rc );
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      this.transform.ApplyWorld( _rc );
       if ( this.render === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
         _rc.drawImage(

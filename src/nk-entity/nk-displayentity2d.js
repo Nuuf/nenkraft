@@ -19,10 +19,6 @@ module.exports = function ( nk ) {
       this.transform.UpdateWorld( Displayentity2D.NULL_TRANSFORM.worldTransform );
     }
   };
-  Displayentity2D.prototype.UpdateAndApplyTransform = function ( _rc ) {
-    this.UpdateTransform();
-    this.transform.ApplyWorld( _rc );
-  };
   nk.Entity.Displayentity2D = Displayentity2D;
   Object.defineProperty( Displayentity2D.prototype, 'rotation', {
     get: function () {

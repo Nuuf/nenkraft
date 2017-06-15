@@ -28,7 +28,11 @@ module.exports = function ( nk ) {
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
     if ( this.display === true ) {
-      this.UpdateAndApplyTransform( _rc );
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      this.transform.ApplyWorld( _rc );
       var path = this.path;
       if ( path && path.Draw && this.render === true ) {
         path.Draw( _rc );

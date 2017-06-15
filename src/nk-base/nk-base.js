@@ -12,7 +12,7 @@ module.exports = function ( nk ) {
   nk.CP = Object.create( null );
   nk.Load = Object.create( null );
   nk.Animator = Object.create( null );
-  nk.VERSION = '0.1.1 (Alpha)';
+  nk.VERSION = '0.1.10 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + nk.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',

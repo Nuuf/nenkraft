@@ -21,13 +21,13 @@ module.exports = function () {
     var H = c.height, HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, HW, HH, true );
-    //stage.backgroundColor = 'rgba(255,255,255,0)';
+    stage.backgroundColor = 'rgba(255,255,255,0)';
     //stage.clear = false;
     stage.ticker.StartAF();
 
-    //var fps = new nk.Text( 0, 0, '' );
-    //fps.style.text.fillColor = '#000';
-    //fps.style.text.strokeColor = '#000';
+    var fps = new nk.Text( 0, 0, '' );
+    fps.style.text.fillColor = '#000';
+    fps.style.text.strokeColor = '#000';
 
     var colliders = [];
 
@@ -38,7 +38,6 @@ module.exports = function () {
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
       p.style.stroke.lineWidth = mass / 5;
       var g = new nk.Graphic2D( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), p );
-      g.ApplyTransformation = nk.Container2D.SimpleTransformation;
       g.data.mass = mass;
       g.data.body = {
         relative: g.position,
@@ -87,7 +86,7 @@ module.exports = function () {
           }
         }
       }
-      //fps.text = Math.round( stage.ticker.GetTPS() );
+      fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );
@@ -96,7 +95,7 @@ module.exports = function () {
       Collider();
     }
 
-    //stage.AddChild( fps );
+    stage.AddChild( fps );
 
 
     document.body.removeChild( buttonContainer );

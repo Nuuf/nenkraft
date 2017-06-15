@@ -32,6 +32,7 @@ module.exports = function () {
     var equil = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Equilateral( new nk.Path.Polygon2D(), 0, -50, 100, 100 ) ) );
 
     var star = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Star( new nk.Path.Polygon2D(), 0, 0, 50, 25, 5 ) ) );
+    star.transformAutomaticUpdate = false;
 
     var cyclic = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Cyclic( new nk.Path.Polygon2D(), 0, 0, 50, 3 ) ) );
 

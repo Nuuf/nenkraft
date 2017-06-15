@@ -13,12 +13,21 @@ module.exports = function ( nk ) {
   //Members
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
+  Container2D.prototype.transformShouldUpdate = true;
+  Container2D.prototype.transformAutomaticUpdate = true;
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
     if ( this.display === true ) {
-      this.UpdateAndApplyTransform( _rc );
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      this.transform.ApplyWorld( _rc );
       this.DrawChildren( _rc );
     }
+  };
+  Container2D.prototype.RequestTransformUpdate = function () {
+    this.transformShouldUpdate = true;
   };
   Container2D.prototype.DrawChildren = function ( _rc ) {
     for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
@@ -94,6 +103,34 @@ module.exports = function ( nk ) {
   Container2D.prototype.AttachTo = function ( _parent ) {
     if ( this.parent !== null ) this.parent.RemoveChild( this );
     _parent.AddChild( this );
+  };
+  Container2D.prototype.GetChildClosestTo = function ( _object ) {
+    var children = this.children, closestChild = null;
+    if ( children.length !== 0 ) {
+      for ( var i = 0, l = children.length, child, distance = Infinity, tempDistance; i < l; ++i ) {
+        child = children[ i ];
+        tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
+        if ( tempDistance < distance ) {
+          distance = tempDistance;
+          closestChild = child;
+        }
+      }
+      return closestChild;
+    }
+  };
+  Container2D.prototype.GetChildFurthestFrom = function ( _object ) {
+    var children = this.children, closestChild = null;
+    if ( children.length !== 0 ) {
+      for ( var i = 0, l = children.length, child, distance = 0, tempDistance; i < l; ++i ) {
+        child = children[ i ];
+        tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
+        if ( tempDistance > distance ) {
+          distance = tempDistance;
+          closestChild = child;
+        }
+      }
+      return closestChild;
+    }
   };
   nk.Entity.Container2D = Container2D;
   nk.Container2D = Container2D;

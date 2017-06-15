@@ -36,7 +36,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 50;
+    var fps = 55;
 
     var childrenMDC = [];
 
@@ -45,6 +45,7 @@ module.exports = function () {
       var i = 35;
       while ( --i ) {
         var sprite = new nk.Sprite( Math.random() * W - HW, Math.random() * H - HH, texture );
+        sprite.transformAutomaticUpdate = false;
         container.AddChild( sprite );
       }
 
