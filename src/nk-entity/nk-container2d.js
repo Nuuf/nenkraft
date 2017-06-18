@@ -65,13 +65,13 @@ module.exports = function ( nk ) {
   };
   Container2D.prototype.RemoveChildren = function () {
     var children = this.children;
-    for ( var i = 0, l = arguments.length, child, parent, ix; i < l; ++i ) {
-      child = arguments[ i ];
-      parent = child.parent;
+    var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
+    for ( var i = 0, l = aChildren.length, child, parent, ix; i < l; ++i ) {
+      child = aChildren[ i ];
       ix = children.indexOf( child );
       if ( ix !== -1 ) {
         children.splice( ix, 1 );
-        child.parent = this;
+        delete child.parent;
       }
     }
   };
@@ -104,11 +104,14 @@ module.exports = function ( nk ) {
     if ( this.parent !== null ) this.parent.RemoveChild( this );
     _parent.AddChild( this );
   };
-  Container2D.prototype.GetChildClosestTo = function ( _object ) {
+  Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
     var children = this.children, closestChild = null;
     if ( children.length !== 0 ) {
       for ( var i = 0, l = children.length, child, distance = Infinity, tempDistance; i < l; ++i ) {
         child = children[ i ];
+        if ( _filterCondition !== undefined ) {
+          if ( _filterCondition( child ) === false ) continue;
+        }
         tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
         if ( tempDistance < distance ) {
           distance = tempDistance;
@@ -117,12 +120,16 @@ module.exports = function ( nk ) {
       }
       return closestChild;
     }
+    return null;
   };
-  Container2D.prototype.GetChildFurthestFrom = function ( _object ) {
+  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filterCondition ) {
     var children = this.children, closestChild = null;
     if ( children.length !== 0 ) {
       for ( var i = 0, l = children.length, child, distance = 0, tempDistance; i < l; ++i ) {
         child = children[ i ];
+        if ( _filterCondition !== undefined ) {
+          if ( _filterCondition( child ) === false ) continue;
+        }
         tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
         if ( tempDistance > distance ) {
           distance = tempDistance;
@@ -131,6 +138,7 @@ module.exports = function ( nk ) {
       }
       return closestChild;
     }
+    return null;
   };
   nk.Entity.Container2D = Container2D;
   nk.Container2D = Container2D;

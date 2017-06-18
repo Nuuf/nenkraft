@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "devDependencies": {
     "autoprefixer": "*",
     "css-loader": "*",
