@@ -1,26 +1,27 @@
 module.exports = function ( nk ) {
   'use strict';
   function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
-    if ( !( this instanceof Motion ) ) return new Motion();
+    if ( !( this instanceof Motion ) ) return new Motion( _id, _target, _propertyString, _value, _duration, _easing );
     this.id = _id;
     this.target = _target;
     this.propertyString = _propertyString;
-    this.value = _value;
-    this.duration = _duration;
-    this.easing = nk.Math.Ease[ _easing === undefined ? this.easing : _easing ];
-
-
+    if ( _value !== undefined ) this.value = _value;
+    if ( _duration !== undefined ) this.duration = _duration;
+    this.easing = nk.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
     this.onStart = new nk.Event.LocalEvent();
     this.onEnd = new nk.Event.LocalEvent();
+    this.onStop = new nk.Event.LocalEvent();
+    this.onReconfigure = new nk.Event.LocalEvent();
+    this.onReset = new nk.Event.LocalEvent();
   }
   Motion.prototype = Object.create( null );
   Motion.prototype.constructor = Motion;
   //Static
-
+  Motion.DEFAULT_EASING = 'Linear';
   //Members
   Motion.prototype.id = null;
   Motion.prototype.target = null;
-  Motion.prototype.easing = 'Linear';
+  Motion.prototype.easing = null;
   Motion.prototype.duration = 1000;
   Motion.prototype.time = 0;
   Motion.prototype.value = 1;
@@ -41,6 +42,15 @@ module.exports = function ( nk ) {
     this.running = true;
     this.onStart.Dispatch( this, null );
   };
+  Motion.prototype.Stop = function () {
+    delete this.property;
+    delete this.propertyObject;
+    delete this.startValue;
+    delete this.change;
+    delete this.time;
+    delete this.running;
+    this.onStop.Dispatch( this, null );
+  };
   Motion.prototype.Process = function () {
     if ( this.running === true ) {
       this.propertyObject[ this.property ] = this.easing( this.time, this.startValue, this.change, this.duration );
@@ -51,8 +61,23 @@ module.exports = function ( nk ) {
       }
     }
   };
+  Motion.prototype.Reconfigure = function ( _propertyString, _value, _duration, _easing ) {
+    if ( _propertyString !== undefined ) this.propertyString = _propertyString;
+    this.value = _value;
+    this.duration = _duration;
+    this.easing = nk.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
+    this.onReconfigure.Dispatch( this, null );
+  };
   Motion.prototype.Reset = function () {
-
+    if ( this.propertyObject === null || this.property === null ) return false;
+    this.propertyObject[ this.property ] = this.startValue;
+    delete this.property;
+    delete this.propertyObject;
+    delete this.startValue;
+    delete this.change;
+    delete this.time;
+    delete this.running;
+    this.onReset.Dispatch( this, null );
   };
   nk.Motion = Motion;
 };
