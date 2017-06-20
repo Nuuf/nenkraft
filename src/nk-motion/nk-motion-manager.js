@@ -1,7 +1,7 @@
 module.exports = function ( nk ) {
   'use strict';
   function MotionManager ( _target ) {
-    if ( !( this instanceof MotionManager ) ) return new MotionManager();
+    if ( !( this instanceof MotionManager ) ) return new MotionManager( _target );
     this.motions = [];
     this.target = _target;
   }
@@ -35,12 +35,18 @@ module.exports = function ( nk ) {
     }
     return motion;
   };
+  MotionManager.prototype.StartMultiple = function ( _ids ) {
+    //TODO
+  };
   MotionManager.prototype.Stop = function ( _id ) {
     var motion = this.GetMotion( _id );
     if ( motion !== null ) {
       motion.Stop();
     }
     return motion;
+  };
+  MotionManager.prototype.StopMultiple = function ( _ids ) {
+    //TODO
   };
   MotionManager.prototype.Process = function () {
     for ( var i = 0, motions = this.motions, l = motions.length, motion; i < l; ++i ) {

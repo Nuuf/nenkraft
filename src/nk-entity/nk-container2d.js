@@ -101,8 +101,10 @@ module.exports = function ( nk ) {
     if ( this.parent !== null ) this.parent.RemoveChild( this );
   };
   Container2D.prototype.AttachTo = function ( _parent ) {
-    if ( this.parent !== null ) this.parent.RemoveChild( this );
     _parent.AddChild( this );
+  };
+  Container2D.prototype.Detach = function () {
+    if ( this.parent !== null ) this.parent.RemoveChild( this );
   };
   Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
     var children = this.children, closestChild = null;

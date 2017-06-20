@@ -19,8 +19,9 @@ module.exports = function ( nk ) {
       this.transform.UpdateWorld( Displayentity2D.NULL_TRANSFORM.worldTransform );
     }
   };
-  Displayentity2D.prototype.GetWorldPos = function () {
-    return new nk.Vector2D( this.transform.worldTransform.e, this.transform.worldTransform.f );
+  Displayentity2D.prototype.GetWorldPosition = function () {
+    var wt = this.transform.worldTransform;
+    return new nk.Vector2D( wt.e, wt.f );
   };
   nk.Entity.Displayentity2D = Displayentity2D;
   Object.defineProperty( Displayentity2D.prototype, 'rotation', {

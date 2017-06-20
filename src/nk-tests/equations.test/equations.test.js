@@ -87,7 +87,7 @@ module.exports = function () {
         var children = this.parent.children;
         for ( var i = 0, l = children.length, child; i < l; ++i ) {
           child = children[ i ];
-          if ( child.IntersectsPoint( this.data.rightPoint.GetWorldPos() ) ) {
+          if ( child.IntersectsPoint( this.data.rightPoint.GetWorldPosition() ) ) {
             if ( _noAssign === undefined ) this.data.rightObject = child;
             return child;
           }
@@ -100,7 +100,7 @@ module.exports = function () {
         var children = this.parent.children;
         for ( var i = 0, l = children.length, child; i < l; ++i ) {
           child = children[ i ];
-          if ( child.IntersectsPoint( this.data.leftPoint.GetWorldPos() ) ) {
+          if ( child.IntersectsPoint( this.data.leftPoint.GetWorldPosition() ) ) {
             if ( _noAssign === undefined ) this.data.leftObject = child;
             return child;
           }
