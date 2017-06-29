@@ -25,7 +25,7 @@ module.exports = function ( nk ) {
       this.tl = new nk.Vector2D();
       this.br = new nk.Vector2D();
     }
-    this.CalculateWH();
+    this.ComputeWH();
   }
   AABB2D.prototype = Object.create( null );
   AABB2D.prototype.constructor = AABB2D;
@@ -35,27 +35,39 @@ module.exports = function ( nk ) {
   AABB2D.prototype.TYPE = AABB2D.TYPE;
   AABB2D.prototype.w = 0;
   AABB2D.prototype.h = 0;
+  AABB2D.prototype.area = 0;
   //Methods
   AABB2D.prototype.Set = function ( _x, _y, _w, _h ) {
     this.tl.x = _x;
     this.tl.y = _y;
     this.br.x = _w;
     this.br.y = _h;
-    this.CalculateWH();
+    this.ComputeWH();
   };
-  AABB2D.prototype.SetC = function ( _aabb2d ) {
-    this.Set( _aabb2d.tl.x, _aabb2d.tl.y, _aabb2d.br.x, _aabb2d.br.y );
+  AABB2D.prototype.SetC = function ( _aabb ) {
+    this.Set( _aabb.tl.x, _aabb.tl.y, _aabb.br.x, _aabb.br.y );
   };
-  AABB2D.prototype.CalculateWH = function () {
+  AABB2D.prototype.ComputeWH = function () {
     this.w = this.br.x - this.tl.x;
     this.h = this.br.y - this.tl.y;
+    this.area = this.w * this.h;
   };
   AABB2D.prototype.IntersectsPoint = function ( _v ) {
-    if ( _v.x < this.tl.x || _v.x > this.br.x || _v.y < this.tl.y || _v.y > this.br.y ) return false;
-    return true;
+    return !( _v.x < this.tl.x || _v.x > this.br.x || _v.y < this.tl.y || _v.y > this.br.y );
   };
   AABB2D.prototype.ContainsPoint = function ( _v ) {
     return ( _v.x > this.tl.x && _v.x < this.br.x && _v.y > this.tl.y && _v.y < this.br.y );
+  };
+  AABB2D.prototype.IntersectsAABB2D = function ( _aabb ) {
+    var tl1 = this.tl, br1 = this.br, tl2 = _aabb.tl, br2 = _aabb.br;
+    return !( tl2.x >= br1.x || tl2.y >= br1.y || br2.x <= tl1.x || br2.y <= tl1.y );
+  };
+  AABB2D.prototype.ContainsAABB2D = function ( _aabb ) {
+    if ( _aabb.area > this.area ) {
+      return false;
+    }
+    var tl1 = this.tl, br1 = this.br, tl2 = _aabb.tl, br2 = _aabb.br;
+    return ( tl2.x >= tl1.x && tl2.y >= tl1.y && br2.x <= br1.x && br2.y <= br1.y );
   };
 
   nk.Geom.AABB2D = AABB2D;

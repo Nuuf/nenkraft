@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.1.12",
+  "version": "0.1.21",
   "devDependencies": {
     "autoprefixer": "*",
     "css-loader": "*",
@@ -15,13 +15,16 @@
     "style-loader": "*",
     "url-loader": "*",
     "webpack": "^2.*",
-    "webpack-dev-server": "^2.*"
+    "webpack-dev-server": "^2.*",
+    "cross-env": "*"
   },
   "scripts": {
-    "serve": "SET NODE_ENV=development&& node deve-server.js",
-    "build": "rimraf dist && SET NODE_ENV=production&& webpack",
+    "s-d": "cross-env NODE_ENV=development",
+    "s-p": "cross-env NODE_ENV=production",
     "clean": "rimraf dist",
     "lint": "eslint src",
-    "lint-init": "eslint --init"
+    "start": "npm run s-d node deve-server.js",
+    "build-dev": "npm run clean && npm run s-d webpack",
+    "build": "npm run clean && npm run s-p webpack"
   }
 }

@@ -23,8 +23,8 @@ module.exports = function ( nk ) {
     BOTTOM: 'bottom'
   };
   //Members
-  Text.prototype.fillColor = '#000000';
-  Text.prototype.strokeColor = '#FFFFFF';
+  Text.prototype.fillColor = '#444499';
+  Text.prototype.strokeColor = '#00FFFF';
   Text.prototype.font = '22px Arial';
   Text.prototype.align = nk.Style.TEXT_ALIGN.LEFT;
   Text.prototype.baseline = nk.Style.TEXT_BASELINE.TOP;

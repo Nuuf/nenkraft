@@ -36,14 +36,11 @@ module.exports = function () {
     stage.mouse.onUp.Add( function ( _event ) {
       if ( xM.running ) xM.Stop();
       if ( yM.running ) yM.Stop();
-      sxM.Reset();
-      syM.Reset();
+      mm.ResetMultiple( 'sx sy' );
       xM.Reconfigure( undefined, _event.data.x, 60 );
       yM.Reconfigure( undefined, _event.data.y, 60 );
-      xM.Start();
-      yM.Start();
-      sxM.Start();
-      syM.Start();
+
+      mm.StartMultiple( 'x y sx sy' );
 
     }, stage );
 

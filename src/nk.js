@@ -48,4 +48,4 @@ require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
 require( './nk-load/nk-texture-loader' )( namespace );
 
-if ( DEVELOPMENT && module.hot ) module.hot.accept();
+//if ( DEVELOPMENT && module.hot ) module.hot.accept();

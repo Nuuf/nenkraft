@@ -11,6 +11,10 @@ module.exports = function ( nk ) {
   Displayentity2D.NULL_TRANSFORM = new nk.Math.Transform2D();
   //Members
   Displayentity2D.prototype.parent = null;
+  Displayentity2D.prototype.w = 0;
+  Displayentity2D.prototype.h = 0;
+  Displayentity2D.prototype.bounds = null;
+  Displayentity2D.prototype.boundsDirty = true;
   //Methods
   Displayentity2D.prototype.UpdateTransform = function () {
     if ( this.parent ) {
@@ -22,6 +26,17 @@ module.exports = function ( nk ) {
   Displayentity2D.prototype.GetWorldPosition = function () {
     var wt = this.transform.worldTransform;
     return new nk.Vector2D( wt.e, wt.f );
+  };
+  Displayentity2D.prototype.ComputeBounds = function ( _anchor ) {
+    var ax = _anchor ? _anchor.x : 0;
+    var ay = _anchor ? _anchor.y : 0;
+    this.bounds = new nk.Geom.AABB2D(
+      this.x - this.width * ay,
+      this.y - this.height * ay,
+      this.x + this.width,
+      this.y + this.height
+    );
+    return this.bounds;
   };
   nk.Entity.Displayentity2D = Displayentity2D;
   Object.defineProperty( Displayentity2D.prototype, 'rotation', {
@@ -62,6 +77,22 @@ module.exports = function ( nk ) {
     },
     set: function ( _value ) {
       this.transform.position.y = _value;
+    }
+  } );
+  Object.defineProperty( Displayentity2D.prototype, 'width', {
+    get: function () {
+      return this.w * this.scale.x;
+    },
+    set: function ( _value ) {
+      this.w = _value;
+    }
+  } );
+  Object.defineProperty( Displayentity2D.prototype, 'height', {
+    get: function () {
+      return this.h * this.scale.y;
+    },
+    set: function ( _value ) {
+      this.h = _value;
     }
   } );
 };
