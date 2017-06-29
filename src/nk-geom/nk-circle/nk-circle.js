@@ -16,7 +16,12 @@ module.exports = function ( nk ) {
   Circle.prototype.h = 0;
   Circle.prototype.radiusSquared = 0;
   Circle.prototype.radiusUnsquared = 0;
+  Circle.prototype.area = 0;
   //Methods
+  Circle.prototype.IntersectsCircle = function ( _circle ) {
+    var radii = this.radius + _circle.radius;
+    return ( radii * radii >= this.center.GetDistanceSquaredV( _circle.center ) );
+  };
   Circle.prototype.IntersectsPoint = function ( _v ) {
     return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _v ) );
   };
@@ -42,6 +47,7 @@ module.exports = function ( nk ) {
       this.radiusUnsquared = _value;
       this.radiusSquared = _value * _value;
       this.diameter = this.w = this.h = _value * 2;
+      this.area = Math.PI * _value * _value;
     },
     get: function () {
       return this.radiusUnsquared;

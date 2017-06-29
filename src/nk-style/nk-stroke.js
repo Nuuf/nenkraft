@@ -18,7 +18,7 @@ module.exports = function ( nk ) {
     MITER: 'miter'
   };
   //Members
-  Stroke.prototype.color = '#00FF00';
+  Stroke.prototype.color = '#00FFFF';
   Stroke.prototype.lineCap = nk.Style.LINE_CAP.ROUND;
   Stroke.prototype.lineJoin = nk.Style.LINE_JOIN.ROUND;
   Stroke.prototype.lineWidth = 1;

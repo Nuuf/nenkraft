@@ -36,7 +36,10 @@ module.exports = function ( nk ) {
     return motion;
   };
   MotionManager.prototype.StartMultiple = function ( _ids ) {
-    //TODO
+    _ids = _ids.split( ' ' );
+    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+      this.Start( _ids[ i ] );
+    }
   };
   MotionManager.prototype.Stop = function ( _id ) {
     var motion = this.GetMotion( _id );
@@ -46,7 +49,23 @@ module.exports = function ( nk ) {
     return motion;
   };
   MotionManager.prototype.StopMultiple = function ( _ids ) {
-    //TODO
+    _ids = _ids.split( ' ' );
+    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+      this.Stop( _ids[ i ] );
+    }
+  };
+  MotionManager.prototype.Reset = function ( _id ) {
+    var motion = this.GetMotion( _id );
+    if ( motion !== null ) {
+      motion.Reset();
+    }
+    return motion;
+  };
+  MotionManager.prototype.ResetMultiple = function ( _ids ) {
+    _ids = _ids.split( ' ' );
+    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+      this.Reset( _ids[ i ] );
+    }
   };
   MotionManager.prototype.Process = function () {
     for ( var i = 0, motions = this.motions, l = motions.length, motion; i < l; ++i ) {

@@ -169,6 +169,7 @@ module.exports = function ( nk ) {
   Polygon2D.prototype.IntersectsPoint = function ( _v ) {
     if ( this.dirtyBounds === true ) this.ComputeBounds();
     if ( this.aabb.IntersectsPoint( _v ) === false ) return false;
+    //TODO
     return true;
   };
   nk.Geom.Polygon2D = Polygon2D;

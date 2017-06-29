@@ -12,7 +12,7 @@ module.exports = function ( nk ) {
   //Static
 
   //Members
-  Fill.prototype.color = '#440066';
+  Fill.prototype.color = '#444499';
   Fill.prototype.applied = true;
   //Methods
   Fill.prototype.Apply = function ( _rc ) {

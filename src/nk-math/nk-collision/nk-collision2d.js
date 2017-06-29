@@ -8,18 +8,6 @@ module.exports = function ( nk ) {
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
     return _a.GetMagnitude() - _b.GetMagnitude();
   };
-  Collision2D.AABB2DvsAABB2D.Intersect = function ( _aabb1, _aabb2 ) {
-    var tl1 = _aabb1.tl, tl2 = _aabb2.tl;
-    if (
-      tl1.x < tl2.x + _aabb1.w &&
-      tl2.x < tl1.x + _aabb2.w &&
-      tl1.y < tl2.y + _aabb1.h &&
-      tl2.y < tl1.y + _aabb2.h
-    ) {
-      return true;
-    }
-    return false;
-  };
   Collision2D.AABB2DvsAABB2D.Collide = function ( _aabb1, _aabb2 ) {
     var tl1 = _aabb1.tl, tl2 = _aabb2.tl, br1 = _aabb1.br, br2 = _aabb2.br;
     var tl2xw = tl2.x + _aabb1.w;
@@ -42,10 +30,6 @@ module.exports = function ( nk ) {
       return vecs[ 0 ];
     }
     return null;
-  };
-  Collision2D.CirclevsCircle.Intersect = function ( _circle1, _circle2 ) {
-    var radii = _circle1.radius + _circle2.radius;
-    return ( radii * radii >= _circle1.center.GetDistanceSquaredV( _circle2.center ) );
   };
   Collision2D.CirclevsCircle.Collide = function ( _circle1, _circle2 ) {
     var r1 = _circle1.radius, r2 = _circle1.radius;
@@ -102,15 +86,12 @@ module.exports = function ( nk ) {
       if ( anchor2.x !== 0 ) tl2.x += anchor2.x * w2;
       if ( anchor2.y !== 0 ) tl2.y += anchor2.y * h2;
     }
-    if (
+    return (
       tl1.x < tl2.x + w1 &&
       tl2.x < tl1.x + w2 &&
       tl1.y < tl2.y + h1 &&
       tl2.y < tl1.y + h2
-    ) {
-      return true;
-    }
-    return false;
+    );
   };
   Collision2D.AABB2DvsAABB2D.Relative.Collide = function ( _obj1, _obj2 ) {
     var aabb1 = _obj1.shape, w1 = aabb1.w, h1 = aabb1.h, anchor1 = _obj1.anchor;

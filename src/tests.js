@@ -12,4 +12,4 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
   tests[ i ]();
 }
 
-if ( DEVELOPMENT && module.hot ) module.hot.accept();
+//if ( DEVELOPMENT && module.hot ) module.hot.accept();

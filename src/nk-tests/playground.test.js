@@ -20,26 +20,48 @@ module.exports = function () {
     var H = c.height, HH = H * 0.5;
     var widthByHeight = W / H;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
-    stage.ticker.StartAF();
+    var stage = new nk.Stage2D( c, HW, HH );
 
-    stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Line2D( -HW, 0, HW, 0 ) ) );
-    stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Line2D( 0, -HH, 0, HH ) ) );
+    var test1 = new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( 0, 0, 200, 220 ) );
+    var test2 = new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( 0, 0, 25, 10 ) );
+    test1.scale.Set( 0.1, 2 );
 
-    var box = stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( -50, -50, 50, 50 ) ) );
-    stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 50 ) ) );
+    stage.AddChildren( test1, test2 );
 
-    var equil = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Equilateral( new nk.Path.Polygon2D(), 0, -50, 100, 100 ) ) );
+    var dragger = null;
 
-    var star = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Star( new nk.Path.Polygon2D(), 0, 0, 50, 25, 5 ) ) );
-    star.transformAutomaticUpdate = false;
+    stage.mouse.onMove.Add( function ( _event ) {
+      if ( dragger !== null ) {
+        dragger.x = _event.data.x;
+        dragger.y = _event.data.y;
 
-    var cyclic = stage.AddChild( new nk.Graphic2D( 0, 0, nk.Geom.Polygon2D.Construct.Cyclic( new nk.Path.Polygon2D(), 0, 0, 50, 3 ) ) );
+        var b1 = test1.ComputeBounds();
+        var b2 = test2.ComputeBounds();
+        if ( b1.IntersectsAABB2D( b2 ) ) {
+          test1.path.style.fill.color = '#F00';
+        } else {
+          test1.path.style.fill.color = '#0F0';
+        }
+      }
+    }, stage );
+    stage.mouse.onDown.Add( function ( _event ) {
+      var p = _event.data;
+      for ( var i = stage.children.length; i--; ) {
+        if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragger = stage.children[ i ];
 
-    stage.onProcess.Add( function () {
-      star.rotation -= nk.Math.RADIAN;
-      box.rotation += nk.Math.RADIAN;
-      equil.rotation -= nk.Math.RADIAN * 2;
+          _event.stopPropagation = true;
+
+          dragger.SendToFront();
+          break;
+        }
+      }
+    }, stage );
+    stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) dragger = null;
+    } );
+    stage.mouse.onLeave.Add( function ( _event ) {
+      if ( dragger ) dragger = null;
     } );
 
     document.body.removeChild( buttonContainer );

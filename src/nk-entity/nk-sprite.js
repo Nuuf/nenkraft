@@ -29,8 +29,8 @@ module.exports = function ( nk ) {
     path.AddPoint( new nk.Vector2D( 32, 32 ) );
     path.AddPoint( new nk.Vector2D( 0, 64 ) );
     path.ComputeBounds();
-    path.style.fill.color = 'rgba(66,00,66,0.5)';
-    path.style.stroke.color = '#F00';
+    path.style.fill.color = 'rgba(66,66,66,0.5)';
+    path.style.stroke.color = '#00FFFF';
     path.style.stroke.lineWidth = 3;
     return new nk.Graphic2D( 0, 0, path );
   } );
