@@ -129,7 +129,7 @@ module.exports = function ( nk ) {
     }
     return output.join( '' );
   };
-  nk.Utils.GenerateSimpleTexture = function ( _textureFunction ) {
+  nk.Utils.GenerateSimpleBase64Png = function ( _textureFunction ) {
     var drawable = _textureFunction();
     var canvas = document.createElement( 'canvas' );
     canvas.width = drawable.w;

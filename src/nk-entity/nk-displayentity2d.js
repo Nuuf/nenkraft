@@ -28,14 +28,15 @@ module.exports = function ( nk ) {
     return new nk.Vector2D( wt.e, wt.f );
   };
   Displayentity2D.prototype.ComputeBounds = function ( _anchor ) {
-    var ax = _anchor ? _anchor.x : 0;
-    var ay = _anchor ? _anchor.y : 0;
+    var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
+    var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
     this.bounds = new nk.Geom.AABB2D(
       this.x - this.width * ay,
       this.y - this.height * ay,
       this.x + this.width,
       this.y + this.height
     );
+    this.boundsDirty = false;
     return this.bounds;
   };
   nk.Entity.Displayentity2D = Displayentity2D;

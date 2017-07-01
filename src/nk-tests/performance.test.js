@@ -72,7 +72,7 @@ module.exports = function () {
 
     var imageCache = new nk.Load.TextureLoader( [ {
       id: 'tex',
-      src: nk.Utils.GenerateSimpleTexture( CreateTexture )
+      src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
     }] );
     imageCache.onComplete.Add( function () {
       texture = imageCache.Get( 'tex' );

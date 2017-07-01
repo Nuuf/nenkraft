@@ -55,12 +55,19 @@ module.exports = function ( nk ) {
       child.parent = this;
     }
   };
+  Container2D.prototype.AddSibling = function ( _sibling ) {
+    var parent = this.parent;
+    if ( parent !== null ) {
+      parent.AddChild( _sibling );
+    }
+    return _sibling;
+  };
   Container2D.prototype.RemoveChild = function ( _child ) {
     var children = this.children;
     var ix = children.indexOf( _child );
     if ( ix !== -1 ) {
       children.splice( ix, 1 );
-      _child.parent = null;
+      delete _child.parent;
     }
   };
   Container2D.prototype.RemoveChildren = function () {
