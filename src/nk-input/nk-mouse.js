@@ -33,22 +33,20 @@ module.exports = function () {
     pos.Subtract( element.offsetLeft, element.offsetTop );
     pos.SubtractV( this.offset );
     pos.DivideV( this.scale );
-    this.onMove.Dispatch( this, pos );
+    this.onMove.Dispatch( this.element, pos );
   };
   Mouse.prototype.OnDown = function ( _event ) {
-    _event.preventDefault();
     _event.stopPropagation();
-    this.onDown.Dispatch( this, this.position );
+    this.onDown.Dispatch( this.element, this.position );
   };
   Mouse.prototype.OnUp = function ( _event ) {
-    _event.preventDefault();
     _event.stopPropagation();
-    this.onUp.Dispatch( this, this.position );
+    this.onUp.Dispatch( this.element, this.position );
   };
   Mouse.prototype.OnLeave = function ( _event ) {
     _event.preventDefault();
     _event.stopPropagation();
-    this.onLeave.Dispatch( this, this.position );
+    this.onLeave.Dispatch( this.element, this.position );
   };
   nk.Input.Mouse = Mouse;
   Object.defineProperty( Mouse.prototype, 'x', {

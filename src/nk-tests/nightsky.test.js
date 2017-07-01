@@ -28,10 +28,10 @@ module.exports = function () {
 
     var imageCache = new nk.Load.TextureLoader( [ {
       id: 'butterfly',
-      src: nk.Utils.GenerateSimpleTexture( Butterfly )
+      src: nk.Utils.GenerateSimpleBase64Png( Butterfly )
     }, {
       id: 'staticStar',
-      src: nk.Utils.GenerateSimpleTexture( StaticStar )
+      src: nk.Utils.GenerateSimpleBase64Png( StaticStar )
     }] );
     imageCache.onComplete.Add( function () {
       Go();
