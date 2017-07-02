@@ -1,5 +1,5 @@
 module.exports = function ( Nenkraft ) {
-  "use strict";
+  'use strict';
   function Pool ( _class ) {
     if ( !( this instanceof Pool ) ) return new Pool( _class );
     this.class = _class;
