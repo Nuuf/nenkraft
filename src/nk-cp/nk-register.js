@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Register ( _options ) {
     if ( !( this instanceof Register ) ) return new Register( _options );
@@ -36,5 +36,5 @@ module.exports = function () {
     }
     return cmdStr;
   };
-  nk.CP.Register = Register;
+  Nenkraft.CP.Register = Register;
 };

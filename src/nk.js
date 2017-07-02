@@ -1,4 +1,4 @@
-var namespace = global.nk = global.Nenkraft = Object.create( null );;
+var namespace = Object.create( null );;
 
 require( './nk-base/nk-base' )( namespace );
 require( './nk-math/nk-math' )( namespace );
@@ -6,6 +6,7 @@ require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-color' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
+require( './nk-utils/nk-pool' )( namespace );
 require( './nk-style/nk-fill' )( namespace );
 require( './nk-style/nk-shadow' )( namespace );
 require( './nk-style/nk-stroke' )( namespace );
@@ -51,5 +52,7 @@ require( './nk-cp/nk-option' )( namespace );
 require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
 require( './nk-load/nk-texture-loader' )( namespace );
+
+global.Nenkraft = global.nk = namespace;
 
 //if ( DEVELOPMENT && module.hot ) module.hot.accept();

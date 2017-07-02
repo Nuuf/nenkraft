@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Polygon2D () {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
@@ -10,18 +10,18 @@ module.exports = function ( nk ) {
   Polygon2D.TYPE = 3;
   Polygon2D.Construct = Object.create( null );
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
-    var tl = new nk.Vector2D( _x, _y );
-    var tr = new nk.Vector2D( _x + _w, _y );
-    var br = new nk.Vector2D( _x + _w, _y + _h );
-    var bl = new nk.Vector2D( _x, _y + _h );
+    var tl = new Nenkraft.Vector2D( _x, _y );
+    var tr = new Nenkraft.Vector2D( _x + _w, _y );
+    var br = new Nenkraft.Vector2D( _x + _w, _y + _h );
+    var bl = new Nenkraft.Vector2D( _x, _y + _h );
     _po.Recreate( [ tl, tr, br, bl ] );
     _po.ComputeBounds();
     return _po;
   };
   Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _w, _h ) {
-    var tm = new nk.Vector2D( _x, _y );
-    var br = new nk.Vector2D( _x + _w * 0.5, _y + _h );
-    var bl = new nk.Vector2D( _x - _w * 0.5, _y + _h );
+    var tm = new Nenkraft.Vector2D( _x, _y );
+    var br = new Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
+    var bl = new Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
     _po.Recreate( [ tm, br, bl ] );
     _po.ComputeBounds();
     return _po;
@@ -33,7 +33,7 @@ module.exports = function ( nk ) {
       th = an * i;
       x = Math.cos( th ) * _ra;
       y = Math.sin( th ) * _ra;
-      _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
     return _po;
@@ -46,7 +46,7 @@ module.exports = function ( nk ) {
       th = an * i;
       x = Math.cos( th ) * ra;
       y = Math.sin( th ) * ra;
-      _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
     return _po;
@@ -58,7 +58,7 @@ module.exports = function ( nk ) {
       u = i * c._1 * Math.PI / _n;
       x = Math.cos( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
       y = Math.sin( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
-      _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
     return _po;
@@ -105,7 +105,7 @@ module.exports = function ( nk ) {
         x = Math.cos( a ) * r * _ra;
         y = Math.sin( a ) * r * _ra;
       }
-      _po.AddPoint( new nk.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
     return _po;
@@ -130,7 +130,7 @@ module.exports = function ( nk ) {
     else this.vertices.length = 0;
   };
   Polygon2D.prototype.ComputeBounds = function () {
-    if ( this.aabb === null ) this.aabb = new nk.Geom.AABB2D();
+    if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
     var mix = Infinity, max = -Infinity, miy = Infinity, may = -Infinity;
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
       p = ps[ i ];
@@ -158,7 +158,7 @@ module.exports = function ( nk ) {
     this.dirtyBounds = true;
   };
   Polygon2D.prototype.GetCentroid = function () {
-    var centroid = new nk.Vector2D();
+    var centroid = new Nenkraft.Vector2D();
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
       p = ps[ i ];
       centroid.AddV( p );
@@ -172,5 +172,5 @@ module.exports = function ( nk ) {
     //TODO
     return true;
   };
-  nk.Geom.Polygon2D = Polygon2D;
+  Nenkraft.Geom.Polygon2D = Polygon2D;
 };

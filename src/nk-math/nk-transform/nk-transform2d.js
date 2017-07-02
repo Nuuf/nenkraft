@@ -1,13 +1,13 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Transform2D ( _x, _y ) {
     if ( !( this instanceof Transform2D ) ) return new Transform2D();
-    this.position = new nk.Vector2D( _x, _y );
-    this.scale = new nk.Vector2D( 1, 1 );
-    this.skew = new nk.Vector2D();
-    this.pivot = new nk.Vector2D();
-    this.localTransform = new nk.Matrix2D();
-    this.worldTransform = new nk.Matrix2D();
+    this.position = new Nenkraft.Vector2D( _x, _y );
+    this.scale = new Nenkraft.Vector2D( 1, 1 );
+    this.skew = new Nenkraft.Vector2D();
+    this.pivot = new Nenkraft.Vector2D();
+    this.localTransform = new Nenkraft.Matrix2D();
+    this.worldTransform = new Nenkraft.Matrix2D();
   }
   Transform2D.prototype = Object.create( null );
   Transform2D.prototype.constructor = Transform2D;
@@ -62,5 +62,5 @@ module.exports = function ( nk ) {
   Transform2D.prototype.ApplyWorld = function ( _rc ) {
     this.worldTransform.ApplyToContext( _rc );
   };
-  nk.Math.Transform2D = Transform2D;
+  Nenkraft.Math.Transform2D = Transform2D;
 };

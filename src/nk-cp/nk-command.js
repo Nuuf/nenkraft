@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Command ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
     if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
@@ -33,12 +33,12 @@ module.exports = function () {
     if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
     if ( this.options === null ) this.options = [];
     _priority = _priority === undefined ? 0 : _priority;
-    var opt = new nk.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
+    var opt = new Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
     opt.command = this;
     for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
       option = options[ i ];
       if ( option.priority <= _priority ) {
-        nk.Utils.ArrayInsert( options, opt, i );
+        Nenkraft.Utils.ArrayInsert( options, opt, i );
         this.allOptionIds = this.GetAllOptionIds();
         return this;
       }
@@ -104,5 +104,5 @@ module.exports = function () {
     }
     return str;
   };
-  nk.CP.Command = Command;
+  Nenkraft.CP.Command = Command;
 };

@@ -1,8 +1,8 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
-    if ( _arg0 instanceof nk.Vector2D && _arg1 instanceof nk.Vector2D ) {
+    if ( _arg0 instanceof Nenkraft.Vector2D && _arg1 instanceof Nenkraft.Vector2D ) {
       this.tl = _arg0;
       this.br = _arg1;
     }
@@ -14,16 +14,16 @@ module.exports = function ( nk ) {
       _arg1.x !== undefined &&
       _arg1.y !== undefined
     ) {
-      this.tl = new nk.Vector2D( _arg0.x, _arg0.y );
-      this.br = new nk.Vector2D( _arg1.x, _arg1.y );
+      this.tl = new Nenkraft.Vector2D( _arg0.x, _arg0.y );
+      this.br = new Nenkraft.Vector2D( _arg1.x, _arg1.y );
     }
     else if ( _arg0 !== undefined && _arg1 !== undefined && _arg2 !== undefined && _arg3 !== undefined ) {
-      this.tl = new nk.Vector2D( _arg0, _arg1 );
-      this.br = new nk.Vector2D( _arg2, _arg3 );
+      this.tl = new Nenkraft.Vector2D( _arg0, _arg1 );
+      this.br = new Nenkraft.Vector2D( _arg2, _arg3 );
     }
     else {
-      this.tl = new nk.Vector2D();
-      this.br = new nk.Vector2D();
+      this.tl = new Nenkraft.Vector2D();
+      this.br = new Nenkraft.Vector2D();
     }
     this.ComputeWH();
   }
@@ -70,5 +70,5 @@ module.exports = function ( nk ) {
     return ( tl2.x >= tl1.x && tl2.y >= tl1.y && br2.x <= br1.x && br2.y <= br1.y );
   };
 
-  nk.Geom.AABB2D = AABB2D;
+  Nenkraft.Geom.AABB2D = AABB2D;
 };

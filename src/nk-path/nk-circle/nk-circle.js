@@ -1,10 +1,10 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Geom.Circle;
+  var Super = Nenkraft.Geom.Circle;
   function Circle ( _x, _y, _radius ) {
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
     Super.call( this, _x, _y, _radius );
-    this.style = nk.Style.CreateFSSa();
+    this.style = Nenkraft.Style.CreateFSSa();
   }
   Circle.prototype = Object.create( Super.prototype );
   Circle.prototype.constructor = Circle;
@@ -16,7 +16,7 @@ module.exports = function ( nk ) {
   Circle.prototype.Draw = function ( _rc ) {
     var center = this.center, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
     _rc.beginPath();
-    _rc.arc( center.x, center.y, this.radius, 0, nk.Math.PII, false );
+    _rc.arc( center.x, center.y, this.radius, 0, Nenkraft.Math.PII, false );
     _rc.closePath();
     if ( shadow.applied === true ) shadow.Apply( _rc );
     if ( fill.applied === true ) {
@@ -28,5 +28,5 @@ module.exports = function ( nk ) {
       _rc.stroke();
     }
   };
-  nk.Path.Circle = Circle;
+  Nenkraft.Path.Circle = Circle;
 };

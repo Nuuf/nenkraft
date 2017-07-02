@@ -1,10 +1,10 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Geom.Line2D;
+  var Super = Nenkraft.Geom.Line2D;
   function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
     Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-    this.style = nk.Style.CreateSSa();
+    this.style = Nenkraft.Style.CreateSSa();
   }
   Line2D.prototype = Object.create( Super.prototype );
   Line2D.prototype.constructor = Line2D;
@@ -25,5 +25,5 @@ module.exports = function ( nk ) {
       _rc.stroke();
     }
   };
-  nk.Path.Line2D = Line2D;
+  Nenkraft.Path.Line2D = Line2D;
 };

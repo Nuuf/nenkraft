@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function MotionManager ( _target ) {
     if ( !( this instanceof MotionManager ) ) return new MotionManager( _target );
@@ -16,7 +16,7 @@ module.exports = function ( nk ) {
   MotionManager.prototype.Create = function ( _id, _propertyString, _value, _duration, _easing ) {
     var exists = this.GetMotion( _id );
     if ( exists === null ) {
-      var motion = new nk.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
+      var motion = new Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
       this.motions.push( motion );
       return motion;
     }
@@ -80,5 +80,5 @@ module.exports = function ( nk ) {
     }
     return null;
   };
-  nk.MotionManager = MotionManager;
+  Nenkraft.MotionManager = MotionManager;
 };

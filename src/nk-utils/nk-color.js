@@ -1,6 +1,6 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var HexMap = nk.Utils.B16ToB10;
+  var HexMap = Nenkraft.Utils.B16ToB10;
   function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
     this.channel = [
@@ -56,7 +56,7 @@ module.exports = function ( nk ) {
     this.ComputeValueHSLA();
   };
   Color.prototype.SetRGB = function ( _r, _g, _b ) {
-    var Clamp = nk.Utils.Clamp, min = 0, max = 255;
+    var Clamp = Nenkraft.Utils.Clamp, min = 0, max = 255;
     this.channel[ 0 ] = Clamp( _r, min, max );
     this.channel[ 1 ] = Clamp( _g, min, max );
     this.channel[ 2 ] = Clamp( _b, min, max );
@@ -75,5 +75,5 @@ module.exports = function ( nk ) {
     else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
   };
 
-  nk.Color = Color;
+  Nenkraft.Color = Color;
 };

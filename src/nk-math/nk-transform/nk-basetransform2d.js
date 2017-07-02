@@ -1,11 +1,11 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Basetransform2D ( _x, _y ) {
     if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D();
-    this.position = new nk.Vector2D( _x, _y );
-    this.scale = new nk.Vector2D( 1, 1 );
-    this.localTransform = new nk.Vector2D();
-    this.worldTransform = new nk.Vector2D();
+    this.position = new Nenkraft.Vector2D( _x, _y );
+    this.scale = new Nenkraft.Vector2D( 1, 1 );
+    this.localTransform = new Nenkraft.Vector2D();
+    this.worldTransform = new Nenkraft.Vector2D();
   }
   Basetransform2D.prototype = Object.create( null );
   Basetransform2D.prototype.constructor = Basetransform2D;
@@ -25,5 +25,5 @@ module.exports = function ( nk ) {
   Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
     _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
   };
-  nk.Math.Basetransform2D = Basetransform2D;
+  Nenkraft.Math.Basetransform2D = Basetransform2D;
 };

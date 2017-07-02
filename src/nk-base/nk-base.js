@@ -1,20 +1,20 @@
-module.exports = function ( nk ) {
-  nk.Geom = Object.create( null );
-  nk.Style = Object.create( null );
-  nk.Debug = Object.create( null );
-  nk.Math = Object.create( null );
-  nk.Utils = Object.create( null );
-  nk.Entity = Object.create( null );
-  nk.Path = Object.create( null );
-  nk.Event = Object.create( null );
-  nk.Time = Object.create( null );
-  nk.Input = Object.create( null );
-  nk.CP = Object.create( null );
-  nk.Load = Object.create( null );
-  nk.Animator = Object.create( null );
-  nk.VERSION = '0.1.3 (Alpha)';
+module.exports = function ( Nenkraft ) {
+  Nenkraft.Geom = Object.create( null );
+  Nenkraft.Style = Object.create( null );
+  Nenkraft.Debug = Object.create( null );
+  Nenkraft.Math = Object.create( null );
+  Nenkraft.Utils = Object.create( null );
+  Nenkraft.Entity = Object.create( null );
+  Nenkraft.Path = Object.create( null );
+  Nenkraft.Event = Object.create( null );
+  Nenkraft.Time = Object.create( null );
+  Nenkraft.Input = Object.create( null );
+  Nenkraft.CP = Object.create( null );
+  Nenkraft.Load = Object.create( null );
+  Nenkraft.Animator = Object.create( null );
+  Nenkraft.VERSION = '0.1.32 (Alpha)';
   console.log(
-    '%cnenkraft %cversion %c' + nk.VERSION,
+    '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
     'color:magenta;background-color:black;font-family:Arial;font-size:16px;',
     'color:yellow;background-color:black;font-family:Arial;font-size:18px;'

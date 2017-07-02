@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Matrix2D () {
     if ( !( this instanceof Matrix2D ) ) return new Matrix2D();
@@ -101,6 +101,6 @@ module.exports = function ( nk ) {
   Matrix2D.prototype.ApplyToContext = function ( _rc ) {
     _rc.setTransform( this.a, this.b, this.c, this.d, this.e, this.f );
   };
-  nk.Math.Matrix2D = Matrix2D;
-  nk.Matrix2D = Matrix2D;
+  Nenkraft.Math.Matrix2D = Matrix2D;
+  Nenkraft.Matrix2D = Matrix2D;
 };

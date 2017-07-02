@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
     if ( !( this instanceof Motion ) ) return new Motion( _id, _target, _propertyString, _value, _duration, _easing );
@@ -7,12 +7,12 @@ module.exports = function ( nk ) {
     this.propertyString = _propertyString;
     if ( _value !== undefined ) this.value = _value;
     if ( _duration !== undefined ) this.duration = _duration;
-    this.easing = nk.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
-    this.onStart = new nk.Event.LocalEvent();
-    this.onEnd = new nk.Event.LocalEvent();
-    this.onStop = new nk.Event.LocalEvent();
-    this.onReconfigure = new nk.Event.LocalEvent();
-    this.onReset = new nk.Event.LocalEvent();
+    this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
+    this.onStart = new Nenkraft.Event.LocalEvent();
+    this.onEnd = new Nenkraft.Event.LocalEvent();
+    this.onStop = new Nenkraft.Event.LocalEvent();
+    this.onReconfigure = new Nenkraft.Event.LocalEvent();
+    this.onReset = new Nenkraft.Event.LocalEvent();
   }
   Motion.prototype = Object.create( null );
   Motion.prototype.constructor = Motion;
@@ -35,7 +35,7 @@ module.exports = function ( nk ) {
   Motion.prototype.Start = function () {
     var property = this.propertyString.split( '.' );
     this.property = property[ property.length - 1 ];
-    this.propertyObject = nk.Utils.Nested( this.target, this.propertyString, true );
+    this.propertyObject = Nenkraft.Utils.Nested( this.target, this.propertyString, true );
     this.startValue = this.propertyObject[ this.property ];
     this.change = this.value - this.startValue;
     this.time = 0;
@@ -65,7 +65,7 @@ module.exports = function ( nk ) {
     if ( _propertyString !== undefined ) this.propertyString = _propertyString;
     this.value = _value;
     this.duration = _duration;
-    this.easing = nk.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
+    this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
     this.onReconfigure.Dispatch( this, null );
   };
   Motion.prototype.Reset = function () {
@@ -79,5 +79,5 @@ module.exports = function ( nk ) {
     delete this.running;
     this.onReset.Dispatch( this, null );
   };
-  nk.Motion = Motion;
+  Nenkraft.Motion = Motion;
 };

@@ -1,14 +1,14 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Plain2D ( _x, _y ) {
     if ( !( this instanceof Plain2D ) ) return new Plain2D( _x, _y );
-    this.transform = new nk.Math.Basetransform2D( _x, _y );
+    this.transform = new Nenkraft.Math.Basetransform2D( _x, _y );
     this.data = Object.create( null );
   }
   Plain2D.prototype = Object.create( null );
   Plain2D.prototype.constructor = Plain2D;
   //Static
-  Plain2D.NULL_TRANSFORM = new nk.Math.Basetransform2D();
+  Plain2D.NULL_TRANSFORM = new Nenkraft.Math.Basetransform2D();
   //Members
   Plain2D.prototype.parent = null;
   Plain2D.prototype.w = 0;
@@ -33,7 +33,7 @@ module.exports = function ( nk ) {
   Plain2D.prototype.ComputeBounds = function ( _anchor ) {
     var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
-    this.bounds = new nk.Geom.AABB2D(
+    this.bounds = new Nenkraft.Geom.AABB2D(
       this.x - this.width * ay,
       this.y - this.height * ay,
       this.x + this.width,
@@ -41,6 +41,16 @@ module.exports = function ( nk ) {
     );
     this.boundsDirty = false;
     return this.bounds;
+  };
+  Plain2D.prototype.Destroy = function () {
+    if ( this.parent !== null ) this.parent.RemoveChild( this );
+  };
+  Plain2D.prototype.AttachTo = function ( _parent ) {
+    _parent.AddChild( this );
+  };
+  Plain2D.prototype.Detach = function ( _pool ) {
+    if ( this.parent !== null ) this.parent.RemoveChild( this );
+    if ( _pool ) _pool.Store( this );
   };
   Object.defineProperty( Plain2D.prototype, 'scale', {
     get: function () {
@@ -84,6 +94,6 @@ module.exports = function ( nk ) {
       this.h = _value;
     }
   } );
-  nk.Entity.Plain2D = Plain2D;
-  nk.Plain2D = Plain2D;
+  Nenkraft.Entity.Plain2D = Plain2D;
+  Nenkraft.Plain2D = Plain2D;
 };

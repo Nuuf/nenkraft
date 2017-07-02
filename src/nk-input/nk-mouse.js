@@ -1,22 +1,22 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Mouse ( _element, _offsetX, _offsetY ) {
     if ( !( this instanceof Mouse ) ) return new Mouse( _element, _offsetX, _offsetY );
     this.element = _element;
-    this.position = new nk.Vector2D();
-    this.scale = new nk.Vector2D( 1, 1 );
-    this.anchor = new nk.Vector2D();
-    this.offset = new nk.Vector2D( _offsetX, _offsetY );
+    this.position = new Nenkraft.Vector2D();
+    this.scale = new Nenkraft.Vector2D( 1, 1 );
+    this.anchor = new Nenkraft.Vector2D();
+    this.offset = new Nenkraft.Vector2D( _offsetX, _offsetY );
 
     this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
     this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
     this.element.addEventListener( 'mouseup', this.OnUp.bind( this ) );
     this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
 
-    this.onMove = new nk.Event.LocalEvent();
-    this.onDown = new nk.Event.LocalEvent();
-    this.onUp = new nk.Event.LocalEvent();
-    this.onLeave = new nk.Event.LocalEvent();
+    this.onMove = new Nenkraft.Event.LocalEvent();
+    this.onDown = new Nenkraft.Event.LocalEvent();
+    this.onUp = new Nenkraft.Event.LocalEvent();
+    this.onLeave = new Nenkraft.Event.LocalEvent();
   }
   Mouse.prototype = Object.create( null );
   Mouse.prototype.constructor = Mouse;
@@ -48,7 +48,7 @@ module.exports = function () {
     _event.stopPropagation();
     this.onLeave.Dispatch( this.element, this.position );
   };
-  nk.Input.Mouse = Mouse;
+  Nenkraft.Input.Mouse = Mouse;
   Object.defineProperty( Mouse.prototype, 'x', {
     get: function () {
       return this.position.x;

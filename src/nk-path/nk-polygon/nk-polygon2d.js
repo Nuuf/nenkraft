@@ -1,10 +1,10 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Geom.Polygon2D;
+  var Super = Nenkraft.Geom.Polygon2D;
   function Polygon2D () {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     Super.call( this );
-    this.style = nk.Style.CreateFSSa();
+    this.style = Nenkraft.Style.CreateFSSa();
   }
   Polygon2D.prototype = Object.create( Super.prototype );
   Polygon2D.prototype.constructor = Polygon2D;
@@ -33,5 +33,5 @@ module.exports = function ( nk ) {
       _rc.stroke();
     }
   };
-  nk.Path.Polygon2D = Polygon2D;
+  Nenkraft.Path.Polygon2D = Polygon2D;
 };

@@ -1,18 +1,18 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  nk.Style.CreateAll = function () {
-    return { fill: new nk.Style.Fill(), stroke: new nk.Style.Stroke(), shadow: new nk.Style.Shadow(), text: new nk.Style.Text() };
+  Nenkraft.Style.CreateAll = function () {
+    return { fill: new Nenkraft.Style.Fill(), stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
   };
-  nk.Style.CreateFSSa = function () {
-    return { fill: new nk.Style.Fill(), stroke: new nk.Style.Stroke(), shadow: new nk.Style.Shadow() };
+  Nenkraft.Style.CreateFSSa = function () {
+    return { fill: new Nenkraft.Style.Fill(), stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow() };
   };
-  nk.Style.CreateSSa = function () {
-    return { stroke: new nk.Style.Stroke(), shadow: new nk.Style.Shadow() };
+  Nenkraft.Style.CreateSSa = function () {
+    return { stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow() };
   };
-  nk.Style.CreateFSa = function () {
-    return { fill: new nk.Style.Fill(), shadow: new nk.Style.Shadow() };
+  Nenkraft.Style.CreateFSa = function () {
+    return { fill: new Nenkraft.Style.Fill(), shadow: new Nenkraft.Style.Shadow() };
   };
-  nk.Style.CreateSaT = function () {
-    return { shadow: new nk.Style.Shadow(), text: new nk.Style.Text() };
+  Nenkraft.Style.CreateSaT = function () {
+    return { shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
   };
 };

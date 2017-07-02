@@ -1,8 +1,8 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Shadow ( _props ) {
     if ( !( this instanceof Shadow ) ) return new Shadow( _props );
-    nk.Utils.ApplyProperties( this, _props );
+    Nenkraft.Utils.ApplyProperties( this, _props );
   }
   Shadow.prototype = Object.create( null );
   Shadow.prototype.constructor = Shadow;
@@ -21,5 +21,5 @@ module.exports = function ( nk ) {
     _rc.shadowOffsetX = this.offsetX;
     _rc.shadowOffsetY = this.offsetY;
   };
-  nk.Style.Shadow = Shadow;
+  Nenkraft.Style.Shadow = Shadow;
 };

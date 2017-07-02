@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function LocalEvent () {
     if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
@@ -25,7 +25,7 @@ module.exports = function () {
     return -1;
   };
   LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
-    var listener = new nk.LocalListener( this, _context, _handle, _removeOnNextCall );
+    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
     this.listeners.push( listener );
   };
   LocalEvent.prototype.Remove = function ( _handle, _context ) {
@@ -64,6 +64,6 @@ module.exports = function () {
     delete this.target;
     delete this.data;
   };
-  nk.Event.LocalEvent = LocalEvent;
-  nk.LocalEvent = LocalEvent;
+  Nenkraft.Event.LocalEvent = LocalEvent;
+  Nenkraft.LocalEvent = LocalEvent;
 };

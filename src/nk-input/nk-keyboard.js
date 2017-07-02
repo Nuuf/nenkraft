@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Keyboard ( _element ) {
     if ( !( this instanceof Keyboard ) ) return new Keyboard( _element );
@@ -9,8 +9,8 @@ module.exports = function () {
     this.element.addEventListener( 'keydown', this.OnKeyDown.bind( this ) );
     this.element.addEventListener( 'keyup', this.OnKeyUp.bind( this ) );
 
-    this.onDown = new nk.Event.LocalEvent();
-    this.onUp = new nk.Event.LocalEvent();
+    this.onDown = new Nenkraft.Event.LocalEvent();
+    this.onUp = new Nenkraft.Event.LocalEvent();
   }
   Keyboard.prototype = Object.create( null );
   Keyboard.prototype.constructor = Keyboard;
@@ -29,5 +29,5 @@ module.exports = function () {
     _event.stopPropagation();
     this.onUp.Dispatch( this.element, _event );
   };
-  nk.Input.Keyboard = Keyboard;
+  Nenkraft.Input.Keyboard = Keyboard;
 };

@@ -1,8 +1,8 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Circle ( _x, _y, _radius ) {
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
-    this.center = new nk.Vector2D( _x, _y );
+    this.center = new Nenkraft.Vector2D( _x, _y );
     this.radius = _radius === undefined ? 32 : _radius;
   }
   Circle.prototype = Object.create( null );
@@ -25,7 +25,7 @@ module.exports = function ( nk ) {
   Circle.prototype.IntersectsPoint = function ( _v ) {
     return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _v ) );
   };
-  nk.Geom.Circle = Circle;
+  Nenkraft.Geom.Circle = Circle;
   Object.defineProperty( Circle.prototype, 'x', {
     set: function ( _value ) {
       this.center.x = _value;

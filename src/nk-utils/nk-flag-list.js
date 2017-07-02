@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function FlagList () {
     if ( !( this instanceof FlagList ) ) return new FlagList();
@@ -26,5 +26,5 @@ module.exports = function ( nk ) {
   FlagList.prototype.Toggle = function ( _value ) {
     this.value ^= _value;
   };
-  nk.Utils.FlagList = FlagList;
+  Nenkraft.Utils.FlagList = FlagList;
 };
