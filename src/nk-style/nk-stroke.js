@@ -1,26 +1,26 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Stroke ( _props ) {
     if ( !( this instanceof Stroke ) ) return new Stroke( _props );
-    nk.Utils.ApplyProperties( this, _props );
+    Nenkraft.Utils.ApplyProperties( this, _props );
   }
   Stroke.prototype = Object.create( null );
   Stroke.prototype.constructor = Stroke;
   //Static
-  nk.Style.LINE_CAP = {
+  Nenkraft.Style.LINE_CAP = {
     ROUND: 'round',
     BUTT: 'butt',
     SQUARE: 'square'
   };
-  nk.Style.LINE_JOIN = {
+  Nenkraft.Style.LINE_JOIN = {
     BEVEL: 'bevel',
     ROUND: 'round',
     MITER: 'miter'
   };
   //Members
   Stroke.prototype.color = '#00FFFF';
-  Stroke.prototype.lineCap = nk.Style.LINE_CAP.ROUND;
-  Stroke.prototype.lineJoin = nk.Style.LINE_JOIN.ROUND;
+  Stroke.prototype.lineCap = Nenkraft.Style.LINE_CAP.ROUND;
+  Stroke.prototype.lineJoin = Nenkraft.Style.LINE_JOIN.ROUND;
   Stroke.prototype.lineWidth = 1;
   Stroke.prototype.miterLimit = 10;
   Stroke.prototype.applied = true;
@@ -33,5 +33,5 @@ module.exports = function ( nk ) {
     _rc.miterLimit = this.miterLimit;
   };
 
-  nk.Style.Stroke = Stroke;
+  Nenkraft.Style.Stroke = Stroke;
 };

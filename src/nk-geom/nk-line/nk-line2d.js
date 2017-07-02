@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
@@ -7,12 +7,12 @@ module.exports = function ( nk ) {
       this.e = _arg1;
     }
     else if ( _arg0 !== undefined && _arg1 !== undefined && _arg2 !== undefined && _arg3 !== undefined ) {
-      this.s = new nk.Vector2D( _arg0, _arg1 );
-      this.e = new nk.Vector2D( _arg2, _arg3 );
+      this.s = new Nenkraft.Vector2D( _arg0, _arg1 );
+      this.e = new Nenkraft.Vector2D( _arg2, _arg3 );
     }
     else {
-      this.s = new nk.Vector2D();
-      this.e = new nk.Vector2D();
+      this.s = new Nenkraft.Vector2D();
+      this.e = new Nenkraft.Vector2D();
     }
   }
   Line2D.prototype = Object.create( null );
@@ -37,5 +37,5 @@ module.exports = function ( nk ) {
   Line2D.prototype.IntersectsPoint = function () {
     return false;
   };
-  nk.Geom.Line2D = Line2D;
+  Nenkraft.Geom.Line2D = Line2D;
 };

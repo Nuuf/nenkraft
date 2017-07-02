@@ -1,10 +1,10 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function TextureLoader ( _objs ) {
     if ( !( this instanceof TextureLoader ) ) return new TextureLoader( _objs );
     this.cache = [];
-    this.onTextureLoaded = new nk.Event.LocalEvent();
-    this.onComplete = new nk.Event.LocalEvent();
+    this.onTextureLoaded = new Nenkraft.Event.LocalEvent();
+    this.onComplete = new Nenkraft.Event.LocalEvent();
     this.OnLoad = this.OnLoad.bind( this );
     if ( _objs !== undefined ) this.Load( _objs );
   }
@@ -56,5 +56,5 @@ module.exports = function ( nk ) {
     }
     return null;
   };
-  nk.Load.TextureLoader = TextureLoader;
+  Nenkraft.Load.TextureLoader = TextureLoader;
 };

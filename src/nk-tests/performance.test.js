@@ -25,18 +25,20 @@ module.exports = function () {
 
     function CreateTexture () {
       var path = new nk.Path.Polygon2D();
-      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 3 );
+      path.style.stroke.lineWidth = 3;
+      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 12 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
 
-    var ticker = new nk.Ticker( Update );
+    var ticker = new nk.Ticker( Update, 1000, true );
+    ticker.Start();
 
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 55;
+    var fps = 24;
 
     var childrenMDC = [];
 

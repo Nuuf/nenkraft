@@ -1,11 +1,11 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Timer ( _stopTime ) {
     if ( !( this instanceof Timer ) ) return new Timer( _stopTime );
     this.stopTime = Math.round( _stopTime === undefined ? null : _stopTime );
-    this.onStop = new nk.LocalEvent();
-    this.onStart = new nk.LocalEvent();
-    this.onReset = new nk.LocalEvent();
+    this.onStop = new Nenkraft.LocalEvent();
+    this.onStart = new Nenkraft.LocalEvent();
+    this.onReset = new Nenkraft.LocalEvent();
   }
   Timer.prototype = Object.create( null );
   Timer.prototype.constructor = Timer;
@@ -36,6 +36,6 @@ module.exports = function () {
       }
     }
   };
-  nk.Time.Timer = Timer;
-  nk.Timer = Timer;
+  Nenkraft.Time.Timer = Timer;
+  Nenkraft.Timer = Timer;
 };

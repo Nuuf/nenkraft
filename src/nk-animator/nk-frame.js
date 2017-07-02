@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Frame ( _x, _y, _w, _h, _rate, _sprite ) {
     if ( !( this instanceof Frame ) ) return new Frame( _x, _y, _w, _h, _rate, _sprite );
@@ -37,5 +37,5 @@ module.exports = function ( nk ) {
   Frame.prototype.Reset = function () {
     this.timer = this.rate;
   };
-  nk.Animator.Frame = Frame;
+  Nenkraft.Animator.Frame = Frame;
 };

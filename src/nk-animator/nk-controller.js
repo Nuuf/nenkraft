@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Controller ( _sprite ) {
     if ( !( this instanceof Controller ) ) return new Controller( _sprite );
@@ -14,7 +14,7 @@ module.exports = function ( nk ) {
   Controller.prototype.sprite = null;
   //Methods
   Controller.prototype.AddAnimation = function ( _id, _rate ) {
-    var animation = new nk.Animator.Animation( this, _id, _rate );
+    var animation = new Nenkraft.Animator.Animation( this, _id, _rate );
     this.animations.push( animation );
     return animation;
   };
@@ -42,5 +42,5 @@ module.exports = function ( nk ) {
     if ( currentAnimation !== null ) currentAnimation.Process();
   };
 
-  nk.Animator.Controller = Controller;
+  Nenkraft.Animator.Controller = Controller;
 };

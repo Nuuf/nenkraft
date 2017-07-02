@@ -1,6 +1,6 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Entity.Displayentity2D;
+  var Super = Nenkraft.Entity.Displayentity2D;
   function Container2D ( _x, _y ) {
     if ( !( this instanceof Container2D ) ) return new Container2D( _x, _y );
     Super.call( this, _x, _y );
@@ -110,8 +110,9 @@ module.exports = function ( nk ) {
   Container2D.prototype.AttachTo = function ( _parent ) {
     _parent.AddChild( this );
   };
-  Container2D.prototype.Detach = function () {
+  Container2D.prototype.Detach = function ( _pool ) {
     if ( this.parent !== null ) this.parent.RemoveChild( this );
+    if ( _pool ) _pool.Store( this );
   };
   Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
     var children = this.children, closestChild = null;
@@ -149,6 +150,6 @@ module.exports = function ( nk ) {
     }
     return null;
   };
-  nk.Entity.Container2D = Container2D;
-  nk.Container2D = Container2D;
+  Nenkraft.Entity.Container2D = Container2D;
+  Nenkraft.Container2D = Container2D;
 };

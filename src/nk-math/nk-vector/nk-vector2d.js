@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Vector2D ( _arg0, _arg1 ) {
     if ( !( this instanceof Vector2D ) ) return new Vector2D( _arg0, _arg1 );
@@ -221,6 +221,6 @@ module.exports = function ( nk ) {
   Vector2D.prototype.GetLength = Vector2D.prototype.GetMagnitude;
   Vector2D.prototype.GetLengthSquared = Vector2D.prototype.GetMagnitudeSquared;
 
-  nk.Math.Vector2D = Vector2D;
-  nk.Vector2D = Vector2D;
+  Nenkraft.Math.Vector2D = Vector2D;
+  Nenkraft.Vector2D = Vector2D;
 };

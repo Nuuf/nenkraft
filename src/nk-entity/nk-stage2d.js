@@ -1,6 +1,6 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Entity.Container2D;
+  var Super = Nenkraft.Entity.Container2D;
   function Stage2D ( _canvas, _x, _y, _doNotStart ) {
     if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart );
     Super.call( this, _x, _y );
@@ -8,10 +8,10 @@ module.exports = function () {
     this.rc = _canvas.getContext( '2d' );
     this.w = _canvas.width;
     this.h = _canvas.height;
-    this.ticker = new nk.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
-    this.onProcess = new nk.Event.LocalEvent();
-    this.mouse = new nk.Input.Mouse( _canvas, _x, _y );
-    this.keyboard = new nk.Input.Keyboard( _canvas );
+    this.ticker = new Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
+    this.onProcess = new Nenkraft.Event.LocalEvent();
+    this.mouse = new Nenkraft.Input.Mouse( _canvas, _x, _y );
+    this.keyboard = new Nenkraft.Input.Keyboard( _canvas );
   }
   Stage2D.prototype = Object.create( Super.prototype );
   Stage2D.prototype.constructor = Stage2D;
@@ -38,6 +38,6 @@ module.exports = function () {
     this.Draw( rc );
     this.onProcess.Dispatch( this, _delta );
   };
-  nk.Entity.Stage2D = Stage2D;
-  nk.Stage2D = Stage2D;
+  Nenkraft.Entity.Stage2D = Stage2D;
+  Nenkraft.Stage2D = Stage2D;
 };

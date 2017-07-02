@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Option ( _id, _handle, _info, _priority, _breakIfExecuted ) {
     if ( !( this instanceof Option ) ) return new Option( _id, _handle, _info, _priority, _breakIfExecuted );
@@ -23,5 +23,5 @@ module.exports = function () {
     this.handle( _dataStrs, _data );
     return this.breakIfExecuted;
   };
-  nk.CP.Option = Option;
+  Nenkraft.CP.Option = Option;
 };

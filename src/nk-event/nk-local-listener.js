@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function LocalListener ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
     if ( !( this instanceof LocalListener ) ) return new LocalListener( _holderContext, _listenerContex, _handle, _removeOnNextCall );
@@ -23,6 +23,6 @@ module.exports = function () {
   LocalListener.prototype.Remove = function () {
     this.holderContext.Remove( this.handle, this.context );
   };
-  nk.Event.LocalListener = LocalListener;
-  nk.LocalListener = LocalListener;
+  Nenkraft.Event.LocalListener = LocalListener;
+  Nenkraft.LocalListener = LocalListener;
 };

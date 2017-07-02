@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Ticker ( _onProcess, _rate, _doNotStart ) {
     if ( !( this instanceof Ticker ) ) return new Ticker( _onProcess, _rate, _doNotStart );
@@ -43,7 +43,7 @@ module.exports = function () {
     this.then = this.now;
   };
   Ticker.prototype.GetTPS = function () {
-    return nk.Math.PR( 1 / this.delta * 1000, 2 );
+    return Nenkraft.Math.PR( 1 / this.delta * 1000, 2 );
   };
   Ticker.prototype.SetDesiredRate = function ( _rate ) {
     this.desiredRate = _rate === undefined ? 16.66 : 1000 / _rate;
@@ -102,6 +102,6 @@ module.exports = function () {
       Ticker.Log( '%cTicker: Stopping RAF!', 'color:cyan;'.concat( Ticker.GLOBAL_CSS ) );
     }
   };
-  nk.Time.Ticker = Ticker;
-  nk.Ticker = Ticker;
+  Nenkraft.Time.Ticker = Ticker;
+  Nenkraft.Ticker = Ticker;
 };

@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   function FlagEnum () {
     if ( !( this instanceof FlagEnum ) ) return new FlagEnum();
@@ -17,5 +17,5 @@ module.exports = function ( nk ) {
       this.next = this.next << 1;
     };
   };
-  nk.Utils.FlagEnum = FlagEnum;
+  Nenkraft.Utils.FlagEnum = FlagEnum;
 };

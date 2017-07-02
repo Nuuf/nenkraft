@@ -29,6 +29,7 @@ module.exports = function () {
         id: 'particle',
         src: nk.Utils.GenerateSimpleBase64Png( function () {
           var path = new nk.Path.Circle( 5, 5, 5 );
+          path.style.stroke.color = "#000";
           var t = new nk.Graphic2D( 0, 0, path );
           return t;
         } )

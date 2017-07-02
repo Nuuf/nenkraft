@@ -1,6 +1,6 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Entity.Container2D;
+  var Super = Nenkraft.Entity.Container2D;
   function Graphic2D ( _x, _y, _path ) {
     if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
     Super.call( this, _x, _y );
@@ -16,7 +16,7 @@ module.exports = function ( nk ) {
       }
       this.path = _path;
     }
-    this.anchor = new nk.Vector2D();
+    this.anchor = new Nenkraft.Vector2D();
   }
   Graphic2D.prototype = Object.create( Super.prototype );
   Graphic2D.prototype.constructor = Graphic2D;
@@ -44,6 +44,6 @@ module.exports = function ( nk ) {
     var cv = _v.SubtractVC( this.position );
     return this.path.IntersectsPoint( cv );
   };
-  nk.Entity.Graphic2D = Graphic2D;
-  nk.Graphic2D = Graphic2D;
+  Nenkraft.Entity.Graphic2D = Graphic2D;
+  Nenkraft.Graphic2D = Graphic2D;
 };

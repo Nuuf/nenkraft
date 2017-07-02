@@ -1,11 +1,11 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = nk.Entity.Container2D;
+  var Super = Nenkraft.Entity.Container2D;
   function Text ( _x, _y, _text ) {
     if ( !( this instanceof Text ) ) return new Text( _x, _y );
     Super.call( this, _x, _y );
     if ( _text !== undefined ) this.text = _text;
-    this.style = nk.Style.CreateSaT();
+    this.style = Nenkraft.Style.CreateSaT();
   }
   Text.prototype = Object.create( Super.prototype );
   Text.prototype.constructor = Text;
@@ -40,6 +40,6 @@ module.exports = function ( nk ) {
   Text.prototype.IntersectsPoint = function ( _v ) {
     return false;
   };
-  nk.Entity.Text = Text;
-  nk.Text = Text;
+  Nenkraft.Entity.Text = Text;
+  Nenkraft.Text = Text;
 };

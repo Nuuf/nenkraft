@@ -1,4 +1,4 @@
-module.exports = function ( nk ) {
+module.exports = function ( Nenkraft ) {
   'use strict';
   var Collision2D = Object.create( null );
   Collision2D.AABB2DvsAABB2D = Object.create( null );
@@ -21,10 +21,10 @@ module.exports = function ( nk ) {
       tl2.y < br1yh
     ) {
       var vecs = [
-        new nk.Vector2D( tl1.x - tl2xw, 0 ),
-        new nk.Vector2D( tl1xw - tl2.x, 0 ),
-        new nk.Vector2D( 0, tl1.y - br2yh ),
-        new nk.Vector2D( 0, br1yh - tl2.y )
+        new Nenkraft.Vector2D( tl1.x - tl2xw, 0 ),
+        new Nenkraft.Vector2D( tl1xw - tl2.x, 0 ),
+        new Nenkraft.Vector2D( 0, tl1.y - br2yh ),
+        new Nenkraft.Vector2D( 0, br1yh - tl2.y )
       ];
       vecs.sort( Collision2D.VectorSortMinMag );
       return vecs[ 0 ];
@@ -41,18 +41,18 @@ module.exports = function ( nk ) {
     if ( radii * radii > distanceSq ) {
       var distance = Math.sqrt( distanceSq );
       var dm = ( _circle1.radiusSquared - _circle2.radiusSquared + distanceSq ) / ( distance + distance );
-      var poc1 = new nk.Vector2D(
+      var poc1 = new Nenkraft.Vector2D(
         pos1.x + ( delta.x * dm / distance ),
         pos1.y + ( delta.y * dm / distance )
       );
       var de = Math.sqrt(( _circle2.radiusSquared ) - ( dm * dm ) ) / distance;
       var rx = -delta.y * de;
       var ry = delta.x * de;
-      var poc2 = new nk.Vector2D(
+      var poc2 = new Nenkraft.Vector2D(
         poc1.x + rx,
         poc1.y + ry
       );
-      var poc3 = new nk.Vector2D(
+      var poc3 = new Nenkraft.Vector2D(
         poc1.x - rx,
         poc1.y - ry
       );
@@ -117,10 +117,10 @@ module.exports = function ( nk ) {
       tl2.y < br1yh
     ) {
       var tvs = [
-        new nk.Vector2D( tl1.x - tl2xw, 0 ),
-        new nk.Vector2D( tl1xw - tl2.x, 0 ),
-        new nk.Vector2D( 0, tl1.y - br2yh ),
-        new nk.Vector2D( 0, br1yh - tl2.y )
+        new Nenkraft.Vector2D( tl1.x - tl2xw, 0 ),
+        new Nenkraft.Vector2D( tl1xw - tl2.x, 0 ),
+        new Nenkraft.Vector2D( 0, tl1.y - br2yh ),
+        new Nenkraft.Vector2D( 0, br1yh - tl2.y )
       ];
       tvs.sort( Collision2D.VectorSortMinMag );
       return tvs[ 0 ];
@@ -163,18 +163,18 @@ module.exports = function ( nk ) {
     if ( radii * radii > distanceSq ) {
       var distance = Math.sqrt( distanceSq );
       var dm = ( c1.radiusSquared - c2.radiusSquared + distanceSq ) / ( distance + distance );
-      var poc1 = new nk.Vector2D(
+      var poc1 = new Nenkraft.Vector2D(
         pos1.x + ( delta.x * dm / distance ),
         pos1.y + ( delta.y * dm / distance )
       );
       var de = Math.sqrt(( c1.radiusSquared ) - ( dm * dm ) ) / distance;
       var rx = -delta.y * de;
       var ry = delta.x * de;
-      var poc2 = new nk.Vector2D(
+      var poc2 = new Nenkraft.Vector2D(
         poc1.x + rx,
         poc1.y + ry
       );
-      var poc3 = new nk.Vector2D(
+      var poc3 = new Nenkraft.Vector2D(
         poc1.x - rx,
         poc1.y - ry
       );
@@ -206,5 +206,5 @@ module.exports = function ( nk ) {
     _obj2.relative.AddV( v2 );
   };
 
-  nk.Math.Collision2D = Collision2D;
+  Nenkraft.Math.Collision2D = Collision2D;
 };
