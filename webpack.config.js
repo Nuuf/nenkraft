@@ -60,12 +60,8 @@ module.exports = {
   externals: {},
   module: {
     rules: [ {
-      test: /\.png|jpg$/,
-      use: [ 'url-loader?limit=1024&name=img/[hash:12].[ext]' ],
-      exclude: /node_modules/
-    }, {
-      test: /\.gif$/,
-      use: [ 'file-loader?name=img/[hash:12].[ext]' ],
+      test: /\.png|jpg|gif$/,
+      use: [ 'file-loader?name=[path][name].[ext]' ],
       exclude: /node_modules/
     }, {
       test: /\.css$/,

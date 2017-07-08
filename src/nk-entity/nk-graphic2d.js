@@ -16,7 +16,6 @@ module.exports = function ( Nenkraft ) {
       }
       this.path = _path;
     }
-    this.anchor = new Nenkraft.Vector2D();
   }
   Graphic2D.prototype = Object.create( Super.prototype );
   Graphic2D.prototype.constructor = Graphic2D;
@@ -42,6 +41,7 @@ module.exports = function ( Nenkraft ) {
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );
+    cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );
   };
   Nenkraft.Entity.Graphic2D = Graphic2D;

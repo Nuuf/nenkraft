@@ -38,7 +38,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 24;
+    var fps = 40;
 
     var childrenMDC = [];
 

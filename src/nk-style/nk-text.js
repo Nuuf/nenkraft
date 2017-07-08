@@ -29,6 +29,7 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.align = Nenkraft.Style.TEXT_ALIGN.LEFT;
   Text.prototype.baseline = Nenkraft.Style.TEXT_BASELINE.TOP;
   Text.prototype.applied = true;
+  Text.prototype.lineWidth = 0.5;
   //Methods
   Text.prototype.Apply = function ( _rc ) {
     _rc.fillStyle = this.fillColor;
@@ -36,6 +37,7 @@ module.exports = function ( Nenkraft ) {
     _rc.font = this.font;
     _rc.textAlign = this.align;
     _rc.textBaseline = this.baseline;
+    _rc.lineWidth = this.lineWidth;
   };
 
   Nenkraft.Style.Text = Text;

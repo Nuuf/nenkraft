@@ -44,13 +44,13 @@ module.exports = function () {
     var obj1 = {
       shape: aabbg1.path,
       relative: aabbg1.position,
-      anchor: aabbg1.anchor
+      anchor: new nk.Vector2D()
     };
 
     var obj2 = {
       shape: aabbg2.path,
       relative: aabbg2.position,
-      anchor: aabbg2.anchor
+      anchor: new nk.Vector2D()
     };
 
     lineC.path.s.SetV( aabbg1.position );
@@ -58,10 +58,10 @@ module.exports = function () {
 
     stage.mouse.onMove.Add( function ( _event ) {
       if ( dragger !== null ) {
-        dragger.x = _event.data.x;
-        dragger.y = _event.data.y;
+        dragger.x = _event.data.position.x;
+        dragger.y = _event.data.position.y;
 
-        mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2 );
+        var mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2 );
 
         lineC.path.s.SetV( aabbg1.position );
         lineC.path.e.SetV( aabbg2.position );
@@ -75,7 +75,7 @@ module.exports = function () {
       }
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
-      var p = _event.data;
+      var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
           dragger = stage.children[ i ];

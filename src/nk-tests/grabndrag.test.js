@@ -39,12 +39,12 @@ module.exports = function () {
 
     stage.mouse.onMove.Add( function ( _event ) {
       if ( dragger !== null ) {
-        dragger.x = _event.data.x;
-        dragger.y = _event.data.y;
+        dragger.x = _event.data.position.x;
+        dragger.y = _event.data.position.y;
       }
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
-      var p = _event.data;
+      var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
           dragger = stage.children[ i ];

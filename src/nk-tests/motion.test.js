@@ -37,8 +37,8 @@ module.exports = function () {
       if ( xM.running ) xM.Stop();
       if ( yM.running ) yM.Stop();
       mm.ResetMultiple( 'sx sy' );
-      xM.Reconfigure( undefined, _event.data.x, 60 );
-      yM.Reconfigure( undefined, _event.data.y, 60 );
+      xM.Reconfigure( undefined, _event.data.position.x, 60 );
+      yM.Reconfigure( undefined, _event.data.position.y, 60 );
 
       mm.StartMultiple( 'x y sx sy' );
 

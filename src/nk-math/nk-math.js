@@ -18,12 +18,22 @@ module.exports = function ( Nenkraft ) {
   };
   Nenkraft.Math.PR = Nenkraft.Math.PrecisionRound;
   Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
-    return ( _start - ( _margin * ( _am - 1 ) * 0.5 ) + ( _i * _margin ) );
+    return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
   };
-  Nenkraft.Math.Attract = function ( _position1, _position2, _velocity, _radius, _strength ) {
-    var delta = _position1.SubtractVC( _position2 ), distance = delta.GetMagnitudeSquared();
+  Nenkraft.Math.Attract = function ( _target, _attractor, _velocity, _radius, _strength ) {
+    var delta = _attractor.SubtractVC( _target ), distance = delta.GetMagnitudeSquared();
     if ( distance < _radius * _radius ) {
-      var theta = distance.GetAngle();
+      var theta = delta.GetAngle();
+      _velocity.Add(
+        Math.cos( theta ) * _strength,
+        Math.sin( theta ) * _strength
+      );
+    }
+  };
+  Nenkraft.Math.Repel = function ( _target, _repeller, _velocity, _radius, _strength ) {
+    var delta = _target.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
+    if ( distance < _radius * _radius ) {
+      var theta = delta.GetAngle();
       _velocity.Add(
         Math.cos( theta ) * _strength,
         Math.sin( theta ) * _strength

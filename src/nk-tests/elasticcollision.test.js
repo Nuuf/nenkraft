@@ -28,11 +28,12 @@ module.exports = function () {
     var fps = new nk.Text( 0, 0, '' );
     fps.style.text.fillColor = '#000';
     fps.style.text.strokeColor = '#000';
+    fps.style.text.font = '60px Arial';
 
     var colliders = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 5, 20 );
+      var mass = nk.Utils.RandomInteger( 5, 60 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
@@ -41,10 +42,10 @@ module.exports = function () {
       g.data.mass = mass;
       g.data.body = {
         relative: g.position,
-        anchor: g.anchor,
+        anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -2, 2 ), nk.Utils.RandomInteger( -2, 2 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -9, 9 ), nk.Utils.RandomInteger( -9, 9 ) )
       };
       colliders.push( g );
       stage.AddChild( g );
@@ -59,15 +60,15 @@ module.exports = function () {
         collider = colliders[ i ];
         vel = collider.data.body.velocity;
         collider.position.AddV( vel );
-        if ( collider.x >= HW ) {
+        if ( collider.x + collider.path.radius >= HW ) {
           vel.x = -Math.abs( vel.x );
-        } else if ( collider.x <= -HW ) {
+        } else if ( collider.x - collider.path.radius <= -HW ) {
           vel.x = Math.abs( vel.x );
         }
-        if ( collider.y >= HH ) {
+        if ( collider.y + collider.path.radius >= HH ) {
           vel.y = -Math.abs( vel.y );
 
-        } else if ( collider.y <= -HH ) {
+        } else if ( collider.y - collider.path.radius <= -HH ) {
           vel.y = Math.abs( vel.y );
         }
       }
@@ -91,7 +92,7 @@ module.exports = function () {
 
     stage.onProcess.Add( Process, window );
 
-    for ( var i = 100; i--; ) {
+    for ( var i = 20; i--; ) {
       Collider();
     }
 
