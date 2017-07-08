@@ -62,17 +62,6 @@ module.exports = function ( Nenkraft ) {
     }
     return null;
   };
-  /*
-  * @parameter: _obj1: {}
-  * @parameter: _obj2: {}
-  *
-  * {
-  *   aabb,
-  *   anchor,
-  *   relative,
-  * }
-  *
-  */
   Collision2D.AABB2DvsAABB2D.Relative.Intersect = function ( _obj1, _obj2 ) {
     var aabb1 = _obj1.shape, w1 = aabb1.w, h1 = aabb1.h, anchor1 = _obj1.anchor;
     var aabb2 = _obj2.shape, w2 = aabb2.w, h2 = aabb2.h, anchor2 = _obj2.anchor;

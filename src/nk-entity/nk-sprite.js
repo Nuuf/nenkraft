@@ -59,6 +59,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );
     cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
+    cv.DivideV( this.scale );
     return this.shape.IntersectsPoint( cv );
   };
   Sprite.prototype.SetTexture = function ( _texture ) {

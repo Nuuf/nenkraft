@@ -41,6 +41,7 @@ module.exports = function ( Nenkraft ) {
   };
   Plaingraphic2D.prototype.IntersectsPoint = function ( _v ) {
     var cv = _v.SubtractVC( this.position );
+    cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );
   };
   Nenkraft.Entity.Plaingraphic2D = Plaingraphic2D;

@@ -16,12 +16,10 @@ module.exports = function ( Nenkraft ) {
     this.value = ( this.value & ~_value );
   };
   FlagList.prototype.Compare = function ( _value ) {
-    if ( ( this.value & _value ) !== 0 ) return true;
-    return false;
+    return ( ( this.value & _value ) !== 0 );
   };
-  FlagList.prototype.Has = function ( _value ) {
-    if ( ( this.value & _value ) === _value ) return true;
-    return false;
+  FlagList.prototype.Holds = function ( _value ) {
+    return ( ( this.value & _value ) === _value );
   };
   FlagList.prototype.Toggle = function ( _value ) {
     this.value ^= _value;

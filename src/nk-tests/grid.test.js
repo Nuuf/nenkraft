@@ -22,6 +22,8 @@ module.exports = function () {
     var ratio = W / H;
 
     var stage = new nk.Stage2D( c, 0, 0 );
+    var container = new nk.Container2D();
+    stage.AddChild( container );
 
     var i = 0;
 
@@ -34,32 +36,24 @@ module.exports = function () {
 
     i = points.length;
     while ( i-- ) {
-      stage.AddChild( new nk.Graphic2D( points[ i ].x, points[ i ].y, new nk.Path.AABB2D( 0, 0, mx, my ) ) );
+      container.AddChild( new nk.Graphic2D( points[ i ].x, points[ i ].y, new nk.Path.AABB2D( 0, 0, mx, my ) ) );
     }
 
-    var dragger = null;
-
-    stage.mouse.onMove.Add( function ( _event ) {
-      if ( dragger !== null ) {
-        dragger.x = _event.data.x;
-        dragger.y = _event.data.y;
-      }
-    }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
-      var p = _event.data;
-      for ( var i = stage.children.length; i--; ) {
-        if ( stage.children[ i ].IntersectsPoint( p ) ) {
-          dragger = stage.children[ i ];
-
-          _event.stopPropagation = true;
-
-          dragger.SendToFront();
+      var p = _event.data.position.DivideVC( container.scale );
+      for ( var i = container.children.length; i--; ) {
+        if ( container.children[ i ].IntersectsPoint( p ) ) {
+          container.children[ i ].Destroy();
           break;
         }
       }
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
+    stage.mouse.onWheel.Add( function ( _event ) {
+      if ( _event.data.native.deltaY < 0 ) {
+        container.scale.Add( 0.1, 0.1 );
+      } else {
+        container.scale.Subtract( 0.1, 0.1 );
+      }
     } );
 
     document.body.removeChild( buttonContainer );

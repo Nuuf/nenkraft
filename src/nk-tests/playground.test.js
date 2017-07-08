@@ -21,48 +21,62 @@ module.exports = function () {
     var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
+    stage.clear = false;
+    stage.backgroundColor = 'rgba(0,0,0,0.1)';
+    //stage.fill = false;
 
-    var test1 = new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( 0, 0, 200, 220 ) );
-    var test2 = new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( 0, 0, 25, 10 ) );
-    test1.scale.Set( 0.1, 2 );
+    var orig = new nk.Plaingraphic2D( 0, 0, new nk.Path.Circle( 0, 0, 200 ) );
+    orig.path.style.fill.applied = false;
+    stage.AddChild( orig );
 
-    stage.AddChildren( test1, test2 );
+    var objs = [];
 
-    var dragger = null;
+    var mouseDown = false;
 
-    stage.mouse.onMove.Add( function ( _event ) {
-      if ( dragger !== null ) {
-        dragger.x = _event.data.x;
-        dragger.y = _event.data.y;
-
-        var b1 = test1.ComputeBounds();
-        var b2 = test2.ComputeBounds();
-        if ( b1.IntersectsAABB2D( b2 ) ) {
-          test1.path.style.fill.color = '#F00';
-        } else {
-          test1.path.style.fill.color = '#0F0';
+    stage.onProcess.Add( function () {
+      for ( var i = 0, l = objs.length; i < l; ++i ) {
+        if ( !objs[ i ] ) break;
+        nk.Math.Attract( objs[ i ].position, orig.position, objs[ i ].data.vel, orig.path.radius * 2, 0.1 );
+        objs[ i ].position.AddV( objs[ i ].data.vel );
+        //objs[ i ].data.color.IncreaseChannel( 0, 1 );
+        //objs[ i ].path.style.fill.color = objs[ i ].data.color.value;
+        if ( !--objs[ i ].data.lifeSpan ) {
+          objs[ i ].Destroy();
+          objs.splice( i, 1 );
         }
       }
-    }, stage );
-    stage.mouse.onDown.Add( function ( _event ) {
-      var p = _event.data;
-      for ( var i = stage.children.length; i--; ) {
-        if ( stage.children[ i ].IntersectsPoint( p ) ) {
-          dragger = stage.children[ i ];
 
-          _event.stopPropagation = true;
-
-          dragger.SendToFront();
-          break;
+      if ( mouseDown ) {
+        var i = 2;
+        while ( --i ) {
+          MakeObj( stage.mouse.position.x, stage.mouse.position.y );
         }
       }
+
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
+
+
+    function MakeObj ( _x, _y ) {
+      var path = new nk.Path.Polygon2D();
+      nk.Geom.Polygon2D.Construct.Supershape( path, 0, 0, nk.Utils.RandomInteger( 5, 30 ), 20, nk.Utils.RandomFloat( 0, 20 ), nk.Utils.RandomFloat( 0, 3 ), nk.Utils.RandomFloat( 0, 3 ), nk.Utils.RandomFloat( 0, 3 ) );
+      path.Rotate( nk.Utils.RandomFloat( -nk.Math.PII, nk.Math.PII ), 0.5, 0.5, true );
+      var obj = new nk.Plaingraphic2D( _x, _y, path );
+      obj.data.vel = new nk.Vector2D( nk.Utils.RandomFloat( -4, 4 ), nk.Utils.RandomFloat( -4, 4 ) );
+      obj.data.lifeSpan = 600;
+      //obj.data.color = new nk.Color( nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ) );
+      //obj.data.color.ConvertToHSLA();
+      stage.AddChild( obj );
+      objs.push( obj );
+    };
+
+    stage.mouse.onDown.Add( function () {
+      mouseDown = true;
     } );
-    stage.mouse.onLeave.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
+    stage.mouse.onUp.Add( function () {
+      mouseDown = false;
     } );
+
+
 
     document.body.removeChild( buttonContainer );
   }

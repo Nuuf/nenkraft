@@ -23,7 +23,7 @@ module.exports = function ( Nenkraft ) {
     if ( this.objects.length === 0 ) {
       this.Flood();
     }
-    return this.objects.splice( this.objects.length - 1, 1 )[ 0 ];
+    return this.objects.pop();
   };
   Pool.prototype.Flood = function ( _func, _amount, _context ) {
     if ( _func ) this.floodFunction = _func;
@@ -37,6 +37,11 @@ module.exports = function ( Nenkraft ) {
   };
   Pool.prototype.Flush = function () {
     this.objects.length = 0;
+  };
+  Pool.prototype.Clean = function () {
+    var amount = this.objects.length;
+    this.Flush();
+    this.Flood( undefined, amount );
   };
   Nenkraft.Utils.Pool = Pool;
   Nenkraft.Pool = Pool;

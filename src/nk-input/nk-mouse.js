@@ -12,11 +12,13 @@ module.exports = function ( Nenkraft ) {
     this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
     this.element.addEventListener( 'mouseup', this.OnUp.bind( this ) );
     this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
+    this.element.addEventListener( 'wheel', this.OnWheel.bind( this ) );
 
     this.onMove = new Nenkraft.Event.LocalEvent();
     this.onDown = new Nenkraft.Event.LocalEvent();
     this.onUp = new Nenkraft.Event.LocalEvent();
     this.onLeave = new Nenkraft.Event.LocalEvent();
+    this.onWheel = new Nenkraft.Event.LocalEvent();
   }
   Mouse.prototype = Object.create( null );
   Mouse.prototype.constructor = Mouse;
@@ -33,20 +35,23 @@ module.exports = function ( Nenkraft ) {
     pos.Subtract( element.offsetLeft, element.offsetTop );
     pos.SubtractV( this.offset );
     pos.DivideV( this.scale );
-    this.onMove.Dispatch( this.element, pos );
+    this.onMove.Dispatch( this.element, { position: pos, native: _event } );
   };
   Mouse.prototype.OnDown = function ( _event ) {
     _event.stopPropagation();
-    this.onDown.Dispatch( this.element, this.position );
+    this.onDown.Dispatch( this.element, { position: this.position, native: _event } );
   };
   Mouse.prototype.OnUp = function ( _event ) {
     _event.stopPropagation();
-    this.onUp.Dispatch( this.element, this.position );
+    this.onUp.Dispatch( this.element, { position: this.position, native: _event } );
   };
   Mouse.prototype.OnLeave = function ( _event ) {
     _event.preventDefault();
     _event.stopPropagation();
-    this.onLeave.Dispatch( this.element, this.position );
+    this.onLeave.Dispatch( this.element, { position: this.position, native: _event } );
+  };
+  Mouse.prototype.OnWheel = function ( _event ) {
+    this.onWheel.Dispatch( this.element, { position: this.position, native: _event } );
   };
   Nenkraft.Input.Mouse = Mouse;
   Object.defineProperty( Mouse.prototype, 'x', {
