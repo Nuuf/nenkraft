@@ -2,7 +2,7 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
-    if ( _arg0 !== undefined && _arg0.x && _arg0.y && _arg1 !== undefined && _arg1.x && _arg1.y ) {
+    if ( _arg0 !== undefined && _arg0.x != null && _arg0.y != null && _arg1 !== undefined && _arg1.x != null && _arg1.y != null ) {
       this.s = _arg0;
       this.e = _arg1;
     }
@@ -33,6 +33,9 @@ module.exports = function ( Nenkraft ) {
     ap.Multiply( _anX, _anY === undefined ? _anX : _anY );
     this.s.RotateAroundV( ap, _a );
     this.e.RotateAroundV( ap, _a );
+  };
+  Line2D.prototype.GetLength = function () {
+    return this.s.GetDistanceV( this.e );
   };
   Line2D.prototype.IntersectsPoint = function () {
     return false;

@@ -52,6 +52,24 @@ module.exports = function ( Nenkraft ) {
     if ( this.parent !== null ) this.parent.RemoveChild( this );
     if ( _pool ) _pool.Store( this );
   };
+  Plain2D.prototype.SendToFront = function () {
+    if ( this.parent !== null ) {
+      var pChildren = this.parent.children;
+      var ix = pChildren.indexOf( this );
+      if ( ix !== -1 ) {
+        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+      }
+    }
+  };
+  Plain2D.prototype.SendToBack = function () {
+    if ( this.parent !== null ) {
+      var pChildren = this.parent.children;
+      var ix = pChildren.indexOf( this );
+      if ( ix !== -1 ) {
+        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
+      }
+    }
+  };
   Object.defineProperty( Plain2D.prototype, 'scale', {
     get: function () {
       return this.transform.scale;

@@ -2,11 +2,11 @@ var namespace = Object.create( null );;
 
 require( './nk-base/nk-base' )( namespace );
 require( './nk-math/nk-math' )( namespace );
+require( './nk-utils/nk-pool' )( namespace );
 require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-color' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
-require( './nk-utils/nk-pool' )( namespace );
 require( './nk-style/nk-fill' )( namespace );
 require( './nk-style/nk-shadow' )( namespace );
 require( './nk-style/nk-stroke' )( namespace );

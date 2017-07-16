@@ -22,7 +22,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, HH );
 
-    var magnet = new nk.Plaingraphic2D( 0, 0, new nk.Path.AABB2D( -50, -25, 50, 25 ) );
+    var magnet = new nk.Plaingraphic2D( 0, 0, new nk.Path.AABB2D( -50, -50, 50, 50 ) );
     console.log( magnet.width, magnet.height );
     magnet.data.pole = new nk.Vector2D( 40, 0 );
     magnet.data.radius = 15;
@@ -30,24 +30,20 @@ module.exports = function () {
     magnet.data.body = {
       shape: magnet.path,
       relative: magnet.position,
-      anchor: new nk.Vector2D( 0, -1 )
+      anchor: new nk.Vector2D( 0, 0 )
     };
 
-
-    var test = new nk.Plaingraphic2D( 0, 0, new nk.Path.AABB2D( -50, -50, 50, 50 ) );
-    test.data.body = {
-      shape: test.path,
-      relative: test.position,
-      anchor: new nk.Vector2D()
-    };
+    var particles = [];
 
     var Collide = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
 
-    stage.AddChildren( magnet, test );
+    stage.AddChildren( magnet );
 
     stage.onProcess.Add( function () {
-      var mtv = Collide( magnet.data.body, test.data.body );
-      if ( mtv ) test.position.SubtractV( mtv );
+      for ( var i = 0, l = particles.length; i < l; ++i ) {
+        var mtv = Collide( magnet.data.body, particles[ i ].data.body );
+        if ( mtv ) particles[ i ].position.SubtractV( mtv );
+      }
     } );
 
     stage.mouse.onDown.Add( function ( _event ) {

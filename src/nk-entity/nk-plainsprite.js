@@ -4,7 +4,7 @@ module.exports = function ( Nenkraft ) {
   function Plainsprite ( _x, _y, _texture ) {
     if ( !( this instanceof Plainsprite ) ) return new Plainsprite( _x, _y, _texture );
     Super.call( this, _x, _y );
-    this.anchor = new Nenkraft.Vector2D();
+    this.anchor = new Nenkraft.Vector2D( 0, 0 );
     this.clip = new Nenkraft.Geom.AABB2D();
     this.shape = new Nenkraft.Geom.AABB2D();
     if ( _texture === undefined ) _texture = Plainsprite.DEFAULT_TEXTURE;
@@ -29,7 +29,7 @@ module.exports = function ( Nenkraft ) {
     path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
     path.ComputeBounds();
     path.style.fill.color = 'rgba(66,66,66,0.5)';
-    path.style.stroke.color = '#00FFFF';
+    path.style.stroke.color = '#3399FF';
     path.style.stroke.lineWidth = 3;
     return new Nenkraft.Graphic2D( 0, 0, path );
   } ) );

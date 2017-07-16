@@ -20,7 +20,16 @@ module.exports = function ( Nenkraft ) {
   Vector2D.prototype = Object.create( null );
   Vector2D.prototype.constructor = Vector2D;
   //Static
-
+  Vector2D.Pool = new Nenkraft.Utils.Pool( Vector2D );
+  Vector2D.Pool.Retrieve = function ( _x, _y ) {
+    if ( this.objects.length === 0 ) {
+      this.Flood();
+    }
+    var v = this.objects.pop();
+    v.Set( _x, _y );
+    return v;
+  };
+  Vector2D.Pool.Flood( function () { }, 1000 );
   //Members
   Vector2D.prototype.x = 0;
   Vector2D.prototype.y = 0;
@@ -216,6 +225,19 @@ module.exports = function ( Nenkraft ) {
   };
   Vector2D.prototype.IsEqualToV = function ( _v ) {
     return ( this.x === _v.x && this.y === _v.y );
+  };
+  //|||||
+  Vector2D.prototype.ProjectOnto = function ( _v ) {
+    var dot = this.GetDotV( _v );
+    if ( dot === 0 ) return new Vector2D();
+    var mag = _v.GetMagnitude();
+    var scl = dot / ( mag * mag );
+    var p = _v.Copy();
+    p.Multiply( scl, scl );
+    return p;
+  };
+  Vector2D.prototype.Store = function () {
+    Vector2D.Pool.Store( this );
   };
   //|||||
   Vector2D.prototype.GetLength = Vector2D.prototype.GetMagnitude;

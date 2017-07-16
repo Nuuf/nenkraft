@@ -9,6 +9,7 @@ module.exports = function ( Nenkraft ) {
         this.w = _path.w;
         this.h = _path.h;
       }
+      else if ( _path.GetLength !== undefined ) this.w = this.h = _path.GetLength();
       else if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
       else if ( _path.aabb !== undefined ) {
         this.w = _path.aabb.w;

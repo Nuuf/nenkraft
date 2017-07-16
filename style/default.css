@@ -4,10 +4,13 @@ html, body {
 }
 
 #buttons {
+  width: 600px;
+  display: inline-block;
+  height: auto;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 150px;
+  left: 50%;
+  transform: translateX(-50%);
 }
     
 #buttons input[type='button'] {
@@ -19,9 +22,11 @@ html, body {
   padding: 15px;
   cursor: pointer;
   border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  width: 150px;
+  float: left;
 }
 #buttons input:active {
-  border: none;
   outline: none;
 }
 #buttons input:hover {

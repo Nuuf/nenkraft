@@ -13,6 +13,7 @@ module.exports = function ( Nenkraft ) {
   //Members
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
+  Container2D.prototype.alpha = 1.0;
   Container2D.prototype.transformShouldUpdate = true;
   Container2D.prototype.transformAutomaticUpdate = true;
   //Methods
