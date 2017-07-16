@@ -4,7 +4,7 @@ module.exports = function ( Nenkraft ) {
   function Sprite ( _x, _y, _texture ) {
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
     Super.call( this, _x, _y );
-    this.anchor = new Nenkraft.Vector2D();
+    this.anchor = new Nenkraft.Vector2D( 0, 0 );
     this.clip = new Nenkraft.Geom.AABB2D();
     this.shape = new Nenkraft.Geom.AABB2D();
     if ( _texture === undefined ) _texture = Sprite.DEFAULT_TEXTURE;

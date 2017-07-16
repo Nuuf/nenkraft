@@ -40,12 +40,15 @@ module.exports = function () {
     var holdCounter = 0;
     var fps = 40;
 
+    var am = 35;
+
     var childrenMDC = [];
 
     var timer = new nk.Timer();
     timer.onStop.Add( function () {
-      var i = 35;
-      while ( --i ) {
+      var i = am;
+      am = am < 3 ? 3 : am--;
+      while ( i-- ) {
         var sprite = new nk.Sprite( Math.random() * W - HW, Math.random() * H - HH, texture );
         sprite.transformAutomaticUpdate = false;
         container.AddChild( sprite );

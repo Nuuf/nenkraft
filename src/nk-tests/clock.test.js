@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'Playground' );
+  button.setAttribute( 'value', 'Clock' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -21,18 +21,6 @@ module.exports = function () {
     var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
-
-    var u = new nk.Vector2D( 400, -400 );
-    var v = new nk.Vector2D( 2000, 0 );
-
-    var p = u.ProjectOnto( v );
-
-    stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, u.x, u.y ) ) );
-    stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, v.x, v.y ) ) );
-
-    stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, p.x, p.y ) ) ).path.style.stroke.lineWidth = 10;
-
-
 
     document.body.removeChild( buttonContainer );
   }

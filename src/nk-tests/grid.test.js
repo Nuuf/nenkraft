@@ -10,7 +10,7 @@ module.exports = function () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
-    c.style.backgroundColor = '#FFF';
+    c.style.backgroundColor = '#000';
     c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = '0';

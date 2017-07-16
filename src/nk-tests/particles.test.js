@@ -28,7 +28,9 @@ module.exports = function () {
       {
         id: 'particle',
         src: nk.Utils.GenerateSimpleBase64Png( function () {
-          var path = new nk.Path.Circle( 100, 100, 100 );
+          var path = new nk.Path.Circle( 20, 20, 20 );
+          path.style.fill.color = 'rgba(0, 0, 0, 0.01)';
+          path.style.stroke.color = 'rgba(255, 200, 50, 0.1)';
           var t = new nk.Graphic2D( 0, 0, path );
           return t;
         } )
@@ -36,13 +38,13 @@ module.exports = function () {
     ] );
     imageCache.onComplete.Add( function () {
 
-      var i = 2000;
+      var i = 400;
       while ( i-- ) {
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.Get( 'particle' ) ) );
-        child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 20 ), nk.Utils.RandomFloat( -2, 20 ) );
+        child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );
       }
 
-      var totalTime = 300;
+      var totalTime = 400;
 
       var timer = new nk.Timer();
       timer.Start( totalTime );
@@ -55,7 +57,7 @@ module.exports = function () {
         while ( i-- ) {
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
-          child.data.velocity.Rotate( nk.Math.RADIAN * nk.Utils.RandomFloat( -8, 8 ) );
+          child.data.velocity.Rotate( nk.Math.RADIAN * nk.Utils.RandomFloat( -12, 12 ) );
           child.scale.Set(( totalTime - timer.time ) / totalTime );
         }
         timer.Process();
