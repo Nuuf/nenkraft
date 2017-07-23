@@ -1,33 +1,33 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
-  function Displayentity2D ( _x, _y ) {
-    if ( !( this instanceof Displayentity2D ) ) return new Displayentity2D( _x, _y );
+  function CoreEntity2D ( _x, _y ) {
+    if ( !( this instanceof CoreEntity2D ) ) return new CoreEntity2D( _x, _y );
     this.transform = new Nenkraft.Math.Transform2D( _x, _y );
     this.data = Object.create( null );
   }
-  Displayentity2D.prototype = Object.create( null );
-  Displayentity2D.prototype.constructor = Displayentity2D;
+  CoreEntity2D.prototype = Object.create( null );
+  CoreEntity2D.prototype.constructor = CoreEntity2D;
   //Static
-  Displayentity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
+  CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
   //Members
-  Displayentity2D.prototype.parent = null;
-  Displayentity2D.prototype.w = 0;
-  Displayentity2D.prototype.h = 0;
-  Displayentity2D.prototype.bounds = null;
-  Displayentity2D.prototype.boundsDirty = true;
+  CoreEntity2D.prototype.parent = null;
+  CoreEntity2D.prototype.w = 0;
+  CoreEntity2D.prototype.h = 0;
+  CoreEntity2D.prototype.bounds = null;
+  CoreEntity2D.prototype.boundsDirty = true;
   //Methods
-  Displayentity2D.prototype.UpdateTransform = function () {
+  CoreEntity2D.prototype.UpdateTransform = function () {
     if ( this.parent ) {
       this.transform.UpdateWorld( this.parent.transform.worldTransform );
     } else {
-      this.transform.UpdateWorld( Displayentity2D.NULL_TRANSFORM.worldTransform );
+      this.transform.UpdateWorld( CoreEntity2D.NULL_TRANSFORM.worldTransform );
     }
   };
-  Displayentity2D.prototype.GetWorldPosition = function () {
+  CoreEntity2D.prototype.GetWorldPosition = function () {
     var wt = this.transform.worldTransform;
     return new Nenkraft.Vector2D( wt.e, wt.f );
   };
-  Displayentity2D.prototype.ComputeBounds = function ( _anchor ) {
+  CoreEntity2D.prototype.ComputeBounds = function ( _anchor ) {
     var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
     this.bounds = new Nenkraft.Geom.AABB2D(
@@ -39,8 +39,8 @@ module.exports = function ( Nenkraft ) {
     this.boundsDirty = false;
     return this.bounds;
   };
-  Nenkraft.Entity.Displayentity2D = Displayentity2D;
-  Object.defineProperty( Displayentity2D.prototype, 'rotation', {
+  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
+  Object.defineProperty( CoreEntity2D.prototype, 'rotation', {
     get: function () {
       return this.transform.rotation;
     },
@@ -49,22 +49,22 @@ module.exports = function ( Nenkraft ) {
       this.transform.UpdateSkew();
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'scale', {
+  Object.defineProperty( CoreEntity2D.prototype, 'scale', {
     get: function () {
       return this.transform.scale;
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'position', {
+  Object.defineProperty( CoreEntity2D.prototype, 'position', {
     get: function () {
       return this.transform.position;
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'pivot', {
+  Object.defineProperty( CoreEntity2D.prototype, 'pivot', {
     get: function () {
       return this.transform.pivot;
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'x', {
+  Object.defineProperty( CoreEntity2D.prototype, 'x', {
     get: function () {
       return this.transform.position.x;
     },
@@ -72,7 +72,7 @@ module.exports = function ( Nenkraft ) {
       this.transform.position.x = _value;
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'y', {
+  Object.defineProperty( CoreEntity2D.prototype, 'y', {
     get: function () {
       return this.transform.position.y;
     },
@@ -80,7 +80,7 @@ module.exports = function ( Nenkraft ) {
       this.transform.position.y = _value;
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'width', {
+  Object.defineProperty( CoreEntity2D.prototype, 'width', {
     get: function () {
       return this.w * this.scale.x;
     },
@@ -88,7 +88,7 @@ module.exports = function ( Nenkraft ) {
       this.w = _value;
     }
   } );
-  Object.defineProperty( Displayentity2D.prototype, 'height', {
+  Object.defineProperty( CoreEntity2D.prototype, 'height', {
     get: function () {
       return this.h * this.scale.y;
     },

@@ -2,6 +2,6 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.1.38 (Alpha)
+# Version 0.1.4 (Alpha)
 
 [logo]: ./images/nenkraft-banner.png "nenkraft"

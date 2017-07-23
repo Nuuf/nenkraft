@@ -11,13 +11,13 @@ var entry = PRODUCTION
       './src/nk.js'
     ],
     tests: [
-      './src/tests.js',
+      './tests/tests.js',
     ]
   }
   : {
     nk: [
       './src/nk.js',
-      './src/tests.js',
+      './tests/tests.js',
       'webpack/hot/dev-server',
       'webpack-dev-server/client?http://localhost:8080'
     ]

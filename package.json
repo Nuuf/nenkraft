@@ -2,7 +2,8 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.1.38",
+  "version": "0.1.4",
+  "main": "./electron/main.js",
   "devDependencies": {
     "autoprefixer": "*",
     "css-loader": "*",

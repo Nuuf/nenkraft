@@ -3,6 +3,7 @@ module.exports = function ( Nenkraft ) {
   function Text ( _props ) {
     if ( !( this instanceof Text ) ) return new Text( _props );
     Nenkraft.Utils.ApplyProperties( this, _props );
+    this.ConcatFont();
   }
   Text.prototype = Object.create( null );
   Text.prototype.constructor = Text;
@@ -25,7 +26,9 @@ module.exports = function ( Nenkraft ) {
   //Members
   Text.prototype.fillColor = '#444499';
   Text.prototype.strokeColor = '#00FFFF';
-  Text.prototype.font = '22px Arial';
+  Text.prototype.fontSize = 22;
+  Text.prototype.font = null;
+  Text.prototype.fontFamily = 'Arial';
   Text.prototype.align = Nenkraft.Style.TEXT_ALIGN.LEFT;
   Text.prototype.baseline = Nenkraft.Style.TEXT_BASELINE.TOP;
   Text.prototype.applied = true;
@@ -38,6 +41,9 @@ module.exports = function ( Nenkraft ) {
     _rc.textAlign = this.align;
     _rc.textBaseline = this.baseline;
     _rc.lineWidth = this.lineWidth;
+  };
+  Text.prototype.ConcatFont = function () {
+    this.font = this.fontSize + 'px ' + this.fontFamily;
   };
 
   Nenkraft.Style.Text = Text;
