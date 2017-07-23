@@ -1,6 +1,6 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
-  var Super = Nenkraft.Entity.Displayentity2D;
+  var Super = Nenkraft.Entity.CoreEntity2D;
   function Container2D ( _x, _y ) {
     if ( !( this instanceof Container2D ) ) return new Container2D( _x, _y );
     Super.call( this, _x, _y );
