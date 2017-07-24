@@ -49,29 +49,36 @@ var cssLoader = PRODUCTION
   } )
   : [ 'style-loader', 'css-loader?localIdentName=' + cssIdentifier, 'postcss-loader' ];
 
-console.log( JSON.stringify( entry.nk ) );
-console.log( JSON.stringify( entry.tests ) );
-console.log( JSON.stringify( plugins ) );
+console.log( JSON.stringify( entry.nk ), 'entry nk' );
+console.log( JSON.stringify( entry.tests ), 'entry tests' );
+console.log( JSON.stringify( plugins ), 'plugins' );
 
-module.exports = {
-  devtool: 'source-map',
-  entry: entry,
-  plugins: plugins,
-  externals: {},
-  module: {
-    rules: [ {
-      test: /\.png|jpg|gif$/,
-      use: [ 'file-loader?name=[path][name].[ext]' ],
-      exclude: /node_modules/
-    }, {
-      test: /\.css$/,
-      use: cssLoader,
-      exclude: /node_modules/
-    }]
-  },
-  output: {
-    path: path.join( __dirname, 'dist' ),
-    publicPath: PRODUCTION ? './' : '/dist/',
-    filename: PRODUCTION ? '[name].min.js' : '[name].min.js'
+module.exports = function ( env ) {
+  var fileName = '[name].min.js';
+  if ( env && env.bigBundle ) {
+    fileName = '[name].js';
+    plugins.shift();
   }
+  return {
+    devtool: 'source-map',
+    entry: entry,
+    plugins: plugins,
+    externals: {},
+    module: {
+      rules: [ {
+        test: /\.png|jpg|gif$/,
+        use: [ 'file-loader?name=[path][name].[ext]' ],
+        exclude: /node_modules/
+      }, {
+        test: /\.css$/,
+        use: cssLoader,
+        exclude: /node_modules/
+      }]
+    },
+    output: {
+      path: path.join( __dirname, 'dist' ),
+      publicPath: PRODUCTION ? './' : '/dist/',
+      filename: fileName
+    }
+  };
 };
