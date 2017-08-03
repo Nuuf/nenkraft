@@ -32,8 +32,6 @@ module.exports = function () {
 
     stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, p.x, p.y ) ) ).path.style.stroke.lineWidth = 10;
 
-
-
     document.body.removeChild( buttonContainer );
   }
 };

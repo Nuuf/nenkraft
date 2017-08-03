@@ -7,7 +7,7 @@
   "devDependencies": {
     "rimraf": "*",
     "cross-env": "*",
-    "socket.io": "*",
+    "ws": "*",
     "express": "*"
   },
   "scripts": {}

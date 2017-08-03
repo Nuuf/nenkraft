@@ -18,7 +18,9 @@ module.exports = function ( Nenkraft ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
-      this.RenderChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.RenderChildren( _rc );
+      }
     }
   };
   Case2D.prototype.RenderChildren = function () {

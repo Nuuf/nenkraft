@@ -48,9 +48,9 @@ module.exports = function ( Nenkraft ) {
   Plain2D.prototype.AttachTo = function ( _parent ) {
     _parent.AddChild( this );
   };
-  Plain2D.prototype.Detach = function ( _pool ) {
-    if ( this.parent !== null ) this.parent.RemoveChild( this );
-    if ( _pool ) _pool.Store( this );
+  Plain2D.prototype.Detach = function () {
+    if ( this.parent !== null ) return this.parent.RemoveChild( this );
+    return null;
   };
   Plain2D.prototype.SendToFront = function () {
     if ( this.parent !== null ) {

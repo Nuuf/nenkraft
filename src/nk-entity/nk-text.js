@@ -34,7 +34,9 @@ module.exports = function ( Nenkraft ) {
           _rc.strokeText( this.text, 0, 0, this.maxWidth );
         }
       }
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Text.prototype.IntersectsPoint = function ( _v ) {

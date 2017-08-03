@@ -37,7 +37,9 @@ module.exports = function ( Nenkraft ) {
       if ( path && path.Draw && this.render === true ) {
         path.Draw( _rc );
       }
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {

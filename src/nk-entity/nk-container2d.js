@@ -24,7 +24,9 @@ module.exports = function ( Nenkraft ) {
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Container2D.prototype.RequestTransformUpdate = function () {
@@ -67,21 +69,23 @@ module.exports = function ( Nenkraft ) {
     var children = this.children;
     var ix = children.indexOf( _child );
     if ( ix !== -1 ) {
-      children.splice( ix, 1 );
+      return children.splice( ix, 1 )[ 0 ];
       delete _child.parent;
     }
   };
   Container2D.prototype.RemoveChildren = function () {
     var children = this.children;
     var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
+    var rChldren = [];
     for ( var i = 0, l = aChildren.length, child, parent, ix; i < l; ++i ) {
       child = aChildren[ i ];
       ix = children.indexOf( child );
       if ( ix !== -1 ) {
-        children.splice( ix, 1 );
+        rChildren.push( children.splice( ix, 1 )[ 0 ] );
         delete child.parent;
       }
     }
+    return rChldren;
   };
   Container2D.prototype.SendToFront = function () {
     if ( this.parent !== null ) {
@@ -111,9 +115,9 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.AttachTo = function ( _parent ) {
     _parent.AddChild( this );
   };
-  Container2D.prototype.Detach = function ( _pool ) {
-    if ( this.parent !== null ) this.parent.RemoveChild( this );
-    if ( _pool ) _pool.Store( this );
+  Container2D.prototype.Detach = function () {
+    if ( this.parent !== null ) return this.parent.RemoveChild( this );
+    return null;
   };
   Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
     var children = this.children, closestChild = null;

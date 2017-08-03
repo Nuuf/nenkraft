@@ -377,7 +377,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.1.4 (Alpha)';
+  Nenkraft.VERSION = '0.1.5 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -609,7 +609,9 @@ module.exports = function ( Nenkraft ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
-      this.RenderChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.RenderChildren( _rc );
+      }
     }
   };
   Case2D.prototype.RenderChildren = function () {
@@ -652,7 +654,9 @@ module.exports = function ( Nenkraft ) {
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Container2D.prototype.RequestTransformUpdate = function () {
@@ -930,7 +934,9 @@ module.exports = function ( Nenkraft ) {
       if ( path && path.Draw && this.render === true ) {
         path.Draw( _rc );
       }
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
@@ -1255,7 +1261,9 @@ module.exports = function ( Nenkraft ) {
           tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
         );
       }
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Sprite.prototype.IntersectsPoint = function ( _v ) {
@@ -1363,7 +1371,9 @@ module.exports = function ( Nenkraft ) {
           _rc.strokeText( this.text, 0, 0, this.maxWidth );
         }
       }
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Text.prototype.IntersectsPoint = function ( _v ) {
