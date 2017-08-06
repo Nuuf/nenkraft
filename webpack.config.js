@@ -51,6 +51,7 @@ var cssLoader = PRODUCTION
 
 console.log( JSON.stringify( entry.nk ), 'entry nk' );
 console.log( JSON.stringify( entry.tests ), 'entry tests' );
+console.log( JSON.stringify( entry.nkb ), 'entry nkb' );
 console.log( JSON.stringify( plugins ), 'plugins' );
 
 module.exports = function ( env ) {

@@ -699,21 +699,23 @@ module.exports = function ( Nenkraft ) {
     var children = this.children;
     var ix = children.indexOf( _child );
     if ( ix !== -1 ) {
-      children.splice( ix, 1 );
+      return children.splice( ix, 1 )[ 0 ];
       delete _child.parent;
     }
   };
   Container2D.prototype.RemoveChildren = function () {
     var children = this.children;
     var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
+    var rChldren = [];
     for ( var i = 0, l = aChildren.length, child, parent, ix; i < l; ++i ) {
       child = aChildren[ i ];
       ix = children.indexOf( child );
       if ( ix !== -1 ) {
-        children.splice( ix, 1 );
+        rChildren.push( children.splice( ix, 1 )[ 0 ] );
         delete child.parent;
       }
     }
+    return rChldren;
   };
   Container2D.prototype.SendToFront = function () {
     if ( this.parent !== null ) {
@@ -743,9 +745,9 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.AttachTo = function ( _parent ) {
     _parent.AddChild( this );
   };
-  Container2D.prototype.Detach = function ( _pool ) {
-    if ( this.parent !== null ) this.parent.RemoveChild( this );
-    if ( _pool ) _pool.Store( this );
+  Container2D.prototype.Detach = function () {
+    if ( this.parent !== null ) return this.parent.RemoveChild( this );
+    return null;
   };
   Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
     var children = this.children, closestChild = null;
@@ -1002,9 +1004,9 @@ module.exports = function ( Nenkraft ) {
   Plain2D.prototype.AttachTo = function ( _parent ) {
     _parent.AddChild( this );
   };
-  Plain2D.prototype.Detach = function ( _pool ) {
-    if ( this.parent !== null ) this.parent.RemoveChild( this );
-    if ( _pool ) _pool.Store( this );
+  Plain2D.prototype.Detach = function () {
+    if ( this.parent !== null ) return this.parent.RemoveChild( this );
+    return null;
   };
   Plain2D.prototype.SendToFront = function () {
     if ( this.parent !== null ) {
@@ -1425,7 +1427,7 @@ module.exports = function ( Nenkraft ) {
   };
   LocalEvent.prototype.Dump = function ( _context ) {
     var listeners = this.listeners;
-    if ( listeners.length === 0 ) return -1;
+    if ( listeners.length === 0 ) return;
     if ( _context !== undefined ) {
       for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
         listener = listeners[ i ];
@@ -3804,16 +3806,6 @@ module.exports = function ( Nenkraft ) {
       else i--;
     }
     return array;
-  };
-  Nenkraft.Utils.ArrayRemove = function ( _array, _obj ) {
-    var ix = _array.indexOf( _obj );
-    if ( ix !== -1 ) {
-      return _array.splice( ix, 1 )[ 0 ];
-    }
-    return null;
-  };
-  Nenkraft.Utils.ArrayInsert = function ( _array, _obj, _index ) {
-    _array.splice( _index, 0, _obj );
   };
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
