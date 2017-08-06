@@ -36,7 +36,7 @@ module.exports = function ( Nenkraft ) {
   };
   LocalEvent.prototype.Dump = function ( _context ) {
     var listeners = this.listeners;
-    if ( listeners.length === 0 ) return -1;
+    if ( listeners.length === 0 ) return;
     if ( _context !== undefined ) {
       for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
         listener = listeners[ i ];

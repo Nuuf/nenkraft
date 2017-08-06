@@ -96,16 +96,6 @@ module.exports = function ( Nenkraft ) {
     }
     return array;
   };
-  Nenkraft.Utils.ArrayRemove = function ( _array, _obj ) {
-    var ix = _array.indexOf( _obj );
-    if ( ix !== -1 ) {
-      return _array.splice( ix, 1 )[ 0 ];
-    }
-    return null;
-  };
-  Nenkraft.Utils.ArrayInsert = function ( _array, _obj, _index ) {
-    _array.splice( _index, 0, _obj );
-  };
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
   Nenkraft.Utils.Cipher.CCH1 = function ( _str, _cci ) {

@@ -53,7 +53,9 @@ module.exports = function ( Nenkraft ) {
           tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
         );
       }
-      this.DrawChildren( _rc );
+      if ( this.children.length > 0 ) {
+        this.DrawChildren( _rc );
+      }
     }
   };
   Sprite.prototype.IntersectsPoint = function ( _v ) {

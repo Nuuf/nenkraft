@@ -51,7 +51,7 @@ module.exports = function () {
           child.data.velocity.AddV( gravity );
           child.data.velocity.Add( wind.x / child.data.mass, wind.y / child.data.mass );
           if ( !child.data.lifespan-- ) {
-            child.Detach( DropPool );
+            DropPool.Store( child.Detach() );
           }
         }
         wind.Set( nk.Utils.RandomFloat( -0.1, 0.1 ), 0 );

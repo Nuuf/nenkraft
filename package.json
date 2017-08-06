@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "./electron/main.js",
   "devDependencies": {
     "autoprefixer": "*",
@@ -26,6 +26,7 @@
     "lint": "eslint src",
     "start": "npm run s-d node deve-server.js",
     "build-dev": "npm run clean && npm run s-d webpack",
-    "build": "npm run clean && npm run s-p webpack"
+    "build": "npm run clean && npm run s-p webpack",
+    "build-x": "npm run clean && npm run s-p webpack && npm run s-p webpack -- --env.bigBundle"
   }
 }

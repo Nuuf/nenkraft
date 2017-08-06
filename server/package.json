@@ -1,0 +1,14 @@
+{
+  "name": "nenkraft-server",
+  "description": "none",
+  "author": "Nuuf",
+  "version": "0.0.1",
+  "main": "",
+  "devDependencies": {
+    "rimraf": "*",
+    "cross-env": "*",
+    "ws": "*",
+    "express": "*"
+  },
+  "scripts": {}
+}
