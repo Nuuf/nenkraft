@@ -14,8 +14,8 @@ Click [here for the mini-file]
 
 ```
   $ git clone https://github.com/Nuuf/nenkraft.git
-  npm i
-  npm start
+  $ npm i
+  $ npm start
 ```
 
 > Optional: Dev with electron.
