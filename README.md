@@ -3,39 +3,39 @@
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
 # Version 0.1.51 (Alpha)
-======
+------
 
 #### Nenkraft is a small rendering tool.
 
 ### How-to
-======
+------
 
 Click [here for the mini-file]
 
-Clone the repository `git clone https://github.com/Nuuf/nenkraft.git`
-Run `npm i`
-Run `npm start`
+1. Clone the repository `git clone https://github.com/Nuuf/nenkraft.git`
+2. Run `npm i`
+3. Run `npm start`
 
 > Optional: Dev with electron.
 
-Install electron `npm i -g electron`
-Run `electron .`
+1. Install electron `npm i -g electron`
+2. Run `electron .`
 
 > Optional: Just serve it
 
-Install http-server `npm i -g http-server`
-Run `http-server dist`
+1. Install http-server `npm i -g http-server`
+2. Run `http-server dist`
 
 > Optional: Entity Server
 
-Run `cd server`
-Run `npm i`
-Run `node index.js`
+1. Run `cd server`
+2. Run `npm i`
+3. Run `node index.js`
 
 > Optional: Clean/Rebuild
 
-Run `npm run clean`
-Run `npm run build-x`
+1. Run `npm run clean`
+2. Run `npm run build-x`
 
 ### Some Examples
 ------
