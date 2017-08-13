@@ -12,30 +12,41 @@
 
 Click [here for the mini-file]
 
-1. Clone the repository `git clone https://github.com/Nuuf/nenkraft.git`
-2. Run `npm i`
-3. Run `npm start`
+```
+  $ git clone https://github.com/Nuuf/nenkraft.git
+  npm i
+  npm start
+```
 
 > Optional: Dev with electron.
 
-1. Install electron `npm i -g electron`
-2. Run `electron .`
+```
+  $ npm i -g electron
+  $ electron .
+```
 
 > Optional: Just serve it
 
-1. Install http-server `npm i -g http-server`
-2. Run `http-server dist`
+```
+  $ npm i -g http-server
+  $ http-server dist
+```
 
 > Optional: Entity Server
 
-1. Run `cd server`
-2. Run `npm i`
-3. Run `node index.js`
+```
+  $ cd server 
+  $ npm i
+  $ node index.js
+```
 
 > Optional: Clean/Rebuild
 
-1. Run `npm run clean`
-2. Run `npm run build-x`
+```
+  $ npm run clean
+  $ npm run build-x
+```
+
 
 ### Some Examples
 ------
