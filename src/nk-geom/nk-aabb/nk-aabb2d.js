@@ -31,17 +31,24 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.constructor = AABB2D;
   //Static
   AABB2D.TYPE = 1;
+  AABB2D.TOP_LEFT = 'TL';
+  AABB2D.TOP_RIGHT = 'TR';
+  AABB2D.BOTTOM_LEFT = 'BL';
+  AABB2D.BOTTOM_RIGHT = 'BR';
   //Members
   AABB2D.prototype.TYPE = AABB2D.TYPE;
   AABB2D.prototype.w = 0;
   AABB2D.prototype.h = 0;
+  AABB2D.prototype.hw = 0;
+  AABB2D.prototype.hh = 0;
   AABB2D.prototype.area = 0;
+  AABB2D.prototype.belongsTo = null;
   //Methods
-  AABB2D.prototype.Set = function ( _x, _y, _w, _h ) {
-    this.tl.x = _x;
-    this.tl.y = _y;
-    this.br.x = _w;
-    this.br.y = _h;
+  AABB2D.prototype.Set = function ( _tlx, _tly, _brx, _bry ) {
+    this.tl.x = _tlx;
+    this.tl.y = _tly;
+    this.br.x = _brx;
+    this.br.y = _bry;
     this.ComputeWH();
   };
   AABB2D.prototype.SetC = function ( _aabb ) {
@@ -50,7 +57,44 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.ComputeWH = function () {
     this.w = this.br.x - this.tl.x;
     this.h = this.br.y - this.tl.y;
+    this.hw = this.w * 0.5;
+    this.hh = this.h * 0.5;
     this.area = this.w * this.h;
+  };
+  AABB2D.prototype.GetQuadrant = function ( _quadrant ) {
+    var tl = this.tl, br = this.br;
+    switch ( _quadrant ) {
+      case AABB2D.TOP_LEFT:
+        return new AABB2D(
+          tl.x,
+          tl.y,
+          tl.x + this.hw,
+          tl.y + this.hh
+        );
+      case AABB2D.TOP_RIGHT:
+        return new AABB2D(
+          tl.x + this.hw,
+          tl.y,
+          br.x,
+          tl.y + this.hh
+        );
+      case AABB2D.BOTTOM_LEFT:
+        return new AABB2D(
+          tl.x,
+          tl.y + this.hh,
+          tl.x + this.hw,
+          br.y
+        );
+      case AABB2D.BOTTOM_RIGHT:
+        return new AABB2D(
+          tl.x + this.hw,
+          tl.y + this.hh,
+          br.x,
+          br.y
+        );
+      default:
+        return null;
+    }
   };
   AABB2D.prototype.IntersectsPoint = function ( _v ) {
     return !( _v.x < this.tl.x || _v.x > this.br.x || _v.y < this.tl.y || _v.y > this.br.y );
@@ -71,4 +115,5 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.Geom.AABB2D = AABB2D;
+  Nenkraft.AABB2D = AABB2D;
 };

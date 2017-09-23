@@ -17,13 +17,13 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.maxWidth = undefined;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.render === true ) {
+      if ( this.display === true ) {
         var style = this.style;
         if ( style.shadow.applied === true ) {
           style.shadow.Apply( _rc );

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 84);
+/******/ 	return __webpack_require__(__webpack_require__.s = 86);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,7 +81,7 @@ __webpack_require__( 7 );
 
 var tests = [];
 
-var context = __webpack_require__(62);
+var context = __webpack_require__(63);
 
 context.keys().forEach( function ( file ) {
   tests.push( context( file ) );
@@ -184,30 +184,32 @@ module.exports = __webpack_require__.p + "images/smudge.png";
 /* 59 */,
 /* 60 */,
 /* 61 */,
-/* 62 */
+/* 62 */,
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 63,
-	"./animation.test": 64,
-	"./butterflyish.test": 65,
-	"./cli.test": 66,
-	"./clock.test": 67,
-	"./elasticcollision.test": 68,
-	"./field.test": 69,
-	"./fractree.test": 70,
-	"./grabndrag.test": 71,
-	"./grid.test": 72,
-	"./magnet.test": 73,
-	"./motion.test": 74,
-	"./nightsky.test": 75,
-	"./particles.test": 76,
-	"./performance.test": 77,
-	"./platformer.test": 78,
-	"./playground.test": 79,
-	"./rain.test": 80,
-	"./sprite.test": 81,
-	"./themask.test": 82
+	"./aabbcollision.test": 64,
+	"./animation.test": 65,
+	"./butterflyish.test": 66,
+	"./cli.test": 67,
+	"./clock.test": 68,
+	"./elasticcollision.test": 69,
+	"./field.test": 70,
+	"./fractree.test": 71,
+	"./grabndrag.test": 72,
+	"./grid.test": 73,
+	"./magnet.test": 74,
+	"./motion.test": 75,
+	"./nightsky.test": 76,
+	"./particles.test": 77,
+	"./performance.test": 78,
+	"./platformer.test": 79,
+	"./playground.test": 80,
+	"./quadtree.test": 81,
+	"./rain.test": 82,
+	"./sprite.test": 83,
+	"./themask.test": 84
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -223,10 +225,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 62;
+webpackContext.id = 63;
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -331,7 +333,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -404,7 +406,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -543,7 +545,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -641,145 +643,46 @@ module.exports = function () {
     var cIndex = -1;
     var cHistory = [];
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( c, HW, HH, false );
 
-    var gobjects = {
+    var circleEntity = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 50 ) );
+    stage.AddChild( circleEntity );
 
-    };
+    var mm = new nk.MotionManager( circleEntity );
+    var moveX = mm.Create( 'x', 'x', 0, 60 );
+    var moveY = mm.Create( 'y', 'y', 0, 60 );
 
-    ////////.....
-    var register = nk.CP.Register();
-    register.Add(
-      nk.CP.Command(
-        //CREATE
-        'create crt',
-        function ( _dataStrs, _data ) {
-          insertParagraph( CE.OPTION_REQUIRED.replace( /DATA/g, 'create' ) );
-        },
-        'Create a graphics object', true ).
-        AddOption(
-        'circle cir',
-        function ( _dataStrs, _data ) {
-          if ( _data.radius === undefined ) {
-            insertParagraph( CE.DATA_MISSING.replace( /DATA/g, 'radius' ) );
-            return;
-          }
-          var tex = new nk.Path.Circle( 0, 0, parseInt( _data.radius ) );
-          var gr = new nk.Graphic2D( parseInt( _data.x ) || 0, parseInt( _data.y ) || 0, tex );
-          stage.AddChild( gr );
-        },
-        'Create a circle', 0, true ).
-        AddOption(
-        'rectangle rect rec',
-        function ( _dataStrs, _data ) {
-          if ( _data.width === undefined || _data.height === undefined ) {
-            insertParagraph( CE.DATA_MISSING.replace( /DATA/g, 'width & height' ) );
-            return;
-          }
-          var tex = new nk.Path.AABB2D( 0, 0, _data.width, _data.height );
-          var gr = new nk.Graphic2D( parseInt( _data.x ), parseInt( _data.y ), tex );
-          stage.AddChild( gr );
-        },
-        'Create a rectangle', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'tick t',
-        function ( _dataStrs, _data ) {
-          insertParagraph( CE.OPTION_REQUIRED.replace( /DATA/g, 'tick' ) );
-        },
-        'Handle ticker', true ).
-        AddOption(
-        'start s',
-        function ( _dataStrs, _data ) {
-          stage.ticker.SetDesiredRate( _data.rate );
-          stage.ticker.StartAF();
-        },
-        'Start the ticker', 0, true ).
-        AddOption(
-        'stop',
-        function ( _dataStrs, _data ) {
-          stage.ticker.Stop();
-        },
-        'Stop the ticker', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'print',
-        function ( _dataStrs, _data ) {
-          insertParagraph( _dataStrs.join( ' ' ) );
-        },
-        'Print info', true ).
-        AddOption(
-        'gobjects gobjs',
-        function ( _dataStrs, _data ) {
-
-        },
-        'Print all graphical objects', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'cch1',
-        function ( _dataStrs, _data ) {
-          insertParagraph( CE.OPTION_REQUIRED.replace( /DATA/g, 'cch1' ) );
-        },
-        'Encrypt some text', true ).
-        AddOption(
-        'e',
-        function ( _dataStrs, _data ) {
-          str = _dataStrs.join( ' ' );
-          insertParagraph( nk.Utils.Cipher.CCH1( str ) );
-        },
-        'Encode', 0, true ).
-        AddOption(
-        'd',
-        function ( _dataStrs, _data ) {
-          str = _dataStrs.join( ' ' );
-          insertParagraph( nk.Utils.Decipher.CCH1( str ) );
-        },
-        'Decode', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'clear',
-        function ( _dataStrs, _data ) {
-          cb.innerHTML = '';
-          cb.appendChild( ci );
-          ci.focus();
-        },
-        'Clear the "terminal"', true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    ////////......
+    var register = new nk.CP.Register();
+    nk.CP.Command.OPTION_PREFIX = '--';
+    register.Add( new nk.CP.Command(
+      'commands',
+      function () {
+        register.commands.forEach( function ( command ) {
+          insertParagraph( command.id[ 0 ] );
+        } );
+      }
+    ) );
+    register.Add( new nk.CP.Command(
+      'clear',
+      function () {
+        cb.innerHTML = '';
+        cb.appendChild( ci );
+        ci.focus();
+      },
+      'clear the screen'
+    ) );
+    register.Add( new nk.CP.Command(
+      'moveto',
+      function () {
+        var data = arguments[ 1 ];
+        var x = Number( data.x );
+        var y = Number( data.y );
+        moveX.value = x;
+        moveY.value = y;
+        mm.StartMultiple( 'x y' );
+      },
+      'move to x y'
+    ) );
 
     function insertParagraph ( _str ) {
       var p = document.createElement( 'p' );
@@ -823,12 +726,16 @@ module.exports = function () {
       ci.focus();
     }
 
+    stage.onProcess.Add( function () {
+      mm.Process();
+    } );
+
     document.body.removeChild( buttonContainer );
   }
 };
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -900,7 +807,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -925,7 +832,8 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( c, 0, 0, true );
+    stage.ComputeBounds();
     stage.backgroundColor = 'rgba(255,255,255,0)';
     //stage.clear = false;
     stage.ticker.StartAF();
@@ -936,68 +844,81 @@ module.exports = function () {
     fps.style.text.font = '60px Arial';
 
     var colliders = [];
+    var bounds = new nk.AABB2D();
+    bounds.SetC( stage.bounds );
+    var root = new nk.QuadtreeNode( bounds, 0, 8, 4 );
+    var objs = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 5, 60 );
+      var mass = nk.Utils.RandomInteger( 2, 8 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
       p.style.stroke.lineWidth = mass / 5;
-      var g = new nk.Graphic2D( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), p );
+      var g = new nk.Graphic2D( nk.Utils.RandomInteger( 0, W ), nk.Utils.RandomInteger( 0, H ), p );
       g.data.mass = mass;
       g.data.body = {
         relative: g.position,
         anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -9, 9 ), nk.Utils.RandomInteger( -9, 9 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -5, 5 ), nk.Utils.RandomInteger( -5, 5 ) )
       };
+      g.ComputeBounds();
       colliders.push( g );
       stage.AddChild( g );
+      objs.push( g.bounds );
     }
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var Response = nk.Math.Collision2D.CirclevsCircle.Relative.ElasticResponse;
 
+    var gravity = new nk.Vector2D( 0, 0.098 );
+
     function Process () {
-      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel;
+      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel, result;
+      root.Dump();
+      objs.forEach( function ( obj ) {
+        root.Add( obj );
+      } );
       for ( i; i < l; ++i ) {
         collider = colliders[ i ];
-        vel = collider.data.body.velocity;
+        body1 = collider.data.body;
+        vel = body1.velocity;
+        vel.AddV( gravity );
         collider.position.AddV( vel );
-        if ( collider.x + collider.path.radius >= HW ) {
+        if ( collider.x + collider.path.radius >= W ) {
           vel.x = -Math.abs( vel.x );
-        } else if ( collider.x - collider.path.radius <= -HW ) {
+        } else if ( collider.x - collider.path.radius <= 0 ) {
           vel.x = Math.abs( vel.x );
         }
-        if ( collider.y + collider.path.radius >= HH ) {
+        if ( collider.y + collider.path.radius >= H ) {
           vel.y = -Math.abs( vel.y );
 
-        } else if ( collider.y - collider.path.radius <= -HH ) {
+        } else if ( collider.y - collider.path.radius <= 0 ) {
           vel.y = Math.abs( vel.y );
         }
-      }
-      l = colliders.length;
-      for ( i = 0; i < l; ++i ) {
-        collider = colliders[ i ];
-        body1 = collider.data.body;
-        for ( j = 0; j < l; ++j ) {
-          collidee = colliders[ j ];
+
+        var convergence = root.Converge( collider.bounds );
+
+        for ( j = 0; j < convergence.length; ++j ) {
+          collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
           if ( collidee !== collider ) {
-            var result = Collide( body1, body2 );
+            result = Collide( body1, body2 );
             if ( result ) {
               Response( body1, body2, result );
             }
           }
         }
+        collider.ComputeBounds();
       }
       fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );
 
-    for ( var i = 20; i--; ) {
+    for ( var i = 100; i--; ) {
       Collider();
     }
 
@@ -1009,7 +930,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1097,7 +1018,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1126,7 +1047,9 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, H );
     stage.clear = false;
-    stage.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    var bgColor = new nk.Color();
+    bgColor.SetHex( '#00000033' );
+    stage.backgroundColor = bgColor.value;
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {
@@ -1184,7 +1107,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1255,7 +1178,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1321,7 +1244,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1392,7 +1315,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1450,7 +1373,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1547,7 +1470,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1590,7 +1513,7 @@ module.exports = function () {
     ] );
     imageCache.onComplete.Add( function () {
 
-      var i = 400;
+      var i = 150;
       while ( i-- ) {
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.Get( 'particle' ) ) );
         child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );
@@ -1621,7 +1544,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1654,7 +1577,7 @@ module.exports = function () {
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 12 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
 
@@ -1664,7 +1587,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 40;
+    var fps = 24;
 
     var am = 35;
 
@@ -1723,7 +1646,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1906,7 +1829,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1948,7 +1871,68 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 80 */
+/* 81 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'Quadtree' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+    var rc = c.getContext( '2d' );
+
+    var W = c.width, HW = W * 0.5;
+    var H = c.height, HH = H * 0.5;
+    var widthByHeight = W / H;
+
+    var stage = new nk.Stage2D( c, 0, 0 );
+    stage.ComputeBounds();
+    stage.clear = false;
+    stage.fill = true;
+    stage.backgroundColor = 'rgba(0,0,0,0.3)';
+
+    var bounds = new nk.AABB2D();
+    bounds.SetC( stage.bounds );
+    var root = new nk.QuadtreeNode( bounds, 0, 8, 3 );
+
+    var objs = [];
+    var nodes = [];
+
+
+    stage.onProcess.Add( function () {
+      nodes.forEach( function ( element ) {
+        nk.Debug.Draw.AABB2D( rc, element.aabb );
+      } );
+    } );
+    stage.mouse.onUp.Add( function ( event ) {
+      var obj = new nk.Graphic2D( event.data.position.x, event.data.position.y, new nk.Path.AABB2D( 0, 0, 10, 10 ) );
+      obj.ComputeBounds( obj.anchor );
+      stage.AddChild( obj );
+      objs.push( obj );
+      root.Dump();
+      objs.forEach( function ( element ) {
+        root.Add( element.bounds );
+      } );
+      nodes = root.ConcatNodes();
+    } );
+
+    document.body.removeChild( buttonContainer );
+  }
+};
+
+/***/ }),
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2031,7 +2015,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2124,7 +2108,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2240,8 +2224,8 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 83 */,
-/* 84 */
+/* 85 */,
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

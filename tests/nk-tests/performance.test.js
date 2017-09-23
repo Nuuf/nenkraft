@@ -28,7 +28,7 @@ module.exports = function () {
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 12 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
 
@@ -38,7 +38,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 40;
+    var fps = 24;
 
     var am = 35;
 

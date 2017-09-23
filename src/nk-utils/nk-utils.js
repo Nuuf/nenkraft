@@ -48,7 +48,9 @@ module.exports = function ( Nenkraft ) {
     '0123456789',
     'ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz',
     'ABCDEFGHJIKLMNOPQRSTUWVXYZ',
-    'abcdefghijklmnopqrstuwvxyz'
+    'abcdefghijklmnopqrstuwvxyz',
+    '0123456789abcdefghijklmnopqrstuwvxyz',
+    '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZ'
   ];
   Nenkraft.Utils.ApplyProperties = function ( _obj, _props ) {
     if ( _props !== undefined ) {
@@ -131,5 +133,11 @@ module.exports = function ( Nenkraft ) {
     var texture = new Image();
     texture.src = _url;
     return texture;
+  };
+  Nenkraft.Utils.Base16ToBase10 = function ( _value ) {
+    return parseInt( _value, 16 );
+  };
+  Nenkraft.Utils.Base2ToBase10 = function ( _value ) {
+    return parseInt( _value, 2 );
   };
 };

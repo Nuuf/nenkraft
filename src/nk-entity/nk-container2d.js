@@ -18,13 +18,13 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.transformAutomaticUpdate = true;
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.children.length > 0 ) {
+      if ( this.children.length > 0 && this.display === true ) {
         this.DrawChildren( _rc );
       }
     }

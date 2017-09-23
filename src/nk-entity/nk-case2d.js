@@ -13,7 +13,7 @@ module.exports = function ( Nenkraft ) {
   delete Case2D.prototype.Draw;
   delete Case2D.prototype.DrawChildren;
   Case2D.prototype.Render = function () {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;

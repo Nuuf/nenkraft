@@ -20,7 +20,8 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( c, 0, 0, true );
+    stage.ComputeBounds();
     stage.backgroundColor = 'rgba(255,255,255,0)';
     //stage.clear = false;
     stage.ticker.StartAF();
@@ -31,68 +32,81 @@ module.exports = function () {
     fps.style.text.font = '60px Arial';
 
     var colliders = [];
+    var bounds = new nk.AABB2D();
+    bounds.SetC( stage.bounds );
+    var root = new nk.QuadtreeNode( bounds, 0, 8, 4 );
+    var objs = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 5, 60 );
+      var mass = nk.Utils.RandomInteger( 2, 8 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
       p.style.stroke.lineWidth = mass / 5;
-      var g = new nk.Graphic2D( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), p );
+      var g = new nk.Graphic2D( nk.Utils.RandomInteger( 0, W ), nk.Utils.RandomInteger( 0, H ), p );
       g.data.mass = mass;
       g.data.body = {
         relative: g.position,
         anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -9, 9 ), nk.Utils.RandomInteger( -9, 9 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -5, 5 ), nk.Utils.RandomInteger( -5, 5 ) )
       };
+      g.ComputeBounds();
       colliders.push( g );
       stage.AddChild( g );
+      objs.push( g.bounds );
     }
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var Response = nk.Math.Collision2D.CirclevsCircle.Relative.ElasticResponse;
 
+    var gravity = new nk.Vector2D( 0, 0.098 );
+
     function Process () {
-      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel;
+      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel, result;
+      root.Dump();
+      objs.forEach( function ( obj ) {
+        root.Add( obj );
+      } );
       for ( i; i < l; ++i ) {
         collider = colliders[ i ];
-        vel = collider.data.body.velocity;
+        body1 = collider.data.body;
+        vel = body1.velocity;
+        vel.AddV( gravity );
         collider.position.AddV( vel );
-        if ( collider.x + collider.path.radius >= HW ) {
+        if ( collider.x + collider.path.radius >= W ) {
           vel.x = -Math.abs( vel.x );
-        } else if ( collider.x - collider.path.radius <= -HW ) {
+        } else if ( collider.x - collider.path.radius <= 0 ) {
           vel.x = Math.abs( vel.x );
         }
-        if ( collider.y + collider.path.radius >= HH ) {
+        if ( collider.y + collider.path.radius >= H ) {
           vel.y = -Math.abs( vel.y );
 
-        } else if ( collider.y - collider.path.radius <= -HH ) {
+        } else if ( collider.y - collider.path.radius <= 0 ) {
           vel.y = Math.abs( vel.y );
         }
-      }
-      l = colliders.length;
-      for ( i = 0; i < l; ++i ) {
-        collider = colliders[ i ];
-        body1 = collider.data.body;
-        for ( j = 0; j < l; ++j ) {
-          collidee = colliders[ j ];
+
+        var convergence = root.Converge( collider.bounds );
+
+        for ( j = 0; j < convergence.length; ++j ) {
+          collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
           if ( collidee !== collider ) {
-            var result = Collide( body1, body2 );
+            result = Collide( body1, body2 );
             if ( result ) {
               Response( body1, body2, result );
             }
           }
         }
+        collider.ComputeBounds();
       }
       fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );
 
-    for ( var i = 20; i--; ) {
+    for ( var i = 100; i--; ) {
       Collider();
     }
 

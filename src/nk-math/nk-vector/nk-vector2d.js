@@ -29,12 +29,16 @@ module.exports = function ( Nenkraft ) {
     v.Set( _x, _y );
     return v;
   };
-  Vector2D.Pool.Flood( function () { }, 1000 );
+  Vector2D.Pool.Flood( function () { }, 100000 );
+  Vector2D.USE_POOL = true;
   //Members
   Vector2D.prototype.x = 0;
   Vector2D.prototype.y = 0;
   //Methods
   Vector2D.prototype.Copy = function () {
+    if ( Vector2D.USE_POOL === true ) {
+      return Vector2D.Pool.Retrieve( this.x, this.y );
+    }
     return new Vector2D( this );
   };
   Vector2D.prototype.AbsoluteCopy = function () {

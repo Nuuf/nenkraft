@@ -40,13 +40,13 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.anchor = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.render === true ) {
+      if ( this.display === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
         _rc.drawImage(
           this.texture,

@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.1.51",
+  "version": "0.1.6",
   "main": "./electron/main.js",
   "devDependencies": {
     "autoprefixer": "*",
@@ -26,6 +26,7 @@
     "clean": "rimraf dist && rimraf server/public/nk.min.js",
     "copy-to-server": "copyfiles -f dist/nk.min.js server/public/",
     "lint": "eslint src",
+    "lintf": "eslint src --fix",
     "start": "npm run s-d node deve-server.js",
     "build-dev": "npm run clean && npm run s-d webpack",
     "build": "npm run clean && npm run s-p webpack",
