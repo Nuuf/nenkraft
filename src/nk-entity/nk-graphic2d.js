@@ -27,14 +27,14 @@ module.exports = function ( Nenkraft ) {
   Graphic2D.prototype.anchor = null;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
       var path = this.path;
-      if ( path && path.Draw && this.render === true ) {
+      if ( path && path.Draw && this.display === true ) {
         path.Draw( _rc );
       }
       if ( this.children.length > 0 ) {

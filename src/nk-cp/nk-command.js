@@ -7,13 +7,13 @@ module.exports = function ( Nenkraft ) {
     this.handle = _handle;
     this.info = _info;
     this.data = {};
-    if ( _optionPrefix !== undefined ) this.optionPrefix = _optionPrefix;
+    this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
     if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
   }
   Command.prototype = Object.create( null );
   Command.prototype.constructor = Command;
   //Static
-
+  Command.OPTION_PREFIX = '';
   //Members
   Command.prototype.dataSeparator = '=';
   Command.prototype.options = null;
@@ -38,7 +38,7 @@ module.exports = function ( Nenkraft ) {
     for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
       option = options[ i ];
       if ( option.priority <= _priority ) {
-        Nenkraft.Utils.ArrayInsert( options, opt, i );
+        options.splice( i, 0, opt );
         this.allOptionIds = this.GetAllOptionIds();
         return this;
       }

@@ -29,6 +29,7 @@ require( './nk-geom/nk-line/nk-line2d' )( namespace );
 require( './nk-geom/nk-aabb/nk-aabb2d' )( namespace );
 require( './nk-geom/nk-polygon/nk-polygon2d' )( namespace );
 require( './nk-geom/nk-circle/nk-circle' )( namespace );
+require( './nk-utils/nk-quadtree-node' )( namespace );
 require( './nk-input/nk-mouse' )( namespace );
 require( './nk-input/nk-keyboard' )( namespace );
 require( './nk-debug/nk-debug' )( namespace );

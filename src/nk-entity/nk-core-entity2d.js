@@ -30,13 +30,23 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.ComputeBounds = function ( _anchor ) {
     var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
-    this.bounds = new Nenkraft.Geom.AABB2D(
-      this.x - this.width * ay,
-      this.y - this.height * ay,
-      this.x + this.width,
-      this.y + this.height
-    );
+    if ( this.bounds === null ) {
+      this.bounds = new Nenkraft.Geom.AABB2D(
+        this.x - this.width * ay,
+        this.y - this.height * ay,
+        this.x + this.width,
+        this.y + this.height
+      );
+    } else {
+      this.bounds.Set(
+        this.x - this.width * ay,
+        this.y - this.height * ay,
+        this.x + this.width,
+        this.y + this.height
+      );
+    }
     this.boundsDirty = false;
+    this.bounds.belongsTo = this;
     return this.bounds;
   };
   Nenkraft.Entity.CoreEntity2D = CoreEntity2D;

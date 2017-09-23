@@ -93,145 +93,46 @@ module.exports = function () {
     var cIndex = -1;
     var cHistory = [];
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( c, HW, HH, false );
 
-    var gobjects = {
+    var circleEntity = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 50 ) );
+    stage.AddChild( circleEntity );
 
-    };
+    var mm = new nk.MotionManager( circleEntity );
+    var moveX = mm.Create( 'x', 'x', 0, 60 );
+    var moveY = mm.Create( 'y', 'y', 0, 60 );
 
-    ////////.....
-    var register = nk.CP.Register();
-    register.Add(
-      nk.CP.Command(
-        //CREATE
-        'create crt',
-        function ( _dataStrs, _data ) {
-          insertParagraph( CE.OPTION_REQUIRED.replace( /DATA/g, 'create' ) );
-        },
-        'Create a graphics object', true ).
-        AddOption(
-        'circle cir',
-        function ( _dataStrs, _data ) {
-          if ( _data.radius === undefined ) {
-            insertParagraph( CE.DATA_MISSING.replace( /DATA/g, 'radius' ) );
-            return;
-          }
-          var tex = new nk.Path.Circle( 0, 0, parseInt( _data.radius ) );
-          var gr = new nk.Graphic2D( parseInt( _data.x ) || 0, parseInt( _data.y ) || 0, tex );
-          stage.AddChild( gr );
-        },
-        'Create a circle', 0, true ).
-        AddOption(
-        'rectangle rect rec',
-        function ( _dataStrs, _data ) {
-          if ( _data.width === undefined || _data.height === undefined ) {
-            insertParagraph( CE.DATA_MISSING.replace( /DATA/g, 'width & height' ) );
-            return;
-          }
-          var tex = new nk.Path.AABB2D( 0, 0, _data.width, _data.height );
-          var gr = new nk.Graphic2D( parseInt( _data.x ), parseInt( _data.y ), tex );
-          stage.AddChild( gr );
-        },
-        'Create a rectangle', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'tick t',
-        function ( _dataStrs, _data ) {
-          insertParagraph( CE.OPTION_REQUIRED.replace( /DATA/g, 'tick' ) );
-        },
-        'Handle ticker', true ).
-        AddOption(
-        'start s',
-        function ( _dataStrs, _data ) {
-          stage.ticker.SetDesiredRate( _data.rate );
-          stage.ticker.StartAF();
-        },
-        'Start the ticker', 0, true ).
-        AddOption(
-        'stop',
-        function ( _dataStrs, _data ) {
-          stage.ticker.Stop();
-        },
-        'Stop the ticker', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'print',
-        function ( _dataStrs, _data ) {
-          insertParagraph( _dataStrs.join( ' ' ) );
-        },
-        'Print info', true ).
-        AddOption(
-        'gobjects gobjs',
-        function ( _dataStrs, _data ) {
-
-        },
-        'Print all graphical objects', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'cch1',
-        function ( _dataStrs, _data ) {
-          insertParagraph( CE.OPTION_REQUIRED.replace( /DATA/g, 'cch1' ) );
-        },
-        'Encrypt some text', true ).
-        AddOption(
-        'e',
-        function ( _dataStrs, _data ) {
-          str = _dataStrs.join( ' ' );
-          insertParagraph( nk.Utils.Cipher.CCH1( str ) );
-        },
-        'Encode', 0, true ).
-        AddOption(
-        'd',
-        function ( _dataStrs, _data ) {
-          str = _dataStrs.join( ' ' );
-          insertParagraph( nk.Utils.Decipher.CCH1( str ) );
-        },
-        'Decode', 0, true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    register.Add(
-      nk.CP.Command(
-        'clear',
-        function ( _dataStrs, _data ) {
-          cb.innerHTML = '';
-          cb.appendChild( ci );
-          ci.focus();
-        },
-        'Clear the "terminal"', true ).
-        AddOption(
-        'help ?',
-        function () {
-          insertParagraph( this.command.GenerateInfoString().replace( /\n/g, '<br/>' ) );
-        },
-        'Get help', 999, true )
-    );
-    ////////......
+    var register = new nk.CP.Register();
+    nk.CP.Command.OPTION_PREFIX = '--';
+    register.Add( new nk.CP.Command(
+      'commands',
+      function () {
+        register.commands.forEach( function ( command ) {
+          insertParagraph( command.id[ 0 ] );
+        } );
+      }
+    ) );
+    register.Add( new nk.CP.Command(
+      'clear',
+      function () {
+        cb.innerHTML = '';
+        cb.appendChild( ci );
+        ci.focus();
+      },
+      'clear the screen'
+    ) );
+    register.Add( new nk.CP.Command(
+      'moveto',
+      function () {
+        var data = arguments[ 1 ];
+        var x = Number( data.x );
+        var y = Number( data.y );
+        moveX.value = x;
+        moveY.value = y;
+        mm.StartMultiple( 'x y' );
+      },
+      'move to x y'
+    ) );
 
     function insertParagraph ( _str ) {
       var p = document.createElement( 'p' );
@@ -274,6 +175,10 @@ module.exports = function () {
     function onCommandboxClick ( event ) {
       ci.focus();
     }
+
+    stage.onProcess.Add( function () {
+      mm.Process();
+    } );
 
     document.body.removeChild( buttonContainer );
   }

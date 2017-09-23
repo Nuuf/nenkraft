@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 83);
+/******/ 	return __webpack_require__(__webpack_require__.s = 85);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -75,7 +75,7 @@
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 38 )( namespace );
 __webpack_require__( 60 )( namespace );
-__webpack_require__( 61 )( namespace );
+__webpack_require__( 62 )( namespace );
 __webpack_require__( 57 )( namespace );
 __webpack_require__( 59 )( namespace );
 __webpack_require__( 58 )( namespace );
@@ -101,6 +101,7 @@ __webpack_require__( 31 )( namespace );
 __webpack_require__( 29 )( namespace );
 __webpack_require__( 32 )( namespace );
 __webpack_require__( 30 )( namespace );
+__webpack_require__( 61 )( namespace );
 __webpack_require__( 34 )( namespace );
 __webpack_require__( 33 )( namespace );
 __webpack_require__( 16 )( namespace );
@@ -366,7 +367,6 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   Nenkraft.Geom = Object.create( null );
   Nenkraft.Style = Object.create( null );
-  Nenkraft.Debug = Object.create( null );
   Nenkraft.Math = Object.create( null );
   Nenkraft.Utils = Object.create( null );
   Nenkraft.Entity = Object.create( null );
@@ -377,7 +377,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.1.51 (Alpha)';
+  Nenkraft.VERSION = '0.1.6 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -399,13 +399,13 @@ module.exports = function ( Nenkraft ) {
     this.handle = _handle;
     this.info = _info;
     this.data = {};
-    if ( _optionPrefix !== undefined ) this.optionPrefix = _optionPrefix;
+    this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
     if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
   }
   Command.prototype = Object.create( null );
   Command.prototype.constructor = Command;
   //Static
-
+  Command.OPTION_PREFIX = '';
   //Members
   Command.prototype.dataSeparator = '=';
   Command.prototype.options = null;
@@ -430,7 +430,7 @@ module.exports = function ( Nenkraft ) {
     for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
       option = options[ i ];
       if ( option.priority <= _priority ) {
-        Nenkraft.Utils.ArrayInsert( options, opt, i );
+        options.splice( i, 0, opt );
         this.allOptionIds = this.GetAllOptionIds();
         return this;
       }
@@ -582,7 +582,25 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-
+  function Debug () {
+    throw new Error( 'Cannot be instantiated' );
+  }
+  Debug.Draw = {};
+  Debug.Draw.AABB2D = function ( _rc, _aabb ) {
+    _rc.setTransform( 1, 0, 0, 1, 0, 0 );
+    _rc.strokeStyle = 'rgba(255, 0, 255, 1)';
+    _rc.fillStyle = 'rgba(0, 255, 0, 0.1)';
+    _rc.lineWidth = 2;
+    _rc.beginPath();
+    _rc.moveTo( _aabb.tl.x, _aabb.tl.y );
+    _rc.lineTo( _aabb.br.x, _aabb.tl.y );
+    _rc.lineTo( _aabb.br.x, _aabb.br.y );
+    _rc.lineTo( _aabb.tl.x, _aabb.br.y );
+    _rc.closePath();
+    _rc.stroke();
+    _rc.fill();
+  };
+  Nenkraft.Debug = Debug;
 };
 
 /***/ }),
@@ -604,7 +622,7 @@ module.exports = function ( Nenkraft ) {
   delete Case2D.prototype.Draw;
   delete Case2D.prototype.DrawChildren;
   Case2D.prototype.Render = function () {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
@@ -648,13 +666,13 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.transformAutomaticUpdate = true;
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.children.length > 0 ) {
+      if ( this.children.length > 0 && this.display === true ) {
         this.DrawChildren( _rc );
       }
     }
@@ -825,13 +843,23 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.ComputeBounds = function ( _anchor ) {
     var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
-    this.bounds = new Nenkraft.Geom.AABB2D(
-      this.x - this.width * ay,
-      this.y - this.height * ay,
-      this.x + this.width,
-      this.y + this.height
-    );
+    if ( this.bounds === null ) {
+      this.bounds = new Nenkraft.Geom.AABB2D(
+        this.x - this.width * ay,
+        this.y - this.height * ay,
+        this.x + this.width,
+        this.y + this.height
+      );
+    } else {
+      this.bounds.Set(
+        this.x - this.width * ay,
+        this.y - this.height * ay,
+        this.x + this.width,
+        this.y + this.height
+      );
+    }
     this.boundsDirty = false;
+    this.bounds.belongsTo = this;
     return this.bounds;
   };
   Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
@@ -926,14 +954,14 @@ module.exports = function ( Nenkraft ) {
   Graphic2D.prototype.anchor = null;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
       var path = this.path;
-      if ( path && path.Draw && this.render === true ) {
+      if ( path && path.Draw && this.display === true ) {
         path.Draw( _rc );
       }
       if ( this.children.length > 0 ) {
@@ -1106,14 +1134,14 @@ module.exports = function ( Nenkraft ) {
   Plaingraphic2D.prototype.anchor = null;
   //Methods
   Plaingraphic2D.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
       var path = this.path;
-      if ( path && path.Draw && this.render === true ) {
+      if ( path && path.Draw && this.display === true ) {
         path.Draw( _rc );
       }
     }
@@ -1173,13 +1201,13 @@ module.exports = function ( Nenkraft ) {
   Plainsprite.prototype.anchor = null;
   //Methods
   Plainsprite.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.render === true ) {
+      if ( this.display === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
         _rc.drawImage(
           this.texture,
@@ -1250,13 +1278,13 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.anchor = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.render === true ) {
+      if ( this.display === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
         _rc.drawImage(
           this.texture,
@@ -1356,13 +1384,13 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.maxWidth = undefined;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
-    if ( this.display === true ) {
+    if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       this.transform.ApplyWorld( _rc );
-      if ( this.render === true ) {
+      if ( this.display === true ) {
         var style = this.style;
         if ( style.shadow.applied === true ) {
           style.shadow.Apply( _rc );
@@ -1529,17 +1557,24 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.constructor = AABB2D;
   //Static
   AABB2D.TYPE = 1;
+  AABB2D.TOP_LEFT = 'TL';
+  AABB2D.TOP_RIGHT = 'TR';
+  AABB2D.BOTTOM_LEFT = 'BL';
+  AABB2D.BOTTOM_RIGHT = 'BR';
   //Members
   AABB2D.prototype.TYPE = AABB2D.TYPE;
   AABB2D.prototype.w = 0;
   AABB2D.prototype.h = 0;
+  AABB2D.prototype.hw = 0;
+  AABB2D.prototype.hh = 0;
   AABB2D.prototype.area = 0;
+  AABB2D.prototype.belongsTo = null;
   //Methods
-  AABB2D.prototype.Set = function ( _x, _y, _w, _h ) {
-    this.tl.x = _x;
-    this.tl.y = _y;
-    this.br.x = _w;
-    this.br.y = _h;
+  AABB2D.prototype.Set = function ( _tlx, _tly, _brx, _bry ) {
+    this.tl.x = _tlx;
+    this.tl.y = _tly;
+    this.br.x = _brx;
+    this.br.y = _bry;
     this.ComputeWH();
   };
   AABB2D.prototype.SetC = function ( _aabb ) {
@@ -1548,7 +1583,44 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.ComputeWH = function () {
     this.w = this.br.x - this.tl.x;
     this.h = this.br.y - this.tl.y;
+    this.hw = this.w * 0.5;
+    this.hh = this.h * 0.5;
     this.area = this.w * this.h;
+  };
+  AABB2D.prototype.GetQuadrant = function ( _quadrant ) {
+    var tl = this.tl, br = this.br;
+    switch ( _quadrant ) {
+      case AABB2D.TOP_LEFT:
+        return new AABB2D(
+          tl.x,
+          tl.y,
+          tl.x + this.hw,
+          tl.y + this.hh
+        );
+      case AABB2D.TOP_RIGHT:
+        return new AABB2D(
+          tl.x + this.hw,
+          tl.y,
+          br.x,
+          tl.y + this.hh
+        );
+      case AABB2D.BOTTOM_LEFT:
+        return new AABB2D(
+          tl.x,
+          tl.y + this.hh,
+          tl.x + this.hw,
+          br.y
+        );
+      case AABB2D.BOTTOM_RIGHT:
+        return new AABB2D(
+          tl.x + this.hw,
+          tl.y + this.hh,
+          br.x,
+          br.y
+        );
+      default:
+        return null;
+    }
   };
   AABB2D.prototype.IntersectsPoint = function ( _v ) {
     return !( _v.x < this.tl.x || _v.x > this.br.x || _v.y < this.tl.y || _v.y > this.br.y );
@@ -1569,6 +1641,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.Geom.AABB2D = AABB2D;
+  Nenkraft.AABB2D = AABB2D;
 };
 
 /***/ }),
@@ -2088,7 +2161,7 @@ module.exports = function ( Nenkraft ) {
         pos1.x + ( delta.x * dm / distance ),
         pos1.y + ( delta.y * dm / distance )
       );
-      var de = Math.sqrt(( _circle2.radiusSquared ) - ( dm * dm ) ) / distance;
+      var de = Math.sqrt( ( _circle2.radiusSquared ) - ( dm * dm ) ) / distance;
       var rx = -delta.y * de;
       var ry = delta.x * de;
       var poc2 = new Nenkraft.Vector2D(
@@ -2199,7 +2272,7 @@ module.exports = function ( Nenkraft ) {
         pos1.x + ( delta.x * dm / distance ),
         pos1.y + ( delta.y * dm / distance )
       );
-      var de = Math.sqrt(( c1.radiusSquared ) - ( dm * dm ) ) / distance;
+      var de = Math.sqrt( ( c1.radiusSquared ) - ( dm * dm ) ) / distance;
       var rx = -delta.y * de;
       var ry = delta.x * de;
       var poc2 = new Nenkraft.Vector2D(
@@ -2234,8 +2307,8 @@ module.exports = function ( Nenkraft ) {
       v2.x + op * m1 * n.x,
       v2.y + op * m1 * n.y
     );
-    _obj1.relative.AddV( v1 );
-    _obj2.relative.AddV( v2 );
+    _obj1.relative.AddV( _result.mtv );
+    _obj2.relative.SubtractV( _result.mtv );
   };
 
   Nenkraft.Math.Collision2D = Collision2D;
@@ -2626,12 +2699,16 @@ module.exports = function ( Nenkraft ) {
     v.Set( _x, _y );
     return v;
   };
-  Vector2D.Pool.Flood( function () { }, 1000 );
+  Vector2D.Pool.Flood( function () { }, 100000 );
+  Vector2D.USE_POOL = true;
   //Members
   Vector2D.prototype.x = 0;
   Vector2D.prototype.y = 0;
   //Methods
   Vector2D.prototype.Copy = function () {
+    if ( Vector2D.USE_POOL === true ) {
+      return Vector2D.Pool.Retrieve( this.x, this.y );
+    }
     return new Vector2D( this );
   };
   Vector2D.prototype.AbsoluteCopy = function () {
@@ -3515,7 +3592,8 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  var HexMap = Nenkraft.Utils.B16ToB10;
+  var HexMap = Nenkraft.Utils.Base16ToBase10;
+  var Clamp = Nenkraft.Utils.Clamp;
   function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
     this.channel = [
@@ -3570,22 +3648,32 @@ module.exports = function ( Nenkraft ) {
     this.currentConversion = 'hsl';
     this.ComputeValueHSLA();
   };
-  Color.prototype.SetRGB = function ( _r, _g, _b ) {
-    var Clamp = Nenkraft.Utils.Clamp, min = 0, max = 255;
+  Color.prototype.SetRGB = function ( _r, _g, _b, _noCompute ) {
+    var min = 0, max = 255;
     this.channel[ 0 ] = Clamp( _r, min, max );
     this.channel[ 1 ] = Clamp( _g, min, max );
     this.channel[ 2 ] = Clamp( _b, min, max );
     this.currentConversion = 'rgb';
+    if ( !_noCompute ) this.ComputeValueRGBA();
+  };
+  Color.prototype.SetRGBA = function ( _r, _g, _b, _a ) {
+    this.SetRGB( _r, _g, _b, true );
+    this.channel[ 3 ] = Clamp( _a / 255, 0, 1 );
     this.ComputeValueRGBA();
   };
   Color.prototype.SetHex = function ( _hex ) {
     _hex = _hex.replace( /#/g, '' );
     var strs = _hex.match( /.{2}/g );
     strs = strs.map( HexMap );
-    this.SetRGB( strs[ 0 ], strs[ 1 ], strs[ 2 ] );
+    this.SetRGBA( strs[ 0 ], strs[ 1 ], strs[ 2 ], strs[ 3 ] );
   };
   Color.prototype.IncreaseChannel = function ( _channel, _value ) {
     this.channel[ _channel ] += _value;
+    if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
+    else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+  };
+  Color.prototype.SetChannel = function ( _channel, _value ) {
+    this.channel[ _channel ] = _value;
     if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
     else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
   };
@@ -3711,6 +3799,150 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
+  function QuadtreeNode ( _aabb, _level, _objCap, _levelCap ) {
+    if ( !( this instanceof QuadtreeNode ) ) return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
+    this.aabb = _aabb;
+    this.level = _level;
+    this.objectCap = _objCap;
+    this.levelCap = _levelCap;
+    this.nodes = {};
+    this.objects = [];
+  }
+  QuadtreeNode.prototype = Object.create( null );
+  QuadtreeNode.prototype.constructor = QuadtreeNode;
+  //Static
+  QuadtreeNode.TOP_LEFT = 'TL';
+  QuadtreeNode.TOP_RIGHT = 'TR';
+  QuadtreeNode.BOTTOM_LEFT = 'BL';
+  QuadtreeNode.BOTTOM_RIGHT = 'BR';
+  //Members
+  QuadtreeNode.prototype.objectCap = 0;
+  QuadtreeNode.prototype.levelCap = 0;
+  QuadtreeNode.prototype.level = 0;
+  QuadtreeNode.prototype.nodes = null;
+  QuadtreeNode.prototype.objects = null;
+  QuadtreeNode.prototype.aabb = null;
+  QuadtreeNode.prototype.hasSplit = false;
+  //Methods
+  QuadtreeNode.prototype.Add = function ( _object ) {
+    var marking = '';
+    var objects = this.objects;
+    var nodes = this.nodes;
+    var i = 0;
+    if ( this.hasSplit === true ) {
+      marking = this.Marking( _object );
+      if ( marking !== null ) {
+        nodes[ marking ].Add( _object );
+        return;
+      }
+    }
+    objects.push( _object );
+    if ( this.level < this.levelCap ) {
+      if ( objects.length > this.objectCap ) {
+        if ( this.hasSplit === false ) {
+          this.Split();
+        }
+        while ( i < objects.length ) {
+          marking = this.Marking( objects[ i ] );
+          if ( marking !== null ) {
+            nodes[ marking ].Add( objects.splice( i, 1 )[ 0 ] );
+          } else {
+            ++i;
+          }
+        }
+      }
+    }
+  };
+  QuadtreeNode.prototype.Converge = function ( _object ) {
+    var objects = this.objects.slice();
+    var marking = null;
+    var nodes = this.nodes;
+    if ( this.hasSplit === true ) {
+      marking = this.Marking( _object );
+      if ( marking !== null ) {
+        objects = objects.concat( nodes[ marking ].Converge( _object ) );
+      } else {
+        objects = objects.concat( nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
+        objects = objects.concat( nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
+        objects = objects.concat( nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
+        objects = objects.concat( nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
+      }
+    }
+    return objects;
+  };
+  QuadtreeNode.prototype.Split = function () {
+    var nl = this.level + 1;
+    var oc = this.objectCap;
+    var lc = this.levelCap;
+    var nodes = this.nodes;
+    var aabb = this.aabb;
+    nodes[ QuadtreeNode.TOP_LEFT ] = new QuadtreeNode(
+      aabb.GetQuadrant( QuadtreeNode.TOP_LEFT ),
+      nl, oc, lc
+    );
+    nodes[ QuadtreeNode.TOP_RIGHT ] = new QuadtreeNode(
+      aabb.GetQuadrant( QuadtreeNode.TOP_RIGHT ),
+      nl, oc, lc
+    );
+    nodes[ QuadtreeNode.BOTTOM_LEFT ] = new QuadtreeNode(
+      aabb.GetQuadrant( QuadtreeNode.BOTTOM_LEFT ),
+      nl, oc, lc
+    );
+    nodes[ QuadtreeNode.BOTTOM_RIGHT ] = new QuadtreeNode(
+      aabb.GetQuadrant( QuadtreeNode.BOTTOM_RIGHT ),
+      nl, oc, lc
+    );
+    this.hasSplit = true;
+  };
+  QuadtreeNode.prototype.Dump = function () {
+    var nodes = this.nodes;
+    this.objects.length = 0;
+    if ( this.hasSplit === true ) {
+      nodes[ QuadtreeNode.TOP_LEFT ].Dump();
+      nodes[ QuadtreeNode.TOP_RIGHT ].Dump();
+      nodes[ QuadtreeNode.BOTTOM_LEFT ].Dump();
+      nodes[ QuadtreeNode.BOTTOM_RIGHT ].Dump();
+    }
+    this.nodes = {};
+    this.hasSplit = false;
+  };
+  QuadtreeNode.prototype.Marking = function ( _object ) {
+    var nodes = this.nodes;
+    if ( nodes[ QuadtreeNode.TOP_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
+      return QuadtreeNode.TOP_LEFT;
+    }
+    if ( nodes[ QuadtreeNode.TOP_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
+      return QuadtreeNode.TOP_RIGHT;
+    }
+    if ( nodes[ QuadtreeNode.BOTTOM_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
+      return QuadtreeNode.BOTTOM_LEFT;
+    }
+    if ( nodes[ QuadtreeNode.BOTTOM_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
+      return QuadtreeNode.BOTTOM_RIGHT;
+    }
+    return null;
+  };
+  QuadtreeNode.prototype.ConcatNodes = function ( _nodeList ) {
+    if ( _nodeList === undefined ) _nodeList = [];
+    _nodeList.push( this );
+    var nodes = this.nodes;
+    if ( this.hasSplit === false ) return _nodeList;
+    nodes[ QuadtreeNode.TOP_LEFT ].ConcatNodes( _nodeList );
+    nodes[ QuadtreeNode.TOP_RIGHT ].ConcatNodes( _nodeList );
+    nodes[ QuadtreeNode.BOTTOM_LEFT ].ConcatNodes( _nodeList );
+    nodes[ QuadtreeNode.BOTTOM_RIGHT ].ConcatNodes( _nodeList );
+    return _nodeList;
+  };
+  Nenkraft.Utils.QuadtreeNode = QuadtreeNode;
+  Nenkraft.QuadtreeNode = QuadtreeNode;
+};
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports) {
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
   Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
     return ( Math.random() * ( _max - _min + 1 ) + _min ) | 0;
   };
@@ -3759,7 +3991,9 @@ module.exports = function ( Nenkraft ) {
     '0123456789',
     'ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz',
     'ABCDEFGHJIKLMNOPQRSTUWVXYZ',
-    'abcdefghijklmnopqrstuwvxyz'
+    'abcdefghijklmnopqrstuwvxyz',
+    '0123456789abcdefghijklmnopqrstuwvxyz',
+    '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZ'
   ];
   Nenkraft.Utils.ApplyProperties = function ( _obj, _props ) {
     if ( _props !== undefined ) {
@@ -3843,11 +4077,16 @@ module.exports = function ( Nenkraft ) {
     texture.src = _url;
     return texture;
   };
+  Nenkraft.Utils.Base16ToBase10 = function ( _value ) {
+    return parseInt( _value, 16 );
+  };
+  Nenkraft.Utils.Base2ToBase10 = function ( _value ) {
+    return parseInt( _value, 2 );
+  };
 };
 
 
 /***/ }),
-/* 62 */,
 /* 63 */,
 /* 64 */,
 /* 65 */,
@@ -3868,7 +4107,9 @@ module.exports = function ( Nenkraft ) {
 /* 80 */,
 /* 81 */,
 /* 82 */,
-/* 83 */
+/* 83 */,
+/* 84 */,
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(0);

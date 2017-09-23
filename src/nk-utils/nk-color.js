@@ -1,6 +1,7 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
-  var HexMap = Nenkraft.Utils.B16ToB10;
+  var HexMap = Nenkraft.Utils.Base16ToBase10;
+  var Clamp = Nenkraft.Utils.Clamp;
   function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
     this.channel = [
@@ -55,22 +56,32 @@ module.exports = function ( Nenkraft ) {
     this.currentConversion = 'hsl';
     this.ComputeValueHSLA();
   };
-  Color.prototype.SetRGB = function ( _r, _g, _b ) {
-    var Clamp = Nenkraft.Utils.Clamp, min = 0, max = 255;
+  Color.prototype.SetRGB = function ( _r, _g, _b, _noCompute ) {
+    var min = 0, max = 255;
     this.channel[ 0 ] = Clamp( _r, min, max );
     this.channel[ 1 ] = Clamp( _g, min, max );
     this.channel[ 2 ] = Clamp( _b, min, max );
     this.currentConversion = 'rgb';
+    if ( !_noCompute ) this.ComputeValueRGBA();
+  };
+  Color.prototype.SetRGBA = function ( _r, _g, _b, _a ) {
+    this.SetRGB( _r, _g, _b, true );
+    this.channel[ 3 ] = Clamp( _a / 255, 0, 1 );
     this.ComputeValueRGBA();
   };
   Color.prototype.SetHex = function ( _hex ) {
     _hex = _hex.replace( /#/g, '' );
     var strs = _hex.match( /.{2}/g );
     strs = strs.map( HexMap );
-    this.SetRGB( strs[ 0 ], strs[ 1 ], strs[ 2 ] );
+    this.SetRGBA( strs[ 0 ], strs[ 1 ], strs[ 2 ], strs[ 3 ] );
   };
   Color.prototype.IncreaseChannel = function ( _channel, _value ) {
     this.channel[ _channel ] += _value;
+    if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
+    else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
+  };
+  Color.prototype.SetChannel = function ( _channel, _value ) {
+    this.channel[ _channel ] = _value;
     if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
     else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
   };

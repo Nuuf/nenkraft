@@ -45,7 +45,7 @@ module.exports = function ( Nenkraft ) {
         pos1.x + ( delta.x * dm / distance ),
         pos1.y + ( delta.y * dm / distance )
       );
-      var de = Math.sqrt(( _circle2.radiusSquared ) - ( dm * dm ) ) / distance;
+      var de = Math.sqrt( ( _circle2.radiusSquared ) - ( dm * dm ) ) / distance;
       var rx = -delta.y * de;
       var ry = delta.x * de;
       var poc2 = new Nenkraft.Vector2D(
@@ -156,7 +156,7 @@ module.exports = function ( Nenkraft ) {
         pos1.x + ( delta.x * dm / distance ),
         pos1.y + ( delta.y * dm / distance )
       );
-      var de = Math.sqrt(( c1.radiusSquared ) - ( dm * dm ) ) / distance;
+      var de = Math.sqrt( ( c1.radiusSquared ) - ( dm * dm ) ) / distance;
       var rx = -delta.y * de;
       var ry = delta.x * de;
       var poc2 = new Nenkraft.Vector2D(
@@ -191,8 +191,8 @@ module.exports = function ( Nenkraft ) {
       v2.x + op * m1 * n.x,
       v2.y + op * m1 * n.y
     );
-    _obj1.relative.AddV( v1 );
-    _obj2.relative.AddV( v2 );
+    _obj1.relative.AddV( _result.mtv );
+    _obj2.relative.SubtractV( _result.mtv );
   };
 
   Nenkraft.Math.Collision2D = Collision2D;

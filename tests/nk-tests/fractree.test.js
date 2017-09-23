@@ -24,7 +24,9 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, H );
     stage.clear = false;
-    stage.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    var bgColor = new nk.Color();
+    bgColor.SetHex( '#00000033' );
+    stage.backgroundColor = bgColor.value;
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {
