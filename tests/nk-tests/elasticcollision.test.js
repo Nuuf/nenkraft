@@ -38,7 +38,7 @@ module.exports = function () {
     var objs = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 2, 8 );
+      var mass = nk.Utils.RandomInteger( 16, 32 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
@@ -61,8 +61,6 @@ module.exports = function () {
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var Response = nk.Math.Collision2D.CirclevsCircle.Relative.ElasticResponse;
 
-    var gravity = new nk.Vector2D( 0, 0.098 );
-
     function Process () {
       var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel, result;
       root.Dump();
@@ -73,7 +71,6 @@ module.exports = function () {
         collider = colliders[ i ];
         body1 = collider.data.body;
         vel = body1.velocity;
-        vel.AddV( gravity );
         collider.position.AddV( vel );
         if ( collider.x + collider.path.radius >= W ) {
           vel.x = -Math.abs( vel.x );

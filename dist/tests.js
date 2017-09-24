@@ -850,7 +850,7 @@ module.exports = function () {
     var objs = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 2, 8 );
+      var mass = nk.Utils.RandomInteger( 16, 32 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
@@ -873,8 +873,6 @@ module.exports = function () {
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var Response = nk.Math.Collision2D.CirclevsCircle.Relative.ElasticResponse;
 
-    var gravity = new nk.Vector2D( 0, 0.098 );
-
     function Process () {
       var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel, result;
       root.Dump();
@@ -885,7 +883,6 @@ module.exports = function () {
         collider = colliders[ i ];
         body1 = collider.data.body;
         vel = body1.velocity;
-        vel.AddV( gravity );
         collider.position.AddV( vel );
         if ( collider.x + collider.path.radius >= W ) {
           vel.x = -Math.abs( vel.x );
@@ -982,7 +979,7 @@ module.exports = function () {
       }
 
       if ( mouseDown ) {
-        var i = 2;
+        i = 2;
         while ( --i ) {
           MakeObj( stage.mouse.position.x, stage.mouse.position.y );
         }
@@ -1269,45 +1266,94 @@ module.exports = function () {
     var H = c.height, HH = H * 0.5;
     var widthByHeight = W / H;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( c, 0, 0 );
 
-    var magnet = new nk.Plaingraphic2D( 0, 0, new nk.Path.AABB2D( -50, -50, 50, 50 ) );
-    console.log( magnet.width, magnet.height );
-    magnet.data.pole = new nk.Vector2D( 40, 0 );
-    magnet.data.radius = 15;
-    magnet.data.dragging = false;
+    var magnet = new nk.Plaingraphic2D( HW, HH, new nk.Path.Circle( 0, 0, 100 ) );
     magnet.data.body = {
-      shape: magnet.path,
       relative: magnet.position,
-      anchor: new nk.Vector2D( 0, 0 )
+      anchor: new nk.Vector2D(),
+      shape: magnet.path,
+      mass: 1,
+      velocity: new nk.Vector2D()
     };
+    var dragIt = false;
+    var startDrag = new nk.Vector2D();
+    var dragOffset = new nk.Vector2D();
 
     var particles = [];
 
-    var Collide = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
+    stage.AddChild( magnet );
 
-    stage.AddChildren( magnet );
+    function CreateParticle () {
+      var p = new nk.Plaingraphic2D( nk.Utils.RandomInteger( -100, 100 ), nk.Utils.RandomInteger( -100, 100 ), new nk.Path.Circle( 0, 0, 20 ) );
+      p.data.force = {
+        velocity: new nk.Vector2D(),
+        friction: new nk.Vector2D( 0.98, 0.98 )
+      };
+      p.data.body = {
+        relative: p.position,
+        anchor: new nk.Vector2D(),
+        shape: p.path,
+        mass: 1,
+        velocity: p.data.force.velocity
+      };
+      stage.AddChild( p );
+      particles.push( p );
+      p.data.sepArr = particles;
+    }
+
+    ( function () {
+      var i = 100;
+      while ( i-- ) {
+        CreateParticle();
+      }
+    } )();
+
+    var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
+
 
     stage.onProcess.Add( function () {
-      for ( var i = 0, l = particles.length; i < l; ++i ) {
-        var mtv = Collide( magnet.data.body, particles[ i ].data.body );
-        if ( mtv ) particles[ i ].position.SubtractV( mtv );
-      }
-    } );
+      particles.forEach( function ( particle ) {
+        var vel = particle.data.force.velocity;
+        nk.Math.Attract( particle.position, magnet.position, vel, magnet.path.radius * 3, 5 );
+        particle.position.AddV( vel );
+        vel.MultiplyV( particle.data.force.friction );
+        if ( particle.x + particle.path.radius >= W ) {
+          vel.x = -Math.abs( vel.x );
+        } else if ( particle.x - particle.path.radius <= 0 ) {
+          vel.x = Math.abs( vel.x );
+        }
+        if ( particle.y + particle.path.radius >= H ) {
+          vel.y = -Math.abs( vel.y );
 
-    stage.mouse.onDown.Add( function ( _event ) {
-      if ( magnet.IntersectsPoint( _event.data.position ) ) {
-        magnet.data.dragging = true;
-        _event.stopPropagation = true;
+        } else if ( particle.y - particle.path.radius <= 0 ) {
+          vel.y = Math.abs( vel.y );
+        }
+        var result = Collide( magnet.data.body, particle.data.body );
+        if ( result ) {
+          result.mtv.Multiply( result.mtd, result.mtd );
+          particle.position.AddV( result.mtv );
+          vel.Set( 0, 0 );
+        }
+      } );
+    } );
+    stage.mouse.onMove.Add( function ( event ) {
+      if ( dragIt === true ) {
+        magnet.x = event.data.position.x - startDrag.x + dragOffset.x;
+        magnet.y = event.data.position.y - startDrag.y + dragOffset.y;
       }
     } );
-    stage.mouse.onMove.Add( function () {
-      if ( magnet.data.dragging ) {
-        magnet.position.SetV( stage.mouse.position );
+    stage.mouse.onDown.Add( function ( event ) {
+      var p = event.data.position;
+      if ( magnet.IntersectsPoint( p ) ) {
+        startDrag.SetV( p );
+        dragOffset.SetV( magnet );
+        dragIt = true;
       }
+      event.stopPropagation = true;
     } );
-    stage.mouse.onUp.Add( function () {
-      magnet.data.dragging = false;
+    stage.mouse.onUp.Add( function ( event ) {
+      dragIt = false;
     } );
 
     document.body.removeChild( buttonContainer );

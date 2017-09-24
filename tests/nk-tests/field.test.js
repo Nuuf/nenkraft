@@ -47,7 +47,7 @@ module.exports = function () {
       }
 
       if ( mouseDown ) {
-        var i = 2;
+        i = 2;
         while ( --i ) {
           MakeObj( stage.mouse.position.x, stage.mouse.position.y );
         }
