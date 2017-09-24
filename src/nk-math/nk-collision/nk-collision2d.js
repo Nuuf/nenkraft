@@ -169,12 +169,14 @@ module.exports = function ( Nenkraft ) {
       );
       var mtv = pos1.SubtractVC( pos2 );
       mtv.Divide( radii, radii );
-      return { poc: [ poc1, poc2, poc3 ], mtv: mtv, delta: delta };
+      var mtd = distance - r1 - r2;
+      return { poc: [ poc1, poc2, poc3 ], mtv: mtv, mtd: mtd, delta: delta };
     }
     return null;
   };
   Collision2D.CirclevsCircle.Relative.ElasticResponse = function ( _obj1, _obj2, _result ) {
     var n = _result.delta.Copy();
+    var mtv = _result.mtv.Copy();
     n.Normalize();
     var m1 = _obj1.mass;
     var m2 = _obj2.mass;
@@ -191,8 +193,10 @@ module.exports = function ( Nenkraft ) {
       v2.x + op * m1 * n.x,
       v2.y + op * m1 * n.y
     );
-    _obj1.relative.AddV( _result.mtv );
-    _obj2.relative.SubtractV( _result.mtv );
+    mtv.Multiply( _result.mtd, _result.mtd );
+    mtv.Divide( 2, 2 );
+    _obj1.relative.SubtractV( mtv );
+    _obj2.relative.AddV( mtv );
   };
 
   Nenkraft.Math.Collision2D = Collision2D;
