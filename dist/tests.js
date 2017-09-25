@@ -386,7 +386,7 @@ module.exports = function () {
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef );
 
-      timer.onStop.Add( function () {
+      timer.onFinish.Add( function () {
         sprite.animationController.StopCurrentAnimation();
       } );
 
@@ -848,6 +848,7 @@ module.exports = function () {
     bounds.SetC( stage.bounds );
     var root = new nk.QuadtreeNode( bounds, 0, 8, 4 );
     var objs = [];
+    var nodes = [];
 
     function Collider () {
       var mass = nk.Utils.RandomInteger( 16, 32 );
@@ -862,9 +863,16 @@ module.exports = function () {
         anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -5, 5 ), nk.Utils.RandomInteger( -5, 5 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -1, 1 ), nk.Utils.RandomInteger( -1, 1 ) )
       };
       g.ComputeBounds();
+      g.data.timer = new nk.Timer();
+      g.data.timer.onFinish.Add( function () {
+        p.style.fill.applied = false;
+      } );
+      g.data.timer.onStart.Add( function () {
+        p.style.fill.applied = true;
+      } );
       colliders.push( g );
       stage.AddChild( g );
       objs.push( g.bounds );
@@ -879,8 +887,10 @@ module.exports = function () {
       objs.forEach( function ( obj ) {
         root.Add( obj );
       } );
+      nodes = root.ConcatNodes();
       for ( i; i < l; ++i ) {
         collider = colliders[ i ];
+        collider.data.timer.Process();
         body1 = collider.data.body;
         vel = body1.velocity;
         collider.position.AddV( vel );
@@ -904,18 +914,23 @@ module.exports = function () {
           if ( collidee !== collider ) {
             result = Collide( body1, body2 );
             if ( result ) {
+              collider.data.timer.Start( 10 );
+              collidee.data.timer.Start( 10 );
               Response( body1, body2, result );
             }
           }
         }
         collider.ComputeBounds();
       }
+      nodes.forEach( function ( node ) {
+        nk.Debug.Draw.AABB2D( rc, node.aabb );
+      } );
       fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );
 
-    for ( var i = 100; i--; ) {
+    for ( var i = 50; i--; ) {
       Collider();
     }
 
@@ -1085,7 +1100,7 @@ module.exports = function () {
     Branch( new nk.Vector2D( 0, 0 ), new nk.Vector2D( 0, l ) );
 
     var timer = new nk.Timer( 1000 );
-    timer.onStop.Add( function () {
+    timer.onFinish.Add( function () {
       stage.ticker.Stop();
     } );
     timer.Start();
@@ -1268,7 +1283,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, 0, 0 );
 
-    var magnet = new nk.Plaingraphic2D( HW, HH, new nk.Path.Circle( 0, 0, 100 ) );
+    var magnet = new nk.Plaingraphic2D( HW, HH, new nk.Path.Circle( 0, 0, 30 ) );
     magnet.data.body = {
       relative: magnet.position,
       anchor: new nk.Vector2D(),
@@ -1285,10 +1300,10 @@ module.exports = function () {
     stage.AddChild( magnet );
 
     function CreateParticle () {
-      var p = new nk.Plaingraphic2D( nk.Utils.RandomInteger( -100, 100 ), nk.Utils.RandomInteger( -100, 100 ), new nk.Path.Circle( 0, 0, 20 ) );
+      var p = new nk.Plaingraphic2D( nk.Utils.RandomInteger( 0, W ), nk.Utils.RandomInteger( 0, H ), new nk.Path.Circle( 0, 0, 6 ) );
       p.data.force = {
         velocity: new nk.Vector2D(),
-        friction: new nk.Vector2D( 0.98, 0.98 )
+        friction: new nk.Vector2D( 0.99, 0.99 )
       };
       p.data.body = {
         relative: p.position,
@@ -1303,7 +1318,7 @@ module.exports = function () {
     }
 
     ( function () {
-      var i = 100;
+      var i = 500;
       while ( i-- ) {
         CreateParticle();
       }
@@ -1315,19 +1330,22 @@ module.exports = function () {
     stage.onProcess.Add( function () {
       particles.forEach( function ( particle ) {
         var vel = particle.data.force.velocity;
-        nk.Math.Attract( particle.position, magnet.position, vel, magnet.path.radius * 3, 5 );
+        nk.Math.Attract( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
         particle.position.AddV( vel );
         vel.MultiplyV( particle.data.force.friction );
         if ( particle.x + particle.path.radius >= W ) {
           vel.x = -Math.abs( vel.x );
+          particle.x = W - particle.path.radius;
         } else if ( particle.x - particle.path.radius <= 0 ) {
           vel.x = Math.abs( vel.x );
+          particle.x = 0 + particle.path.radius;
         }
         if ( particle.y + particle.path.radius >= H ) {
           vel.y = -Math.abs( vel.y );
-
+          particle.y = H - particle.path.radius;
         } else if ( particle.y - particle.path.radius <= 0 ) {
           vel.y = Math.abs( vel.y );
+          particle.y = 0 + particle.path.radius;
         }
         var result = Collide( magnet.data.body, particle.data.body );
         if ( result ) {
@@ -1569,7 +1587,7 @@ module.exports = function () {
 
       var timer = new nk.Timer();
       timer.Start( totalTime );
-      timer.onStop.Add( function () {
+      timer.onFinish.Add( function () {
         stage.ticker.Stop();
       } );
 
@@ -1579,7 +1597,7 @@ module.exports = function () {
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
           child.data.velocity.Rotate( nk.Math.RADIAN * nk.Utils.RandomFloat( -12, 12 ) );
-          child.scale.Set(( totalTime - timer.time ) / totalTime );
+          child.scale.Set( ( totalTime - timer.time ) / totalTime );
         }
         timer.Process();
       }, stage );
@@ -1640,7 +1658,7 @@ module.exports = function () {
     var childrenMDC = [];
 
     var timer = new nk.Timer();
-    timer.onStop.Add( function () {
+    timer.onFinish.Add( function () {
       var i = am;
       am = am < 3 ? 3 : am--;
       while ( i-- ) {

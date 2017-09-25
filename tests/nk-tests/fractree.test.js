@@ -65,7 +65,7 @@ module.exports = function () {
     Branch( new nk.Vector2D( 0, 0 ), new nk.Vector2D( 0, l ) );
 
     var timer = new nk.Timer( 1000 );
-    timer.onStop.Add( function () {
+    timer.onFinish.Add( function () {
       stage.ticker.Stop();
     } );
     timer.Start();

@@ -377,7 +377,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.1.61 (Alpha)';
+  Nenkraft.VERSION = '0.1.62 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -2122,7 +2122,7 @@ module.exports = function ( Nenkraft ) {
   Collision2D.CirclevsCircle = Object.create( null );
   Collision2D.CirclevsCircle.Relative = Object.create( null );
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
-    return _a.GetMagnitude() - _b.GetMagnitude();
+    return _a.GetMagnitudeSquared() - _b.GetMagnitudeSquared();
   };
   Collision2D.AABB2DvsAABB2D.Collide = function ( _aabb1, _aabb2 ) {
     var tl1 = _aabb1.tl, tl2 = _aabb2.tl, br1 = _aabb1.br, br2 = _aabb2.br;
@@ -3554,8 +3554,11 @@ module.exports = function ( Nenkraft ) {
     if ( !( this instanceof Timer ) ) return new Timer( _stopTime );
     this.stopTime = Math.round( _stopTime === undefined ? null : _stopTime );
     this.onStop = new Nenkraft.LocalEvent();
+    this.onFinish = new Nenkraft.LocalEvent();
     this.onStart = new Nenkraft.LocalEvent();
     this.onReset = new Nenkraft.LocalEvent();
+    this.onPause = new Nenkraft.LocalEvent();
+    this.onResume = new Nenkraft.LocalEvent();
   }
   Timer.prototype = Object.create( null );
   Timer.prototype.constructor = Timer;
@@ -3564,6 +3567,7 @@ module.exports = function ( Nenkraft ) {
   //Members
   Timer.prototype.time = 0;
   Timer.prototype.isRunning = false;
+  Timer.prototype.canResume = false;
   Timer.prototype.count = 0;
   //Methods
   Timer.prototype.Reset = function ( _stopTime ) {
@@ -3575,14 +3579,35 @@ module.exports = function ( Nenkraft ) {
     if ( this.stopTime <= 0 ) return;
     this.time = 0;
     this.isRunning = true;
+    this.canResume = false;
     this.onStart.Dispatch( this, { stopTime: this.stopTime } );
+  };
+  Timer.prototype.Stop = function () {
+    if ( this.isRunning === true ) {
+      this.isRunning = false;
+      this.onStop.Dispatch( this, null );
+    }
+  };
+  Timer.prototype.Pause = function () {
+    if ( this.isRunning === true && this.canResume === false ) {
+      this.isRunning = false;
+      this.canResume = true;
+      this.onPause.Dispatch( this, null );
+    }
+  };
+  Timer.prototype.Resume = function () {
+    if ( this.canResume === true ) {
+      this.isRunning = true;
+      this.canResume = false;
+      this.onResume.Dispatch( this, null );
+    }
   };
   Timer.prototype.Process = function () {
     if ( this.time < this.stopTime && this.isRunning === true ) {
       if ( ++this.time >= this.stopTime ) {
         this.isRunning = false;
         this.count++;
-        this.onStop.Dispatch( this, null );
+        this.onFinish.Dispatch( this, null );
       }
     }
   };
