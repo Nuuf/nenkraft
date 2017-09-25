@@ -22,7 +22,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, 0, 0 );
 
-    var magnet = new nk.Plaingraphic2D( HW, HH, new nk.Path.Circle( 0, 0, 100 ) );
+    var magnet = new nk.Plaingraphic2D( HW, HH, new nk.Path.Circle( 0, 0, 30 ) );
     magnet.data.body = {
       relative: magnet.position,
       anchor: new nk.Vector2D(),
@@ -39,10 +39,10 @@ module.exports = function () {
     stage.AddChild( magnet );
 
     function CreateParticle () {
-      var p = new nk.Plaingraphic2D( nk.Utils.RandomInteger( -100, 100 ), nk.Utils.RandomInteger( -100, 100 ), new nk.Path.Circle( 0, 0, 20 ) );
+      var p = new nk.Plaingraphic2D( nk.Utils.RandomInteger( 0, W ), nk.Utils.RandomInteger( 0, H ), new nk.Path.Circle( 0, 0, 6 ) );
       p.data.force = {
         velocity: new nk.Vector2D(),
-        friction: new nk.Vector2D( 0.98, 0.98 )
+        friction: new nk.Vector2D( 0.99, 0.99 )
       };
       p.data.body = {
         relative: p.position,
@@ -57,7 +57,7 @@ module.exports = function () {
     }
 
     ( function () {
-      var i = 100;
+      var i = 500;
       while ( i-- ) {
         CreateParticle();
       }
@@ -69,19 +69,22 @@ module.exports = function () {
     stage.onProcess.Add( function () {
       particles.forEach( function ( particle ) {
         var vel = particle.data.force.velocity;
-        nk.Math.Attract( particle.position, magnet.position, vel, magnet.path.radius * 3, 5 );
+        nk.Math.Attract( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
         particle.position.AddV( vel );
         vel.MultiplyV( particle.data.force.friction );
         if ( particle.x + particle.path.radius >= W ) {
           vel.x = -Math.abs( vel.x );
+          particle.x = W - particle.path.radius;
         } else if ( particle.x - particle.path.radius <= 0 ) {
           vel.x = Math.abs( vel.x );
+          particle.x = 0 + particle.path.radius;
         }
         if ( particle.y + particle.path.radius >= H ) {
           vel.y = -Math.abs( vel.y );
-
+          particle.y = H - particle.path.radius;
         } else if ( particle.y - particle.path.radius <= 0 ) {
           vel.y = Math.abs( vel.y );
+          particle.y = 0 + particle.path.radius;
         }
         var result = Collide( magnet.data.body, particle.data.body );
         if ( result ) {

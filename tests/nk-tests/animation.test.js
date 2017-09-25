@@ -48,7 +48,7 @@ module.exports = function () {
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef );
 
-      timer.onStop.Add( function () {
+      timer.onFinish.Add( function () {
         sprite.animationController.StopCurrentAnimation();
       } );
 

@@ -6,7 +6,7 @@ module.exports = function ( Nenkraft ) {
   Collision2D.CirclevsCircle = Object.create( null );
   Collision2D.CirclevsCircle.Relative = Object.create( null );
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
-    return _a.GetMagnitude() - _b.GetMagnitude();
+    return _a.GetMagnitudeSquared() - _b.GetMagnitudeSquared();
   };
   Collision2D.AABB2DvsAABB2D.Collide = function ( _aabb1, _aabb2 ) {
     var tl1 = _aabb1.tl, tl2 = _aabb2.tl, br1 = _aabb1.br, br2 = _aabb2.br;

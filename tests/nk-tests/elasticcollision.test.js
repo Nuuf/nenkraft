@@ -36,6 +36,7 @@ module.exports = function () {
     bounds.SetC( stage.bounds );
     var root = new nk.QuadtreeNode( bounds, 0, 8, 4 );
     var objs = [];
+    var nodes = [];
 
     function Collider () {
       var mass = nk.Utils.RandomInteger( 16, 32 );
@@ -50,9 +51,16 @@ module.exports = function () {
         anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -5, 5 ), nk.Utils.RandomInteger( -5, 5 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -1, 1 ), nk.Utils.RandomInteger( -1, 1 ) )
       };
       g.ComputeBounds();
+      g.data.timer = new nk.Timer();
+      g.data.timer.onFinish.Add( function () {
+        p.style.fill.applied = false;
+      } );
+      g.data.timer.onStart.Add( function () {
+        p.style.fill.applied = true;
+      } );
       colliders.push( g );
       stage.AddChild( g );
       objs.push( g.bounds );
@@ -67,8 +75,10 @@ module.exports = function () {
       objs.forEach( function ( obj ) {
         root.Add( obj );
       } );
+      nodes = root.ConcatNodes();
       for ( i; i < l; ++i ) {
         collider = colliders[ i ];
+        collider.data.timer.Process();
         body1 = collider.data.body;
         vel = body1.velocity;
         collider.position.AddV( vel );
@@ -92,18 +102,23 @@ module.exports = function () {
           if ( collidee !== collider ) {
             result = Collide( body1, body2 );
             if ( result ) {
+              collider.data.timer.Start( 10 );
+              collidee.data.timer.Start( 10 );
               Response( body1, body2, result );
             }
           }
         }
         collider.ComputeBounds();
       }
+      nodes.forEach( function ( node ) {
+        nk.Debug.Draw.AABB2D( rc, node.aabb );
+      } );
       fps.text = Math.round( stage.ticker.GetTPS() );
     }
 
     stage.onProcess.Add( Process, window );
 
-    for ( var i = 100; i--; ) {
+    for ( var i = 50; i--; ) {
       Collider();
     }
 

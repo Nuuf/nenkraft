@@ -45,7 +45,7 @@ module.exports = function () {
     var childrenMDC = [];
 
     var timer = new nk.Timer();
-    timer.onStop.Add( function () {
+    timer.onFinish.Add( function () {
       var i = am;
       am = am < 3 ? 3 : am--;
       while ( i-- ) {

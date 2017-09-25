@@ -48,7 +48,7 @@ module.exports = function () {
 
       var timer = new nk.Timer();
       timer.Start( totalTime );
-      timer.onStop.Add( function () {
+      timer.onFinish.Add( function () {
         stage.ticker.Stop();
       } );
 
@@ -58,7 +58,7 @@ module.exports = function () {
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
           child.data.velocity.Rotate( nk.Math.RADIAN * nk.Utils.RandomFloat( -12, 12 ) );
-          child.scale.Set(( totalTime - timer.time ) / totalTime );
+          child.scale.Set( ( totalTime - timer.time ) / totalTime );
         }
         timer.Process();
       }, stage );
