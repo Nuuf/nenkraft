@@ -34,7 +34,7 @@ module.exports = function ( Nenkraft ) {
     var id = '';
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
       ilpdd = i / lpd;
-      if ( ilpdd !== 0 && Number.isInteger( ilpdd ) ) id += _separator;
+      if ( ilpdd !== 0 && Nenkraft.Utils.IsInteger( ilpdd ) ) id += _separator;
       else {
         at = Nenkraft.Utils.RandomInteger( 1, charset.length - 1 );
         id += charset.charAt( at );
@@ -57,7 +57,6 @@ module.exports = function ( Nenkraft ) {
       var key;
       for ( key in _props ) {
         if ( _obj[ key ] !== undefined ) _obj[ key ] = _props[ key ];
-        // else error
       }
     }
   };
@@ -97,6 +96,15 @@ module.exports = function ( Nenkraft ) {
       else i--;
     }
     return array;
+  };
+  Nenkraft.Utils.ArrayShuffle = function ( _array ) {
+    var i = _array.length - 1, temp, rand;
+    for ( ; i >= 0; --i ) {
+      rand = ( Math.random() * i ) | 0;
+      temp = _array[ i ];
+      _array[ i ] = _array[ rand ];
+      _array[ rand ] = temp;
+    }
   };
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
