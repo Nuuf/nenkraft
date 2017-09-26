@@ -377,7 +377,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.1.63 (Alpha)';
+  Nenkraft.VERSION = '0.1.64 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -4003,12 +4003,12 @@ module.exports = function ( Nenkraft ) {
     _parts = _parts === undefined ? 4 : _parts;
     _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
     _separator = _separator === undefined ? '-' : _separator;
-    var id = '';
+    var id = '', RandomInteger = Nenkraft.Utils.RandomInteger, IsInteger = Nenkraft.Utils.IsInteger;
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
       ilpdd = i / lpd;
-      if ( ilpdd !== 0 && Nenkraft.Utils.IsInteger( ilpdd ) ) id += _separator;
+      if ( ilpdd !== 0 && IsInteger( ilpdd ) ) id += _separator;
       else {
-        at = Nenkraft.Utils.RandomInteger( 1, charset.length - 1 );
+        at = RandomInteger( 1, charset.length - 1 );
         id += charset.charAt( at );
       }
     }
@@ -4016,7 +4016,7 @@ module.exports = function ( Nenkraft ) {
   };
   Nenkraft.Utils.CharacterSets = [
     '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz',
-    '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz!?#$%@',
+    '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz!?#$%@&',
     '0123456789',
     'ABCDEFGHJIKLMNOPQRSTUWVXYZabcdefghijklmnopqrstuwvxyz',
     'ABCDEFGHJIKLMNOPQRSTUWVXYZ',
@@ -4054,13 +4054,18 @@ module.exports = function ( Nenkraft ) {
           return _obj;
         }
         return _obj[ key ];
+      } else {
+        if ( _set === true ) {
+          _obj[ key ] = _value;
+          return;
+        }
       }
     }
   };
   Nenkraft.Utils.ArrayGetRandom = function ( _array, _amount ) {
-    var array = [], control = {}, _al = _array.length;
+    var array = [], control = {}, _al = _array.length, Random = Math.random;
     for ( var i = 0, l = _amount; i < l; ++i ) {
-      var ix = ( Math.random() * _al ) | 0;
+      var ix = ( Random() * _al ) | 0;
       if ( control[ ix ] === undefined ) {
         control[ ix ] = null;
         array.push( _array[ ix ] );
@@ -4070,9 +4075,9 @@ module.exports = function ( Nenkraft ) {
     return array;
   };
   Nenkraft.Utils.ArrayShuffle = function ( _array ) {
-    var i = _array.length - 1, temp, rand;
+    var i = _array.length - 1, temp, rand, Random = Math.random;
     for ( ; i >= 0; --i ) {
-      rand = ( Math.random() * i ) | 0;
+      rand = ( Random() * i ) | 0;
       temp = _array[ i ];
       _array[ i ] = _array[ rand ];
       _array[ rand ] = temp;
@@ -4081,12 +4086,12 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
   Nenkraft.Utils.Cipher.CCH1 = function ( _str, _cci ) {
-    var output = [];
+    var output = [], RandomInteger = Nenkraft.Utils.RandomInteger;
     _cci = _cci === undefined ? 1 : _cci;
     for ( var i = 0, chrs = _str.split( '' ), l = chrs.length, chr, otn; i < l; ++i ) {
       chr = chrs[ i ];
       chr = ( chr.charCodeAt( 0 ) + _cci ).toString( 2 );
-      otn = Nenkraft.Utils.RandomInteger( 1, 9 );
+      otn = RandomInteger( 1, 9 );
       output.push( otn + 'x' + chr.replace( /1/g, otn ) );
     }
     return output.join( ' ' );
