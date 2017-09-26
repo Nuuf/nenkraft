@@ -86,48 +86,24 @@ module.exports = function () {
     setInterval( Update, 1 );
 
     var a = {
-      a: {
-
-      },
       b: {
-        b: {
-
-        },
         c: {
           d: {
             e: {
-              f: {
-                g: {
-                  h: {
-                    i: {
-                      j: {
-                        k: {
-                          l: {
-                            m: {
-                              n: {
-                                o: {
-                                  p: {
-                                    q: 10
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+              f: undefined
             }
           }
         }
       }
-    }
+    };
 
-    nk.Utils.Nested( a, 'b.c.d.e.f..g.h.i.j.k.l.m.n.o.p.q' );
-    nk.Utils.Nested( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q', true, 20 );
-    nk.Utils.Nested( a, 'b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q' );
+    console.log( nk.Utils.Nested( a, 'b.c.d.e.f' ) );
+    console.log( nk.Utils.Nested( a, 'b.c.d.e.f', true ) );
+    nk.Utils.Nested( a, 'b.c.d.e.f', false, true, 20 );
+    console.log( nk.Utils.Nested( a, 'b.c.d.e.f' ) );
+    nk.Utils.Nested( a, 'b|c|d|e|f', false, true, 30, '|' );
+    console.log( nk.Utils.Nested( a, 'b.c.d.e.f' ) );
+    console.log( a );
 
     document.body.removeChild( buttonContainer );
   }
