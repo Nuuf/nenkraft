@@ -37,6 +37,7 @@ module.exports = function ( Nenkraft ) {
         this.x + this.width,
         this.y + this.height
       );
+      this.bounds.belongsTo = this;
     } else {
       this.bounds.Set(
         this.x - this.width * ay,
@@ -46,7 +47,6 @@ module.exports = function ( Nenkraft ) {
       );
     }
     this.boundsDirty = false;
-    this.bounds.belongsTo = this;
     return this.bounds;
   };
   Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
