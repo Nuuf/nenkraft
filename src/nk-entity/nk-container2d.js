@@ -58,6 +58,9 @@ module.exports = function ( Nenkraft ) {
       child.parent = this;
     }
   };
+  Container2D.prototype.Mount = function () {
+    this.AddChildren.apply( this, arguments );
+  };
   Container2D.prototype.AddSibling = function ( _sibling ) {
     var parent = this.parent;
     if ( parent !== null ) {
@@ -69,14 +72,14 @@ module.exports = function ( Nenkraft ) {
     var children = this.children;
     var ix = children.indexOf( _child );
     if ( ix !== -1 ) {
-      return children.splice( ix, 1 )[ 0 ];
       delete _child.parent;
+      return children.splice( ix, 1 )[ 0 ];
     }
   };
   Container2D.prototype.RemoveChildren = function () {
     var children = this.children;
     var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
-    var rChldren = [];
+    var rChildren = [];
     for ( var i = 0, l = aChildren.length, child, parent, ix; i < l; ++i ) {
       child = aChildren[ i ];
       ix = children.indexOf( child );
@@ -85,7 +88,7 @@ module.exports = function ( Nenkraft ) {
         delete child.parent;
       }
     }
-    return rChldren;
+    return rChildren;
   };
   Container2D.prototype.SendToFront = function () {
     if ( this.parent !== null ) {

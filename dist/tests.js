@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 86);
+/******/ 	return __webpack_require__(__webpack_require__.s = 87);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -206,10 +206,11 @@ var map = {
 	"./performance.test": 78,
 	"./platformer.test": 79,
 	"./playground.test": 80,
-	"./quadtree.test": 81,
-	"./rain.test": 82,
-	"./sprite.test": 83,
-	"./themask.test": 84
+	"./polygoncollision.test": 81,
+	"./quadtree.test": 82,
+	"./rain.test": 83,
+	"./sprite.test": 84,
+	"./themask.test": 85
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -286,6 +287,8 @@ module.exports = function () {
       anchor: new nk.Vector2D()
     };
 
+    var result = new nk.Math.Collision2D.AABB2DvsAABB2D.Result();
+
     lineC.path.s.SetV( aabbg1.position );
     lineC.path.e.SetV( aabbg2.position );
 
@@ -294,16 +297,18 @@ module.exports = function () {
         dragger.x = _event.data.position.x;
         dragger.y = _event.data.position.y;
 
-        var mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2 );
+        result.occured = false;
+
+        nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2, result );
 
         lineC.path.s.SetV( aabbg1.position );
         lineC.path.e.SetV( aabbg2.position );
 
         lineC.SendToFront();
 
-        if ( mtv !== null ) {
+        if ( result.occured === true ) {
           text.text = 'Well done!';
-          aabbg1.position.AddV( mtv );
+          aabbg1.position.AddV( result.mtv );
         } else text.text = 'Collide them!';
       }
     }, stage );
@@ -827,7 +832,7 @@ module.exports = function () {
     var nodes = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 16, 32 );
+      var mass = nk.Utils.RandomInteger( 12, 74 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
@@ -839,7 +844,7 @@ module.exports = function () {
         anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -1, 1 ), nk.Utils.RandomInteger( -1, 1 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -4, 4 ), nk.Utils.RandomInteger( -4, 4 ) )
       };
       g.ComputeBounds();
       g.data.timer = new nk.Timer();
@@ -856,9 +861,10 @@ module.exports = function () {
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var Response = nk.Math.Collision2D.CirclevsCircle.Relative.ElasticResponse;
+    var result = new nk.Math.Collision2D.CirclevsCircle.Result();
 
     function Process () {
-      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel, result;
+      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel;
       root.Dump();
       objs.forEach( function ( obj ) {
         root.Add( obj );
@@ -888,8 +894,9 @@ module.exports = function () {
           collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
           if ( collidee !== collider ) {
-            result = Collide( body1, body2 );
-            if ( result ) {
+            result.occured = false;
+            Collide( body1, body2, result );
+            if ( result.occured === true ) {
               collider.data.timer.Start( 10 );
               collidee.data.timer.Start( 10 );
               Response( body1, body2, result );
@@ -1127,6 +1134,8 @@ module.exports = function () {
     var graphicRectangle = new nk.Graphic2D( 450, 200, new nk.Path.AABB2D( -100, -100, 100, 100 ) );
 
     var dragger = null;
+    var dragStart = new nk.Vector2D();
+    var dragOffset = new nk.Vector2D();
 
     stage.AddChild( text );
     stage.AddChild( graphicCircle );
@@ -1139,15 +1148,19 @@ module.exports = function () {
 
     stage.mouse.onMove.Add( function ( _event ) {
       if ( dragger !== null ) {
-        dragger.x = _event.data.position.x;
-        dragger.y = _event.data.position.y;
+        dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
+        dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
       }
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragStart.SetV( p );
+
           dragger = stage.children[ i ];
+
+          dragOffset.SetV( dragger );
 
           _event.stopPropagation = true;
 
@@ -1301,6 +1314,7 @@ module.exports = function () {
     } )();
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
+    var result = new nk.Math.Collision2D.CirclevsCircle.Result();
 
 
     stage.onProcess.Add( function () {
@@ -1323,8 +1337,9 @@ module.exports = function () {
           vel.y = Math.abs( vel.y );
           particle.y = 0 + particle.path.radius;
         }
-        var result = Collide( magnet.data.body, particle.data.body );
-        if ( result ) {
+        result.occured = false;
+        Collide( magnet.data.body, particle.data.body, result );
+        if ( result.occured === true ) {
           result.mtv.Multiply( result.mtd, result.mtd );
           particle.position.AddV( result.mtv );
           vel.Set( 0, 0 );
@@ -1739,6 +1754,7 @@ module.exports = function () {
 
     var platforms = [];
     var character = null;
+    var result = new nk.Math.Collision2D.AABB2DvsAABB2D.Result();
 
     function Start () {
       InitCharacter();
@@ -1778,20 +1794,22 @@ module.exports = function () {
         character.data.force.velocity.AddV( character.data.force.jump );
       }
       for ( var i = 0, l = platforms.length; i < l; ++i ) {
-        var mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide(
+        result.occured = false;
+        nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide(
           character.data.collisionData,
-          platforms[ i ].data.collisionData
+          platforms[ i ].data.collisionData,
+          result
         );
-        if ( mtv ) {
-          if ( mtv.y < 0 && character.data.force.velocity.y > 0 ) {
+        if ( result.occured === true ) {
+          if ( result.mtv.y < 0 && character.data.force.velocity.y > 0 ) {
             character.data.force.velocity.y = 0;
             character.data.state.onGround = true;
             character.data.state.falling = false;
             character.data.state.ascending = false;
-          } else if ( mtv.y > 0 && character.data.force.velocity.y < 0 ) {
+          } else if ( result.mtv.y > 0 && character.data.force.velocity.y < 0 ) {
             character.data.force.velocity.y = 0;
           }
-          character.position.AddV( mtv );
+          character.position.AddV( result.mtv );
         }
       }
     }
@@ -1896,15 +1914,6 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, HH );
 
-    var u = new nk.Vector2D( 400, -400 );
-    var v = new nk.Vector2D( 2000, 0 );
-
-    var p = u.ProjectOnto( v );
-
-    stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, u.x, u.y ) ) );
-    stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, v.x, v.y ) ) );
-
-    stage.AddChild( new nk.Plaingraphic2D( 0, 0, new nk.Path.Line2D( 0, 0, p.x, p.y ) ) ).path.style.stroke.lineWidth = 10;
 
     document.body.removeChild( buttonContainer );
   }
@@ -1912,6 +1921,112 @@ module.exports = function () {
 
 /***/ }),
 /* 81 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'PolygonCollision' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+    var rc = c.getContext( '2d' );
+
+    var W = c.width, HW = W * 0.5;
+    var H = c.height, HH = H * 0.5;
+    var widthByHeight = W / H;
+
+    var stage = new nk.Stage2D( c, HW, HH, true );
+    stage.ticker.SetDesiredRate( 120 );
+    stage.ticker.Start();
+
+    var RI = nk.Utils.RandomInteger;
+
+    var objs = [];
+
+    var dragger = null;
+    var dragStart = new nk.Vector2D();
+    var dragOffset = new nk.Vector2D();
+
+    function CreatePolygon () {
+      var p = new nk.Path.Polygon2D();
+      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 25, 65 ), RI( 3, 8 ) );
+      var pg = new nk.Graphic2D( 0, 0, p );
+      stage.Mount( pg );
+      objs.push( {
+        shape: p,
+        relative: pg.position,
+        anchor: new nk.Vector2D()
+      } );
+    }
+
+    ( function () {
+      var i = 50;
+      while ( i-- ) {
+        CreatePolygon();
+      }
+    }() );
+
+    var Collide = nk.Math.Collision2D.PolygonvsPolygon.Relative.Collide;
+    var result = new nk.Math.Collision2D.PolygonvsPolygon.Result();
+
+    stage.onProcess.Add( function () {
+      for ( var i = 0, l = objs.length; i < l; ++i ) {
+        var obj1 = objs[ i ];
+        for ( var j = 0; j < l; ++j ) {
+          var obj2 = objs[ j ];
+          if ( obj2 === obj1 ) continue;
+          result.Reset();
+          if ( Collide( obj1, obj2, result ) ) {
+            obj1.relative.SubtractV( result.mtv );
+            obj2.relative.AddV( result.mtv );
+          }
+        }
+      }
+    } );
+
+    stage.mouse.onMove.Add( function ( _event ) {
+      if ( dragger !== null ) {
+        dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
+        dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      }
+    }, stage );
+    stage.mouse.onDown.Add( function ( _event ) {
+      var p = _event.data.position;
+      for ( var i = stage.children.length; i--; ) {
+        if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragStart.SetV( p );
+
+          dragger = stage.children[ i ];
+
+          dragOffset.SetV( dragger );
+
+          _event.stopPropagation = true;
+
+          dragger.SendToFront();
+          break;
+        }
+      }
+    }, stage );
+    stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) dragger = null;
+    } );
+
+    document.body.removeChild( buttonContainer );
+  }
+};
+
+/***/ }),
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1972,7 +2087,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2055,7 +2170,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2148,7 +2263,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2264,8 +2379,8 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 85 */,
-/* 86 */
+/* 86 */,
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

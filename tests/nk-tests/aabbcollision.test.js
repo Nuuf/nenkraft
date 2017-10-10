@@ -53,6 +53,8 @@ module.exports = function () {
       anchor: new nk.Vector2D()
     };
 
+    var result = new nk.Math.Collision2D.AABB2DvsAABB2D.Result();
+
     lineC.path.s.SetV( aabbg1.position );
     lineC.path.e.SetV( aabbg2.position );
 
@@ -61,16 +63,18 @@ module.exports = function () {
         dragger.x = _event.data.position.x;
         dragger.y = _event.data.position.y;
 
-        var mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2 );
+        result.occured = false;
+
+        nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide( obj1, obj2, result );
 
         lineC.path.s.SetV( aabbg1.position );
         lineC.path.e.SetV( aabbg2.position );
 
         lineC.SendToFront();
 
-        if ( mtv !== null ) {
+        if ( result.occured === true ) {
           text.text = 'Well done!';
-          aabbg1.position.AddV( mtv );
+          aabbg1.position.AddV( result.mtv );
         } else text.text = 'Collide them!';
       }
     }, stage );

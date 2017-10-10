@@ -48,6 +48,7 @@ module.exports = function () {
 
     var platforms = [];
     var character = null;
+    var result = new nk.Math.Collision2D.AABB2DvsAABB2D.Result();
 
     function Start () {
       InitCharacter();
@@ -87,20 +88,22 @@ module.exports = function () {
         character.data.force.velocity.AddV( character.data.force.jump );
       }
       for ( var i = 0, l = platforms.length; i < l; ++i ) {
-        var mtv = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide(
+        result.occured = false;
+        nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide(
           character.data.collisionData,
-          platforms[ i ].data.collisionData
+          platforms[ i ].data.collisionData,
+          result
         );
-        if ( mtv ) {
-          if ( mtv.y < 0 && character.data.force.velocity.y > 0 ) {
+        if ( result.occured === true ) {
+          if ( result.mtv.y < 0 && character.data.force.velocity.y > 0 ) {
             character.data.force.velocity.y = 0;
             character.data.state.onGround = true;
             character.data.state.falling = false;
             character.data.state.ascending = false;
-          } else if ( mtv.y > 0 && character.data.force.velocity.y < 0 ) {
+          } else if ( result.mtv.y > 0 && character.data.force.velocity.y < 0 ) {
             character.data.force.velocity.y = 0;
           }
-          character.position.AddV( mtv );
+          character.position.AddV( result.mtv );
         }
       }
     }

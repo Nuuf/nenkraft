@@ -15,7 +15,7 @@ module.exports = function ( Nenkraft ) {
     if ( this[ _id ] === undefined ) {
       this[ _id ] = this.next;
       this.next = this.next << 1;
-    };
+    }
   };
   Nenkraft.Utils.FlagEnum = FlagEnum;
 };

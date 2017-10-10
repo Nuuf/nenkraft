@@ -3,11 +3,19 @@ module.exports = function ( Nenkraft ) {
   function Polygon2D () {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     this.vertices = [];
+    this.normals = [];
   }
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
   //Static
   Polygon2D.TYPE = 3;
+  Polygon2D.CreateCopy = function ( _polygon ) {
+    var p = new Polygon2D();
+    for ( var i = 0, vertices = _polygon.vertices, l = vertices.length; i < l; ++i ) {
+      p.AddPoint( vertices[ i ].Copy() );
+    }
+    return p;
+  };
   Polygon2D.Construct = Object.create( null );
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
     var tl = new Nenkraft.Vector2D( _x, _y );
@@ -16,6 +24,7 @@ module.exports = function ( Nenkraft ) {
     var bl = new Nenkraft.Vector2D( _x, _y + _h );
     _po.Recreate( [ tl, tr, br, bl ] );
     _po.ComputeBounds();
+    _po.GetNormalsA();
     return _po;
   };
   Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _w, _h ) {
@@ -24,6 +33,7 @@ module.exports = function ( Nenkraft ) {
     var bl = new Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
     _po.Recreate( [ tm, br, bl ] );
     _po.ComputeBounds();
+    _po.GetNormalsA();
     return _po;
   };
   Polygon2D.Construct.Cyclic = function ( _po, _x, _y, _ra, _acc ) {
@@ -36,6 +46,7 @@ module.exports = function ( Nenkraft ) {
       _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    _po.GetNormalsA();
     return _po;
   };
   Polygon2D.Construct.Star = function ( _po, _x, _y, _ora, _ira, _cors ) {
@@ -49,6 +60,7 @@ module.exports = function ( Nenkraft ) {
       _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    _po.GetNormalsA();
     return _po;
   };
   Polygon2D.Construct.Butterfly = function ( _po, _x, _y, _n, _ra ) {
@@ -61,6 +73,7 @@ module.exports = function ( Nenkraft ) {
       _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    _po.GetNormalsA();
     return _po;
   };
   Polygon2D.Construct.Butterfly.C = {
@@ -108,6 +121,7 @@ module.exports = function ( Nenkraft ) {
       _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
     }
     _po.ComputeBounds();
+    _po.GetNormalsA();
     return _po;
   };
   Polygon2D.Construct.Supershape.C = {
@@ -131,7 +145,7 @@ module.exports = function ( Nenkraft ) {
   };
   Polygon2D.prototype.ComputeBounds = function () {
     if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
-    var mix = Infinity, max = -Infinity, miy = Infinity, may = -Infinity;
+    var mix = Infinity, max = -mix, miy = mix, may = -mix;
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
       p = ps[ i ];
       if ( p.x < mix ) mix = p.x;
@@ -145,6 +159,7 @@ module.exports = function ( Nenkraft ) {
   Polygon2D.prototype.Rotate = function ( _a, _anX, _anY, _uAABB ) {
     if ( this.dirtyBounds === true && _uAABB === true ) this.ComputeBounds();
     else if ( this.aabb === null ) this.ComputeBounds();
+    _anX = _anX === undefined ? 0.5 : _anX;
     var aabb = this.aabb;
     var ap = aabb.tl.Copy();
     ap.AddV( aabb.br );
@@ -166,11 +181,62 @@ module.exports = function ( Nenkraft ) {
     centroid.Divide( l, l );
     return centroid;
   };
+  Polygon2D.prototype.GetNormalsA = function () {
+    this.normals.length = 0;
+    var normals = this.normals;
+    for (
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      i < l;
+      vertex = vertices[ ++i ] ) {
+      normals.push( vertex.GetNormalAV( vertices[ i + 1 ] ) );
+    }
+    normals.push( vertices[ l ].GetNormalAV( vertices[ 0 ] ) );
+    return normals;
+  };
+  Polygon2D.prototype.GetNormalsB = function () {
+    this.normals.length = 0;
+    var normals = this.normals;
+    for (
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      i < l;
+      vertex = vertices[ ++i ] ) {
+      normals.push( vertex.GetNormalBV( vertices[ i + 1 ] ) );
+    }
+    normals.push( vertices[ l ].GetNormalBV( vertices[ 0 ] ) );
+    return normals;
+  };
+  Polygon2D.prototype.GetPerimeterMidPoints = function () {
+    var centers = [];
+    for (
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      i < l;
+      vertex = vertices[ ++i ] ) {
+      centers.push( vertex.GetMidPointV( vertices[ i + 1 ] ) );
+    }
+    centers.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
+    return centers;
+  };
   Polygon2D.prototype.IntersectsPoint = function ( _v ) {
     if ( this.dirtyBounds === true ) this.ComputeBounds();
     if ( this.aabb.IntersectsPoint( _v ) === false ) return false;
-    //TODO
-    return true;
+    var x = _v.x;
+    var y = _v.y;
+    var intersects = false;
+    var i, j;
+    var vertices = this.vertices;
+    var vertexi, vertexj;
+    var l = vertices.length;
+    for ( i = 0, j = l - 1; i < l; j = i++ ) {
+      vertexi = vertices[ i ];
+      vertexj = vertices[ j ];
+      if (
+        ( ( vertexi.y > y ) !== ( vertexj.y > y ) ) &&
+        ( x < ( vertexj.x - vertexi.x ) * ( y - vertexi.y ) / ( vertexj.y - vertexi.y ) + vertexi.x )
+      ) {
+        intersects = !intersects;
+      }
+    }
+    return intersects;
   };
   Nenkraft.Geom.Polygon2D = Polygon2D;
 };

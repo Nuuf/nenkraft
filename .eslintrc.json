@@ -1,6 +1,7 @@
 {
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "rules": {
     "indent": [
@@ -10,15 +11,46 @@
         "SwitchCase": 1
       }
     ],
-    "linebreak-style": [
-      "error",
-      "windows"
-    ],
     "quotes": [
       "error",
       "single"
     ],
     "semi": [
+      "error",
+      "always"
+    ],
+    "no-debugger": [
+      "error"
+    ],
+    "no-extra-semi": [
+      "error"
+    ],
+    "no-sparse-arrays": [
+      "error"
+    ],
+    "no-unreachable": [
+      "error"
+    ],
+    "default-case": [
+      "error"
+    ],
+    "no-else-return": [
+      "error"
+    ],
+    "no-loop-func": [
+      "error"
+    ],
+    "no-redeclare": [
+      "error"
+    ],
+    "no-undef": [
+      "error"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "eol-last": [
       "error",
       "always"
     ]

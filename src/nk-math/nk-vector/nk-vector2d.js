@@ -2,12 +2,12 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   function Vector2D ( _arg0, _arg1 ) {
     if ( !( this instanceof Vector2D ) ) return new Vector2D( _arg0, _arg1 );
-    if ( _arg0 !== undefined && _arg0.x !== undefined && _arg0.y !== undefined ) {
+    if ( _arg0 != undefined && _arg0.x != undefined && _arg0.y != undefined ) {
       this.x = _arg0.x;
       this.y = _arg0.y;
     }
-    else if ( _arg0 !== undefined ) {
-      if ( _arg1 === undefined ) {
+    else if ( _arg0 != undefined ) {
+      if ( _arg1 == undefined ) {
         this.x = _arg0;
         this.y = _arg0;
       }
@@ -20,6 +20,27 @@ module.exports = function ( Nenkraft ) {
   Vector2D.prototype = Object.create( null );
   Vector2D.prototype.constructor = Vector2D;
   //Static
+  Vector2D.TranslateMultiple = function ( _vectors, _vector ) {
+    for ( var i = 0, l = _vectors.length; i < l; ++i ) {
+      _vectors[ i ].AddV( _vector );
+    }
+  };
+  Vector2D.GetMinMaxDot = function ( _vectors, _axis ) {
+    var min = Infinity;
+    var max = -min;
+    var dot = 0, result = _axis.Copy();
+    for ( var i = 0, l = _vectors.length; i < l; ++i ) {
+      dot = _vectors[ i ].GetDotV( _axis );
+      if ( dot > max ) {
+        max = dot;
+      }
+      if ( dot < min ) {
+        min = dot;
+      }
+    }
+    result.Set( min, max );
+    return result;
+  };
   Vector2D.Pool = new Nenkraft.Utils.Pool( Vector2D );
   Vector2D.Pool.Retrieve = function ( _x, _y ) {
     if ( this.objects.length === 0 ) {
@@ -52,7 +73,7 @@ module.exports = function ( Nenkraft ) {
     this.y = _v.y;
   };
   Vector2D.prototype.Set = function ( _x, _y ) {
-    if ( _x !== undefined && _y === undefined ) {
+    if ( _x != undefined && _y == undefined ) {
       this.x = _x;
       this.y = _x;
     } else {
@@ -174,11 +195,11 @@ module.exports = function ( Nenkraft ) {
     return Math.atan2( this.y, this.x );
   };
   //|||||
-  Vector2D.prototype.GetAngleBetween = function ( _x, _y ) {
-    return Math.atan2( this.y - _y, this.x - _x );
-  };
   Vector2D.prototype.GetAngleBetweenV = function ( _v ) {
     return Math.atan2( this.y - _v.y, this.x - _v.x );
+  };
+  Vector2D.prototype.GetAngleBetween = function ( _x, _y ) {
+    return Math.atan2( this.y - _y, this.x - _x );
   };
   //|||||
   Vector2D.prototype.GetDotV = function ( _v ) {
@@ -222,6 +243,50 @@ module.exports = function ( Nenkraft ) {
     var d = this.Copy();
     d.Subtract( _x, _y );
     return d.GetMagnitudeSquared();
+  };
+  Vector2D.prototype.GetPerpendicularCCWV = function ( _v ) {
+    return new Vector2D( -( _v.y - this.y ), _v.x - this.x );
+  };
+  Vector2D.prototype.GetPerpendicularCCW = function ( _x, _y ) {
+    return new Vector2D( -( _y - this.y ), _x - this.x );
+  };
+  Vector2D.prototype.GetPerpendicularCWV = function ( _v ) {
+    return new Vector2D( _v.y - this.y, -( _v.x - this.x ) );
+  };
+  Vector2D.prototype.GetPerpendicularCW = function ( _x, _y ) {
+    return new Vector2D( _y - this.y, -( _x - this.x ) );
+  };
+  Vector2D.prototype.GetNormalAV = function ( _v ) {
+    var normal = this.GetPerpendicularCCWV( _v );
+    normal.Normalize();
+    return normal;
+  };
+  Vector2D.prototype.GetNormalA = function ( _x, _y ) {
+    var normal = this.GetPerpendicularCCW( _x, _y );
+    normal.Normalize();
+    return normal;
+  };
+  Vector2D.prototype.GetNormalBV = function ( _v ) {
+    var normal = this.GetPerpendicularCWV( _v );
+    normal.Normalize();
+    return normal;
+  };
+  Vector2D.prototype.GetNormalB = function ( _x, _y ) {
+    var normal = this.GetPerpendicularCW( _x, _y );
+    normal.Normalize();
+    return normal;
+  };
+  Vector2D.prototype.GetMidPointV = function ( _v ) {
+    var mp = this.Copy();
+    mp.AddV( _v );
+    mp.Divide( 2, 2 );
+    return mp;
+  };
+  Vector2D.prototype.GetMidPoint = function ( _x, _y ) {
+    var mp = this.Copy();
+    mp.Add( _x, _y );
+    mp.Multiply( 0.5, 0.5 );
+    return mp;
   };
   //|||||
   Vector2D.prototype.IsEqualTo = function ( _x, _y ) {
