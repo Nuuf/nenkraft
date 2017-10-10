@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'GrabnDrag' );
+  button.setAttribute( 'value', 'PolygonCollision' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -12,32 +12,62 @@ module.exports = function () {
     c.setAttribute( 'height', window.innerHeight );
     c.style.display = 'initial';
     c.style.position = 'absolute';
-    c.style.top = 0;
-    c.style.left = 0;
+    c.style.top = '0';
+    c.style.left = '0';
     var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
+    var widthByHeight = W / H;
 
-    var stage = new nk.Stage2D( c );
+    var stage = new nk.Stage2D( c, HW, HH, true );
+    stage.ticker.SetDesiredRate( 120 );
+    stage.ticker.Start();
 
-    var text = new nk.Text( 100, 100, 'Grab and drag' );
+    var RI = nk.Utils.RandomInteger;
 
-    var graphicCircle = new nk.Graphic2D( 350, 150, new nk.Path.Circle( 0, 0, 100 ) );
-    var graphicRectangle = new nk.Graphic2D( 450, 200, new nk.Path.AABB2D( -100, -100, 100, 100 ) );
+    var objs = [];
 
     var dragger = null;
     var dragStart = new nk.Vector2D();
     var dragOffset = new nk.Vector2D();
 
-    stage.AddChild( text );
-    stage.AddChild( graphicCircle );
-    stage.AddChild( graphicRectangle );
-
-    var t = 10;
-    while ( --t ) {
-      stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( -100, -100, 100, 100 ) ) );
+    function CreatePolygon () {
+      var p = new nk.Path.Polygon2D();
+      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 25, 65 ), RI( 3, 8 ) );
+      var pg = new nk.Graphic2D( 0, 0, p );
+      stage.Mount( pg );
+      objs.push( {
+        shape: p,
+        relative: pg.position,
+        anchor: new nk.Vector2D()
+      } );
     }
+
+    ( function () {
+      var i = 50;
+      while ( i-- ) {
+        CreatePolygon();
+      }
+    }() );
+
+    var Collide = nk.Math.Collision2D.PolygonvsPolygon.Relative.Collide;
+    var result = new nk.Math.Collision2D.PolygonvsPolygon.Result();
+
+    stage.onProcess.Add( function () {
+      for ( var i = 0, l = objs.length; i < l; ++i ) {
+        var obj1 = objs[ i ];
+        for ( var j = 0; j < l; ++j ) {
+          var obj2 = objs[ j ];
+          if ( obj2 === obj1 ) continue;
+          result.Reset();
+          if ( Collide( obj1, obj2, result ) ) {
+            obj1.relative.SubtractV( result.mtv );
+            obj2.relative.AddV( result.mtv );
+          }
+        }
+      }
+    } );
 
     stage.mouse.onMove.Add( function ( _event ) {
       if ( dragger !== null ) {
@@ -65,7 +95,6 @@ module.exports = function () {
     stage.mouse.onUp.Add( function ( _event ) {
       if ( dragger ) dragger = null;
     } );
-
 
     document.body.removeChild( buttonContainer );
   }

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.1.65 (Alpha)
+# Version 0.2.0 (Alpha)
 ------
 
 #### Nenkraft is a small rendering tool. (MIT License)
@@ -60,7 +60,7 @@ Click [here for the mini-file]
 ```javascript
     var canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
-    var stageEntity = nk.Stage2D( c, 0 /* OriginX */, 0 /* OriginY */);
+    var stageEntity = nk.Stage2D( canvas, 0 /* OriginX */, 0 /* OriginY */);
     var textEntity = nk.Text(0, 0, 'Hello World!');
     stageEntity.AddChild(textEntity);
 ```
@@ -70,7 +70,7 @@ Click [here for the mini-file]
 ```javascript
     var canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
-    var stageEntity = nk.Stage2D( c );
+    var stageEntity = nk.Stage2D( canvas );
     var imageCache = new nk.Load.TextureLoader();
     var spriteEntity = null;
     imageCache.onComplete.Add(Start);

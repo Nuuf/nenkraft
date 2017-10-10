@@ -39,7 +39,7 @@ module.exports = function () {
     var nodes = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 16, 32 );
+      var mass = nk.Utils.RandomInteger( 12, 74 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
@@ -51,7 +51,7 @@ module.exports = function () {
         anchor: new nk.Vector2D(),
         shape: g.path,
         mass: mass,
-        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -1, 1 ), nk.Utils.RandomInteger( -1, 1 ) )
+        velocity: new nk.Vector2D( nk.Utils.RandomInteger( -4, 4 ), nk.Utils.RandomInteger( -4, 4 ) )
       };
       g.ComputeBounds();
       g.data.timer = new nk.Timer();
@@ -68,9 +68,10 @@ module.exports = function () {
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var Response = nk.Math.Collision2D.CirclevsCircle.Relative.ElasticResponse;
+    var result = new nk.Math.Collision2D.CirclevsCircle.Result();
 
     function Process () {
-      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel, result;
+      var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel;
       root.Dump();
       objs.forEach( function ( obj ) {
         root.Add( obj );
@@ -100,8 +101,9 @@ module.exports = function () {
           collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
           if ( collidee !== collider ) {
-            result = Collide( body1, body2 );
-            if ( result ) {
+            result.occured = false;
+            Collide( body1, body2, result );
+            if ( result.occured === true ) {
               collider.data.timer.Start( 10 );
               collidee.data.timer.Start( 10 );
               Response( body1, body2, result );

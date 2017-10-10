@@ -19,7 +19,7 @@ module.exports = function ( Nenkraft ) {
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       if ( this.children.length > 0 ) {
-        this.RenderChildren( _rc );
+        this.RenderChildren();
       }
     }
   };

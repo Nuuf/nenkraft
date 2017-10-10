@@ -1,4 +1,4 @@
-var namespace = Object.create( null );;
+var namespace = Object.create( null );
 
 require( './nk-base/nk-base' )( namespace );
 require( './nk-math/nk-math' )( namespace );
@@ -21,14 +21,14 @@ require( './nk-math/nk-vector/nk-limit-vector2d' )( namespace );
 require( './nk-math/nk-matrix/nk-matrix2d' )( namespace );
 require( './nk-math/nk-transform/nk-basetransform2d' )( namespace );
 require( './nk-math/nk-transform/nk-transform2d' )( namespace );
-require( './nk-math/nk-collision/nk-collision2d' )( namespace );
-require( './nk-math/nk-ease' )( namespace );
-require( './nk-motion/nk-motion' )( namespace );
-require( './nk-motion/nk-motion-manager' )( namespace );
 require( './nk-geom/nk-line/nk-line2d' )( namespace );
 require( './nk-geom/nk-aabb/nk-aabb2d' )( namespace );
 require( './nk-geom/nk-polygon/nk-polygon2d' )( namespace );
 require( './nk-geom/nk-circle/nk-circle' )( namespace );
+require( './nk-math/nk-collision/nk-collision2d' )( namespace );
+require( './nk-math/nk-ease' )( namespace );
+require( './nk-motion/nk-motion' )( namespace );
+require( './nk-motion/nk-motion-manager' )( namespace );
 require( './nk-utils/nk-quadtree-node' )( namespace );
 require( './nk-input/nk-mouse' )( namespace );
 require( './nk-input/nk-keyboard' )( namespace );

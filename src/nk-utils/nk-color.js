@@ -8,7 +8,7 @@ module.exports = function ( Nenkraft ) {
       _r === undefined ? 0 : _r,
       _g === undefined ? 0 : _g,
       _b === undefined ? 0 : _b,
-      _a === undefined ? 1 : _a,
+      _a === undefined ? 1 : _a
     ];
     this.ComputeValueRGBA();
   }

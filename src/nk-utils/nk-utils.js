@@ -82,11 +82,10 @@ module.exports = function ( Nenkraft ) {
           return _obj;
         }
         return _obj[ key ];
-      } else {
-        if ( _set === true ) {
-          _obj[ key ] = _value;
-          return;
-        }
+      }
+      if ( _set === true ) {
+        _obj[ key ] = _value;
+        return;
       }
     }
   };

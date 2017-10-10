@@ -64,6 +64,7 @@ module.exports = function () {
     } )();
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
+    var result = new nk.Math.Collision2D.CirclevsCircle.Result();
 
 
     stage.onProcess.Add( function () {
@@ -86,8 +87,9 @@ module.exports = function () {
           vel.y = Math.abs( vel.y );
           particle.y = 0 + particle.path.radius;
         }
-        var result = Collide( magnet.data.body, particle.data.body );
-        if ( result ) {
+        result.occured = false;
+        Collide( magnet.data.body, particle.data.body, result );
+        if ( result.occured === true ) {
           result.mtv.Multiply( result.mtd, result.mtd );
           particle.position.AddV( result.mtv );
           vel.Set( 0, 0 );
