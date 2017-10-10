@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.2.0 (Alpha)
+# Version 0.2.1 (Alpha)
 ------
 
 #### Nenkraft is a small rendering tool. (MIT License)
@@ -26,7 +26,7 @@ Click [here for the mini-file]
 
 ```
   $ npm i -g electron
-  $ electron .
+  $ npm run electron
 ```
 
 > Optional: Just serve it

@@ -381,7 +381,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.2.0 (Alpha)';
+  Nenkraft.VERSION = '0.2.1 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -876,7 +876,6 @@ module.exports = function ( Nenkraft ) {
     this.boundsDirty = false;
     return this.bounds;
   };
-  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
   Object.defineProperty( CoreEntity2D.prototype, 'rotation', {
     get: function () {
       return this.transform.rotation;
@@ -933,6 +932,7 @@ module.exports = function ( Nenkraft ) {
       this.h = _value;
     }
   } );
+  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
 };
 
 
@@ -1710,7 +1710,6 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.IntersectsPoint = function ( _v ) {
     return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _v ) );
   };
-  Nenkraft.Geom.Circle = Circle;
   Object.defineProperty( Circle.prototype, 'x', {
     set: function ( _value ) {
       this.center.x = _value;
@@ -1738,6 +1737,7 @@ module.exports = function ( Nenkraft ) {
       return this.radiusUnsquared;
     }
   } );
+  Nenkraft.Geom.Circle = Circle;
 };
 
 
@@ -2137,7 +2137,6 @@ module.exports = function ( Nenkraft ) {
   Mouse.prototype.OnWheel = function ( _event ) {
     this.onWheel.Dispatch( this.element, { position: this.position, native: _event } );
   };
-  Nenkraft.Input.Mouse = Mouse;
   Object.defineProperty( Mouse.prototype, 'x', {
     get: function () {
       return this.position.x;
@@ -2148,6 +2147,7 @@ module.exports = function ( Nenkraft ) {
       return this.position.y;
     }
   } );
+  Nenkraft.Input.Mouse = Mouse;
 };
 
 
@@ -3489,9 +3489,6 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  /*
-  * @parameter _props: Object
-  */
   function Fill ( _props ) {
     if ( !( this instanceof Fill ) ) return new Fill( _props );
     Nenkraft.Utils.ApplyProperties( this, _props );

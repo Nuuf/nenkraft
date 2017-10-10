@@ -49,7 +49,6 @@ module.exports = function ( Nenkraft ) {
     this.boundsDirty = false;
     return this.bounds;
   };
-  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
   Object.defineProperty( CoreEntity2D.prototype, 'rotation', {
     get: function () {
       return this.transform.rotation;
@@ -106,4 +105,5 @@ module.exports = function ( Nenkraft ) {
       this.h = _value;
     }
   } );
+  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
 };
