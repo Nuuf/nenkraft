@@ -1,8 +1,5 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
-  /*
-  * @parameter _props: Object
-  */
   function Fill ( _props ) {
     if ( !( this instanceof Fill ) ) return new Fill( _props );
     Nenkraft.Utils.ApplyProperties( this, _props );

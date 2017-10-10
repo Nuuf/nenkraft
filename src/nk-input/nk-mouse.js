@@ -53,7 +53,6 @@ module.exports = function ( Nenkraft ) {
   Mouse.prototype.OnWheel = function ( _event ) {
     this.onWheel.Dispatch( this.element, { position: this.position, native: _event } );
   };
-  Nenkraft.Input.Mouse = Mouse;
   Object.defineProperty( Mouse.prototype, 'x', {
     get: function () {
       return this.position.x;
@@ -64,4 +63,5 @@ module.exports = function ( Nenkraft ) {
       return this.position.y;
     }
   } );
+  Nenkraft.Input.Mouse = Mouse;
 };

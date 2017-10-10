@@ -62,6 +62,7 @@ module.exports = function () {
           if ( obj2 === obj1 ) continue;
           result.Reset();
           if ( Collide( obj1, obj2, result ) ) {
+            result.mtv.Divide( 2, 2 );
             obj1.relative.SubtractV( result.mtv );
             obj2.relative.AddV( result.mtv );
           }

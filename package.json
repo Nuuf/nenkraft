@@ -2,8 +2,8 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.2.0",
-  "main": "./electron/main.js",
+  "version": "0.2.1",
+  "main": "index.js",
   "devDependencies": {
     "autoprefixer": "*",
     "css-loader": "*",
@@ -30,6 +30,7 @@
     "start": "npm run s-d node deve-server.js",
     "build-dev": "npm run clean && npm run s-d webpack",
     "build": "npm run clean && npm run s-p webpack",
-    "build-x": "npm run clean && npm run s-p webpack && npm run s-p webpack -- --env.bigBundle && npm run copy-to-server"
+    "build-x": "npm run clean && npm run s-p webpack && npm run s-p webpack -- --env.bigBundle && npm run copy-to-server",
+    "electron": "electron ./electron/main.js"
   }
 }

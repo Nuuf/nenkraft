@@ -25,7 +25,6 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.IntersectsPoint = function ( _v ) {
     return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _v ) );
   };
-  Nenkraft.Geom.Circle = Circle;
   Object.defineProperty( Circle.prototype, 'x', {
     set: function ( _value ) {
       this.center.x = _value;
@@ -53,4 +52,5 @@ module.exports = function ( Nenkraft ) {
       return this.radiusUnsquared;
     }
   } );
+  Nenkraft.Geom.Circle = Circle;
 };
