@@ -8,7 +8,7 @@ module.exports = function ( Nenkraft ) {
     this.onEnd = new Nenkraft.Event.LocalEvent();
     this.onStop = new Nenkraft.Event.LocalEvent();
     this.onStart = new Nenkraft.Event.LocalEvent();
-    if ( _rate !== undefined ) this.rate = _rate;
+    if ( _rate != undefined ) this.rate = _rate;
   }
   Animation.prototype = Object.create( null );
   Animation.prototype.constructor = Animation;
@@ -29,7 +29,7 @@ module.exports = function ( Nenkraft ) {
   Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
     for ( var i = 0, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
       rate = _data[ i ];
-      this.AddFrame(( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
+      this.AddFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
     }
   };
   Animation.prototype.SetFrame = function ( _index ) {

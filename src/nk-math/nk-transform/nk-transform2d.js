@@ -21,7 +21,7 @@ module.exports = function ( Nenkraft ) {
   Transform2D.prototype.skewSY = 1;
   //Methods
   Transform2D.prototype.UpdateLocal = function () {
-    var localTransform = this.localTransform, position = this.position, scale = this.scale, skew = this.skew, pivot = this.pivot;
+    var localTransform = this.localTransform, position = this.position, scale = this.scale, pivot = this.pivot;
 
     localTransform.a = this.skewCX * scale.x;
     localTransform.b = this.skewSX * scale.x;
@@ -34,7 +34,7 @@ module.exports = function ( Nenkraft ) {
     return localTransform;
   };
   Transform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
-    var localTransform = this.localTransform, worldTransform = this.worldTransform, position = this.position, scale = this.scale, skew = this.skew, pivot = this.pivot;
+    var localTransform = this.localTransform, worldTransform = this.worldTransform, position = this.position, scale = this.scale, pivot = this.pivot;
 
     localTransform.a = this.skewCX * scale.x;
     localTransform.b = this.skewSX * scale.x;

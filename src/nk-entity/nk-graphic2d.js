@@ -25,6 +25,9 @@ module.exports = function ( Nenkraft ) {
   //Members
   Graphic2D.prototype.path = null;
   Graphic2D.prototype.anchor = null;
+  Graphic2D.prototype.alpha = 1.0;
+  Graphic2D.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Graphic2D.prototype.interactive = true;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -35,6 +38,8 @@ module.exports = function ( Nenkraft ) {
       this.transform.ApplyWorld( _rc );
       var path = this.path;
       if ( path && path.Draw && this.display === true ) {
+        _rc.globalAlpha = this.alpha;
+        _rc.globalCompositeOperation = this.gco;
         path.Draw( _rc );
       }
       if ( this.children.length > 0 ) {
@@ -43,6 +48,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );

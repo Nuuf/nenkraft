@@ -52,6 +52,8 @@ module.exports = function () {
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
+          dragger.gco = nk.Style.GCO.MULTIPLY;
+          dragger.scale.Set( 2, 2 );
 
           dragOffset.SetV( dragger );
 
@@ -63,7 +65,11 @@ module.exports = function () {
       }
     }, stage );
     stage.mouse.onUp.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
+      if ( dragger ) {
+        dragger.gco = nk.Style.GCO.DEFAULT;
+        dragger.scale.Set( 1, 1 );
+        dragger = null;
+      }
     } );
 
 

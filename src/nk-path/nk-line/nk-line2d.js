@@ -14,7 +14,7 @@ module.exports = function ( Nenkraft ) {
 
   //Methods
   Line2D.prototype.Draw = function ( _rc ) {
-    var s = this.s, e = this.e, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
+    var s = this.s, e = this.e, style = this.style, stroke = style.stroke, shadow = style.shadow;
     _rc.beginPath();
     _rc.moveTo( s.x, s.y );
     _rc.lineTo( e.x, e.y );
@@ -26,4 +26,5 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Nenkraft.Path.Line2D = Line2D;
+  Nenkraft.Path.Ray2D = Line2D;
 };

@@ -13,8 +13,9 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Text.prototype.text = '';
-  Text.prototype.visible = true;
   Text.prototype.maxWidth = undefined;
+  Text.prototype.alpha = 1.0;
+  Text.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -30,6 +31,8 @@ module.exports = function ( Nenkraft ) {
         }
         if ( style.text.applied === true ) {
           style.text.Apply( _rc );
+          _rc.globalAlpha = this.alpha;
+          _rc.globalCompositeOperation = this.gco;
           _rc.fillText( this.text, 0, 0, this.maxWidth );
           _rc.strokeText( this.text, 0, 0, this.maxWidth );
         }
@@ -39,7 +42,7 @@ module.exports = function ( Nenkraft ) {
       }
     }
   };
-  Text.prototype.IntersectsPoint = function ( _v ) {
+  Text.prototype.IntersectsPoint = function () {
     return false;
   };
   Nenkraft.Entity.Text = Text;

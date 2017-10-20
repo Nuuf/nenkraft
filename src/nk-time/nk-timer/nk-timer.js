@@ -20,17 +20,22 @@ module.exports = function ( Nenkraft ) {
   Timer.prototype.canResume = false;
   Timer.prototype.count = 0;
   //Methods
-  Timer.prototype.Reset = function ( _stopTime ) {
+  Timer.prototype.Reset = function () {
     this.onReset.Dispatch( this, null );
     this.count = 0;
+    this.time = 0;
+    this.isRunning = false;
+    this.canResume = false;
+    this.stopTime = null;
   };
   Timer.prototype.Start = function ( _stopTime ) {
     this.stopTime = Math.round( _stopTime === undefined ? this.stopTime : _stopTime );
-    if ( this.stopTime <= 0 ) return;
-    this.time = 0;
-    this.isRunning = true;
-    this.canResume = false;
-    this.onStart.Dispatch( this, { stopTime: this.stopTime } );
+    if ( this.stopTime > 0 ) {
+      this.time = 0;
+      this.isRunning = true;
+      this.canResume = false;
+      this.onStart.Dispatch( this, { stopTime: this.stopTime } );
+    }
   };
   Timer.prototype.Stop = function () {
     if ( this.isRunning === true ) {

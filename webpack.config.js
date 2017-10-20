@@ -1,5 +1,7 @@
 var webpack = require( 'webpack' ),
   path = require( 'path' ),
+  os = require( 'os' ),
+  colors = require( 'colors/safe' ),
   ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
   HTMLWebpackPlugin = require( 'html-webpack-plugin' ),
   PRODUCTION = process.env.NODE_ENV === 'production',
@@ -49,10 +51,10 @@ var cssLoader = PRODUCTION
   } )
   : [ 'style-loader', 'css-loader?localIdentName=' + cssIdentifier, 'postcss-loader' ];
 
-console.log( JSON.stringify( entry.nk ), 'entry nk' );
-console.log( JSON.stringify( entry.tests ), 'entry tests' );
-console.log( JSON.stringify( entry.nkb ), 'entry nkb' );
-console.log( JSON.stringify( plugins ), 'plugins' );
+console.log( JSON.stringify( entry.nk ) || colors.red( 'undefined' ), os.EOL + 'entry nk' );
+console.log( JSON.stringify( entry.tests ) || colors.red( 'undefined' ), os.EOL + 'entry tests' );
+console.log( JSON.stringify( entry.nkb ) || colors.red( 'undefined' ), os.EOL + 'entry nkb' );
+console.log( JSON.stringify( plugins ) || colors.red( 'undefined' ), os.EOL + 'plugins' );
 
 module.exports = function ( env ) {
   var fileName = '[name].min.js';

@@ -7,19 +7,19 @@ module.exports = function ( Nenkraft ) {
   Collision2D.CirclevsCircle.Relative = Object.create( null );
   Collision2D.PolygonvsPolygon = Object.create( null );
   Collision2D.PolygonvsPolygon.Relative = Object.create( null );
+  Collision2D.CirclevsLine = Object.create( null );
+  Collision2D.CirclevsLine.Relative = Object.create( null );
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
     return _a.GetMagnitudeSquared() - _b.GetMagnitudeSquared();
   };
   var V2DMMD = Nenkraft.Vector2D.GetMinMaxDot;
-  var P2DCC = Nenkraft.Geom.Polygon2D.CreateCopy;
-  var V2DTM = Nenkraft.Vector2D.TranslateMultiple;
+  var CPOL = Nenkraft.Math.ClosestPointOnLine;
   Collision2D.AABB2DvsAABB2D.Result = function () {
-
+    this.mtv = new Nenkraft.Vector2D();
   };
-  Collision2D.AABB2DvsAABB2D.Result.prototype.mtv = null;
   Collision2D.AABB2DvsAABB2D.Result.prototype.occured = false;
   Collision2D.AABB2DvsAABB2D.Result.prototype.Reset = function () {
-    this.mtv = null;
+    this.mtv.Set( 0, 0 );
     this.occured = false;
   };
   Collision2D.AABB2DvsAABB2D.Relative.Collide = function ( _obj1, _obj2, _result ) {
@@ -53,7 +53,7 @@ module.exports = function ( Nenkraft ) {
           new Nenkraft.Vector2D( 0, br1yh - tl2.y )
         ];
         tvs.sort( Collision2D.VectorSortMinMag );
-        _result.mtv = tvs[ 0 ];
+        _result.mtv.SetV( tvs[ 0 ] );
         _result.occured = true;
       }
       return true;
@@ -61,13 +61,13 @@ module.exports = function ( Nenkraft ) {
     return false;
   };
   Collision2D.CirclevsCircle.Result = function () {
+    this.mtv = new Nenkraft.Vector2D( 0, 0 );
     this.poc = {
       a: null,
       b: null,
       c: null
     };
   };
-  Collision2D.CirclevsCircle.Result.prototype.mtv = null;
   Collision2D.CirclevsCircle.Result.prototype.mtd = 0;
   Collision2D.CirclevsCircle.Result.prototype.delta = null;
   Collision2D.CirclevsCircle.Result.prototype.occured = false;
@@ -75,7 +75,7 @@ module.exports = function ( Nenkraft ) {
     this.poc.a = null;
     this.poc.b = null;
     this.poc.c = null;
-    this.mtv = null;
+    this.mtv.Set( 0, 0 );
     this.mtd = 0;
     this.delta = null;
     this.occured = false;
@@ -122,7 +122,7 @@ module.exports = function ( Nenkraft ) {
         _result.poc.a = poc1;
         _result.poc.b = poc2;
         _result.poc.c = poc3;
-        _result.mtv = mtv;
+        _result.mtv.SetV( mtv );
         _result.mtd = mtd;
         _result.delta = delta;
         _result.occured = true;
@@ -240,6 +240,64 @@ module.exports = function ( Nenkraft ) {
       _result.occured = true;
     }
     return true;
+  };
+  Collision2D.CirclevsLine.Result = function () {
+    this.mtv = new Nenkraft.Vector2D( 0, 0 );
+    this.cp = new Nenkraft.Vector2D( 0, 0 );
+  };
+  Collision2D.CirclevsLine.Result.prototype.occured = false;
+  Collision2D.CirclevsLine.Result.prototype.sore = 0;
+  Collision2D.CirclevsLine.Result.prototype.Reset = function () {
+    this.mtv.Set( 0, 0 );
+    this.cp.Set( 0, 0 );
+    this.occured = false;
+    this.sore = 0;
+  };
+  Collision2D.CirclevsLine.Relative.Collide = function ( _c, _l, _result ) {
+    var lshape = _l.shape;
+    var cshape = _c.shape;
+    var lpos = _l.relative;
+    var cpos = _c.relative;
+    var s = lshape.s.AddVC( lpos );
+    var e = lshape.e.AddVC( lpos );
+    var cp = CPOL( s, e, cpos );
+    var delta = cpos.SubtractVC( cp );
+    var distanceSq = delta.GetMagnitudeSquared();
+    if ( distanceSq < cshape.radiusSquared ) {
+      if ( _result ) {
+        var mtv = delta;
+        var distance = cshape.radius - Math.sqrt( distanceSq );
+        mtv.Normalize();
+        mtv.Multiply( distance, distance );
+        _result.mtv.SetV( mtv );
+        _result.cp.SetV( cp );
+        _result.occured = true;
+        if ( cp === s ) {
+          _result.sore = 1;
+        } else if ( cp === e ) {
+          _result.sore = 2;
+        }
+      }
+      return true;
+    }
+    return false;
+  };
+  Collision2D.CirclevsLine.Relative.ReflectingResponse = function ( _c, _l, _result ) {
+    var lshape = _l.shape;
+    var cvel = _c.velocity;
+    var cpos = _c.relative;
+    var n;
+    var refl;
+    var cp = _result.cp;
+    if ( _result.sore !== 0 ) {
+      n = cp.SubtractVC( cpos );
+      n.Normalize();
+    } else {
+      n = lshape.GetNormalA();
+    }
+    refl = cvel.GetReflectionV( n );
+    cvel.SetV( refl );
+    cpos.AddV( _result.mtv );
   };
 
   Nenkraft.Math.Collision2D = Collision2D;

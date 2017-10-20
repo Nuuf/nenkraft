@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 86);
+/******/ 	return __webpack_require__(__webpack_require__.s = 89);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -181,7 +181,7 @@ module.exports = function ( Nenkraft ) {
     this.onEnd = new Nenkraft.Event.LocalEvent();
     this.onStop = new Nenkraft.Event.LocalEvent();
     this.onStart = new Nenkraft.Event.LocalEvent();
-    if ( _rate !== undefined ) this.rate = _rate;
+    if ( _rate != undefined ) this.rate = _rate;
   }
   Animation.prototype = Object.create( null );
   Animation.prototype.constructor = Animation;
@@ -202,7 +202,7 @@ module.exports = function ( Nenkraft ) {
   Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
     for ( var i = 0, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
       rate = _data[ i ];
-      this.AddFrame(( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
+      this.AddFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
     }
   };
   Animation.prototype.SetFrame = function ( _index ) {
@@ -381,7 +381,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.2.1 (Alpha)';
+  Nenkraft.VERSION = '0.3.0 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -628,8 +628,6 @@ module.exports = function ( Nenkraft ) {
   //Static
   //Members
   //Methods
-  delete Case2D.prototype.Draw;
-  delete Case2D.prototype.DrawChildren;
   Case2D.prototype.Render = function () {
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
@@ -647,6 +645,10 @@ module.exports = function ( Nenkraft ) {
       if ( child.Render ) child.Render();
     }
   };
+  delete Case2D.prototype.Draw;
+  delete Case2D.prototype.DrawChildren;
+  delete Case2D.prototype.alpha;
+  delete Case2D.prototype.gco;
   Nenkraft.Entity.Case2D = Case2D;
   Nenkraft.Case2D = Case2D;
 };
@@ -671,7 +673,6 @@ module.exports = function ( Nenkraft ) {
   //Members
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
-  Container2D.prototype.alpha = 1.0;
   Container2D.prototype.transformShouldUpdate = true;
   Container2D.prototype.transformAutomaticUpdate = true;
   //Methods
@@ -738,7 +739,7 @@ module.exports = function ( Nenkraft ) {
     var children = this.children;
     var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
     var rChildren = [];
-    for ( var i = 0, l = aChildren.length, child, parent, ix; i < l; ++i ) {
+    for ( var i = 0, l = aChildren.length, child, ix; i < l; ++i ) {
       child = aChildren[ i ];
       ix = children.indexOf( child );
       if ( ix !== -1 ) {
@@ -859,7 +860,7 @@ module.exports = function ( Nenkraft ) {
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
     if ( this.bounds === null ) {
       this.bounds = new Nenkraft.Geom.AABB2D(
-        this.x - this.width * ay,
+        this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
         this.y + this.height
@@ -867,7 +868,7 @@ module.exports = function ( Nenkraft ) {
       this.bounds.belongsTo = this;
     } else {
       this.bounds.Set(
-        this.x - this.width * ay,
+        this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
         this.y + this.height
@@ -967,6 +968,9 @@ module.exports = function ( Nenkraft ) {
   //Members
   Graphic2D.prototype.path = null;
   Graphic2D.prototype.anchor = null;
+  Graphic2D.prototype.alpha = 1.0;
+  Graphic2D.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Graphic2D.prototype.interactive = true;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -977,6 +981,8 @@ module.exports = function ( Nenkraft ) {
       this.transform.ApplyWorld( _rc );
       var path = this.path;
       if ( path && path.Draw && this.display === true ) {
+        _rc.globalAlpha = this.alpha;
+        _rc.globalCompositeOperation = this.gco;
         path.Draw( _rc );
       }
       if ( this.children.length > 0 ) {
@@ -985,6 +991,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );
@@ -1035,7 +1042,7 @@ module.exports = function ( Nenkraft ) {
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
     if ( this.bounds === null ) {
       this.bounds = new Nenkraft.Geom.AABB2D(
-        this.x - this.width * ay,
+        this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
         this.y + this.height
@@ -1043,7 +1050,7 @@ module.exports = function ( Nenkraft ) {
       this.bounds.belongsTo = this;
     } else {
       this.bounds.Set(
-        this.x - this.width * ay,
+        this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
         this.y + this.height
@@ -1091,7 +1098,7 @@ module.exports = function ( Nenkraft ) {
     }
   } );
   Object.defineProperty( Plain2D.prototype, 'x', {
-    get: function ( _value ) {
+    get: function () {
       return this.transform.position.x;
     },
     set: function ( _value ) {
@@ -1099,7 +1106,7 @@ module.exports = function ( Nenkraft ) {
     }
   } );
   Object.defineProperty( Plain2D.prototype, 'y', {
-    get: function ( _value ) {
+    get: function () {
       return this.transform.position.y;
     },
     set: function ( _value ) {
@@ -1159,6 +1166,7 @@ module.exports = function ( Nenkraft ) {
   //Members
   Plaingraphic2D.prototype.path = null;
   Plaingraphic2D.prototype.anchor = null;
+  Plaingraphic2D.prototype.interactive = true;
   //Methods
   Plaingraphic2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -1174,6 +1182,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Plaingraphic2D.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );
@@ -1227,6 +1236,7 @@ module.exports = function ( Nenkraft ) {
   Plainsprite.prototype.clip = null;
   Plainsprite.prototype.texture = null;
   Plainsprite.prototype.anchor = null;
+  Plainsprite.prototype.interactive = true;
   //Methods
   Plainsprite.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -1245,6 +1255,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Plainsprite.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
     return this.shape.IntersectsPoint( cv );
@@ -1305,6 +1316,9 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.clip = null;
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
+  Sprite.prototype.alpha = 1.0;
+  Sprite.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Sprite.prototype.interactive = true;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -1315,6 +1329,8 @@ module.exports = function ( Nenkraft ) {
       this.transform.ApplyWorld( _rc );
       if ( this.display === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
+        _rc.globalAlpha = this.alpha;
+        _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
           this.texture,
           tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
@@ -1326,6 +1342,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Sprite.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
     cv.DivideV( this.scale );
@@ -1387,6 +1404,8 @@ module.exports = function ( Nenkraft ) {
     this.Draw( rc );
     this.onProcess.Dispatch( this, _delta );
   };
+  delete Stage2D.prototype.alpha;
+  delete Stage2D.prototype.gco;
   Nenkraft.Entity.Stage2D = Stage2D;
   Nenkraft.Stage2D = Stage2D;
 };
@@ -1411,8 +1430,9 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Text.prototype.text = '';
-  Text.prototype.visible = true;
   Text.prototype.maxWidth = undefined;
+  Text.prototype.alpha = 1.0;
+  Text.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -1428,6 +1448,8 @@ module.exports = function ( Nenkraft ) {
         }
         if ( style.text.applied === true ) {
           style.text.Apply( _rc );
+          _rc.globalAlpha = this.alpha;
+          _rc.globalCompositeOperation = this.gco;
           _rc.fillText( this.text, 0, 0, this.maxWidth );
           _rc.strokeText( this.text, 0, 0, this.maxWidth );
         }
@@ -1437,7 +1459,7 @@ module.exports = function ( Nenkraft ) {
       }
     }
   };
-  Text.prototype.IntersectsPoint = function ( _v ) {
+  Text.prototype.IntersectsPoint = function () {
     return false;
   };
   Nenkraft.Entity.Text = Text;
@@ -1747,6 +1769,8 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
+  var LLI = Nenkraft.Math.LineLineIntersection;
+  var CPOL = Nenkraft.Math.ClosestPointOnLine;
   function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
     if ( _arg0 !== undefined && _arg0.x != null && _arg0.y != null && _arg1 !== undefined && _arg1.x != null && _arg1.y != null ) {
@@ -1768,26 +1792,57 @@ module.exports = function ( Nenkraft ) {
   Line2D.TYPE = 0;
   //Members
   Line2D.prototype.TYPE = Line2D.TYPE;
+  Line2D.prototype.epsilon = 1000;
   //Methods
-  Line2D.prototype.Stretch = function ( _m ) {
-    var hm = _m * 0.5;
+  Line2D.prototype.Stretch = function ( _magnitude ) {
+    var hm = _magnitude * 0.5;
     this.s.PushFromV( this.e, hm );
     this.e.PushFromV( this.s, hm );
   };
-  Line2D.prototype.Rotate = function ( _a, _anX, _anY ) {
+  Line2D.prototype.Rotate = function ( _angle, _anchorX, _anchorY ) {
+    _anchorX = _anchorX == undefined ? 0.5 : _anchorX;
     var ap = this.s.Copy();
     ap.AddV( this.e );
-    ap.Multiply( _anX, _anY === undefined ? _anX : _anY );
-    this.s.RotateAroundV( ap, _a );
-    this.e.RotateAroundV( ap, _a );
+    ap.Multiply( _anchorX, _anchorY == undefined ? _anchorX : _anchorY );
+    this.s.RotateAroundV( ap, _angle );
+    this.e.RotateAroundV( ap, _angle );
   };
   Line2D.prototype.GetLength = function () {
     return this.s.GetDistanceV( this.e );
   };
-  Line2D.prototype.IntersectsPoint = function () {
-    return false;
+  Line2D.prototype.GetLengthSquared = function () {
+    return this.s.GetDistanceSquaredV( this.e );
+  };
+  Line2D.prototype.IntersectsPoint = function ( _v ) {
+    var s = this.s;
+    var e = this.e;
+    var cross = ( _v.y - s.y ) * ( e.x - s.x ) - ( _v.x - s.x ) * ( e.y - s.y );
+    if ( Math.abs( cross ) > this.epsilon ) {
+      return false;
+    }
+    var dot = ( _v.x - s.x ) * ( e.x - s.x ) + ( _v.y - s.y ) * ( e.y - s.y );
+    if ( dot < 0 ) {
+      return false;
+    }
+    if ( dot > this.GetLengthSquared() ) {
+      return false;
+    }
+    return true;
+  };
+  Line2D.prototype.IntersectsLine = function ( _line ) {
+    return LLI( this.s, this.e, _line.s, _line.e );
+  };
+  Line2D.prototype.GetClosestPointTo = function ( _v ) {
+    return CPOL( this.s, this.e, _v );
+  };
+  Line2D.prototype.GetNormalA = function () {
+    return this.s.GetNormalAV( this.e );
+  };
+  Line2D.prototype.GetNormalB = function () {
+    return this.s.GetNormalBV( this.e );
   };
   Nenkraft.Geom.Line2D = Line2D;
+  Nenkraft.Geom.Ray2D = Line2D;
 };
 
 
@@ -1801,6 +1856,8 @@ module.exports = function ( Nenkraft ) {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     this.vertices = [];
     this.normals = [];
+    this.perimeterMidPoints = [];
+    this.centroid = new Nenkraft.Vector2D();
   }
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
@@ -1824,7 +1881,7 @@ module.exports = function ( Nenkraft ) {
     _po.GetNormalsA();
     return _po;
   };
-  Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _w, _h ) {
+  Polygon2D.Construct.Isosceles = function ( _po, _x, _y, _w, _h ) {
     var tm = new Nenkraft.Vector2D( _x, _y );
     var br = new Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
     var bl = new Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
@@ -1834,8 +1891,8 @@ module.exports = function ( Nenkraft ) {
     return _po;
   };
   Polygon2D.Construct.Cyclic = function ( _po, _x, _y, _ra, _acc ) {
-    _po.Recreate( [] );
     var i = 0, l = _acc, x, y, th, an = Math.PI * 2 / l;
+    _po.Recreate( [] );
     for ( i; i < l; ++i ) {
       th = an * i;
       x = Math.cos( th ) * _ra;
@@ -1846,9 +1903,27 @@ module.exports = function ( Nenkraft ) {
     _po.GetNormalsA();
     return _po;
   };
-  Polygon2D.Construct.Star = function ( _po, _x, _y, _ora, _ira, _cors ) {
+  Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _side ) {
+    var an = 2.0943951023931953;
+    var x, y;
     _po.Recreate( [] );
+    x = Math.cos( 0 ) * _side;
+    y = Math.sin( 0 ) * _side;
+    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    x = Math.cos( an ) * _side;
+    y = Math.sin( an ) * _side;
+    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    x = Math.cos( an * 2 ) * _side;
+    y = Math.sin( an * 2 ) * _side;
+    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.Rotate( Nenkraft.Math.RADIAN * -90 );
+    _po.ComputeBounds();
+    _po.GetNormalsA();
+    return _po;
+  };
+  Polygon2D.Construct.Star = function ( _po, _x, _y, _ora, _ira, _cors ) {
     var i = 0, l = _cors * 2, x, y, th, an = Math.PI * 2 / l, ra;
+    _po.Recreate( [] );
     for ( i; i < l; ++i ) {
       ra = ( i & 1 ) === 0 ? _ora : _ira;
       th = an * i;
@@ -1861,8 +1936,8 @@ module.exports = function ( Nenkraft ) {
     return _po;
   };
   Polygon2D.Construct.Butterfly = function ( _po, _x, _y, _n, _ra ) {
-    _po.Recreate( [] );
     var i = 0, x, y, u, c = Polygon2D.Construct.Butterfly.C;
+    _po.Recreate( [] );
     for ( i; i < _n; ++i ) {
       u = i * c._1 * Math.PI / _n;
       x = Math.cos( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
@@ -1891,8 +1966,8 @@ module.exports = function ( Nenkraft ) {
     _n1 = _n1 === undefined ? 1 : _n1;
     _n2 = _n2 === undefined ? 1 : _n2;
     _n3 = _n3 === undefined ? 1 : _n3;
-    _po.Recreate( [] );
     var i = 0, l = _acc, x, y, a, r, c = Polygon2D.Construct.Supershape.C, t1, t2;
+    _po.Recreate( [] );
     for ( i; i < l; ++i ) {
       a = i * Math.PI * 2 / _acc;
 
@@ -1937,8 +2012,8 @@ module.exports = function ( Nenkraft ) {
     this.vertices = this.vertices.concat( _ps );
   };
   Polygon2D.prototype.Recreate = function ( _ps ) {
-    if ( _ps !== undefined ) this.vertices = _ps;
-    else this.vertices.length = 0;
+    this.vertices.length = 0;
+    if ( _ps != undefined ) this.vertices = this.vertices.concat( _ps );
   };
   Polygon2D.prototype.ComputeBounds = function () {
     if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
@@ -1953,24 +2028,24 @@ module.exports = function ( Nenkraft ) {
     this.aabb.Set( mix, miy, max, may );
     this.dirtyBounds = false;
   };
-  Polygon2D.prototype.Rotate = function ( _a, _anX, _anY, _uAABB ) {
-    if ( this.dirtyBounds === true && _uAABB === true ) this.ComputeBounds();
+  Polygon2D.prototype.Rotate = function ( _angle, _anchorX, _anchorY, _updateBounds ) {
+    if ( this.dirtyBounds === true && _updateBounds === true ) this.ComputeBounds();
     else if ( this.aabb === null ) this.ComputeBounds();
-    _anX = _anX === undefined ? 0.5 : _anX;
+    _anchorX = _anchorX === undefined ? 0.5 : _anchorX;
     var aabb = this.aabb;
     var ap = aabb.tl.Copy();
     ap.AddV( aabb.br );
-    ap.Multiply( _anX, _anY === undefined ? _anX : _anY );
+    ap.Multiply( _anchorX, _anchorY === undefined ? _anchorX : _anchorY );
     var i = 0, ps = this.vertices, l = ps.length, p;
-    _a = _a;
     for ( i; i < l; ++i ) {
       p = ps[ i ];
-      p.RotateAroundV( ap, _a );
+      p.RotateAroundV( ap, _angle );
     }
     this.dirtyBounds = true;
   };
   Polygon2D.prototype.GetCentroid = function () {
-    var centroid = new Nenkraft.Vector2D();
+    var centroid = this.centroid;
+    centroid.Set( 0, 0 );
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
       p = ps[ i ];
       centroid.AddV( p );
@@ -1979,8 +2054,8 @@ module.exports = function ( Nenkraft ) {
     return centroid;
   };
   Polygon2D.prototype.GetNormalsA = function () {
-    this.normals.length = 0;
     var normals = this.normals;
+    normals.length = 0;
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -1991,8 +2066,8 @@ module.exports = function ( Nenkraft ) {
     return normals;
   };
   Polygon2D.prototype.GetNormalsB = function () {
-    this.normals.length = 0;
     var normals = this.normals;
+    normals.length = 0;
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -2003,15 +2078,16 @@ module.exports = function ( Nenkraft ) {
     return normals;
   };
   Polygon2D.prototype.GetPerimeterMidPoints = function () {
-    var centers = [];
+    var perimeterMidPoints = this.perimeterMidPoints;
+    perimeterMidPoints.length = 0;
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
-      centers.push( vertex.GetMidPointV( vertices[ i + 1 ] ) );
+      perimeterMidPoints.push( vertex.GetMidPointV( vertices[ i + 1 ] ) );
     }
-    centers.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
-    return centers;
+    perimeterMidPoints.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
+    return perimeterMidPoints;
   };
   Polygon2D.prototype.IntersectsPoint = function ( _v ) {
     if ( this.dirtyBounds === true ) this.ComputeBounds();
@@ -2230,19 +2306,19 @@ module.exports = function ( Nenkraft ) {
   Collision2D.CirclevsCircle.Relative = Object.create( null );
   Collision2D.PolygonvsPolygon = Object.create( null );
   Collision2D.PolygonvsPolygon.Relative = Object.create( null );
+  Collision2D.CirclevsLine = Object.create( null );
+  Collision2D.CirclevsLine.Relative = Object.create( null );
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
     return _a.GetMagnitudeSquared() - _b.GetMagnitudeSquared();
   };
   var V2DMMD = Nenkraft.Vector2D.GetMinMaxDot;
-  var P2DCC = Nenkraft.Geom.Polygon2D.CreateCopy;
-  var V2DTM = Nenkraft.Vector2D.TranslateMultiple;
+  var CPOL = Nenkraft.Math.ClosestPointOnLine;
   Collision2D.AABB2DvsAABB2D.Result = function () {
-
+    this.mtv = new Nenkraft.Vector2D();
   };
-  Collision2D.AABB2DvsAABB2D.Result.prototype.mtv = null;
   Collision2D.AABB2DvsAABB2D.Result.prototype.occured = false;
   Collision2D.AABB2DvsAABB2D.Result.prototype.Reset = function () {
-    this.mtv = null;
+    this.mtv.Set( 0, 0 );
     this.occured = false;
   };
   Collision2D.AABB2DvsAABB2D.Relative.Collide = function ( _obj1, _obj2, _result ) {
@@ -2276,7 +2352,7 @@ module.exports = function ( Nenkraft ) {
           new Nenkraft.Vector2D( 0, br1yh - tl2.y )
         ];
         tvs.sort( Collision2D.VectorSortMinMag );
-        _result.mtv = tvs[ 0 ];
+        _result.mtv.SetV( tvs[ 0 ] );
         _result.occured = true;
       }
       return true;
@@ -2284,13 +2360,13 @@ module.exports = function ( Nenkraft ) {
     return false;
   };
   Collision2D.CirclevsCircle.Result = function () {
+    this.mtv = new Nenkraft.Vector2D( 0, 0 );
     this.poc = {
       a: null,
       b: null,
       c: null
     };
   };
-  Collision2D.CirclevsCircle.Result.prototype.mtv = null;
   Collision2D.CirclevsCircle.Result.prototype.mtd = 0;
   Collision2D.CirclevsCircle.Result.prototype.delta = null;
   Collision2D.CirclevsCircle.Result.prototype.occured = false;
@@ -2298,7 +2374,7 @@ module.exports = function ( Nenkraft ) {
     this.poc.a = null;
     this.poc.b = null;
     this.poc.c = null;
-    this.mtv = null;
+    this.mtv.Set( 0, 0 );
     this.mtd = 0;
     this.delta = null;
     this.occured = false;
@@ -2345,7 +2421,7 @@ module.exports = function ( Nenkraft ) {
         _result.poc.a = poc1;
         _result.poc.b = poc2;
         _result.poc.c = poc3;
-        _result.mtv = mtv;
+        _result.mtv.SetV( mtv );
         _result.mtd = mtd;
         _result.delta = delta;
         _result.occured = true;
@@ -2464,6 +2540,64 @@ module.exports = function ( Nenkraft ) {
     }
     return true;
   };
+  Collision2D.CirclevsLine.Result = function () {
+    this.mtv = new Nenkraft.Vector2D( 0, 0 );
+    this.cp = new Nenkraft.Vector2D( 0, 0 );
+  };
+  Collision2D.CirclevsLine.Result.prototype.occured = false;
+  Collision2D.CirclevsLine.Result.prototype.sore = 0;
+  Collision2D.CirclevsLine.Result.prototype.Reset = function () {
+    this.mtv.Set( 0, 0 );
+    this.cp.Set( 0, 0 );
+    this.occured = false;
+    this.sore = 0;
+  };
+  Collision2D.CirclevsLine.Relative.Collide = function ( _c, _l, _result ) {
+    var lshape = _l.shape;
+    var cshape = _c.shape;
+    var lpos = _l.relative;
+    var cpos = _c.relative;
+    var s = lshape.s.AddVC( lpos );
+    var e = lshape.e.AddVC( lpos );
+    var cp = CPOL( s, e, cpos );
+    var delta = cpos.SubtractVC( cp );
+    var distanceSq = delta.GetMagnitudeSquared();
+    if ( distanceSq < cshape.radiusSquared ) {
+      if ( _result ) {
+        var mtv = delta;
+        var distance = cshape.radius - Math.sqrt( distanceSq );
+        mtv.Normalize();
+        mtv.Multiply( distance, distance );
+        _result.mtv.SetV( mtv );
+        _result.cp.SetV( cp );
+        _result.occured = true;
+        if ( cp === s ) {
+          _result.sore = 1;
+        } else if ( cp === e ) {
+          _result.sore = 2;
+        }
+      }
+      return true;
+    }
+    return false;
+  };
+  Collision2D.CirclevsLine.Relative.ReflectingResponse = function ( _c, _l, _result ) {
+    var lshape = _l.shape;
+    var cvel = _c.velocity;
+    var cpos = _c.relative;
+    var n;
+    var refl;
+    var cp = _result.cp;
+    if ( _result.sore !== 0 ) {
+      n = cp.SubtractVC( cpos );
+      n.Normalize();
+    } else {
+      n = lshape.GetNormalA();
+    }
+    refl = cvel.GetReflectionV( n );
+    cvel.SetV( refl );
+    cpos.AddV( _result.mtv );
+  };
 
   Nenkraft.Math.Collision2D = Collision2D;
 };
@@ -2531,8 +2665,8 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
     return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
   };
-  Nenkraft.Math.Attract = function ( _target, _attractor, _velocity, _radius, _strength ) {
-    var delta = _attractor.SubtractVC( _target ), distance = delta.GetMagnitudeSquared();
+  Nenkraft.Math.AttractRepel = function ( _repeller, _attractor, _velocity, _radius, _strength ) {
+    var delta = _attractor.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
     if ( distance < _radius * _radius ) {
       var theta = delta.GetAngle();
       _velocity.Add(
@@ -2541,25 +2675,40 @@ module.exports = function ( Nenkraft ) {
       );
     }
   };
-  Nenkraft.Math.Repel = function ( _target, _repeller, _velocity, _radius, _strength ) {
-    var delta = _target.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
-    if ( distance < _radius * _radius ) {
-      var theta = delta.GetAngle();
-      _velocity.Add(
-        Math.cos( theta ) * _strength,
-        Math.sin( theta ) * _strength
-      );
+  Nenkraft.Math.LineLineIntersection = function ( _sA, _eA, _sB, _eB ) {
+    var d1 = _eA.SubtractVC( _sA );
+    var d2 = _eB.SubtractVC( _sB );
+    var l = -d2.x * d1.y + d1.x * d2.y;
+    var abx = _sA.x - _sB.x;
+    var aby = _sA.y - _sB.y;
+    var s = ( -d1.y * abx + d1.x * aby ) / l;
+    var t = ( d2.x * aby - d2.y * abx ) / l;
+    if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
+      d1.Set( _sA.x + ( t * d1.x ), _sA.y + ( t * d1.y ) );
+      return d1;
     }
+    return false;
+  };
+  Nenkraft.Math.ClosestPointOnLine = function ( _s, _e, _v ) {
+    var delta = _e.SubtractVC( _s );
+    var u = ( ( _v.x - _s.x ) * delta.x + ( _v.y - _s.y ) * delta.y ) / delta.GetMagnitudeSquared();
+    if ( u < 0 ) {
+      return _s;
+    } else if ( u > 1 ) {
+      return _e;
+    }
+    delta.Set( _s.x + u * delta.x, _s.y + u * delta.y );
+    return delta;
   };
   Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
     for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
-      _points[ i ].Set(( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
+      _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
     }
   };
   Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
     var grid = [];
     for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
-      grid.push( new _creatableClass(( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
+      grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
     }
     return grid;
   };
@@ -2744,7 +2893,7 @@ module.exports = function ( Nenkraft ) {
   Transform2D.prototype.skewSY = 1;
   //Methods
   Transform2D.prototype.UpdateLocal = function () {
-    var localTransform = this.localTransform, position = this.position, scale = this.scale, skew = this.skew, pivot = this.pivot;
+    var localTransform = this.localTransform, position = this.position, scale = this.scale, pivot = this.pivot;
 
     localTransform.a = this.skewCX * scale.x;
     localTransform.b = this.skewSX * scale.x;
@@ -2757,7 +2906,7 @@ module.exports = function ( Nenkraft ) {
     return localTransform;
   };
   Transform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
-    var localTransform = this.localTransform, worldTransform = this.worldTransform, position = this.position, scale = this.scale, skew = this.skew, pivot = this.pivot;
+    var localTransform = this.localTransform, worldTransform = this.worldTransform, position = this.position, scale = this.scale, pivot = this.pivot;
 
     localTransform.a = this.skewCX * scale.x;
     localTransform.b = this.skewSX * scale.x;
@@ -2897,7 +3046,6 @@ module.exports = function ( Nenkraft ) {
     v.Positive();
     return v;
   };
-  //|||||
   Vector2D.prototype.SetV = function ( _v ) {
     this.x = _v.x;
     this.y = _v.y;
@@ -2911,11 +3059,9 @@ module.exports = function ( Nenkraft ) {
       this.y = _y;
     }
   };
-  //|||||
   Vector2D.prototype.Is0 = function () {
     return this.x === 0 && this.y === 0;
   };
-  //|||||
   Vector2D.prototype.AddV = function ( _v ) {
     this.x += _v.x;
     this.y += _v.y;
@@ -2929,7 +3075,6 @@ module.exports = function ( Nenkraft ) {
     this.x += _x;
     this.y += _y;
   };
-  //|||||
   Vector2D.prototype.SubtractV = function ( _v ) {
     this.x -= _v.x;
     this.y -= _v.y;
@@ -2943,7 +3088,6 @@ module.exports = function ( Nenkraft ) {
     this.x -= _x;
     this.y -= _y;
   };
-  //|||||
   Vector2D.prototype.MultiplyV = function ( _v ) {
     this.x *= _v.x;
     this.y *= _v.y;
@@ -2957,7 +3101,6 @@ module.exports = function ( Nenkraft ) {
     this.x *= _x;
     this.y *= _y;
   };
-  //|||||
   Vector2D.prototype.DivideV = function ( _v ) {
     this.x /= _v.x;
     this.y /= _v.y;
@@ -2971,7 +3114,6 @@ module.exports = function ( Nenkraft ) {
     this.x /= _x;
     this.y /= _y;
   };
-  //|||||
   Vector2D.prototype.Normalize = function () {
     var m = this.GetMagnitude();
     this.Divide( m, m );
@@ -2994,7 +3136,13 @@ module.exports = function ( Nenkraft ) {
     this.x = tx * c - ty * s;
     this.y = tx * s + ty * c;
   };
-  //|||||
+  Vector2D.prototype.RotateBy = function ( _a ) {
+    var angle = this.GetAngle() + _a;
+    var s = Math.sin( angle ), c = Math.cos( angle );
+    var tx = this.x, ty = this.y;
+    this.x = tx * c - ty * s;
+    this.y = tx * s + ty * c;
+  };
   Vector2D.prototype.RotateAroundV = function ( _v, _a ) {
     this.SubtractV( _v );
     this.Rotate( _a );
@@ -3005,7 +3153,16 @@ module.exports = function ( Nenkraft ) {
     this.Rotate( _a );
     this.Add( _x, _y );
   };
-  //|||||
+  Vector2D.prototype.RotateAroundByV = function ( _v, _a ) {
+    this.SubtractV( _v );
+    this.RotateBy( _a );
+    this.AddV( _v );
+  };
+  Vector2D.prototype.RotateAroundBy = function ( _x, _y, _a ) {
+    this.Subtract( _x, _y );
+    this.RotateBy( _a );
+    this.Add( _x, _y );
+  };
   Vector2D.prototype.PushFromV = function ( _v, _m ) {
     var d = this.Copy();
     d.SubtractV( _v );
@@ -3020,39 +3177,33 @@ module.exports = function ( Nenkraft ) {
     d.Multiply( _m, _m );
     this.AddV( d );
   };
-  //|||||
   Vector2D.prototype.GetAngle = function () {
     return Math.atan2( this.y, this.x );
   };
-  //|||||
   Vector2D.prototype.GetAngleBetweenV = function ( _v ) {
     return Math.atan2( this.y - _v.y, this.x - _v.x );
   };
   Vector2D.prototype.GetAngleBetween = function ( _x, _y ) {
     return Math.atan2( this.y - _y, this.x - _x );
   };
-  //|||||
   Vector2D.prototype.GetDotV = function ( _v ) {
     return ( this.x * _v.x + this.y * _v.y );
   };
   Vector2D.prototype.GetDot = function ( _x, _y ) {
     return ( this.x * _x + this.y * _y );
   };
-  //|||||
   Vector2D.prototype.GetCrossV = function ( _v ) {
     return ( this.x * _v.y + this.y * _v.x );
   };
   Vector2D.prototype.GetCross = function ( _x, _y ) {
     return ( this.x * _y + this.y * _x );
   };
-  //|||||
   Vector2D.prototype.GetMagnitudeSquared = function () {
     return ( this.x * this.x + this.y * this.y );
   };
   Vector2D.prototype.GetMagnitude = function () {
     return Math.sqrt( this.GetMagnitudeSquared() );
   };
-  //|||||
   Vector2D.prototype.GetDistanceV = function ( _v ) {
     var d = this.Copy();
     d.SubtractV( _v );
@@ -3063,7 +3214,6 @@ module.exports = function ( Nenkraft ) {
     d.Subtract( _x, _y );
     return d.GetMagnitude();
   };
-  //|||||
   Vector2D.prototype.GetDistanceSquaredV = function ( _v ) {
     var d = this.Copy();
     d.SubtractV( _v );
@@ -3118,15 +3268,13 @@ module.exports = function ( Nenkraft ) {
     mp.Multiply( 0.5, 0.5 );
     return mp;
   };
-  //|||||
   Vector2D.prototype.IsEqualTo = function ( _x, _y ) {
     return ( this.x === _x && this.y === _y );
   };
   Vector2D.prototype.IsEqualToV = function ( _v ) {
     return ( this.x === _v.x && this.y === _v.y );
   };
-  //|||||
-  Vector2D.prototype.ProjectOnto = function ( _v ) {
+  Vector2D.prototype.GetProjectionOntoV = function ( _v ) {
     var dot = this.GetDotV( _v );
     if ( dot === 0 ) return new Vector2D();
     var mag = _v.GetMagnitude();
@@ -3135,10 +3283,34 @@ module.exports = function ( Nenkraft ) {
     p.Multiply( scl, scl );
     return p;
   };
+  Vector2D.prototype.GetProjectionOnto = function ( _x, _y ) {
+    var p = this.Copy();
+    p.Set( _x, _y );
+    var dot = this.GetDotV( p );
+    if ( dot === 0 ) return new Vector2D();
+    var mag = p.GetMagnitude();
+    var scl = dot / ( mag * mag );
+    p.Multiply( scl, scl );
+    return p;
+  };
+  Vector2D.prototype.GetReflectionV = function ( _v ) {
+    var r = _v.Copy();
+    var dot = this.GetDotV( r );
+    r.Multiply( 2, 2 );
+    r.Multiply( dot, dot );
+    return this.SubtractVC( r );
+  };
+  Vector2D.prototype.GetReflection = function ( _x, _y ) {
+    var r = this.Copy();
+    r.Set( _x, _y );
+    var dot = this.GetDotV( r );
+    r.Multiply( 2, 2 );
+    r.Multiply( dot, dot );
+    return this.SubtractVC( r );
+  };
   Vector2D.prototype.Store = function () {
     Vector2D.Pool.Store( this );
   };
-  //|||||
   Vector2D.prototype.GetLength = Vector2D.prototype.GetMagnitude;
   Vector2D.prototype.GetLengthSquared = Vector2D.prototype.GetMagnitudeSquared;
 
@@ -3190,7 +3362,7 @@ module.exports = function ( Nenkraft ) {
   };
   MotionManager.prototype.StartMultiple = function ( _ids ) {
     _ids = _ids.split( ' ' );
-    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
       this.Start( _ids[ i ] );
     }
   };
@@ -3203,7 +3375,7 @@ module.exports = function ( Nenkraft ) {
   };
   MotionManager.prototype.StopMultiple = function ( _ids ) {
     _ids = _ids.split( ' ' );
-    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
       this.Stop( _ids[ i ] );
     }
   };
@@ -3216,7 +3388,7 @@ module.exports = function ( Nenkraft ) {
   };
   MotionManager.prototype.ResetMultiple = function ( _ids ) {
     _ids = _ids.split( ' ' );
-    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
       this.Reset( _ids[ i ] );
     }
   };
@@ -3425,7 +3597,7 @@ module.exports = function ( Nenkraft ) {
 
   //Methods
   Line2D.prototype.Draw = function ( _rc ) {
-    var s = this.s, e = this.e, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
+    var s = this.s, e = this.e, style = this.style, stroke = style.stroke, shadow = style.shadow;
     _rc.beginPath();
     _rc.moveTo( s.x, s.y );
     _rc.lineTo( e.x, e.y );
@@ -3437,6 +3609,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Nenkraft.Path.Line2D = Line2D;
+  Nenkraft.Path.Ray2D = Line2D;
 };
 
 
@@ -3603,6 +3776,32 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateSaT = function () {
     return { shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
   };
+  Nenkraft.Style.GCO = Object.create( null );
+  Nenkraft.Style.GCO.SOURCE_OVER = Nenkraft.Style.GCO.DEFAULT = 'source-over';
+  Nenkraft.Style.GCO.SOURCE_IN = 'source-in';
+  Nenkraft.Style.GCO.SOURCE_OUT = 'source-out';
+  Nenkraft.Style.GCO.SOURCE_ATOP = 'source-atop';
+  Nenkraft.Style.GCO.DESTINATION_OVER = 'destination-over';
+  Nenkraft.Style.GCO.DESTINATION_IN = 'destination-in';
+  Nenkraft.Style.GCO.DESTINATION_OUT = 'destination-out';
+  Nenkraft.Style.GCO.DESTINATION_ATOP = 'destination-atop';
+  Nenkraft.Style.GCO.LIGHTER = 'lighter';
+  Nenkraft.Style.GCO.COPY = 'copy';
+  Nenkraft.Style.GCO.XOR = 'xor';
+  Nenkraft.Style.GCO.MULTIPLY = 'multiply';
+  Nenkraft.Style.GCO.OVERLAY = 'overlay';
+  Nenkraft.Style.GCO.DARKEN = 'darken';
+  Nenkraft.Style.GCO.LIGHTEN = 'lighten';
+  Nenkraft.Style.GCO.COLOR_DODGE = 'color-dodge';
+  Nenkraft.Style.GCO.COLOR_BURN = 'color-burn';
+  Nenkraft.Style.GCO.HARD_LIGHT = 'hard-light';
+  Nenkraft.Style.GCO.SOFT_LIGHT = 'soft-light';
+  Nenkraft.Style.GCO.DIFFERENCE = 'difference';
+  Nenkraft.Style.GCO.EXCLUSION = 'exclusion';
+  Nenkraft.Style.GCO.HUE = 'hue';
+  Nenkraft.Style.GCO.SATURATION = 'saturation';
+  Nenkraft.Style.GCO.COLOR = 'color';
+  Nenkraft.Style.GCO.LUMINOSITY = 'luminosity';
 };
 
 
@@ -3801,17 +4000,22 @@ module.exports = function ( Nenkraft ) {
   Timer.prototype.canResume = false;
   Timer.prototype.count = 0;
   //Methods
-  Timer.prototype.Reset = function ( _stopTime ) {
+  Timer.prototype.Reset = function () {
     this.onReset.Dispatch( this, null );
     this.count = 0;
+    this.time = 0;
+    this.isRunning = false;
+    this.canResume = false;
+    this.stopTime = null;
   };
   Timer.prototype.Start = function ( _stopTime ) {
     this.stopTime = Math.round( _stopTime === undefined ? this.stopTime : _stopTime );
-    if ( this.stopTime <= 0 ) return;
-    this.time = 0;
-    this.isRunning = true;
-    this.canResume = false;
-    this.onStart.Dispatch( this, { stopTime: this.stopTime } );
+    if ( this.stopTime > 0 ) {
+      this.time = 0;
+      this.isRunning = true;
+      this.canResume = false;
+      this.onStart.Dispatch( this, { stopTime: this.stopTime } );
+    }
   };
   Timer.prototype.Stop = function () {
     if ( this.isRunning === true ) {
@@ -4209,13 +4413,14 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
-    return ( Math.random() * ( _max - _min + 1 ) + _min ) | 0;
+  var Random = Math.random;
+  var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
+    return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
   };
   Nenkraft.Utils.RandomFloat = function ( _min, _max ) {
-    return Math.random() * ( _max - _min ) + _min;
+    return Random() * ( _max - _min ) + _min;
   };
-  Nenkraft.Utils.IsInteger = function ( _value ) {
+  var II = Nenkraft.Utils.IsInteger = function ( _value ) {
     return Number( _value ) === _value && _value % 1 === 0;
   };
   Nenkraft.Utils.IsFloat = function ( _value ) {
@@ -4231,6 +4436,10 @@ module.exports = function ( Nenkraft ) {
     else if ( _value > _max ) return _min;
     return _value;
   };
+  Nenkraft.Utils.ThisOrThat = function () {
+    if ( RI( 1, 2 ) === 1 ) return true;
+    return false;
+  };
   Nenkraft.Utils.IntegerNotation = function ( _value, _roof, _splitter ) {
     var vrm = _value % _roof, vrd = _value / _roof;
     return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
@@ -4240,12 +4449,12 @@ module.exports = function ( Nenkraft ) {
     _parts = _parts === undefined ? 4 : _parts;
     _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
     _separator = _separator === undefined ? '-' : _separator;
-    var id = '', RandomInteger = Nenkraft.Utils.RandomInteger, IsInteger = Nenkraft.Utils.IsInteger;
+    var id = '';
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
       ilpdd = i / lpd;
-      if ( ilpdd !== 0 && IsInteger( ilpdd ) ) id += _separator;
+      if ( ilpdd !== 0 && II( ilpdd ) ) id += _separator;
       else {
-        at = RandomInteger( 1, charset.length - 1 );
+        at = RI( 1, charset.length - 1 );
         id += charset.charAt( at );
       }
     }
@@ -4299,7 +4508,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Nenkraft.Utils.ArrayGetRandom = function ( _array, _amount ) {
-    var array = [], control = {}, _al = _array.length, Random = Math.random;
+    var array = [], control = {}, _al = _array.length;
     for ( var i = 0, l = _amount; i < l; ++i ) {
       var ix = ( Random() * _al ) | 0;
       if ( control[ ix ] === undefined ) {
@@ -4311,7 +4520,7 @@ module.exports = function ( Nenkraft ) {
     return array;
   };
   Nenkraft.Utils.ArrayShuffle = function ( _array ) {
-    var i = _array.length - 1, temp, rand, Random = Math.random;
+    var i = _array.length - 1, temp, rand;
     for ( ; i >= 0; --i ) {
       rand = ( Random() * i ) | 0;
       temp = _array[ i ];
@@ -4322,12 +4531,12 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
   Nenkraft.Utils.Cipher.CCH1 = function ( _str, _cci ) {
-    var output = [], RandomInteger = Nenkraft.Utils.RandomInteger;
+    var output = [];
     _cci = _cci === undefined ? 1 : _cci;
     for ( var i = 0, chrs = _str.split( '' ), l = chrs.length, chr, otn; i < l; ++i ) {
       chr = chrs[ i ];
       chr = ( chr.charCodeAt( 0 ) + _cci ).toString( 2 );
-      otn = RandomInteger( 1, 9 );
+      otn = RI( 1, 9 );
       output.push( otn + 'x' + chr.replace( /1/g, otn ) );
     }
     return output.join( ' ' );
@@ -4388,7 +4597,10 @@ module.exports = function ( Nenkraft ) {
 /* 83 */,
 /* 84 */,
 /* 85 */,
-/* 86 */
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(0);

@@ -67,7 +67,6 @@ module.exports = function ( Nenkraft ) {
     v.Positive();
     return v;
   };
-  //|||||
   Vector2D.prototype.SetV = function ( _v ) {
     this.x = _v.x;
     this.y = _v.y;
@@ -81,11 +80,9 @@ module.exports = function ( Nenkraft ) {
       this.y = _y;
     }
   };
-  //|||||
   Vector2D.prototype.Is0 = function () {
     return this.x === 0 && this.y === 0;
   };
-  //|||||
   Vector2D.prototype.AddV = function ( _v ) {
     this.x += _v.x;
     this.y += _v.y;
@@ -99,7 +96,6 @@ module.exports = function ( Nenkraft ) {
     this.x += _x;
     this.y += _y;
   };
-  //|||||
   Vector2D.prototype.SubtractV = function ( _v ) {
     this.x -= _v.x;
     this.y -= _v.y;
@@ -113,7 +109,6 @@ module.exports = function ( Nenkraft ) {
     this.x -= _x;
     this.y -= _y;
   };
-  //|||||
   Vector2D.prototype.MultiplyV = function ( _v ) {
     this.x *= _v.x;
     this.y *= _v.y;
@@ -127,7 +122,6 @@ module.exports = function ( Nenkraft ) {
     this.x *= _x;
     this.y *= _y;
   };
-  //|||||
   Vector2D.prototype.DivideV = function ( _v ) {
     this.x /= _v.x;
     this.y /= _v.y;
@@ -141,7 +135,6 @@ module.exports = function ( Nenkraft ) {
     this.x /= _x;
     this.y /= _y;
   };
-  //|||||
   Vector2D.prototype.Normalize = function () {
     var m = this.GetMagnitude();
     this.Divide( m, m );
@@ -164,7 +157,13 @@ module.exports = function ( Nenkraft ) {
     this.x = tx * c - ty * s;
     this.y = tx * s + ty * c;
   };
-  //|||||
+  Vector2D.prototype.RotateBy = function ( _a ) {
+    var angle = this.GetAngle() + _a;
+    var s = Math.sin( angle ), c = Math.cos( angle );
+    var tx = this.x, ty = this.y;
+    this.x = tx * c - ty * s;
+    this.y = tx * s + ty * c;
+  };
   Vector2D.prototype.RotateAroundV = function ( _v, _a ) {
     this.SubtractV( _v );
     this.Rotate( _a );
@@ -175,7 +174,16 @@ module.exports = function ( Nenkraft ) {
     this.Rotate( _a );
     this.Add( _x, _y );
   };
-  //|||||
+  Vector2D.prototype.RotateAroundByV = function ( _v, _a ) {
+    this.SubtractV( _v );
+    this.RotateBy( _a );
+    this.AddV( _v );
+  };
+  Vector2D.prototype.RotateAroundBy = function ( _x, _y, _a ) {
+    this.Subtract( _x, _y );
+    this.RotateBy( _a );
+    this.Add( _x, _y );
+  };
   Vector2D.prototype.PushFromV = function ( _v, _m ) {
     var d = this.Copy();
     d.SubtractV( _v );
@@ -190,39 +198,33 @@ module.exports = function ( Nenkraft ) {
     d.Multiply( _m, _m );
     this.AddV( d );
   };
-  //|||||
   Vector2D.prototype.GetAngle = function () {
     return Math.atan2( this.y, this.x );
   };
-  //|||||
   Vector2D.prototype.GetAngleBetweenV = function ( _v ) {
     return Math.atan2( this.y - _v.y, this.x - _v.x );
   };
   Vector2D.prototype.GetAngleBetween = function ( _x, _y ) {
     return Math.atan2( this.y - _y, this.x - _x );
   };
-  //|||||
   Vector2D.prototype.GetDotV = function ( _v ) {
     return ( this.x * _v.x + this.y * _v.y );
   };
   Vector2D.prototype.GetDot = function ( _x, _y ) {
     return ( this.x * _x + this.y * _y );
   };
-  //|||||
   Vector2D.prototype.GetCrossV = function ( _v ) {
     return ( this.x * _v.y + this.y * _v.x );
   };
   Vector2D.prototype.GetCross = function ( _x, _y ) {
     return ( this.x * _y + this.y * _x );
   };
-  //|||||
   Vector2D.prototype.GetMagnitudeSquared = function () {
     return ( this.x * this.x + this.y * this.y );
   };
   Vector2D.prototype.GetMagnitude = function () {
     return Math.sqrt( this.GetMagnitudeSquared() );
   };
-  //|||||
   Vector2D.prototype.GetDistanceV = function ( _v ) {
     var d = this.Copy();
     d.SubtractV( _v );
@@ -233,7 +235,6 @@ module.exports = function ( Nenkraft ) {
     d.Subtract( _x, _y );
     return d.GetMagnitude();
   };
-  //|||||
   Vector2D.prototype.GetDistanceSquaredV = function ( _v ) {
     var d = this.Copy();
     d.SubtractV( _v );
@@ -288,15 +289,13 @@ module.exports = function ( Nenkraft ) {
     mp.Multiply( 0.5, 0.5 );
     return mp;
   };
-  //|||||
   Vector2D.prototype.IsEqualTo = function ( _x, _y ) {
     return ( this.x === _x && this.y === _y );
   };
   Vector2D.prototype.IsEqualToV = function ( _v ) {
     return ( this.x === _v.x && this.y === _v.y );
   };
-  //|||||
-  Vector2D.prototype.ProjectOnto = function ( _v ) {
+  Vector2D.prototype.GetProjectionOntoV = function ( _v ) {
     var dot = this.GetDotV( _v );
     if ( dot === 0 ) return new Vector2D();
     var mag = _v.GetMagnitude();
@@ -305,10 +304,34 @@ module.exports = function ( Nenkraft ) {
     p.Multiply( scl, scl );
     return p;
   };
+  Vector2D.prototype.GetProjectionOnto = function ( _x, _y ) {
+    var p = this.Copy();
+    p.Set( _x, _y );
+    var dot = this.GetDotV( p );
+    if ( dot === 0 ) return new Vector2D();
+    var mag = p.GetMagnitude();
+    var scl = dot / ( mag * mag );
+    p.Multiply( scl, scl );
+    return p;
+  };
+  Vector2D.prototype.GetReflectionV = function ( _v ) {
+    var r = _v.Copy();
+    var dot = this.GetDotV( r );
+    r.Multiply( 2, 2 );
+    r.Multiply( dot, dot );
+    return this.SubtractVC( r );
+  };
+  Vector2D.prototype.GetReflection = function ( _x, _y ) {
+    var r = this.Copy();
+    r.Set( _x, _y );
+    var dot = this.GetDotV( r );
+    r.Multiply( 2, 2 );
+    r.Multiply( dot, dot );
+    return this.SubtractVC( r );
+  };
   Vector2D.prototype.Store = function () {
     Vector2D.Pool.Store( this );
   };
-  //|||||
   Vector2D.prototype.GetLength = Vector2D.prototype.GetMagnitude;
   Vector2D.prototype.GetLengthSquared = Vector2D.prototype.GetMagnitudeSquared;
 

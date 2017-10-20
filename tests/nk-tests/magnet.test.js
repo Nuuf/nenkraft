@@ -70,7 +70,7 @@ module.exports = function () {
     stage.onProcess.Add( function () {
       particles.forEach( function ( particle ) {
         var vel = particle.data.force.velocity;
-        nk.Math.Attract( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
+        nk.Math.AttractRepel( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
         particle.position.AddV( vel );
         vel.MultiplyV( particle.data.force.friction );
         if ( particle.x + particle.path.radius >= W ) {

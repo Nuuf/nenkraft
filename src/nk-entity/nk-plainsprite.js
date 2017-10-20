@@ -38,6 +38,7 @@ module.exports = function ( Nenkraft ) {
   Plainsprite.prototype.clip = null;
   Plainsprite.prototype.texture = null;
   Plainsprite.prototype.anchor = null;
+  Plainsprite.prototype.interactive = true;
   //Methods
   Plainsprite.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -56,6 +57,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Plainsprite.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
     return this.shape.IntersectsPoint( cv );

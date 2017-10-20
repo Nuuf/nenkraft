@@ -36,7 +36,7 @@ module.exports = function () {
     stage.onProcess.Add( function () {
       for ( var i = 0, l = objs.length; i < l; ++i ) {
         if ( !objs[ i ] ) break;
-        nk.Math.Attract( objs[ i ].position, orig.position, objs[ i ].data.vel, orig.path.radius * 2, 0.1 );
+        nk.Math.AttractRepel( objs[ i ].position, orig.position, objs[ i ].data.vel, orig.path.radius * 2, 0.1 );
         objs[ i ].position.AddV( objs[ i ].data.vel );
         //objs[ i ].data.color.IncreaseChannel( 0, 1 );
         //objs[ i ].path.style.fill.color = objs[ i ].data.color.value;

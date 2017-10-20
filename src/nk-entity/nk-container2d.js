@@ -13,7 +13,6 @@ module.exports = function ( Nenkraft ) {
   //Members
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
-  Container2D.prototype.alpha = 1.0;
   Container2D.prototype.transformShouldUpdate = true;
   Container2D.prototype.transformAutomaticUpdate = true;
   //Methods
@@ -80,7 +79,7 @@ module.exports = function ( Nenkraft ) {
     var children = this.children;
     var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
     var rChildren = [];
-    for ( var i = 0, l = aChildren.length, child, parent, ix; i < l; ++i ) {
+    for ( var i = 0, l = aChildren.length, child, ix; i < l; ++i ) {
       child = aChildren[ i ];
       ix = children.indexOf( child );
       if ( ix !== -1 ) {

@@ -37,7 +37,7 @@ module.exports = function ( Nenkraft ) {
   };
   MotionManager.prototype.StartMultiple = function ( _ids ) {
     _ids = _ids.split( ' ' );
-    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
       this.Start( _ids[ i ] );
     }
   };
@@ -50,7 +50,7 @@ module.exports = function ( Nenkraft ) {
   };
   MotionManager.prototype.StopMultiple = function ( _ids ) {
     _ids = _ids.split( ' ' );
-    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
       this.Stop( _ids[ i ] );
     }
   };
@@ -63,7 +63,7 @@ module.exports = function ( Nenkraft ) {
   };
   MotionManager.prototype.ResetMultiple = function ( _ids ) {
     _ids = _ids.split( ' ' );
-    for ( var i = 0, l = _ids.length, motion; i < l; ++i ) {
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
       this.Reset( _ids[ i ] );
     }
   };

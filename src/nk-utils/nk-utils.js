@@ -1,12 +1,13 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
-  Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
-    return ( Math.random() * ( _max - _min + 1 ) + _min ) | 0;
+  var Random = Math.random;
+  var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
+    return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
   };
   Nenkraft.Utils.RandomFloat = function ( _min, _max ) {
-    return Math.random() * ( _max - _min ) + _min;
+    return Random() * ( _max - _min ) + _min;
   };
-  Nenkraft.Utils.IsInteger = function ( _value ) {
+  var II = Nenkraft.Utils.IsInteger = function ( _value ) {
     return Number( _value ) === _value && _value % 1 === 0;
   };
   Nenkraft.Utils.IsFloat = function ( _value ) {
@@ -22,6 +23,10 @@ module.exports = function ( Nenkraft ) {
     else if ( _value > _max ) return _min;
     return _value;
   };
+  Nenkraft.Utils.ThisOrThat = function () {
+    if ( RI( 1, 2 ) === 1 ) return true;
+    return false;
+  };
   Nenkraft.Utils.IntegerNotation = function ( _value, _roof, _splitter ) {
     var vrm = _value % _roof, vrd = _value / _roof;
     return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
@@ -31,12 +36,12 @@ module.exports = function ( Nenkraft ) {
     _parts = _parts === undefined ? 4 : _parts;
     _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
     _separator = _separator === undefined ? '-' : _separator;
-    var id = '', RandomInteger = Nenkraft.Utils.RandomInteger, IsInteger = Nenkraft.Utils.IsInteger;
+    var id = '';
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
       ilpdd = i / lpd;
-      if ( ilpdd !== 0 && IsInteger( ilpdd ) ) id += _separator;
+      if ( ilpdd !== 0 && II( ilpdd ) ) id += _separator;
       else {
-        at = RandomInteger( 1, charset.length - 1 );
+        at = RI( 1, charset.length - 1 );
         id += charset.charAt( at );
       }
     }
@@ -90,7 +95,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Nenkraft.Utils.ArrayGetRandom = function ( _array, _amount ) {
-    var array = [], control = {}, _al = _array.length, Random = Math.random;
+    var array = [], control = {}, _al = _array.length;
     for ( var i = 0, l = _amount; i < l; ++i ) {
       var ix = ( Random() * _al ) | 0;
       if ( control[ ix ] === undefined ) {
@@ -102,7 +107,7 @@ module.exports = function ( Nenkraft ) {
     return array;
   };
   Nenkraft.Utils.ArrayShuffle = function ( _array ) {
-    var i = _array.length - 1, temp, rand, Random = Math.random;
+    var i = _array.length - 1, temp, rand;
     for ( ; i >= 0; --i ) {
       rand = ( Random() * i ) | 0;
       temp = _array[ i ];
@@ -113,12 +118,12 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
   Nenkraft.Utils.Cipher.CCH1 = function ( _str, _cci ) {
-    var output = [], RandomInteger = Nenkraft.Utils.RandomInteger;
+    var output = [];
     _cci = _cci === undefined ? 1 : _cci;
     for ( var i = 0, chrs = _str.split( '' ), l = chrs.length, chr, otn; i < l; ++i ) {
       chr = chrs[ i ];
       chr = ( chr.charCodeAt( 0 ) + _cci ).toString( 2 );
-      otn = RandomInteger( 1, 9 );
+      otn = RI( 1, 9 );
       output.push( otn + 'x' + chr.replace( /1/g, otn ) );
     }
     return output.join( ' ' );

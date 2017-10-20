@@ -66,7 +66,7 @@ module.exports = function () {
       }
       if ( character.data.force.velocity.y > 0 ) {
         character.data.state.falling = true;
-        character.data.state.onGround = false
+        character.data.state.onGround = false;
         character.data.state.ascending = false;
       } else if ( character.data.force.velocity.y < 0 ) {
         character.data.state.falling = false;

@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "index.js",
   "devDependencies": {
     "autoprefixer": "*",
@@ -18,7 +18,8 @@
     "webpack": "^2.*",
     "webpack-dev-server": "^2.*",
     "cross-env": "*",
-    "copyfiles": "*"
+    "copyfiles": "*",
+    "colors": "*"
   },
   "scripts": {
     "s-d": "cross-env NODE_ENV=development",
