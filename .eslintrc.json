@@ -53,6 +53,23 @@
     "eol-last": [
       "error",
       "always"
+    ],
+    "space-in-parens": [
+      "error",
+      "always"
+    ],
+    "no-multi-spaces": [
+      "error"
+    ],
+    "no-unused-vars": [
+      "error"
+    ],
+    "func-call-spacing": [
+      "error",
+      "never"
+    ],
+    "no-unneeded-ternary": [
+      "error"
     ]
   }
 }

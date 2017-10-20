@@ -34,12 +34,12 @@ module.exports = function () {
     var colliders = [];
     var bounds = new nk.AABB2D();
     bounds.SetC( stage.bounds );
-    var root = new nk.QuadtreeNode( bounds, 0, 8, 4 );
+    var root = new nk.QuadtreeNode( bounds, 0, 5, 5 );
     var objs = [];
     var nodes = [];
 
     function Collider () {
-      var mass = nk.Utils.RandomInteger( 12, 74 );
+      var mass = nk.Utils.RandomInteger( 10, 30 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
       p.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( 100, 255 ), 0, nk.Utils.RandomInteger( 100, 255 ), 1 ).value;
@@ -57,9 +57,11 @@ module.exports = function () {
       g.data.timer = new nk.Timer();
       g.data.timer.onFinish.Add( function () {
         p.style.fill.applied = false;
+        g.alpha = 1.0;
       } );
       g.data.timer.onStart.Add( function () {
         p.style.fill.applied = true;
+        g.alpha = 0.8;
       } );
       colliders.push( g );
       stage.AddChild( g );

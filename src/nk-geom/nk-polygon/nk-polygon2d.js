@@ -4,6 +4,8 @@ module.exports = function ( Nenkraft ) {
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
     this.vertices = [];
     this.normals = [];
+    this.perimeterMidPoints = [];
+    this.centroid = new Nenkraft.Vector2D();
   }
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
@@ -27,7 +29,7 @@ module.exports = function ( Nenkraft ) {
     _po.GetNormalsA();
     return _po;
   };
-  Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _w, _h ) {
+  Polygon2D.Construct.Isosceles = function ( _po, _x, _y, _w, _h ) {
     var tm = new Nenkraft.Vector2D( _x, _y );
     var br = new Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
     var bl = new Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
@@ -37,8 +39,8 @@ module.exports = function ( Nenkraft ) {
     return _po;
   };
   Polygon2D.Construct.Cyclic = function ( _po, _x, _y, _ra, _acc ) {
-    _po.Recreate( [] );
     var i = 0, l = _acc, x, y, th, an = Math.PI * 2 / l;
+    _po.Recreate( [] );
     for ( i; i < l; ++i ) {
       th = an * i;
       x = Math.cos( th ) * _ra;
@@ -49,9 +51,27 @@ module.exports = function ( Nenkraft ) {
     _po.GetNormalsA();
     return _po;
   };
-  Polygon2D.Construct.Star = function ( _po, _x, _y, _ora, _ira, _cors ) {
+  Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _side ) {
+    var an = 2.0943951023931953;
+    var x, y;
     _po.Recreate( [] );
+    x = Math.cos( 0 ) * _side;
+    y = Math.sin( 0 ) * _side;
+    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    x = Math.cos( an ) * _side;
+    y = Math.sin( an ) * _side;
+    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    x = Math.cos( an * 2 ) * _side;
+    y = Math.sin( an * 2 ) * _side;
+    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.Rotate( Nenkraft.Math.RADIAN * -90 );
+    _po.ComputeBounds();
+    _po.GetNormalsA();
+    return _po;
+  };
+  Polygon2D.Construct.Star = function ( _po, _x, _y, _ora, _ira, _cors ) {
     var i = 0, l = _cors * 2, x, y, th, an = Math.PI * 2 / l, ra;
+    _po.Recreate( [] );
     for ( i; i < l; ++i ) {
       ra = ( i & 1 ) === 0 ? _ora : _ira;
       th = an * i;
@@ -64,8 +84,8 @@ module.exports = function ( Nenkraft ) {
     return _po;
   };
   Polygon2D.Construct.Butterfly = function ( _po, _x, _y, _n, _ra ) {
-    _po.Recreate( [] );
     var i = 0, x, y, u, c = Polygon2D.Construct.Butterfly.C;
+    _po.Recreate( [] );
     for ( i; i < _n; ++i ) {
       u = i * c._1 * Math.PI / _n;
       x = Math.cos( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
@@ -94,8 +114,8 @@ module.exports = function ( Nenkraft ) {
     _n1 = _n1 === undefined ? 1 : _n1;
     _n2 = _n2 === undefined ? 1 : _n2;
     _n3 = _n3 === undefined ? 1 : _n3;
-    _po.Recreate( [] );
     var i = 0, l = _acc, x, y, a, r, c = Polygon2D.Construct.Supershape.C, t1, t2;
+    _po.Recreate( [] );
     for ( i; i < l; ++i ) {
       a = i * Math.PI * 2 / _acc;
 
@@ -140,8 +160,8 @@ module.exports = function ( Nenkraft ) {
     this.vertices = this.vertices.concat( _ps );
   };
   Polygon2D.prototype.Recreate = function ( _ps ) {
-    if ( _ps !== undefined ) this.vertices = _ps;
-    else this.vertices.length = 0;
+    this.vertices.length = 0;
+    if ( _ps != undefined ) this.vertices = this.vertices.concat( _ps );
   };
   Polygon2D.prototype.ComputeBounds = function () {
     if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
@@ -156,24 +176,24 @@ module.exports = function ( Nenkraft ) {
     this.aabb.Set( mix, miy, max, may );
     this.dirtyBounds = false;
   };
-  Polygon2D.prototype.Rotate = function ( _a, _anX, _anY, _uAABB ) {
-    if ( this.dirtyBounds === true && _uAABB === true ) this.ComputeBounds();
+  Polygon2D.prototype.Rotate = function ( _angle, _anchorX, _anchorY, _updateBounds ) {
+    if ( this.dirtyBounds === true && _updateBounds === true ) this.ComputeBounds();
     else if ( this.aabb === null ) this.ComputeBounds();
-    _anX = _anX === undefined ? 0.5 : _anX;
+    _anchorX = _anchorX === undefined ? 0.5 : _anchorX;
     var aabb = this.aabb;
     var ap = aabb.tl.Copy();
     ap.AddV( aabb.br );
-    ap.Multiply( _anX, _anY === undefined ? _anX : _anY );
+    ap.Multiply( _anchorX, _anchorY === undefined ? _anchorX : _anchorY );
     var i = 0, ps = this.vertices, l = ps.length, p;
-    _a = _a;
     for ( i; i < l; ++i ) {
       p = ps[ i ];
-      p.RotateAroundV( ap, _a );
+      p.RotateAroundV( ap, _angle );
     }
     this.dirtyBounds = true;
   };
   Polygon2D.prototype.GetCentroid = function () {
-    var centroid = new Nenkraft.Vector2D();
+    var centroid = this.centroid;
+    centroid.Set( 0, 0 );
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
       p = ps[ i ];
       centroid.AddV( p );
@@ -182,8 +202,8 @@ module.exports = function ( Nenkraft ) {
     return centroid;
   };
   Polygon2D.prototype.GetNormalsA = function () {
-    this.normals.length = 0;
     var normals = this.normals;
+    normals.length = 0;
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -194,8 +214,8 @@ module.exports = function ( Nenkraft ) {
     return normals;
   };
   Polygon2D.prototype.GetNormalsB = function () {
-    this.normals.length = 0;
     var normals = this.normals;
+    normals.length = 0;
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -206,15 +226,16 @@ module.exports = function ( Nenkraft ) {
     return normals;
   };
   Polygon2D.prototype.GetPerimeterMidPoints = function () {
-    var centers = [];
+    var perimeterMidPoints = this.perimeterMidPoints;
+    perimeterMidPoints.length = 0;
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
-      centers.push( vertex.GetMidPointV( vertices[ i + 1 ] ) );
+      perimeterMidPoints.push( vertex.GetMidPointV( vertices[ i + 1 ] ) );
     }
-    centers.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
-    return centers;
+    perimeterMidPoints.push( vertices[ l ].GetMidPointV( vertices[ 0 ] ) );
+    return perimeterMidPoints;
   };
   Polygon2D.prototype.IntersectsPoint = function ( _v ) {
     if ( this.dirtyBounds === true ) this.ComputeBounds();

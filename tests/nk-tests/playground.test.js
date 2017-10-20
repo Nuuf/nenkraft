@@ -22,7 +22,6 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, HH );
 
-
     document.body.removeChild( buttonContainer );
   }
 };

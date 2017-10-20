@@ -35,7 +35,7 @@ module.exports = function ( Nenkraft ) {
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
     if ( this.bounds === null ) {
       this.bounds = new Nenkraft.Geom.AABB2D(
-        this.x - this.width * ay,
+        this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
         this.y + this.height
@@ -43,7 +43,7 @@ module.exports = function ( Nenkraft ) {
       this.bounds.belongsTo = this;
     } else {
       this.bounds.Set(
-        this.x - this.width * ay,
+        this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
         this.y + this.height
@@ -91,7 +91,7 @@ module.exports = function ( Nenkraft ) {
     }
   } );
   Object.defineProperty( Plain2D.prototype, 'x', {
-    get: function ( _value ) {
+    get: function () {
       return this.transform.position.x;
     },
     set: function ( _value ) {
@@ -99,7 +99,7 @@ module.exports = function ( Nenkraft ) {
     }
   } );
   Object.defineProperty( Plain2D.prototype, 'y', {
-    get: function ( _value ) {
+    get: function () {
       return this.transform.position.y;
     },
     set: function ( _value ) {

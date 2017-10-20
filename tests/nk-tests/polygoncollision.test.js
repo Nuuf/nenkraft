@@ -34,7 +34,7 @@ module.exports = function () {
 
     function CreatePolygon () {
       var p = new nk.Path.Polygon2D();
-      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 25, 65 ), RI( 3, 8 ) );
+      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 20, 40 ), RI( 3, 6 ) );
       var pg = new nk.Graphic2D( 0, 0, p );
       stage.Mount( pg );
       objs.push( {
@@ -62,9 +62,14 @@ module.exports = function () {
           if ( obj2 === obj1 ) continue;
           result.Reset();
           if ( Collide( obj1, obj2, result ) ) {
-            result.mtv.Divide( 2, 2 );
-            obj1.relative.SubtractV( result.mtv );
-            obj2.relative.AddV( result.mtv );
+            if ( dragger ) {
+              if ( obj1.relative !== dragger.position ) obj1.relative.SubtractV( result.mtv );
+              if ( obj2.relative !== dragger.position ) obj2.relative.AddV( result.mtv );
+            }
+            else {
+              obj1.relative.SubtractV( result.mtv );
+              obj2.relative.AddV( result.mtv );
+            }
           }
         }
       }

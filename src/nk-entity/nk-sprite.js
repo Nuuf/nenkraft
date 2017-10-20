@@ -38,6 +38,9 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.clip = null;
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
+  Sprite.prototype.alpha = 1.0;
+  Sprite.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Sprite.prototype.interactive = true;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -48,6 +51,8 @@ module.exports = function ( Nenkraft ) {
       this.transform.ApplyWorld( _rc );
       if ( this.display === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
+        _rc.globalAlpha = this.alpha;
+        _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
           this.texture,
           tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
@@ -59,6 +64,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Sprite.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
     cv.DivideV( this.scale );

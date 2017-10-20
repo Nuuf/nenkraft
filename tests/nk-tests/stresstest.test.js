@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'Performance' );
+  button.setAttribute( 'value', 'Stresstest' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );

@@ -26,6 +26,7 @@ module.exports = function ( Nenkraft ) {
   //Members
   Plaingraphic2D.prototype.path = null;
   Plaingraphic2D.prototype.anchor = null;
+  Plaingraphic2D.prototype.interactive = true;
   //Methods
   Plaingraphic2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -41,6 +42,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Plaingraphic2D.prototype.IntersectsPoint = function ( _v ) {
+    if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
     cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );

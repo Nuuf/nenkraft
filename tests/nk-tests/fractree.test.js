@@ -38,10 +38,11 @@ module.exports = function () {
       this.x = nk.Utils.RandomFloat( -HW, HW );
       this.y = nk.Utils.RandomFloat( 0, H );
       this.rotation = nk.Utils.RandomInteger( 0, nk.Math.PII );
+      if ( nk.Utils.ThisOrThat() ) this.rotation = - this.rotation;
       var mm = this.data.motionManager = new nk.MotionManager( this );
-      mm.Create( 'moveX', 'x', 0, nk.Utils.RandomInteger( 100, 400 ), 'QuadOut' );
-      mm.Create( 'moveY', 'y', 0, nk.Utils.RandomInteger( 100, 400 ), 'QuadIn' );
-      mm.Create( 'rotate', 'rotation', 0, nk.Utils.RandomInteger( 100, 600 ), 'QuadInOut' );
+      mm.Create( 'moveX', 'x', 0, 120, 'SineInOut' );
+      mm.Create( 'moveY', 'y', 0, 120, 'SineInOut' );
+      mm.Create( 'rotate', 'rotation', 0, 120, 'SineInOut' );
       mm.StartMultiple( 'moveX moveY rotate' );
       if ( this.w > 12 ) {
         this.Grow();
@@ -64,7 +65,7 @@ module.exports = function () {
 
     Branch( new nk.Vector2D( 0, 0 ), new nk.Vector2D( 0, l ) );
 
-    var timer = new nk.Timer( 1000 );
+    var timer = new nk.Timer( 130 );
     timer.onFinish.Add( function () {
       stage.ticker.Stop();
     } );

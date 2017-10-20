@@ -38,6 +38,8 @@ module.exports = function ( Nenkraft ) {
     this.Draw( rc );
     this.onProcess.Dispatch( this, _delta );
   };
+  delete Stage2D.prototype.alpha;
+  delete Stage2D.prototype.gco;
   Nenkraft.Entity.Stage2D = Stage2D;
   Nenkraft.Stage2D = Stage2D;
 };
