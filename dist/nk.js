@@ -63,85 +63,11 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 89);
+/******/ 	return __webpack_require__(__webpack_require__.s = 90);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var namespace = Object.create( null );
-
-__webpack_require__( 12 )( namespace );
-__webpack_require__( 38 )( namespace );
-__webpack_require__( 60 )( namespace );
-__webpack_require__( 62 )( namespace );
-__webpack_require__( 57 )( namespace );
-__webpack_require__( 59 )( namespace );
-__webpack_require__( 58 )( namespace );
-__webpack_require__( 50 )( namespace );
-__webpack_require__( 51 )( namespace );
-__webpack_require__( 52 )( namespace );
-__webpack_require__( 54 )( namespace );
-__webpack_require__( 53 )( namespace );
-__webpack_require__( 28 )( namespace );
-__webpack_require__( 27 )( namespace );
-__webpack_require__( 55 )( namespace );
-__webpack_require__( 56 )( namespace );
-__webpack_require__( 43 )( namespace );
-__webpack_require__( 42 )( namespace );
-__webpack_require__( 39 )( namespace );
-__webpack_require__( 40 )( namespace );
-__webpack_require__( 41 )( namespace );
-__webpack_require__( 31 )( namespace );
-__webpack_require__( 29 )( namespace );
-__webpack_require__( 32 )( namespace );
-__webpack_require__( 30 )( namespace );
-__webpack_require__( 36 )( namespace );
-__webpack_require__( 37 )( namespace );
-__webpack_require__( 45 )( namespace );
-__webpack_require__( 44 )( namespace );
-__webpack_require__( 61 )( namespace );
-__webpack_require__( 34 )( namespace );
-__webpack_require__( 33 )( namespace );
-__webpack_require__( 16 )( namespace );
-__webpack_require__( 48 )( namespace );
-__webpack_require__( 46 )( namespace );
-__webpack_require__( 49 )( namespace );
-__webpack_require__( 47 )( namespace );
-__webpack_require__( 19 )( namespace );
-__webpack_require__( 18 )( namespace );
-__webpack_require__( 17 )( namespace );
-__webpack_require__( 25 )( namespace );
-__webpack_require__( 20 )( namespace );
-__webpack_require__( 21 )( namespace );
-__webpack_require__( 22 )( namespace );
-__webpack_require__( 23 )( namespace );
-__webpack_require__( 26 )( namespace );
-__webpack_require__( 24 )( namespace );
-__webpack_require__( 11 )( namespace );
-__webpack_require__( 9 )( namespace );
-__webpack_require__( 10 )( namespace );
-__webpack_require__( 14 )( namespace );
-__webpack_require__( 13 )( namespace );
-__webpack_require__( 15 )( namespace );
-__webpack_require__( 35 )( namespace );
-
-global.Nenkraft = global.nk = namespace;
-
-//if ( DEVELOPMENT && module.hot ) module.hot.accept();
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
-
-/***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
 /***/ (function(module, exports) {
 
 var g;
@@ -168,6 +94,81 @@ module.exports = g;
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var namespace = Object.create( null );
+
+__webpack_require__( 12 )( namespace );
+__webpack_require__( 38 )( namespace );
+__webpack_require__( 61 )( namespace );
+__webpack_require__( 63 )( namespace );
+__webpack_require__( 58 )( namespace );
+__webpack_require__( 60 )( namespace );
+__webpack_require__( 59 )( namespace );
+__webpack_require__( 50 )( namespace );
+__webpack_require__( 51 )( namespace );
+__webpack_require__( 52 )( namespace );
+__webpack_require__( 54 )( namespace );
+__webpack_require__( 53 )( namespace );
+__webpack_require__( 28 )( namespace );
+__webpack_require__( 27 )( namespace );
+__webpack_require__( 55 )( namespace );
+__webpack_require__( 56 )( namespace );
+__webpack_require__( 43 )( namespace );
+__webpack_require__( 42 )( namespace );
+__webpack_require__( 39 )( namespace );
+__webpack_require__( 40 )( namespace );
+__webpack_require__( 41 )( namespace );
+__webpack_require__( 31 )( namespace );
+__webpack_require__( 29 )( namespace );
+__webpack_require__( 32 )( namespace );
+__webpack_require__( 30 )( namespace );
+__webpack_require__( 36 )( namespace );
+__webpack_require__( 37 )( namespace );
+__webpack_require__( 45 )( namespace );
+__webpack_require__( 44 )( namespace );
+__webpack_require__( 62 )( namespace );
+__webpack_require__( 34 )( namespace );
+__webpack_require__( 33 )( namespace );
+__webpack_require__( 16 )( namespace );
+__webpack_require__( 48 )( namespace );
+__webpack_require__( 46 )( namespace );
+__webpack_require__( 49 )( namespace );
+__webpack_require__( 47 )( namespace );
+__webpack_require__( 19 )( namespace );
+__webpack_require__( 18 )( namespace );
+__webpack_require__( 17 )( namespace );
+__webpack_require__( 25 )( namespace );
+__webpack_require__( 20 )( namespace );
+__webpack_require__( 21 )( namespace );
+__webpack_require__( 22 )( namespace );
+__webpack_require__( 23 )( namespace );
+__webpack_require__( 26 )( namespace );
+__webpack_require__( 24 )( namespace );
+__webpack_require__( 11 )( namespace );
+__webpack_require__( 9 )( namespace );
+__webpack_require__( 10 )( namespace );
+__webpack_require__( 14 )( namespace );
+__webpack_require__( 13 )( namespace );
+__webpack_require__( 15 )( namespace );
+__webpack_require__( 35 )( namespace );
+__webpack_require__( 57 )( namespace );
+
+global.Nenkraft = global.nk = namespace;
+
+//if ( DEVELOPMENT && module.hot ) module.hot.accept();
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
 /* 9 */
 /***/ (function(module, exports) {
 
@@ -381,7 +382,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.3.0 (Alpha)';
+  Nenkraft.VERSION = '0.3.1 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -4053,6 +4054,195 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 /* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = function ( Nenkraft ) {
+  'use strict';
+  function Assert ( _data, _compare, _value, _noSelfAssert ) {
+    if ( _noSelfAssert == undefined || typeof _data.Assert !== 'function' ) {
+      switch ( _compare ) {
+        case Assert.IS:
+          Is( _data, _value );
+          return;
+        case Assert.IS_NOT:
+          IsNot( _data, _value );
+          return;
+        case Assert.IS_TYPE:
+          IsType( _data, _value );
+          return;
+        case Assert.IS_NOT_TYPE:
+          IsNotType( _data, _value );
+          return;
+        case Assert.IS_INSTANCE_OF:
+          IsInstanceOf( _data, _value );
+          return;
+        case Assert.IS_NOT_INSTANCE_OF:
+          IsNotInstanceOf( _data, _value );
+          return;
+        default:
+          throw new Error( 'No comparison: ' + _compare );
+      }
+    } else {
+      _data.Assert( _compare, _value );
+    }
+  }
+  function Is ( _data, _value ) {
+    var failed = false;
+    if ( _data !== _value ) {
+      failed = true;
+    }
+    if ( failed ) {
+      console.error( _data, _value );
+      throw new Error( 'Assertion failed: IS' );
+    } else {
+      if ( Assert.LOG ) {
+        console.log( 'Assertion success: ' );
+        console.log( _data );
+        console.log( 'IS' );
+        console.log( _value );
+      }
+    }
+  }
+  function IsNot ( _data, _value ) {
+    var failed = false;
+    if ( _data === _value ) {
+      failed = true;
+    }
+    if ( failed ) {
+      console.error( _data, _value );
+      throw new Error( 'Assertion failed: IS NOT' );
+    } else {
+      if ( Assert.LOG ) {
+        console.log( 'Assertion success: ' );
+        console.log( _data );
+        console.log( 'IS NOT' );
+        console.log( _value );
+      }
+    }
+  }
+  function IsType ( _data, _value ) {
+    var failed = false;
+    if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
+      if ( !Array.isArray( _data ) && !Array.isArray( _value ) ) {
+        failed = true;
+      }
+    } else {
+      if ( _data === null || _value === null ) {
+        if ( _data !== _value ) {
+          failed = true;
+        }
+      }
+      else if ( typeof _data !== typeof _value ) {
+        failed = true;
+      }
+    }
+    if ( failed ) {
+      console.error( _data, _value );
+      throw new Error( 'Assertion failed: IS TYPE' );
+    } else {
+      if ( Assert.LOG ) {
+        console.log( 'Assertion success: ' );
+        console.log( _data );
+        console.log( 'IS TYPE' );
+        console.log( _value );
+      }
+    }
+  }
+  function IsNotType ( _data, _value ) {
+    var failed = false;
+    if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
+      if ( Array.isArray( _data ) && ( Array.isArray( _value ) ) ) {
+        failed = true;
+      }
+    } else {
+      if ( _data === null || _value === null ) {
+        if ( _value === _data ) {
+          failed = true;
+        }
+      }
+      else if ( typeof _data === typeof _value ) {
+        failed = true;
+      }
+    }
+    if ( failed ) {
+      console.error( _data, _value );
+      throw new Error( 'Assertion failed: IS NOT TYPE' );
+    } else {
+      if ( Assert.LOG ) {
+        console.log( 'Assertion success: ' );
+        console.log( _data );
+        console.log( 'IS NOT TYPE' );
+        console.log( _value );
+      }
+    }
+  }
+  function IsInstanceOf ( _data, _value ) {
+    var failed = false;
+    if ( !( _data instanceof _value ) ) {
+      failed = true;
+    }
+    if ( failed ) {
+      console.error( _data, _value );
+      throw new Error( 'Assertion failed: IS INSTANCE OF' );
+    } else {
+      if ( Assert.LOG ) {
+        console.log( 'Assertion success: ' );
+        console.log( _data );
+        console.log( 'IS INSTANCE OF' );
+        console.log( _value.name );
+      }
+    }
+  }
+  function IsNotInstanceOf ( _data, _value ) {
+    var failed = false;
+    if ( _data instanceof _value ) {
+      failed = true;
+    }
+    if ( failed ) {
+      console.error( _data, _value );
+      throw new Error( 'Assertion failed: IS NOT INSTANCE OF' );
+    } else {
+      if ( Assert.LOG ) {
+        console.log( 'Assertion success: ' );
+        console.log( _data );
+        console.log( 'IS NOT INSTANCE OF' );
+        console.log( _value.name );
+      }
+    }
+  }
+  Assert.IS = 0;
+  Assert.IS_NOT = 1;
+  Assert.IS_TYPE = 2;
+  Assert.IS_NOT_TYPE = 3;
+  Assert.IS_INSTANCE_OF = 4;
+  Assert.IS_NOT_INSTANCE_OF = 5;
+  Assert.GlobalAssign = function () {
+    if ( window ) {
+      window.IS = 0;
+      window.IS_NOT = 1;
+      window.IS_TYPE = 2;
+      window.IS_NOT_TYPE = 3;
+      window.IS_INSTANCE_OF = 4;
+      window.IS_NOT_INSTANCE_OF = 5;
+    } else if ( global ) {
+      global.IS = 0;
+      global.IS_NOT = 1;
+      global.IS_TYPE = 2;
+      global.IS_NOT_TYPE = 3;
+      global.IS_INSTANCE_OF = 4;
+      global.IS_NOT_INSTANCE_OF = 5;
+    } else {
+      throw new Error( 'No global namespace' );
+    }
+  };
+  Assert.LOG = false;
+  Nenkraft.Utils.Assert = Assert;
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 58 */
 /***/ (function(module, exports) {
 
 module.exports = function ( Nenkraft ) {
@@ -4148,7 +4338,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 module.exports = function ( Nenkraft ) {
@@ -4175,7 +4365,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports) {
 
 module.exports = function ( Nenkraft ) {
@@ -4209,7 +4399,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 module.exports = function ( Nenkraft ) {
@@ -4263,7 +4453,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 module.exports = function ( Nenkraft ) {
@@ -4408,7 +4598,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports) {
 
 module.exports = function ( Nenkraft ) {
@@ -4574,7 +4764,6 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 63 */,
 /* 64 */,
 /* 65 */,
 /* 66 */,
@@ -4600,10 +4789,11 @@ module.exports = function ( Nenkraft ) {
 /* 86 */,
 /* 87 */,
 /* 88 */,
-/* 89 */
+/* 89 */,
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(0);
+module.exports = __webpack_require__(1);
 
 
 /***/ })

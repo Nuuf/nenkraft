@@ -22,6 +22,16 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, HH );
 
+    makesurethat = nk.Utils.Assert;
+    makesurethat.GlobalAssign();
+    makesurethat.LOG = true;
+
+    makesurethat( stage, IS_INSTANCE_OF, nk.Stage2D );
+    makesurethat( W, IS, HW * 2 );
+    makesurethat( button, IS_NOT, null );
+
+
+
     document.body.removeChild( buttonContainer );
   }
 };

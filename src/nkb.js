@@ -29,5 +29,6 @@ require( './nk-entity/nk-case2d' )( namespace );
 require( './nk-cp/nk-option' )( namespace );
 require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
+require( './nk-utils/nk-assert' )( namespace );
 
 module.exports = namespace;

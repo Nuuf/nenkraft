@@ -75,7 +75,7 @@ module.exports = function () {
     CreateLine( 0, HH, W, 0, false );
 
     ( function () {
-      var i = 50;
+      var i = 25;
       while ( i-- ) {
         CreateCircle( RI( -HW, HW ), RI( -HH, HH ), RI( 5, 10 ) );
       }
