@@ -54,6 +54,7 @@ require( './nk-cp/nk-option' )( namespace );
 require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
 require( './nk-load/nk-texture-loader' )( namespace );
+require( './nk-utils/nk-assert' )( namespace );
 
 global.Nenkraft = global.nk = namespace;
 
