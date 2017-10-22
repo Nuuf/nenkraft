@@ -4,6 +4,7 @@ require( './nk-base/nkb-base' )( namespace );
 require( './nk-math/nk-math' )( namespace );
 require( './nk-utils/nk-pool' )( namespace );
 require( './nk-utils/nk-utils' )( namespace );
+require( './nk-utils/nk-assert' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
 require( './nk-event/nk-local-listener' )( namespace );
@@ -29,6 +30,5 @@ require( './nk-entity/nk-case2d' )( namespace );
 require( './nk-cp/nk-option' )( namespace );
 require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
-require( './nk-utils/nk-assert' )( namespace );
 
 module.exports = namespace;

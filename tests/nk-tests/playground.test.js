@@ -30,6 +30,8 @@ module.exports = function () {
     makesurethat( W, IS, HW * 2 );
     makesurethat( button, IS_NOT, null );
 
+    stage.position.Assert();
+
 
 
     document.body.removeChild( buttonContainer );

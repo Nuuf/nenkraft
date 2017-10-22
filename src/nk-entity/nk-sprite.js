@@ -39,7 +39,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
   Sprite.prototype.alpha = 1.0;
-  Sprite.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Sprite.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Sprite.prototype.interactive = true;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {

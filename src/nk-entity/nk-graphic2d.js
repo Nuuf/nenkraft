@@ -24,9 +24,8 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Graphic2D.prototype.path = null;
-  Graphic2D.prototype.anchor = null;
   Graphic2D.prototype.alpha = 1.0;
-  Graphic2D.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Graphic2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Graphic2D.prototype.interactive = true;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {

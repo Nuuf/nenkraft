@@ -38,6 +38,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS' );
@@ -55,6 +56,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS NOT' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS NOT' );
@@ -83,6 +85,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS TYPE' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS TYPE' );
@@ -111,6 +114,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS NOT TYPE' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS NOT TYPE' );
@@ -128,6 +132,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS INSTANCE OF' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS INSTANCE OF' );
@@ -145,6 +150,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS NOT INSTANCE OF' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS NOT INSTANCE OF' );

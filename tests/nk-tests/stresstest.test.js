@@ -44,12 +44,14 @@ module.exports = function () {
 
     var childrenMDC = [];
 
+    var spritePool = new nk.Pool( nk.Sprite );
+
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {
       var i = am;
       am = am < 3 ? 3 : am--;
       while ( i-- ) {
-        var sprite = new nk.Sprite( Math.random() * W - HW, Math.random() * H - HH, texture );
+        var sprite = spritePool.Retrieve();
         sprite.transformAutomaticUpdate = false;
         container.AddChild( sprite );
       }
@@ -60,6 +62,9 @@ module.exports = function () {
       else {
         var numChildren = container.children.length;
         console.log( numChildren, ticker.GetTPS() );
+        container.children.forEach( function ( child ) {
+          spritePool.Store( child );
+        } );
         container.Dump();
         holdCounter = 0;
         childrenMDC.push( numChildren );
@@ -81,6 +86,11 @@ module.exports = function () {
     }] );
     imageCache.onComplete.Add( function () {
       texture = imageCache.Get( 'tex' );
+      spritePool.Flood( function ( obj ) {
+        obj.x = Math.random() * W - HW;
+        obj.y = Math.random() * H - HH;
+        obj.SetTexture( texture );
+      }, 50000 );
       timer.Start( 120 );
     } );
 

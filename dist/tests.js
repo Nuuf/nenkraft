@@ -1566,6 +1566,7 @@ module.exports = function () {
     var stage = new nk.Stage2D( c, HW, HH );
     stage.clear = false;
     stage.fill = false;
+    stage.gco = nk.Style.GCO.COLOR_DODGE;
 
     imageCache = new nk.Load.TextureLoader( [
       {
@@ -1581,7 +1582,7 @@ module.exports = function () {
     ] );
     imageCache.onComplete.Add( function () {
 
-      var i = 150;
+      var i = 250;
       while ( i-- ) {
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.Get( 'particle' ) ) );
         child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );
@@ -1832,6 +1833,8 @@ module.exports = function () {
     makesurethat( stage, IS_INSTANCE_OF, nk.Stage2D );
     makesurethat( W, IS, HW * 2 );
     makesurethat( button, IS_NOT, null );
+
+    stage.position.Assert();
 
 
 
@@ -2521,12 +2524,14 @@ module.exports = function () {
 
     var childrenMDC = [];
 
+    var spritePool = new nk.Pool( nk.Sprite );
+
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {
       var i = am;
       am = am < 3 ? 3 : am--;
       while ( i-- ) {
-        var sprite = new nk.Sprite( Math.random() * W - HW, Math.random() * H - HH, texture );
+        var sprite = spritePool.Retrieve();
         sprite.transformAutomaticUpdate = false;
         container.AddChild( sprite );
       }
@@ -2537,6 +2542,9 @@ module.exports = function () {
       else {
         var numChildren = container.children.length;
         console.log( numChildren, ticker.GetTPS() );
+        container.children.forEach( function ( child ) {
+          spritePool.Store( child );
+        } );
         container.Dump();
         holdCounter = 0;
         childrenMDC.push( numChildren );
@@ -2558,6 +2566,11 @@ module.exports = function () {
     }] );
     imageCache.onComplete.Add( function () {
       texture = imageCache.Get( 'tex' );
+      spritePool.Flood( function ( obj ) {
+        obj.x = Math.random() * W - HW;
+        obj.y = Math.random() * H - HH;
+        obj.SetTexture( texture );
+      }, 50000 );
       timer.Start( 120 );
     } );
 
