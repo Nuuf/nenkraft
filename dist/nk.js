@@ -103,6 +103,7 @@ __webpack_require__( 12 )( namespace );
 __webpack_require__( 38 )( namespace );
 __webpack_require__( 61 )( namespace );
 __webpack_require__( 63 )( namespace );
+__webpack_require__( 57 )( namespace );
 __webpack_require__( 58 )( namespace );
 __webpack_require__( 60 )( namespace );
 __webpack_require__( 59 )( namespace );
@@ -153,7 +154,6 @@ __webpack_require__( 14 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 15 )( namespace );
 __webpack_require__( 35 )( namespace );
-__webpack_require__( 57 )( namespace );
 
 global.Nenkraft = global.nk = namespace;
 
@@ -382,7 +382,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.3.1 (Alpha)';
+  Nenkraft.VERSION = '0.3.2 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -968,9 +968,8 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Graphic2D.prototype.path = null;
-  Graphic2D.prototype.anchor = null;
   Graphic2D.prototype.alpha = 1.0;
-  Graphic2D.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Graphic2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Graphic2D.prototype.interactive = true;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
@@ -1158,7 +1157,6 @@ module.exports = function ( Nenkraft ) {
       }
       this.path = _path;
     }
-    this.anchor = new Nenkraft.Vector2D();
   }
   Plaingraphic2D.prototype = Object.create( Super.prototype );
   Plaingraphic2D.prototype.constructor = Plaingraphic2D;
@@ -1166,7 +1164,6 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Plaingraphic2D.prototype.path = null;
-  Plaingraphic2D.prototype.anchor = null;
   Plaingraphic2D.prototype.interactive = true;
   //Methods
   Plaingraphic2D.prototype.Draw = function ( _rc ) {
@@ -1318,7 +1315,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
   Sprite.prototype.alpha = 1.0;
-  Sprite.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Sprite.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Sprite.prototype.interactive = true;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
@@ -1388,9 +1385,13 @@ module.exports = function ( Nenkraft ) {
   Stage2D.prototype.backgroundColor = 'rgba(0,0,0,1)';
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
+  Stage2D.prototype.alpha = 1.0;
+  Stage2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   //Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
+    _rc.globalAlpha = this.alpha;
+    _rc.globalCompositeOperation = this.gco;
     if ( this.clear === true ) {
       _rc.clearRect( 0, 0, this.w, this.h );
     }
@@ -1433,7 +1434,7 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.text = '';
   Text.prototype.maxWidth = undefined;
   Text.prototype.alpha = 1.0;
-  Text.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Text.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -3309,6 +3310,11 @@ module.exports = function ( Nenkraft ) {
     r.Multiply( dot, dot );
     return this.SubtractVC( r );
   };
+  Vector2D.prototype.Assert = function () {
+    var A = Nenkraft.Utils.Assert;
+    A( this.x, A.IS_TYPE, 0 );
+    A( this.y, A.IS_TYPE, 0 );
+  };
   Vector2D.prototype.Store = function () {
     Vector2D.Pool.Store( this );
   };
@@ -4096,6 +4102,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS' );
@@ -4113,6 +4120,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS NOT' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS NOT' );
@@ -4141,6 +4149,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS TYPE' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS TYPE' );
@@ -4169,6 +4178,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS NOT TYPE' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS NOT TYPE' );
@@ -4186,6 +4196,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS INSTANCE OF' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS INSTANCE OF' );
@@ -4203,6 +4214,7 @@ module.exports = function ( Nenkraft ) {
       throw new Error( 'Assertion failed: IS NOT INSTANCE OF' );
     } else {
       if ( Assert.LOG ) {
+        console.log( '<<||--------------------------------||>>' );
         console.log( 'Assertion success: ' );
         console.log( _data );
         console.log( 'IS NOT INSTANCE OF' );

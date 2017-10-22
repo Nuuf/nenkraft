@@ -15,7 +15,7 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.text = '';
   Text.prototype.maxWidth = undefined;
   Text.prototype.alpha = 1.0;
-  Text.prototype.gco = Nenkraft.Style.GCO.SOURCE_OVER;
+  Text.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {

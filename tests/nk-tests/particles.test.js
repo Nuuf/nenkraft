@@ -23,6 +23,7 @@ module.exports = function () {
     var stage = new nk.Stage2D( c, HW, HH );
     stage.clear = false;
     stage.fill = false;
+    stage.gco = nk.Style.GCO.COLOR_DODGE;
 
     imageCache = new nk.Load.TextureLoader( [
       {
@@ -38,7 +39,7 @@ module.exports = function () {
     ] );
     imageCache.onComplete.Add( function () {
 
-      var i = 150;
+      var i = 250;
       while ( i-- ) {
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.Get( 'particle' ) ) );
         child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );

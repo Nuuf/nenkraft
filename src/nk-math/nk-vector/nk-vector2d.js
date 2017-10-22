@@ -329,6 +329,11 @@ module.exports = function ( Nenkraft ) {
     r.Multiply( dot, dot );
     return this.SubtractVC( r );
   };
+  Vector2D.prototype.Assert = function () {
+    var A = Nenkraft.Utils.Assert;
+    A( this.x, A.IS_TYPE, 0 );
+    A( this.y, A.IS_TYPE, 0 );
+  };
   Vector2D.prototype.Store = function () {
     Vector2D.Pool.Store( this );
   };

@@ -21,9 +21,13 @@ module.exports = function ( Nenkraft ) {
   Stage2D.prototype.backgroundColor = 'rgba(0,0,0,1)';
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
+  Stage2D.prototype.alpha = 1.0;
+  Stage2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   //Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
+    _rc.globalAlpha = this.alpha;
+    _rc.globalCompositeOperation = this.gco;
     if ( this.clear === true ) {
       _rc.clearRect( 0, 0, this.w, this.h );
     }

@@ -17,7 +17,6 @@ module.exports = function ( Nenkraft ) {
       }
       this.path = _path;
     }
-    this.anchor = new Nenkraft.Vector2D();
   }
   Plaingraphic2D.prototype = Object.create( Super.prototype );
   Plaingraphic2D.prototype.constructor = Plaingraphic2D;
@@ -25,7 +24,6 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Plaingraphic2D.prototype.path = null;
-  Plaingraphic2D.prototype.anchor = null;
   Plaingraphic2D.prototype.interactive = true;
   //Methods
   Plaingraphic2D.prototype.Draw = function ( _rc ) {
