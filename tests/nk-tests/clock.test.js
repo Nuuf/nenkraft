@@ -56,10 +56,10 @@ module.exports = function () {
       var seconds = date.getSeconds();
       var minutes = date.getMinutes();
       var hours = date.getHours();
-      millisecondHand.path.e.RotateAroundV( millisecondHand.path.s, nk.Math.DTR(( milliseconds / 1000 * 360 ) - 90 ) - millisecondHand.path.e.GetAngle() );
-      secondHand.path.e.RotateAroundV( secondHand.path.s, nk.Math.DTR(( seconds * 6 ) - 90 ) - secondHand.path.e.GetAngle() );
-      minuteHand.path.e.RotateAroundV( minuteHand.path.s, nk.Math.DTR(( minutes * 6 ) - 90 ) - minuteHand.path.e.GetAngle() );
-      hourHand.path.e.RotateAroundV( hourHand.path.s, nk.Math.DTR(( ( 60 * hours + minutes ) * 0.5 ) - 90 ) - hourHand.path.e.GetAngle() );
+      millisecondHand.path.e.RotateAroundV( millisecondHand.path.s, nk.Math.DTR( ( milliseconds / 1000 * 360 ) - 90 ) - millisecondHand.path.e.GetAngle() );
+      secondHand.path.e.RotateAroundV( secondHand.path.s, nk.Math.DTR( ( seconds * 6 ) - 90 ) - secondHand.path.e.GetAngle() );
+      minuteHand.path.e.RotateAroundV( minuteHand.path.s, nk.Math.DTR( ( minutes * 6 ) - 90 ) - minuteHand.path.e.GetAngle() );
+      hourHand.path.e.RotateAroundV( hourHand.path.s, nk.Math.DTR( ( ( 60 * hours + minutes ) * 0.5 ) - 90 ) - hourHand.path.e.GetAngle() );
     } );
 
     document.body.removeChild( buttonContainer );

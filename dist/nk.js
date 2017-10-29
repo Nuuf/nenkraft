@@ -1,3 +1,10 @@
+/**
+* @package     Nenkraft
+* @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+* @version     0.3.3 (Alpha)
+* @copyright   (C) 2017 Gustav 'Nuuf' Åberg
+* @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
+*/
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -97,7 +104,11 @@ module.exports = g;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var namespace = Object.create( null );
+/* WEBPACK VAR INJECTION */(function(global) {/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+var namespace = Object.create( null );
 
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 38 )( namespace );
@@ -171,6 +182,10 @@ global.Nenkraft = global.nk = namespace;
 /* 8 */,
 /* 9 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -270,6 +285,10 @@ module.exports = function ( Nenkraft ) {
 /* 10 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Controller ( _sprite ) {
@@ -322,6 +341,10 @@ module.exports = function ( Nenkraft ) {
 /* 11 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Frame ( _x, _y, _w, _h, _rate, _sprite ) {
@@ -369,6 +392,10 @@ module.exports = function ( Nenkraft ) {
 /* 12 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   Nenkraft.Geom = Object.create( null );
   Nenkraft.Style = Object.create( null );
@@ -382,7 +409,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.3.2 (Alpha)';
+  Nenkraft.VERSION = '0.3.3 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -395,6 +422,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 13 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -510,6 +541,10 @@ module.exports = function ( Nenkraft ) {
 /* 14 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Option ( _id, _handle, _info, _priority, _breakIfExecuted ) {
@@ -542,6 +577,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -589,6 +628,10 @@ module.exports = function ( Nenkraft ) {
 /* 16 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Debug () {
@@ -616,6 +659,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 17 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -658,6 +705,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 18 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -827,6 +878,10 @@ module.exports = function ( Nenkraft ) {
 /* 19 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function CoreEntity2D ( _x, _y ) {
@@ -942,6 +997,10 @@ module.exports = function ( Nenkraft ) {
 /* 20 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
@@ -1004,6 +1063,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 21 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1138,6 +1201,10 @@ module.exports = function ( Nenkraft ) {
 /* 22 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Plain2D;
@@ -1193,6 +1260,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 23 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1273,6 +1344,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 24 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1362,6 +1437,10 @@ module.exports = function ( Nenkraft ) {
 /* 25 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
@@ -1416,6 +1495,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 26 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1472,6 +1555,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 27 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1548,6 +1635,10 @@ module.exports = function ( Nenkraft ) {
 /* 28 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function LocalListener ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
@@ -1581,6 +1672,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 29 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1707,6 +1802,10 @@ module.exports = function ( Nenkraft ) {
 /* 30 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Circle ( _x, _y, _radius ) {
@@ -1768,6 +1867,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 31 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -1851,6 +1954,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 32 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -2121,6 +2228,10 @@ module.exports = function ( Nenkraft ) {
 /* 33 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Keyboard ( _element ) {
@@ -2159,6 +2270,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 34 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -2233,6 +2348,10 @@ module.exports = function ( Nenkraft ) {
 /* 35 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function TextureLoader ( _objs ) {
@@ -2298,6 +2417,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 36 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -2609,6 +2732,10 @@ module.exports = function ( Nenkraft ) {
 /* 37 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   Nenkraft.Math.Ease = Object.create( null );
@@ -2644,6 +2771,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 38 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -2725,6 +2856,10 @@ module.exports = function ( Nenkraft ) {
 /* 39 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Matrix2D () {
@@ -2733,6 +2868,7 @@ module.exports = function ( Nenkraft ) {
   Matrix2D.prototype = Object.create( null );
   Matrix2D.prototype.constructor = Matrix2D;
   //Static
+  Matrix2D.EPSILON = 0.00001;
   //Members
   Matrix2D.prototype.a = 1;
   Matrix2D.prototype.b = 0;
@@ -2753,22 +2889,30 @@ module.exports = function ( Nenkraft ) {
     this.d = _d;
     this.e = _e;
     this.f = _f;
+    return this;
+  };
+  Matrix2D.prototype.SetTransform = function ( _x, _y, _sx, _sy, _r, _skx, _sky, _px, _py ) {
+    var sr = Math.sin( _r );
+    var cr = Math.cos( _r );
+    var sskx = -Math.sin( _skx );
+    var cskx = Math.cos( _skx );
+    var ssky = Math.sin( _sky );
+    var csky = Math.cos( _sky );
+    var a = cr * _sx;
+    var b = sr * _sx;
+    var c = -sr * _sy;
+    var d = cr * _sy;
+    this.a = csky * a + ssky * c;
+    this.b = csky * b + ssky * d;
+    this.c = sskx * a + cskx * c;
+    this.d = sskx * b + cskx * d;
+    this.e = _x + _px * a + _py * c;
+    this.f = _y + _px * b + _py * d;
+    return this;
   };
   Matrix2D.prototype.Translate = function ( _x, _y ) {
     this.e += _x;
     this.f += _y;
-  };
-  Matrix2D.prototype.TranslateV = function ( _v ) {
-    this.e += _v.x;
-    this.f += _v.y;
-  };
-  Matrix2D.prototype.TranslateTo = function ( _x, _y ) {
-    this.e = _x;
-    this.f = _y;
-  };
-  Matrix2D.prototype.TranslateToV = function ( _v ) {
-    this.e = _v.x;
-    this.f = _v.y;
   };
   Matrix2D.prototype.Scale = function ( _x, _y ) {
     this.a *= _x;
@@ -2778,23 +2922,38 @@ module.exports = function ( Nenkraft ) {
     this.e *= _x;
     this.f *= _y;
   };
-  Matrix2D.prototype.ScaleV = function ( _v ) {
-    var x = _v.x, y = _v.y;
-    this.a *= x;
-    this.b *= y;
-    this.c *= x;
-    this.d *= y;
-    this.e *= x;
-    this.f *= y;
-  };
   Matrix2D.prototype.Rotate = function ( _angle ) {
-    var cos = Math.cos( _angle ), sin = Math.sin( _angle ), a = this.a, c = this.c, e = this.e;
-    this.a = ( a * cos ) - ( this.b * sin );
-    this.b = ( a * sin ) + ( this.b * cos );
-    this.c = ( c * cos ) - ( this.d * sin );
-    this.d = ( c * sin ) + ( this.d * cos );
-    this.e = ( e * cos ) - ( this.f * sin );
-    this.f = ( e * sin ) + ( this.f * cos );
+    var sa = Math.sin( _angle );
+    var ca = Math.cos( _angle );
+    var a = this.a;
+    var c = this.c;
+    var e = this.e;
+    this.a = a * ca - this.b * sa;
+    this.b = a * sa + this.b * ca;
+    this.c = c * ca - this.d * sa;
+    this.d = c * sa + this.d * ca;
+    this.e = e * ca - this.f * sa;
+    this.f = e * sa + this.f * ca;
+  };
+  Matrix2D.prototype.Decompose = function ( _transform ) {
+    var a = this.a;
+    var b = this.b;
+    var c = this.c;
+    var d = this.d;
+    var skx = -Math.atan2( -c, d );
+    var sky = Math.atan2( b, a );
+    var delta = Math.abs( skx + sky );
+    if ( delta < Matrix2D.EPSILON ) {
+      _transform.rotation = sky;
+      if ( a < 0 && d >= 0 ) {
+        _transform.rotation += Math.PI;
+      }
+      _transform.skew.Set( 0 );
+    } else {
+      _transform.skew.Set( skx, sky );
+    }
+    _transform.scale.Set( Math.sqrt( a * a + b * b ), Math.sqrt( c * c + d * d ) );
+    _transform.position.Set( this.e, this.f );
   };
   Matrix2D.prototype.Identity = function () {
     this.a = 1;
@@ -2803,27 +2962,6 @@ module.exports = function ( Nenkraft ) {
     this.d = 1;
     this.e = 0;
     this.f = 0;
-  };
-  Matrix2D.prototype.Append = function ( _matrix ) {
-    var a = this.a, b = this.b, c = this.c, d = this.d;
-    this.a = ( _matrix.a * a ) + ( _matrix.b * c );
-    this.b = ( _matrix.a * b ) + ( _matrix.b * d );
-    this.c = ( _matrix.c * a ) + ( _matrix.d * c );
-    this.d = ( _matrix.c * b ) + ( _matrix.d * d );
-    this.e = this.e + ( _matrix.e * a ) + ( _matrix.f * c );
-    this.f = this.f + ( _matrix.e * b ) + ( _matrix.f * d );
-  };
-  Matrix2D.prototype.Prepend = function ( _matrix ) {
-    var e = this.e;
-    if ( _matrix.a !== 1 || _matrix.b || _matrix.c || _matrix.d !== 1 ) {
-      var a = this.a, c = this.c;
-      this.a = ( a * _matrix.a ) + ( this.b * _matrix.c );
-      this.b = ( a * _matrix.b ) + ( this.b * _matrix.d );
-      this.c = ( c * _matrix.a ) + ( this.d * _matrix.c );
-      this.d = ( c * _matrix.b ) + ( this.d * _matrix.d );
-    }
-    this.e = _matrix.e + ( e * _matrix.a ) + ( this.f * _matrix.c );
-    this.f = _matrix.f + ( e * _matrix.b ) + ( this.f * _matrix.d );
   };
   Matrix2D.prototype.ApplyToContext = function ( _rc ) {
     _rc.setTransform( this.a, this.b, this.c, this.d, this.e, this.f );
@@ -2836,6 +2974,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 40 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -2872,10 +3014,14 @@ module.exports = function ( Nenkraft ) {
 /* 41 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Transform2D ( _x, _y ) {
-    if ( !( this instanceof Transform2D ) ) return new Transform2D();
+    if ( !( this instanceof Transform2D ) ) return new Transform2D( _x, _y );
     this.position = Nenkraft.Vector2D( _x, _y );
     this.scale = new Nenkraft.Vector2D( 1, 1 );
     this.skew = new Nenkraft.Vector2D( 0, 0 );
@@ -2894,6 +3040,10 @@ module.exports = function ( Nenkraft ) {
   Transform2D.prototype.skewCY = 0;
   Transform2D.prototype.skewSY = 1;
   //Methods
+  Transform2D.prototype.Set = function ( _matrix ) {
+    _matrix.Decompose( this );
+    this.UpdateSkew();
+  };
   Transform2D.prototype.UpdateLocal = function () {
     var localTransform = this.localTransform, position = this.position, scale = this.scale, pivot = this.pivot;
 
@@ -2902,12 +3052,11 @@ module.exports = function ( Nenkraft ) {
     localTransform.c = this.skewCY * scale.y;
     localTransform.d = this.skewSY * scale.y;
 
-    localTransform.e = position.x - ( ( pivot.x * localTransform.a ) + ( pivot.y * localTransform.c ) );
-    localTransform.f = position.y - ( ( pivot.y * localTransform.b ) + ( pivot.y * localTransform.d ) );
-
-    return localTransform;
+    localTransform.e = position.x - pivot.x * localTransform.a + pivot.y * localTransform.c;
+    localTransform.f = position.y - pivot.y * localTransform.b + pivot.y * localTransform.d;
   };
   Transform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
+
     var localTransform = this.localTransform, worldTransform = this.worldTransform, position = this.position, scale = this.scale, pivot = this.pivot;
 
     localTransform.a = this.skewCX * scale.x;
@@ -2915,16 +3064,16 @@ module.exports = function ( Nenkraft ) {
     localTransform.c = this.skewCY * scale.y;
     localTransform.d = this.skewSY * scale.y;
 
-    localTransform.e = position.x - ( ( pivot.x * localTransform.a ) + ( pivot.y * localTransform.c ) );
-    localTransform.f = position.y - ( ( pivot.y * localTransform.b ) + ( pivot.y * localTransform.d ) );
+    localTransform.e = position.x - pivot.x * localTransform.a + pivot.y * localTransform.c;
+    localTransform.f = position.y - pivot.y * localTransform.b + pivot.y * localTransform.d;
 
-    worldTransform.a = ( localTransform.a * _parentWorldTransform.a ) + ( localTransform.b * _parentWorldTransform.c );
-    worldTransform.b = ( localTransform.a * _parentWorldTransform.b ) + ( localTransform.b * _parentWorldTransform.d );
-    worldTransform.c = ( localTransform.c * _parentWorldTransform.a ) + ( localTransform.d * _parentWorldTransform.c );
-    worldTransform.d = ( localTransform.c * _parentWorldTransform.b ) + ( localTransform.d * _parentWorldTransform.d );
+    worldTransform.a = localTransform.a * _parentWorldTransform.a + localTransform.b * _parentWorldTransform.c;
+    worldTransform.b = localTransform.a * _parentWorldTransform.b + localTransform.b * _parentWorldTransform.d;
+    worldTransform.c = localTransform.c * _parentWorldTransform.a + localTransform.d * _parentWorldTransform.c;
+    worldTransform.d = localTransform.c * _parentWorldTransform.b + localTransform.d * _parentWorldTransform.d;
 
-    worldTransform.e = ( localTransform.e * _parentWorldTransform.a ) + ( localTransform.f * _parentWorldTransform.c ) + _parentWorldTransform.e;
-    worldTransform.f = ( localTransform.e * _parentWorldTransform.b ) + ( localTransform.f * _parentWorldTransform.d ) + _parentWorldTransform.f;
+    worldTransform.e = localTransform.e * _parentWorldTransform.a + localTransform.f * _parentWorldTransform.c + _parentWorldTransform.e;
+    worldTransform.f = localTransform.e * _parentWorldTransform.b + localTransform.f * _parentWorldTransform.d + _parentWorldTransform.f;
   };
   Transform2D.prototype.UpdateSkew = function () {
     var skew = this.skew, rotation = this.rotation;
@@ -2943,6 +3092,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 42 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -2978,6 +3131,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 43 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3312,8 +3469,8 @@ module.exports = function ( Nenkraft ) {
   };
   Vector2D.prototype.Assert = function () {
     var A = Nenkraft.Utils.Assert;
-    A( this.x, A.IS_TYPE, 0 );
-    A( this.y, A.IS_TYPE, 0 );
+    A( this.x, A.IS_SAME_TYPE, 0 );
+    A( this.y, A.IS_SAME_TYPE, 0 );
   };
   Vector2D.prototype.Store = function () {
     Vector2D.Pool.Store( this );
@@ -3329,6 +3486,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 44 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3420,6 +3581,10 @@ module.exports = function ( Nenkraft ) {
 /* 45 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
@@ -3509,6 +3674,10 @@ module.exports = function ( Nenkraft ) {
 /* 46 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.AABB2D;
@@ -3550,6 +3719,10 @@ module.exports = function ( Nenkraft ) {
 /* 47 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.Circle;
@@ -3588,6 +3761,10 @@ module.exports = function ( Nenkraft ) {
 /* 48 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.Line2D;
@@ -3623,6 +3800,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 49 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3667,6 +3848,10 @@ module.exports = function ( Nenkraft ) {
 /* 50 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Fill ( _props ) {
@@ -3691,6 +3876,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 51 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3722,6 +3911,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 52 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3765,6 +3958,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 53 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3815,6 +4012,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 54 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3871,6 +4072,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 55 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -3985,6 +4190,10 @@ module.exports = function ( Nenkraft ) {
 /* 56 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Timer ( _stopTime ) {
@@ -4062,28 +4271,44 @@ module.exports = function ( Nenkraft ) {
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = function ( Nenkraft ) {
+/* WEBPACK VAR INJECTION */(function(global) {/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
   'use strict';
   function Assert ( _data, _compare, _value, _noSelfAssert ) {
     if ( _noSelfAssert == undefined || typeof _data.Assert !== 'function' ) {
       switch ( _compare ) {
         case Assert.IS:
-          Is( _data, _value );
+          Is( _data, _value, _compare );
           return;
         case Assert.IS_NOT:
-          IsNot( _data, _value );
+          IsNot( _data, _value, _compare );
           return;
-        case Assert.IS_TYPE:
-          IsType( _data, _value );
+        case Assert.IS_SAME_TYPE:
+          IsSameType( _data, _value, _compare );
           return;
-        case Assert.IS_NOT_TYPE:
-          IsNotType( _data, _value );
+        case Assert.IS_NOT_SAME_TYPE:
+          IsNotSameType( _data, _value, _compare );
           return;
         case Assert.IS_INSTANCE_OF:
-          IsInstanceOf( _data, _value );
+          IsInstanceOf( _data, _value, _compare );
           return;
         case Assert.IS_NOT_INSTANCE_OF:
-          IsNotInstanceOf( _data, _value );
+          IsNotInstanceOf( _data, _value, _compare );
+          return;
+        case Assert.IS_LESS_THAN:
+          IsLessThan( _data, _value, _compare );
+          return;
+        case Assert.IS_GREATER_THAN:
+          IsGreaterThan( _data, _value, _compare );
+          return;
+        case Assert.IS_LESS_THAN_OR_EQUAL:
+          IsLessThanOrEqual( _data, _value, _compare );
+          return;
+        case Assert.IS_GREATER_THAN_OR_EQUAL:
+          IsGreaterThanOrEqual( _data, _value, _compare );
           return;
         default:
           throw new Error( 'No comparison: ' + _compare );
@@ -4092,43 +4317,21 @@ module.exports = function ( Nenkraft ) {
       _data.Assert( _compare, _value );
     }
   }
-  function Is ( _data, _value ) {
+  function Is ( _data, _value, _compare ) {
     var failed = false;
     if ( _data !== _value ) {
       failed = true;
     }
-    if ( failed ) {
-      console.error( _data, _value );
-      throw new Error( 'Assertion failed: IS' );
-    } else {
-      if ( Assert.LOG ) {
-        console.log( '<<||--------------------------------||>>' );
-        console.log( 'Assertion success: ' );
-        console.log( _data );
-        console.log( 'IS' );
-        console.log( _value );
-      }
-    }
+    Check( failed, _data, _value, _compare );
   }
-  function IsNot ( _data, _value ) {
+  function IsNot ( _data, _value, _compare ) {
     var failed = false;
     if ( _data === _value ) {
       failed = true;
     }
-    if ( failed ) {
-      console.error( _data, _value );
-      throw new Error( 'Assertion failed: IS NOT' );
-    } else {
-      if ( Assert.LOG ) {
-        console.log( '<<||--------------------------------||>>' );
-        console.log( 'Assertion success: ' );
-        console.log( _data );
-        console.log( 'IS NOT' );
-        console.log( _value );
-      }
-    }
+    Check( failed, _data, _value, _compare );
   }
-  function IsType ( _data, _value ) {
+  function IsSameType ( _data, _value, _compare ) {
     var failed = false;
     if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
       if ( !Array.isArray( _data ) && !Array.isArray( _value ) ) {
@@ -4144,20 +4347,9 @@ module.exports = function ( Nenkraft ) {
         failed = true;
       }
     }
-    if ( failed ) {
-      console.error( _data, _value );
-      throw new Error( 'Assertion failed: IS TYPE' );
-    } else {
-      if ( Assert.LOG ) {
-        console.log( '<<||--------------------------------||>>' );
-        console.log( 'Assertion success: ' );
-        console.log( _data );
-        console.log( 'IS TYPE' );
-        console.log( _value );
-      }
-    }
+    Check( failed, _data, _value, _compare );
   }
-  function IsNotType ( _data, _value ) {
+  function IsNotSameType ( _data, _value, _compare ) {
     var failed = false;
     if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
       if ( Array.isArray( _data ) && ( Array.isArray( _value ) ) ) {
@@ -4173,82 +4365,104 @@ module.exports = function ( Nenkraft ) {
         failed = true;
       }
     }
-    if ( failed ) {
-      console.error( _data, _value );
-      throw new Error( 'Assertion failed: IS NOT TYPE' );
-    } else {
-      if ( Assert.LOG ) {
-        console.log( '<<||--------------------------------||>>' );
-        console.log( 'Assertion success: ' );
-        console.log( _data );
-        console.log( 'IS NOT TYPE' );
-        console.log( _value );
-      }
-    }
+    Check( failed, _data, _value, _compare );
   }
-  function IsInstanceOf ( _data, _value ) {
+  function IsInstanceOf ( _data, _value, _compare ) {
     var failed = false;
     if ( !( _data instanceof _value ) ) {
       failed = true;
     }
-    if ( failed ) {
-      console.error( _data, _value );
-      throw new Error( 'Assertion failed: IS INSTANCE OF' );
-    } else {
-      if ( Assert.LOG ) {
-        console.log( '<<||--------------------------------||>>' );
-        console.log( 'Assertion success: ' );
-        console.log( _data );
-        console.log( 'IS INSTANCE OF' );
-        console.log( _value.name );
-      }
-    }
+    Check( failed, _data, _value.name, _compare );
   }
-  function IsNotInstanceOf ( _data, _value ) {
+  function IsNotInstanceOf ( _data, _value, _compare ) {
     var failed = false;
     if ( _data instanceof _value ) {
       failed = true;
     }
-    if ( failed ) {
+    Check( failed, _data, _value.name, _compare );
+  }
+  function IsLessThan ( _data, _value, _compare ) {
+    var failed = false;
+    if ( _data >= _value ) {
+      failed = true;
+    }
+    Check( failed, _data, _value, _compare );
+  }
+  function IsGreaterThan ( _data, _value, _compare ) {
+    var failed = false;
+    if ( _data <= _value ) {
+      failed = true;
+    }
+    Check( failed, _data, _value, _compare );
+  }
+  function IsLessThanOrEqual ( _data, _value, _compare ) {
+    var failed = false;
+    if ( _data > _value ) {
+      failed = true;
+    }
+    Check( failed, _data, _value, _compare );
+  }
+  function IsGreaterThanOrEqual ( _data, _value, _compare ) {
+    var failed = false;
+    if ( _data < _value ) {
+      failed = true;
+    }
+    Check( failed, _data, _value, _compare );
+  }
+  function Check ( _failed, _data, _value, _compare ) {
+    if ( _failed ) {
       console.error( _data, _value );
-      throw new Error( 'Assertion failed: IS NOT INSTANCE OF' );
+      throw new Error( 'Assertion failed: ' + _compare );
     } else {
-      if ( Assert.LOG ) {
-        console.log( '<<||--------------------------------||>>' );
-        console.log( 'Assertion success: ' );
-        console.log( _data );
-        console.log( 'IS NOT INSTANCE OF' );
-        console.log( _value.name );
+      if ( Assert.LOG && window ) {
+        SuccessLog( _data, _value, _compare );
       }
     }
   }
-  Assert.IS = 0;
-  Assert.IS_NOT = 1;
-  Assert.IS_TYPE = 2;
-  Assert.IS_NOT_TYPE = 3;
-  Assert.IS_INSTANCE_OF = 4;
-  Assert.IS_NOT_INSTANCE_OF = 5;
+  function SuccessLog ( _data, _value, _compare ) {
+    console.log( '%c<<||-?START?-||>>', 'background-color: black; color: #0FF; padding: 0px 25px;' );
+    console.log( '%cAssertion success: ', 'background-color: #333; color: #0F0; padding: 0px 25px;' );
+    console.log( _data );
+    console.log( _compare );
+    console.log( _value );
+    console.log( '%c>>||-?END?-||<<', 'background-color: black; color: #FF0; padding: 0px 25px;' );
+  }
+
+  Assert.IS = 'IS';
+  Assert.IS_NOT = 'IS NOT';
+  Assert.IS_SAME_TYPE = 'IS SAME TYPE';
+  Assert.IS_NOT_SAME_TYPE = 'IS NOT SAME TYPE';
+  Assert.IS_INSTANCE_OF = 'IS INSTANCE OF';
+  Assert.IS_NOT_INSTANCE_OF = 'IS NOT INSTANCE OF';
+  Assert.IS_LESS_THAN = 'IS LESS THAN';
+  Assert.IS_GREATER_THAN = 'IS GREATER THAN';
+  Assert.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
+  Assert.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
   Assert.GlobalAssign = function () {
+    var g;
     if ( window ) {
-      window.IS = 0;
-      window.IS_NOT = 1;
-      window.IS_TYPE = 2;
-      window.IS_NOT_TYPE = 3;
-      window.IS_INSTANCE_OF = 4;
-      window.IS_NOT_INSTANCE_OF = 5;
+      g = window;
     } else if ( global ) {
-      global.IS = 0;
-      global.IS_NOT = 1;
-      global.IS_TYPE = 2;
-      global.IS_NOT_TYPE = 3;
-      global.IS_INSTANCE_OF = 4;
-      global.IS_NOT_INSTANCE_OF = 5;
+      g = global;
+    }
+    if ( g ) {
+      g.IS = 'IS';
+      g.IS_NOT = 'IS NOT';
+      g.IS_SAME_TYPE = 'IS SAME TYPE';
+      g.IS_NOT_SAME_TYPE = 'IS NOT SAME TYPE';
+      g.IS_INSTANCE_OF = 'IS INSTANCE OF';
+      g.IS_NOT_INSTANCE_OF = 'IS NOT INSTANCE OF';
+      g.IS_LESS_THAN = 'IS LESS THAN';
+      g.IS_GREATER_THAN = 'IS GREATER THAN';
+      g.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
+      g.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
     } else {
       throw new Error( 'No global namespace' );
     }
   };
   Assert.LOG = false;
   Nenkraft.Utils.Assert = Assert;
+  Nenkraft.Assert = Assert;
 };
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -4256,6 +4470,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 58 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -4353,6 +4571,10 @@ module.exports = function ( Nenkraft ) {
 /* 59 */
 /***/ (function(module, exports) {
 
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function FlagEnum () {
@@ -4379,6 +4601,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 60 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -4413,6 +4639,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 61 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -4467,6 +4697,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 62 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';
@@ -4612,6 +4846,10 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 /* 63 */
 /***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
 
 module.exports = function ( Nenkraft ) {
   'use strict';

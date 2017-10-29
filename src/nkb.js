@@ -1,3 +1,7 @@
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 var namespace = Object.create( null );
 
 require( './nk-base/nkb-base' )( namespace );

@@ -1,3 +1,10 @@
+/**
+* @package     Nenkraft
+* @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+* @version     0.3.3 (Alpha)
+* @copyright   (C) 2017 Gustav 'Nuuf' Åberg
+* @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
+*/
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -781,10 +788,10 @@ module.exports = function () {
       var seconds = date.getSeconds();
       var minutes = date.getMinutes();
       var hours = date.getHours();
-      millisecondHand.path.e.RotateAroundV( millisecondHand.path.s, nk.Math.DTR(( milliseconds / 1000 * 360 ) - 90 ) - millisecondHand.path.e.GetAngle() );
-      secondHand.path.e.RotateAroundV( secondHand.path.s, nk.Math.DTR(( seconds * 6 ) - 90 ) - secondHand.path.e.GetAngle() );
-      minuteHand.path.e.RotateAroundV( minuteHand.path.s, nk.Math.DTR(( minutes * 6 ) - 90 ) - minuteHand.path.e.GetAngle() );
-      hourHand.path.e.RotateAroundV( hourHand.path.s, nk.Math.DTR(( ( 60 * hours + minutes ) * 0.5 ) - 90 ) - hourHand.path.e.GetAngle() );
+      millisecondHand.path.e.RotateAroundV( millisecondHand.path.s, nk.Math.DTR( ( milliseconds / 1000 * 360 ) - 90 ) - millisecondHand.path.e.GetAngle() );
+      secondHand.path.e.RotateAroundV( secondHand.path.s, nk.Math.DTR( ( seconds * 6 ) - 90 ) - secondHand.path.e.GetAngle() );
+      minuteHand.path.e.RotateAroundV( minuteHand.path.s, nk.Math.DTR( ( minutes * 6 ) - 90 ) - minuteHand.path.e.GetAngle() );
+      hourHand.path.e.RotateAroundV( hourHand.path.s, nk.Math.DTR( ( ( 60 * hours + minutes ) * 0.5 ) - 90 ) - hourHand.path.e.GetAngle() );
     } );
 
     document.body.removeChild( buttonContainer );
@@ -1818,27 +1825,28 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
-    makesurethat = nk.Utils.Assert;
-    makesurethat.GlobalAssign();
-    makesurethat.LOG = true;
+    stage.Mount(
+      new nk.Graphic2D( 0, 0, nk.Path.Line2D( -HW, -HH, HW, HH ) ),
+      new nk.Graphic2D( 0, 0, nk.Path.Line2D( HW, -HH, -HW, HH ) )
+    );
 
-    makesurethat( stage, IS_INSTANCE_OF, nk.Stage2D );
-    makesurethat( W, IS, HW * 2 );
-    makesurethat( button, IS_NOT, null );
-
-    stage.position.Assert();
+    var obj = stage.AddChild( new nk.Sprite( 0, 0 ) );
+    obj.anchor.Set( 0.5 );
+    obj.transform.Set( new nk.Matrix2D().SetTransform( 0, 0, 1, 1, nk.Math.RADIAN * 45, 0, 0, 0, 0 ) );
 
 
 
     document.body.removeChild( buttonContainer );
+
+
   }
 };
 
@@ -2153,9 +2161,9 @@ module.exports = function () {
     }() );
 
     ( function () {
-      var i = 36;
+      var i = 360;
       var angle = Math.PI * 2 / i;
-      var r = 360;
+      var r = 20;
       while ( i-- ) {
         var th = angle * i;
         var line = new nk.Path.Ray2D( 0, 0, 0, 0 );
@@ -2241,7 +2249,9 @@ module.exports = function () {
       }
     }, stage );
     stage.mouse.onUp.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
+      if ( dragger ) {
+        dragger = null;
+      }
     } );
 
 

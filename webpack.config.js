@@ -2,6 +2,7 @@ var webpack = require( 'webpack' ),
   path = require( 'path' ),
   os = require( 'os' ),
   colors = require( 'colors/safe' ),
+  banner = require( './banner' )(),
   ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
   HTMLWebpackPlugin = require( 'html-webpack-plugin' ),
   PRODUCTION = process.env.NODE_ENV === 'production',
@@ -31,7 +32,8 @@ var plugins = PRODUCTION
     new ExtractTextPlugin( 'style-[contenthash:10].css' ),
     new HTMLWebpackPlugin( {
       template: 'build_template.html'
-    } )
+    } ),
+    new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } )
   ]
   : [
     new webpack.HotModuleReplacementPlugin()

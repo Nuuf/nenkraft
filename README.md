@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.3.2 (Alpha)
+# Version 0.3.3 (Alpha)
 ------
 
 #### Nenkraft is a small rendering tool. (MIT License)

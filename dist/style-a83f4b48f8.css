@@ -1,2 +1,9 @@
+/**
+* @package     Nenkraft
+* @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+* @version     0.3.3 (Alpha)
+* @copyright   (C) 2017 Gustav 'Nuuf' Åberg
+* @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
+*/
 body,html{padding:0;margin:0}#buttons{width:600px;display:inline-block;height:auto;position:absolute;top:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}#buttons input[type=button]{display:list-item;width:100%;background-color:#000;color:#fff;border:none;padding:15px;cursor:pointer;border-bottom:1px solid #fff;border-right:1px solid #fff;width:150px;float:left}#buttons input:active{outline:none}#buttons input:hover{color:grey}canvas{background-color:#000;display:none}:focus{outline:none}
 /*# sourceMappingURL=style-a83f4b48f8.css.map*/
