@@ -1,3 +1,7 @@
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Circle ( _x, _y, _radius ) {

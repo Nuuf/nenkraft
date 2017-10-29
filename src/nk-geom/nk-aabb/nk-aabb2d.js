@@ -1,3 +1,7 @@
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {

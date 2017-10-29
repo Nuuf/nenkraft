@@ -1,3 +1,7 @@
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   var HexMap = Nenkraft.Utils.Base16ToBase10;

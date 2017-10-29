@@ -1,3 +1,7 @@
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {

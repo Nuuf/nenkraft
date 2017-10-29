@@ -48,6 +48,7 @@ mDown.onEnd.Add( function () {
 
 MotionManager.StartMultiple( 'up left' );
 
+
 var intervalId = setInterval( function () {
   MainCase.Render();
   MotionManager.Process();

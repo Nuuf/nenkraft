@@ -49,9 +49,9 @@ module.exports = function () {
     }() );
 
     ( function () {
-      var i = 36;
+      var i = 360;
       var angle = Math.PI * 2 / i;
-      var r = 360;
+      var r = 20;
       while ( i-- ) {
         var th = angle * i;
         var line = new nk.Path.Ray2D( 0, 0, 0, 0 );
@@ -137,7 +137,9 @@ module.exports = function () {
       }
     }, stage );
     stage.mouse.onUp.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
+      if ( dragger ) {
+        dragger = null;
+      }
     } );
 
 

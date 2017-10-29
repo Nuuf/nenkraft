@@ -1,3 +1,7 @@
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Vector2D ( _arg0, _arg1 ) {
@@ -331,8 +335,8 @@ module.exports = function ( Nenkraft ) {
   };
   Vector2D.prototype.Assert = function () {
     var A = Nenkraft.Utils.Assert;
-    A( this.x, A.IS_TYPE, 0 );
-    A( this.y, A.IS_TYPE, 0 );
+    A( this.x, A.IS_SAME_TYPE, 0 );
+    A( this.y, A.IS_SAME_TYPE, 0 );
   };
   Vector2D.prototype.Store = function () {
     Vector2D.Pool.Store( this );
