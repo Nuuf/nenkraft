@@ -21,7 +21,19 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.radiusSquared = 0;
   Circle.prototype.radiusUnsquared = 0;
   Circle.prototype.area = 0;
+  Circle.prototype.belongsTo = null;
   //Methods
+  Circle.prototype.Set = function ( _x, _y, _radius ) {
+    this.center.Set( _x, _y );
+    this.radius = _radius;
+  };
+  Circle.prototype.SetC = function ( _circle ) {
+    this.center.SetV( _circle );
+    this.radius = _circle.radius;
+  };
+  Circle.prototype.Scale = function ( _scale ) {
+    this.radius *= _scale;
+  };
   Circle.prototype.IntersectsCircle = function ( _circle ) {
     var radii = this.radius + _circle.radius;
     return ( radii * radii >= this.center.GetDistanceSquaredV( _circle.center ) );

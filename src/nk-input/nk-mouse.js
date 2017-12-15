@@ -9,14 +9,13 @@ module.exports = function ( Nenkraft ) {
     this.element = _element;
     this.position = new Nenkraft.Vector2D();
     this.scale = new Nenkraft.Vector2D( 1, 1 );
-    this.anchor = new Nenkraft.Vector2D();
     this.offset = new Nenkraft.Vector2D( _offsetX, _offsetY );
 
     this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
     this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
     this.element.addEventListener( 'mouseup', this.OnUp.bind( this ) );
     this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
-    this.element.addEventListener( 'wheel', this.OnWheel.bind( this ) );
+    this.element.addEventListener( 'wheel', this.OnWheel.bind( this ), { passive: true } );
 
     this.onMove = new Nenkraft.Event.LocalEvent();
     this.onDown = new Nenkraft.Event.LocalEvent();

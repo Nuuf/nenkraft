@@ -28,6 +28,7 @@ module.exports = function ( Nenkraft ) {
   //Members
   Line2D.prototype.TYPE = Line2D.TYPE;
   Line2D.prototype.epsilon = 1000;
+  Line2D.prototype.belongsTo = null;
   //Methods
   Line2D.prototype.Stretch = function ( _magnitude ) {
     var hm = _magnitude * 0.5;

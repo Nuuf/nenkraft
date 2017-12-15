@@ -84,7 +84,7 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.GetAllOptionIds = function () {
     var allOptionIds = [];
     for ( var i = 0, options = this.options, l = options.length; i < l; ++i ) {
-      allOptionIds = allOptionIds.concat( options[ i ].id );
+      allOptionIds.push.apply( allOptionIds, options[ i ].id );
     }
     return allOptionIds;
   };

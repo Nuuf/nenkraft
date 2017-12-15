@@ -5,10 +5,10 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.Polygon2D;
-  function Polygon2D () {
-    if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
-    Super.call( this );
-    this.style = Nenkraft.Style.CreateFSSa();
+  function Polygon2D ( _vertices, _style ) {
+    if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices, _style );
+    Super.call( this, _vertices );
+    this.style = Nenkraft.Style.CreateFSSa( _style );
   }
   Polygon2D.prototype = Object.create( Super.prototype );
   Polygon2D.prototype.constructor = Polygon2D;

@@ -5,7 +5,7 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Animation ( _controller, _id, _rate ) {
-    if ( !( this instanceof Animation ) ) return new Animation( _controller, _id );
+    if ( !( this instanceof Animation ) ) return new Animation( _controller, _id, _rate );
     this.frames = [];
     this.controller = _controller;
     this.id = _id;
@@ -27,11 +27,12 @@ module.exports = function ( Nenkraft ) {
   Animation.prototype.reverse = false;
   //Methods
   Animation.prototype.AddFrame = function ( _x, _y, _w, _h, _rate ) {
-    _rate = _rate === undefined ? this.rate : _rate;
+    _rate = _rate == undefined ? this.rate : _rate;
     this.frames.push( new Nenkraft.Animator.Frame( _x, _y, _w, _h, _rate, this.controller.sprite ) );
   };
-  Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
-    for ( var i = 0, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
+  Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
+    _data = _data == undefined ? {} : _data;
+    for ( var i = 0, rate, columns = _imageWidth / _imageHeight; i < _amount; ++i ) {
       rate = _data[ i ];
       this.AddFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
     }

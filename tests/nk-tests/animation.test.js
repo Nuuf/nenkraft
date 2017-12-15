@@ -27,13 +27,13 @@ module.exports = function () {
 
     var timer = new nk.Time.Timer();
 
-    var imageCache = new nk.Load.TextureLoader();
+    var imageCache = new nk.ImageLoader();
     imageCache.onComplete.Add( function ( _event ) {
 
-      spriteRef = new nk.Sprite( 0, -200, imageCache.Get( '1to8' ) );
+      spriteRef = new nk.Sprite( 0, -200, imageCache.GetBasicTexture( '1to8' ) );
       spriteRef.anchor.Set( 0.5 );
 
-      sprite = new nk.Sprite( 0, 0, _event.data.cache[ 0 ].image );
+      sprite = new nk.Sprite( 0, 0, _event.data.basicTextureCache.GetById( '1to8' ) );
       sprite.anchor.Set( 0.5 );
       sprite.scale.Set( 5.0 );
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
@@ -60,8 +60,8 @@ module.exports = function () {
       }, stage );
     } );
     imageCache.Load( [
-      { id: '1to8', src: './images/1to8.png' },
-    ] );
+      { id: '1to8', src: './images/1to8.png' }
+    ], true );
 
     document.body.removeChild( buttonContainer );
   }

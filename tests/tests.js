@@ -5,6 +5,7 @@ require( './../images/4dots.png' );
 require( './../images/glass-of-blueberryjuice.png' );
 require( './../images/raindrop.png' );
 require( './../images/smudge.png' );
+require( './../images/colors.png' );
 
 var tests = [];
 

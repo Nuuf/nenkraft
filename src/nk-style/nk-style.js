@@ -4,20 +4,44 @@
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  Nenkraft.Style.CreateAll = function () {
-    return { fill: new Nenkraft.Style.Fill(), stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
+  Nenkraft.Style.CreateAll = function ( _style ) {
+    return {
+      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
+      text: new Nenkraft.Style.Text( _style ? _style.text : null ),
+      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null ),
+    };
   };
-  Nenkraft.Style.CreateFSSa = function () {
-    return { fill: new Nenkraft.Style.Fill(), stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow() };
+  Nenkraft.Style.CreateFSSa = function ( _style ) {
+    return {
+      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+    };
   };
-  Nenkraft.Style.CreateSSa = function () {
-    return { stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow() };
+  Nenkraft.Style.CreateSSa = function ( _style ) {
+    return {
+      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+    };
   };
-  Nenkraft.Style.CreateFSa = function () {
-    return { fill: new Nenkraft.Style.Fill(), shadow: new Nenkraft.Style.Shadow() };
+  Nenkraft.Style.CreateFSa = function ( _style ) {
+    return {
+      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+    };
   };
-  Nenkraft.Style.CreateSaT = function () {
-    return { shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
+  Nenkraft.Style.CreateSaT = function ( _style ) {
+    return {
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
+      text: new Nenkraft.Style.Text( _style ? _style.text : null )
+    };
+  };
+  Nenkraft.Style.CreateP = function ( _style ) {
+    return {
+      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
+    };
   };
   Nenkraft.Style.GCO = Object.create( null );
   Nenkraft.Style.GCO.SOURCE_OVER = Nenkraft.Style.GCO.DEFAULT = 'source-over';

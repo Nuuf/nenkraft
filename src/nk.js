@@ -5,10 +5,12 @@
 var namespace = Object.create( null );
 
 require( './nk-base/nk-base' )( namespace );
+require( './nk-shader/nk-load-shaders' )( namespace );
 require( './nk-math/nk-math' )( namespace );
-require( './nk-utils/nk-pool' )( namespace );
-require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-assert' )( namespace );
+require( './nk-utils/nk-pool' )( namespace );
+require( './nk-utils/nk-cache' )( namespace );
+require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-color' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
@@ -16,7 +18,9 @@ require( './nk-style/nk-fill' )( namespace );
 require( './nk-style/nk-shadow' )( namespace );
 require( './nk-style/nk-stroke' )( namespace );
 require( './nk-style/nk-text' )( namespace );
+require( './nk-style/nk-pixel' )( namespace );
 require( './nk-style/nk-style' )( namespace );
+require( './nk-texture/nk-basic-texture' )( namespace );
 require( './nk-event/nk-local-listener' )( namespace );
 require( './nk-event/nk-local-event' )( namespace );
 require( './nk-time/nk-ticker/nk-ticker' )( namespace );
@@ -38,6 +42,7 @@ require( './nk-utils/nk-quadtree-node' )( namespace );
 require( './nk-input/nk-mouse' )( namespace );
 require( './nk-input/nk-keyboard' )( namespace );
 require( './nk-debug/nk-debug' )( namespace );
+require( './nk-path/nk-pixel/nk-pixel2d' )( namespace );
 require( './nk-path/nk-line/nk-line2d' )( namespace );
 require( './nk-path/nk-aabb/nk-aabb2d' )( namespace );
 require( './nk-path/nk-polygon/nk-polygon2d' )( namespace );
@@ -58,7 +63,14 @@ require( './nk-animator/nk-controller' )( namespace );
 require( './nk-cp/nk-option' )( namespace );
 require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
-require( './nk-load/nk-texture-loader' )( namespace );
+require( './nk-load/nk-image-loader' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-program-controller' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-line2d-program-controller' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-rectangle-program-controller' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-circle-program-controller' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-texture-program-controller' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-texture-batch-program-controller' )( namespace );
+require( './nk-controller/nk-gl-program-controller/nk-gl-pixel-batch-program-controller' )( namespace );
 
 global.Nenkraft = global.nk = namespace;
 

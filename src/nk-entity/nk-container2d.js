@@ -15,10 +15,19 @@ module.exports = function ( Nenkraft ) {
   //Static
 
   //Members
+  Container2D.prototype.children = null;
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
   Container2D.prototype.transformShouldUpdate = true;
   Container2D.prototype.transformAutomaticUpdate = true;
+  //
+  Container2D.prototype.isBatchParent = false;
+  Container2D.prototype.childDataBuffer = null;
+  Container2D.prototype.bufferData = null;
+  Container2D.prototype.programController = null;
+  Container2D.prototype.bufferStartIndex = 0;
+  Container2D.prototype.bufferEndIndex = 0;
+  //
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -26,9 +35,23 @@ module.exports = function ( Nenkraft ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
-      this.transform.ApplyWorld( _rc );
       if ( this.children.length > 0 && this.display === true ) {
         this.DrawChildren( _rc );
+      }
+    }
+  };
+  Container2D.prototype.GLDraw = function ( _gl ) {
+    if ( this.render === true ) {
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      if ( this.children.length > 0 && this.display === true ) {
+        if ( this.isBatchParent === true ) {
+          this.GLBatchDrawChildren( _gl );
+        } else {
+          this.GLDrawChildren( _gl );
+        }
       }
     }
   };
@@ -41,6 +64,38 @@ module.exports = function ( Nenkraft ) {
       if ( child.Draw ) child.Draw( _rc );
     }
   };
+  Container2D.prototype.GLDrawChildren = function ( _gl ) {
+    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+      child = children[ i ];
+      if ( child.GLDraw ) child.GLDraw( _gl );
+    }
+  };
+  Container2D.prototype.GLBatchDrawChildren = function ( _gl ) {
+    if ( this.childDataBuffer != null && this.programController != null ) {
+      this.programController.Execute( this.childDataBuffer, this.children.length );
+    }
+  };
+  Container2D.prototype.ComputeBatchBuffer = function ( _getBufferData ) {
+    var childDataBuffer = [];
+    for ( var i = 0, children = this.children, l = children.length, child, childData; i < l; ++i ) {
+      child = children[ i ];
+      if ( _getBufferData != null ) {
+        childData = _getBufferData( child );
+      } else {
+        childData = child.GetBufferData();
+      }
+      child.bufferStartIndex = childDataBuffer.length;
+      child.bufferEndIndex = childDataBuffer.length + childData.length;
+      childDataBuffer.push.apply( childDataBuffer, childData );
+    }
+    this.childDataBuffer = new Float32Array( childDataBuffer );
+  };
+  Container2D.prototype.UpdateInBuffer = function () {
+    throw new Error( 'Cannot update buffer data directly on Container2D object!' );
+  };
+  Container2D.prototype.GetBufferData = function () {
+    throw new Error( 'Cannot access buffer data directly on Container2D object!' );
+  };
   Container2D.prototype.AddChild = function ( _child ) {
     var parent = _child.parent;
     if ( parent !== null ) {
@@ -51,14 +106,12 @@ module.exports = function ( Nenkraft ) {
     return _child;
   };
   Container2D.prototype.AddChildren = function () {
-    for ( var i = 0, l = arguments.length, child, parent; i < l; ++i ) {
-      child = arguments[ i ];
-      parent = child.parent;
-      if ( parent !== null ) {
-        parent.RemoveChild( child );
-      }
-      this.children.push( child );
-      child.parent = this;
+    var children = arguments;
+    if ( Array.isArray( children[ 0 ] ) ) {
+      children = children[ 0 ];
+    }
+    for ( var i = 0, l = children.length, child, parent; i < l; ++i ) {
+      this.AddChild( children[ i ] );
     }
   };
   Container2D.prototype.Mount = function () {
@@ -160,6 +213,10 @@ module.exports = function ( Nenkraft ) {
       return closestChild;
     }
     return null;
+  };
+  Container2D.prototype.UseAsBatchParent = function ( _pc ) {
+    this.isBatchParent = true;
+    this.programController = _pc;
   };
   Nenkraft.Entity.Container2D = Container2D;
   Nenkraft.Container2D = Container2D;

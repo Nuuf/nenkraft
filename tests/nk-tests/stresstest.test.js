@@ -80,12 +80,12 @@ module.exports = function () {
       }
     }, timer );
 
-    var imageCache = new nk.Load.TextureLoader( [ {
+    var imageCache = new nk.ImageLoader( [ {
       id: 'tex',
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    }] );
+    }], true );
     imageCache.onComplete.Add( function () {
-      texture = imageCache.Get( 'tex' );
+      texture = imageCache.GetBasicTexture( 'tex' );
       spritePool.Flood( function ( obj ) {
         obj.x = Math.random() * W - HW;
         obj.y = Math.random() * H - HH;

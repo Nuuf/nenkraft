@@ -3,6 +3,9 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "Float32Array": true
+  },
   "rules": {
     "indent": [
       "error",

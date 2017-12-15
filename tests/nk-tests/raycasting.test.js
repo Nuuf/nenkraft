@@ -51,7 +51,7 @@ module.exports = function () {
     ( function () {
       var i = 360;
       var angle = Math.PI * 2 / i;
-      var r = 20;
+      var r = 180;
       while ( i-- ) {
         var th = angle * i;
         var line = new nk.Path.Ray2D( 0, 0, 0, 0 );

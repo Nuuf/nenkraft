@@ -71,6 +71,31 @@ module.exports = function ( Nenkraft ) {
     }
     return grid;
   };
+  Nenkraft.Math.TriRectArray = function ( _x, _y, _w, _h, _arr ) {
+    if ( _arr != null ) {
+      _arr[ 0 ] = _x;
+      _arr[ 1 ] = _y;
+      _arr[ 2 ] = _x + _w;
+      _arr[ 3 ] = _y;
+      _arr[ 4 ] = _x;
+      _arr[ 5 ] = _y + _h;
+      _arr[ 6 ] = _x;
+      _arr[ 7 ] = _y + _h;
+      _arr[ 8 ] = _x + _w;
+      _arr[ 9 ] = _y;
+      _arr[ 10 ] = _x + _w;
+      _arr[ 11 ] = _y + _h;
+      return _arr;
+    }
+    return [
+      _x, _y,
+      _x + _w, _y,
+      _x, _y + _h,
+      _x, _y + _h,
+      _x + _w, _y,
+      _x + _w, _y + _h
+    ];
+  };
   Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );

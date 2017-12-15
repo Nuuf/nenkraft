@@ -15,6 +15,8 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
   //Members
   CoreEntity2D.prototype.parent = null;
+  CoreEntity2D.prototype.transform = null;
+  CoreEntity2D.prototype.data = null;
   CoreEntity2D.prototype.w = 0;
   CoreEntity2D.prototype.h = 0;
   CoreEntity2D.prototype.bounds = null;
