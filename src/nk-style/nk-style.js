@@ -10,7 +10,7 @@ module.exports = function ( Nenkraft ) {
       stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
       shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
       text: new Nenkraft.Style.Text( _style ? _style.text : null ),
-      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null ),
+      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
     };
   };
   Nenkraft.Style.CreateFSSa = function ( _style ) {

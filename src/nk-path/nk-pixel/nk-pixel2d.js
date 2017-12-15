@@ -21,9 +21,9 @@ module.exports = function ( Nenkraft ) {
   Pixel2D.prototype.programController = null;
   Pixel2D.prototype.bufferData = null;
   //Methods
-  Pixel2D.prototype.Draw = function ( _rc ) {
-
-  };
+  /* Pixel2D.prototype.Draw = function ( _rc ) {
+    //TODO
+  }; */
   Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
     if ( this.programController != null ) {
       this.programController.Execute(

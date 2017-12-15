@@ -48,7 +48,7 @@ module.exports = function ( Nenkraft ) {
       }
       if ( this.children.length > 0 && this.display === true ) {
         if ( this.isBatchParent === true ) {
-          this.GLBatchDrawChildren( _gl );
+          this.GLBatchDrawChildren();
         } else {
           this.GLDrawChildren( _gl );
         }
@@ -70,7 +70,7 @@ module.exports = function ( Nenkraft ) {
       if ( child.GLDraw ) child.GLDraw( _gl );
     }
   };
-  Container2D.prototype.GLBatchDrawChildren = function ( _gl ) {
+  Container2D.prototype.GLBatchDrawChildren = function () {
     if ( this.childDataBuffer != null && this.programController != null ) {
       this.programController.Execute( this.childDataBuffer, this.children.length );
     }
@@ -110,7 +110,7 @@ module.exports = function ( Nenkraft ) {
     if ( Array.isArray( children[ 0 ] ) ) {
       children = children[ 0 ];
     }
-    for ( var i = 0, l = children.length, child, parent; i < l; ++i ) {
+    for ( var i = 0, l = children.length; i < l; ++i ) {
       this.AddChild( children[ i ] );
     }
   };

@@ -1348,7 +1348,7 @@ module.exports = function ( Nenkraft ) {
       }
       if ( this.children.length > 0 && this.display === true ) {
         if ( this.isBatchParent === true ) {
-          this.GLBatchDrawChildren( _gl );
+          this.GLBatchDrawChildren();
         } else {
           this.GLDrawChildren( _gl );
         }
@@ -1370,7 +1370,7 @@ module.exports = function ( Nenkraft ) {
       if ( child.GLDraw ) child.GLDraw( _gl );
     }
   };
-  Container2D.prototype.GLBatchDrawChildren = function ( _gl ) {
+  Container2D.prototype.GLBatchDrawChildren = function () {
     if ( this.childDataBuffer != null && this.programController != null ) {
       this.programController.Execute( this.childDataBuffer, this.children.length );
     }
@@ -1410,7 +1410,7 @@ module.exports = function ( Nenkraft ) {
     if ( Array.isArray( children[ 0 ] ) ) {
       children = children[ 0 ];
     }
-    for ( var i = 0, l = children.length, child, parent; i < l; ++i ) {
+    for ( var i = 0, l = children.length; i < l; ++i ) {
       this.AddChild( children[ i ] );
     }
   };
@@ -4899,9 +4899,9 @@ module.exports = function ( Nenkraft ) {
   Pixel2D.prototype.programController = null;
   Pixel2D.prototype.bufferData = null;
   //Methods
-  Pixel2D.prototype.Draw = function ( _rc ) {
-
-  };
+  /* Pixel2D.prototype.Draw = function ( _rc ) {
+    //TODO
+  }; */
   Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
     if ( this.programController != null ) {
       this.programController.Execute(
@@ -5087,6 +5087,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.Pixel = Pixel;
 };
 
+
 /***/ }),
 /* 68 */
 /***/ (function(module, exports) {
@@ -5185,7 +5186,7 @@ module.exports = function ( Nenkraft ) {
       stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
       shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
       text: new Nenkraft.Style.Text( _style ? _style.text : null ),
-      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null ),
+      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
     };
   };
   Nenkraft.Style.CreateFSSa = function ( _style ) {
