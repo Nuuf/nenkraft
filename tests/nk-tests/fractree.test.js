@@ -23,10 +23,6 @@ module.exports = function () {
     var l = 200;
 
     var stage = new nk.Stage2D( c, HW, H );
-    stage.clear = false;
-    var bgColor = new nk.Color();
-    bgColor.SetHex( '#00000033' );
-    stage.backgroundColor = bgColor.value;
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {

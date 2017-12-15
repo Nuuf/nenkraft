@@ -9,7 +9,7 @@ module.exports = function ( Nenkraft ) {
     if ( typeof _onProcess !== 'function' ) throw new Error( 'Ticker: An onProcess function is required!' );
     this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
-    if ( _doNotStart === undefined || _doNotStart === false ) {
+    if ( _doNotStart == undefined || _doNotStart === false ) {
       this.StartAF();
     }
   }

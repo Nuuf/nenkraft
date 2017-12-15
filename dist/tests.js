@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.3.3 (Alpha)
+* @version     0.4.0 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 91);
+/******/ 	return __webpack_require__(__webpack_require__.s = 117);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -83,13 +83,14 @@ __webpack_require__( 3 );
 
 __webpack_require__( 4 );
 __webpack_require__( 5 );
-__webpack_require__( 6 );
 __webpack_require__( 7 );
 __webpack_require__( 8 );
+__webpack_require__( 9 );
+__webpack_require__( 6 );
 
 var tests = [];
 
-var context = __webpack_require__(64);
+var context = __webpack_require__(83);
 
 context.keys().forEach( function ( file ) {
   tests.push( context( file ) );
@@ -123,22 +124,27 @@ module.exports = __webpack_require__.p + "images/4dots.png";
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/glass-of-blueberryjuice.png";
+module.exports = __webpack_require__.p + "images/colors.png";
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/raindrop.png";
+module.exports = __webpack_require__.p + "images/glass-of-blueberryjuice.png";
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "images/raindrop.png";
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports = __webpack_require__.p + "images/smudge.png";
 
 /***/ }),
-/* 9 */,
 /* 10 */,
 /* 11 */,
 /* 12 */,
@@ -193,35 +199,61 @@ module.exports = __webpack_require__.p + "images/smudge.png";
 /* 61 */,
 /* 62 */,
 /* 63 */,
-/* 64 */
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 65,
-	"./animation.test": 66,
-	"./butterflyish.test": 67,
-	"./cli.test": 68,
-	"./clock.test": 69,
-	"./elasticcollision.test": 70,
-	"./field.test": 71,
-	"./fractree.test": 72,
-	"./grabndrag.test": 73,
-	"./grid.test": 74,
-	"./magnet.test": 75,
-	"./motion.test": 76,
-	"./nightsky.test": 77,
-	"./particles.test": 78,
-	"./platformer.test": 79,
-	"./playground.test": 80,
-	"./polygoncollision.test": 81,
-	"./quadtree.test": 82,
-	"./rain.test": 83,
-	"./raycasting.test": 84,
-	"./reflectivecollision.test": 85,
-	"./sprite.test": 86,
-	"./stresstest.test": 87,
-	"./text.test": 88,
-	"./themask.test": 89
+	"./aabbcollision.test": 84,
+	"./animation.test": 85,
+	"./butterflyish.test": 86,
+	"./cli.test": 87,
+	"./clock.test": 88,
+	"./elasticcollision.test": 89,
+	"./field.test": 90,
+	"./fractree.test": 91,
+	"./grabndrag.test": 92,
+	"./grid.test": 93,
+	"./magnet.test": 94,
+	"./motion.test": 95,
+	"./nightsky.test": 96,
+	"./particles.test": 97,
+	"./platformer.test": 98,
+	"./playground.test": 99,
+	"./polygoncollision.test": 100,
+	"./quadtree.test": 101,
+	"./rain.test": 102,
+	"./raycasting.test": 103,
+	"./reflectivecollision.test": 104,
+	"./sprite.test": 105,
+	"./stresstest.test": 106,
+	"./text.test": 107,
+	"./themask.test": 108,
+	"./webglanimation.test": 109,
+	"./webglcircle.test": 110,
+	"./webglline2d.test": 111,
+	"./webglpixelbatch.test": 112,
+	"./webglrectangle.test": 113,
+	"./webglstresstest.test": 114,
+	"./webgltexturebatch.test": 115
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -237,10 +269,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 64;
+webpackContext.id = 83;
 
 /***/ }),
-/* 65 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -349,7 +381,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 66 */
+/* 85 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -381,13 +413,13 @@ module.exports = function () {
 
     var timer = new nk.Time.Timer();
 
-    var imageCache = new nk.Load.TextureLoader();
+    var imageCache = new nk.ImageLoader();
     imageCache.onComplete.Add( function ( _event ) {
 
-      spriteRef = new nk.Sprite( 0, -200, imageCache.Get( '1to8' ) );
+      spriteRef = new nk.Sprite( 0, -200, imageCache.GetBasicTexture( '1to8' ) );
       spriteRef.anchor.Set( 0.5 );
 
-      sprite = new nk.Sprite( 0, 0, _event.data.cache[ 0 ].image );
+      sprite = new nk.Sprite( 0, 0, _event.data.basicTextureCache.GetById( '1to8' ) );
       sprite.anchor.Set( 0.5 );
       sprite.scale.Set( 5.0 );
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
@@ -414,15 +446,15 @@ module.exports = function () {
       }, stage );
     } );
     imageCache.Load( [
-      { id: '1to8', src: './images/1to8.png' },
-    ] );
+      { id: '1to8', src: './images/1to8.png' }
+    ], true );
 
     document.body.removeChild( buttonContainer );
   }
 };
 
 /***/ }),
-/* 67 */
+/* 86 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -537,7 +569,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 68 */
+/* 87 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -727,7 +759,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 69 */
+/* 88 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -799,7 +831,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 70 */
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -826,7 +858,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, 0, 0, true );
     stage.ComputeBounds();
-    stage.backgroundColor = 'rgba(255,255,255,0)';
+    stage.backgroundColor = 'rgba(255,255,255,1)';
     //stage.clear = false;
     stage.ticker.StartAF();
 
@@ -919,7 +951,7 @@ module.exports = function () {
         collider.ComputeBounds();
       }
       nodes.forEach( function ( node ) {
-        nk.Debug.Draw.AABB2D( rc, node.aabb );
+        nk.Debug.Draw.AABB2D( rc, node.aabb, { noFill: true } );
       } );
       fps.text = Math.round( stage.ticker.GetTPS() );
     }
@@ -938,7 +970,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 71 */
+/* 90 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1026,7 +1058,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 72 */
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1054,10 +1086,6 @@ module.exports = function () {
     var l = 200;
 
     var stage = new nk.Stage2D( c, HW, H );
-    stage.clear = false;
-    var bgColor = new nk.Color();
-    bgColor.SetHex( '#00000033' );
-    stage.backgroundColor = bgColor.value;
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {
@@ -1116,7 +1144,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 73 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1199,7 +1227,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 74 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1265,7 +1293,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 75 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1390,7 +1418,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 76 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1448,7 +1476,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 77 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1479,13 +1507,13 @@ module.exports = function () {
     var staticStars = [];
 
 
-    var imageCache = new nk.Load.TextureLoader( [ {
+    var imageCache = new nk.ImageLoader( [ {
       id: 'butterfly',
       src: nk.Utils.GenerateSimpleBase64Png( Butterfly )
     }, {
       id: 'staticStar',
       src: nk.Utils.GenerateSimpleBase64Png( StaticStar )
-    }] );
+    }], true );
     imageCache.onComplete.Add( function () {
       Go();
     } );
@@ -1505,7 +1533,7 @@ module.exports = function () {
       for ( var i = 0; i < am; ++i ) {
         var x = nk.Utils.RandomInteger( xv.x, xv.y );
         var y = nk.Utils.RandomInteger( yv.x, yv.y );
-        var sprite = new nk.Sprite( x, y, imageCache.Get( img ) );
+        var sprite = new nk.Sprite( x, y, imageCache.GetBasicTexture( img ) );
         sprite.anchor.Set( 0.5 );
         sprite.scale.Set( scale );
         sprite.rotation = nk.Utils.RandomFloat( 0, nk.Math.PII );
@@ -1526,7 +1554,7 @@ module.exports = function () {
       nk.Geom.Polygon2D.Construct.Butterfly( path, 0, 0, 4000, 50 );
       //To get the difference in x,y
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
     function StaticStar () {
@@ -1536,7 +1564,7 @@ module.exports = function () {
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 800, 400, 5 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
 
@@ -1545,7 +1573,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 78 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1575,7 +1603,7 @@ module.exports = function () {
     stage.fill = false;
     stage.gco = nk.Style.GCO.COLOR_DODGE;
 
-    imageCache = new nk.Load.TextureLoader( [
+    imageCache = new nk.ImageLoader( [
       {
         id: 'particle',
         src: nk.Utils.GenerateSimpleBase64Png( function () {
@@ -1586,12 +1614,12 @@ module.exports = function () {
           return t;
         } )
       }
-    ] );
+    ], true );
     imageCache.onComplete.Add( function () {
 
       var i = 250;
       while ( i-- ) {
-        var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.Get( 'particle' ) ) );
+        var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.GetBasicTexture( 'particle' ) ) );
         child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );
       }
 
@@ -1620,7 +1648,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 79 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1647,7 +1675,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, HH, true );
 
-    var imageCache = new nk.Load.TextureLoader( [ {
+    var imageCache = new nk.ImageLoader( [ {
       id: 'character',
       src: nk.Utils.GenerateSimpleBase64Png( function () {
         var path = new nk.Path.AABB2D( 0, 0, 20, 20 );
@@ -1666,7 +1694,7 @@ module.exports = function () {
         var t = new nk.Graphic2D( 0, 0, path );
         return t;
       } )
-    }] );
+    }], true );
     imageCache.onComplete.Add( function () {
       Start();
     } );
@@ -1734,7 +1762,7 @@ module.exports = function () {
     }
 
     function InitCharacter () {
-      character = new nk.Sprite( 0, 0, imageCache.Get( 'character' ) );
+      character = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( 'character' ) );
       character.anchor.Set( 0.5 );
       character.data.move = {
         left: false,
@@ -1788,7 +1816,7 @@ module.exports = function () {
     function InitPlatforms () {
       var i = 100;
       while ( i-- ) {
-        var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.Get( 'platform' ) );
+        var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );
         platform.data.collisionData = {
           shape: platform.shape,
           relative: platform.position,
@@ -1806,7 +1834,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 80 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1819,28 +1847,53 @@ module.exports = function () {
 
   function Run () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
+    c.setAttribute( 'width', 1024 );
+    c.setAttribute( 'height', 64 );
     c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
+    window.c = c;
 
     var W = c.width;
     var H = c.height;
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( c, 0, 0 );
 
-    stage.Mount(
-      new nk.Graphic2D( 0, 0, nk.Path.Line2D( -HW, -HH, HW, HH ) ),
-      new nk.Graphic2D( 0, 0, nk.Path.Line2D( HW, -HH, -HW, HH ) )
-    );
+    window.stage = stage;
 
-    var obj = stage.AddChild( new nk.Sprite( 0, 0 ) );
-    obj.anchor.Set( 0.5 );
-    obj.transform.Set( new nk.Matrix2D().SetTransform( 0, 0, 1, 1, nk.Math.RADIAN * 45, 0, 0, 0, 0 ) );
+    /*     stage.Mount(
+          new nk.Graphic2D( 0, 0, nk.Path.Line2D( -HW, -HH, HW, HH ) ),
+          new nk.Graphic2D( 0, 0, nk.Path.Line2D( HW, -HH, -HW, HH ) )
+        );
+    
+        var obj = stage.AddChild( new nk.Sprite( 0, 0 ) );
+        obj.anchor.Set( 0.5 );
+        obj.transform.Set( new nk.Matrix2D().SetTransform( 0, 0, 1, 1, nk.Math.RADIAN * 45, 0, 0, 0, 0 ) ); */
+
+    stage.Mount( [
+      new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'red' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'green' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 2, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'blue' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 3, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'purple' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 4, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'orange' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 5, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'aqua' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 6, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'violet' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 7, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'indianred' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 8, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'orchid' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 9, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'magenta' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 10, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'powderblue' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 11, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'royalblue' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 12, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'darkolivegreen' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 13, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'darkkhaki' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 14, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'steelblue' }, stroke: { applied: false } } ) ),
+      new nk.Graphic2D( 64 * 15, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'firebrick' }, stroke: { applied: false } } ) ),
+    ] );
+
+    var t = new nk.Path.Polygon2D( [ 0, 0, 100, 100, 0, 100, 100, 0 ] );
+    console.log( t );
 
 
 
@@ -1851,7 +1904,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 81 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1963,7 +2016,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 82 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1990,9 +2043,6 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, 0, 0 );
     stage.ComputeBounds();
-    stage.clear = false;
-    stage.fill = true;
-    stage.backgroundColor = 'rgba(0,0,0,0.3)';
 
     var bounds = new nk.AABB2D();
     bounds.SetC( stage.bounds );
@@ -2024,7 +2074,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 83 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2050,25 +2100,22 @@ module.exports = function () {
     var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
-    stage.clear = false;
-    stage.fill = true;
-    stage.backgroundColor = 'rgba(0,0,0,0.3)';
 
     var gravity = new nk.Vector2D( 0, 0.0982 );
     var wind = new nk.Vector2D();
 
     var DropPool = new nk.Pool( nk.Plainsprite );
 
-    imageCache = new nk.Load.TextureLoader( [
+    imageCache = new nk.ImageLoader( [
       {
         id: 'raindrop',
         src: './images/raindrop.png'
       }
-    ] );
+    ], true );
     imageCache.onComplete.Add( function () {
 
       DropPool.Flood( function ( _sprite ) {
-        _sprite.SetTexture( imageCache.Get( 'raindrop' ) );
+        _sprite.SetTexture( imageCache.GetBasicTexture( 'raindrop' ) );
         _sprite.data.velocity = new nk.Vector2D();
       }, 1000 );
 
@@ -2107,7 +2154,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 84 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2163,7 +2210,7 @@ module.exports = function () {
     ( function () {
       var i = 360;
       var angle = Math.PI * 2 / i;
-      var r = 20;
+      var r = 180;
       while ( i-- ) {
         var th = angle * i;
         var line = new nk.Path.Ray2D( 0, 0, 0, 0 );
@@ -2260,7 +2307,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 85 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2392,7 +2439,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 86 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2425,14 +2472,14 @@ module.exports = function () {
     var sprite4 = null;
     var sprite5 = null;
 
-    var imageCache = new nk.Load.TextureLoader();
+    var imageCache = new nk.ImageLoader();
     imageCache.onComplete.Add( function ( _event ) {
       console.log( _event.target, _event.data, 'complete' );
-      sprite1 = new nk.Sprite( 0, 0, imageCache.Get( '4dots' ) );
+      sprite1 = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( '4dots' ) );
       sprite1.anchor.Set( 0.5 );
-      sprite2 = new nk.Sprite( 100, 50, imageCache.Get( 'smudge' ) );
+      sprite2 = new nk.Sprite( 100, 50, imageCache.GetBasicTexture( 'smudge' ) );
       sprite2.anchor.Set( 0.5 );
-      sprite3 = new nk.Sprite( -100, 100, imageCache.Get( 'gobj' ) );
+      sprite3 = new nk.Sprite( -100, 100, imageCache.GetBasicTexture( 'gobj' ) );
       sprite3.anchor.Set( 0.5 );
       sprite3.clip.tl.Set( 0, 64 );
       sprite4 = new nk.Sprite( 100, 100 );
@@ -2442,16 +2489,16 @@ module.exports = function () {
 
       stage.AddChildren( sprite1, sprite2, sprite3, sprite4, sprite5 );
     } );
-    imageCache.onTextureLoaded.Add( function ( _event ) {
+    imageCache.onImageLoaded.Add( function ( _event ) {
       console.log( _event.target, _event.data, 'loaded' );
     } );
     imageCache.Load( [
       { id: 'smudge', src: './images/smudge.png' },
-    ] );
+    ], true );
     imageCache.Load( [
       { id: '4dots', src: './images/4dots.png' },
       { id: 'gobj', src: './images/glass-of-blueberryjuice.png' }
-    ] );
+    ], true );
 
 
 
@@ -2485,7 +2532,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 87 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2570,12 +2617,12 @@ module.exports = function () {
       }
     }, timer );
 
-    var imageCache = new nk.Load.TextureLoader( [ {
+    var imageCache = new nk.ImageLoader( [ {
       id: 'tex',
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    }] );
+    }], true );
     imageCache.onComplete.Add( function () {
-      texture = imageCache.Get( 'tex' );
+      texture = imageCache.GetBasicTexture( 'tex' );
       spritePool.Flood( function ( obj ) {
         obj.x = Math.random() * W - HW;
         obj.y = Math.random() * H - HH;
@@ -2597,7 +2644,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 88 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2640,7 +2687,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 89 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2756,8 +2803,697 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 90 */,
-/* 91 */
+/* 109 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Animation' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
+
+    var wRatio = W / H;
+
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
+
+
+
+    var sprite = null;
+    var spriteRef = null;
+    var test = null;
+
+    var imageCache = new nk.ImageLoader();
+    imageCache.onComplete.Add( function ( _event ) {
+
+      var p1 = new nk.GLTextureProgramController( stage.gl );
+      var p2 = new nk.GLTextureProgramController( stage.gl );
+      var p3 = new nk.GLTextureProgramController( stage.gl );
+      p1.BindBasicTexture( imageCache.GetBasicTexture( '1to8' ) );
+      p2.BindBasicTexture( imageCache.GetBasicTexture( '1to8f' ) );
+      p3.BindBasicTexture( nk.Sprite.DEFAULT_TEXTURE );
+
+      test = new nk.Sprite( HW, HH, p3 );
+      test.anchor.Set( 0.5 );
+      test.scale.Set( 5 );
+      test.UpdateShape();
+
+      spriteRef = new nk.Sprite( HW, HH - 200, p2 );
+      spriteRef.anchor.Set( 0.5 );
+
+      sprite = new nk.Sprite( HW, HH, p1 );
+      sprite.anchor.Set( 0.5 );
+      sprite.scale.Set( 5 );
+      sprite.UpdateShape();
+
+
+
+      var ac = sprite.animationController = new nk.Animator.Controller( sprite );
+      var animation = ac.AddAnimation( 'test', 20 );
+      animation.GenerateFrames( 64, 64, 512, 64, 8, {
+        '5': 120
+      } );
+      animation.reverse = true;
+      animation.onEnd.Add( function () {
+        //stage.ticker.Stop();
+      }, animation );
+      ac.PlayAnimation( 'test', 7 );
+      stage.AddChildren( sprite, spriteRef, test );
+
+
+      stage.onProcess.Add( function () {
+        sprite.animationController.Process();
+      }, stage );
+    } );
+    imageCache.Load( [
+      { id: '1to8', src: './images/1to8.png', w: 64, h: 64 },
+      { id: '1to8f', src: './images/1to8.png' }
+    ], true );
+
+    var dragger = null;
+    var dragStart = new nk.Vector2D();
+    var dragOffset = new nk.Vector2D();
+
+
+    stage.mouse.onMove.Add( function ( _event ) {
+      if ( dragger !== null ) {
+        dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
+        dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      }
+    }, stage );
+    stage.mouse.onDown.Add( function ( _event ) {
+      var p = _event.data.position;
+      for ( var i = stage.children.length; i--; ) {
+        if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragStart.SetV( p );
+
+          dragger = stage.children[ i ];
+
+          dragOffset.SetV( dragger );
+
+          _event.stopPropagation = true;
+
+          dragger.SendToFront();
+          break;
+        }
+      }
+    }, stage );
+    stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) {
+        dragger = null;
+      }
+    } );
+
+    document.body.removeChild( buttonContainer );
+
+
+  }
+};
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Circle' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
+
+    var wRatio = W / H;
+
+    stage = new nk.Stage2D( c, 0, 0, false, true );
+
+
+    var pc = new nk.GLCircleProgramController( stage.gl );
+    var pcLine = new nk.GLLine2DProgramController( stage.gl );
+
+    var RF = nk.Utils.RandomFloat;
+
+    var hzLine = new nk.Path.Line2D( HW, 0, HW, H );
+    var vtLine = new nk.Path.Line2D( 0, HH, W, HH );
+    hzLine.LinkProgramController( pcLine );
+    vtLine.UseProgramController( pcLine );
+    stage.Mount( new nk.Graphic2D( 0, 0, hzLine ), new nk.Graphic2D( 0, 0, vtLine ) );
+    stage.children[ 0 ].interactive = false;
+    stage.children[ 1 ].interactive = false;
+
+    var path = new nk.Path.Circle( 0, 0, 10 );
+    path.LinkProgramController( pc );
+
+    var i = 1000;
+    while ( i-- ) {
+      var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
+      g.AttachTo( stage );
+    }
+
+
+
+
+
+    var dragger = null;
+    var dragStart = new nk.Vector2D();
+    var dragOffset = new nk.Vector2D();
+
+
+    stage.mouse.onMove.Add( function ( _event ) {
+      if ( dragger !== null ) {
+        dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
+        dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      }
+    }, stage );
+    stage.mouse.onDown.Add( function ( _event ) {
+      var p = _event.data.position;
+      for ( var i = stage.children.length; i--; ) {
+        if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragStart.SetV( p );
+
+          dragger = stage.children[ i ];
+
+          dragOffset.SetV( dragger );
+
+          _event.stopPropagation = true;
+
+          dragger.SendToFront();
+          break;
+        }
+      }
+    }, stage );
+    stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) {
+        dragger = null;
+      }
+    } );
+
+    document.body.removeChild( buttonContainer );
+
+
+  }
+};
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Line2D' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
+
+    var wRatio = W / H;
+
+    var mX = W / 30;
+    var mY = H / 30;
+
+    stage = new nk.Stage2D( c, 0, 0, false, true );
+
+
+    var pc = new nk.GLLine2DProgramController( stage.gl );
+
+    var RF = nk.Utils.RandomFloat;
+
+    var s = new nk.Vector2D();
+
+    var points = nk.Math.SquareGrid( W + mX, H + mY, mX, mY, nk.Vector2D );
+
+    var i = points.length;
+    while ( i-- ) {
+      var e = points[ i ];
+      var path = new nk.Path.Line2D( s, e );
+      path.LinkProgramController( pc );
+      var g = new nk.Graphic2D( 0, 0, path );
+      g.AttachTo( stage );
+    }
+
+    function Update () {
+      s.SetV( stage.mouse.position );
+    }
+
+    stage.onProcess.Add( Update, stage );
+
+
+
+
+    document.body.removeChild( buttonContainer );
+
+
+  }
+};
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Pixelbatch' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
+
+    var wRatio = W / H;
+
+    var mX = W / 30;
+    var mY = H / 30;
+
+    stage = new nk.Stage2D( c, 0, 0, false, true );
+
+    var pc = new nk.GLPixelBatchProgramController( stage.gl );
+    stage.UseAsBatchParent( pc );
+
+    var RF = nk.Utils.RandomFloat;
+    var RI = nk.Utils.RandomInteger;
+
+    ( function () {
+      var i = 10000;
+      while ( i-- ) {
+        var p = new nk.Path.Pixel2D( 0, 0 );
+        p.colorObj.r = 0.4;
+        p.colorObj.g = Math.random();
+        p.colorObj.b = 0.2;
+        p.colorObj.a = RF( 0.8, 1.0 );
+        p.style.pixel.size = RF( 1, 2 );
+        var g = new nk.Graphic2D( HW, HH, p );
+        g.data.velocity = new nk.Vector2D( RF( -10, 10 ), RF( -1, 10 ) );
+        g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );
+        stage.Mount( g );
+        g.UpdateTransform();
+      }
+      stage.ComputeBatchBuffer();
+
+    }() );
+
+    stage.onProcess.Add( function prasd () {
+      this.children.forEach( function ( child ) {
+        child.data.velocity.Rotate( child.data.torque );
+        child.position.AddV( child.data.velocity );
+        child.UpdateInBuffer();
+      } );
+      if ( stage.ticker.GetTPS() < 55 ) {
+        console.log( stage.ticker.GetTPS() );
+      }
+    }, stage );
+
+
+    console.log( stage.childDataBuffer );
+
+
+    document.body.removeChild( buttonContainer );
+
+
+  }
+};
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Rectangle' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
+
+    var wRatio = W / H;
+
+    stage = new nk.Stage2D( c, 0, 0, false, true );
+
+
+    var pc = new nk.GLRectangleProgramController( stage.gl );
+
+    var RF = nk.Utils.RandomFloat;
+
+    var path = new nk.Path.AABB2D( -10, -10, 10, 10 );
+    path.LinkProgramController( pc );
+
+    var i = 1000;
+    while ( i-- ) {
+      var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
+      g.AttachTo( stage );
+    }
+
+
+
+
+    var dragger = null;
+    var dragStart = new nk.Vector2D();
+    var dragOffset = new nk.Vector2D();
+
+
+    stage.mouse.onMove.Add( function ( _event ) {
+      if ( dragger !== null ) {
+        dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
+        dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      }
+    }, stage );
+    stage.mouse.onDown.Add( function ( _event ) {
+      var p = _event.data.position;
+      for ( var i = stage.children.length; i--; ) {
+        if ( stage.children[ i ].IntersectsPoint( p ) ) {
+          dragStart.SetV( p );
+
+          dragger = stage.children[ i ];
+
+          dragOffset.SetV( dragger );
+
+          _event.stopPropagation = true;
+
+          dragger.SendToFront();
+          break;
+        }
+      }
+    }, stage );
+    stage.mouse.onUp.Add( function ( _event ) {
+      if ( dragger ) {
+        dragger = null;
+      }
+    } );
+
+    document.body.removeChild( buttonContainer );
+
+
+  }
+};
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Stresstest' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = 0;
+    c.style.left = 0;
+    var gl = c.getContext( 'webgl' );
+    if ( !gl ) {
+      gl = c.getContext( 'experimental-webgl' );
+    }
+
+    var W = c.width, HW = W * 0.5;
+    var H = c.height, HH = H * 0.5;
+
+    var container = new nk.Container2D( 0, 0 );
+    container.scale.Set( 2 / W, -2 / H );
+    container.position.Add( -1 + 1, 0 );
+    container.UpdateTransform();
+
+    var pcon = null;
+    var pcon0 = null;
+
+    var cpath = new nk.Path.Circle( 0, 0, 25 );
+    pcon0 = new nk.GLCircleProgramController( gl );
+    cpath.LinkProgramController( pcon0 );
+
+    var rpath = new nk.Path.AABB2D( -25, -25, 25, 25 );
+    pcon1 = new nk.GLRectangleProgramController( gl );
+    rpath.LinkProgramController( pcon1 );
+
+    var usedPath = rpath;
+
+    function CreateTexture () {
+      var path = new nk.Path.Polygon2D();
+      path.style.stroke.lineWidth = 1;
+      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 32, 12 );
+      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      return t;
+    }
+
+    var ticker = new nk.Ticker( Update, 1000, true );
+    ticker.Start();
+
+    var numTimes = 20;
+    var hold = 20;
+    var holdCounter = 0;
+    var fps = 24;
+
+    var am = 35;
+
+    var childrenMDC = [];
+
+    var spritePool = new nk.Pool( nk.Sprite );
+    var graphicPool = new nk.Pool( nk.Graphic2D );
+
+    var usedPool = spritePool;
+
+    var timer = new nk.Timer();
+    timer.onFinish.Add( function () {
+      var i = am;
+      am = am < 3 ? 3 : am--;
+      while ( i-- ) {
+        var obj = usedPool.Retrieve();
+        container.AddChild( obj );
+      }
+
+      if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
+        this.Start( 1 );
+      }
+      else {
+        var numChildren = container.children.length;
+        console.log( numChildren, ticker.GetTPS() );
+        container.children.forEach( function ( child ) {
+          usedPool.Store( child );
+        } );
+        container.Dump();
+        holdCounter = 0;
+        childrenMDC.push( numChildren );
+        numTimes--;
+        if ( numTimes > 0 ) {
+          timer.Start( 120 );
+        } else {
+          childrenMDC.sort( function ( a, b ) {
+            return a - b;
+          } );
+          console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+        }
+      }
+    }, timer );
+
+    var imageCache = new nk.ImageLoader( [ {
+      id: 'tex',
+      src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
+    }], true );
+    imageCache.onComplete.Add( function () {
+      pcon = new nk.GLTextureProgramController( gl );
+      pcon.BindBasicTexture( imageCache.GetBasicTexture( 'tex' ) );
+
+      spritePool.Flood( function ( obj ) {
+        obj.x = Math.random() * W - HW;
+        obj.y = Math.random() * H - HH;
+        obj.programController = pcon;
+        obj.transformAutomaticUpdate = false;
+        obj.SetTexture( pcon.originalTexture );
+      }, 5000 );
+      graphicPool.Flood( function ( obj ) {
+        obj.x = Math.random() * W - HW;
+        obj.y = Math.random() * H - HH;
+        obj.transformAutomaticUpdate = false;
+        obj.SetPath( usedPath );
+      }, 5000 );
+      timer.Start( 120 );
+    } );
+
+    function Update () {
+      gl.viewport( 0, 0, W, H );
+      gl.clear( gl.COLOR_BUFFER_BIT );
+      gl.enable( gl.BLEND );
+      gl.disable( gl.DEPTH_TEST );
+      gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
+      container.GLDraw( gl );
+      timer.Process();
+      gl.flush();
+    }
+
+    document.body.removeChild( buttonContainer );
+  }
+};
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Texturebatch' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width;
+    var H = c.height;
+    var HW = W * 0.5;
+    var HH = H * 0.5;
+
+    var wRatio = W / H;
+
+    var mX = W / 30;
+    var mY = H / 30;
+
+    var RF = nk.Utils.RandomFloat;
+    var RI = nk.Utils.RandomInteger;
+
+    stage = new nk.Stage2D( c, 0, 0, false, true );
+
+    var pc = new nk.GLTextureBatchProgramController( stage.gl );
+    stage.UseAsBatchParent( pc );
+
+    var ic = new nk.ImageLoader();
+    ic.onComplete.Add( function ( _event ) {
+      var tex = ic.GetBasicTexture( 'colors' );
+      pc.BindBasicTexture( tex );
+
+      ( function () {
+        var i = 5000;
+        while ( i-- ) {
+          var s = new nk.Sprite( HW, HH, tex );
+          var ac = s.animationController = new nk.Animator.Controller( s );
+          var anim = ac.AddAnimation( 'test', RI( 5, 40 ) );
+          anim.GenerateFrames( 64, 64, 1024, 64, 16 );
+          ac.PlayAnimation( 'test', RI( 0, 15 ) );
+          var vx = RF( 3, 5 );
+          vx = nk.Utils.ThisOrThat( vx, -vx );
+          var vy = RF( 3, 5 );
+          vy = nk.Utils.ThisOrThat( vy, -vy );
+          var to = RF( nk.Math.RADIAN, nk.Math.RADIAN * 10 );
+          to = nk.Utils.ThisOrThat( to, -to );
+          s.data.velocity = new nk.Vector2D( vx, vy );
+          s.data.torque = to;
+          s.scale.Set( 0.4 );
+          s.anchor.Set( 0.5 );
+          stage.Mount( s );
+          s.UpdateTransform();
+        }
+        stage.ComputeBatchBuffer();
+
+        stage.onProcess.Add( function () {
+          this.children.forEach( function ( child ) {
+            child.animationController.Process();
+            child.data.velocity.Rotate( child.data.torque );
+            child.position.AddV( child.data.velocity );
+            child.UpdateInBuffer();
+          } );
+          if ( stage.ticker.GetTPS() < 55 ) {
+            console.log( stage.ticker.GetTPS() );
+          }
+        }, stage );
+      }() );
+    } );
+
+    ic.Load( [
+      { id: 'colors', src: './images/colors.png', w: 64, h: 64 }
+    ], true );
+
+
+
+    document.body.removeChild( buttonContainer );
+
+
+  }
+};
+
+/***/ }),
+/* 116 */,
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

@@ -26,13 +26,13 @@ module.exports = function () {
     var staticStars = [];
 
 
-    var imageCache = new nk.Load.TextureLoader( [ {
+    var imageCache = new nk.ImageLoader( [ {
       id: 'butterfly',
       src: nk.Utils.GenerateSimpleBase64Png( Butterfly )
     }, {
       id: 'staticStar',
       src: nk.Utils.GenerateSimpleBase64Png( StaticStar )
-    }] );
+    }], true );
     imageCache.onComplete.Add( function () {
       Go();
     } );
@@ -52,7 +52,7 @@ module.exports = function () {
       for ( var i = 0; i < am; ++i ) {
         var x = nk.Utils.RandomInteger( xv.x, xv.y );
         var y = nk.Utils.RandomInteger( yv.x, yv.y );
-        var sprite = new nk.Sprite( x, y, imageCache.Get( img ) );
+        var sprite = new nk.Sprite( x, y, imageCache.GetBasicTexture( img ) );
         sprite.anchor.Set( 0.5 );
         sprite.scale.Set( scale );
         sprite.rotation = nk.Utils.RandomFloat( 0, nk.Math.PII );
@@ -73,7 +73,7 @@ module.exports = function () {
       nk.Geom.Polygon2D.Construct.Butterfly( path, 0, 0, 4000, 50 );
       //To get the difference in x,y
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
     function StaticStar () {
@@ -83,7 +83,7 @@ module.exports = function () {
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 800, 400, 5 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D(( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
     }
 

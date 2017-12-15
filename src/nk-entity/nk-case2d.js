@@ -31,10 +31,6 @@ module.exports = function ( Nenkraft ) {
       if ( child.Render ) child.Render();
     }
   };
-  delete Case2D.prototype.Draw;
-  delete Case2D.prototype.DrawChildren;
-  delete Case2D.prototype.alpha;
-  delete Case2D.prototype.gco;
   Nenkraft.Entity.Case2D = Case2D;
   Nenkraft.Case2D = Case2D;
 };

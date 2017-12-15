@@ -22,7 +22,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, 0, 0, true );
     stage.ComputeBounds();
-    stage.backgroundColor = 'rgba(255,255,255,0)';
+    stage.backgroundColor = 'rgba(255,255,255,1)';
     //stage.clear = false;
     stage.ticker.StartAF();
 
@@ -115,7 +115,7 @@ module.exports = function () {
         collider.ComputeBounds();
       }
       nodes.forEach( function ( node ) {
-        nk.Debug.Draw.AABB2D( rc, node.aabb );
+        nk.Debug.Draw.AABB2D( rc, node.aabb, { noFill: true } );
       } );
       fps.text = Math.round( stage.ticker.GetTPS() );
     }

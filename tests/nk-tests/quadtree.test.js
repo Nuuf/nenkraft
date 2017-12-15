@@ -22,9 +22,6 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, 0, 0 );
     stage.ComputeBounds();
-    stage.clear = false;
-    stage.fill = true;
-    stage.backgroundColor = 'rgba(0,0,0,0.3)';
 
     var bounds = new nk.AABB2D();
     bounds.SetC( stage.bounds );

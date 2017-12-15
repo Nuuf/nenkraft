@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.3.3 (Alpha)
+* @version     0.4.0 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 90);
+/******/ 	return __webpack_require__(__webpack_require__.s = 116);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -110,61 +110,73 @@ module.exports = g;
 
 var namespace = Object.create( null );
 
-__webpack_require__( 12 )( namespace );
-__webpack_require__( 38 )( namespace );
-__webpack_require__( 61 )( namespace );
-__webpack_require__( 63 )( namespace );
+__webpack_require__( 19 )( namespace );
+__webpack_require__( 65 )( namespace );
+__webpack_require__( 52 )( namespace );
+__webpack_require__( 75 )( namespace );
+__webpack_require__( 80 )( namespace );
+__webpack_require__( 76 )( namespace );
+__webpack_require__( 82 )( namespace );
+__webpack_require__( 77 )( namespace );
+__webpack_require__( 79 )( namespace );
+__webpack_require__( 78 )( namespace );
+__webpack_require__( 66 )( namespace );
+__webpack_require__( 68 )( namespace );
+__webpack_require__( 69 )( namespace );
+__webpack_require__( 71 )( namespace );
+__webpack_require__( 67 )( namespace );
+__webpack_require__( 70 )( namespace );
+__webpack_require__( 72 )( namespace );
+__webpack_require__( 42 )( namespace );
+__webpack_require__( 41 )( namespace );
+__webpack_require__( 73 )( namespace );
+__webpack_require__( 74 )( namespace );
 __webpack_require__( 57 )( namespace );
-__webpack_require__( 58 )( namespace );
-__webpack_require__( 60 )( namespace );
-__webpack_require__( 59 )( namespace );
+__webpack_require__( 56 )( namespace );
+__webpack_require__( 53 )( namespace );
+__webpack_require__( 54 )( namespace );
+__webpack_require__( 55 )( namespace );
+__webpack_require__( 45 )( namespace );
+__webpack_require__( 43 )( namespace );
+__webpack_require__( 46 )( namespace );
+__webpack_require__( 44 )( namespace );
 __webpack_require__( 50 )( namespace );
 __webpack_require__( 51 )( namespace );
-__webpack_require__( 52 )( namespace );
-__webpack_require__( 54 )( namespace );
-__webpack_require__( 53 )( namespace );
-__webpack_require__( 28 )( namespace );
-__webpack_require__( 27 )( namespace );
-__webpack_require__( 55 )( namespace );
-__webpack_require__( 56 )( namespace );
-__webpack_require__( 43 )( namespace );
-__webpack_require__( 42 )( namespace );
-__webpack_require__( 39 )( namespace );
-__webpack_require__( 40 )( namespace );
-__webpack_require__( 41 )( namespace );
-__webpack_require__( 31 )( namespace );
-__webpack_require__( 29 )( namespace );
-__webpack_require__( 32 )( namespace );
+__webpack_require__( 59 )( namespace );
+__webpack_require__( 58 )( namespace );
+__webpack_require__( 81 )( namespace );
+__webpack_require__( 48 )( namespace );
+__webpack_require__( 47 )( namespace );
 __webpack_require__( 30 )( namespace );
+__webpack_require__( 63 )( namespace );
+__webpack_require__( 62 )( namespace );
+__webpack_require__( 60 )( namespace );
+__webpack_require__( 64 )( namespace );
+__webpack_require__( 61 )( namespace );
+__webpack_require__( 33 )( namespace );
+__webpack_require__( 32 )( namespace );
+__webpack_require__( 31 )( namespace );
+__webpack_require__( 39 )( namespace );
+__webpack_require__( 34 )( namespace );
+__webpack_require__( 35 )( namespace );
 __webpack_require__( 36 )( namespace );
 __webpack_require__( 37 )( namespace );
-__webpack_require__( 45 )( namespace );
-__webpack_require__( 44 )( namespace );
-__webpack_require__( 62 )( namespace );
-__webpack_require__( 34 )( namespace );
-__webpack_require__( 33 )( namespace );
-__webpack_require__( 16 )( namespace );
-__webpack_require__( 48 )( namespace );
-__webpack_require__( 46 )( namespace );
-__webpack_require__( 49 )( namespace );
-__webpack_require__( 47 )( namespace );
-__webpack_require__( 19 )( namespace );
+__webpack_require__( 40 )( namespace );
+__webpack_require__( 38 )( namespace );
 __webpack_require__( 18 )( namespace );
+__webpack_require__( 16 )( namespace );
 __webpack_require__( 17 )( namespace );
-__webpack_require__( 25 )( namespace );
-__webpack_require__( 20 )( namespace );
-__webpack_require__( 21 )( namespace );
-__webpack_require__( 22 )( namespace );
+__webpack_require__( 28 )( namespace );
+__webpack_require__( 27 )( namespace );
+__webpack_require__( 29 )( namespace );
+__webpack_require__( 49 )( namespace );
 __webpack_require__( 23 )( namespace );
-__webpack_require__( 26 )( namespace );
+__webpack_require__( 21 )( namespace );
 __webpack_require__( 24 )( namespace );
-__webpack_require__( 11 )( namespace );
-__webpack_require__( 9 )( namespace );
-__webpack_require__( 10 )( namespace );
-__webpack_require__( 14 )( namespace );
-__webpack_require__( 13 )( namespace );
-__webpack_require__( 15 )( namespace );
-__webpack_require__( 35 )( namespace );
+__webpack_require__( 20 )( namespace );
+__webpack_require__( 26 )( namespace );
+__webpack_require__( 25 )( namespace );
+__webpack_require__( 22 )( namespace );
 
 global.Nenkraft = global.nk = namespace;
 
@@ -180,7 +192,44 @@ global.Nenkraft = global.nk = namespace;
 /* 6 */,
 /* 7 */,
 /* 8 */,
-/* 9 */
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec3 aProjection1;\r\nattribute vec3 aProjection2;\r\nattribute vec3 aProjection3;\r\nattribute vec2 aPosition;\r\nattribute vec4 aColor;\r\nattribute float aPointSize;\r\n\r\nvarying vec4 vColor;\r\n\r\nvoid main() {\r\n  mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );\r\n  gl_Position = vec4( ( projection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  gl_PointSize = aPointSize;\r\n  vColor = aColor;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying vec4 vColor;\r\n\r\nvoid main() {\r\n  gl_FragColor = vColor;\r\n}\r\n@fragment-end@\r\n"
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\n\r\nuniform mat3 uProjection;\r\nuniform lowp vec4 uFillColor;\r\nuniform lowp vec4 uOutlineColor;\r\nuniform float uRadius;\r\nuniform float uOutline;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vRadius;\r\nvarying float vOutline;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vFillColor = uFillColor;\r\n  vOutlineColor = uOutlineColor;\r\n  vPosition = aPosition;\r\n  vRadius = uRadius;\r\n  vOutline = uOutline;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vRadius;\r\nvarying float vOutline;\r\n\r\nvoid main() {\r\n  float d = dot( vPosition, vPosition );\r\n  float rs = vRadius * vRadius;\r\n  float ors = vRadius - vOutline;\r\n  ors = ors * ors;\r\n  if ( d < rs && d > ors ) {\r\n    gl_FragColor = vOutlineColor;\r\n  } else if ( d < rs ) {\r\n    gl_FragColor = vFillColor;\r\n  }\r\n}\r\n@fragment-end@"
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\n\r\nuniform mat3 uProjection;\r\nuniform lowp vec4 uColor;\r\n\r\nvarying lowp vec4 vColor;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vColor = uColor;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying lowp vec4 vColor;\r\n\r\nvoid main() {\r\n  gl_FragColor = vColor;\r\n}\r\n@fragment-end@\r\n"
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\n\r\nuniform mat3 uProjection;\r\nuniform lowp vec4 uFillColor;\r\nuniform lowp vec4 uOutlineColor;\r\nuniform vec2 uSize;\r\nuniform float uOutline;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vBorderX;\r\nvarying float vNegBorderX;\r\nvarying float vBorderY;\r\nvarying float vNegBorderY;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vFillColor = uFillColor;\r\n  vOutlineColor = uOutlineColor;\r\n  vPosition = aPosition;\r\n  vBorderX = -uSize.x * 0.5 + uOutline;\r\n  vNegBorderX = uSize.x * 0.5 - uOutline;\r\n  vBorderY = -uSize.y * 0.5 + uOutline;\r\n  vNegBorderY = uSize.y * 0.5 - uOutline;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vBorderX;\r\nvarying float vNegBorderX;\r\nvarying float vBorderY;\r\nvarying float vNegBorderY;\r\n\r\nvoid main() {\r\n  if (\r\n    vPosition.x > vBorderX &&\r\n    vPosition.x < vNegBorderX && \r\n    vPosition.y > vBorderY && \r\n    vPosition.y < vNegBorderY\r\n  ) {\r\n    gl_FragColor = vFillColor;\r\n  } else {\r\n    gl_FragColor = vOutlineColor;\r\n  }\r\n}\r\n@fragment-end@\r\n"
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\nattribute vec2 aTexCoord;\r\n\r\nattribute vec3 aProjection1;\r\nattribute vec3 aProjection2;\r\nattribute vec3 aProjection3;\r\n\r\nattribute vec3 aTranslation1;\r\nattribute vec3 aTranslation2;\r\nattribute vec3 aTranslation3;\r\n\r\nattribute vec3 aTransformation1;\r\nattribute vec3 aTransformation2;\r\nattribute vec3 aTransformation3;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );\r\n  mat3 translation = mat3( aTranslation1, aTranslation2, aTranslation3 );\r\n  mat3 transformation = mat3( aTransformation1, aTransformation2, aTransformation3 );\r\n  gl_Position = vec4( ( projection * translation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vTexCoord = ( transformation * vec3( aTexCoord, 1.0 ) ).xy;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord );\r\n}\r\n@fragment-end@\r\n"
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\nattribute vec2 aTexCoord;\r\n\r\nuniform mat3 uProjection;\r\nuniform mat3 uTranslation;\r\nuniform mat3 uTransformation;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vTexCoord = ( uTransformation * vec3( aTexCoord, 1.0 ) ).xy;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord );\r\n}\r\n@fragment-end@\r\n"
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports) {
 
 /**
@@ -190,7 +239,7 @@ global.Nenkraft = global.nk = namespace;
 module.exports = function ( Nenkraft ) {
   'use strict';
   function Animation ( _controller, _id, _rate ) {
-    if ( !( this instanceof Animation ) ) return new Animation( _controller, _id );
+    if ( !( this instanceof Animation ) ) return new Animation( _controller, _id, _rate );
     this.frames = [];
     this.controller = _controller;
     this.id = _id;
@@ -212,11 +261,12 @@ module.exports = function ( Nenkraft ) {
   Animation.prototype.reverse = false;
   //Methods
   Animation.prototype.AddFrame = function ( _x, _y, _w, _h, _rate ) {
-    _rate = _rate === undefined ? this.rate : _rate;
+    _rate = _rate == undefined ? this.rate : _rate;
     this.frames.push( new Nenkraft.Animator.Frame( _x, _y, _w, _h, _rate, this.controller.sprite ) );
   };
-  Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _textureWidth, _textureHeight, _amount, _data ) {
-    for ( var i = 0, rate, columns = _textureWidth / _textureHeight; i < _amount; ++i ) {
+  Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
+    _data = _data == undefined ? {} : _data;
+    for ( var i = 0, rate, columns = _imageWidth / _imageHeight; i < _amount; ++i ) {
       rate = _data[ i ];
       this.AddFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
     }
@@ -282,7 +332,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 10 */
+/* 17 */
 /***/ (function(module, exports) {
 
 /**
@@ -338,7 +388,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 11 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /**
@@ -389,7 +439,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 12 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /**
@@ -401,6 +451,8 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style = Object.create( null );
   Nenkraft.Math = Object.create( null );
   Nenkraft.Utils = Object.create( null );
+  Nenkraft.Texture = Object.create( null );
+  Nenkraft.Controller = Object.create( null );
   Nenkraft.Entity = Object.create( null );
   Nenkraft.Path = Object.create( null );
   Nenkraft.Event = Object.create( null );
@@ -409,7 +461,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.3.3 (Alpha)';
+  Nenkraft.VERSION = '0.4.0 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -420,7 +472,536 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 13 */
+/* 20 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Controller.GLProgramController;
+  var TriRectArray = Nenkraft.Math.TriRectArray;
+  function GLCircleProgramController ( _gl ) {
+    if ( !( this instanceof GLCircleProgramController ) ) return new GLCircleProgramController( _gl );
+    Super.call( this, _gl, Nenkraft.SHADER_CODE.CIRCLE );
+    this.Initialise();
+  }
+  GLCircleProgramController.prototype = Object.create( Super.prototype );
+  GLCircleProgramController.prototype.constructor = GLCircleProgramController;
+  //Static
+
+  //Members
+  GLCircleProgramController.prototype.essenceBuffer = null;
+  GLCircleProgramController.prototype.vertices = null;
+  GLCircleProgramController.prototype.fillColor = null;
+  GLCircleProgramController.prototype.outlineColor = null;
+  GLCircleProgramController.prototype.outline = 5.0;
+  //Methods
+  GLCircleProgramController.prototype.Initialise = function () {
+    var gl = this.gl;
+    this.essenceBuffer = gl.createBuffer();
+    this.vertices = new Float32Array( Nenkraft.Math.TriRectArray( 0, 0, 1, 1 ) );
+    this.fillColor = new Nenkraft.Color();
+    this.outlineColor = new Nenkraft.Color();
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, this.vertices, gl.DYNAMIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    this.AssignAttribute( 'aPosition' );
+    this.AssignUniform( 'uProjection' );
+    this.AssignUniform( 'uFillColor' );
+    this.AssignUniform( 'uOutlineColor' );
+    this.AssignUniform( 'uRadius' );
+    this.AssignUniform( 'uOutline' );
+  };
+  GLCircleProgramController.prototype.Execute = function ( _projection, _x, _y, _radius ) {
+    var gl = this.gl;
+    var attributes = this.attributes;
+    var uniforms = this.uniforms;
+    var vertices = this.vertices;
+    var fillChannel = this.fillColor.channel;
+    var outlineChannel = this.outlineColor.channel;
+    TriRectArray( _x - _radius, _y - _radius, _radius * 2, _radius * 2, vertices );
+    if ( this !== Super.LAST_USED_CONTROLLER ) {
+      gl.useProgram( this.program );
+      gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+      gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
+      gl.enableVertexAttribArray( attributes.aPosition );
+      gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
+      Super.LAST_USED_CONTROLLER = this;
+    }
+    gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
+    gl.uniform4f( uniforms.uFillColor, fillChannel[ 0 ], fillChannel[ 1 ], fillChannel[ 2 ], fillChannel[ 3 ] );
+    gl.uniform4f( uniforms.uOutlineColor, outlineChannel[ 0 ], outlineChannel[ 1 ], outlineChannel[ 2 ], outlineChannel[ 3 ] );
+    gl.uniform1f( uniforms.uOutline, this.outline );
+    gl.uniform1f( uniforms.uRadius, _radius );
+    gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );
+  };
+  Nenkraft.Controller.GLCircleProgramController = GLCircleProgramController;
+  Nenkraft.GLCircleProgramController = GLCircleProgramController;
+};
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Controller.GLProgramController;
+  function GLLine2DProgramController ( _gl ) {
+    if ( !( this instanceof GLLine2DProgramController ) ) return new GLLine2DProgramController( _gl );
+    Super.call( this, _gl, Nenkraft.SHADER_CODE.LINE2D );
+    this.Initialise();
+  }
+  GLLine2DProgramController.prototype = Object.create( Super.prototype );
+  GLLine2DProgramController.prototype.constructor = GLLine2DProgramController;
+  //Static
+
+  //Members
+  GLLine2DProgramController.prototype.essenceBuffer = null;
+  GLLine2DProgramController.prototype.vertices = null;
+  GLLine2DProgramController.prototype.color = null;
+  //Methods
+  GLLine2DProgramController.prototype.Initialise = function () {
+    var gl = this.gl;
+    this.essenceBuffer = gl.createBuffer();
+    this.vertices = new Float32Array( [ -1, 0, 1, 0 ] );
+    this.color = new Nenkraft.Color();
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, this.vertices, gl.DYNAMIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    this.AssignAttribute( 'aPosition' );
+    this.AssignUniform( 'uProjection' );
+    this.AssignUniform( 'uColor' );
+  };
+  GLLine2DProgramController.prototype.Execute = function ( _projection, _s, _e ) {
+    var gl = this.gl;
+    var attributes = this.attributes;
+    var uniforms = this.uniforms;
+    var vertices = this.vertices;
+    var channel = this.color.channel;
+    vertices[ 0 ] = _s.x;
+    vertices[ 1 ] = _s.y;
+    vertices[ 2 ] = _e.x;
+    vertices[ 3 ] = _e.y;
+    if ( this !== Super.LAST_USED_CONTROLLER ) {
+      gl.useProgram( this.program );
+      Super.LAST_USED_CONTROLLER = this;
+    }
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
+    gl.enableVertexAttribArray( attributes.aPosition );
+    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
+    gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
+    gl.uniform4f( uniforms.uColor, channel[ 0 ], channel[ 1 ], channel[ 2 ], channel[ 3 ] );
+    gl.drawArrays( gl.LINES, 0, 2 );
+  };
+  Nenkraft.Controller.GLLine2DProgramController = GLLine2DProgramController;
+  Nenkraft.GLLine2DProgramController = GLLine2DProgramController;
+};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Controller.GLProgramController;
+  function GLPixelBatchProgramController ( _gl ) {
+    if ( !( this instanceof GLPixelBatchProgramController ) ) return new GLPixelBatchProgramController( _gl );
+    Super.call( this, _gl, Nenkraft.SHADER_CODE.PIXEL_BATCH );
+    this.Initialise();
+  }
+  GLPixelBatchProgramController.prototype = Object.create( Super.prototype );
+  GLPixelBatchProgramController.prototype.constructor = GLPixelBatchProgramController;
+  //Static
+
+  //Members
+  GLPixelBatchProgramController.prototype.dataBuffer = null;
+  //Methods
+  GLPixelBatchProgramController.prototype.Initialise = function () {
+    var gl = this.gl;
+    this.dataBuffer = gl.createBuffer();
+    this.AssignAttribute( 'aProjection1' );
+    this.AssignAttribute( 'aProjection2' );
+    this.AssignAttribute( 'aProjection3' );
+    this.AssignAttribute( 'aPosition' );
+    this.AssignAttribute( 'aColor' );
+    this.AssignAttribute( 'aPointSize' );
+  };
+  GLPixelBatchProgramController.prototype.Execute = function ( _data, _numElements ) {
+    var gl = this.gl;
+    var attributes = this.attributes;
+    gl.useProgram( this.program );
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, _data, gl.STREAM_DRAW );
+    gl.enableVertexAttribArray( attributes.aProjection1 );
+    gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, 64, 0 );
+    gl.enableVertexAttribArray( attributes.aProjection2 );
+    gl.vertexAttribPointer( attributes.aProjection2, 3, gl.FLOAT, false, 64, 12 );
+    gl.enableVertexAttribArray( attributes.aProjection3 );
+    gl.vertexAttribPointer( attributes.aProjection3, 3, gl.FLOAT, false, 64, 24 );
+    gl.enableVertexAttribArray( attributes.aPosition );
+    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 64, 36 );
+    gl.enableVertexAttribArray( attributes.aColor );
+    gl.vertexAttribPointer( attributes.aColor, 4, gl.FLOAT, false, 64, 44 );
+    gl.enableVertexAttribArray( attributes.aPointSize );
+    gl.vertexAttribPointer( attributes.aPointSize, 1, gl.FLOAT, false, 64, 60 );
+    gl.drawArrays( gl.POINTS, 0, _numElements );
+    Super.LAST_USED_CONTROLLER = this;
+  };
+  Nenkraft.Controller.GLPixelBatchProgramController = GLPixelBatchProgramController;
+  Nenkraft.GLPixelBatchProgramController = GLPixelBatchProgramController;
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  function GLProgramController ( _gl, _shader ) {
+    if ( !( this instanceof GLProgramController ) ) return new GLProgramController( _gl, _shader );
+    this.gl = _gl;
+    this.data = Object.create( null );
+    if ( _gl != null && _shader != null ) {
+      this.Init( _shader.v, _shader.f );
+    }
+  }
+  GLProgramController.prototype = Object.create( null );
+  GLProgramController.prototype.constructor = GLProgramController;
+  //Static
+  GLProgramController.LAST_USED_CONTROLLER = null;
+  //Members
+  GLProgramController.prototype.program = null;
+  GLProgramController.prototype.gl = null;
+  GLProgramController.prototype.attributes = null;
+  GLProgramController.prototype.uniforms = null;
+  GLProgramController.prototype.data = null;
+  //Methods
+  GLProgramController.prototype.Init = function ( _vs, _fs ) {
+    var gl = this.gl;
+    var vShader = this.CreateShader( _vs, gl.VERTEX_SHADER );
+    var fShader = this.CreateShader( _fs, gl.FRAGMENT_SHADER );
+    var program = this.program = gl.createProgram();
+    gl.attachShader( program, vShader );
+    gl.attachShader( program, fShader );
+    gl.linkProgram( program );
+    if ( !gl.getProgramParameter( program, gl.LINK_STATUS ) ) {
+      var info = gl.getProgramInfoLog( program );
+      throw new Error( 'Program link failed:' + info );
+    }
+    gl.detachShader( program, vShader );
+    gl.detachShader( program, fShader );
+    gl.deleteShader( vShader );
+    gl.deleteShader( fShader );
+    this.attributes = {};
+    this.uniforms = {};
+  };
+  GLProgramController.prototype.CreateShader = function ( _script, _type ) {
+    var gl = this.gl;
+    var shader = gl.createShader( _type );
+    gl.shaderSource( shader, _script );
+    gl.compileShader( shader );
+    if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
+      var info = gl.getShaderInfoLog( shader );
+      throw new Error( 'Shader compilation failed:' + info );
+    }
+    return shader;
+  };
+  GLProgramController.prototype.AssignAttribute = function ( _attribute ) {
+    this.attributes[ _attribute ] = this.gl.getAttribLocation( this.program, _attribute );
+  };
+  GLProgramController.prototype.AssignUniform = function ( _uniform ) {
+    this.uniforms[ _uniform ] = this.gl.getUniformLocation( this.program, _uniform );
+  };
+  GLProgramController.prototype.Execute = function () {
+    //Override
+  };
+  Nenkraft.Controller.GLProgramController = GLProgramController;
+  Nenkraft.GLProgramController = GLProgramController;
+};
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Controller.GLProgramController;
+  var TriRectArray = Nenkraft.Math.TriRectArray;
+  function GLRectangleProgramController ( _gl ) {
+    if ( !( this instanceof GLRectangleProgramController ) ) return new GLRectangleProgramController( _gl );
+    Super.call( this, _gl, Nenkraft.SHADER_CODE.RECTANGLE );
+    this.Initialise();
+  }
+  GLRectangleProgramController.prototype = Object.create( Super.prototype );
+  GLRectangleProgramController.prototype.constructor = GLRectangleProgramController;
+  //Static
+
+  //Members
+  GLRectangleProgramController.prototype.geometricBuffer = null;
+  GLRectangleProgramController.prototype.vertices = null;
+  GLRectangleProgramController.prototype.fillColor = null;
+  GLRectangleProgramController.prototype.outlineColor = null;
+  GLRectangleProgramController.prototype.outline = 5.0;
+  //Methods
+  GLRectangleProgramController.prototype.Initialise = function () {
+    var gl = this.gl;
+    this.essenceBuffer = gl.createBuffer();
+    this.vertices = new Float32Array( Nenkraft.Math.TriRectArray( 0, 0, 1, 1 ) );
+    this.fillColor = new Nenkraft.Color();
+    this.outlineColor = new Nenkraft.Color();
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, this.vertices, gl.DYNAMIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    this.AssignAttribute( 'aPosition' );
+    this.AssignUniform( 'uProjection' );
+    this.AssignUniform( 'uFillColor' );
+    this.AssignUniform( 'uOutlineColor' );
+    this.AssignUniform( 'uSize' );
+    this.AssignUniform( 'uOutline' );
+  };
+  GLRectangleProgramController.prototype.Execute = function ( _projection, _x, _y, _w, _h ) {
+    var gl = this.gl;
+    var attributes = this.attributes;
+    var uniforms = this.uniforms;
+    var vertices = this.vertices;
+    var fillChannel = this.fillColor.channel;
+    var outlineChannel = this.outlineColor.channel;
+    TriRectArray( _x, _y, _w, _h, vertices );
+    if ( this !== Super.LAST_USED_CONTROLLER ) {
+      gl.useProgram( this.program );
+      Super.LAST_USED_CONTROLLER = this;
+    }
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
+    gl.enableVertexAttribArray( attributes.aPosition );
+    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
+    gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
+    gl.uniform4f( uniforms.uFillColor, fillChannel[ 0 ], fillChannel[ 1 ], fillChannel[ 2 ], fillChannel[ 3 ] );
+    gl.uniform4f( uniforms.uOutlineColor, outlineChannel[ 0 ], outlineChannel[ 1 ], outlineChannel[ 2 ], outlineChannel[ 3 ] );
+    gl.uniform1f( uniforms.uOutline, this.outline );
+    gl.uniform2f( uniforms.uSize, _w, _h );
+    gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );
+  };
+  Nenkraft.Controller.GLRectangleProgramController = GLRectangleProgramController;
+  Nenkraft.GLRectangleProgramController = GLRectangleProgramController;
+};
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Controller.GLProgramController;
+  var TRA = Nenkraft.Math.TriRectArray;
+  function GLTextureBatchProgramController ( _gl ) {
+    if ( !( this instanceof GLTextureBatchProgramController ) ) return new GLTextureBatchProgramController( _gl );
+    Super.call( this, _gl, Nenkraft.SHADER_CODE.TEXTURE_2D_BATCH );
+  }
+  GLTextureBatchProgramController.prototype = Object.create( Super.prototype );
+  GLTextureBatchProgramController.prototype.constructor = GLTextureBatchProgramController;
+  //Static
+
+  //Members
+  GLTextureBatchProgramController.prototype.originalTexture = null;
+  GLTextureBatchProgramController.prototype.boundTexture = null;
+  GLTextureBatchProgramController.prototype.essenceBuffer = null;
+  GLTextureBatchProgramController.prototype.dataBuffer = null;
+  GLTextureBatchProgramController.prototype.indexBuffer = null;
+  //Methods
+  GLTextureBatchProgramController.prototype.BindBasicTexture = function ( _texture ) {
+    var gl = this.gl;
+    this.aia = gl.getExtension( 'ANGLE_instanced_arrays' );
+    this.originalTexture = _texture;
+    this.boundTexture = gl.createTexture();
+    this.essenceBuffer = gl.createBuffer();
+    this.dataBuffer = gl.createBuffer();
+    var essence = TRA( 0, 0, _texture.w, _texture.h );
+    essence.push.apply( essence, TRA( 0, 0, 1, 1 ) );
+    gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
+    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    gl.bindTexture( gl.TEXTURE_2D, null );
+    this.AssignAttribute( 'aPosition' );
+    this.AssignAttribute( 'aTexCoord' );
+    this.AssignAttribute( 'aProjection1' );
+    this.AssignAttribute( 'aProjection2' );
+    this.AssignAttribute( 'aProjection3' );
+    this.AssignAttribute( 'aTranslation1' );
+    this.AssignAttribute( 'aTranslation2' );
+    this.AssignAttribute( 'aTranslation3' );
+    this.AssignAttribute( 'aTransformation1' );
+    this.AssignAttribute( 'aTransformation2' );
+    this.AssignAttribute( 'aTransformation3' );
+    this.AssignUniform( 'uImage' );
+  };
+  GLTextureBatchProgramController.prototype.Execute = function ( _data, _numElements ) {
+    var gl = this.gl;
+    var aia = this.aia;
+    var attributes = this.attributes;
+    var uniforms = this.uniforms;
+    if ( this !== Super.LAST_USED_CONTROLLER ) {
+      gl.useProgram( this.program );
+      gl.activeTexture( gl.TEXTURE0 );
+      gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
+      gl.uniform1i( uniforms.uImage, 0 );
+      gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+      gl.enableVertexAttribArray( attributes.aPosition );
+      gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
+      aia.vertexAttribDivisorANGLE( attributes.aPosition, 0 );
+      gl.enableVertexAttribArray( attributes.aTexCoord );
+      gl.vertexAttribPointer( attributes.aTexCoord, 2, gl.FLOAT, false, 0, 48 );
+      aia.vertexAttribDivisorANGLE( attributes.aTexCoord, 0 );
+      Super.LAST_USED_CONTROLLER = this;
+    }
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, _data, gl.STREAM_DRAW );
+    gl.enableVertexAttribArray( attributes.aProjection1 );
+    gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, 108, 0 );
+    aia.vertexAttribDivisorANGLE( attributes.aProjection1, 1 );
+    gl.enableVertexAttribArray( attributes.aProjection2 );
+    gl.vertexAttribPointer( attributes.aProjection2, 3, gl.FLOAT, false, 108, 12 );
+    aia.vertexAttribDivisorANGLE( attributes.aProjection2, 1 );
+    gl.enableVertexAttribArray( attributes.aProjection3 );
+    gl.vertexAttribPointer( attributes.aProjection3, 3, gl.FLOAT, false, 108, 24 );
+    aia.vertexAttribDivisorANGLE( attributes.aProjection3, 1 );
+    gl.enableVertexAttribArray( attributes.aTranslation1 );
+    gl.vertexAttribPointer( attributes.aTranslation1, 3, gl.FLOAT, false, 108, 36 );
+    aia.vertexAttribDivisorANGLE( attributes.aTranslation1, 1 );
+    gl.enableVertexAttribArray( attributes.aTranslation2 );
+    gl.vertexAttribPointer( attributes.aTranslation2, 3, gl.FLOAT, false, 108, 48 );
+    aia.vertexAttribDivisorANGLE( attributes.aTranslation2, 1 );
+    gl.enableVertexAttribArray( attributes.aTranslation3 );
+    gl.vertexAttribPointer( attributes.aTranslation3, 3, gl.FLOAT, false, 108, 60 );
+    aia.vertexAttribDivisorANGLE( attributes.aTranslation3, 1 );
+    gl.enableVertexAttribArray( attributes.aTransformation1 );
+    gl.vertexAttribPointer( attributes.aTransformation1, 3, gl.FLOAT, false, 108, 72 );
+    aia.vertexAttribDivisorANGLE( attributes.aTransformation1, 1 );
+    gl.enableVertexAttribArray( attributes.aTransformation2 );
+    gl.vertexAttribPointer( attributes.aTransformation2, 3, gl.FLOAT, false, 108, 84 );
+    aia.vertexAttribDivisorANGLE( attributes.aTransformation2, 1 );
+    gl.enableVertexAttribArray( attributes.aTransformation3 );
+    gl.vertexAttribPointer( attributes.aTransformation3, 3, gl.FLOAT, false, 108, 96 );
+    aia.vertexAttribDivisorANGLE( attributes.aTransformation3, 1 );
+    aia.drawArraysInstancedANGLE( gl.TRIANGLE_STRIP, 0, 6, _numElements );
+  };
+  Nenkraft.Controller.GLTextureBatchProgramController = GLTextureBatchProgramController;
+  Nenkraft.GLTextureBatchProgramController = GLTextureBatchProgramController;
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Controller.GLProgramController;
+  var TRA = Nenkraft.Math.TriRectArray;
+  function GLTextureProgramController ( _gl ) {
+    if ( !( this instanceof GLTextureProgramController ) ) return new GLTextureProgramController( _gl );
+    Super.call( this, _gl, Nenkraft.SHADER_CODE.TEXTURE_2D );
+  }
+  GLTextureProgramController.prototype = Object.create( Super.prototype );
+  GLTextureProgramController.prototype.constructor = GLTextureProgramController;
+  //Static
+
+  //Members
+  GLTextureProgramController.prototype.originalTexture = null;
+  GLTextureProgramController.prototype.boundTexture = null;
+  GLTextureProgramController.prototype.essenceBuffer = null;
+  //Methods
+  GLTextureProgramController.prototype.BindBasicTexture = function ( _texture ) {
+    var gl = this.gl;
+    this.originalTexture = _texture;
+    this.boundTexture = gl.createTexture();
+    this.essenceBuffer = gl.createBuffer();
+    var essence = TRA( 0, 0, _texture.w, _texture.h );
+    essence.push.apply( essence, TRA( 0, 0, 1, 1 ) );
+    gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
+    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    gl.bindTexture( gl.TEXTURE_2D, null );
+    this.AssignAttribute( 'aPosition' );
+    this.AssignAttribute( 'aTexCoord' );
+    this.AssignUniform( 'uImage' );
+    this.AssignUniform( 'uProjection' );
+    this.AssignUniform( 'uTranslation' );
+    this.AssignUniform( 'uTransformation' );
+  };
+  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation ) {
+    var gl = this.gl;
+    var attributes = this.attributes;
+    var uniforms = this.uniforms;
+    if ( this !== Super.LAST_USED_CONTROLLER ) {
+      gl.useProgram( this.program );
+      gl.activeTexture( gl.TEXTURE0 );
+      gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
+      gl.uniform1i( uniforms.uImage, 0 );
+      gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+      gl.enableVertexAttribArray( attributes.aPosition );
+      gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
+      gl.enableVertexAttribArray( attributes.aTexCoord );
+      gl.vertexAttribPointer( attributes.aTexCoord, 2, gl.FLOAT, false, 0, 48 );
+      Super.LAST_USED_CONTROLLER = this;
+    }
+    gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
+    gl.uniformMatrix3fv( uniforms.uTranslation, false, _translation );
+    gl.uniformMatrix3fv( uniforms.uTransformation, false, _transformation );
+    gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );
+  };
+  Nenkraft.Controller.GLTextureProgramController = GLTextureProgramController;
+  Nenkraft.GLTextureProgramController = GLTextureProgramController;
+};
+
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports) {
 
 /**
@@ -509,7 +1090,7 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.GetAllOptionIds = function () {
     var allOptionIds = [];
     for ( var i = 0, options = this.options, l = options.length; i < l; ++i ) {
-      allOptionIds = allOptionIds.concat( options[ i ].id );
+      allOptionIds.push.apply( allOptionIds, options[ i ].id );
     }
     return allOptionIds;
   };
@@ -538,7 +1119,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 14 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /**
@@ -575,7 +1156,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 15 */
+/* 29 */
 /***/ (function(module, exports) {
 
 /**
@@ -625,7 +1206,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 16 */
+/* 30 */
 /***/ (function(module, exports) {
 
 /**
@@ -638,10 +1219,17 @@ module.exports = function ( Nenkraft ) {
     throw new Error( 'Cannot be instantiated' );
   }
   Debug.Draw = {};
-  Debug.Draw.AABB2D = function ( _rc, _aabb ) {
+  Debug.Draw.AABB2D = function ( _rc, _aabb, _options ) {
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
-    _rc.strokeStyle = 'rgba(255, 0, 255, 1)';
-    _rc.fillStyle = 'rgba(0, 255, 0, 0.1)';
+    _rc.globalAlpha = 0.1;
+    _rc.strokeStyle = 'rgba(100, 0, 100, 1)';
+    _rc.fillStyle = 'rgba(0, 100, 0, 1)';
+    if ( _options && _options.strokeStyle ) {
+      _rc.strokeStyle = _options.strokeStyle;
+    }
+    if ( _options && _options.fillStyle ) {
+      _rc.fillStyle = _options.fillStyle;
+    }
     _rc.lineWidth = 2;
     _rc.beginPath();
     _rc.moveTo( _aabb.tl.x, _aabb.tl.y );
@@ -649,15 +1237,23 @@ module.exports = function ( Nenkraft ) {
     _rc.lineTo( _aabb.br.x, _aabb.br.y );
     _rc.lineTo( _aabb.tl.x, _aabb.br.y );
     _rc.closePath();
-    _rc.stroke();
-    _rc.fill();
+    if ( _options && _options.noStroke ) {
+
+    } else {
+      _rc.stroke();
+    }
+    if ( _options && _options.noFill ) {
+
+    } else {
+      _rc.fill();
+    }
   };
   Nenkraft.Debug = Debug;
 };
 
 
 /***/ }),
-/* 17 */
+/* 31 */
 /***/ (function(module, exports) {
 
 /**
@@ -693,17 +1289,13 @@ module.exports = function ( Nenkraft ) {
       if ( child.Render ) child.Render();
     }
   };
-  delete Case2D.prototype.Draw;
-  delete Case2D.prototype.DrawChildren;
-  delete Case2D.prototype.alpha;
-  delete Case2D.prototype.gco;
   Nenkraft.Entity.Case2D = Case2D;
   Nenkraft.Case2D = Case2D;
 };
 
 
 /***/ }),
-/* 18 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /**
@@ -723,10 +1315,19 @@ module.exports = function ( Nenkraft ) {
   //Static
 
   //Members
+  Container2D.prototype.children = null;
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
   Container2D.prototype.transformShouldUpdate = true;
   Container2D.prototype.transformAutomaticUpdate = true;
+  //
+  Container2D.prototype.isBatchParent = false;
+  Container2D.prototype.childDataBuffer = null;
+  Container2D.prototype.bufferData = null;
+  Container2D.prototype.programController = null;
+  Container2D.prototype.bufferStartIndex = 0;
+  Container2D.prototype.bufferEndIndex = 0;
+  //
   //Methods
   Container2D.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -734,9 +1335,23 @@ module.exports = function ( Nenkraft ) {
         this.UpdateTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
-      this.transform.ApplyWorld( _rc );
       if ( this.children.length > 0 && this.display === true ) {
         this.DrawChildren( _rc );
+      }
+    }
+  };
+  Container2D.prototype.GLDraw = function ( _gl ) {
+    if ( this.render === true ) {
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      if ( this.children.length > 0 && this.display === true ) {
+        if ( this.isBatchParent === true ) {
+          this.GLBatchDrawChildren();
+        } else {
+          this.GLDrawChildren( _gl );
+        }
       }
     }
   };
@@ -749,6 +1364,38 @@ module.exports = function ( Nenkraft ) {
       if ( child.Draw ) child.Draw( _rc );
     }
   };
+  Container2D.prototype.GLDrawChildren = function ( _gl ) {
+    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+      child = children[ i ];
+      if ( child.GLDraw ) child.GLDraw( _gl );
+    }
+  };
+  Container2D.prototype.GLBatchDrawChildren = function () {
+    if ( this.childDataBuffer != null && this.programController != null ) {
+      this.programController.Execute( this.childDataBuffer, this.children.length );
+    }
+  };
+  Container2D.prototype.ComputeBatchBuffer = function ( _getBufferData ) {
+    var childDataBuffer = [];
+    for ( var i = 0, children = this.children, l = children.length, child, childData; i < l; ++i ) {
+      child = children[ i ];
+      if ( _getBufferData != null ) {
+        childData = _getBufferData( child );
+      } else {
+        childData = child.GetBufferData();
+      }
+      child.bufferStartIndex = childDataBuffer.length;
+      child.bufferEndIndex = childDataBuffer.length + childData.length;
+      childDataBuffer.push.apply( childDataBuffer, childData );
+    }
+    this.childDataBuffer = new Float32Array( childDataBuffer );
+  };
+  Container2D.prototype.UpdateInBuffer = function () {
+    throw new Error( 'Cannot update buffer data directly on Container2D object!' );
+  };
+  Container2D.prototype.GetBufferData = function () {
+    throw new Error( 'Cannot access buffer data directly on Container2D object!' );
+  };
   Container2D.prototype.AddChild = function ( _child ) {
     var parent = _child.parent;
     if ( parent !== null ) {
@@ -759,14 +1406,12 @@ module.exports = function ( Nenkraft ) {
     return _child;
   };
   Container2D.prototype.AddChildren = function () {
-    for ( var i = 0, l = arguments.length, child, parent; i < l; ++i ) {
-      child = arguments[ i ];
-      parent = child.parent;
-      if ( parent !== null ) {
-        parent.RemoveChild( child );
-      }
-      this.children.push( child );
-      child.parent = this;
+    var children = arguments;
+    if ( Array.isArray( children[ 0 ] ) ) {
+      children = children[ 0 ];
+    }
+    for ( var i = 0, l = children.length; i < l; ++i ) {
+      this.AddChild( children[ i ] );
     }
   };
   Container2D.prototype.Mount = function () {
@@ -869,13 +1514,17 @@ module.exports = function ( Nenkraft ) {
     }
     return null;
   };
+  Container2D.prototype.UseAsBatchParent = function ( _pc ) {
+    this.isBatchParent = true;
+    this.programController = _pc;
+  };
   Nenkraft.Entity.Container2D = Container2D;
   Nenkraft.Container2D = Container2D;
 };
 
 
 /***/ }),
-/* 19 */
+/* 33 */
 /***/ (function(module, exports) {
 
 /**
@@ -895,6 +1544,8 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
   //Members
   CoreEntity2D.prototype.parent = null;
+  CoreEntity2D.prototype.transform = null;
+  CoreEntity2D.prototype.data = null;
   CoreEntity2D.prototype.w = 0;
   CoreEntity2D.prototype.h = 0;
   CoreEntity2D.prototype.bounds = null;
@@ -994,7 +1645,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 20 */
+/* 34 */
 /***/ (function(module, exports) {
 
 /**
@@ -1007,19 +1658,8 @@ module.exports = function ( Nenkraft ) {
   function Graphic2D ( _x, _y, _path ) {
     if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
     Super.call( this, _x, _y );
-    if ( _path !== undefined ) {
-      if ( _path.w !== undefined && _path.h !== undefined ) {
-        this.w = _path.w;
-        this.h = _path.h;
-      }
-      else if ( _path.GetLength !== undefined ) this.w = this.h = _path.GetLength();
-      else if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
-      else if ( _path.aabb !== undefined ) {
-        this.w = _path.aabb.w;
-        this.h = _path.aabb.h;
-      }
-      this.path = _path;
-    }
+    this.anchor = new Nenkraft.Vector2D();
+    this.SetPath( _path );
   }
   Graphic2D.prototype = Object.create( Super.prototype );
   Graphic2D.prototype.constructor = Graphic2D;
@@ -1027,6 +1667,7 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   Graphic2D.prototype.path = null;
+  Graphic2D.prototype.anchor = null;
   Graphic2D.prototype.alpha = 1.0;
   Graphic2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Graphic2D.prototype.interactive = true;
@@ -1049,11 +1690,84 @@ module.exports = function ( Nenkraft ) {
       }
     }
   };
+  Graphic2D.prototype.GLDraw = function ( _gl ) {
+    if ( this.render === true ) {
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      var path = this.path;
+      if ( path && path.GLDraw && this.display === true ) {
+        path.GLDraw( _gl, this.transform );
+      }
+      if ( this.children.length > 0 && this.display === true ) {
+        if ( this.isBatchParent === true ) {
+          this.GLBatchDrawChildren( _gl );
+        } else {
+          this.GLDrawChildren( _gl );
+        }
+      }
+    }
+  };
+  Graphic2D.prototype.GetBufferData = function () {
+    this.UpdateTransform();
+    var transformData = this.transform.worldTransform.AsArray( true );
+    if ( this.bufferData == null ) {
+      this.bufferData = [];
+    }
+    var bufferData = this.bufferData;
+    bufferData.length = 0;
+    bufferData[ 0 ] = transformData[ 0 ];
+    bufferData[ 1 ] = transformData[ 1 ];
+    bufferData[ 2 ] = transformData[ 2 ];
+    bufferData[ 3 ] = transformData[ 3 ];
+    bufferData[ 4 ] = transformData[ 4 ];
+    bufferData[ 5 ] = transformData[ 5 ];
+    bufferData[ 6 ] = transformData[ 6 ];
+    bufferData[ 7 ] = transformData[ 7 ];
+    bufferData[ 8 ] = transformData[ 8 ];
+    if ( this.path && this.path.GetBufferData ) {
+      bufferData.push.apply( bufferData, this.path.GetBufferData() );
+    }
+    return bufferData;
+  };
+  Graphic2D.prototype.UpdateInBuffer = function () {
+    this.UpdateTransform();
+    var transformData = this.transform.worldTransform.AsArray( true );
+    var buffer = this.parent.childDataBuffer;
+    var index = this.bufferStartIndex;
+    buffer[ index ] = transformData[ 0 ];
+    buffer[ index + 1 ] = transformData[ 1 ];
+    buffer[ index + 2 ] = transformData[ 2 ];
+    buffer[ index + 3 ] = transformData[ 3 ];
+    buffer[ index + 4 ] = transformData[ 4 ];
+    buffer[ index + 5 ] = transformData[ 5 ];
+    buffer[ index + 6 ] = transformData[ 6 ];
+    buffer[ index + 7 ] = transformData[ 7 ];
+    buffer[ index + 8 ] = transformData[ 8 ];
+    if ( this.path && this.path.UpdateInBuffer ) {
+      this.path.UpdateInBuffer( buffer, index + 9 );
+    }
+  };
   Graphic2D.prototype.IntersectsPoint = function ( _v ) {
     if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
-    cv.DivideV( this.scale );
     return this.path.IntersectsPoint( cv );
+  };
+  Graphic2D.prototype.SetPath = function ( _path ) {
+    if ( _path !== undefined ) {
+      if ( _path.w !== undefined && _path.h !== undefined ) {
+        this.w = _path.w;
+        this.h = _path.h;
+      }
+      else if ( _path.GetLength !== undefined ) this.w = this.h = _path.GetLength();
+      else if ( _path.diameter !== undefined ) this.w = this.h = _path.diameter;
+      else if ( _path.aabb !== undefined ) {
+        this.w = _path.aabb.w;
+        this.h = _path.aabb.h;
+      }
+      this.path = _path;
+    }
   };
   Nenkraft.Entity.Graphic2D = Graphic2D;
   Nenkraft.Graphic2D = Graphic2D;
@@ -1061,7 +1775,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 21 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /**
@@ -1198,7 +1912,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 22 */
+/* 36 */
 /***/ (function(module, exports) {
 
 /**
@@ -1258,7 +1972,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 23 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /**
@@ -1274,32 +1988,36 @@ module.exports = function ( Nenkraft ) {
     this.anchor = new Nenkraft.Vector2D( 0, 0 );
     this.clip = new Nenkraft.Geom.AABB2D();
     this.shape = new Nenkraft.Geom.AABB2D();
-    if ( _texture === undefined ) _texture = Plainsprite.DEFAULT_TEXTURE;
+    if ( _texture == null ) _texture = Plainsprite.DEFAULT_TEXTURE;
     this.SetTexture( _texture );
   }
   Plainsprite.prototype = Object.create( Super.prototype );
   Plainsprite.prototype.constructor = Plainsprite;
   //Static
-  Plainsprite.DEFAULT_TEXTURE = Nenkraft.Utils.TextureFromDataURL( Nenkraft.Utils.GenerateSimpleBase64Png( function () {
-    //Oooh what fun.
-    var path = new Nenkraft.Path.Polygon2D();
-    path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-    path.ComputeBounds();
-    path.style.fill.color = 'rgba(66,66,66,0.5)';
-    path.style.stroke.color = '#3399FF';
-    path.style.stroke.lineWidth = 3;
-    return new Nenkraft.Graphic2D( 0, 0, path );
-  } ) );
+  Plainsprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
+    Nenkraft.Utils.ImageFromDataURL(
+      Nenkraft.Utils.GenerateSimpleBase64Png( function () {
+        //Oooh what fun.
+        var path = new Nenkraft.Path.Polygon2D();
+        path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+        path.ComputeBounds();
+        path.style.fill.color = 'rgba(66,66,66,0.5)';
+        path.style.stroke.color = '#3399FF';
+        path.style.stroke.lineWidth = 3;
+        return new Nenkraft.Graphic2D( 0, 0, path );
+      } )
+    ), 'DEFAULT_PLAINSPRITE_TEXTURE', 64, 64, 64, 64
+  );
   //Members
   Plainsprite.prototype.shape = null;
   Plainsprite.prototype.clip = null;
@@ -1317,7 +2035,7 @@ module.exports = function ( Nenkraft ) {
       if ( this.display === true ) {
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
         _rc.drawImage(
-          this.texture,
+          this.texture.image,
           tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
         );
       }
@@ -1331,8 +2049,8 @@ module.exports = function ( Nenkraft ) {
   };
   Plainsprite.prototype.SetTexture = function ( _texture ) {
     this.texture = _texture;
-    this.w = _texture.naturalWidth;
-    this.h = _texture.naturalHeight;
+    this.w = _texture.w;
+    this.h = _texture.h;
     this.clip.Set( 0, 0, this.w, this.h );
     this.shape.SetC( this.clip );
   };
@@ -1342,7 +2060,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 24 */
+/* 38 */
 /***/ (function(module, exports) {
 
 /**
@@ -1358,40 +2076,58 @@ module.exports = function ( Nenkraft ) {
     this.anchor = new Nenkraft.Vector2D( 0, 0 );
     this.clip = new Nenkraft.Geom.AABB2D();
     this.shape = new Nenkraft.Geom.AABB2D();
-    if ( _texture === undefined ) _texture = Sprite.DEFAULT_TEXTURE;
-    this.SetTexture( _texture );
+    this.textureTransformation = new Nenkraft.Math.Matrix2D();
+    this.textureTranslation = new Nenkraft.Math.Matrix2D();
+    this.originalShape = new Nenkraft.Geom.AABB2D();
+    if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
+      this.programController = _texture;
+      this.SetTexture( _texture.originalTexture );
+    }
+    else if ( _texture == null ) {
+      this.SetTexture( Sprite.DEFAULT_TEXTURE );
+    } else {
+      this.SetTexture( _texture );
+    }
   }
   Sprite.prototype = Object.create( Super.prototype );
   Sprite.prototype.constructor = Sprite;
   //Static
-  Sprite.DEFAULT_TEXTURE = Nenkraft.Utils.TextureFromDataURL( Nenkraft.Utils.GenerateSimpleBase64Png( function () {
-    //Oooh what fun.
-    var path = new Nenkraft.Path.Polygon2D();
-    path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-    path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-    path.ComputeBounds();
-    path.style.fill.color = 'rgba(66,66,66,0.5)';
-    path.style.stroke.color = '#00FFFF';
-    path.style.stroke.lineWidth = 3;
-    return new Nenkraft.Graphic2D( 0, 0, path );
-  } ) );
+  Sprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
+    Nenkraft.Utils.ImageFromDataURL(
+      Nenkraft.Utils.GenerateSimpleBase64Png( function () {
+        //Oooh what fun.
+        var path = new Nenkraft.Path.Polygon2D();
+        path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+        path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+        path.ComputeBounds();
+        path.style.fill.color = 'rgba(66,66,66,0.5)';
+        path.style.stroke.color = '#00FFFF';
+        path.style.stroke.lineWidth = 3;
+        return new Nenkraft.Graphic2D( 0, 0, path );
+      } )
+    ), 'DEFAULT_SPRITE_TEXTURE', 64, 64, 64, 64
+  );
   //Members
   Sprite.prototype.shape = null;
+  Sprite.prototype.originalShape = null;
   Sprite.prototype.clip = null;
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
   Sprite.prototype.alpha = 1.0;
   Sprite.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Sprite.prototype.interactive = true;
+  Sprite.prototype.programController = null;
+  Sprite.prototype.textureTransformation = null;
+  Sprite.prototype.textureTranslation = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
     if ( this.render === true ) {
@@ -1405,7 +2141,7 @@ module.exports = function ( Nenkraft ) {
         _rc.globalAlpha = this.alpha;
         _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
-          this.texture,
+          this.texture.image,
           tl.x, tl.y, br.x, br.y, -w * anchor.x, -h * anchor.y, w, h
         );
       }
@@ -1414,19 +2150,134 @@ module.exports = function ( Nenkraft ) {
       }
     }
   };
+  Sprite.prototype.GLDraw = function ( _gl ) {
+    if ( this.render === true ) {
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        this.UpdateTextureTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      if ( this.display === true && this.programController != null ) {
+        this.programController.Execute(
+          this.transform.worldTransform.AsArray( true ),
+          this.textureTranslation.AsArray( true ),
+          this.textureTransformation.AsArray( true )
+        );
+      }
+      if ( this.children.length > 0 && this.display === true ) {
+        if ( this.isBatchParent === true ) {
+          this.GLBatchDrawChildren( _gl );
+        } else {
+          this.GLDrawChildren( _gl );
+        }
+      }
+    }
+  };
+  Sprite.prototype.GetBufferData = function () {
+    this.UpdateTransform();
+    this.UpdateTextureTransform();
+    var transformData = this.transform.worldTransform.AsArray( true );
+    var textureTranslationData = this.textureTranslation.AsArray( true );
+    var textureTransformationData = this.textureTransformation.AsArray( true );
+    if ( this.bufferData == null ) {
+      this.bufferData = [];
+    }
+    var bufferData = this.bufferData;
+    bufferData.length = 0;
+    bufferData[ 0 ] = transformData[ 0 ];
+    bufferData[ 1 ] = transformData[ 1 ];
+    bufferData[ 2 ] = transformData[ 2 ];
+    bufferData[ 3 ] = transformData[ 3 ];
+    bufferData[ 4 ] = transformData[ 4 ];
+    bufferData[ 5 ] = transformData[ 5 ];
+    bufferData[ 6 ] = transformData[ 6 ];
+    bufferData[ 7 ] = transformData[ 7 ];
+    bufferData[ 8 ] = transformData[ 8 ];
+    bufferData[ 9 ] = textureTranslationData[ 0 ];
+    bufferData[ 10 ] = textureTranslationData[ 1 ];
+    bufferData[ 11 ] = textureTranslationData[ 2 ];
+    bufferData[ 12 ] = textureTranslationData[ 3 ];
+    bufferData[ 13 ] = textureTranslationData[ 4 ];
+    bufferData[ 14 ] = textureTranslationData[ 5 ];
+    bufferData[ 15 ] = textureTranslationData[ 6 ];
+    bufferData[ 16 ] = textureTranslationData[ 7 ];
+    bufferData[ 17 ] = textureTranslationData[ 8 ];
+    bufferData[ 18 ] = textureTransformationData[ 0 ];
+    bufferData[ 19 ] = textureTransformationData[ 1 ];
+    bufferData[ 20 ] = textureTransformationData[ 2 ];
+    bufferData[ 21 ] = textureTransformationData[ 3 ];
+    bufferData[ 22 ] = textureTransformationData[ 4 ];
+    bufferData[ 23 ] = textureTransformationData[ 5 ];
+    bufferData[ 24 ] = textureTransformationData[ 6 ];
+    bufferData[ 25 ] = textureTransformationData[ 7 ];
+    bufferData[ 26 ] = textureTransformationData[ 8 ];
+    return bufferData;
+  };
+  Sprite.prototype.UpdateInBuffer = function () {
+    this.UpdateTransform();
+    this.UpdateTextureTransform();
+    var transformData = this.transform.worldTransform.AsArray( true );
+    var textureTranslationData = this.textureTranslation.AsArray( true );
+    var textureTransformationData = this.textureTransformation.AsArray( true );
+    var buffer = this.parent.childDataBuffer;
+    var index = this.bufferStartIndex;
+    buffer[ index ] = transformData[ 0 ];
+    buffer[ index + 1 ] = transformData[ 1 ];
+    buffer[ index + 2 ] = transformData[ 2 ];
+    buffer[ index + 3 ] = transformData[ 3 ];
+    buffer[ index + 4 ] = transformData[ 4 ];
+    buffer[ index + 5 ] = transformData[ 5 ];
+    buffer[ index + 6 ] = transformData[ 6 ];
+    buffer[ index + 7 ] = transformData[ 7 ];
+    buffer[ index + 8 ] = transformData[ 8 ];
+    buffer[ index + 9 ] = textureTranslationData[ 0 ];
+    buffer[ index + 10 ] = textureTranslationData[ 1 ];
+    buffer[ index + 11 ] = textureTranslationData[ 2 ];
+    buffer[ index + 12 ] = textureTranslationData[ 3 ];
+    buffer[ index + 13 ] = textureTranslationData[ 4 ];
+    buffer[ index + 14 ] = textureTranslationData[ 5 ];
+    buffer[ index + 15 ] = textureTranslationData[ 6 ];
+    buffer[ index + 16 ] = textureTranslationData[ 7 ];
+    buffer[ index + 17 ] = textureTranslationData[ 8 ];
+    buffer[ index + 18 ] = textureTransformationData[ 0 ];
+    buffer[ index + 19 ] = textureTransformationData[ 1 ];
+    buffer[ index + 20 ] = textureTransformationData[ 2 ];
+    buffer[ index + 21 ] = textureTransformationData[ 3 ];
+    buffer[ index + 22 ] = textureTransformationData[ 4 ];
+    buffer[ index + 23 ] = textureTransformationData[ 5 ];
+    buffer[ index + 24 ] = textureTransformationData[ 6 ];
+    buffer[ index + 25 ] = textureTransformationData[ 7 ];
+    buffer[ index + 26 ] = textureTransformationData[ 8 ];
+  };
+  Sprite.prototype.UpdateTextureTransform = function () {
+    var translation = this.textureTranslation;
+    var transformation = this.textureTransformation;
+    var texture = this.texture;
+    var clip = this.clip;
+    translation.e = -this.w * this.anchor.x;
+    translation.f = -this.h * this.anchor.y;
+    transformation.e = texture.w / texture.fw * clip.tl.x / clip.br.x;
+    transformation.f = texture.h / texture.fh * clip.tl.y / clip.br.y;
+  };
   Sprite.prototype.IntersectsPoint = function ( _v ) {
     if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
-    cv.Add( this.w * this.anchor.x, this.h * this.anchor.y );
-    cv.DivideV( this.scale );
+    cv.Add( this.w * this.anchor.x * this.scale.x, this.h * this.anchor.y * this.scale.y );
     return this.shape.IntersectsPoint( cv );
+  };
+  Sprite.prototype.UpdateShape = function () {
+    this.shape.SetC( this.originalShape );
+    this.shape.Scale( this.scale.x, this.scale.y );
   };
   Sprite.prototype.SetTexture = function ( _texture ) {
     this.texture = _texture;
-    this.w = _texture.naturalWidth;
-    this.h = _texture.naturalHeight;
+    this.w = _texture.w;
+    this.h = _texture.h;
     this.clip.Set( 0, 0, this.w, this.h );
     this.shape.SetC( this.clip );
+    this.originalShape.SetC( this.clip );
+    this.textureTransformation.a = _texture.w / _texture.fw;
+    this.textureTransformation.d = _texture.h / _texture.fh;
   };
   Nenkraft.Entity.Sprite = Sprite;
   Nenkraft.Sprite = Sprite;
@@ -1434,7 +2285,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 25 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /**
@@ -1444,14 +2295,36 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
-  function Stage2D ( _canvas, _x, _y, _doNotStart ) {
-    if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart );
+  function Stage2D ( _canvas, _x, _y, _doNotStart, _useWebGL ) {
+    if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart, _useWebGL );
     Super.call( this, _x, _y );
     this.canvas = _canvas;
-    this.rc = _canvas.getContext( '2d' );
     this.w = _canvas.width;
     this.h = _canvas.height;
-    this.ticker = new Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
+    if ( _useWebGL === true ) {
+      this.gl = _canvas.getContext( 'webgl' );
+      if ( this.gl == null ) {
+        this.gl = _canvas.getContext( 'experimental-webgl' );
+      }
+      if ( this.gl == null ) {
+        throw new Error( 'WebGL is not supported!' );
+      }
+      this.gl.clearColor(
+        0.0392156862745098,
+        0.0784313725490196,
+        0.11764705882352941,
+        0
+      );
+      this.usingWebGL = true;
+      this.scale.Set( 2 / this.w, -2 / this.h );
+      this.position.Add( -1, 1 );
+      this.position.Add( _x * this.scale.x, _y * this.scale.y );
+      this.UpdateTransform();
+      this.ticker = new Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _doNotStart );
+    } else {
+      this.rc = _canvas.getContext( '2d' );
+      this.ticker = new Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
+    }
     this.onProcess = new Nenkraft.Event.LocalEvent();
     this.mouse = new Nenkraft.Input.Mouse( _canvas, _x, _y );
     this.keyboard = new Nenkraft.Input.Keyboard( _canvas );
@@ -1461,39 +2334,51 @@ module.exports = function ( Nenkraft ) {
   //Static
 
   //Members
-  Stage2D.prototype.backgroundColor = 'rgba(0,0,0,1)';
+  Stage2D.prototype.backgroundColor = 'rgba(10,20,30,1)';
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
-  Stage2D.prototype.alpha = 1.0;
-  Stage2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
+  Stage2D.prototype.usingWebGL = false;
   //Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
-    _rc.globalAlpha = this.alpha;
-    _rc.globalCompositeOperation = this.gco;
-    if ( this.clear === true ) {
-      _rc.clearRect( 0, 0, this.w, this.h );
-    }
-    else if ( this.fill === true ) {
+    _rc.globalAlpha = 1.0;
+    _rc.globalCompositeOperation = 'source-over';
+    if ( this.fill === true ) {
       _rc.fillStyle = this.backgroundColor;
       _rc.fillRect( 0, 0, this.w, this.h );
     }
+    else if ( this.clear === true ) {
+      _rc.clearRect( 0, 0, this.w, this.h );
+    }
+  };
+  Stage2D.prototype.GLPreDraw = function ( _gl ) {
+    _gl.viewport( 0, 0, this.w, this.h );
+    _gl.clear( _gl.COLOR_BUFFER_BIT );
+    _gl.enable( _gl.BLEND );
+    _gl.disable( _gl.DEPTH_TEST );
+    _gl.blendFunc( _gl.SRC_ALPHA, _gl.ONE_MINUS_SRC_ALPHA );
+  };
+  Stage2D.prototype.GLPostDraw = function ( _gl ) {
+    _gl.flush();
   };
   Stage2D.prototype.Process = function ( _delta ) {
-    var rc = this.rc;
-    this.PreDraw( rc );
-    this.Draw( rc );
+    this.PreDraw( this.rc );
+    this.Draw( this.rc );
     this.onProcess.Dispatch( this, _delta );
   };
-  delete Stage2D.prototype.alpha;
-  delete Stage2D.prototype.gco;
+  Stage2D.prototype.GLProcess = function ( _delta ) {
+    this.GLPreDraw( this.gl );
+    this.GLDraw( this.gl );
+    this.GLPostDraw( this.gl );
+    this.onProcess.Dispatch( this, _delta );
+  };
   Nenkraft.Entity.Stage2D = Stage2D;
   Nenkraft.Stage2D = Stage2D;
 };
 
 
 /***/ }),
-/* 26 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /**
@@ -1553,7 +2438,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 27 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /**
@@ -1632,7 +2517,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 28 */
+/* 42 */
 /***/ (function(module, exports) {
 
 /**
@@ -1670,7 +2555,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 29 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /**
@@ -1732,6 +2617,10 @@ module.exports = function ( Nenkraft ) {
   };
   AABB2D.prototype.SetC = function ( _aabb ) {
     this.Set( _aabb.tl.x, _aabb.tl.y, _aabb.br.x, _aabb.br.y );
+  };
+  AABB2D.prototype.Scale = function ( _x, _y ) {
+    this.tl.Multiply( _x, _y );
+    this.br.Multiply( _x, _y );
   };
   AABB2D.prototype.ComputeWH = function () {
     this.w = this.br.x - this.tl.x;
@@ -1799,7 +2688,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 30 */
+/* 44 */
 /***/ (function(module, exports) {
 
 /**
@@ -1825,7 +2714,19 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.radiusSquared = 0;
   Circle.prototype.radiusUnsquared = 0;
   Circle.prototype.area = 0;
+  Circle.prototype.belongsTo = null;
   //Methods
+  Circle.prototype.Set = function ( _x, _y, _radius ) {
+    this.center.Set( _x, _y );
+    this.radius = _radius;
+  };
+  Circle.prototype.SetC = function ( _circle ) {
+    this.center.SetV( _circle );
+    this.radius = _circle.radius;
+  };
+  Circle.prototype.Scale = function ( _scale ) {
+    this.radius *= _scale;
+  };
   Circle.prototype.IntersectsCircle = function ( _circle ) {
     var radii = this.radius + _circle.radius;
     return ( radii * radii >= this.center.GetDistanceSquaredV( _circle.center ) );
@@ -1865,7 +2766,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 31 */
+/* 45 */
 /***/ (function(module, exports) {
 
 /**
@@ -1898,6 +2799,7 @@ module.exports = function ( Nenkraft ) {
   //Members
   Line2D.prototype.TYPE = Line2D.TYPE;
   Line2D.prototype.epsilon = 1000;
+  Line2D.prototype.belongsTo = null;
   //Methods
   Line2D.prototype.Stretch = function ( _magnitude ) {
     var hm = _magnitude * 0.5;
@@ -1952,7 +2854,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 32 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -1961,12 +2863,19 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  function Polygon2D () {
-    if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
+  function Polygon2D ( _vertices ) {
+    if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices );
     this.vertices = [];
     this.normals = [];
     this.perimeterMidPoints = [];
     this.centroid = new Nenkraft.Vector2D();
+    if ( _vertices != null ) {
+      if ( _vertices[ 0 ] instanceof Nenkraft.Vector2D ) {
+        this.AddPoints( _vertices );
+      } else {
+        this.PushPoints( _vertices );
+      }
+    }
   }
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
@@ -2113,16 +3022,25 @@ module.exports = function ( Nenkraft ) {
   Polygon2D.prototype.TYPE = Polygon2D.TYPE;
   Polygon2D.prototype.aabb = null;
   Polygon2D.prototype.dirtyBounds = true;
+  Polygon2D.prototype.belongsTo = null;
   //Methods
   Polygon2D.prototype.AddPoint = function ( _p ) {
     this.vertices.push( _p );
   };
   Polygon2D.prototype.AddPoints = function ( _ps ) {
-    this.vertices = this.vertices.concat( _ps );
+    this.vertices.push.apply( this.vertices, _ps );
+  };
+  Polygon2D.prototype.PushPoint = function ( _x, _y ) {
+    this.vertices.push( new Nenkraft.Vector2D( _x, _y ) );
+  };
+  Polygon2D.prototype.PushPoints = function ( _ps ) {
+    for ( var i = 0, l = _ps.length; i < l; i += 2 ) {
+      this.PushPoint( _ps[ i ], _ps[ i + 1 ] );
+    }
   };
   Polygon2D.prototype.Recreate = function ( _ps ) {
     this.vertices.length = 0;
-    if ( _ps != undefined ) this.vertices = this.vertices.concat( _ps );
+    if ( _ps != undefined ) this.vertices.push.apply( this.vertices, _ps );
   };
   Polygon2D.prototype.ComputeBounds = function () {
     if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
@@ -2225,7 +3143,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 33 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -2268,7 +3186,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 34 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /**
@@ -2282,14 +3200,13 @@ module.exports = function ( Nenkraft ) {
     this.element = _element;
     this.position = new Nenkraft.Vector2D();
     this.scale = new Nenkraft.Vector2D( 1, 1 );
-    this.anchor = new Nenkraft.Vector2D();
     this.offset = new Nenkraft.Vector2D( _offsetX, _offsetY );
 
     this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
     this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
     this.element.addEventListener( 'mouseup', this.OnUp.bind( this ) );
     this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
-    this.element.addEventListener( 'wheel', this.OnWheel.bind( this ) );
+    this.element.addEventListener( 'wheel', this.OnWheel.bind( this ), { passive: true } );
 
     this.onMove = new Nenkraft.Event.LocalEvent();
     this.onDown = new Nenkraft.Event.LocalEvent();
@@ -2345,7 +3262,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 35 */
+/* 49 */
 /***/ (function(module, exports) {
 
 /**
@@ -2354,68 +3271,82 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  function TextureLoader ( _objs ) {
-    if ( !( this instanceof TextureLoader ) ) return new TextureLoader( _objs );
-    this.cache = [];
-    this.onTextureLoaded = new Nenkraft.Event.LocalEvent();
+  function ImageLoader ( _objs, _createTextures ) {
+    if ( !( this instanceof ImageLoader ) ) return new ImageLoader( _objs, _createTextures );
+    this.imageCache = new Nenkraft.Utils.Cache( Image );
+    this.basicTextureCache = new Nenkraft.Utils.Cache( Nenkraft.Texture.BasicTexture );
+    this.onImageLoaded = new Nenkraft.Event.LocalEvent();
     this.onComplete = new Nenkraft.Event.LocalEvent();
-    this.OnLoad = this.OnLoad.bind( this );
-    if ( _objs !== undefined ) this.Load( _objs );
+    if ( _objs !== undefined ) this.Load( _objs, _createTextures );
   }
-  TextureLoader.prototype = Object.create( null );
-  TextureLoader.prototype.constructor = TextureLoader;
+  ImageLoader.prototype = Object.create( null );
+  ImageLoader.prototype.constructor = ImageLoader;
   //Static
 
   //Members
-  TextureLoader.prototype.count = 0;
-  TextureLoader.prototype.loading = false;
-  TextureLoader.prototype.toLoad = null;
+  ImageLoader.prototype.count = 0;
+  ImageLoader.prototype.loading = false;
+  ImageLoader.prototype.toLoad = null;
+  ImageLoader.prototype.createTextures = false;
   //Methods
-  TextureLoader.prototype.Load = function ( _objs ) {
+  ImageLoader.prototype.Load = function ( _objs, _createTextures ) {
     if ( this.toLoad === null ) this.toLoad = [];
-    this.toLoad = this.toLoad.concat( _objs );
+    this.toLoad.push.apply( this.toLoad, _objs );
+    if ( _createTextures != null ) {
+      this.createTextures = _createTextures;
+    }
     if ( this.loading === false ) {
       this.count = 0;
       this.loading = true;
       this.Haul( this.count );
     }
   };
-  TextureLoader.prototype.Haul = function ( _count ) {
+  ImageLoader.prototype.Haul = function ( _count ) {
     var item = this.toLoad[ _count ];
-    if ( item !== undefined ) {
-      if ( this.Get( item.id ) !== null ) throw new Error( 'Invalid identifier' );
+    if ( item != null ) {
       var image = new Image();
-      image.onload = this.OnLoad;
+      image.onload = this.OnLoad.bind( this );
+      image.onerror = this.OnError.bind( this );
       image.src = item.src;
-      image.data = { id: item.id };
-    }
-    else {
-      this.onComplete.Dispatch( this, { cache: this.cache } );
+      image.id = item.id;
+      image.data = Object.create( null );
+      image.data.w = item.w;
+      image.data.h = item.h;
+      image.data.fw = item.fw;
+      image.data.fh = item.fh;
+    } else {
       this.count = 0;
       this.loading = false;
       this.toLoad = null;
+      this.onComplete.Dispatch( this, { imageCache: this.imageCache, basicTextureCache: this.basicTextureCache } );
     }
   };
-  TextureLoader.prototype.OnLoad = function ( _event ) {
-    var texture = { id: _event.target.data.id, image: _event.target };
-    this.cache.push( texture );
-    delete _event.target.data;
-    this.onTextureLoaded.Dispatch( texture, { count: this.count } );
+  ImageLoader.prototype.OnLoad = function ( _event ) {
+    var t = _event.target;
+    delete t.onload;
+    this.imageCache.StoreSafe( t );
+    if ( this.createTextures === true ) {
+      this.basicTextureCache.StoreSafe( new Nenkraft.Texture.BasicTexture( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh ) );
+    }
+    this.onImageLoaded.Dispatch( t, { count: this.count } );
     this.Haul( ++this.count );
   };
-  TextureLoader.prototype.Get = function ( _id ) {
-    for ( var i = 0, l = this.cache.length, texture; i < l; ++i ) {
-      texture = this.cache[ i ];
-      if ( texture && texture.id === _id ) return texture.image;
-    }
-    return null;
+  ImageLoader.prototype.OnError = function () {
+    throw new Error( 'Could not load image' );
   };
-  Nenkraft.Load.TextureLoader = TextureLoader;
+  ImageLoader.prototype.GetImage = function ( _id ) {
+    return this.imageCache.GetById( _id );
+  };
+  ImageLoader.prototype.GetBasicTexture = function ( _id ) {
+    return this.basicTextureCache.GetById( _id );
+  };
+  Nenkraft.Load.ImageLoader = ImageLoader;
+  Nenkraft.ImageLoader = ImageLoader;
 };
 
 
 /***/ }),
-/* 36 */
+/* 50 */
 /***/ (function(module, exports) {
 
 /**
@@ -2729,7 +3660,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 37 */
+/* 51 */
 /***/ (function(module, exports) {
 
 /**
@@ -2769,7 +3700,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 38 */
+/* 52 */
 /***/ (function(module, exports) {
 
 /**
@@ -2845,6 +3776,31 @@ module.exports = function ( Nenkraft ) {
     }
     return grid;
   };
+  Nenkraft.Math.TriRectArray = function ( _x, _y, _w, _h, _arr ) {
+    if ( _arr != null ) {
+      _arr[ 0 ] = _x;
+      _arr[ 1 ] = _y;
+      _arr[ 2 ] = _x + _w;
+      _arr[ 3 ] = _y;
+      _arr[ 4 ] = _x;
+      _arr[ 5 ] = _y + _h;
+      _arr[ 6 ] = _x;
+      _arr[ 7 ] = _y + _h;
+      _arr[ 8 ] = _x + _w;
+      _arr[ 9 ] = _y;
+      _arr[ 10 ] = _x + _w;
+      _arr[ 11 ] = _y + _h;
+      return _arr;
+    }
+    return [
+      _x, _y,
+      _x + _w, _y,
+      _x, _y + _h,
+      _x, _y + _h,
+      _x + _w, _y,
+      _x + _w, _y + _h
+    ];
+  };
   Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
@@ -2853,7 +3809,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 39 */
+/* 53 */
 /***/ (function(module, exports) {
 
 /**
@@ -2864,12 +3820,14 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   function Matrix2D () {
     if ( !( this instanceof Matrix2D ) ) return new Matrix2D();
+    this.array = new Float32Array( 9 );
   }
   Matrix2D.prototype = Object.create( null );
   Matrix2D.prototype.constructor = Matrix2D;
   //Static
   Matrix2D.EPSILON = 0.00001;
   //Members
+  Matrix2D.prototype.array = null;
   Matrix2D.prototype.a = 1;
   Matrix2D.prototype.b = 0;
   Matrix2D.prototype.c = 0;
@@ -2877,6 +3835,14 @@ module.exports = function ( Nenkraft ) {
   Matrix2D.prototype.e = 0;
   Matrix2D.prototype.f = 0;
   //Methods
+  Matrix2D.prototype.Identity = function () {
+    this.a = 1;
+    this.b = 0;
+    this.c = 0;
+    this.d = 1;
+    this.e = 0;
+    this.f = 0;
+  };
   Matrix2D.prototype.Copy = function () {
     var matrix = new Matrix2D();
     matrix.Set( this.a, this.b, this.c, this.d, this.e, this.f );
@@ -2892,6 +3858,15 @@ module.exports = function ( Nenkraft ) {
     return this;
   };
   Matrix2D.prototype.SetTransform = function ( _x, _y, _sx, _sy, _r, _skx, _sky, _px, _py ) {
+    _x = _x == null ? 0 : _x;
+    _y = _y == null ? 0 : _y;
+    _sx = _sx == null ? 1 : _sx;
+    _sy = _sy == null ? 1 : _sy;
+    _r = _r == null ? 0 : _r;
+    _skx = _skx == null ? 0 : _skx;
+    _sky = _sky == null ? 0 : _sky;
+    _px = _px == null ? 0 : _px;
+    _py = _py == null ? 0 : _py;
     var sr = Math.sin( _r );
     var cr = Math.cos( _r );
     var sskx = -Math.sin( _skx );
@@ -2913,6 +3888,16 @@ module.exports = function ( Nenkraft ) {
   Matrix2D.prototype.Translate = function ( _x, _y ) {
     this.e += _x;
     this.f += _y;
+  };
+  Matrix2D.prototype.ApplyTranslation = function ( _x, _y ) {
+    this.e = _x * this.a + _y * this.c + this.e;
+    this.f = _x * this.b + _y * this.d + this.f;
+  };
+  Matrix2D.prototype.ApplyScale = function ( _x, _y ) {
+    this.a *= _x;
+    this.b *= _y;
+    this.c *= _x;
+    this.d *= _y;
   };
   Matrix2D.prototype.Scale = function ( _x, _y ) {
     this.a *= _x;
@@ -2955,16 +3940,33 @@ module.exports = function ( Nenkraft ) {
     _transform.scale.Set( Math.sqrt( a * a + b * b ), Math.sqrt( c * c + d * d ) );
     _transform.position.Set( this.e, this.f );
   };
-  Matrix2D.prototype.Identity = function () {
-    this.a = 1;
-    this.b = 0;
-    this.c = 0;
-    this.d = 1;
-    this.e = 0;
-    this.f = 0;
-  };
   Matrix2D.prototype.ApplyToContext = function ( _rc ) {
     _rc.setTransform( this.a, this.b, this.c, this.d, this.e, this.f );
+  };
+  Matrix2D.prototype.AsArray = function ( _transpose ) {
+    var array = this.array;
+    if ( _transpose === true ) {
+      array[ 0 ] = this.a;
+      array[ 1 ] = this.b;
+      array[ 2 ] = 0;
+      array[ 3 ] = this.c;
+      array[ 4 ] = this.d;
+      array[ 5 ] = 0;
+      array[ 6 ] = this.e;
+      array[ 7 ] = this.f;
+      array[ 8 ] = 1;
+    } else {
+      array[ 0 ] = this.a;
+      array[ 1 ] = this.c;
+      array[ 2 ] = this.e;
+      array[ 3 ] = this.b;
+      array[ 4 ] = this.d;
+      array[ 5 ] = this.f;
+      array[ 6 ] = 0;
+      array[ 7 ] = 0;
+      array[ 8 ] = 1;
+    }
+    return array;
   };
   Nenkraft.Math.Matrix2D = Matrix2D;
   Nenkraft.Matrix2D = Matrix2D;
@@ -2972,7 +3974,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 40 */
+/* 54 */
 /***/ (function(module, exports) {
 
 /**
@@ -3011,7 +4013,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 41 */
+/* 55 */
 /***/ (function(module, exports) {
 
 /**
@@ -3090,7 +4092,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 42 */
+/* 56 */
 /***/ (function(module, exports) {
 
 /**
@@ -3129,7 +4131,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 43 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /**
@@ -3484,7 +4486,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 44 */
+/* 58 */
 /***/ (function(module, exports) {
 
 /**
@@ -3578,7 +4580,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 45 */
+/* 59 */
 /***/ (function(module, exports) {
 
 /**
@@ -3671,7 +4673,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 46 */
+/* 60 */
 /***/ (function(module, exports) {
 
 /**
@@ -3681,10 +4683,10 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.AABB2D;
-  function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {
-    if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
+  function AABB2D ( _arg0, _arg1, _arg2, _arg3, _style ) {
+    if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3, _style );
     Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-    this.style = Nenkraft.Style.CreateFSSa();
+    this.style = Nenkraft.Style.CreateFSSa( _style );
   }
   AABB2D.prototype = Object.create( Super.prototype );
   AABB2D.prototype.constructor = AABB2D;
@@ -3711,12 +4713,37 @@ module.exports = function ( Nenkraft ) {
       _rc.stroke();
     }
   };
+  AABB2D.prototype.GLDraw = function ( _gl, _transform ) {
+    if ( this.programController != null ) {
+      this.programController.Execute(
+        _transform.worldTransform.AsArray( true ),
+        this.tl.x, this.tl.y, this.w, this.h
+      );
+    }
+  };
+  AABB2D.prototype.LinkProgramController = function ( _pc ) {
+    this.programController = _pc;
+    this.LinkStyle();
+  };
+  AABB2D.prototype.UseProgramController = function ( _pc ) {
+    this.programController = _pc;
+  };
+  AABB2D.prototype.LinkStyle = function () {
+    var pc = this.programController;
+    if ( pc != null && pc.fillColor != null && pc.outlineColor != null && pc.outline != null ) {
+      pc.fillColor.SetHex( this.style.fill.color );
+      pc.fillColor.Normalize();
+      pc.outlineColor.SetHex( this.style.stroke.color );
+      pc.outlineColor.Normalize();
+      pc.outline = this.style.stroke.lineWidth + 0.2;
+    }
+  };
   Nenkraft.Path.AABB2D = AABB2D;
 };
 
 
 /***/ }),
-/* 47 */
+/* 61 */
 /***/ (function(module, exports) {
 
 /**
@@ -3726,10 +4753,10 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.Circle;
-  function Circle ( _x, _y, _radius ) {
-    if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
+  function Circle ( _x, _y, _radius, _style ) {
+    if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius, _style );
     Super.call( this, _x, _y, _radius );
-    this.style = Nenkraft.Style.CreateFSSa();
+    this.style = Nenkraft.Style.CreateFSSa( _style );
   }
   Circle.prototype = Object.create( Super.prototype );
   Circle.prototype.constructor = Circle;
@@ -3753,12 +4780,37 @@ module.exports = function ( Nenkraft ) {
       _rc.stroke();
     }
   };
+  Circle.prototype.GLDraw = function ( _gl, _transform ) {
+    if ( this.programController != null ) {
+      this.programController.Execute(
+        _transform.worldTransform.AsArray( true ),
+        this.center.x, this.center.y, this.radius
+      );
+    }
+  };
+  Circle.prototype.LinkProgramController = function ( _pc ) {
+    this.programController = _pc;
+    this.LinkStyle();
+  };
+  Circle.prototype.UseProgramController = function ( _pc ) {
+    this.programController = _pc;
+  };
+  Circle.prototype.LinkStyle = function () {
+    var pc = this.programController;
+    if ( pc != null && pc.fillColor != null && pc.outlineColor != null && pc.outline != null ) {
+      pc.fillColor.SetHex( this.style.fill.color );
+      pc.fillColor.Normalize();
+      pc.outlineColor.SetHex( this.style.stroke.color );
+      pc.outlineColor.Normalize();
+      pc.outline = this.style.stroke.lineWidth + 0.2;
+    }
+  };
   Nenkraft.Path.Circle = Circle;
 };
 
 
 /***/ }),
-/* 48 */
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -3768,17 +4820,18 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.Line2D;
-  function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
-    if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
+  function Line2D ( _arg0, _arg1, _arg2, _arg3, _style ) {
+    if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3, _style );
     Super.call( this, _arg0, _arg1, _arg2, _arg3 );
-    this.style = Nenkraft.Style.CreateSSa();
+    this.style = Nenkraft.Style.CreateSSa( _style );
   }
   Line2D.prototype = Object.create( Super.prototype );
   Line2D.prototype.constructor = Line2D;
   //Static
 
   //Members
-
+  Line2D.prototype.style = null;
+  Line2D.prototype.programController = null;
   //Methods
   Line2D.prototype.Draw = function ( _rc ) {
     var s = this.s, e = this.e, style = this.style, stroke = style.stroke, shadow = style.shadow;
@@ -3792,13 +4845,114 @@ module.exports = function ( Nenkraft ) {
       _rc.stroke();
     }
   };
+  Line2D.prototype.GLDraw = function ( _gl, _transform ) {
+    if ( this.programController != null ) {
+      this.programController.Execute(
+        _transform.worldTransform.AsArray( true ),
+        this.s, this.e
+      );
+    }
+  };
+  Line2D.prototype.LinkProgramController = function ( _pc ) {
+    this.programController = _pc;
+    this.LinkStyle();
+  };
+  Line2D.prototype.UseProgramController = function ( _pc ) {
+    this.programController = _pc;
+  };
+  Line2D.prototype.LinkStyle = function () {
+    var pc = this.programController;
+    if ( pc != null && pc.color != null ) {
+      pc.color.SetHex( this.style.stroke.color );
+      pc.color.Normalize();
+    }
+  };
   Nenkraft.Path.Line2D = Line2D;
   Nenkraft.Path.Ray2D = Line2D;
 };
 
 
 /***/ }),
-/* 49 */
+/* 63 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Math.Vector2D;
+  function Pixel2D ( _x, _y, _style ) {
+    if ( !( this instanceof Pixel2D ) ) return new Pixel2D( _x, _y, _style );
+    Super.call( this, _x, _y );
+    this.style = new Nenkraft.Style.CreateP( _style );
+    this.colorObj = new Nenkraft.Color();
+  }
+  Pixel2D.prototype = Object.create( Super.prototype );
+  Pixel2D.prototype.constructor = Pixel2D;
+  //Static
+
+  //Members
+  Pixel2D.prototype.colorObj = null;
+  Pixel2D.prototype.style = null;
+  Pixel2D.prototype.programController = null;
+  Pixel2D.prototype.bufferData = null;
+  //Methods
+  /* Pixel2D.prototype.Draw = function ( _rc ) {
+    //TODO
+  }; */
+  Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
+    if ( this.programController != null ) {
+      this.programController.Execute(
+        _transform.worldTransform.AsArray( true ),
+        this.x, this.y
+      );
+    }
+  };
+  Pixel2D.prototype.LinkProgramController = function ( _pc ) {
+    this.programController = _pc;
+    this.LinkStyle();
+  };
+  Pixel2D.prototype.UseProgramController = function ( _pc ) {
+    this.programController = _pc;
+  };
+  Pixel2D.prototype.LinkStyle = function () {
+    var pc = this.programController;
+    if ( pc != null && pc.color != null ) {
+      pc.color.SetHex( this.style.pixel.color );
+      pc.color.Normalize();
+    }
+  };
+  Pixel2D.prototype.GetBufferData = function () {
+    if ( this.bufferData == null ) {
+      this.bufferData = [];
+    }
+    var bufferData = this.bufferData;
+    bufferData[ 0 ] = this.x;
+    bufferData[ 1 ] = this.y;
+    bufferData[ 2 ] = this.colorObj.r;
+    bufferData[ 3 ] = this.colorObj.g;
+    bufferData[ 4 ] = this.colorObj.b;
+    bufferData[ 5 ] = this.colorObj.a;
+    bufferData[ 6 ] = this.style.pixel.size;
+    return bufferData;
+  };
+  Pixel2D.prototype.UpdateInBuffer = function ( _buffer, _index ) {
+    _buffer[ _index ] = this.x;
+    _buffer[ _index + 1 ] = this.y;
+    _buffer[ _index + 2 ] = this.colorObj.r;
+    _buffer[ _index + 3 ] = this.colorObj.g;
+    _buffer[ _index + 4 ] = this.colorObj.b;
+    _buffer[ _index + 5 ] = this.colorObj.a;
+    _buffer[ _index + 6 ] = this.style.pixel.size;
+  };
+  Nenkraft.Path.Pixel2D = Pixel2D;
+};
+
+
+/***/ }),
+/* 64 */
 /***/ (function(module, exports) {
 
 /**
@@ -3808,10 +4962,10 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Geom.Polygon2D;
-  function Polygon2D () {
-    if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
-    Super.call( this );
-    this.style = Nenkraft.Style.CreateFSSa();
+  function Polygon2D ( _vertices, _style ) {
+    if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices, _style );
+    Super.call( this, _vertices );
+    this.style = Nenkraft.Style.CreateFSSa( _style );
   }
   Polygon2D.prototype = Object.create( Super.prototype );
   Polygon2D.prototype.constructor = Polygon2D;
@@ -3845,7 +4999,42 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 50 */
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  function Parse ( _data ) {
+    var vS = '@vertex@';
+    var vE = '@vertex-end@';
+    var fS = '@fragment@';
+    var fE = '@fragment-end@';
+    var s, e;
+    s = _data.indexOf( vS ) + vS.length;
+    e = _data.indexOf( vE );
+    var vShader = _data.substring( s, e );
+    s = _data.indexOf( fS ) + fS.length;
+    e = _data.indexOf( fE );
+    var fShader = _data.substring( s, e );
+    return { v: vShader, f: fShader };
+  }
+  Nenkraft.SHADER_CODE = {
+    TEXTURE_2D: Parse( __webpack_require__( 15 ) ),
+    TEXTURE_2D_BATCH: Parse( __webpack_require__( 14 ) ),
+    LINE2D: Parse( __webpack_require__( 12 ) ),
+    RECTANGLE: Parse( __webpack_require__( 13 ) ),
+    CIRCLE: Parse( __webpack_require__( 11 ) ),
+    PIXEL_BATCH: Parse( __webpack_require__( 10 ) )
+  };
+};
+
+
+/***/ }),
+/* 66 */
 /***/ (function(module, exports) {
 
 /**
@@ -3874,7 +5063,33 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 51 */
+/* 67 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  function Pixel ( _props ) {
+    if ( !( this instanceof Pixel ) ) return new Pixel( _props );
+    Nenkraft.Utils.ApplyProperties( this, _props );
+  }
+  Pixel.prototype = Object.create( null );
+  Pixel.prototype.constructor = Pixel;
+  //Static
+
+  //Members
+  Pixel.prototype.color = '#000000';
+  Pixel.prototype.size = 1.0;
+  //Methods
+  Nenkraft.Style.Pixel = Pixel;
+};
+
+
+/***/ }),
+/* 68 */
 /***/ (function(module, exports) {
 
 /**
@@ -3909,7 +5124,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 52 */
+/* 69 */
 /***/ (function(module, exports) {
 
 /**
@@ -3956,7 +5171,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 53 */
+/* 70 */
 /***/ (function(module, exports) {
 
 /**
@@ -3965,20 +5180,44 @@ module.exports = function ( Nenkraft ) {
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  Nenkraft.Style.CreateAll = function () {
-    return { fill: new Nenkraft.Style.Fill(), stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
+  Nenkraft.Style.CreateAll = function ( _style ) {
+    return {
+      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
+      text: new Nenkraft.Style.Text( _style ? _style.text : null ),
+      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
+    };
   };
-  Nenkraft.Style.CreateFSSa = function () {
-    return { fill: new Nenkraft.Style.Fill(), stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow() };
+  Nenkraft.Style.CreateFSSa = function ( _style ) {
+    return {
+      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+    };
   };
-  Nenkraft.Style.CreateSSa = function () {
-    return { stroke: new Nenkraft.Style.Stroke(), shadow: new Nenkraft.Style.Shadow() };
+  Nenkraft.Style.CreateSSa = function ( _style ) {
+    return {
+      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+    };
   };
-  Nenkraft.Style.CreateFSa = function () {
-    return { fill: new Nenkraft.Style.Fill(), shadow: new Nenkraft.Style.Shadow() };
+  Nenkraft.Style.CreateFSa = function ( _style ) {
+    return {
+      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+    };
   };
-  Nenkraft.Style.CreateSaT = function () {
-    return { shadow: new Nenkraft.Style.Shadow(), text: new Nenkraft.Style.Text() };
+  Nenkraft.Style.CreateSaT = function ( _style ) {
+    return {
+      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
+      text: new Nenkraft.Style.Text( _style ? _style.text : null )
+    };
+  };
+  Nenkraft.Style.CreateP = function ( _style ) {
+    return {
+      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
+    };
   };
   Nenkraft.Style.GCO = Object.create( null );
   Nenkraft.Style.GCO.SOURCE_OVER = Nenkraft.Style.GCO.DEFAULT = 'source-over';
@@ -4010,7 +5249,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 54 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -4070,7 +5309,58 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 55 */
+/* 72 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  function BasicTexture ( _image, _id, _w, _h, _fullWidth, _fullHeight ) {
+    if ( !( this instanceof BasicTexture ) ) return new BasicTexture( _image, _w, _h, _fullWidth, _fullHeight );
+    this.image = _image;
+    if ( _id != null ) {
+      this.id = _id;
+    } else {
+      this.id = _image.id;
+    }
+    if ( _w != null ) {
+      this.w = _w;
+    } else {
+      this.w = _image.naturalWidth;
+    }
+    if ( _h != null ) {
+      this.h = _h;
+    } else {
+      this.h = _image.naturalHeight;
+    }
+    if ( _fullWidth != null ) {
+      this.fw = _fullWidth;
+    } else {
+      this.fw = _image.naturalWidth;
+    }
+    if ( _fullHeight != null ) {
+      this.fh = _fullHeight;
+    } else {
+      this.fh = _image.naturalHeight;
+    }
+  }
+  BasicTexture.prototype = Object.create( null );
+  BasicTexture.prototype.constructor = BasicTexture;
+  //Static
+
+  //Members
+  BasicTexture.prototype.image = null;
+  //Methods
+  Nenkraft.Texture.BasicTexture = BasicTexture;
+  Nenkraft.BasicTexture = BasicTexture;
+};
+
+
+/***/ }),
+/* 73 */
 /***/ (function(module, exports) {
 
 /**
@@ -4084,7 +5374,7 @@ module.exports = function ( Nenkraft ) {
     if ( typeof _onProcess !== 'function' ) throw new Error( 'Ticker: An onProcess function is required!' );
     this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
-    if ( _doNotStart === undefined || _doNotStart === false ) {
+    if ( _doNotStart == undefined || _doNotStart === false ) {
       this.StartAF();
     }
   }
@@ -4187,7 +5477,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 56 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -4268,7 +5558,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 57 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -4411,13 +5701,50 @@ module.exports = function ( Nenkraft ) {
   }
   function Check ( _failed, _data, _value, _compare ) {
     if ( _failed ) {
-      console.error( _data, _value );
+      ErrorInfo( _data, _value, _compare );
       throw new Error( 'Assertion failed: ' + _compare );
     } else {
       if ( Assert.LOG && window ) {
         SuccessLog( _data, _value, _compare );
       }
     }
+  }
+  function ErrorInfo ( _data, _value, _compare ) {
+    switch ( _compare ) {
+      case Assert.IS:
+        _compare = Assert.IS_NOT;
+        break;
+      case Assert.IS_NOT:
+        _compare = Assert.IS;
+        break;
+      case Assert.IS_SAME_TYPE:
+        _compare = Assert.IS_NOT_SAME_TYPE;
+        break;
+      case Assert.IS_NOT_SAME_TYPE:
+        _compare = Assert.IS_SAME_TYPE;
+        break;
+      case Assert.IS_INSTANCE_OF:
+        _compare = Assert.IS_NOT_INSTANCE_OF;
+        break;
+      case Assert.IS_NOT_INSTANCE_OF:
+        _compare = Assert.IS_INSTANCE_OF;
+        break;
+      case Assert.IS_LESS_THAN:
+        _compare = Assert.IS_GREATER_THAN_OR_EQUAL;
+        break;
+      case Assert.IS_GREATER_THAN:
+        _compare = Assert.IS_LESS_THAN_OR_EQUAL;
+        break;
+      case Assert.IS_LESS_THAN_OR_EQUAL:
+        _compare = Assert.IS_GREATER_THAN;
+        break;
+      case Assert.IS_GREATER_THAN_OR_EQUAL:
+        _compare = Assert.IS_LESS_THAN;
+        break;
+      default:
+        throw new Error( 'Unexpected error' );
+    }
+    console.error( _data, _compare, _value );
   }
   function SuccessLog ( _data, _value, _compare ) {
     console.log( '%c<<||-?START?-||>>', 'background-color: black; color: #0FF; padding: 0px 25px;' );
@@ -4468,7 +5795,116 @@ module.exports = function ( Nenkraft ) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 58 */
+/* 76 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Assert = Nenkraft.Utils.Assert;
+  var EO = Object.create( null );
+  var ES = '';
+  function Cache ( _type ) {
+    if ( !( this instanceof Cache ) ) return new Cache( _type );
+    if ( _type != null ) {
+      this.type = _type;
+    }
+    this.items = [];
+  }
+  Cache.prototype = Object.create( null );
+  Cache.prototype.constructor = Cache;
+  //Static
+
+  //Members
+  Cache.prototype.type = null;
+  //Methods
+  Cache.prototype.Store = function ( _item ) {
+    var valid = false;
+    if ( _item == null ) {
+      return null;
+    }
+    if ( _item.id != null && _item.id !== '' ) {
+      valid = !this.Contains( _item, _item.id );
+    } else if ( _item.data ) {
+      if ( _item.data.id != null && _item.data.id !== '' ) {
+        valid = !this.Contains( _item, _item.data.id );
+      }
+    }
+    if ( valid === false ) {
+      return false;
+    }
+    this.items.push( _item );
+    return true;
+  };
+  Cache.prototype.StoreSafe = function ( _item ) {
+    if ( this.type != null ) {
+      Assert( _item, Assert.IS_INSTANCE_OF, this.type );
+    }
+    Assert( _item, Assert.IS_SAME_TYPE, EO );
+    if ( _item.id ) {
+      Assert( _item.id, Assert.IS_SAME_TYPE, ES );
+      Assert( _item.id, Assert.IS_NOT, '' );
+    } else {
+      Assert( _item.data, Assert.IS_SAME_TYPE, EO );
+      Assert( _item.data.id, Assert.IS_SAME_TYPE, ES );
+      Assert( _item.data.id, Assert.IS_NOT, '' );
+    }
+    this.items.push( _item );
+    return true;
+  };
+  Cache.prototype.Get = function ( _item ) {
+    for ( var i = 0, items = this.items, l = items.length; i < l; ++i ) {
+      if ( items[ i ] === _item ) {
+        return _item;
+      }
+    }
+    return null;
+  };
+  Cache.prototype.GetById = function ( _id ) {
+    for ( var i = 0, items = this.items, l = items.length, item = items[ i ]; i < l; item = items[ ++i ] ) {
+      if ( item != null ) {
+        if ( item.id === _id || ( item.data != null && item.data.id === _id ) ) {
+          return item;
+        }
+      }
+    }
+    return null;
+  };
+  Cache.prototype.PerformOnAll = function ( _funcName, _params, _context ) {
+    for ( var i = 0, items = this.items, l = items.length, item = items[ i ]; i < l; item = items[ ++i ] ) {
+      if ( item != null && item[ _funcName ] ) {
+        item[ _funcName ].apply( _context ? _context : item, _params );
+      }
+    }
+    return null;
+  };
+  Cache.prototype.Contains = function ( _item, _id ) {
+    for ( var i = 0, items = this.items, l = items.length, item = items[ i ]; i < l; item = items[ ++i ] ) {
+      if ( item != null ) {
+        if ( item === _item ) {
+          return true;
+        }
+        if ( item.id === _id ) {
+          return true;
+        }
+        if ( item.data != null ) {
+          if ( item.data.id === _id ) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  };
+  Nenkraft.Utils.Cache = Cache;
+};
+
+
+/***/ }),
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -4481,18 +5917,18 @@ module.exports = function ( Nenkraft ) {
   var Clamp = Nenkraft.Utils.Clamp;
   function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
-    this.channel = [
+    this.channel = new Float32Array( [
       _r === undefined ? 0 : _r,
       _g === undefined ? 0 : _g,
       _b === undefined ? 0 : _b,
       _a === undefined ? 1 : _a
-    ];
+    ] );
     this.ComputeValueRGBA();
   }
   Color.prototype = Object.create( null );
   Color.prototype.constructor = Color;
   //Static
-
+  var NORM = Color.NORM = 1 / 255;
   //Members
   Color.prototype.value = '';
   Color.prototype.currentConversion = '';
@@ -4509,19 +5945,15 @@ module.exports = function ( Nenkraft ) {
   Color.prototype.ComputeValueHSLA = function () {
     this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
   };
-
   Color.prototype.ConvertToHSLA = function ( _round ) {
     var r = this.channel[ 0 ] / 255, g = this.channel[ 1 ] / 255, b = this.channel[ 2 ] / 255;
     var max = Math.max( r, g, b ), min = Math.min( r, g, b ), maxnmin = max - min, maxpmin = max + min;
     var h = 0, s = 0, l = maxpmin * 0.5;
     if ( max !== min ) {
-
       s = ( l > 0.5 ) ? maxnmin / ( 2 - max - min ) : maxnmin / ( max + min );
-
       if ( max === r ) h = ( g - b ) / maxnmin + ( ( g < b ) ? 6 : 0 );
       else if ( max === g ) h = ( b - r ) / maxnmin + 2;
       else h = ( r - g ) / maxnmin + 4;
-
       h /= 6;
     }
     this.channel[ 0 ] = h * 360, this.channel[ 1 ] = s * 100, this.channel[ 2 ] = l * 100;
@@ -4543,13 +5975,14 @@ module.exports = function ( Nenkraft ) {
   };
   Color.prototype.SetRGBA = function ( _r, _g, _b, _a ) {
     this.SetRGB( _r, _g, _b, true );
-    this.channel[ 3 ] = Clamp( _a / 255, 0, 1 );
+    this.channel[ 3 ] = Clamp( _a, 0, 1 );
     this.ComputeValueRGBA();
   };
   Color.prototype.SetHex = function ( _hex ) {
     _hex = _hex.replace( /#/g, '' );
     var strs = _hex.match( /.{2}/g );
     strs = strs.map( HexMap );
+    if ( strs[ 3 ] == null ) strs[ 3 ] = 1;
     this.SetRGBA( strs[ 0 ], strs[ 1 ], strs[ 2 ], strs[ 3 ] );
   };
   Color.prototype.IncreaseChannel = function ( _channel, _value ) {
@@ -4562,13 +5995,50 @@ module.exports = function ( Nenkraft ) {
     if ( this.currentConversion === 'rgb' ) this.ComputeValueRGBA();
     else if ( this.currentConversion === 'hsl' ) this.ComputeValueHSLA();
   };
+  Color.prototype.Normalize = function () {
+    this.channel[ 0 ] = NORM * this.channel[ 0 ];
+    this.channel[ 1 ] = NORM * this.channel[ 1 ];
+    this.channel[ 2 ] = NORM * this.channel[ 2 ];
+  };
+  Object.defineProperty( Color.prototype, 'r', {
+    set: function ( _value ) {
+      this.channel[ 0 ] = _value;
+    },
+    get: function () {
+      return this.channel[ 0 ];
+    }
+  } );
+  Object.defineProperty( Color.prototype, 'g', {
+    set: function ( _value ) {
+      this.channel[ 1 ] = _value;
+    },
+    get: function () {
+      return this.channel[ 1 ];
+    }
+  } );
+  Object.defineProperty( Color.prototype, 'b', {
+    set: function ( _value ) {
+      this.channel[ 2 ] = _value;
+    },
+    get: function () {
+      return this.channel[ 2 ];
+    }
+  } );
+  Object.defineProperty( Color.prototype, 'a', {
+    set: function ( _value ) {
+      this.channel[ 3 ] = _value;
+    },
+    get: function () {
+      return this.channel[ 3 ];
+    }
+  } );
 
   Nenkraft.Color = Color;
 };
 
 
 /***/ }),
-/* 59 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -4599,7 +6069,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 60 */
+/* 79 */
 /***/ (function(module, exports) {
 
 /**
@@ -4637,7 +6107,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 61 */
+/* 80 */
 /***/ (function(module, exports) {
 
 /**
@@ -4695,7 +6165,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 62 */
+/* 81 */
 /***/ (function(module, exports) {
 
 /**
@@ -4844,7 +6314,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 63 */
+/* 82 */
 /***/ (function(module, exports) {
 
 /**
@@ -4854,6 +6324,8 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Random = Math.random;
+  var CANVAS = null;
+  var CANVASRC = null;
   var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
     return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
   };
@@ -4876,9 +6348,9 @@ module.exports = function ( Nenkraft ) {
     else if ( _value > _max ) return _min;
     return _value;
   };
-  Nenkraft.Utils.ThisOrThat = function () {
-    if ( RI( 1, 2 ) === 1 ) return true;
-    return false;
+  Nenkraft.Utils.ThisOrThat = function ( _this, _that ) {
+    if ( RI( 1, 2 ) === 1 ) return _this;
+    return _that;
   };
   Nenkraft.Utils.IntegerNotation = function ( _value, _roof, _splitter ) {
     var vrm = _value % _roof, vrd = _value / _roof;
@@ -4991,18 +6463,25 @@ module.exports = function ( Nenkraft ) {
     }
     return output.join( '' );
   };
-  Nenkraft.Utils.GenerateSimpleBase64Png = function ( _textureFunction ) {
-    var drawable = _textureFunction();
-    var canvas = document.createElement( 'canvas' );
-    canvas.width = drawable.w;
-    canvas.height = drawable.h;
-    drawable.Draw( canvas.getContext( '2d' ) );
-    return canvas.toDataURL( 'image/png' );
+  Nenkraft.Utils.GenerateSimpleBase64Png = function ( _imageFunction ) {
+    var drawable = _imageFunction();
+    if ( CANVAS == null ) {
+      CANVAS = document.createElement( 'canvas' );
+      CANVASRC = CANVAS.getContext( '2d' );
+    }
+    CANVASRC.clearRect( 0, 0, CANVAS.width, CANVAS.height );
+    CANVAS.width = drawable.w;
+    CANVAS.height = drawable.h;
+    CANVASRC.setTransform( 1, 0, 0, 1, 0, 0 );
+    drawable.Draw( CANVASRC );
+    return CANVAS.toDataURL( 'image/png' );
   };
-  Nenkraft.Utils.TextureFromDataURL = function ( _url ) {
-    var texture = new Image();
-    texture.src = _url;
-    return texture;
+  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h ) {
+    var image = new Image();
+    image.src = _url;
+    image.width = _w;
+    image.height = _h;
+    return image;
   };
   Nenkraft.Utils.Base16ToBase10 = function ( _value ) {
     return parseInt( _value, 16 );
@@ -5014,25 +6493,6 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
 /* 83 */,
 /* 84 */,
 /* 85 */,
@@ -5040,7 +6500,33 @@ module.exports = function ( Nenkraft ) {
 /* 87 */,
 /* 88 */,
 /* 89 */,
-/* 90 */
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

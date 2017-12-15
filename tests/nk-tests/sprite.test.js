@@ -28,14 +28,14 @@ module.exports = function () {
     var sprite4 = null;
     var sprite5 = null;
 
-    var imageCache = new nk.Load.TextureLoader();
+    var imageCache = new nk.ImageLoader();
     imageCache.onComplete.Add( function ( _event ) {
       console.log( _event.target, _event.data, 'complete' );
-      sprite1 = new nk.Sprite( 0, 0, imageCache.Get( '4dots' ) );
+      sprite1 = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( '4dots' ) );
       sprite1.anchor.Set( 0.5 );
-      sprite2 = new nk.Sprite( 100, 50, imageCache.Get( 'smudge' ) );
+      sprite2 = new nk.Sprite( 100, 50, imageCache.GetBasicTexture( 'smudge' ) );
       sprite2.anchor.Set( 0.5 );
-      sprite3 = new nk.Sprite( -100, 100, imageCache.Get( 'gobj' ) );
+      sprite3 = new nk.Sprite( -100, 100, imageCache.GetBasicTexture( 'gobj' ) );
       sprite3.anchor.Set( 0.5 );
       sprite3.clip.tl.Set( 0, 64 );
       sprite4 = new nk.Sprite( 100, 100 );
@@ -45,16 +45,16 @@ module.exports = function () {
 
       stage.AddChildren( sprite1, sprite2, sprite3, sprite4, sprite5 );
     } );
-    imageCache.onTextureLoaded.Add( function ( _event ) {
+    imageCache.onImageLoaded.Add( function ( _event ) {
       console.log( _event.target, _event.data, 'loaded' );
     } );
     imageCache.Load( [
       { id: 'smudge', src: './images/smudge.png' },
-    ] );
+    ], true );
     imageCache.Load( [
       { id: '4dots', src: './images/4dots.png' },
       { id: 'gobj', src: './images/glass-of-blueberryjuice.png' }
-    ] );
+    ], true );
 
 
 

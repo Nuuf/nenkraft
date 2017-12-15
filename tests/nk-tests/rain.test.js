@@ -21,25 +21,22 @@ module.exports = function () {
     var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
-    stage.clear = false;
-    stage.fill = true;
-    stage.backgroundColor = 'rgba(0,0,0,0.3)';
 
     var gravity = new nk.Vector2D( 0, 0.0982 );
     var wind = new nk.Vector2D();
 
     var DropPool = new nk.Pool( nk.Plainsprite );
 
-    imageCache = new nk.Load.TextureLoader( [
+    imageCache = new nk.ImageLoader( [
       {
         id: 'raindrop',
         src: './images/raindrop.png'
       }
-    ] );
+    ], true );
     imageCache.onComplete.Add( function () {
 
       DropPool.Flood( function ( _sprite ) {
-        _sprite.SetTexture( imageCache.Get( 'raindrop' ) );
+        _sprite.SetTexture( imageCache.GetBasicTexture( 'raindrop' ) );
         _sprite.data.velocity = new nk.Vector2D();
       }, 1000 );
 

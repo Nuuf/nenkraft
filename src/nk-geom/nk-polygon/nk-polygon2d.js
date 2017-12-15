@@ -4,12 +4,19 @@
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  function Polygon2D () {
-    if ( !( this instanceof Polygon2D ) ) return new Polygon2D();
+  function Polygon2D ( _vertices ) {
+    if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices );
     this.vertices = [];
     this.normals = [];
     this.perimeterMidPoints = [];
     this.centroid = new Nenkraft.Vector2D();
+    if ( _vertices != null ) {
+      if ( _vertices[ 0 ] instanceof Nenkraft.Vector2D ) {
+        this.AddPoints( _vertices );
+      } else {
+        this.PushPoints( _vertices );
+      }
+    }
   }
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
@@ -156,16 +163,25 @@ module.exports = function ( Nenkraft ) {
   Polygon2D.prototype.TYPE = Polygon2D.TYPE;
   Polygon2D.prototype.aabb = null;
   Polygon2D.prototype.dirtyBounds = true;
+  Polygon2D.prototype.belongsTo = null;
   //Methods
   Polygon2D.prototype.AddPoint = function ( _p ) {
     this.vertices.push( _p );
   };
   Polygon2D.prototype.AddPoints = function ( _ps ) {
-    this.vertices = this.vertices.concat( _ps );
+    this.vertices.push.apply( this.vertices, _ps );
+  };
+  Polygon2D.prototype.PushPoint = function ( _x, _y ) {
+    this.vertices.push( new Nenkraft.Vector2D( _x, _y ) );
+  };
+  Polygon2D.prototype.PushPoints = function ( _ps ) {
+    for ( var i = 0, l = _ps.length; i < l; i += 2 ) {
+      this.PushPoint( _ps[ i ], _ps[ i + 1 ] );
+    }
   };
   Polygon2D.prototype.Recreate = function ( _ps ) {
     this.vertices.length = 0;
-    if ( _ps != undefined ) this.vertices = this.vertices.concat( _ps );
+    if ( _ps != undefined ) this.vertices.push.apply( this.vertices, _ps );
   };
   Polygon2D.prototype.ComputeBounds = function () {
     if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();

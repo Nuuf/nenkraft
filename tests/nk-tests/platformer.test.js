@@ -22,7 +22,7 @@ module.exports = function () {
 
     var stage = new nk.Stage2D( c, HW, HH, true );
 
-    var imageCache = new nk.Load.TextureLoader( [ {
+    var imageCache = new nk.ImageLoader( [ {
       id: 'character',
       src: nk.Utils.GenerateSimpleBase64Png( function () {
         var path = new nk.Path.AABB2D( 0, 0, 20, 20 );
@@ -41,7 +41,7 @@ module.exports = function () {
         var t = new nk.Graphic2D( 0, 0, path );
         return t;
       } )
-    }] );
+    }], true );
     imageCache.onComplete.Add( function () {
       Start();
     } );
@@ -109,7 +109,7 @@ module.exports = function () {
     }
 
     function InitCharacter () {
-      character = new nk.Sprite( 0, 0, imageCache.Get( 'character' ) );
+      character = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( 'character' ) );
       character.anchor.Set( 0.5 );
       character.data.move = {
         left: false,
@@ -163,7 +163,7 @@ module.exports = function () {
     function InitPlatforms () {
       var i = 100;
       while ( i-- ) {
-        var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.Get( 'platform' ) );
+        var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );
         platform.data.collisionData = {
           shape: platform.shape,
           relative: platform.position,

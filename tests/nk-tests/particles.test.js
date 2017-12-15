@@ -25,7 +25,7 @@ module.exports = function () {
     stage.fill = false;
     stage.gco = nk.Style.GCO.COLOR_DODGE;
 
-    imageCache = new nk.Load.TextureLoader( [
+    imageCache = new nk.ImageLoader( [
       {
         id: 'particle',
         src: nk.Utils.GenerateSimpleBase64Png( function () {
@@ -36,12 +36,12 @@ module.exports = function () {
           return t;
         } )
       }
-    ] );
+    ], true );
     imageCache.onComplete.Add( function () {
 
       var i = 250;
       while ( i-- ) {
-        var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.Get( 'particle' ) ) );
+        var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.GetBasicTexture( 'particle' ) ) );
         child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );
       }
 

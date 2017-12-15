@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.3.3 (Alpha)
+# Version 0.4.0 (Alpha)
 ------
 
 #### Nenkraft is a small rendering tool. (MIT License)
@@ -51,40 +51,8 @@ Click [here for the mini-file]
   $ npm run build-x
 ```
 
-
-### Some Examples
-------
-
-> Hello world
-
-```javascript
-    var canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    var stageEntity = nk.Stage2D( canvas, 0 /* OriginX */, 0 /* OriginY */);
-    var textEntity = nk.Text(0, 0, 'Hello World!');
-    stageEntity.AddChild(textEntity);
-```
-
-> Loading an image and creating a sprite
-
-```javascript
-    var canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    var stageEntity = nk.Stage2D( canvas );
-    var imageCache = new nk.Load.TextureLoader();
-    var spriteEntity = null;
-    imageCache.onComplete.Add(Start);
-    imageCache.Load([
-        {id: 'imageId', src: 'path/to/file'}
-    ]);
-    function Start() {
-        spriteEntity = new nk.Sprite(0, 0, imageCache.Get('imageId'));
-        stageEntity.AddChild(spriteEntity);
-    }
-```
-
-Click [here for more examples]
+[Click here for examples]
 
 [logo]: ./images/nenkraft-banner.png "nenkraft"
-[here for more examples]: https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests
+[Click here for examples]: https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests
 [here for the mini-file]: https://raw.githubusercontent.com/Nuuf/nenkraft/master/dist/nk.min.js

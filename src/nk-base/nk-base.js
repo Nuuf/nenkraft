@@ -7,6 +7,8 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style = Object.create( null );
   Nenkraft.Math = Object.create( null );
   Nenkraft.Utils = Object.create( null );
+  Nenkraft.Texture = Object.create( null );
+  Nenkraft.Controller = Object.create( null );
   Nenkraft.Entity = Object.create( null );
   Nenkraft.Path = Object.create( null );
   Nenkraft.Event = Object.create( null );
@@ -15,7 +17,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.3.3 (Alpha)';
+  Nenkraft.VERSION = '0.4.0 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',

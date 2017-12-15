@@ -138,13 +138,50 @@ module.exports = function ( Nenkraft ) {
   }
   function Check ( _failed, _data, _value, _compare ) {
     if ( _failed ) {
-      console.error( _data, _value );
+      ErrorInfo( _data, _value, _compare );
       throw new Error( 'Assertion failed: ' + _compare );
     } else {
       if ( Assert.LOG && window ) {
         SuccessLog( _data, _value, _compare );
       }
     }
+  }
+  function ErrorInfo ( _data, _value, _compare ) {
+    switch ( _compare ) {
+      case Assert.IS:
+        _compare = Assert.IS_NOT;
+        break;
+      case Assert.IS_NOT:
+        _compare = Assert.IS;
+        break;
+      case Assert.IS_SAME_TYPE:
+        _compare = Assert.IS_NOT_SAME_TYPE;
+        break;
+      case Assert.IS_NOT_SAME_TYPE:
+        _compare = Assert.IS_SAME_TYPE;
+        break;
+      case Assert.IS_INSTANCE_OF:
+        _compare = Assert.IS_NOT_INSTANCE_OF;
+        break;
+      case Assert.IS_NOT_INSTANCE_OF:
+        _compare = Assert.IS_INSTANCE_OF;
+        break;
+      case Assert.IS_LESS_THAN:
+        _compare = Assert.IS_GREATER_THAN_OR_EQUAL;
+        break;
+      case Assert.IS_GREATER_THAN:
+        _compare = Assert.IS_LESS_THAN_OR_EQUAL;
+        break;
+      case Assert.IS_LESS_THAN_OR_EQUAL:
+        _compare = Assert.IS_GREATER_THAN;
+        break;
+      case Assert.IS_GREATER_THAN_OR_EQUAL:
+        _compare = Assert.IS_LESS_THAN;
+        break;
+      default:
+        throw new Error( 'Unexpected error' );
+    }
+    console.error( _data, _compare, _value );
   }
   function SuccessLog ( _data, _value, _compare ) {
     console.log( '%c<<||-?START?-||>>', 'background-color: black; color: #0FF; padding: 0px 25px;' );

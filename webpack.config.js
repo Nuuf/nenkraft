@@ -78,6 +78,10 @@ module.exports = function ( env ) {
         test: /\.css$/,
         use: cssLoader,
         exclude: /node_modules/
+      }, {
+        test: /\.shader|txt$/,
+        use: [ 'raw-loader' ],
+        exclude: /node_modules/
       }]
     },
     output: {

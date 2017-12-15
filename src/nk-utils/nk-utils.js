@@ -5,6 +5,8 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Random = Math.random;
+  var CANVAS = null;
+  var CANVASRC = null;
   var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
     return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
   };
@@ -27,9 +29,9 @@ module.exports = function ( Nenkraft ) {
     else if ( _value > _max ) return _min;
     return _value;
   };
-  Nenkraft.Utils.ThisOrThat = function () {
-    if ( RI( 1, 2 ) === 1 ) return true;
-    return false;
+  Nenkraft.Utils.ThisOrThat = function ( _this, _that ) {
+    if ( RI( 1, 2 ) === 1 ) return _this;
+    return _that;
   };
   Nenkraft.Utils.IntegerNotation = function ( _value, _roof, _splitter ) {
     var vrm = _value % _roof, vrd = _value / _roof;
@@ -142,18 +144,25 @@ module.exports = function ( Nenkraft ) {
     }
     return output.join( '' );
   };
-  Nenkraft.Utils.GenerateSimpleBase64Png = function ( _textureFunction ) {
-    var drawable = _textureFunction();
-    var canvas = document.createElement( 'canvas' );
-    canvas.width = drawable.w;
-    canvas.height = drawable.h;
-    drawable.Draw( canvas.getContext( '2d' ) );
-    return canvas.toDataURL( 'image/png' );
+  Nenkraft.Utils.GenerateSimpleBase64Png = function ( _imageFunction ) {
+    var drawable = _imageFunction();
+    if ( CANVAS == null ) {
+      CANVAS = document.createElement( 'canvas' );
+      CANVASRC = CANVAS.getContext( '2d' );
+    }
+    CANVASRC.clearRect( 0, 0, CANVAS.width, CANVAS.height );
+    CANVAS.width = drawable.w;
+    CANVAS.height = drawable.h;
+    CANVASRC.setTransform( 1, 0, 0, 1, 0, 0 );
+    drawable.Draw( CANVASRC );
+    return CANVAS.toDataURL( 'image/png' );
   };
-  Nenkraft.Utils.TextureFromDataURL = function ( _url ) {
-    var texture = new Image();
-    texture.src = _url;
-    return texture;
+  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h ) {
+    var image = new Image();
+    image.src = _url;
+    image.width = _w;
+    image.height = _h;
+    return image;
   };
   Nenkraft.Utils.Base16ToBase10 = function ( _value ) {
     return parseInt( _value, 16 );
