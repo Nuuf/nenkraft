@@ -25,7 +25,7 @@ module.exports = function ( Nenkraft ) {
     //TODO
   }; */
   Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
-    if ( this.programController != null ) {
+    if ( this.programController !== null ) {
       this.programController.Execute(
         _transform.worldTransform.AsArray( true ),
         this.x, this.y
@@ -41,7 +41,7 @@ module.exports = function ( Nenkraft ) {
   };
   Pixel2D.prototype.LinkStyle = function () {
     var pc = this.programController;
-    if ( pc != null && pc.color != null ) {
+    if ( pc !== null && pc.color !== null ) {
       pc.color.SetHex( this.style.pixel.color );
       pc.color.Normalize();
     }

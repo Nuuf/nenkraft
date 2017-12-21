@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'WebGL Texturebatch' );
+  button.setAttribute( 'value', 'WebGL TextureBatch' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -28,7 +28,7 @@ module.exports = function () {
     var RF = nk.Utils.RandomFloat;
     var RI = nk.Utils.RandomInteger;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = window.stage = new nk.Stage2D( c, 0, 0, false, true );
 
     var pc = new nk.GLTextureBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -39,22 +39,22 @@ module.exports = function () {
       pc.BindBasicTexture( tex );
 
       ( function () {
-        var i = 5000;
+        var i = 50000;
         while ( i-- ) {
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
           var anim = ac.AddAnimation( 'test', RI( 5, 40 ) );
           anim.GenerateFrames( 64, 64, 1024, 64, 16 );
           ac.PlayAnimation( 'test', RI( 0, 15 ) );
-          var vx = RF( 3, 5 );
+          var vx = RI( 1, 3 );
           vx = nk.Utils.ThisOrThat( vx, -vx );
-          var vy = RF( 3, 5 );
+          var vy = RI( 1, 3 );
           vy = nk.Utils.ThisOrThat( vy, -vy );
-          var to = RF( nk.Math.RADIAN, nk.Math.RADIAN * 10 );
+          var to = RF( nk.Math.RADIAN, nk.Math.RADIAN * 5 );
           to = nk.Utils.ThisOrThat( to, -to );
           s.data.velocity = new nk.Vector2D( vx, vy );
           s.data.torque = to;
-          s.scale.Set( 0.4 );
+          s.scale.Set( 0.1 );
           s.anchor.Set( 0.5 );
           stage.Mount( s );
           s.UpdateTransform();
@@ -62,13 +62,14 @@ module.exports = function () {
         stage.ComputeBatchBuffer();
 
         stage.onProcess.Add( function () {
-          this.children.forEach( function ( child ) {
+          for ( var i = 0, child; i < this.children.length; ++i ) {
+            child = this.children[ i ];
             child.animationController.Process();
             child.data.velocity.Rotate( child.data.torque );
             child.position.AddV( child.data.velocity );
             child.UpdateInBuffer();
-          } );
-          if ( stage.ticker.GetTPS() < 55 ) {
+          }
+          if ( stage.ticker.GetTPS() < 50 ) {
             console.log( stage.ticker.GetTPS() );
           }
         }, stage );
@@ -76,7 +77,7 @@ module.exports = function () {
     } );
 
     ic.Load( [
-      { id: 'colors', src: './images/colors.png', w: 64, h: 64 }
+      { id: 'colors', src: './assets/images/colors.png', w: 64, h: 64 }
     ], true );
 
 

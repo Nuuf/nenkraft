@@ -60,7 +60,7 @@ module.exports = function () {
       }, stage );
     } );
     imageCache.Load( [
-      { id: '1to8', src: './images/1to8.png' }
+      { id: '1to8', src: './assets/images/1to8.png' }
     ], true );
 
     document.body.removeChild( buttonContainer );

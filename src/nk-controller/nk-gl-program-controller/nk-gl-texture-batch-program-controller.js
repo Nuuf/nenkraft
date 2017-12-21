@@ -20,6 +20,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureBatchProgramController.prototype.essenceBuffer = null;
   GLTextureBatchProgramController.prototype.dataBuffer = null;
   GLTextureBatchProgramController.prototype.indexBuffer = null;
+  GLTextureBatchProgramController.prototype.prevNumElements = null;
   //Methods
   GLTextureBatchProgramController.prototype.BindBasicTexture = function ( _texture ) {
     var gl = this.gl;
@@ -73,7 +74,11 @@ module.exports = function ( Nenkraft ) {
       Super.LAST_USED_CONTROLLER = this;
     }
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, _data, gl.STREAM_DRAW );
+    if ( _numElements !== this.prevNumElements ) {
+      gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );
+    } else {
+      gl.bufferSubData( gl.ARRAY_BUFFER, 0, _data );
+    }
     gl.enableVertexAttribArray( attributes.aProjection1 );
     gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, 108, 0 );
     aia.vertexAttribDivisorANGLE( attributes.aProjection1, 1 );

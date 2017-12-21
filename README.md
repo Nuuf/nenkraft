@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Nuuf/nenkraft.svg?branch=master)](https://travis-ci.org/Nuuf/nenkraft)
 
-# Version 0.4.0 (Alpha)
+# Version 0.4.1 (Alpha)
 ------
 
 #### Nenkraft is a small rendering tool. (MIT License)
@@ -51,8 +51,8 @@ Click [here for the mini-file]
   $ npm run build-x
 ```
 
-[Click here for examples]
+[Click here for examples] (Examples are by no means optimized or fully functional)
 
-[logo]: ./images/nenkraft-banner.png "nenkraft"
+[logo]: ./assets/images/nenkraft-banner.png "nenkraft"
 [Click here for examples]: https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests
 [here for the mini-file]: https://raw.githubusercontent.com/Nuuf/nenkraft/master/dist/nk.min.js

@@ -7,6 +7,7 @@ module.exports = function ( Nenkraft ) {
   var Random = Math.random;
   var CANVAS = null;
   var CANVASRC = null;
+  var DPARSER = null;
   var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
     return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
   };
@@ -169,5 +170,64 @@ module.exports = function ( Nenkraft ) {
   };
   Nenkraft.Utils.Base2ToBase10 = function ( _value ) {
     return parseInt( _value, 2 );
+  };
+  Nenkraft.Utils.ObjectIsEmpty = function ( _obj ) {
+    for ( var key in _obj ) {
+      if ( _obj.hasOwnProperty( key ) ) {
+        return false;
+      }
+    }
+    return JSON.stringify( _obj ) === JSON.stringify( {} );
+  };
+  Nenkraft.Utils.ParsedXMLToJSON = function ( _pxml, _deleteWhitespace ) {
+    var o = {};
+    var i, l, attrs, attr, child, pchild, children = _pxml.childNodes, temp;
+    if ( _pxml.nodeType === 1 ) {
+      attrs = _pxml.attributes;
+      l = attrs.length;
+      if ( l > 0 ) {
+        o.attributes = {};
+        for ( i = 0, attr = attrs.item( i ); i < l; attr = attrs.item( ++i ) ) {
+          o.attributes[ attr.nodeName ] = attr.nodeValue;
+        }
+      }
+    } else if ( _pxml.nodeType === 3 ) {
+      if ( ! /^\s*$/g.exec( _pxml.nodeValue ) ) {
+        o = _pxml.nodeValue;
+        if ( _deleteWhitespace === true ) {
+          o = o.replace( /^\s+|\s+&|\n/gmi, '' );
+        }
+      }
+    }
+    if ( children != null ) {
+      l = children.length;
+      for ( i = 0, child = children.item( i ); i < l; child = children.item( ++i ) ) {
+        if ( o[ child.nodeName ] === undefined ) {
+          o[ child.nodeName ] = Nenkraft.Utils.ParsedXMLToJSON( child, _deleteWhitespace );
+        } else {
+          if ( o[ child.nodeName ].push === undefined ) {
+            temp = o[ child.nodeName ];
+            o[ child.nodeName ] = [];
+            if ( !Nenkraft.Utils.ObjectIsEmpty( temp ) ) {
+              o[ child.nodeName ].push( temp );
+            }
+          }
+          pchild = Nenkraft.Utils.ParsedXMLToJSON( child, _deleteWhitespace );
+          if ( !Nenkraft.Utils.ObjectIsEmpty( pchild ) ) {
+            o[ child.nodeName ].push( pchild );
+          }
+        }
+      }
+    }
+    if ( o[ '#text' ] && o[ '#text' ].length === 0 ) {
+      delete o[ '#text' ];
+    }
+    return o;
+  };
+  Nenkraft.Utils.XMLToJSON = function ( _xml, _deleteWhitespace ) {
+    if ( DPARSER == null ) {
+      DPARSER = new DOMParser();
+    }
+    return Nenkraft.Utils.ParsedXMLToJSON( DPARSER.parseFromString( _xml, 'text/xml' ), _deleteWhitespace );
   };
 };

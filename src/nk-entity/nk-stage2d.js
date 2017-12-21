@@ -8,6 +8,9 @@ module.exports = function ( Nenkraft ) {
   function Stage2D ( _canvas, _x, _y, _doNotStart, _useWebGL ) {
     if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart, _useWebGL );
     Super.call( this, _x, _y );
+    if ( typeof _canvas === 'string' ) {
+      _canvas = document.getElementById( _canvas );
+    }
     this.canvas = _canvas;
     this.w = _canvas.width;
     this.h = _canvas.height;

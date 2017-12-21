@@ -31,7 +31,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Line2D.prototype.GLDraw = function ( _gl, _transform ) {
-    if ( this.programController != null ) {
+    if ( this.programController !== null ) {
       this.programController.Execute(
         _transform.worldTransform.AsArray( true ),
         this.s, this.e
@@ -47,7 +47,7 @@ module.exports = function ( Nenkraft ) {
   };
   Line2D.prototype.LinkStyle = function () {
     var pc = this.programController;
-    if ( pc != null && pc.color != null ) {
+    if ( pc !== null && pc.color !== null ) {
       pc.color.SetHex( this.style.stroke.color );
       pc.color.Normalize();
     }

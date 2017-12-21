@@ -49,11 +49,11 @@ module.exports = function () {
       console.log( _event.target, _event.data, 'loaded' );
     } );
     imageCache.Load( [
-      { id: 'smudge', src: './images/smudge.png' },
+      { id: 'smudge', src: './assets/images/smudge.png' },
     ], true );
     imageCache.Load( [
-      { id: '4dots', src: './images/4dots.png' },
-      { id: 'gobj', src: './images/glass-of-blueberryjuice.png' }
+      { id: '4dots', src: './assets/images/4dots.png' },
+      { id: 'gobj', src: './assets/images/glass-of-blueberryjuice.png' }
     ], true );
 
 

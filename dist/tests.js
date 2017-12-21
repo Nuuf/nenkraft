@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.0 (Alpha)
+* @version     0.4.1 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 117);
+/******/ 	return __webpack_require__(__webpack_require__.s = 122);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -83,14 +83,15 @@ __webpack_require__( 3 );
 
 __webpack_require__( 4 );
 __webpack_require__( 5 );
-__webpack_require__( 7 );
 __webpack_require__( 8 );
 __webpack_require__( 9 );
+__webpack_require__( 10 );
 __webpack_require__( 6 );
+__webpack_require__( 7 );
 
 var tests = [];
 
-var context = __webpack_require__(83);
+var context = __webpack_require__(87);
 
 context.keys().forEach( function ( file ) {
   tests.push( context( file ) );
@@ -112,40 +113,45 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/1to8.png";
+module.exports = __webpack_require__.p + "assets/images/1to8.png";
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/4dots.png";
+module.exports = __webpack_require__.p + "assets/images/4dots.png";
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/colors.png";
+module.exports = __webpack_require__.p + "assets/images/colors.png";
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/glass-of-blueberryjuice.png";
+module.exports = __webpack_require__.p + "assets/images/font.png";
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/raindrop.png";
+module.exports = __webpack_require__.p + "assets/images/glass-of-blueberryjuice.png";
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/smudge.png";
+module.exports = __webpack_require__.p + "assets/images/raindrop.png";
 
 /***/ }),
-/* 10 */,
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/images/smudge.png";
+
+/***/ }),
 /* 11 */,
 /* 12 */,
 /* 13 */,
@@ -218,42 +224,47 @@ module.exports = __webpack_require__.p + "images/smudge.png";
 /* 80 */,
 /* 81 */,
 /* 82 */,
-/* 83 */
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 84,
-	"./animation.test": 85,
-	"./butterflyish.test": 86,
-	"./cli.test": 87,
-	"./clock.test": 88,
-	"./elasticcollision.test": 89,
-	"./field.test": 90,
-	"./fractree.test": 91,
-	"./grabndrag.test": 92,
-	"./grid.test": 93,
-	"./magnet.test": 94,
-	"./motion.test": 95,
-	"./nightsky.test": 96,
-	"./particles.test": 97,
-	"./platformer.test": 98,
-	"./playground.test": 99,
-	"./polygoncollision.test": 100,
-	"./quadtree.test": 101,
-	"./rain.test": 102,
-	"./raycasting.test": 103,
-	"./reflectivecollision.test": 104,
-	"./sprite.test": 105,
-	"./stresstest.test": 106,
-	"./text.test": 107,
-	"./themask.test": 108,
-	"./webglanimation.test": 109,
-	"./webglcircle.test": 110,
-	"./webglline2d.test": 111,
-	"./webglpixelbatch.test": 112,
-	"./webglrectangle.test": 113,
-	"./webglstresstest.test": 114,
-	"./webgltexturebatch.test": 115
+	"./aabbcollision.test": 88,
+	"./animation.test": 89,
+	"./bitmapfont.test": 90,
+	"./butterflyish.test": 91,
+	"./cli.test": 92,
+	"./clock.test": 93,
+	"./elasticcollision.test": 94,
+	"./field.test": 95,
+	"./fractree.test": 96,
+	"./grabndrag.test": 97,
+	"./grid.test": 98,
+	"./magnet.test": 99,
+	"./motion.test": 100,
+	"./nightsky.test": 101,
+	"./particles.test": 102,
+	"./platformer.test": 103,
+	"./playground.test": 104,
+	"./polygoncollision.test": 105,
+	"./quadtree.test": 106,
+	"./rain.test": 107,
+	"./raycasting.test": 108,
+	"./reflectivecollision.test": 109,
+	"./sprite.test": 110,
+	"./stresstest.test": 111,
+	"./text.test": 112,
+	"./themask.test": 113,
+	"./webglanimation.test": 114,
+	"./webglcircle.test": 115,
+	"./webglline2d.test": 116,
+	"./webglpixelbatch.test": 117,
+	"./webglrectangle.test": 118,
+	"./webglstresstest.test": 119,
+	"./webgltexturebatch.test": 120
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -269,10 +280,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 83;
+webpackContext.id = 87;
 
 /***/ }),
-/* 84 */
+/* 88 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -307,6 +318,7 @@ module.exports = function () {
     var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 400, 100 ) );
 
     var lineC = new nk.Graphic2D( 0, 0, new nk.Path.Line2D() );
+    lineC.interactive = false;
 
     stage.AddChild( aabbg1 );
     stage.AddChild( aabbg2 );
@@ -381,7 +393,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 85 */
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -446,7 +458,7 @@ module.exports = function () {
       }, stage );
     } );
     imageCache.Load( [
-      { id: '1to8', src: './images/1to8.png' }
+      { id: '1to8', src: './assets/images/1to8.png' }
     ], true );
 
     document.body.removeChild( buttonContainer );
@@ -454,7 +466,78 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 86 */
+/* 90 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'BitmapFont' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+    var rc = c.getContext( '2d' );
+
+    var W = c.width, HW = W * 0.5;
+    var H = c.height, HH = H * 0.5;
+
+    var stage = new nk.Stage2D( c, 0, 0 );
+    stage.backgroundColor = '#FFF';
+
+    var xhrloader = new nk.XHRLoader();
+    var imgloader = new nk.ImageLoader();
+    var done = 0;
+    xhrloader.Load( [
+      { id: 'fontdataxml', src: './assets/xhr/font.fnt', type: 'xml' },
+      { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' }
+    ] );
+    imgloader.Load( [
+      { id: 'fontimg', src: './assets/images/font.png' }
+    ], true );
+    xhrloader.onComplete.Add( function ( event ) {
+      console.log( event.data );
+      console.log( JSON.stringify( event.data.dataCache.items[ 0 ].data ) === JSON.stringify( event.data.dataCache.items[ 1 ].data ) );
+      done++;
+      Go();
+    } );
+    imgloader.onComplete.Add( function ( event ) {
+      console.log( event.data );
+      done++;
+      Go();
+    } );
+
+    var test = null;
+
+    function Go () {
+      if ( done > 1 ) {
+        test = new nk.BitmapText(
+          0,
+          0,
+          imgloader.GetBasicTexture( 'fontimg' ),
+          xhrloader.GetData( 'fontdataxml' ),
+          'Hello world, this is another world'
+        );
+        console.log( test );
+        stage.AddChild( test );
+      }
+    }
+
+
+    document.body.removeChild( buttonContainer );
+  }
+};
+
+/***/ }),
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -569,7 +652,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 87 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -701,6 +784,7 @@ module.exports = function () {
         var data = arguments[ 1 ];
         var x = Number( data.x );
         var y = Number( data.y );
+        if ( isNaN( x ) || isNaN( y ) ) return;
         moveX.value = x;
         moveY.value = y;
         mm.StartMultiple( 'x y' );
@@ -759,7 +843,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 88 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -831,7 +915,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 89 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -970,7 +1054,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 90 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1058,7 +1142,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 91 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1144,7 +1228,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 92 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1227,7 +1311,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 93 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1293,7 +1377,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 94 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1418,7 +1502,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 95 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1476,7 +1560,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 96 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1573,7 +1657,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 97 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1648,7 +1732,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 98 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1834,7 +1918,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 99 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1895,6 +1979,17 @@ module.exports = function () {
     var t = new nk.Path.Polygon2D( [ 0, 0, 100, 100, 0, 100, 100, 0 ] );
     console.log( t );
 
+    var x = new nk.Utils.FlagEnum();
+    x.Add( 'FIRE' );
+    x.Add( 'WATER' );
+    x.Add( 'AIR' );
+    x.Add( 'EARTH' );
+    var y = new nk.Utils.FlagList();
+    y.Add( x.FIRE );
+    y.Add( x.WATER );
+    console.log( y.Compare( x.FIRE | x.EARTH ) );
+    console.log( y.Holds( x.FIRE | x.WATER ) );
+    console.log( y.Holds( x.FIRE | x.WATER | x.EARTH ) );
 
 
     document.body.removeChild( buttonContainer );
@@ -1904,7 +1999,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 100 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1943,7 +2038,7 @@ module.exports = function () {
 
     function CreatePolygon () {
       var p = new nk.Path.Polygon2D();
-      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 20, 40 ), RI( 3, 6 ) );
+      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 10, 60 ), RI( 3, 6 ) );
       var pg = new nk.Graphic2D( 0, 0, p );
       stage.Mount( pg );
       objs.push( {
@@ -2016,7 +2111,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 101 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2074,7 +2169,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2109,7 +2204,7 @@ module.exports = function () {
     imageCache = new nk.ImageLoader( [
       {
         id: 'raindrop',
-        src: './images/raindrop.png'
+        src: './assets/images/raindrop.png'
       }
     ], true );
     imageCache.onComplete.Add( function () {
@@ -2124,9 +2219,9 @@ module.exports = function () {
         while ( i-- ) {
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
-          child.data.velocity.AddV( gravity );
-          child.data.velocity.Add( wind.x / child.data.mass, wind.y / child.data.mass );
-          if ( !child.data.lifespan-- ) {
+          child.data.velocity.Add( gravity.x, gravity.y + child.data.mass / 100 );
+          child.data.velocity.Add( wind.x / child.data.mass * 4, wind.y / child.data.mass * 4 );
+          if ( !--child.data.lifespan ) {
             DropPool.Store( child.Detach() );
           }
         }
@@ -2140,12 +2235,12 @@ module.exports = function () {
 
     function AddDrop () {
       var child = DropPool.Retrieve();
-      var scale = nk.Utils.RandomFloat( 0.5, 1 );
-      child.position.Set( nk.Utils.RandomFloat( -HW, HW ), -HH - child.height );
+      var scale = nk.Utils.RandomFloat( 0.2, 1 );
+      child.position.Set( nk.Utils.RandomFloat( -HW, HW ), -HH - child.height * 2 );
       child.scale.Set( scale );
-      child.data.mass = scale;
+      child.data.mass = scale * 10;
       child.data.velocity.Set( 0 );
-      child.data.lifespan = 240;
+      child.data.lifespan = 280;
       child.AttachTo( stage );
     }
 
@@ -2154,7 +2249,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2307,7 +2402,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2439,7 +2534,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2493,11 +2588,11 @@ module.exports = function () {
       console.log( _event.target, _event.data, 'loaded' );
     } );
     imageCache.Load( [
-      { id: 'smudge', src: './images/smudge.png' },
+      { id: 'smudge', src: './assets/images/smudge.png' },
     ], true );
     imageCache.Load( [
-      { id: '4dots', src: './images/4dots.png' },
-      { id: 'gobj', src: './images/glass-of-blueberryjuice.png' }
+      { id: '4dots', src: './assets/images/4dots.png' },
+      { id: 'gobj', src: './assets/images/glass-of-blueberryjuice.png' }
     ], true );
 
 
@@ -2532,7 +2627,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2644,7 +2739,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2687,13 +2782,13 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'The Mask' );
+  button.setAttribute( 'value', 'TheMask' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', RunTheMask );
   buttonContainer.appendChild( button );
@@ -2803,7 +2898,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2881,8 +2976,8 @@ module.exports = function () {
       }, stage );
     } );
     imageCache.Load( [
-      { id: '1to8', src: './images/1to8.png', w: 64, h: 64 },
-      { id: '1to8f', src: './images/1to8.png' }
+      { id: '1to8', src: './assets/images/1to8.png', w: 64, h: 64 },
+      { id: '1to8f', src: './assets/images/1to8.png' }
     ], true );
 
     var dragger = null;
@@ -2926,7 +3021,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2953,7 +3048,7 @@ module.exports = function () {
 
     var wRatio = W / H;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
 
     var pc = new nk.GLCircleProgramController( stage.gl );
@@ -3023,7 +3118,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3050,10 +3145,10 @@ module.exports = function () {
 
     var wRatio = W / H;
 
-    var mX = W / 30;
-    var mY = H / 30;
+    var mX = W / 45;
+    var mY = H / 45;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
 
     var pc = new nk.GLLine2DProgramController( stage.gl );
@@ -3089,13 +3184,13 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'WebGL Pixelbatch' );
+  button.setAttribute( 'value', 'WebGL PixelBatch' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -3119,7 +3214,7 @@ module.exports = function () {
     var mX = W / 30;
     var mY = H / 30;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
     var pc = new nk.GLPixelBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -3128,7 +3223,7 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
 
     ( function () {
-      var i = 10000;
+      var i = 100000;
       while ( i-- ) {
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
@@ -3168,7 +3263,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3195,7 +3290,7 @@ module.exports = function () {
 
     var wRatio = W / H;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
 
     var pc = new nk.GLRectangleProgramController( stage.gl );
@@ -3255,7 +3350,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3324,7 +3419,7 @@ module.exports = function () {
     var spritePool = new nk.Pool( nk.Sprite );
     var graphicPool = new nk.Pool( nk.Graphic2D );
 
-    var usedPool = spritePool;
+    var usedPool = graphicPool;
 
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {
@@ -3399,13 +3494,13 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'WebGL Texturebatch' );
+  button.setAttribute( 'value', 'WebGL TextureBatch' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -3432,7 +3527,7 @@ module.exports = function () {
     var RF = nk.Utils.RandomFloat;
     var RI = nk.Utils.RandomInteger;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = window.stage = new nk.Stage2D( c, 0, 0, false, true );
 
     var pc = new nk.GLTextureBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -3443,22 +3538,22 @@ module.exports = function () {
       pc.BindBasicTexture( tex );
 
       ( function () {
-        var i = 5000;
+        var i = 50000;
         while ( i-- ) {
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
           var anim = ac.AddAnimation( 'test', RI( 5, 40 ) );
           anim.GenerateFrames( 64, 64, 1024, 64, 16 );
           ac.PlayAnimation( 'test', RI( 0, 15 ) );
-          var vx = RF( 3, 5 );
+          var vx = RI( 1, 3 );
           vx = nk.Utils.ThisOrThat( vx, -vx );
-          var vy = RF( 3, 5 );
+          var vy = RI( 1, 3 );
           vy = nk.Utils.ThisOrThat( vy, -vy );
-          var to = RF( nk.Math.RADIAN, nk.Math.RADIAN * 10 );
+          var to = RF( nk.Math.RADIAN, nk.Math.RADIAN * 5 );
           to = nk.Utils.ThisOrThat( to, -to );
           s.data.velocity = new nk.Vector2D( vx, vy );
           s.data.torque = to;
-          s.scale.Set( 0.4 );
+          s.scale.Set( 0.1 );
           s.anchor.Set( 0.5 );
           stage.Mount( s );
           s.UpdateTransform();
@@ -3466,13 +3561,14 @@ module.exports = function () {
         stage.ComputeBatchBuffer();
 
         stage.onProcess.Add( function () {
-          this.children.forEach( function ( child ) {
+          for ( var i = 0, child; i < this.children.length; ++i ) {
+            child = this.children[ i ];
             child.animationController.Process();
             child.data.velocity.Rotate( child.data.torque );
             child.position.AddV( child.data.velocity );
             child.UpdateInBuffer();
-          } );
-          if ( stage.ticker.GetTPS() < 55 ) {
+          }
+          if ( stage.ticker.GetTPS() < 50 ) {
             console.log( stage.ticker.GetTPS() );
           }
         }, stage );
@@ -3480,7 +3576,7 @@ module.exports = function () {
     } );
 
     ic.Load( [
-      { id: 'colors', src: './images/colors.png', w: 64, h: 64 }
+      { id: 'colors', src: './assets/images/colors.png', w: 64, h: 64 }
     ], true );
 
 
@@ -3492,8 +3588,8 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 116 */,
-/* 117 */
+/* 121 */,
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

@@ -1,11 +1,12 @@
 require( './../style/default.css' );
 
-require( './../images/1to8.png' );
-require( './../images/4dots.png' );
-require( './../images/glass-of-blueberryjuice.png' );
-require( './../images/raindrop.png' );
-require( './../images/smudge.png' );
-require( './../images/colors.png' );
+require( './../assets/images/1to8.png' );
+require( './../assets/images/4dots.png' );
+require( './../assets/images/glass-of-blueberryjuice.png' );
+require( './../assets/images/raindrop.png' );
+require( './../assets/images/smudge.png' );
+require( './../assets/images/colors.png' );
+require( './../assets/images/font.png' );
 
 var tests = [];
 

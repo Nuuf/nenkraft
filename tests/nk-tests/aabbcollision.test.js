@@ -30,6 +30,7 @@ module.exports = function () {
     var aabbg2 = new nk.Graphic2D( 400, 400, new nk.Path.AABB2D( 0, 0, 400, 100 ) );
 
     var lineC = new nk.Graphic2D( 0, 0, new nk.Path.Line2D() );
+    lineC.interactive = false;
 
     stage.AddChild( aabbg1 );
     stage.AddChild( aabbg2 );

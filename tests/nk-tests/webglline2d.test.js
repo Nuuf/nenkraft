@@ -22,10 +22,10 @@ module.exports = function () {
 
     var wRatio = W / H;
 
-    var mX = W / 30;
-    var mY = H / 30;
+    var mX = W / 45;
+    var mY = H / 45;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
 
     var pc = new nk.GLLine2DProgramController( stage.gl );

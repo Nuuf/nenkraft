@@ -73,8 +73,8 @@ module.exports = function () {
       }, stage );
     } );
     imageCache.Load( [
-      { id: '1to8', src: './images/1to8.png', w: 64, h: 64 },
-      { id: '1to8f', src: './images/1to8.png' }
+      { id: '1to8', src: './assets/images/1to8.png', w: 64, h: 64 },
+      { id: '1to8f', src: './assets/images/1to8.png' }
     ], true );
 
     var dragger = null;

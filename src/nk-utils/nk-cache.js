@@ -24,6 +24,7 @@ module.exports = function ( Nenkraft ) {
   Cache.prototype.Store = function ( _item ) {
     var valid = false;
     if ( _item == null ) {
+      console.warn( 'Item is null. Cannot store null item.' );
       return null;
     }
     if ( _item.id != null && _item.id !== '' ) {
@@ -34,6 +35,7 @@ module.exports = function ( Nenkraft ) {
       }
     }
     if ( valid === false ) {
+      console.warn( 'Item is not valid. Check the item id. The item has not been stored' );
       return false;
     }
     this.items.push( _item );
@@ -52,8 +54,7 @@ module.exports = function ( Nenkraft ) {
       Assert( _item.data.id, Assert.IS_SAME_TYPE, ES );
       Assert( _item.data.id, Assert.IS_NOT, '' );
     }
-    this.items.push( _item );
-    return true;
+    return this.Store( _item );
   };
   Cache.prototype.Get = function ( _item ) {
     for ( var i = 0, items = this.items, l = items.length; i < l; ++i ) {

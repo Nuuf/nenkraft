@@ -22,7 +22,7 @@ module.exports = function () {
 
     var wRatio = W / H;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
 
     var pc = new nk.GLCircleProgramController( stage.gl );

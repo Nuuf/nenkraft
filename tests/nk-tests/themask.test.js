@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'The Mask' );
+  button.setAttribute( 'value', 'TheMask' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', RunTheMask );
   buttonContainer.appendChild( button );
