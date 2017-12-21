@@ -36,7 +36,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   AABB2D.prototype.GLDraw = function ( _gl, _transform ) {
-    if ( this.programController != null ) {
+    if ( this.programController !== null ) {
       this.programController.Execute(
         _transform.worldTransform.AsArray( true ),
         this.tl.x, this.tl.y, this.w, this.h
@@ -52,7 +52,7 @@ module.exports = function ( Nenkraft ) {
   };
   AABB2D.prototype.LinkStyle = function () {
     var pc = this.programController;
-    if ( pc != null && pc.fillColor != null && pc.outlineColor != null && pc.outline != null ) {
+    if ( pc !== null && pc.fillColor !== null && pc.outlineColor !== null && pc.outline !== null ) {
       pc.fillColor.SetHex( this.style.fill.color );
       pc.fillColor.Normalize();
       pc.outlineColor.SetHex( this.style.stroke.color );

@@ -56,6 +56,17 @@ module.exports = function () {
     var t = new nk.Path.Polygon2D( [ 0, 0, 100, 100, 0, 100, 100, 0 ] );
     console.log( t );
 
+    var x = new nk.Utils.FlagEnum();
+    x.Add( 'FIRE' );
+    x.Add( 'WATER' );
+    x.Add( 'AIR' );
+    x.Add( 'EARTH' );
+    var y = new nk.Utils.FlagList();
+    y.Add( x.FIRE );
+    y.Add( x.WATER );
+    console.log( y.Compare( x.FIRE | x.EARTH ) );
+    console.log( y.Holds( x.FIRE | x.WATER ) );
+    console.log( y.Holds( x.FIRE | x.WATER | x.EARTH ) );
 
 
     document.body.removeChild( buttonContainer );

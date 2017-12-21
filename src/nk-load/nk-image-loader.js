@@ -17,6 +17,10 @@ module.exports = function ( Nenkraft ) {
   //Static
 
   //Members
+  ImageLoader.prototype.imageCache = null;
+  ImageLoader.prototype.basicTextureCache = null;
+  ImageLoader.prototype.onImageLoaded = null;
+  ImageLoader.prototype.onComplete = null;
   ImageLoader.prototype.count = 0;
   ImageLoader.prototype.loading = false;
   ImageLoader.prototype.toLoad = null;
@@ -55,8 +59,9 @@ module.exports = function ( Nenkraft ) {
     }
   };
   ImageLoader.prototype.OnLoad = function ( _event ) {
-    var t = _event.target;
+    var t = _event.currentTarget;
     delete t.onload;
+    delete t.onerror;
     this.imageCache.StoreSafe( t );
     if ( this.createTextures === true ) {
       this.basicTextureCache.StoreSafe( new Nenkraft.Texture.BasicTexture( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh ) );
@@ -65,7 +70,7 @@ module.exports = function ( Nenkraft ) {
     this.Haul( ++this.count );
   };
   ImageLoader.prototype.OnError = function () {
-    throw new Error( 'Could not load image' );
+    throw new Error( 'Request failed' );
   };
   ImageLoader.prototype.GetImage = function ( _id ) {
     return this.imageCache.GetById( _id );

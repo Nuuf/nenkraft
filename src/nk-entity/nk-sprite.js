@@ -92,7 +92,7 @@ module.exports = function ( Nenkraft ) {
         this.UpdateTextureTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
-      if ( this.display === true && this.programController != null ) {
+      if ( this.display === true && this.programController !== null ) {
         this.programController.Execute(
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),

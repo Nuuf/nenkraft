@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'WebGL Pixelbatch' );
+  button.setAttribute( 'value', 'WebGL PixelBatch' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -25,7 +25,7 @@ module.exports = function () {
     var mX = W / 30;
     var mY = H / 30;
 
-    stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
 
     var pc = new nk.GLPixelBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -34,7 +34,7 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
 
     ( function () {
-      var i = 10000;
+      var i = 100000;
       while ( i-- ) {
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;

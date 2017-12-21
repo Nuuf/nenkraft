@@ -127,6 +127,7 @@ module.exports = function () {
         var data = arguments[ 1 ];
         var x = Number( data.x );
         var y = Number( data.y );
+        if ( isNaN( x ) || isNaN( y ) ) return;
         moveX.value = x;
         moveY.value = y;
         mm.StartMultiple( 'x y' );

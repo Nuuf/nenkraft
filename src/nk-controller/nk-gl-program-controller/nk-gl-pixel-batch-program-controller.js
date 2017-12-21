@@ -16,6 +16,7 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   GLPixelBatchProgramController.prototype.dataBuffer = null;
+  GLPixelBatchProgramController.prototype.prevNumElements = 0;
   //Methods
   GLPixelBatchProgramController.prototype.Initialise = function () {
     var gl = this.gl;
@@ -30,9 +31,15 @@ module.exports = function ( Nenkraft ) {
   GLPixelBatchProgramController.prototype.Execute = function ( _data, _numElements ) {
     var gl = this.gl;
     var attributes = this.attributes;
-    gl.useProgram( this.program );
+    if ( Super.LAST_USED_CONTROLLER !== this ) {
+      gl.useProgram( this.program );
+    }
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, _data, gl.STREAM_DRAW );
+    if ( _numElements !== this.prevNumElements ) {
+      gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );
+    } else {
+      gl.bufferSubData( gl.ARRAY_BUFFER, 0, _data );
+    }
     gl.enableVertexAttribArray( attributes.aProjection1 );
     gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, 64, 0 );
     gl.enableVertexAttribArray( attributes.aProjection2 );
@@ -46,6 +53,7 @@ module.exports = function ( Nenkraft ) {
     gl.enableVertexAttribArray( attributes.aPointSize );
     gl.vertexAttribPointer( attributes.aPointSize, 1, gl.FLOAT, false, 64, 60 );
     gl.drawArrays( gl.POINTS, 0, _numElements );
+    this.prevNumElements = _numElements;
     Super.LAST_USED_CONTROLLER = this;
   };
   Nenkraft.Controller.GLPixelBatchProgramController = GLPixelBatchProgramController;

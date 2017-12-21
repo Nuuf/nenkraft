@@ -39,6 +39,11 @@ module.exports = function ( Nenkraft ) {
 
   //Members
   BasicTexture.prototype.image = null;
+  BasicTexture.prototype.id = null;
+  BasicTexture.prototype.w = 0;
+  BasicTexture.prototype.h = 0;
+  BasicTexture.prototype.fw = 0;
+  BasicTexture.prototype.fh = 0;
   //Methods
   Nenkraft.Texture.BasicTexture = BasicTexture;
   Nenkraft.BasicTexture = BasicTexture;

@@ -33,7 +33,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Circle.prototype.GLDraw = function ( _gl, _transform ) {
-    if ( this.programController != null ) {
+    if ( this.programController !== null ) {
       this.programController.Execute(
         _transform.worldTransform.AsArray( true ),
         this.center.x, this.center.y, this.radius
@@ -49,7 +49,7 @@ module.exports = function ( Nenkraft ) {
   };
   Circle.prototype.LinkStyle = function () {
     var pc = this.programController;
-    if ( pc != null && pc.fillColor != null && pc.outlineColor != null && pc.outline != null ) {
+    if ( pc !== null && pc.fillColor !== null && pc.outlineColor !== null && pc.outline !== null ) {
       pc.fillColor.SetHex( this.style.fill.color );
       pc.fillColor.Normalize();
       pc.outlineColor.SetHex( this.style.stroke.color );

@@ -30,7 +30,7 @@ module.exports = function () {
     imageCache = new nk.ImageLoader( [
       {
         id: 'raindrop',
-        src: './images/raindrop.png'
+        src: './assets/images/raindrop.png'
       }
     ], true );
     imageCache.onComplete.Add( function () {
@@ -45,9 +45,9 @@ module.exports = function () {
         while ( i-- ) {
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
-          child.data.velocity.AddV( gravity );
-          child.data.velocity.Add( wind.x / child.data.mass, wind.y / child.data.mass );
-          if ( !child.data.lifespan-- ) {
+          child.data.velocity.Add( gravity.x, gravity.y + child.data.mass / 100 );
+          child.data.velocity.Add( wind.x / child.data.mass * 4, wind.y / child.data.mass * 4 );
+          if ( !--child.data.lifespan ) {
             DropPool.Store( child.Detach() );
           }
         }
@@ -61,12 +61,12 @@ module.exports = function () {
 
     function AddDrop () {
       var child = DropPool.Retrieve();
-      var scale = nk.Utils.RandomFloat( 0.5, 1 );
-      child.position.Set( nk.Utils.RandomFloat( -HW, HW ), -HH - child.height );
+      var scale = nk.Utils.RandomFloat( 0.2, 1 );
+      child.position.Set( nk.Utils.RandomFloat( -HW, HW ), -HH - child.height * 2 );
       child.scale.Set( scale );
-      child.data.mass = scale;
+      child.data.mass = scale * 10;
       child.data.velocity.Set( 0 );
-      child.data.lifespan = 240;
+      child.data.lifespan = 280;
       child.AttachTo( stage );
     }
 
