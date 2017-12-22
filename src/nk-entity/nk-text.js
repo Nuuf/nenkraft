@@ -22,6 +22,7 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();

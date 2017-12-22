@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.1 (Alpha)
+* @version     0.4.2 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -524,9 +524,11 @@ module.exports = function () {
           0,
           imgloader.GetBasicTexture( 'fontimg' ),
           xhrloader.GetData( 'fontdataxml' ),
-          'Hello world, this is another world'
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         );
         console.log( test );
+        test.maxWidth = window.innerWidth;
+        test.ComputeText();
         stage.AddChild( test );
       }
     }
@@ -3055,6 +3057,7 @@ module.exports = function () {
     var pcLine = new nk.GLLine2DProgramController( stage.gl );
 
     var RF = nk.Utils.RandomFloat;
+    var RI = nk.Utils.RandomInteger;
 
     var hzLine = new nk.Path.Line2D( HW, 0, HW, H );
     var vtLine = new nk.Path.Line2D( 0, HH, W, HH );
@@ -3064,18 +3067,19 @@ module.exports = function () {
     stage.children[ 0 ].interactive = false;
     stage.children[ 1 ].interactive = false;
 
-    var path = new nk.Path.Circle( 0, 0, 10 );
-    path.LinkProgramController( pc );
-
     var i = 1000;
     while ( i-- ) {
+      var path = new nk.Path.Circle( 0, 0, RI( 2, 30 ) );
+      path.style.fill.color = new nk.Color( RI( 0, 255 ), RI( 0, 255 ), RI( 0, 255 ) ).ComputeValueHex();
+      path.LinkProgramController( pc );
       var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
+      g.GLPreDraw = PreDraw;
       g.AttachTo( stage );
     }
 
-
-
-
+    function PreDraw () {
+      this.path.LinkStyle();
+    }
 
     var dragger = null;
     var dragStart = new nk.Vector2D();
@@ -3223,14 +3227,14 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
 
     ( function () {
-      var i = 100000;
+      var i = 10000;
       while ( i-- ) {
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
         p.colorObj.b = 0.2;
         p.colorObj.a = RF( 0.8, 1.0 );
-        p.style.pixel.size = RF( 1, 2 );
+        p.style.pixel.size = RF( 1, 3 );
         var g = new nk.Graphic2D( HW, HH, p );
         g.data.velocity = new nk.Vector2D( RF( -10, 10 ), RF( -1, 10 ) );
         g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );
@@ -3419,7 +3423,7 @@ module.exports = function () {
     var spritePool = new nk.Pool( nk.Sprite );
     var graphicPool = new nk.Pool( nk.Graphic2D );
 
-    var usedPool = graphicPool;
+    var usedPool = spritePool;
 
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {
@@ -3538,7 +3542,7 @@ module.exports = function () {
       pc.BindBasicTexture( tex );
 
       ( function () {
-        var i = 50000;
+        var i = 10000;
         while ( i-- ) {
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
@@ -3553,7 +3557,7 @@ module.exports = function () {
           to = nk.Utils.ThisOrThat( to, -to );
           s.data.velocity = new nk.Vector2D( vx, vy );
           s.data.torque = to;
-          s.scale.Set( 0.1 );
+          s.scale.Set( 0.3 );
           s.anchor.Set( 0.5 );
           stage.Mount( s );
           s.UpdateTransform();

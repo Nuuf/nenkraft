@@ -64,7 +64,7 @@ module.exports = function () {
     var spritePool = new nk.Pool( nk.Sprite );
     var graphicPool = new nk.Pool( nk.Graphic2D );
 
-    var usedPool = graphicPool;
+    var usedPool = spritePool;
 
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {

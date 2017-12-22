@@ -75,12 +75,10 @@ module.exports = function ( Nenkraft ) {
     _gl.flush();
   };
   Stage2D.prototype.Process = function ( _delta ) {
-    this.PreDraw( this.rc );
     this.Draw( this.rc );
     this.onProcess.Dispatch( this, _delta );
   };
   Stage2D.prototype.GLProcess = function ( _delta ) {
-    this.GLPreDraw( this.gl );
     this.GLDraw( this.gl );
     this.GLPostDraw( this.gl );
     this.onProcess.Dispatch( this, _delta );

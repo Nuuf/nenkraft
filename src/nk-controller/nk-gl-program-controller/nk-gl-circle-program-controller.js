@@ -48,12 +48,12 @@ module.exports = function ( Nenkraft ) {
     TriRectArray( _x - _radius, _y - _radius, _radius * 2, _radius * 2, vertices );
     if ( this !== Super.LAST_USED_CONTROLLER ) {
       gl.useProgram( this.program );
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
-      gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
-      gl.enableVertexAttribArray( attributes.aPosition );
-      gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
       Super.LAST_USED_CONTROLLER = this;
     }
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
+    gl.enableVertexAttribArray( attributes.aPosition );
+    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniform4f( uniforms.uFillColor, fillChannel[ 0 ], fillChannel[ 1 ], fillChannel[ 2 ], fillChannel[ 3 ] );
     gl.uniform4f( uniforms.uOutlineColor, outlineChannel[ 0 ], outlineChannel[ 1 ], outlineChannel[ 2 ], outlineChannel[ 3 ] );

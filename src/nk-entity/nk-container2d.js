@@ -29,7 +29,14 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.bufferEndIndex = 0;
   //
   //Methods
+  Container2D.prototype.PreDraw = function ( /* _rc */ ) {
+    // Override
+  };
+  Container2D.prototype.GLPreDraw = function ( /* _gl */ ) {
+    // Override
+  };
   Container2D.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -41,6 +48,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Container2D.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();

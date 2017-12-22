@@ -9,10 +9,10 @@ module.exports = function ( Nenkraft ) {
   function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
     this.channel = new Float32Array( [
-      _r === undefined ? 0 : _r,
-      _g === undefined ? 0 : _g,
-      _b === undefined ? 0 : _b,
-      _a === undefined ? 1 : _a
+      _r == null ? 0 : _r,
+      _g == null ? 0 : _g,
+      _b == null ? 0 : _b,
+      _a == null ? 1 : _a
     ] );
     this.ComputeValueRGBA();
   }
@@ -32,9 +32,15 @@ module.exports = function ( Nenkraft ) {
   };
   Color.prototype.ComputeValueRGBA = function () {
     this.value = 'rgba('.concat( this.channel.join( ',' ).concat( ')' ) );
+    return this.value;
   };
   Color.prototype.ComputeValueHSLA = function () {
     this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
+    return this.value;
+  };
+  Color.prototype.ComputeValueHex = function () {
+    this.value = '#' + this.channel[ 0 ].toString( 16 ) + this.channel[ 1 ].toString( 16 ) + this.channel[ 2 ].toString( 16 );
+    return this.value;
   };
   Color.prototype.ConvertToHSLA = function ( _round ) {
     var r = this.channel[ 0 ] / 255, g = this.channel[ 1 ] / 255, b = this.channel[ 2 ] / 255;
