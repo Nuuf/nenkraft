@@ -39,7 +39,7 @@ module.exports = function () {
       pc.BindBasicTexture( tex );
 
       ( function () {
-        var i = 50000;
+        var i = 10000;
         while ( i-- ) {
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
@@ -54,7 +54,7 @@ module.exports = function () {
           to = nk.Utils.ThisOrThat( to, -to );
           s.data.velocity = new nk.Vector2D( vx, vy );
           s.data.torque = to;
-          s.scale.Set( 0.1 );
+          s.scale.Set( 0.3 );
           s.anchor.Set( 0.5 );
           stage.Mount( s );
           s.UpdateTransform();

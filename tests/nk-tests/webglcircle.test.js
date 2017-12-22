@@ -29,6 +29,7 @@ module.exports = function () {
     var pcLine = new nk.GLLine2DProgramController( stage.gl );
 
     var RF = nk.Utils.RandomFloat;
+    var RI = nk.Utils.RandomInteger;
 
     var hzLine = new nk.Path.Line2D( HW, 0, HW, H );
     var vtLine = new nk.Path.Line2D( 0, HH, W, HH );
@@ -38,18 +39,19 @@ module.exports = function () {
     stage.children[ 0 ].interactive = false;
     stage.children[ 1 ].interactive = false;
 
-    var path = new nk.Path.Circle( 0, 0, 10 );
-    path.LinkProgramController( pc );
-
     var i = 1000;
     while ( i-- ) {
+      var path = new nk.Path.Circle( 0, 0, RI( 2, 30 ) );
+      path.style.fill.color = new nk.Color( RI( 0, 255 ), RI( 0, 255 ), RI( 0, 255 ) ).ComputeValueHex();
+      path.LinkProgramController( pc );
       var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
+      g.GLPreDraw = PreDraw;
       g.AttachTo( stage );
     }
 
-
-
-
+    function PreDraw () {
+      this.path.LinkStyle();
+    }
 
     var dragger = null;
     var dragStart = new nk.Vector2D();

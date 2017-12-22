@@ -32,6 +32,7 @@ module.exports = function ( Nenkraft ) {
   Char.prototype.xoffset = 0;
   Char.prototype.yoffset = 0;
   Char.prototype.xadvance = 0;
+  Char.prototype.yadvance = 0;
   Char.prototype.kernings = null;
   //Methods
   Char.prototype.ApplyKernings = function ( _kernings ) {
@@ -47,9 +48,18 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Char.prototype.Crunch = function ( _prevChar ) {
-    this.position.Set( 0, 0 );
+    this.position.Set( 0 );
     if ( _prevChar != null ) {
-      this.position.Add( _prevChar.position.x + _prevChar.xadvance, 0 );
+      this.position.x = _prevChar.position.x + _prevChar.xadvance;
+      this.position.y = this.yadvance = _prevChar.yadvance;
+      if ( _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
+        for ( var i = 0, kernings = this.kernings, l = kernings.length; i < l; i += 3 ) {
+          if ( kernings[ i + 1 ] === _prevChar.id ) {
+            this.position.x += kernings[ i + 2 ];
+            break;
+          }
+        }
+      }
     }
     this.position.Add( this.xoffset, this.yoffset );
   };

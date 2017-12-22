@@ -65,6 +65,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.textureTranslation = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -86,6 +87,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Sprite.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();

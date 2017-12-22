@@ -10,6 +10,7 @@ module.exports = function ( Nenkraft ) {
     if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
     Super.call( this, _x, _y, _texture );
     this.fontData = _data;
+    this.lineHeight = _data.data.font.common.attributes.lineHeight;
     if ( _text != null ) {
       this.text = _text;
     }
@@ -25,11 +26,10 @@ module.exports = function ( Nenkraft ) {
   BitmapText.prototype.fontData = null;
   BitmapText.prototype.text = '';
   BitmapText.prototype.chars = null;
-  BitmapText.prototype.wordSpacing = 0;
-  BitmapText.prototype.letterSpacing = 0;
   BitmapText.prototype.lineHeight = 0;
   //Methods
   BitmapText.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -65,11 +65,17 @@ module.exports = function ( Nenkraft ) {
   BitmapText.prototype.ComputeText = function () {
     this.chars.length = 0;
     var kernings = this.fontData.data.font.kernings.kerning;
+    var lineNum = 0;
     for ( var i = 0, char, chars = this.chars, prevChar, text = this.text, l = text.length; i < l; ++i ) {
       prevChar = chars[ i - 1 ];
       char = new Char( this.GetCharData( text.charCodeAt( i ) ) );
       char.ApplyKernings( kernings );
       char.Crunch( prevChar );
+      if ( ( char.position.x + char.width ) > this.maxWidth ) {
+        char.position.Set( 0 );
+        char.yadvance = this.lineHeight * ++lineNum;
+        char.position.Add( char.xoffset, char.yoffset + char.yadvance );
+      }
       chars.push( char );
     }
   };

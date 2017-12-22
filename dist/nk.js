@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.1 (Alpha)
+* @version     0.4.2 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -465,7 +465,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.4.1 (Alpha)';
+  Nenkraft.VERSION = '0.4.2 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -529,12 +529,12 @@ module.exports = function ( Nenkraft ) {
     TriRectArray( _x - _radius, _y - _radius, _radius * 2, _radius * 2, vertices );
     if ( this !== Super.LAST_USED_CONTROLLER ) {
       gl.useProgram( this.program );
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
-      gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
-      gl.enableVertexAttribArray( attributes.aPosition );
-      gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
       Super.LAST_USED_CONTROLLER = this;
     }
+    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
+    gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
+    gl.enableVertexAttribArray( attributes.aPosition );
+    gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniform4f( uniforms.uFillColor, fillChannel[ 0 ], fillChannel[ 1 ], fillChannel[ 2 ], fillChannel[ 3 ] );
     gl.uniform4f( uniforms.uOutlineColor, outlineChannel[ 0 ], outlineChannel[ 1 ], outlineChannel[ 2 ], outlineChannel[ 3 ] );
@@ -1285,6 +1285,7 @@ module.exports = function ( Nenkraft ) {
     if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
     Super.call( this, _x, _y, _texture );
     this.fontData = _data;
+    this.lineHeight = _data.data.font.common.attributes.lineHeight;
     if ( _text != null ) {
       this.text = _text;
     }
@@ -1300,11 +1301,10 @@ module.exports = function ( Nenkraft ) {
   BitmapText.prototype.fontData = null;
   BitmapText.prototype.text = '';
   BitmapText.prototype.chars = null;
-  BitmapText.prototype.wordSpacing = 0;
-  BitmapText.prototype.letterSpacing = 0;
   BitmapText.prototype.lineHeight = 0;
   //Methods
   BitmapText.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -1340,11 +1340,17 @@ module.exports = function ( Nenkraft ) {
   BitmapText.prototype.ComputeText = function () {
     this.chars.length = 0;
     var kernings = this.fontData.data.font.kernings.kerning;
+    var lineNum = 0;
     for ( var i = 0, char, chars = this.chars, prevChar, text = this.text, l = text.length; i < l; ++i ) {
       prevChar = chars[ i - 1 ];
       char = new Char( this.GetCharData( text.charCodeAt( i ) ) );
       char.ApplyKernings( kernings );
       char.Crunch( prevChar );
+      if ( ( char.position.x + char.width ) > this.maxWidth ) {
+        char.position.Set( 0 );
+        char.yadvance = this.lineHeight * ++lineNum;
+        char.position.Add( char.xoffset, char.yoffset + char.yadvance );
+      }
       chars.push( char );
     }
   };
@@ -1437,7 +1443,14 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.bufferEndIndex = 0;
   //
   //Methods
+  Container2D.prototype.PreDraw = function ( /* _rc */ ) {
+    // Override
+  };
+  Container2D.prototype.GLPreDraw = function ( /* _gl */ ) {
+    // Override
+  };
   Container2D.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -1449,6 +1462,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Container2D.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -1781,6 +1795,7 @@ module.exports = function ( Nenkraft ) {
   Graphic2D.prototype.interactive = true;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -1799,6 +1814,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Graphic2D.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -2238,6 +2254,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.textureTranslation = null;
   //Methods
   Sprite.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -2259,6 +2276,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Sprite.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -2473,12 +2491,10 @@ module.exports = function ( Nenkraft ) {
     _gl.flush();
   };
   Stage2D.prototype.Process = function ( _delta ) {
-    this.PreDraw( this.rc );
     this.Draw( this.rc );
     this.onProcess.Dispatch( this, _delta );
   };
   Stage2D.prototype.GLProcess = function ( _delta ) {
-    this.GLPreDraw( this.gl );
     this.GLDraw( this.gl );
     this.GLPostDraw( this.gl );
     this.onProcess.Dispatch( this, _delta );
@@ -2516,6 +2532,7 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   //Methods
   Text.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -6173,6 +6190,7 @@ module.exports = function ( Nenkraft ) {
   Char.prototype.xoffset = 0;
   Char.prototype.yoffset = 0;
   Char.prototype.xadvance = 0;
+  Char.prototype.yadvance = 0;
   Char.prototype.kernings = null;
   //Methods
   Char.prototype.ApplyKernings = function ( _kernings ) {
@@ -6188,9 +6206,18 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Char.prototype.Crunch = function ( _prevChar ) {
-    this.position.Set( 0, 0 );
+    this.position.Set( 0 );
     if ( _prevChar != null ) {
-      this.position.Add( _prevChar.position.x + _prevChar.xadvance, 0 );
+      this.position.x = _prevChar.position.x + _prevChar.xadvance;
+      this.position.y = this.yadvance = _prevChar.yadvance;
+      if ( _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
+        for ( var i = 0, kernings = this.kernings, l = kernings.length; i < l; i += 3 ) {
+          if ( kernings[ i + 1 ] === _prevChar.id ) {
+            this.position.x += kernings[ i + 2 ];
+            break;
+          }
+        }
+      }
     }
     this.position.Add( this.xoffset, this.yoffset );
   };
@@ -6213,10 +6240,10 @@ module.exports = function ( Nenkraft ) {
   function Color ( _r, _g, _b, _a ) {
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
     this.channel = new Float32Array( [
-      _r === undefined ? 0 : _r,
-      _g === undefined ? 0 : _g,
-      _b === undefined ? 0 : _b,
-      _a === undefined ? 1 : _a
+      _r == null ? 0 : _r,
+      _g == null ? 0 : _g,
+      _b == null ? 0 : _b,
+      _a == null ? 1 : _a
     ] );
     this.ComputeValueRGBA();
   }
@@ -6236,9 +6263,15 @@ module.exports = function ( Nenkraft ) {
   };
   Color.prototype.ComputeValueRGBA = function () {
     this.value = 'rgba('.concat( this.channel.join( ',' ).concat( ')' ) );
+    return this.value;
   };
   Color.prototype.ComputeValueHSLA = function () {
     this.value = 'hsla(' + this.channel[ 0 ] + ',' + this.channel[ 1 ] + '%,' + this.channel[ 2 ] + '%,' + this.channel[ 3 ] + ')';
+    return this.value;
+  };
+  Color.prototype.ComputeValueHex = function () {
+    this.value = '#' + this.channel[ 0 ].toString( 16 ) + this.channel[ 1 ].toString( 16 ) + this.channel[ 2 ].toString( 16 );
+    return this.value;
   };
   Color.prototype.ConvertToHSLA = function ( _round ) {
     var r = this.channel[ 0 ] / 255, g = this.channel[ 1 ] / 255, b = this.channel[ 2 ] / 255;

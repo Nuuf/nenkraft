@@ -34,14 +34,14 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
 
     ( function () {
-      var i = 100000;
+      var i = 10000;
       while ( i-- ) {
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
         p.colorObj.b = 0.2;
         p.colorObj.a = RF( 0.8, 1.0 );
-        p.style.pixel.size = RF( 1, 2 );
+        p.style.pixel.size = RF( 1, 3 );
         var g = new nk.Graphic2D( HW, HH, p );
         g.data.velocity = new nk.Vector2D( RF( -10, 10 ), RF( -1, 10 ) );
         g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );

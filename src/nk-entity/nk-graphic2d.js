@@ -23,6 +23,7 @@ module.exports = function ( Nenkraft ) {
   Graphic2D.prototype.interactive = true;
   //Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
+    this.PreDraw( _rc );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
@@ -41,6 +42,7 @@ module.exports = function ( Nenkraft ) {
     }
   };
   Graphic2D.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
