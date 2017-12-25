@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.2 (Alpha)
+* @version     0.4.3 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 122);
+/******/ 	return __webpack_require__(__webpack_require__.s = 124);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -84,14 +84,15 @@ __webpack_require__( 3 );
 __webpack_require__( 4 );
 __webpack_require__( 5 );
 __webpack_require__( 8 );
-__webpack_require__( 9 );
 __webpack_require__( 10 );
+__webpack_require__( 11 );
 __webpack_require__( 6 );
 __webpack_require__( 7 );
+__webpack_require__( 9 );
 
 var tests = [];
 
-var context = __webpack_require__(87);
+var context = __webpack_require__(88);
 
 context.keys().forEach( function ( file ) {
   tests.push( context( file ) );
@@ -143,16 +144,21 @@ module.exports = __webpack_require__.p + "assets/images/glass-of-blueberryjuice.
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/images/raindrop.png";
+module.exports = __webpack_require__.p + "assets/images/invaders/invaders.png";
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "assets/images/raindrop.png";
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports = __webpack_require__.p + "assets/images/smudge.png";
 
 /***/ }),
-/* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
@@ -228,43 +234,45 @@ module.exports = __webpack_require__.p + "assets/images/smudge.png";
 /* 84 */,
 /* 85 */,
 /* 86 */,
-/* 87 */
+/* 87 */,
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 88,
-	"./animation.test": 89,
-	"./bitmapfont.test": 90,
-	"./butterflyish.test": 91,
-	"./cli.test": 92,
-	"./clock.test": 93,
-	"./elasticcollision.test": 94,
-	"./field.test": 95,
-	"./fractree.test": 96,
-	"./grabndrag.test": 97,
-	"./grid.test": 98,
-	"./magnet.test": 99,
-	"./motion.test": 100,
-	"./nightsky.test": 101,
-	"./particles.test": 102,
-	"./platformer.test": 103,
-	"./playground.test": 104,
-	"./polygoncollision.test": 105,
-	"./quadtree.test": 106,
-	"./rain.test": 107,
-	"./raycasting.test": 108,
-	"./reflectivecollision.test": 109,
-	"./sprite.test": 110,
-	"./stresstest.test": 111,
-	"./text.test": 112,
-	"./themask.test": 113,
-	"./webglanimation.test": 114,
-	"./webglcircle.test": 115,
-	"./webglline2d.test": 116,
-	"./webglpixelbatch.test": 117,
-	"./webglrectangle.test": 118,
-	"./webglstresstest.test": 119,
-	"./webgltexturebatch.test": 120
+	"./aabbcollision.test": 89,
+	"./animation.test": 90,
+	"./bitmapfont.test": 91,
+	"./butterflyish.test": 92,
+	"./cli.test": 93,
+	"./clock.test": 94,
+	"./elasticcollision.test": 95,
+	"./field.test": 96,
+	"./fractree.test": 97,
+	"./grabndrag.test": 98,
+	"./grid.test": 99,
+	"./invaders.test": 100,
+	"./magnet.test": 101,
+	"./motion.test": 102,
+	"./nightsky.test": 103,
+	"./particles.test": 104,
+	"./platformer.test": 105,
+	"./playground.test": 106,
+	"./polygoncollision.test": 107,
+	"./quadtree.test": 108,
+	"./rain.test": 109,
+	"./raycasting.test": 110,
+	"./reflectivecollision.test": 111,
+	"./sprite.test": 112,
+	"./stresstest.test": 113,
+	"./text.test": 114,
+	"./themask.test": 115,
+	"./webglanimation.test": 116,
+	"./webglcircle.test": 117,
+	"./webglline2d.test": 118,
+	"./webglpixelbatch.test": 119,
+	"./webglrectangle.test": 120,
+	"./webglstresstest.test": 121,
+	"./webgltexturebatch.test": 122
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -280,10 +288,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 87;
+webpackContext.id = 88;
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -393,7 +401,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -466,7 +474,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -539,7 +547,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -654,7 +662,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -845,7 +853,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -917,7 +925,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1056,7 +1064,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1144,7 +1152,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1230,7 +1238,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1313,7 +1321,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1379,7 +1387,344 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 99 */
+/* 100 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'Invaders' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', 1024 );
+    c.setAttribute( 'height', 800 );
+    c.style.border = '2px solid black';
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '50%';
+    c.style.transform = 'translateX(-50%)';
+
+    var W = c.width, HW = W * 0.5;
+    var H = c.height, HH = H * 0.5;
+    var ratio = W / H;
+
+    var RI = nk.Utils.RandomInteger;
+    var RF = nk.Utils.RandomFloat;
+    var COLLIDE = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
+
+    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
+    var pc = new nk.GLTextureProgramController( stage.gl );
+
+    var playerBulletPool = new nk.Pool();
+    var enemyPool = new nk.Pool();
+
+    var worldScale = new nk.Vector2D( 2.0, 2.0 );
+    var ship = null;
+    var enemyBullets = [];
+    var playerBullets = [];
+    var enemies = [];
+    var shields = [];
+
+    var shieldHealth = 3;
+    var numShields = 16;
+
+    var shieldVerticalPosition = 500;
+
+    var enemySpawnRate = 2;
+    var enemySpeed = 3.0;
+    var enemyHealth = 15;
+
+
+
+    var imageLoader = new nk.ImageLoader( [ {
+      id: 'sheet',
+      src: './../assets/images/invaders/invaders.png',
+      w: 16, h: 16, fw: 128, fh: 16
+    }], true, function () {
+      go();
+    } );
+
+    function go () {
+      stage.ticker.StartAF();
+      pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
+      playerBulletPool.Flood( function () {
+        var b = new nk.Sprite( 0, 0, pc );
+        b.scale.SetV( worldScale );
+        b.UpdateShape();
+        b.anchor.Set( 0.5 );
+        b.data.velocity = new nk.Vector2D();
+        b.data.body = {
+          relative: b.position,
+          shape: b.shape,
+          anchor: b.anchor
+        };
+        b.clip.Set( 16 * 7, 0, 16, 16 );
+        return b;
+      }, 1000 );
+      enemyPool.Flood( function () {
+        var e = new nk.Sprite( 0, 0, pc );
+        e.scale.SetV( worldScale );
+        e.UpdateShape();
+        e.anchor.Set( 0.5 );
+        e.data.velocity = new nk.Vector2D();
+        e.data.body = {
+          relative: e.position,
+          shape: e.shape,
+          anchor: e.anchor
+        };
+        e.clip.Set( 16 * RI( 1, 2 ), 0, 16, 16 );
+        return e;
+      }, 1000 );
+      createShip();
+      createShields();
+      setupListeners();
+      setupProcess();
+    }
+
+    function createShip () {
+      if ( ship ) return;
+      ship = new nk.Sprite( 0, 0, pc );
+      ship.scale.SetV( worldScale );
+      ship.UpdateShape();
+      ship.anchor.Set( 0.5 );
+      ship.x = HW;
+      ship.y = H - ship.height * 0.5;
+      ship.data.velocity = new nk.Vector2D();
+      ship.data.moveSpeed = 8;
+      ship.data.fire = false;
+      ship.data.fireRate = 1;
+      ship.data.fireTimer = 0;
+      ship.data.bulletsPerBlast = 20;
+      stage.Mount( ship );
+    }
+
+    function createPlayerBullet () {
+      var i = ship.data.bulletsPerBlast;
+      while ( i-- ) {
+        var b = playerBulletPool.Retrieve();
+        b.x = ship.x;
+        b.y = ship.y;
+        b.data.velocity.x = 0;
+        b.data.velocity.y = RF( -20, -1 );
+        b.data.velocity.Rotate( nk.Math.DTR(
+          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RI( 2, 3 ), i )
+        ) );
+        if ( b.data.velocity.y > 0 ) {
+          b.data.velocity.y = -b.data.velocity.y;
+        }
+        b.data.lifeSpan = 200;
+        playerBullets.push( b );
+        stage.Mount( b );
+      }
+    }
+
+    function createEnemy () {
+      var e = enemyPool.Retrieve();
+      e.x = RF( 0, W );
+      e.y = 0 - e.height * 0.5;
+      e.data.velocity.x = 0;
+      e.data.velocity.y = enemySpeed;
+      e.data.health = enemyHealth;
+      enemies.push( e );
+      stage.Mount( e );
+    }
+
+    function createShields () {
+      for ( var i = 0; i < numShields; ++i ) {
+        var s = new nk.Sprite( 0, 0, pc );
+        s.scale.SetV( worldScale );
+        s.UpdateShape();
+        s.anchor.Set( 0.5 );
+        s.data.health = shieldHealth;
+        s.data.body = {
+          relative: s.position,
+          shape: s.shape,
+          anchor: s.anchor
+        };
+        s.x = nk.Math.Spread( HW, numShields, s.width * 1.2, i );
+        s.y = shieldVerticalPosition;
+        s.clip.Set( 16 * 3, 0, 16, 16 );
+        shields.push( s );
+        stage.Mount( s );
+      }
+    }
+
+    function setupListeners () {
+      stage.keyboard.onDown.Add( onKeyDown, ship );
+      stage.keyboard.onUp.Add( onKeyUp, ship );
+
+      function onKeyDown ( event ) {
+        var kc = event.data.keyCode;
+        //console.log( kc );
+        switch ( kc ) {
+          case 37:
+            this.data.moveLeft = true;
+            break;
+          case 39:
+            this.data.moveRight = true;
+            break;
+          case 32:
+            this.data.fire = true;
+            break;
+          default: break;
+        }
+      }
+
+      function onKeyUp ( event ) {
+        var kc = event.data.keyCode;
+        switch ( kc ) {
+          case 37:
+            this.data.moveLeft = false;
+            break;
+          case 39:
+            this.data.moveRight = false;
+            break;
+          case 32:
+            this.data.fire = false;
+            break;
+          default: break;
+        }
+      }
+    }
+
+    function setupProcess () {
+      stage.onProcess.Add( onProcess, stage );
+
+      function onProcess () {
+        handleShip();
+        handlePlayerBullets();
+        if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
+          createEnemy();
+        }
+        handleEnemies();
+        handlePlayerBullet_EnemyCollision();
+        handleEnemy_ShieldCollsition();
+        if ( this.ticker.GetTPS() < 24 ) {
+          console.log( this.ticker.GetTPS() );
+        }
+      }
+
+      function handleShip () {
+        var shipWHalf = ship.width * 0.5;
+        if ( ship.data.moveLeft && ship.x > 0 + shipWHalf ) {
+          ship.data.velocity.x = -ship.data.moveSpeed;
+        } else if ( ship.data.moveRight && ship.x < W - shipWHalf ) {
+          ship.data.velocity.x = ship.data.moveSpeed;
+        } else {
+          ship.data.velocity.x = 0;
+        }
+        ship.position.AddV( ship.data.velocity );
+        if ( ship.x < 0 + shipWHalf ) {
+          ship.x = 0 + shipWHalf;
+        } else if ( ship.x > W - shipWHalf ) {
+          ship.x = W - shipWHalf;
+        }
+        if ( ship.data.fire && ship.data.fireTimer === 0 ) {
+          createPlayerBullet();
+          ship.data.fireTimer = ship.data.fireRate;
+        }
+        if ( ship.data.fireTimer > 0 ) {
+          ship.data.fireTimer--;
+        }
+      }
+
+      function handlePlayerBullets () {
+        for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
+          bullet = playerBullets[ i ];
+          if ( bullet ) {
+            bullet.position.AddV( bullet.data.velocity );
+            if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
+              bullet.data.velocity.x = -bullet.data.velocity.x;
+            }
+            if ( --bullet.data.lifeSpan <= 0 ) {
+              bullet.Detach();
+              playerBullets.splice( i, 1 );
+              playerBulletPool.Store( bullet );
+            }
+          }
+
+        }
+      }
+
+      function handleEnemies () {
+        for ( var i = 0, enemy; i < enemies.length; ++i ) {
+          enemy = enemies[ i ];
+          if ( enemy ) {
+            enemy.position.AddV( enemy.data.velocity );
+            if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
+              enemy.Detach();
+              enemies.splice( i, 1 );
+              enemyPool.Store( enemy );
+            }
+          }
+        }
+      }
+
+      function handlePlayerBullet_EnemyCollision () {
+        for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
+          bullet = playerBullets[ i ];
+          if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
+            for ( var j = 0, enemy; j < enemies.length; ++j ) {
+              enemy = enemies[ j ];
+              if ( enemy ) {
+                if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
+                  enemy.data.health--;
+                  bullet.Detach();
+                  playerBullets.splice( i, 1 );
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      function handleEnemy_ShieldCollsition () {
+        for ( var i = 0, shield; i < shields.length; ++i ) {
+          shield = shields[ i ];
+          if ( shield ) {
+            for ( var j = 0, enemy; j < enemies.length; ++j ) {
+              enemy = enemies[ j ];
+              if ( enemy ) {
+                if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
+                  enemy.Detach();
+                  enemies.splice( j, 1 );
+                  enemyPool.Store( enemy );
+                  if ( --shield.data.health <= 0 ) {
+                    shield.Detach();
+                    shields.splice( i, 1 );
+                    break;
+                  } else {
+                    shield.clip.tl.x += 16;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+
+
+
+
+
+
+
+
+    document.body.removeChild( buttonContainer );
+  }
+};
+
+/***/ }),
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1504,7 +1849,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1562,7 +1907,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1659,7 +2004,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1734,7 +2079,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1774,9 +2119,9 @@ module.exports = function () {
     }, {
       id: 'platform',
       src: nk.Utils.GenerateSimpleBase64Png( function () {
-        var path = new nk.Path.AABB2D( 0, 0, 100, 20 );
+        var path = new nk.Path.AABB2D( 0, 0, 50, 10 );
         path.style.fill.applied = false;
-        path.style.stroke.lineWidth = 5;
+        path.style.stroke.lineWidth = 2;
         var t = new nk.Graphic2D( 0, 0, path );
         return t;
       } )
@@ -1900,7 +2245,7 @@ module.exports = function () {
     }
 
     function InitPlatforms () {
-      var i = 100;
+      var i = 200;
       while ( i-- ) {
         var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );
         platform.data.collisionData = {
@@ -1920,7 +2265,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1933,8 +2278,8 @@ module.exports = function () {
 
   function Run () {
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', 1024 );
-    c.setAttribute( 'height', 64 );
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
     c.style.display = 'initial';
     c.style.position = 'absolute';
     c.style.top = '0';
@@ -1950,58 +2295,12 @@ module.exports = function () {
 
     window.stage = stage;
 
-    /*     stage.Mount(
-          new nk.Graphic2D( 0, 0, nk.Path.Line2D( -HW, -HH, HW, HH ) ),
-          new nk.Graphic2D( 0, 0, nk.Path.Line2D( HW, -HH, -HW, HH ) )
-        );
-    
-        var obj = stage.AddChild( new nk.Sprite( 0, 0 ) );
-        obj.anchor.Set( 0.5 );
-        obj.transform.Set( new nk.Matrix2D().SetTransform( 0, 0, 1, 1, nk.Math.RADIAN * 45, 0, 0, 0, 0 ) ); */
-
-    stage.Mount( [
-      new nk.Graphic2D( 0, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'red' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'green' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 2, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'blue' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 3, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'purple' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 4, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'orange' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 5, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'aqua' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 6, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'violet' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 7, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'indianred' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 8, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'orchid' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 9, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'magenta' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 10, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'powderblue' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 11, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'royalblue' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 12, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'darkolivegreen' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 13, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'darkkhaki' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 14, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'steelblue' }, stroke: { applied: false } } ) ),
-      new nk.Graphic2D( 64 * 15, 0, new nk.Path.AABB2D( 0, 0, 64, 64, { fill: { color: 'firebrick' }, stroke: { applied: false } } ) ),
-    ] );
-
-    var t = new nk.Path.Polygon2D( [ 0, 0, 100, 100, 0, 100, 100, 0 ] );
-    console.log( t );
-
-    var x = new nk.Utils.FlagEnum();
-    x.Add( 'FIRE' );
-    x.Add( 'WATER' );
-    x.Add( 'AIR' );
-    x.Add( 'EARTH' );
-    var y = new nk.Utils.FlagList();
-    y.Add( x.FIRE );
-    y.Add( x.WATER );
-    console.log( y.Compare( x.FIRE | x.EARTH ) );
-    console.log( y.Holds( x.FIRE | x.WATER ) );
-    console.log( y.Holds( x.FIRE | x.WATER | x.EARTH ) );
-
-
     document.body.removeChild( buttonContainer );
-
-
   }
 };
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2113,7 +2412,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2171,7 +2470,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2251,7 +2550,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2404,7 +2703,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2536,7 +2835,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2629,7 +2928,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2741,7 +3040,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2784,7 +3083,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2900,7 +3199,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3023,7 +3322,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3122,7 +3421,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3188,7 +3487,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3218,7 +3517,8 @@ module.exports = function () {
     var mX = W / 30;
     var mY = H / 30;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    stage.ticker.Start();
 
     var pc = new nk.GLPixelBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -3227,14 +3527,14 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
 
     ( function () {
-      var i = 10000;
+      var i = 100000;
       while ( i-- ) {
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
-        p.colorObj.b = 0.2;
-        p.colorObj.a = RF( 0.8, 1.0 );
-        p.style.pixel.size = RF( 1, 3 );
+        p.colorObj.b = 0.8;
+        p.colorObj.a = RF( 0.1, 0.6 );
+        p.style.pixel.size = RF( 1, 2 );
         var g = new nk.Graphic2D( HW, HH, p );
         g.data.velocity = new nk.Vector2D( RF( -10, 10 ), RF( -1, 10 ) );
         g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );
@@ -3251,7 +3551,7 @@ module.exports = function () {
         child.position.AddV( child.data.velocity );
         child.UpdateInBuffer();
       } );
-      if ( stage.ticker.GetTPS() < 55 ) {
+      if ( stage.ticker.GetTPS() < 40 ) {
         console.log( stage.ticker.GetTPS() );
       }
     }, stage );
@@ -3267,7 +3567,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3354,7 +3654,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3414,7 +3714,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 24;
+    var fps = 40;
 
     var am = 35;
 
@@ -3498,7 +3798,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3542,7 +3842,7 @@ module.exports = function () {
       pc.BindBasicTexture( tex );
 
       ( function () {
-        var i = 10000;
+        var i = 5000;
         while ( i-- ) {
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
@@ -3572,7 +3872,7 @@ module.exports = function () {
             child.position.AddV( child.data.velocity );
             child.UpdateInBuffer();
           }
-          if ( stage.ticker.GetTPS() < 50 ) {
+          if ( stage.ticker.GetTPS() < 40 ) {
             console.log( stage.ticker.GetTPS() );
           }
         }, stage );
@@ -3592,8 +3892,8 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 121 */,
-/* 122 */
+/* 123 */,
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);
