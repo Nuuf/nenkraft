@@ -17,7 +17,7 @@ module.exports = function ( Nenkraft ) {
   Ticker.prototype.constructor = Ticker;
   //Static
   Ticker.LOG = true;
-  Ticker.GLOBAL_CSS = 'background-color:black;font-family:Arial;font-size:18px;';
+  Ticker.GLOBAL_CSS = 'background-color:black;font-family:Arial;font-size:16px;';
   Ticker.Log = function () {
     if ( Ticker.LOG === false ) return;
     console.log.apply( null, arguments );
