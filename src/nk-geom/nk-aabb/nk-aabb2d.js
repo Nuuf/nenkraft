@@ -61,6 +61,7 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.Scale = function ( _x, _y ) {
     this.tl.Multiply( _x, _y );
     this.br.Multiply( _x, _y );
+    this.ComputeWH();
   };
   AABB2D.prototype.ComputeWH = function () {
     this.w = this.br.x - this.tl.x;
