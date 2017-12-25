@@ -17,7 +17,7 @@ module.exports = function ( Nenkraft ) {
   Pool.prototype.class = null;
   Pool.prototype.objects = null;
   Pool.prototype.floodFunction = null;
-  Pool.prototype.floodAmount = 0;
+  Pool.prototype.floodAmount = 100;
   Pool.prototype.context = null;
   //Methods
   Pool.prototype.Store = function ( _object ) {
@@ -34,9 +34,13 @@ module.exports = function ( Nenkraft ) {
     if ( _amount ) this.floodAmount = _amount;
     if ( _context ) this.context = _context;
     for ( var i = 0; i < this.floodAmount; ++i ) {
-      var object = new this.class();
-      this.Store( object );
-      this.floodFunction.call( this.context, object );
+      if ( this.class != null ) {
+        var object = new this.class();
+        this.Store( object );
+        this.floodFunction.call( this.context, object );
+      } else {
+        this.Store( this.floodFunction.call( this.context ) );
+      }
     }
   };
   Pool.prototype.Flush = function () {

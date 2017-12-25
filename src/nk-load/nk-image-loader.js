@@ -4,12 +4,15 @@
 
 module.exports = function ( Nenkraft ) {
   'use strict';
-  function ImageLoader ( _objs, _createTextures ) {
+  function ImageLoader ( _objs, _createTextures, _onComplete ) {
     if ( !( this instanceof ImageLoader ) ) return new ImageLoader( _objs, _createTextures );
     this.imageCache = new Nenkraft.Utils.Cache( Image );
     this.basicTextureCache = new Nenkraft.Utils.Cache( Nenkraft.Texture.BasicTexture );
     this.onImageLoaded = new Nenkraft.Event.LocalEvent();
     this.onComplete = new Nenkraft.Event.LocalEvent();
+    if ( _onComplete != null ) {
+      this.onComplete.Add( _onComplete, this );
+    }
     if ( _objs !== undefined ) this.Load( _objs, _createTextures );
   }
   ImageLoader.prototype = Object.create( null );

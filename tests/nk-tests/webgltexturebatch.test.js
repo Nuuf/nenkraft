@@ -39,7 +39,7 @@ module.exports = function () {
       pc.BindBasicTexture( tex );
 
       ( function () {
-        var i = 10000;
+        var i = 5000;
         while ( i-- ) {
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
@@ -69,7 +69,7 @@ module.exports = function () {
             child.position.AddV( child.data.velocity );
             child.UpdateInBuffer();
           }
-          if ( stage.ticker.GetTPS() < 50 ) {
+          if ( stage.ticker.GetTPS() < 40 ) {
             console.log( stage.ticker.GetTPS() );
           }
         }, stage );

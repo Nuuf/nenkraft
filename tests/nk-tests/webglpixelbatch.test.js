@@ -25,7 +25,8 @@ module.exports = function () {
     var mX = W / 30;
     var mY = H / 30;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    stage.ticker.Start();
 
     var pc = new nk.GLPixelBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -34,14 +35,14 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
 
     ( function () {
-      var i = 10000;
+      var i = 100000;
       while ( i-- ) {
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
-        p.colorObj.b = 0.2;
-        p.colorObj.a = RF( 0.8, 1.0 );
-        p.style.pixel.size = RF( 1, 3 );
+        p.colorObj.b = 0.8;
+        p.colorObj.a = RF( 0.1, 0.6 );
+        p.style.pixel.size = RF( 1, 2 );
         var g = new nk.Graphic2D( HW, HH, p );
         g.data.velocity = new nk.Vector2D( RF( -10, 10 ), RF( -1, 10 ) );
         g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );
@@ -58,7 +59,7 @@ module.exports = function () {
         child.position.AddV( child.data.velocity );
         child.UpdateInBuffer();
       } );
-      if ( stage.ticker.GetTPS() < 55 ) {
+      if ( stage.ticker.GetTPS() < 40 ) {
         console.log( stage.ticker.GetTPS() );
       }
     }, stage );

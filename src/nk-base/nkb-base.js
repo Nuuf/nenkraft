@@ -10,6 +10,6 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.4.2 (Alpha)';
+  Nenkraft.VERSION = '0.4.3 (Alpha)';
   console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
 };

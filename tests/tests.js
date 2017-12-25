@@ -7,6 +7,7 @@ require( './../assets/images/raindrop.png' );
 require( './../assets/images/smudge.png' );
 require( './../assets/images/colors.png' );
 require( './../assets/images/font.png' );
+require( './../assets/images/invaders/invaders.png' );
 
 var tests = [];
 

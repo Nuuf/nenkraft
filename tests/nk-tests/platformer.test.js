@@ -35,9 +35,9 @@ module.exports = function () {
     }, {
       id: 'platform',
       src: nk.Utils.GenerateSimpleBase64Png( function () {
-        var path = new nk.Path.AABB2D( 0, 0, 100, 20 );
+        var path = new nk.Path.AABB2D( 0, 0, 50, 10 );
         path.style.fill.applied = false;
-        path.style.stroke.lineWidth = 5;
+        path.style.stroke.lineWidth = 2;
         var t = new nk.Graphic2D( 0, 0, path );
         return t;
       } )
@@ -161,7 +161,7 @@ module.exports = function () {
     }
 
     function InitPlatforms () {
-      var i = 100;
+      var i = 200;
       while ( i-- ) {
         var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );
         platform.data.collisionData = {
