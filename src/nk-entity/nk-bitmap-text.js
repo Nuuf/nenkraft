@@ -77,7 +77,7 @@ module.exports = function ( Nenkraft ) {
       );
     }
   };
-  BitmapText.prototype.GLDrawText = function ( _gl ) {
+  BitmapText.prototype.GLDrawText = function () {
     for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
       char = chars[ i ];
       this.programController.Execute(
