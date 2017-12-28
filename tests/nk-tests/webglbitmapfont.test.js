@@ -1,7 +1,7 @@
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'BitmapFont' );
+  button.setAttribute( 'value', 'WebGL BitmapFont' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
   buttonContainer.appendChild( button );
@@ -14,13 +14,13 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0 );
-    stage.backgroundColor = '#FFF';
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
+    var fontPc = new nk.GLTextureProgramController( stage.gl );
 
     var xhrloader = new nk.XHRLoader();
     var imgloader = new nk.ImageLoader();
@@ -48,10 +48,11 @@ module.exports = function () {
 
     function Go () {
       if ( done > 1 ) {
+        fontPc.BindBasicTexture( imgloader.GetBasicTexture( 'fontimg' ) );
         test = new nk.BitmapText(
           0,
           0,
-          imgloader.GetBasicTexture( 'fontimg' ),
+          fontPc,
           xhrloader.GetData( 'fontdataxml' ),
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         );

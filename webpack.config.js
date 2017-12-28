@@ -8,36 +8,34 @@ var webpack = require( 'webpack' ),
   PRODUCTION = process.env.NODE_ENV === 'production',
   DEVELOPMENT = !PRODUCTION;
 
-var entry = PRODUCTION
-  ? {
+var entry =
+  PRODUCTION ? {
     nk: [
       './src/nk.js'
     ],
     tests: [
       './tests/tests.js',
     ]
-  }
-  : {
-    nk: [
-      './src/nk.js',
-      './tests/tests.js',
-      'webpack/hot/dev-server',
-      'webpack-dev-server/client?http://localhost:8080'
-    ]
-  };
+  } : {
+      nk: [
+        './src/nk.js',
+        './tests/tests.js',
+        'webpack/hot/dev-server',
+        'webpack-dev-server/client?http://localhost:8080'
+      ]
+    };
 
-var plugins = PRODUCTION
-  ? [
+var plugins =
+  PRODUCTION ? [
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin( 'style-[contenthash:10].css' ),
     new HTMLWebpackPlugin( {
       template: 'build_template.html'
     } ),
     new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } )
-  ]
-  : [
-    new webpack.HotModuleReplacementPlugin()
-  ];
+  ] : [
+      new webpack.HotModuleReplacementPlugin()
+    ];
 
 plugins.push(
   new webpack.DefinePlugin( {
@@ -47,11 +45,11 @@ plugins.push(
 );
 
 var cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]--[local]';
-var cssLoader = PRODUCTION
-  ? ExtractTextPlugin.extract( {
+var cssLoader =
+  PRODUCTION ? ExtractTextPlugin.extract( {
     use: [ 'css-loader?minimize&localIdentName=' + cssIdentifier, 'postcss-loader' ]
   } )
-  : [ 'style-loader', 'css-loader?localIdentName=' + cssIdentifier, 'postcss-loader' ];
+    : [ 'style-loader', 'css-loader?localIdentName=' + cssIdentifier, 'postcss-loader' ];
 
 console.log( JSON.stringify( entry.nk ) || colors.red( 'undefined' ), os.EOL + 'entry nk' );
 console.log( JSON.stringify( entry.tests ) || colors.red( 'undefined' ), os.EOL + 'entry tests' );
