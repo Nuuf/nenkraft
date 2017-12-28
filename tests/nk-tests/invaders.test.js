@@ -29,6 +29,10 @@ module.exports = function () {
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     var pc = new nk.GLTextureProgramController( stage.gl );
 
+    var worldBounds = new nk.AABB2D();
+    stage.ComputeBounds();
+    worldBounds.SetC( stage.bounds );
+
     var playerBulletPool = new nk.Pool();
     var enemyPool = new nk.Pool();
 
@@ -40,15 +44,15 @@ module.exports = function () {
     var shields = [];
 
     var shieldHealth = 3;
-    var numShields = 16;
+    var numShields = 22;
 
     var shieldVerticalPosition = 500;
 
     var enemySpawnRate = 2;
     var enemySpeed = 3.0;
-    var enemyHealth = 15;
+    var enemyHealth = 20;
 
-
+    var root = new nk.QuadtreeNode( worldBounds, 0, 5, 5 );
 
     var imageLoader = new nk.ImageLoader( [ {
       id: 'sheet',
@@ -59,7 +63,7 @@ module.exports = function () {
     } );
 
     function go () {
-      stage.ticker.StartAF();
+      stage.ticker.Start();
       pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
       playerBulletPool.Flood( function () {
         var b = new nk.Sprite( 0, 0, pc );
@@ -106,9 +110,9 @@ module.exports = function () {
       ship.data.velocity = new nk.Vector2D();
       ship.data.moveSpeed = 8;
       ship.data.fire = false;
-      ship.data.fireRate = 1;
+      ship.data.fireRate = 2;
       ship.data.fireTimer = 0;
-      ship.data.bulletsPerBlast = 20;
+      ship.data.bulletsPerBlast = 50;
       stage.Mount( ship );
     }
 
@@ -121,7 +125,7 @@ module.exports = function () {
         b.data.velocity.x = 0;
         b.data.velocity.y = RF( -20, -1 );
         b.data.velocity.Rotate( nk.Math.DTR(
-          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RI( 2, 3 ), i )
+          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RF( 1, 2 ), i )
         ) );
         if ( b.data.velocity.y > 0 ) {
           b.data.velocity.y = -b.data.velocity.y;
@@ -146,6 +150,7 @@ module.exports = function () {
     function createShields () {
       for ( var i = 0; i < numShields; ++i ) {
         var s = new nk.Sprite( 0, 0, pc );
+        s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
         s.UpdateShape();
         s.anchor.Set( 0.5 );
@@ -206,14 +211,17 @@ module.exports = function () {
 
       function onProcess () {
         handleShip();
-        handlePlayerBullets();
         if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
           createEnemy();
         }
         handleEnemies();
-        handlePlayerBullet_EnemyCollision();
-        handleEnemy_ShieldCollsition();
-        if ( this.ticker.GetTPS() < 24 ) {
+        root.Dump();
+        var i;
+        for ( i = 0; i < enemies.length; ++i ) {
+          root.Add( enemies[ i ].bounds );
+        }
+        handlePlayerBullets();
+        if ( this.ticker.GetTPS() < 40 ) {
           console.log( this.ticker.GetTPS() );
         }
       }
@@ -250,10 +258,16 @@ module.exports = function () {
             if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
               bullet.data.velocity.x = -bullet.data.velocity.x;
             }
+            bullet.ComputeBounds();
             if ( --bullet.data.lifeSpan <= 0 ) {
               bullet.Detach();
               playerBullets.splice( i, 1 );
               playerBulletPool.Store( bullet );
+            } else {
+              // We can cheat, because we have so many objects.
+              if ( RI( 1, 3 ) === 2 ) {
+                handlePlayerBullet_EnemyCollision( bullet, i );
+              }
             }
           }
 
@@ -265,54 +279,52 @@ module.exports = function () {
           enemy = enemies[ i ];
           if ( enemy ) {
             enemy.position.AddV( enemy.data.velocity );
+            enemy.ComputeBounds();
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
               enemy.Detach();
               enemies.splice( i, 1 );
               enemyPool.Store( enemy );
+            } else {
+              handleEnemy_ShieldCollision( enemy, i );
             }
           }
         }
       }
 
-      function handlePlayerBullet_EnemyCollision () {
-        for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
-          bullet = playerBullets[ i ];
-          if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
-            for ( var j = 0, enemy; j < enemies.length; ++j ) {
-              enemy = enemies[ j ];
-              if ( enemy ) {
-                if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
-                  enemy.data.health--;
-                  bullet.Detach();
-                  playerBullets.splice( i, 1 );
-                  break;
-                }
+      function handlePlayerBullet_EnemyCollision ( bullet, index ) {
+        if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
+          var convergence = root.Converge( bullet.bounds );
+          for ( var i = 0, enemy; i < convergence.length; ++i ) {
+            enemy = convergence[ i ].belongsTo;
+            if ( enemy ) {
+              if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
+                enemy.data.health--;
+                bullet.Detach();
+                playerBullets.splice( index, 1 );
+                break;
               }
             }
           }
         }
       }
 
-      function handleEnemy_ShieldCollsition () {
+      function handleEnemy_ShieldCollision ( enemy, index ) {
+        if ( !enemy || enemy.y < shieldVerticalPosition - enemy.height ) return;
         for ( var i = 0, shield; i < shields.length; ++i ) {
           shield = shields[ i ];
           if ( shield ) {
-            for ( var j = 0, enemy; j < enemies.length; ++j ) {
-              enemy = enemies[ j ];
-              if ( enemy ) {
-                if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
-                  enemy.Detach();
-                  enemies.splice( j, 1 );
-                  enemyPool.Store( enemy );
-                  if ( --shield.data.health <= 0 ) {
-                    shield.Detach();
-                    shields.splice( i, 1 );
-                    break;
-                  } else {
-                    shield.clip.tl.x += 16;
-                  }
-                }
+            if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
+              enemy.Detach();
+              enemies.splice( index, 1 );
+              enemyPool.Store( enemy );
+              if ( --shield.data.health <= 0 ) {
+                shield.Detach();
+                shields.splice( i, 1 );
+                break;
+              } else {
+                shield.clip.tl.x += 16;
               }
+              break;
             }
           }
         }

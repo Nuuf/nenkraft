@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.3 (Alpha)
+* @version     0.4.5 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 124);
+/******/ 	return __webpack_require__(__webpack_require__.s = 125);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -267,12 +267,13 @@ var map = {
 	"./text.test": 114,
 	"./themask.test": 115,
 	"./webglanimation.test": 116,
-	"./webglcircle.test": 117,
-	"./webglline2d.test": 118,
-	"./webglpixelbatch.test": 119,
-	"./webglrectangle.test": 120,
-	"./webglstresstest.test": 121,
-	"./webgltexturebatch.test": 122
+	"./webglbitmapfont.test": 117,
+	"./webglcircle.test": 118,
+	"./webglline2d.test": 119,
+	"./webglpixelbatch.test": 120,
+	"./webglrectangle.test": 121,
+	"./webglstresstest.test": 122,
+	"./webgltexturebatch.test": 123
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -536,8 +537,8 @@ module.exports = function () {
         );
         console.log( test );
         test.maxWidth = window.innerWidth;
-        test.ComputeText();
         stage.AddChild( test );
+        test.ComputeText();
       }
     }
 
@@ -1421,6 +1422,10 @@ module.exports = function () {
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     var pc = new nk.GLTextureProgramController( stage.gl );
 
+    var worldBounds = new nk.AABB2D();
+    stage.ComputeBounds();
+    worldBounds.SetC( stage.bounds );
+
     var playerBulletPool = new nk.Pool();
     var enemyPool = new nk.Pool();
 
@@ -1432,15 +1437,15 @@ module.exports = function () {
     var shields = [];
 
     var shieldHealth = 3;
-    var numShields = 16;
+    var numShields = 22;
 
     var shieldVerticalPosition = 500;
 
     var enemySpawnRate = 2;
     var enemySpeed = 3.0;
-    var enemyHealth = 15;
+    var enemyHealth = 20;
 
-
+    var root = new nk.QuadtreeNode( worldBounds, 0, 5, 5 );
 
     var imageLoader = new nk.ImageLoader( [ {
       id: 'sheet',
@@ -1451,7 +1456,7 @@ module.exports = function () {
     } );
 
     function go () {
-      stage.ticker.StartAF();
+      stage.ticker.Start();
       pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
       playerBulletPool.Flood( function () {
         var b = new nk.Sprite( 0, 0, pc );
@@ -1498,9 +1503,9 @@ module.exports = function () {
       ship.data.velocity = new nk.Vector2D();
       ship.data.moveSpeed = 8;
       ship.data.fire = false;
-      ship.data.fireRate = 1;
+      ship.data.fireRate = 2;
       ship.data.fireTimer = 0;
-      ship.data.bulletsPerBlast = 20;
+      ship.data.bulletsPerBlast = 50;
       stage.Mount( ship );
     }
 
@@ -1513,7 +1518,7 @@ module.exports = function () {
         b.data.velocity.x = 0;
         b.data.velocity.y = RF( -20, -1 );
         b.data.velocity.Rotate( nk.Math.DTR(
-          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RI( 2, 3 ), i )
+          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RF( 1, 2 ), i )
         ) );
         if ( b.data.velocity.y > 0 ) {
           b.data.velocity.y = -b.data.velocity.y;
@@ -1538,6 +1543,7 @@ module.exports = function () {
     function createShields () {
       for ( var i = 0; i < numShields; ++i ) {
         var s = new nk.Sprite( 0, 0, pc );
+        s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
         s.UpdateShape();
         s.anchor.Set( 0.5 );
@@ -1598,14 +1604,17 @@ module.exports = function () {
 
       function onProcess () {
         handleShip();
-        handlePlayerBullets();
         if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
           createEnemy();
         }
         handleEnemies();
-        handlePlayerBullet_EnemyCollision();
-        handleEnemy_ShieldCollsition();
-        if ( this.ticker.GetTPS() < 24 ) {
+        root.Dump();
+        var i;
+        for ( i = 0; i < enemies.length; ++i ) {
+          root.Add( enemies[ i ].bounds );
+        }
+        handlePlayerBullets();
+        if ( this.ticker.GetTPS() < 40 ) {
           console.log( this.ticker.GetTPS() );
         }
       }
@@ -1642,10 +1651,16 @@ module.exports = function () {
             if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
               bullet.data.velocity.x = -bullet.data.velocity.x;
             }
+            bullet.ComputeBounds();
             if ( --bullet.data.lifeSpan <= 0 ) {
               bullet.Detach();
               playerBullets.splice( i, 1 );
               playerBulletPool.Store( bullet );
+            } else {
+              // We can cheat, because we have so many objects.
+              if ( RI( 1, 3 ) === 2 ) {
+                handlePlayerBullet_EnemyCollision( bullet, i );
+              }
             }
           }
 
@@ -1657,54 +1672,52 @@ module.exports = function () {
           enemy = enemies[ i ];
           if ( enemy ) {
             enemy.position.AddV( enemy.data.velocity );
+            enemy.ComputeBounds();
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
               enemy.Detach();
               enemies.splice( i, 1 );
               enemyPool.Store( enemy );
+            } else {
+              handleEnemy_ShieldCollision( enemy, i );
             }
           }
         }
       }
 
-      function handlePlayerBullet_EnemyCollision () {
-        for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
-          bullet = playerBullets[ i ];
-          if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
-            for ( var j = 0, enemy; j < enemies.length; ++j ) {
-              enemy = enemies[ j ];
-              if ( enemy ) {
-                if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
-                  enemy.data.health--;
-                  bullet.Detach();
-                  playerBullets.splice( i, 1 );
-                  break;
-                }
+      function handlePlayerBullet_EnemyCollision ( bullet, index ) {
+        if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
+          var convergence = root.Converge( bullet.bounds );
+          for ( var i = 0, enemy; i < convergence.length; ++i ) {
+            enemy = convergence[ i ].belongsTo;
+            if ( enemy ) {
+              if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
+                enemy.data.health--;
+                bullet.Detach();
+                playerBullets.splice( index, 1 );
+                break;
               }
             }
           }
         }
       }
 
-      function handleEnemy_ShieldCollsition () {
+      function handleEnemy_ShieldCollision ( enemy, index ) {
+        if ( !enemy || enemy.y < shieldVerticalPosition - enemy.height ) return;
         for ( var i = 0, shield; i < shields.length; ++i ) {
           shield = shields[ i ];
           if ( shield ) {
-            for ( var j = 0, enemy; j < enemies.length; ++j ) {
-              enemy = enemies[ j ];
-              if ( enemy ) {
-                if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
-                  enemy.Detach();
-                  enemies.splice( j, 1 );
-                  enemyPool.Store( enemy );
-                  if ( --shield.data.health <= 0 ) {
-                    shield.Detach();
-                    shields.splice( i, 1 );
-                    break;
-                  } else {
-                    shield.clip.tl.x += 16;
-                  }
-                }
+            if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
+              enemy.Detach();
+              enemies.splice( index, 1 );
+              enemyPool.Store( enemy );
+              if ( --shield.data.health <= 0 ) {
+                shield.Detach();
+                shields.splice( i, 1 );
+                break;
+              } else {
+                shield.clip.tl.x += 16;
               }
+              break;
             }
           }
         }
@@ -3328,6 +3341,80 @@ module.exports = function () {
 module.exports = function () {
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL BitmapFont' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var W = c.width, HW = W * 0.5;
+    var H = c.height, HH = H * 0.5;
+
+    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
+    var fontPc = new nk.GLTextureProgramController( stage.gl );
+
+    var xhrloader = new nk.XHRLoader();
+    var imgloader = new nk.ImageLoader();
+    var done = 0;
+    xhrloader.Load( [
+      { id: 'fontdataxml', src: './assets/xhr/font.fnt', type: 'xml' },
+      { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' }
+    ] );
+    imgloader.Load( [
+      { id: 'fontimg', src: './assets/images/font.png' }
+    ], true );
+    xhrloader.onComplete.Add( function ( event ) {
+      console.log( event.data );
+      console.log( JSON.stringify( event.data.dataCache.items[ 0 ].data ) === JSON.stringify( event.data.dataCache.items[ 1 ].data ) );
+      done++;
+      Go();
+    } );
+    imgloader.onComplete.Add( function ( event ) {
+      console.log( event.data );
+      done++;
+      Go();
+    } );
+
+    var test = null;
+
+    function Go () {
+      if ( done > 1 ) {
+        fontPc.BindBasicTexture( imgloader.GetBasicTexture( 'fontimg' ) );
+        test = new nk.BitmapText(
+          0,
+          0,
+          fontPc,
+          xhrloader.GetData( 'fontdataxml' ),
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        );
+        console.log( test );
+        test.maxWidth = window.innerWidth;
+        stage.AddChild( test );
+        test.ComputeText();
+      }
+    }
+
+
+    document.body.removeChild( buttonContainer );
+  }
+};
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Circle' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -3421,7 +3508,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3487,7 +3574,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3567,7 +3654,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3654,7 +3741,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3798,7 +3885,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3892,8 +3979,8 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 123 */,
-/* 124 */
+/* 124 */,
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

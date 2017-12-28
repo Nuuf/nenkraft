@@ -20,7 +20,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureBatchProgramController.prototype.essenceBuffer = null;
   GLTextureBatchProgramController.prototype.dataBuffer = null;
   GLTextureBatchProgramController.prototype.indexBuffer = null;
-  GLTextureBatchProgramController.prototype.prevNumElements = null;
+  GLTextureBatchProgramController.prototype.previousNumberOfElements = null;
   //Methods
   GLTextureBatchProgramController.prototype.BindBasicTexture = function ( _texture ) {
     var gl = this.gl;
@@ -54,7 +54,7 @@ module.exports = function ( Nenkraft ) {
     this.AssignAttribute( 'aTransformation3' );
     this.AssignUniform( 'uImage' );
   };
-  GLTextureBatchProgramController.prototype.Execute = function ( _data, _numElements ) {
+  GLTextureBatchProgramController.prototype.Execute = function ( _data, _numberOfElements ) {
     var gl = this.gl;
     var aia = this.aia;
     var attributes = this.attributes;
@@ -74,7 +74,7 @@ module.exports = function ( Nenkraft ) {
       Super.LAST_USED_CONTROLLER = this;
     }
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
-    if ( _numElements !== this.prevNumElements ) {
+    if ( _numberOfElements !== this.previousNumberOfElements ) {
       gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );
     } else {
       gl.bufferSubData( gl.ARRAY_BUFFER, 0, _data );
@@ -106,7 +106,7 @@ module.exports = function ( Nenkraft ) {
     gl.enableVertexAttribArray( attributes.aTransformation3 );
     gl.vertexAttribPointer( attributes.aTransformation3, 3, gl.FLOAT, false, 108, 96 );
     aia.vertexAttribDivisorANGLE( attributes.aTransformation3, 1 );
-    aia.drawArraysInstancedANGLE( gl.TRIANGLE_STRIP, 0, 6, _numElements );
+    aia.drawArraysInstancedANGLE( gl.TRIANGLE_STRIP, 0, 6, _numberOfElements );
   };
   Nenkraft.Controller.GLTextureBatchProgramController = GLTextureBatchProgramController;
   Nenkraft.GLTextureBatchProgramController = GLTextureBatchProgramController;

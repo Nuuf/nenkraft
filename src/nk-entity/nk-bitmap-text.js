@@ -5,7 +5,7 @@
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Sprite;
-  var Char = Nenkraft.Utils.Char;
+  var Char = Nenkraft.Entity.Char;
   function BitmapText ( _x, _y, _texture, _data, _text ) {
     if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
     Super.call( this, _x, _y, _texture );
@@ -46,23 +46,55 @@ module.exports = function ( Nenkraft ) {
       }
     }
   };
+  BitmapText.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
+    if ( this.render === true ) {
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      if ( this.display === true && this.programController !== null ) {
+        this.GLDrawText( _gl );
+      }
+      if ( this.children.length > 0 && this.display === true ) {
+        if ( this.isBatchParent === true ) {
+          this.GLBatchDrawChildren( _gl );
+        } else {
+          this.GLDrawChildren( _gl );
+        }
+      }
+    }
+  };
   BitmapText.prototype.DrawText = function ( _rc ) {
     for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
       char = chars[ i ];
       _rc.drawImage(
         this.texture.image,
-        char.x,
-        char.y,
-        char.width,
-        char.height,
-        char.position.x,
-        char.position.y,
-        char.width,
-        char.height
+        char.cx, char.cy,
+        char.width, char.height,
+        char.position.x, char.position.y,
+        char.width, char.height
       );
     }
   };
+  BitmapText.prototype.GLDrawText = function () {
+    for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
+      char = chars[ i ];
+      this.programController.Execute(
+        char.transform.worldTransform.AsArray( true ),
+        char.translation.AsArray( true ),
+        char.transformation.AsArray( true )
+      );
+    }
+  };
+  BitmapText.prototype.GetBufferData = function () {
+
+  };
+  BitmapText.prototype.UpdateInBuffer = function () {
+
+  };
   BitmapText.prototype.ComputeText = function () {
+    this.UpdateTransform();
     this.chars.length = 0;
     var kernings = this.fontData.data.font.kernings.kerning;
     var lineNum = 0;
@@ -76,6 +108,8 @@ module.exports = function ( Nenkraft ) {
         char.yadvance = this.lineHeight * ++lineNum;
         char.position.Add( char.xoffset, char.yoffset + char.yadvance );
       }
+      char.parent = this;
+      char.UpdateMatrices();
       chars.push( char );
     }
   };

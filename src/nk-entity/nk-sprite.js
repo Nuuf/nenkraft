@@ -91,10 +91,10 @@ module.exports = function ( Nenkraft ) {
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
-        this.UpdateTextureTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       if ( this.display === true && this.programController !== null ) {
+        this.UpdateTextureTransform();
         this.programController.Execute(
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),

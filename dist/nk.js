@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.3 (Alpha)
+* @version     0.4.5 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 123);
+/******/ 	return __webpack_require__(__webpack_require__.s = 124);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -111,59 +111,59 @@ module.exports = g;
 var namespace = Object.create( null );
 
 __webpack_require__( 21 )( namespace );
-__webpack_require__( 69 )( namespace );
-__webpack_require__( 56 )( namespace );
-__webpack_require__( 79 )( namespace );
-__webpack_require__( 85 )( namespace );
+__webpack_require__( 70 )( namespace );
+__webpack_require__( 57 )( namespace );
 __webpack_require__( 80 )( namespace );
+__webpack_require__( 85 )( namespace );
+__webpack_require__( 81 )( namespace );
 __webpack_require__( 87 )( namespace );
 __webpack_require__( 82 )( namespace );
 __webpack_require__( 84 )( namespace );
 __webpack_require__( 83 )( namespace );
-__webpack_require__( 81 )( namespace );
-__webpack_require__( 70 )( namespace );
-__webpack_require__( 72 )( namespace );
-__webpack_require__( 73 )( namespace );
-__webpack_require__( 75 )( namespace );
 __webpack_require__( 71 )( namespace );
+__webpack_require__( 73 )( namespace );
 __webpack_require__( 74 )( namespace );
 __webpack_require__( 76 )( namespace );
-__webpack_require__( 45 )( namespace );
-__webpack_require__( 44 )( namespace );
+__webpack_require__( 72 )( namespace );
+__webpack_require__( 75 )( namespace );
 __webpack_require__( 77 )( namespace );
+__webpack_require__( 46 )( namespace );
+__webpack_require__( 45 )( namespace );
 __webpack_require__( 78 )( namespace );
+__webpack_require__( 79 )( namespace );
+__webpack_require__( 62 )( namespace );
 __webpack_require__( 61 )( namespace );
-__webpack_require__( 60 )( namespace );
-__webpack_require__( 57 )( namespace );
 __webpack_require__( 58 )( namespace );
 __webpack_require__( 59 )( namespace );
-__webpack_require__( 48 )( namespace );
-__webpack_require__( 46 )( namespace );
+__webpack_require__( 60 )( namespace );
 __webpack_require__( 49 )( namespace );
 __webpack_require__( 47 )( namespace );
-__webpack_require__( 54 )( namespace );
-__webpack_require__( 55 )( namespace );
-__webpack_require__( 63 )( namespace );
-__webpack_require__( 62 )( namespace );
-__webpack_require__( 86 )( namespace );
-__webpack_require__( 51 )( namespace );
 __webpack_require__( 50 )( namespace );
-__webpack_require__( 32 )( namespace );
-__webpack_require__( 67 )( namespace );
-__webpack_require__( 66 )( namespace );
+__webpack_require__( 48 )( namespace );
+__webpack_require__( 55 )( namespace );
+__webpack_require__( 56 )( namespace );
 __webpack_require__( 64 )( namespace );
+__webpack_require__( 63 )( namespace );
+__webpack_require__( 86 )( namespace );
+__webpack_require__( 52 )( namespace );
+__webpack_require__( 51 )( namespace );
+__webpack_require__( 32 )( namespace );
 __webpack_require__( 68 )( namespace );
+__webpack_require__( 67 )( namespace );
 __webpack_require__( 65 )( namespace );
-__webpack_require__( 36 )( namespace );
-__webpack_require__( 35 )( namespace );
-__webpack_require__( 34 )( namespace );
-__webpack_require__( 42 )( namespace );
+__webpack_require__( 69 )( namespace );
+__webpack_require__( 66 )( namespace );
 __webpack_require__( 37 )( namespace );
+__webpack_require__( 36 )( namespace );
+__webpack_require__( 34 )( namespace );
+__webpack_require__( 43 )( namespace );
 __webpack_require__( 38 )( namespace );
 __webpack_require__( 39 )( namespace );
 __webpack_require__( 40 )( namespace );
-__webpack_require__( 43 )( namespace );
 __webpack_require__( 41 )( namespace );
+__webpack_require__( 44 )( namespace );
+__webpack_require__( 42 )( namespace );
+__webpack_require__( 35 )( namespace );
 __webpack_require__( 33 )( namespace );
 __webpack_require__( 20 )( namespace );
 __webpack_require__( 18 )( namespace );
@@ -171,8 +171,8 @@ __webpack_require__( 19 )( namespace );
 __webpack_require__( 30 )( namespace );
 __webpack_require__( 29 )( namespace );
 __webpack_require__( 31 )( namespace );
-__webpack_require__( 52 )( namespace );
 __webpack_require__( 53 )( namespace );
+__webpack_require__( 54 )( namespace );
 __webpack_require__( 25 )( namespace );
 __webpack_require__( 23 )( namespace );
 __webpack_require__( 26 )( namespace );
@@ -466,7 +466,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.4.3 (Alpha)';
+  Nenkraft.VERSION = '0.4.5 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -850,7 +850,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureBatchProgramController.prototype.essenceBuffer = null;
   GLTextureBatchProgramController.prototype.dataBuffer = null;
   GLTextureBatchProgramController.prototype.indexBuffer = null;
-  GLTextureBatchProgramController.prototype.prevNumElements = null;
+  GLTextureBatchProgramController.prototype.previousNumberOfElements = null;
   //Methods
   GLTextureBatchProgramController.prototype.BindBasicTexture = function ( _texture ) {
     var gl = this.gl;
@@ -884,7 +884,7 @@ module.exports = function ( Nenkraft ) {
     this.AssignAttribute( 'aTransformation3' );
     this.AssignUniform( 'uImage' );
   };
-  GLTextureBatchProgramController.prototype.Execute = function ( _data, _numElements ) {
+  GLTextureBatchProgramController.prototype.Execute = function ( _data, _numberOfElements ) {
     var gl = this.gl;
     var aia = this.aia;
     var attributes = this.attributes;
@@ -904,7 +904,7 @@ module.exports = function ( Nenkraft ) {
       Super.LAST_USED_CONTROLLER = this;
     }
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
-    if ( _numElements !== this.prevNumElements ) {
+    if ( _numberOfElements !== this.previousNumberOfElements ) {
       gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );
     } else {
       gl.bufferSubData( gl.ARRAY_BUFFER, 0, _data );
@@ -936,7 +936,7 @@ module.exports = function ( Nenkraft ) {
     gl.enableVertexAttribArray( attributes.aTransformation3 );
     gl.vertexAttribPointer( attributes.aTransformation3, 3, gl.FLOAT, false, 108, 96 );
     aia.vertexAttribDivisorANGLE( attributes.aTransformation3, 1 );
-    aia.drawArraysInstancedANGLE( gl.TRIANGLE_STRIP, 0, 6, _numElements );
+    aia.drawArraysInstancedANGLE( gl.TRIANGLE_STRIP, 0, 6, _numberOfElements );
   };
   Nenkraft.Controller.GLTextureBatchProgramController = GLTextureBatchProgramController;
   Nenkraft.GLTextureBatchProgramController = GLTextureBatchProgramController;
@@ -1281,7 +1281,7 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Sprite;
-  var Char = Nenkraft.Utils.Char;
+  var Char = Nenkraft.Entity.Char;
   function BitmapText ( _x, _y, _texture, _data, _text ) {
     if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
     Super.call( this, _x, _y, _texture );
@@ -1322,23 +1322,55 @@ module.exports = function ( Nenkraft ) {
       }
     }
   };
+  BitmapText.prototype.GLDraw = function ( _gl ) {
+    this.GLPreDraw( _gl );
+    if ( this.render === true ) {
+      if ( this.transformShouldUpdate === true ) {
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      }
+      if ( this.display === true && this.programController !== null ) {
+        this.GLDrawText( _gl );
+      }
+      if ( this.children.length > 0 && this.display === true ) {
+        if ( this.isBatchParent === true ) {
+          this.GLBatchDrawChildren( _gl );
+        } else {
+          this.GLDrawChildren( _gl );
+        }
+      }
+    }
+  };
   BitmapText.prototype.DrawText = function ( _rc ) {
     for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
       char = chars[ i ];
       _rc.drawImage(
         this.texture.image,
-        char.x,
-        char.y,
-        char.width,
-        char.height,
-        char.position.x,
-        char.position.y,
-        char.width,
-        char.height
+        char.cx, char.cy,
+        char.width, char.height,
+        char.position.x, char.position.y,
+        char.width, char.height
       );
     }
   };
+  BitmapText.prototype.GLDrawText = function () {
+    for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
+      char = chars[ i ];
+      this.programController.Execute(
+        char.transform.worldTransform.AsArray( true ),
+        char.translation.AsArray( true ),
+        char.transformation.AsArray( true )
+      );
+    }
+  };
+  BitmapText.prototype.GetBufferData = function () {
+
+  };
+  BitmapText.prototype.UpdateInBuffer = function () {
+
+  };
   BitmapText.prototype.ComputeText = function () {
+    this.UpdateTransform();
     this.chars.length = 0;
     var kernings = this.fontData.data.font.kernings.kerning;
     var lineNum = 0;
@@ -1352,6 +1384,8 @@ module.exports = function ( Nenkraft ) {
         char.yadvance = this.lineHeight * ++lineNum;
         char.position.Add( char.xoffset, char.yoffset + char.yadvance );
       }
+      char.parent = this;
+      char.UpdateMatrices();
       chars.push( char );
     }
   };
@@ -1411,6 +1445,90 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 /* 35 */
+/***/ (function(module, exports) {
+
+/**
+* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+*/
+
+module.exports = function ( Nenkraft ) {
+  'use strict';
+  var Super = Nenkraft.Entity.CoreEntity2D;
+  function Char ( _data ) {
+    if ( !( this instanceof Char ) ) return new Char( _data );
+    Super.call( this );
+    if ( _data ) {
+      this.id = parseInt( _data.id );
+      this.cx = parseInt( _data.x );
+      this.cy = parseInt( _data.y );
+      this.w = parseInt( _data.width );
+      this.h = parseInt( _data.height );
+      this.xoffset = parseInt( _data.xoffset );
+      this.yoffset = parseInt( _data.yoffset );
+      this.xadvance = parseInt( _data.xadvance );
+      this.kernings = [];
+      this.translation = new Nenkraft.Matrix2D();
+      this.transformation = new Nenkraft.Matrix2D();
+    }
+  }
+  Char.prototype = Object.create( Super.prototype );
+  Char.prototype.constructor = Char;
+  //Static
+  //Members
+  Char.prototype.id = 0;
+  Char.prototype.xoffset = 0;
+  Char.prototype.yoffset = 0;
+  Char.prototype.xadvance = 0;
+  Char.prototype.yadvance = 0;
+  Char.prototype.kernings = null;
+  //
+  Char.prototype.translation = null;
+  Char.prototype.transformation = null;
+  //Methods
+  Char.prototype.ApplyKernings = function ( _kernings ) {
+    for ( var i = 0, attributes, l = _kernings.length; i < l; ++i ) {
+      attributes = _kernings[ i ].attributes;
+      if ( parseInt( attributes.first ) === this.id ) {
+        this.kernings.push(
+          parseInt( attributes.first ),
+          parseInt( attributes.second ),
+          parseInt( attributes.amount )
+        );
+      }
+    }
+  };
+  Char.prototype.Crunch = function ( _prevChar ) {
+    this.position.Set( 0 );
+    if ( _prevChar != null ) {
+      this.x = _prevChar.x + _prevChar.xadvance;
+      this.y = this.yadvance = _prevChar.yadvance;
+      if ( _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
+        for ( var i = 0, kernings = this.kernings, l = kernings.length; i < l; i += 3 ) {
+          if ( kernings[ i + 1 ] === _prevChar.id ) {
+            this.x += kernings[ i + 2 ];
+            break;
+          }
+        }
+      }
+    }
+    this.position.Add( this.xoffset, this.yoffset );
+  };
+  Char.prototype.UpdateMatrices = function () {
+    if ( this.parent != null ) {
+      var texture = this.parent.texture;
+      var scaleX = this.width / texture.fw;
+      var scaleY = this.height / texture.fh;
+      this.UpdateTransform();
+      this.translation.SetTransform( 0, 0, scaleX, scaleY );
+      this.transformation.SetTransform( scaleX * this.cx / this.width, scaleY * this.cy / this.height, scaleX, scaleY );
+    }
+  };
+  Nenkraft.Entity.Char = Char;
+};
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports) {
 
 /**
@@ -1647,7 +1765,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /**
@@ -1768,7 +1886,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports) {
 
 /**
@@ -1900,7 +2018,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /**
@@ -2037,7 +2155,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /**
@@ -2097,7 +2215,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /**
@@ -2185,7 +2303,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 /**
@@ -2281,10 +2399,10 @@ module.exports = function ( Nenkraft ) {
     if ( this.render === true ) {
       if ( this.transformShouldUpdate === true ) {
         this.UpdateTransform();
-        this.UpdateTextureTransform();
         if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
       }
       if ( this.display === true && this.programController !== null ) {
+        this.UpdateTextureTransform();
         this.programController.Execute(
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
@@ -2412,7 +2530,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /**
@@ -2506,7 +2624,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 /**
@@ -2567,7 +2685,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 /**
@@ -2646,7 +2764,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -2684,7 +2802,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -2818,7 +2936,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /**
@@ -2896,7 +3014,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 /**
@@ -2984,7 +3102,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 /**
@@ -3273,7 +3391,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 /**
@@ -3316,7 +3434,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 /**
@@ -3392,7 +3510,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports) {
 
 /**
@@ -3484,7 +3602,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports) {
 
 /**
@@ -3594,7 +3712,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports) {
 
 /**
@@ -3908,7 +4026,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports) {
 
 /**
@@ -3948,7 +4066,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /**
@@ -4057,7 +4175,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports) {
 
 /**
@@ -4222,7 +4340,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 /**
@@ -4261,7 +4379,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports) {
 
 /**
@@ -4340,7 +4458,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 /**
@@ -4379,7 +4497,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -4734,7 +4852,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports) {
 
 /**
@@ -4828,7 +4946,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 /**
@@ -4921,7 +5039,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports) {
 
 /**
@@ -4991,7 +5109,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 /**
@@ -5058,7 +5176,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 /**
@@ -5121,7 +5239,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 /**
@@ -5200,7 +5318,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports) {
 
 /**
@@ -5247,7 +5365,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5282,7 +5400,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -5311,7 +5429,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 /**
@@ -5337,7 +5455,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 /**
@@ -5372,7 +5490,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -5419,7 +5537,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -5497,7 +5615,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 /**
@@ -5557,7 +5675,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -5613,7 +5731,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -5730,7 +5848,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 /**
@@ -5811,7 +5929,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -6048,7 +6166,7 @@ module.exports = function ( Nenkraft ) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 /**
@@ -6154,79 +6272,6 @@ module.exports = function ( Nenkraft ) {
     return false;
   };
   Nenkraft.Utils.Cache = Cache;
-};
-
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports) {
-
-/**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
-
-module.exports = function ( Nenkraft ) {
-  'use strict';
-  function Char ( _data ) {
-    if ( !( this instanceof Char ) ) return new Char( _data );
-    if ( _data ) {
-      this.id = parseInt( _data.id );
-      this.position = new Nenkraft.Vector2D();
-      this.x = parseInt( _data.x );
-      this.y = parseInt( _data.y );
-      this.width = parseInt( _data.width );
-      this.height = parseInt( _data.height );
-      this.xoffset = parseInt( _data.xoffset );
-      this.yoffset = parseInt( _data.yoffset );
-      this.xadvance = parseInt( _data.xadvance );
-      this.kernings = [];
-    }
-  }
-  Char.prototype = Object.create( null );
-  Char.prototype.constructor = Char;
-  //Static
-  //Members
-  Char.prototype.id = 0;
-  Char.prototype.position = null;
-  Char.prototype.x = 0;
-  Char.prototype.y = 0;
-  Char.prototype.width = 0;
-  Char.prototype.height = 0;
-  Char.prototype.xoffset = 0;
-  Char.prototype.yoffset = 0;
-  Char.prototype.xadvance = 0;
-  Char.prototype.yadvance = 0;
-  Char.prototype.kernings = null;
-  //Methods
-  Char.prototype.ApplyKernings = function ( _kernings ) {
-    for ( var i = 0, attributes, l = _kernings.length; i < l; ++i ) {
-      attributes = _kernings[ i ].attributes;
-      if ( parseInt( attributes.first ) === this.id ) {
-        this.kernings.push(
-          parseInt( attributes.first ),
-          parseInt( attributes.second ),
-          parseInt( attributes.amount )
-        );
-      }
-    }
-  };
-  Char.prototype.Crunch = function ( _prevChar ) {
-    this.position.Set( 0 );
-    if ( _prevChar != null ) {
-      this.position.x = _prevChar.position.x + _prevChar.xadvance;
-      this.position.y = this.yadvance = _prevChar.yadvance;
-      if ( _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
-        for ( var i = 0, kernings = this.kernings, l = kernings.length; i < l; i += 3 ) {
-          if ( kernings[ i + 1 ] === _prevChar.id ) {
-            this.position.x += kernings[ i + 2 ];
-            break;
-          }
-        }
-      }
-    }
-    this.position.Add( this.xoffset, this.yoffset );
-  };
-  Nenkraft.Utils.Char = Char;
 };
 
 
@@ -6519,6 +6564,7 @@ module.exports = function ( Nenkraft ) {
     this.levelCap = _levelCap;
     this.nodes = {};
     this.objects = [];
+    this.convergence = [];
   }
   QuadtreeNode.prototype = Object.create( null );
   QuadtreeNode.prototype.constructor = QuadtreeNode;
@@ -6533,6 +6579,7 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.prototype.level = 0;
   QuadtreeNode.prototype.nodes = null;
   QuadtreeNode.prototype.objects = null;
+  QuadtreeNode.prototype.convergence = null;
   QuadtreeNode.prototype.aabb = null;
   QuadtreeNode.prototype.hasSplit = false;
   //Methods
@@ -6566,21 +6613,23 @@ module.exports = function ( Nenkraft ) {
     }
   };
   QuadtreeNode.prototype.Converge = function ( _object ) {
-    var objects = this.objects.slice();
+    var convergence = this.convergence;
+    convergence.length = 0;
+    convergence.push.apply( convergence, this.objects );
     var marking = null;
     var nodes = this.nodes;
     if ( this.hasSplit === true ) {
       marking = this.Marking( _object );
       if ( marking !== null ) {
-        objects = objects.concat( nodes[ marking ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ marking ].Converge( _object ) );
       } else {
-        objects = objects.concat( nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
-        objects = objects.concat( nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
-        objects = objects.concat( nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
-        objects = objects.concat( nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
       }
     }
-    return objects;
+    return convergence;
   };
   QuadtreeNode.prototype.Split = function () {
     var nl = this.level + 1;
@@ -6925,7 +6974,8 @@ module.exports = function ( Nenkraft ) {
 /* 120 */,
 /* 121 */,
 /* 122 */,
-/* 123 */
+/* 123 */,
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

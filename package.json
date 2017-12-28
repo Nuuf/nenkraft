@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "none",
   "author": "Nuuf",
-  "version": "0.4.3",
+  "version": "0.4.5",
   "main": "index.js",
   "devDependencies": {
     "autoprefixer": "*",
@@ -10,17 +10,17 @@
     "copyfiles": "*",
     "cross-env": "*",
     "css-loader": "*",
-    "eslint": "^4.0.0",
-    "extract-text-webpack-plugin": "^2.*",
+    "eslint": "*",
+    "extract-text-webpack-plugin": "*",
     "file-loader": "*",
-    "html-webpack-plugin": "^2.*",
+    "html-webpack-plugin": "*",
     "postcss-loader": "*",
-    "raw-loader": "^0.5.1",
+    "raw-loader": "*",
     "rimraf": "*",
     "style-loader": "*",
     "url-loader": "*",
-    "webpack": "^2.*",
-    "webpack-dev-server": "^2.*"
+    "webpack": "*",
+    "webpack-dev-server": "*"
   },
   "scripts": {
     "s-d": "cross-env NODE_ENV=development",

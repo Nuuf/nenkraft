@@ -12,6 +12,7 @@ module.exports = function ( Nenkraft ) {
     this.levelCap = _levelCap;
     this.nodes = {};
     this.objects = [];
+    this.convergence = [];
   }
   QuadtreeNode.prototype = Object.create( null );
   QuadtreeNode.prototype.constructor = QuadtreeNode;
@@ -26,6 +27,7 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.prototype.level = 0;
   QuadtreeNode.prototype.nodes = null;
   QuadtreeNode.prototype.objects = null;
+  QuadtreeNode.prototype.convergence = null;
   QuadtreeNode.prototype.aabb = null;
   QuadtreeNode.prototype.hasSplit = false;
   //Methods
@@ -59,21 +61,23 @@ module.exports = function ( Nenkraft ) {
     }
   };
   QuadtreeNode.prototype.Converge = function ( _object ) {
-    var objects = this.objects.slice();
+    var convergence = this.convergence;
+    convergence.length = 0;
+    convergence.push.apply( convergence, this.objects );
     var marking = null;
     var nodes = this.nodes;
     if ( this.hasSplit === true ) {
       marking = this.Marking( _object );
       if ( marking !== null ) {
-        objects = objects.concat( nodes[ marking ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ marking ].Converge( _object ) );
       } else {
-        objects = objects.concat( nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
-        objects = objects.concat( nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
-        objects = objects.concat( nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
-        objects = objects.concat( nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
       }
     }
-    return objects;
+    return convergence;
   };
   QuadtreeNode.prototype.Split = function () {
     var nl = this.level + 1;
