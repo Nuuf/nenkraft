@@ -3,14 +3,18 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TriRectArray = Nenkraft.Math.TriRectArray;
   function GLRectangleProgramController ( _gl ) {
+
     if ( !( this instanceof GLRectangleProgramController ) ) return new GLRectangleProgramController( _gl );
     Super.call( this, _gl, Nenkraft.SHADER_CODE.RECTANGLE );
     this.Initialise();
+  
   }
+
   GLRectangleProgramController.prototype = Object.create( Super.prototype );
   GLRectangleProgramController.prototype.constructor = GLRectangleProgramController;
   //Static
@@ -23,6 +27,7 @@ module.exports = function ( Nenkraft ) {
   GLRectangleProgramController.prototype.outline = 5.0;
   //Methods
   GLRectangleProgramController.prototype.Initialise = function () {
+
     var gl = this.gl;
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( Nenkraft.Math.TriRectArray( 0, 0, 1, 1 ) );
@@ -37,8 +42,11 @@ module.exports = function ( Nenkraft ) {
     this.AssignUniform( 'uOutlineColor' );
     this.AssignUniform( 'uSize' );
     this.AssignUniform( 'uOutline' );
+  
   };
+
   GLRectangleProgramController.prototype.Execute = function ( _projection, _x, _y, _w, _h ) {
+
     var gl = this.gl;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
@@ -47,9 +55,12 @@ module.exports = function ( Nenkraft ) {
     var outlineChannel = this.outlineColor.channel;
     TriRectArray( _x, _y, _w, _h, vertices );
     if ( this !== Super.LAST_USED_CONTROLLER ) {
+
       gl.useProgram( this.program );
       Super.LAST_USED_CONTROLLER = this;
+    
     }
+
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
     gl.enableVertexAttribArray( attributes.aPosition );
@@ -60,7 +71,10 @@ module.exports = function ( Nenkraft ) {
     gl.uniform1f( uniforms.uOutline, this.outline );
     gl.uniform2f( uniforms.uSize, _w, _h );
     gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );
+  
   };
+
   Nenkraft.Controller.GLRectangleProgramController = GLRectangleProgramController;
   Nenkraft.GLRectangleProgramController = GLRectangleProgramController;
+
 };

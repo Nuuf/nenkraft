@@ -95,11 +95,15 @@ var tests = [];
 var context = __webpack_require__(88);
 
 context.keys().forEach( function ( file ) {
+
   tests.push( context( file ) );
+
 } );
 
 for ( var i = 0, l = tests.length; i < l; ++i ) {
+
   tests[ i ]();
+
 }
 
 //if ( DEVELOPMENT && module.hot ) module.hot.accept();
@@ -297,6 +301,7 @@ webpackContext.id = 88;
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'AABBCollision' );
@@ -305,6 +310,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -312,15 +318,10 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '100px';
     c.style.left = '100px';
-    var rc = c.getContext( '2d' );
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, 0, 0 );
     stage.scale.Set( 1, 1 );
     stage.mouse.scale.SetV( stage.scale );
-
 
     var text = new nk.Text( 0, 0, 'Collide them!' );
 
@@ -338,7 +339,6 @@ module.exports = function () {
     stage.AddChild( lineC );
 
     var dragger = null;
-    var test = null;
 
     var obj1 = {
       shape: aabbg1.path,
@@ -351,14 +351,16 @@ module.exports = function () {
       relative: aabbg2.position,
       anchor: new nk.Vector2D()
     };
-
+    
     var result = new nk.Math.Collision2D.AABB2DvsAABB2D.Result();
 
     lineC.path.s.SetV( aabbg1.position );
     lineC.path.e.SetV( aabbg2.position );
 
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x;
         dragger.y = _event.data.position.y;
 
@@ -372,34 +374,49 @@ module.exports = function () {
         lineC.SendToFront();
 
         if ( result.occured === true ) {
+
           text.text = 'Well done!';
           aabbg1.position.AddV( result.mtv );
+        
         } else text.text = 'Collide them!';
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragger = stage.children[ i ];
 
           _event.stopPropagation = true;
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
-    } );
-    stage.mouse.onLeave.Add( function ( _event ) {
-      if ( dragger ) dragger = null;
-    } );
+    stage.mouse.onUp.Add( function ( ) {
 
+      if ( dragger ) dragger = null;
+    
+    } );
+    stage.mouse.onLeave.Add( function ( ) {
+
+      if ( dragger ) dragger = null;
+    
+    } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -408,6 +425,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Animation' );
@@ -416,6 +434,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -423,7 +442,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -452,28 +470,37 @@ module.exports = function () {
       } );
       animation.reverse = true;
       animation.onEnd.Add( function () {
+
         stage.ticker.Stop();
+      
       }, animation );
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef );
 
       timer.onFinish.Add( function () {
+
         sprite.animationController.StopCurrentAnimation();
+      
       } );
 
       //timer.Start( 400 );
 
       stage.onProcess.Add( function () {
+
         sprite.animationController.Process();
         timer.Process();
+      
       }, stage );
+    
     } );
     imageCache.Load( [
       { id: '1to8', src: './assets/images/1to8.png' }
     ], true );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -482,6 +509,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'BitmapFont' );
@@ -490,6 +518,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -497,10 +526,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, 0, 0 );
     stage.backgroundColor = '#FFF';
@@ -516,21 +541,27 @@ module.exports = function () {
       { id: 'fontimg', src: './assets/images/font.png' }
     ], true );
     xhrloader.onComplete.Add( function ( event ) {
+
       console.log( event.data );
       console.log( JSON.stringify( event.data.dataCache.items[ 0 ].data ) === JSON.stringify( event.data.dataCache.items[ 1 ].data ) );
       done++;
       Go();
+    
     } );
     imgloader.onComplete.Add( function ( event ) {
+
       console.log( event.data );
       done++;
       Go();
+    
     } );
 
     var test = null;
 
     function Go () {
+
       if ( done > 1 ) {
+
         test = new nk.BitmapText(
           0,
           0,
@@ -542,12 +573,15 @@ module.exports = function () {
         test.maxWidth = window.innerWidth;
         stage.AddChild( test );
         test.ComputeText();
+      
       }
+    
     }
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -556,6 +590,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Butterflyish' );
@@ -564,6 +599,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -603,7 +639,6 @@ module.exports = function () {
     var angle = 0;
     var speed = 3;
 
-
     var text = new nk.Text( 0, 0, 'Stop trying to hit me and hit me!' );
     text.style.text.align = nk.Style.TEXT_ALIGN.CENTER;
     text.style.text.baseline = nk.Style.TEXT_BASELINE.MIDDLE;
@@ -638,6 +673,7 @@ module.exports = function () {
       container.Draw( rc );
 
       //requestAnimationFrame( Update );
+    
     }
 
     setInterval( Update, 1 );
@@ -663,7 +699,9 @@ module.exports = function () {
     console.log( a );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -672,6 +710,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Playground CLI' );
@@ -745,10 +784,7 @@ module.exports = function () {
     cb.addEventListener( 'click', onCommandboxClick );
     ci.addEventListener( 'keydown', onInputKeyDown );
 
-
-
     ////////////////
-
 
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth - 500 );
@@ -757,8 +793,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = '500px';
-
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -780,23 +814,30 @@ module.exports = function () {
     register.Add( new nk.CP.Command(
       'commands',
       function () {
+
         register.commands.forEach( function ( command ) {
+
           insertParagraph( command.id[ 0 ] );
+        
         } );
+      
       }
     ) );
     register.Add( new nk.CP.Command(
       'clear',
       function () {
+
         cb.innerHTML = '';
         cb.appendChild( ci );
         ci.focus();
+      
       },
       'clear the screen'
     ) );
     register.Add( new nk.CP.Command(
       'moveto',
       function () {
+
         var data = arguments[ 1 ];
         var x = Number( data.x );
         var y = Number( data.y );
@@ -804,58 +845,87 @@ module.exports = function () {
         moveX.value = x;
         moveY.value = y;
         mm.StartMultiple( 'x y' );
+      
       },
       'move to x y'
     ) );
 
     function insertParagraph ( _str ) {
+
       var p = document.createElement( 'p' );
       p.className = 'paragraph';
       p.innerHTML = _str;
       cb.insertBefore( p, ci );
+    
     }
 
     function onInputKeyDown ( event ) {
+
       var stop = false;
       if ( event.keyCode === 13 ) {
+
         stop = true;
         if ( ci.value !== '' ) {
+
           var r = register.Parse( ci.value );
           cHistory.push( ci.value );
           cIndex = cHistory.length - 1;
           if ( r !== null ) {
+
             insertParagraph( CE.UNKNOWN_COMMAND.replace( /DATA/g, r ) );
+          
           }
+        
         }
+
         ci.value = '';
         cb.scrollTop = cb.scrollHeight;
+      
       } else if ( event.keyCode === 38 ) {
+
         if ( cIndex > -1 ) {
+
           stop = true;
           ci.value = cHistory[ cIndex-- ];
+        
         }
+      
       } else if ( event.keyCode === 40 ) {
+
         if ( cIndex < cHistory.length - 1 ) {
+
           stop = true;
           ci.value = cHistory[ ++cIndex ];
+        
         }
+      
       }
+
       if ( stop === true ) {
+
         event.preventDefault();
         event.stopPropagation();
+      
       }
+    
     }
 
-    function onCommandboxClick ( event ) {
+    function onCommandboxClick ( ) {
+
       ci.focus();
+    
     }
 
     stage.onProcess.Add( function () {
+
       mm.Process();
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -864,6 +934,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Clock' );
@@ -872,6 +943,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -879,11 +951,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
@@ -900,6 +970,7 @@ module.exports = function () {
 
     var i = clockPoints.vertices.length;
     while ( i-- ) {
+
       var p = stage.AddChild( new nk.Text(
         clockPoints.vertices[ i ].x,
         clockPoints.vertices[ i ].y,
@@ -913,9 +984,11 @@ module.exports = function () {
       p.style.text.fillColor = '#000';
       p.style.text.lineWidth = 2;
       p.style.text.ConcatFont();
+    
     }
 
     stage.onProcess.Add( function () {
+
       var date = new Date();
       var milliseconds = date.getMilliseconds();
       var seconds = date.getSeconds();
@@ -925,10 +998,13 @@ module.exports = function () {
       secondHand.path.e.RotateAroundV( secondHand.path.s, nk.Math.DTR( ( seconds * 6 ) - 90 ) - secondHand.path.e.GetAngle() );
       minuteHand.path.e.RotateAroundV( minuteHand.path.s, nk.Math.DTR( ( minutes * 6 ) - 90 ) - minuteHand.path.e.GetAngle() );
       hourHand.path.e.RotateAroundV( hourHand.path.s, nk.Math.DTR( ( ( 60 * hours + minutes ) * 0.5 ) - 90 ) - hourHand.path.e.GetAngle() );
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -937,6 +1013,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'ElasticCollision' );
@@ -945,6 +1022,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -955,8 +1033,8 @@ module.exports = function () {
     c.style.left = '0';
     var rc = c.getContext( '2d' );
 
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
+    var W = c.width;
+    var H = c.height;
 
     var stage = new nk.Stage2D( c, 0, 0, true );
     stage.ComputeBounds();
@@ -977,6 +1055,7 @@ module.exports = function () {
     var nodes = [];
 
     function Collider () {
+
       var mass = nk.Utils.RandomInteger( 10, 30 );
       var p = new nk.Path.Circle( 0, 0, mass );
       p.style.fill.applied = false;
@@ -994,16 +1073,21 @@ module.exports = function () {
       g.ComputeBounds();
       g.data.timer = new nk.Timer();
       g.data.timer.onFinish.Add( function () {
+
         p.style.fill.applied = false;
         g.alpha = 1.0;
+      
       } );
       g.data.timer.onStart.Add( function () {
+
         p.style.fill.applied = true;
         g.alpha = 0.8;
+      
       } );
       colliders.push( g );
       stage.AddChild( g );
       objs.push( g.bounds );
+    
     }
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
@@ -1011,64 +1095,91 @@ module.exports = function () {
     var result = new nk.Math.Collision2D.CirclevsCircle.Result();
 
     function Process () {
+
       var i = 0, j, l = colliders.length, collider, collidee, body1, body2, vel;
       root.Dump();
       objs.forEach( function ( obj ) {
+
         root.Add( obj );
+      
       } );
       nodes = root.ConcatNodes();
       for ( i; i < l; ++i ) {
+
         collider = colliders[ i ];
         collider.data.timer.Process();
         body1 = collider.data.body;
         vel = body1.velocity;
         collider.position.AddV( vel );
         if ( collider.x + collider.path.radius >= W ) {
+
           vel.x = -Math.abs( vel.x );
+        
         } else if ( collider.x - collider.path.radius <= 0 ) {
+
           vel.x = Math.abs( vel.x );
+        
         }
+
         if ( collider.y + collider.path.radius >= H ) {
+
           vel.y = -Math.abs( vel.y );
 
         } else if ( collider.y - collider.path.radius <= 0 ) {
+
           vel.y = Math.abs( vel.y );
+        
         }
 
         var convergence = root.Converge( collider.bounds );
 
         for ( j = 0; j < convergence.length; ++j ) {
+
           collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
           if ( collidee !== collider ) {
+
             result.occured = false;
             Collide( body1, body2, result );
             if ( result.occured === true ) {
+
               collider.data.timer.Start( 10 );
               collidee.data.timer.Start( 10 );
               Response( body1, body2, result );
+            
             }
+          
           }
+        
         }
+
         collider.ComputeBounds();
+      
       }
+
       nodes.forEach( function ( node ) {
+
         nk.Debug.Draw.AABB2D( rc, node.aabb, { noFill: true } );
+      
       } );
       fps.text = Math.round( stage.ticker.GetTPS() );
+    
     }
 
     stage.onProcess.Add( Process, window );
 
     for ( var i = 50; i--; ) {
+
       Collider();
+    
     }
 
     stage.AddChild( fps );
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1077,6 +1188,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Field' );
@@ -1085,6 +1197,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1092,11 +1205,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
     stage.clear = false;
@@ -1112,29 +1223,38 @@ module.exports = function () {
     var mouseDown = false;
 
     stage.onProcess.Add( function () {
+
       for ( var i = 0, l = objs.length; i < l; ++i ) {
+
         if ( !objs[ i ] ) break;
         nk.Math.AttractRepel( objs[ i ].position, orig.position, objs[ i ].data.vel, orig.path.radius * 2, 0.1 );
         objs[ i ].position.AddV( objs[ i ].data.vel );
         //objs[ i ].data.color.IncreaseChannel( 0, 1 );
         //objs[ i ].path.style.fill.color = objs[ i ].data.color.value;
         if ( !--objs[ i ].data.lifeSpan ) {
+
           objs[ i ].Destroy();
           objs.splice( i, 1 );
+        
         }
+      
       }
 
       if ( mouseDown ) {
+
         i = 2;
         while ( --i ) {
+
           MakeObj( stage.mouse.position.x, stage.mouse.position.y );
+        
         }
+      
       }
 
     }, stage );
 
-
     function MakeObj ( _x, _y ) {
+
       var path = new nk.Path.Polygon2D();
       nk.Geom.Polygon2D.Construct.Supershape( path, 0, 0, nk.Utils.RandomInteger( 5, 30 ), 20, nk.Utils.RandomFloat( 0, 20 ), nk.Utils.RandomFloat( 0, 3 ), nk.Utils.RandomFloat( 0, 3 ), nk.Utils.RandomFloat( 0, 3 ) );
       path.Rotate( nk.Utils.RandomFloat( -nk.Math.PII, nk.Math.PII ), 0.5, 0.5, true );
@@ -1145,19 +1265,24 @@ module.exports = function () {
       //obj.data.color.ConvertToHSLA();
       stage.AddChild( obj );
       objs.push( obj );
+    
     }
 
     stage.mouse.onDown.Add( function () {
+
       mouseDown = true;
+    
     } );
     stage.mouse.onUp.Add( function () {
+
       mouseDown = false;
+    
     } );
 
-
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1166,6 +1291,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Fractree' );
@@ -1174,6 +1300,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1181,11 +1308,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
+    var H = c.height;
 
     var l = 200;
 
@@ -1193,6 +1318,7 @@ module.exports = function () {
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {
+
       if ( !( this instanceof Branch ) ) return new Branch( start, end );
       nk.Graphic2D.call( this, 0, 0, new nk.Path.Line2D( start, end ) );
       this.path.style.stroke.color = new nk.Color( nk.Utils.RandomInteger( this.w, 200 ), nk.Utils.RandomInteger( this.w, 255 ), nk.Utils.RandomInteger( 0, 20 ), 1 ).value;
@@ -1208,12 +1334,17 @@ module.exports = function () {
       mm.Create( 'rotate', 'rotation', 0, 120, 'SineInOut' );
       mm.StartMultiple( 'moveX moveY rotate' );
       if ( this.w > 12 ) {
+
         this.Grow();
+      
       }
+    
     }
+
     Branch.prototype = Object.create( nk.Graphic2D.prototype );
     Branch.prototype.constructor = Branch;
     Branch.prototype.Grow = function () {
+
       var newEndL = this.path.e.SubtractVC( this.path.s );
       var newEndR = newEndL.Copy();
       newEndL.Rotate( nk.Math.RADIAN * 20 + nk.Utils.RandomFloat( -nk.Math.RADIAN * 20, nk.Math.RADIAN * 20 ) );
@@ -1224,27 +1355,34 @@ module.exports = function () {
       newEndR.AddV( this.path.e );
       Branch( this.path.e, newEndL );
       Branch( this.path.e, newEndR );
+    
     };
 
     Branch( new nk.Vector2D( 0, 0 ), new nk.Vector2D( 0, l ) );
 
     var timer = new nk.Timer( 130 );
     timer.onFinish.Add( function () {
+
       stage.ticker.Stop();
+    
     } );
     timer.Start();
 
-
     stage.onProcess.Add( function () {
+
       stage.children.forEach( function ( child ) {
+
         child.data.motionManager.Process();
+      
       } );
       timer.Process();
+    
     } );
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1253,6 +1391,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'GrabnDrag' );
@@ -1261,6 +1400,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1268,7 +1408,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = 0;
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -1290,19 +1429,28 @@ module.exports = function () {
 
     var t = 10;
     while ( --t ) {
+
       stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( -100, -100, 100, 100 ) ) );
+    
     }
 
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -1315,20 +1463,28 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) {
+
         dragger.gco = nk.Style.GCO.DEFAULT;
         dragger.scale.Set( 1, 1 );
         dragger = null;
+      
       }
+    
     } );
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1337,6 +1493,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Grid' );
@@ -1345,6 +1502,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1353,11 +1511,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var ratio = W / H;
+    var W = c.width;
+    var H = c.height;
 
     var stage = new nk.Stage2D( c, 0, 0 );
     var container = new nk.Container2D();
@@ -1374,28 +1530,44 @@ module.exports = function () {
 
     i = points.length;
     while ( i-- ) {
+
       container.AddChild( new nk.Graphic2D( points[ i ].x, points[ i ].y, new nk.Path.AABB2D( 0, 0, mx, my ) ) );
+    
     }
 
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position.DivideVC( container.scale );
       for ( var i = container.children.length; i--; ) {
+
         if ( container.children[ i ].IntersectsPoint( p ) ) {
+
           container.children[ i ].Destroy();
           break;
+        
         }
+      
       }
+    
     }, stage );
     stage.mouse.onWheel.Add( function ( _event ) {
+
       if ( _event.data.native.deltaY < 0 ) {
+
         container.scale.Add( 0.1, 0.1 );
+      
       } else {
+
         container.scale.Subtract( 0.1, 0.1 );
+      
       }
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1404,6 +1576,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Invaders' );
@@ -1412,6 +1585,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', 1024 );
     c.setAttribute( 'height', 800 );
@@ -1423,8 +1597,7 @@ module.exports = function () {
     c.style.transform = 'translateX(-50%)';
 
     var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var ratio = W / H;
+    var H = c.height;
 
     var RI = nk.Utils.RandomInteger;
     var RF = nk.Utils.RandomFloat;
@@ -1443,7 +1616,7 @@ module.exports = function () {
 
     var worldScale = new nk.Vector2D( 2.0, 2.0 );
     var ship = null;
-    var enemyBullets = [];
+    // var enemyBullets = [];
     var playerBullets = [];
     var enemies = [];
     var shields = [];
@@ -1464,13 +1637,17 @@ module.exports = function () {
       src: './../assets/images/invaders/invaders.png',
       w: 16, h: 16, fw: 128, fh: 16
     }], true, function () {
+
       go();
+    
     } );
 
     function go () {
+
       stage.ticker.Start();
       pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
       playerBulletPool.Flood( function () {
+
         var b = new nk.Sprite( 0, 0, pc );
         b.scale.SetV( worldScale );
         b.UpdateShape();
@@ -1483,8 +1660,10 @@ module.exports = function () {
         };
         b.clip.Set( 16 * 7, 0, 16, 16 );
         return b;
+      
       }, 1000 );
       enemyPool.Flood( function () {
+
         var e = new nk.Sprite( 0, 0, pc );
         e.scale.SetV( worldScale );
         e.UpdateShape();
@@ -1497,14 +1676,17 @@ module.exports = function () {
         };
         e.clip.Set( 16 * RI( 1, 2 ), 0, 16, 16 );
         return e;
+      
       }, 1000 );
       createShip();
       createShields();
       setupListeners();
       setupProcess();
+    
     }
 
     function createShip () {
+
       if ( ship ) return;
       ship = new nk.Sprite( 0, 0, pc );
       ship.scale.SetV( worldScale );
@@ -1519,11 +1701,14 @@ module.exports = function () {
       ship.data.fireTimer = 0;
       ship.data.bulletsPerBlast = 50;
       stage.Mount( ship );
+    
     }
 
     function createPlayerBullet () {
+
       var i = ship.data.bulletsPerBlast;
       while ( i-- ) {
+
         var b = playerBulletPool.Retrieve();
         b.x = ship.x;
         b.y = ship.y;
@@ -1533,15 +1718,21 @@ module.exports = function () {
           nk.Math.Spread( 0, ship.data.bulletsPerBlast, RF( 1, 2 ), i )
         ) );
         if ( b.data.velocity.y > 0 ) {
+
           b.data.velocity.y = -b.data.velocity.y;
+        
         }
+
         b.data.lifeSpan = 200;
         playerBullets.push( b );
         stage.Mount( b );
+      
       }
+    
     }
 
     function createEnemy () {
+
       var e = enemyPool.Retrieve();
       e.x = RF( 0, W );
       e.y = 0 - e.height * 0.5;
@@ -1550,10 +1741,13 @@ module.exports = function () {
       e.data.health = enemyHealth;
       enemies.push( e );
       stage.Mount( e );
+    
     }
 
     function createShields () {
+
       for ( var i = 0; i < numShields; ++i ) {
+
         var s = new nk.Sprite( 0, 0, pc );
         s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
@@ -1570,17 +1764,22 @@ module.exports = function () {
         s.clip.Set( 16 * 3, 0, 16, 16 );
         shields.push( s );
         stage.Mount( s );
+      
       }
+    
     }
 
     function setupListeners () {
+
       stage.keyboard.onDown.Add( onKeyDown, ship );
       stage.keyboard.onUp.Add( onKeyUp, ship );
 
       function onKeyDown ( event ) {
+
         var kc = event.data.keyCode;
         //console.log( kc );
         switch ( kc ) {
+
           case 37:
             this.data.moveLeft = true;
             break;
@@ -1591,12 +1790,16 @@ module.exports = function () {
             this.data.fire = true;
             break;
           default: break;
+        
         }
+      
       }
 
       function onKeyUp ( event ) {
+
         var kc = event.data.keyCode;
         switch ( kc ) {
+
           case 37:
             this.data.moveLeft = false;
             break;
@@ -1607,145 +1810,220 @@ module.exports = function () {
             this.data.fire = false;
             break;
           default: break;
+        
         }
+      
       }
+    
     }
 
     function setupProcess () {
+
       stage.onProcess.Add( onProcess, stage );
 
       function onProcess () {
+
         handleShip();
         if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
+
           createEnemy();
+        
         }
+
         handleEnemies();
         root.Dump();
         var i;
         for ( i = 0; i < enemies.length; ++i ) {
+
           root.Add( enemies[ i ].bounds );
+        
         }
+
         handlePlayerBullets();
         if ( this.ticker.GetTPS() < 40 ) {
+
           console.log( this.ticker.GetTPS() );
+        
         }
+      
       }
 
       function handleShip () {
+
         var shipWHalf = ship.width * 0.5;
         if ( ship.data.moveLeft && ship.x > 0 + shipWHalf ) {
+
           ship.data.velocity.x = -ship.data.moveSpeed;
+        
         } else if ( ship.data.moveRight && ship.x < W - shipWHalf ) {
+
           ship.data.velocity.x = ship.data.moveSpeed;
+        
         } else {
+
           ship.data.velocity.x = 0;
+        
         }
+
         ship.position.AddV( ship.data.velocity );
         if ( ship.x < 0 + shipWHalf ) {
+
           ship.x = 0 + shipWHalf;
+        
         } else if ( ship.x > W - shipWHalf ) {
+
           ship.x = W - shipWHalf;
+        
         }
+
         if ( ship.data.fire && ship.data.fireTimer === 0 ) {
+
           createPlayerBullet();
           ship.data.fireTimer = ship.data.fireRate;
+        
         }
+
         if ( ship.data.fireTimer > 0 ) {
+
           ship.data.fireTimer--;
+        
         }
+      
       }
 
       function handlePlayerBullets () {
+
         for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
+
           bullet = playerBullets[ i ];
           if ( bullet ) {
+
             bullet.position.AddV( bullet.data.velocity );
             if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
+
               bullet.data.velocity.x = -bullet.data.velocity.x;
+            
             }
+
             bullet.ComputeBounds();
             if ( --bullet.data.lifeSpan <= 0 ) {
+
               bullet.Detach();
               playerBullets.splice( i, 1 );
               playerBulletPool.Store( bullet );
+            
             } else {
+
               // We can cheat, because we have so many objects.
               if ( RI( 1, 3 ) === 2 ) {
+
                 handlePlayerBullet_EnemyCollision( bullet, i );
+              
               }
+            
             }
+          
           }
 
         }
+      
       }
 
       function handleEnemies () {
+
         for ( var i = 0, enemy; i < enemies.length; ++i ) {
+
           enemy = enemies[ i ];
           if ( enemy ) {
+
             enemy.position.AddV( enemy.data.velocity );
             enemy.ComputeBounds();
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
+
               enemy.Detach();
               enemies.splice( i, 1 );
               enemyPool.Store( enemy );
+            
             } else {
+
               handleEnemy_ShieldCollision( enemy, i );
+            
             }
+          
           }
+        
         }
+      
       }
 
       function handlePlayerBullet_EnemyCollision ( bullet, index ) {
+
         if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
+
           var convergence = root.Converge( bullet.bounds );
           for ( var i = 0, enemy; i < convergence.length; ++i ) {
+
             enemy = convergence[ i ].belongsTo;
             if ( enemy ) {
+
               if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
+
                 enemy.data.health--;
                 bullet.Detach();
                 playerBullets.splice( index, 1 );
                 break;
+              
               }
+            
             }
+          
           }
+        
         }
+      
       }
 
       function handleEnemy_ShieldCollision ( enemy, index ) {
+
         if ( !enemy || enemy.y < shieldVerticalPosition - enemy.height ) return;
         for ( var i = 0, shield; i < shields.length; ++i ) {
+
           shield = shields[ i ];
           if ( shield ) {
+
             if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
+
               enemy.Detach();
               enemies.splice( index, 1 );
               enemyPool.Store( enemy );
               if ( --shield.data.health <= 0 ) {
+
                 shield.Detach();
                 shields.splice( i, 1 );
                 break;
+              
               } else {
+
                 shield.clip.tl.x += 16;
+              
               }
+
               break;
+            
             }
+          
           }
+        
         }
+      
       }
 
     }
 
-
-
-
-
-
-
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1754,6 +2032,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Magnet' );
@@ -1762,6 +2041,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1769,11 +2049,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, 0, 0 );
 
@@ -1794,6 +2072,7 @@ module.exports = function () {
     stage.AddChild( magnet );
 
     function CreateParticle () {
+
       var p = new nk.Plaingraphic2D( nk.Utils.RandomInteger( 0, W ), nk.Utils.RandomInteger( 0, H ), new nk.Path.Circle( 0, 0, 6 ) );
       p.data.force = {
         velocity: new nk.Vector2D(),
@@ -1809,69 +2088,102 @@ module.exports = function () {
       stage.AddChild( p );
       particles.push( p );
       p.data.sepArr = particles;
+    
     }
 
     ( function () {
+
       var i = 500;
       while ( i-- ) {
+
         CreateParticle();
+      
       }
+    
     } )();
 
     var Collide = nk.Math.Collision2D.CirclevsCircle.Relative.Collide;
     var result = new nk.Math.Collision2D.CirclevsCircle.Result();
 
-
     stage.onProcess.Add( function () {
+
       particles.forEach( function ( particle ) {
+
         var vel = particle.data.force.velocity;
         nk.Math.AttractRepel( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
         particle.position.AddV( vel );
         vel.MultiplyV( particle.data.force.friction );
         if ( particle.x + particle.path.radius >= W ) {
+
           vel.x = -Math.abs( vel.x );
           particle.x = W - particle.path.radius;
+        
         } else if ( particle.x - particle.path.radius <= 0 ) {
+
           vel.x = Math.abs( vel.x );
           particle.x = 0 + particle.path.radius;
+        
         }
+
         if ( particle.y + particle.path.radius >= H ) {
+
           vel.y = -Math.abs( vel.y );
           particle.y = H - particle.path.radius;
+        
         } else if ( particle.y - particle.path.radius <= 0 ) {
+
           vel.y = Math.abs( vel.y );
           particle.y = 0 + particle.path.radius;
+        
         }
+
         result.occured = false;
         Collide( magnet.data.body, particle.data.body, result );
         if ( result.occured === true ) {
+
           result.mtv.Multiply( result.mtd, result.mtd );
           particle.position.AddV( result.mtv );
           vel.Set( 0, 0 );
+        
         }
+      
       } );
+    
     } );
     stage.mouse.onMove.Add( function ( event ) {
+
       if ( dragIt === true ) {
+
         magnet.x = event.data.position.x - startDrag.x + dragOffset.x;
         magnet.y = event.data.position.y - startDrag.y + dragOffset.y;
+      
       }
+    
     } );
     stage.mouse.onDown.Add( function ( event ) {
+
       var p = event.data.position;
       if ( magnet.IntersectsPoint( p ) ) {
+
         startDrag.SetV( p );
         dragOffset.SetV( magnet );
         dragIt = true;
+      
       }
+
       event.stopPropagation = true;
+    
     } );
-    stage.mouse.onUp.Add( function ( event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       dragIt = false;
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1880,6 +2192,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Motion' );
@@ -1888,6 +2201,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1895,11 +2209,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
@@ -1911,10 +2223,11 @@ module.exports = function () {
     var mm = new nk.MotionManager( motObj );
     var xM = mm.Create( 'x', 'x' );
     var yM = mm.Create( 'y', 'y' );
-    var sxM = mm.Create( 'sx', 'scale.x', 1, 10 );
-    var syM = mm.Create( 'sy', 'scale.y', 1, 10 );
+    mm.Create( 'sx', 'scale.x', 1, 10 );
+    mm.Create( 'sy', 'scale.y', 1, 10 );
 
     stage.mouse.onUp.Add( function ( _event ) {
+
       if ( xM.running ) xM.Stop();
       if ( yM.running ) yM.Stop();
       mm.ResetMultiple( 'sx sy' );
@@ -1926,11 +2239,15 @@ module.exports = function () {
     }, stage );
 
     stage.onProcess.Add( function () {
+
       mm.Process();
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -1939,6 +2256,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Nightsky' );
@@ -1947,6 +2265,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -1954,17 +2273,14 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH, true );
     stage.ticker.StartAF();
 
     var staticStars = [];
-
 
     var imageCache = new nk.ImageLoader( [ {
       id: 'butterfly',
@@ -1974,22 +2290,32 @@ module.exports = function () {
       src: nk.Utils.GenerateSimpleBase64Png( StaticStar )
     }], true );
     imageCache.onComplete.Add( function () {
+
       Go();
+    
     } );
 
     function Go () {
+
       CreateSprites( { x: -HW, y: HW }, { x: -HH, y: HH }, 'staticStar', W / H * 500, staticStars, stage, 0.01 );
       stage.onProcess.Add( function () {
+
         for ( var i = 0, l = staticStars.length, star; i < l; ++i ) {
+
           star = staticStars[ i ];
           star.position.AddV( star.data.velocity );
           star.data.velocity.Rotate( nk.Math.DTR( star.data.torque ) );
+        
         }
+      
       }, stage );
+    
     }
 
     function CreateSprites ( xv, yv, img, am, store, parent, scale ) {
+
       for ( var i = 0; i < am; ++i ) {
+
         var x = nk.Utils.RandomInteger( xv.x, xv.y );
         var y = nk.Utils.RandomInteger( yv.x, yv.y );
         var sprite = new nk.Sprite( x, y, imageCache.GetBasicTexture( img ) );
@@ -2000,12 +2326,15 @@ module.exports = function () {
         sprite.data.torque = ( x + y ) / 500 * nk.Utils.RandomInteger( -1, 1 );
         store.push( sprite );
         parent.AddChild( sprite );
+      
       }
+
       console.log( i );
+    
     }
 
-
     function Butterfly () {
+
       var path = new nk.Path.Polygon2D();
       path.style.fill.color = '#FFF';
       path.style.stroke.color = '#000';
@@ -2015,8 +2344,11 @@ module.exports = function () {
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
+    
     }
+
     function StaticStar () {
+
       var path = new nk.Path.Polygon2D();
       path.style.fill.color = '#FFF';
       path.style.stroke.color = '#000';
@@ -2025,10 +2357,13 @@ module.exports = function () {
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
+    
     }
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2037,6 +2372,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Particles' );
@@ -2045,6 +2381,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2052,26 +2389,26 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
     stage.clear = false;
     stage.fill = false;
     stage.gco = nk.Style.GCO.COLOR_DODGE;
 
-    imageCache = new nk.ImageLoader( [
+    var imageCache = new nk.ImageLoader( [
       {
         id: 'particle',
         src: nk.Utils.GenerateSimpleBase64Png( function () {
+
           var path = new nk.Path.Circle( 20, 20, 20 );
           path.style.fill.color = 'rgba(0, 0, 0, 0.01)';
           path.style.stroke.color = 'rgba(255, 200, 50, 0.1)';
           var t = new nk.Graphic2D( 0, 0, path );
           return t;
+        
         } )
       }
     ], true );
@@ -2079,8 +2416,10 @@ module.exports = function () {
 
       var i = 250;
       while ( i-- ) {
+
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.GetBasicTexture( 'particle' ) ) );
         child.data.velocity = new nk.Vector2D( nk.Utils.RandomFloat( -2, 2 ), nk.Utils.RandomFloat( -2, 2 ) );
+      
       }
 
       var totalTime = 400;
@@ -2088,23 +2427,33 @@ module.exports = function () {
       var timer = new nk.Timer();
       timer.Start( totalTime );
       timer.onFinish.Add( function () {
+
         stage.ticker.Stop();
+      
       } );
 
       stage.onProcess.Add( function () {
+
         var i = this.children.length, child;
         while ( i-- ) {
+
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
           child.data.velocity.Rotate( nk.Math.RADIAN * nk.Utils.RandomFloat( -12, 12 ) );
           child.scale.Set( ( totalTime - timer.time ) / totalTime );
+        
         }
+
         timer.Process();
+      
       }, stage );
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2113,6 +2462,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Platformer' );
@@ -2121,6 +2471,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2128,36 +2479,40 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH, true );
 
     var imageCache = new nk.ImageLoader( [ {
       id: 'character',
       src: nk.Utils.GenerateSimpleBase64Png( function () {
+
         var path = new nk.Path.AABB2D( 0, 0, 20, 20 );
         path.style.fill.applied = false;
         path.style.stroke.color = '#0F0';
         path.style.stroke.lineWidth = 3;
         var t = new nk.Graphic2D( 0, 0, path );
         return t;
+      
       } )
     }, {
       id: 'platform',
       src: nk.Utils.GenerateSimpleBase64Png( function () {
+
         var path = new nk.Path.AABB2D( 0, 0, 50, 10 );
         path.style.fill.applied = false;
         path.style.stroke.lineWidth = 2;
         var t = new nk.Graphic2D( 0, 0, path );
         return t;
+      
       } )
     }], true );
     imageCache.onComplete.Add( function () {
+
       Start();
+    
     } );
 
     var platforms = [];
@@ -2165,43 +2520,68 @@ module.exports = function () {
     var result = new nk.Math.Collision2D.AABB2DvsAABB2D.Result();
 
     function Start () {
+
       InitCharacter();
       InitPlatforms();
       stage.ticker.SetDesiredRate( 60 );
       stage.ticker.Start();
+    
     }
 
     function Process () {
+
       if ( character.position.x > HW || character.position.x < -HW ) {
+
         character.position.x = 0;
+      
       }
+
       if ( character.position.y > HH || character.position.y < -HH ) {
+
         character.position.y = 0;
+      
       }
+
       if ( character.data.force.velocity.y > 0 ) {
+
         character.data.state.falling = true;
         character.data.state.onGround = false;
         character.data.state.ascending = false;
+      
       } else if ( character.data.force.velocity.y < 0 ) {
+
         character.data.state.falling = false;
         character.data.state.onGround = false;
         character.data.state.ascending = true;
+      
       }
+
       character.position.AddV( character.data.force.velocity );
       character.data.force.velocity.AddV( character.data.force.gravity );
       if ( character.data.move.left === true ) {
+
         character.position.SubtractV( character.data.force.move );
         character.data.state.moving = true;
+      
       } else if ( character.data.move.right === true ) {
+
         character.position.AddV( character.data.force.move );
         character.data.state.moving = true;
+      
       } else {
+
         character.data.state.moving = false;
+      
       }
+
       if ( character.data.move.jump === true && character.data.state.onGround === true ) {
+
         character.data.force.velocity.AddV( character.data.force.jump );
+      
       }
+
       for ( var i = 0, l = platforms.length; i < l; ++i ) {
+
         result.occured = false;
         nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide(
           character.data.collisionData,
@@ -2209,20 +2589,30 @@ module.exports = function () {
           result
         );
         if ( result.occured === true ) {
+
           if ( result.mtv.y < 0 && character.data.force.velocity.y > 0 ) {
+
             character.data.force.velocity.y = 0;
             character.data.state.onGround = true;
             character.data.state.falling = false;
             character.data.state.ascending = false;
+          
           } else if ( result.mtv.y > 0 && character.data.force.velocity.y < 0 ) {
+
             character.data.force.velocity.y = 0;
+          
           }
+
           character.position.AddV( result.mtv );
+        
         }
+      
       }
+    
     }
 
     function InitCharacter () {
+
       character = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( 'character' ) );
       character.anchor.Set( 0.5 );
       character.data.move = {
@@ -2251,32 +2641,53 @@ module.exports = function () {
 
       stage.onProcess.Add( Process, stage );
       stage.keyboard.onDown.Add( function ( _event ) {
+
         if ( _event.data.key === 'a' ) {
+
           character.data.move.left = true;
           character.data.move.right = false;
+        
         } else if ( _event.data.key === 'd' ) {
+
           character.data.move.right = true;
           character.data.move.false = false;
+        
         }
+
         if ( _event.data.key === 'w' ) {
+
           character.data.move.jump = true;
+        
         }
+      
       } );
       stage.keyboard.onUp.Add( function ( _event ) {
+
         if ( _event.data.key === 'a' ) {
+
           character.data.move.left = false;
+        
         } else if ( _event.data.key === 'd' ) {
+
           character.data.move.right = false;
+        
         }
+
         if ( _event.data.key === 'w' ) {
+
           character.data.move.jump = false;
+        
         }
+      
       } );
+    
     }
 
     function InitPlatforms () {
+
       var i = 200;
       while ( i-- ) {
+
         var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );
         platform.data.collisionData = {
           shape: platform.shape,
@@ -2285,13 +2696,15 @@ module.exports = function () {
         };
         platforms.push( platform );
         stage.AddChild( platform );
+      
       }
+    
     }
 
-
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2300,6 +2713,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Playground' );
@@ -2308,6 +2722,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2317,17 +2732,14 @@ module.exports = function () {
     c.style.left = '0';
     window.c = c;
 
-    var W = c.width;
-    var H = c.height;
-    var HW = W * 0.5;
-    var HH = H * 0.5;
-
     var stage = new nk.Stage2D( c, 0, 0 );
 
     window.stage = stage;
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2336,6 +2748,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'PolygonCollision' );
@@ -2344,6 +2757,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2351,11 +2765,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH, true );
     stage.ticker.SetDesiredRate( 120 );
@@ -2370,6 +2782,7 @@ module.exports = function () {
     var dragOffset = new nk.Vector2D();
 
     function CreatePolygon () {
+
       var p = new nk.Path.Polygon2D();
       nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 10, 60 ), RI( 3, 6 ) );
       var pg = new nk.Graphic2D( 0, 0, p );
@@ -2379,49 +2792,73 @@ module.exports = function () {
         relative: pg.position,
         anchor: new nk.Vector2D()
       } );
+    
     }
 
     ( function () {
+
       var i = 50;
       while ( i-- ) {
+
         CreatePolygon();
+      
       }
+    
     }() );
 
     var Collide = nk.Math.Collision2D.PolygonvsPolygon.Relative.Collide;
     var result = new nk.Math.Collision2D.PolygonvsPolygon.Result();
 
     stage.onProcess.Add( function () {
+
       for ( var i = 0, l = objs.length; i < l; ++i ) {
+
         var obj1 = objs[ i ];
         for ( var j = 0; j < l; ++j ) {
+
           var obj2 = objs[ j ];
           if ( obj2 === obj1 ) continue;
           result.Reset();
           if ( Collide( obj1, obj2, result ) ) {
+
             if ( dragger ) {
+
               if ( obj1.relative !== dragger.position ) obj1.relative.SubtractV( result.mtv );
               if ( obj2.relative !== dragger.position ) obj2.relative.AddV( result.mtv );
+            
             }
             else {
+
               obj1.relative.SubtractV( result.mtv );
               obj2.relative.AddV( result.mtv );
+            
             }
+          
           }
+        
         }
+      
       }
+    
     } );
 
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -2432,15 +2869,22 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) dragger = null;
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2449,6 +2893,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Quadtree' );
@@ -2457,6 +2902,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2465,10 +2911,6 @@ module.exports = function () {
     c.style.top = '0';
     c.style.left = '0';
     var rc = c.getContext( '2d' );
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, 0, 0 );
     stage.ComputeBounds();
@@ -2480,26 +2922,35 @@ module.exports = function () {
     var objs = [];
     var nodes = [];
 
-
     stage.onProcess.Add( function () {
+
       nodes.forEach( function ( element ) {
+
         nk.Debug.Draw.AABB2D( rc, element.aabb );
+      
       } );
+    
     } );
     stage.mouse.onUp.Add( function ( event ) {
+
       var obj = new nk.Graphic2D( event.data.position.x, event.data.position.y, new nk.Path.AABB2D( 0, 0, 10, 10 ) );
       obj.ComputeBounds( obj.anchor );
       stage.AddChild( obj );
       objs.push( obj );
       root.Dump();
       objs.forEach( function ( element ) {
+
         root.Add( element.bounds );
+      
       } );
       nodes = root.ConcatNodes();
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2508,6 +2959,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Rain' );
@@ -2516,6 +2968,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2523,11 +2976,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
@@ -2536,7 +2987,7 @@ module.exports = function () {
 
     var DropPool = new nk.Pool( nk.Plainsprite );
 
-    imageCache = new nk.ImageLoader( [
+    var imageCache = new nk.ImageLoader( [
       {
         id: 'raindrop',
         src: './assets/images/raindrop.png'
@@ -2545,30 +2996,41 @@ module.exports = function () {
     imageCache.onComplete.Add( function () {
 
       DropPool.Flood( function ( _sprite ) {
+
         _sprite.SetTexture( imageCache.GetBasicTexture( 'raindrop' ) );
         _sprite.data.velocity = new nk.Vector2D();
+      
       }, 1000 );
 
       stage.onProcess.Add( function () {
+
         var i = this.children.length, child;
         while ( i-- ) {
+
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
           child.data.velocity.Add( gravity.x, gravity.y + child.data.mass / 100 );
           child.data.velocity.Add( wind.x / child.data.mass * 4, wind.y / child.data.mass * 4 );
           if ( !--child.data.lifespan ) {
+
             DropPool.Store( child.Detach() );
+          
           }
+        
         }
+
         wind.Set( nk.Utils.RandomFloat( -0.1, 0.1 ), 0 );
         AddDrop();
         AddDrop();
         AddDrop();
         AddDrop();
+      
       }, stage );
+    
     } );
 
     function AddDrop () {
+
       var child = DropPool.Retrieve();
       var scale = nk.Utils.RandomFloat( 0.2, 1 );
       child.position.Set( nk.Utils.RandomFloat( -HW, HW ), -HH - child.height * 2 );
@@ -2577,10 +3039,13 @@ module.exports = function () {
       child.data.velocity.Set( 0 );
       child.data.lifespan = 280;
       child.AttachTo( stage );
+    
     }
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2589,6 +3054,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Raycasting' );
@@ -2597,6 +3063,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2604,11 +3071,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
@@ -2616,14 +3081,14 @@ module.exports = function () {
     var dragStart = new nk.Vector2D();
     var dragOffset = new nk.Vector2D();
 
-
-
     var polygons = [];
     var rays = [];
 
     ( function () {
+
       var i = 15;
       while ( i-- ) {
+
         var p = new nk.Path.Polygon2D();
         nk.Geom.Polygon2D.Construct.Cyclic(
           p,
@@ -2635,14 +3100,18 @@ module.exports = function () {
         p.Rotate( nk.Utils.RandomFloat( 0, nk.Math.PII ) );
         var g = new nk.Graphic2D( 0, 0, p );
         polygons.push( g );
+      
       }
+    
     }() );
 
     ( function () {
+
       var i = 360;
       var angle = Math.PI * 2 / i;
       var r = 180;
       while ( i-- ) {
+
         var th = angle * i;
         var line = new nk.Path.Ray2D( 0, 0, 0, 0 );
         line.style.stroke.lineWidth = 1;
@@ -2651,28 +3120,34 @@ module.exports = function () {
         gr.data.angle = th;
         gr.data.r = r;
         rays.push( gr );
+      
       }
+    
     }() );
-
-
 
     stage.Mount.apply( stage, polygons.concat( rays ) );
 
     stage.onProcess.Add( function () {
+
       rays.forEach( function ( ray ) {
+
         ray.path.s.SetV( stage.mouse.position );
         ray.path.e.SetV( ray.path.s );
         ray.path.e.Add( ray.data.r, ray.data.r );
         ray.path.e.RotateAroundV( ray.path.s, ray.data.angle );
+      
       } );
       for ( var i = 0; i < rays.length; ++i ) {
+
         var ray = rays[ i ];
         var polygon;
         for ( var k = 0; k < polygons.length; ++k ) {
+
           polygon = polygons[ k ].path;
           var vertexa, vertexb, contactPoint;
 
           for ( var j = 0; j < polygon.vertices.length - 1; ++j ) {
+
             vertexa = polygon.vertices[ j ];
             vertexb = polygon.vertices[ j + 1 ];
             contactPoint = nk.Math.LineLineIntersection(
@@ -2682,9 +3157,13 @@ module.exports = function () {
               vertexb
             );
             if ( contactPoint ) {
+
               rays[ i ].path.e.SetV( contactPoint );
+            
             }
+          
           }
+
           vertexa = polygon.vertices[ polygon.vertices.length - 1 ];
           vertexb = polygon.vertices[ 0 ];
           contactPoint = nk.Math.LineLineIntersection(
@@ -2694,25 +3173,34 @@ module.exports = function () {
             vertexb
           );
           if ( contactPoint ) {
+
             rays[ i ].path.e.SetV( contactPoint );
+          
           }
+        
         }
 
       }
+    
     } );
 
-
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
 
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -2723,18 +3211,26 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) {
+
         dragger = null;
+      
       }
+    
     } );
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2743,6 +3239,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'ReflectiveCollision' );
@@ -2751,6 +3248,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2758,11 +3256,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
@@ -2773,11 +3269,11 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
     var RF = nk.Utils.RandomFloat;
 
-
     var lines = [];
     var circles = [];
 
-    function CreateCircle ( _x, _y, _radius, _interactive ) {
+    function CreateCircle ( _x, _y, _radius ) {
+
       var c = new nk.Path.Circle( 0, 0, _radius );
       var cg = new nk.Graphic2D( _x, _y, c );
       cg.data.body = {
@@ -2787,8 +3283,11 @@ module.exports = function () {
       };
       stage.Mount( cg );
       circles.push( cg );
+    
     }
+
     function CreateLine ( _x, _y, _width, _rotation, _interactive ) {
+
       var l = new nk.Path.Line2D( -_width * 0.5, 0, _width * 0.5, 0 );
       l.Rotate( nk.Math.RADIAN * _rotation );
       var lg = new nk.Graphic2D( _x, _y, l );
@@ -2799,8 +3298,11 @@ module.exports = function () {
       lines.push( lg );
       stage.Mount( lg );
       if ( _interactive === false ) {
+
         lg.interactive = false;
+      
       }
+    
     }
 
     var Collide = nk.Math.Collision2D.CirclevsLine.Relative.Collide;
@@ -2808,46 +3310,70 @@ module.exports = function () {
     var result = new nk.Math.Collision2D.CirclevsLine.Result();
 
     ( function () {
+
       var i = 25;
       while ( i-- ) {
+
         CreateLine( RI( -HW, HW ), RI( -HH, HH ), 100, RI( 0, 360 ) );
+      
       }
+    
     }() );
+
     CreateLine( -HW, 0, H, 90, false );
     CreateLine( HW, 0, H, 90, false );
     CreateLine( 0, -HH, W, 0, false );
     CreateLine( 0, HH, W, 0, false );
 
     ( function () {
+
       var i = 25;
       while ( i-- ) {
+
         CreateCircle( RI( -HW, HW ), RI( -HH, HH ), RI( 5, 10 ) );
+      
       }
+    
     }() );
 
     stage.onProcess.Add( function () {
+
       circles.forEach( function ( circle ) {
+
         circle.position.AddV( circle.data.body.velocity );
         lines.forEach( function ( line ) {
+
           result.Reset();
           Collide( circle.data.body, line.data.body, result );
           if ( result.occured ) {
+
             Response( circle.data.body, line.data.body, result );
+          
           }
+        
         } );
+      
       } );
+    
     } );
 
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -2858,16 +3384,22 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) dragger = null;
+    
     } );
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2876,6 +3408,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Sprite' );
@@ -2884,6 +3417,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2891,7 +3425,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -2907,6 +3440,7 @@ module.exports = function () {
 
     var imageCache = new nk.ImageLoader();
     imageCache.onComplete.Add( function ( _event ) {
+
       console.log( _event.target, _event.data, 'complete' );
       sprite1 = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( '4dots' ) );
       sprite1.anchor.Set( 0.5 );
@@ -2921,9 +3455,12 @@ module.exports = function () {
       sprite5.anchor.Set( 0.5 );
 
       stage.AddChildren( sprite1, sprite2, sprite3, sprite4, sprite5 );
+    
     } );
     imageCache.onImageLoaded.Add( function ( _event ) {
+
       console.log( _event.target, _event.data, 'loaded' );
+    
     } );
     imageCache.Load( [
       { id: 'smudge', src: './assets/images/smudge.png' }
@@ -2933,35 +3470,47 @@ module.exports = function () {
       { id: 'gobj', src: './assets/images/glass-of-blueberryjuice.png' }
     ], true );
 
-
-
     var dragger = null;
 
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x;
         dragger.y = _event.data.position.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragger = stage.children[ i ];
 
           _event.stopPropagation = true;
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) dragger = null;
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -2970,6 +3519,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Stresstest' );
@@ -2978,6 +3528,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -2995,12 +3546,14 @@ module.exports = function () {
     var texture = null;
 
     function CreateTexture () {
+
       var path = new nk.Path.Polygon2D();
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 12 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
+    
     }
 
     var ticker = new nk.Ticker( Update, 1000, true );
@@ -3019,36 +3572,52 @@ module.exports = function () {
 
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {
+
       var i = am;
       am = am < 3 ? 3 : am--;
       while ( i-- ) {
+
         var sprite = spritePool.Retrieve();
         sprite.transformAutomaticUpdate = false;
         container.AddChild( sprite );
+      
       }
 
       if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
+
         this.Start( 1 );
+      
       }
       else {
+
         var numChildren = container.children.length;
         console.log( numChildren, ticker.GetTPS() );
         container.children.forEach( function ( child ) {
+
           spritePool.Store( child );
+        
         } );
         container.Dump();
         holdCounter = 0;
         childrenMDC.push( numChildren );
         numTimes--;
         if ( numTimes > 0 ) {
+
           timer.Start( 120 );
+        
         } else {
+
           childrenMDC.sort( function ( a, b ) {
+
             return a - b;
+          
           } );
           console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+        
         }
+      
       }
+    
     }, timer );
 
     var imageCache = new nk.ImageLoader( [ {
@@ -3056,25 +3625,33 @@ module.exports = function () {
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
     }], true );
     imageCache.onComplete.Add( function () {
+
       texture = imageCache.GetBasicTexture( 'tex' );
       spritePool.Flood( function ( obj ) {
+
         obj.x = Math.random() * W - HW;
         obj.y = Math.random() * H - HH;
         obj.SetTexture( texture );
+      
       }, 50000 );
       timer.Start( 120 );
+    
     } );
 
     function Update () {
+
       rc.setTransform( 1, 0, 0, 1, 0, 0 );
       rc.fillStyle = 'rgba(0, 0, 0, 1)';
       rc.fillRect( 0, 0, W, H );
       container.Draw( rc );
       timer.Process();
+    
     }
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -3083,6 +3660,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Text' );
@@ -3091,6 +3669,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3098,7 +3677,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -3118,7 +3696,9 @@ module.exports = function () {
     text.rotation = nk.Math.RADIAN * 24;
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -3127,6 +3707,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'TheMask' );
@@ -3134,8 +3715,8 @@ module.exports = function () {
   button.addEventListener( 'click', RunTheMask );
   buttonContainer.appendChild( button );
 
-
   function RunTheMask () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3230,12 +3811,15 @@ module.exports = function () {
       container.Draw( rc );
 
       //requestAnimationFrame( Update );
+    
     }
 
     setInterval( Update, 1 );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -3244,6 +3828,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Animation' );
@@ -3252,6 +3837,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3265,18 +3851,14 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var wRatio = W / H;
-
     var stage = new nk.Stage2D( c, 0, 0, false, true );
-
-
 
     var sprite = null;
     var spriteRef = null;
     var test = null;
 
     var imageCache = new nk.ImageLoader();
-    imageCache.onComplete.Add( function ( _event ) {
+    imageCache.onComplete.Add( function ( ) {
 
       var p1 = new nk.GLTextureProgramController( stage.gl );
       var p2 = new nk.GLTextureProgramController( stage.gl );
@@ -3298,8 +3880,6 @@ module.exports = function () {
       sprite.scale.Set( 5 );
       sprite.UpdateShape();
 
-
-
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.AddAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
@@ -3312,10 +3892,12 @@ module.exports = function () {
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef, test );
 
-
       stage.onProcess.Add( function () {
+
         sprite.animationController.Process();
+      
       }, stage );
+    
     } );
     imageCache.Load( [
       { id: '1to8', src: './assets/images/1to8.png', w: 64, h: 64 },
@@ -3326,17 +3908,23 @@ module.exports = function () {
     var dragStart = new nk.Vector2D();
     var dragOffset = new nk.Vector2D();
 
-
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -3347,19 +3935,26 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) {
+
         dragger = null;
+      
       }
+    
     } );
 
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };
 
 
@@ -3368,6 +3963,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL BitmapFont' );
@@ -3376,6 +3972,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3383,9 +3980,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, 0, 0, false, true );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
@@ -3402,21 +3996,27 @@ module.exports = function () {
       { id: 'fontimg', src: './assets/images/font.png' }
     ], true );
     xhrloader.onComplete.Add( function ( event ) {
+
       console.log( event.data );
       console.log( JSON.stringify( event.data.dataCache.items[ 0 ].data ) === JSON.stringify( event.data.dataCache.items[ 1 ].data ) );
       done++;
       Go();
+    
     } );
     imgloader.onComplete.Add( function ( event ) {
+
       console.log( event.data );
       done++;
       Go();
+    
     } );
 
     var test = null;
 
     function Go () {
+
       if ( done > 1 ) {
+
         fontPc.BindBasicTexture( imgloader.GetBasicTexture( 'fontimg' ) );
         test = new nk.BitmapText(
           0,
@@ -3429,12 +4029,15 @@ module.exports = function () {
         test.maxWidth = window.innerWidth;
         stage.AddChild( test );
         test.ComputeText();
+      
       }
+    
     }
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -3443,6 +4046,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Circle' );
@@ -3451,6 +4055,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3464,10 +4069,7 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var wRatio = W / H;
-
     var stage = new nk.Stage2D( c, 0, 0, false, true );
-
 
     var pc = new nk.GLCircleProgramController( stage.gl );
     var pcLine = new nk.GLLine2DProgramController( stage.gl );
@@ -3485,33 +4087,43 @@ module.exports = function () {
 
     var i = 1000;
     while ( i-- ) {
+
       var path = new nk.Path.Circle( 0, 0, RI( 2, 30 ) );
       path.style.fill.color = new nk.Color( RI( 0, 255 ), RI( 0, 255 ), RI( 0, 255 ) ).ComputeValueHex();
       path.LinkProgramController( pc );
       var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
       g.GLPreDraw = PreDraw;
       g.AttachTo( stage );
+    
     }
 
     function PreDraw () {
+
       this.path.LinkStyle();
+    
     }
 
     var dragger = null;
     var dragStart = new nk.Vector2D();
     var dragOffset = new nk.Vector2D();
 
-
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -3522,19 +4134,26 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) {
+
         dragger = null;
+      
       }
+    
     } );
 
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };
 
 
@@ -3543,6 +4162,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Line2D' );
@@ -3551,6 +4171,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3561,20 +4182,13 @@ module.exports = function () {
 
     var W = c.width;
     var H = c.height;
-    var HW = W * 0.5;
-    var HH = H * 0.5;
-
-    var wRatio = W / H;
 
     var mX = W / 45;
     var mY = H / 45;
 
     var stage = new nk.Stage2D( c, 0, 0, false, true );
 
-
     var pc = new nk.GLLine2DProgramController( stage.gl );
-
-    var RF = nk.Utils.RandomFloat;
 
     var s = new nk.Vector2D();
 
@@ -3582,26 +4196,27 @@ module.exports = function () {
 
     var i = points.length;
     while ( i-- ) {
+
       var e = points[ i ];
       var path = new nk.Path.Line2D( s, e );
       path.LinkProgramController( pc );
       var g = new nk.Graphic2D( 0, 0, path );
       g.AttachTo( stage );
+    
     }
 
     function Update () {
+
       s.SetV( stage.mouse.position );
+    
     }
 
     stage.onProcess.Add( Update, stage );
 
-
-
-
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };
 
 
@@ -3610,6 +4225,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL PixelBatch' );
@@ -3618,6 +4234,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3631,11 +4248,6 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var wRatio = W / H;
-
-    var mX = W / 30;
-    var mY = H / 30;
-
     var stage = new nk.Stage2D( c, 0, 0, true, true );
     stage.ticker.Start();
 
@@ -3643,11 +4255,12 @@ module.exports = function () {
     stage.UseAsBatchParent( pc );
 
     var RF = nk.Utils.RandomFloat;
-    var RI = nk.Utils.RandomInteger;
 
     ( function () {
+
       var i = 100000;
       while ( i-- ) {
+
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
@@ -3659,30 +4272,36 @@ module.exports = function () {
         g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );
         stage.Mount( g );
         g.UpdateTransform();
+      
       }
+
       stage.ComputeBatchBuffer();
 
     }() );
 
     stage.onProcess.Add( function prasd () {
+
       this.children.forEach( function ( child ) {
+
         child.data.velocity.Rotate( child.data.torque );
         child.position.AddV( child.data.velocity );
         child.UpdateInBuffer();
+      
       } );
       if ( stage.ticker.GetTPS() < 40 ) {
-        console.log( stage.ticker.GetTPS() );
-      }
-    }, stage );
 
+        console.log( stage.ticker.GetTPS() );
+      
+      }
+    
+    }, stage );
 
     console.log( stage.childDataBuffer );
 
-
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };
 
 
@@ -3691,6 +4310,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Rectangle' );
@@ -3699,6 +4319,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3709,13 +4330,8 @@ module.exports = function () {
 
     var W = c.width;
     var H = c.height;
-    var HW = W * 0.5;
-    var HH = H * 0.5;
-
-    var wRatio = W / H;
 
     var stage = new nk.Stage2D( c, 0, 0, false, true );
-
 
     var pc = new nk.GLRectangleProgramController( stage.gl );
 
@@ -3726,28 +4342,33 @@ module.exports = function () {
 
     var i = 1000;
     while ( i-- ) {
+
       var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
       g.AttachTo( stage );
+    
     }
-
-
-
 
     var dragger = null;
     var dragStart = new nk.Vector2D();
     var dragOffset = new nk.Vector2D();
 
-
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
         dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragStart.SetV( p );
 
           dragger = stage.children[ i ];
@@ -3758,19 +4379,26 @@ module.exports = function () {
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) {
+
         dragger = null;
+      
       }
+    
     } );
 
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };
 
 
@@ -3779,6 +4407,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Stresstest' );
@@ -3787,6 +4416,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3796,7 +4426,9 @@ module.exports = function () {
     c.style.left = 0;
     var gl = c.getContext( 'webgl' );
     if ( !gl ) {
+
       gl = c.getContext( 'experimental-webgl' );
+    
     }
 
     var W = c.width, HW = W * 0.5;
@@ -3809,6 +4441,7 @@ module.exports = function () {
 
     var pcon = null;
     var pcon0 = null;
+    var pcon1 = null;
 
     var cpath = new nk.Path.Circle( 0, 0, 25 );
     pcon0 = new nk.GLCircleProgramController( gl );
@@ -3821,12 +4454,14 @@ module.exports = function () {
     var usedPath = rpath;
 
     function CreateTexture () {
+
       var path = new nk.Path.Polygon2D();
       path.style.stroke.lineWidth = 1;
       nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 32, 12 );
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
+    
     }
 
     var ticker = new nk.Ticker( Update, 1000, true );
@@ -3848,35 +4483,51 @@ module.exports = function () {
 
     var timer = new nk.Timer();
     timer.onFinish.Add( function () {
+
       var i = am;
       am = am < 3 ? 3 : am--;
       while ( i-- ) {
+
         var obj = usedPool.Retrieve();
         container.AddChild( obj );
+      
       }
 
       if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
+
         this.Start( 1 );
+      
       }
       else {
+
         var numChildren = container.children.length;
         console.log( numChildren, ticker.GetTPS() );
         container.children.forEach( function ( child ) {
+
           usedPool.Store( child );
+        
         } );
         container.Dump();
         holdCounter = 0;
         childrenMDC.push( numChildren );
         numTimes--;
         if ( numTimes > 0 ) {
+
           timer.Start( 120 );
+        
         } else {
+
           childrenMDC.sort( function ( a, b ) {
+
             return a - b;
+          
           } );
           console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+        
         }
+      
       }
+    
     }, timer );
 
     var imageCache = new nk.ImageLoader( [ {
@@ -3884,26 +4535,33 @@ module.exports = function () {
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
     }], true );
     imageCache.onComplete.Add( function () {
+
       pcon = new nk.GLTextureProgramController( gl );
       pcon.BindBasicTexture( imageCache.GetBasicTexture( 'tex' ) );
 
       spritePool.Flood( function ( obj ) {
+
         obj.x = Math.random() * W - HW;
         obj.y = Math.random() * H - HH;
         obj.programController = pcon;
         obj.transformAutomaticUpdate = false;
         obj.SetTexture( pcon.originalTexture );
+      
       }, 5000 );
       graphicPool.Flood( function ( obj ) {
+
         obj.x = Math.random() * W - HW;
         obj.y = Math.random() * H - HH;
         obj.transformAutomaticUpdate = false;
         obj.SetPath( usedPath );
+      
       }, 5000 );
       timer.Start( 120 );
+    
     } );
 
     function Update () {
+
       gl.viewport( 0, 0, W, H );
       gl.clear( gl.COLOR_BUFFER_BIT );
       gl.enable( gl.BLEND );
@@ -3912,10 +4570,13 @@ module.exports = function () {
       container.GLDraw( gl );
       timer.Process();
       gl.flush();
+    
     }
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
 
 
@@ -3924,6 +4585,7 @@ module.exports = function () {
 /***/ (function(module, exports) {
 
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL TextureBatch' );
@@ -3932,6 +4594,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -3945,11 +4608,6 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var wRatio = W / H;
-
-    var mX = W / 30;
-    var mY = H / 30;
-
     var RF = nk.Utils.RandomFloat;
     var RI = nk.Utils.RandomInteger;
 
@@ -3959,13 +4617,16 @@ module.exports = function () {
     stage.UseAsBatchParent( pc );
 
     var ic = new nk.ImageLoader();
-    ic.onComplete.Add( function ( _event ) {
+    ic.onComplete.Add( function ( ) {
+
       var tex = ic.GetBasicTexture( 'colors' );
       pc.BindBasicTexture( tex );
 
       ( function () {
+
         var i = 5000;
         while ( i-- ) {
+
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
           var anim = ac.AddAnimation( 'test', RI( 5, 40 ) );
@@ -3983,34 +4644,43 @@ module.exports = function () {
           s.anchor.Set( 0.5 );
           stage.Mount( s );
           s.UpdateTransform();
+        
         }
+
         stage.ComputeBatchBuffer();
 
         stage.onProcess.Add( function () {
+
           for ( var i = 0, child; i < this.children.length; ++i ) {
+
             child = this.children[ i ];
             child.animationController.Process();
             child.data.velocity.Rotate( child.data.torque );
             child.position.AddV( child.data.velocity );
             child.UpdateInBuffer();
+          
           }
+
           if ( stage.ticker.GetTPS() < 40 ) {
+
             console.log( stage.ticker.GetTPS() );
+          
           }
+        
         }, stage );
+      
       }() );
+    
     } );
 
     ic.Load( [
       { id: 'colors', src: './assets/images/colors.png', w: 64, h: 64 }
     ], true );
 
-
-
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };
 
 

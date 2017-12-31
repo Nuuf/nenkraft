@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Animation' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -14,7 +16,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -43,26 +44,35 @@ module.exports = function () {
       } );
       animation.reverse = true;
       animation.onEnd.Add( function () {
+
         stage.ticker.Stop();
+      
       }, animation );
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef );
 
       timer.onFinish.Add( function () {
+
         sprite.animationController.StopCurrentAnimation();
+      
       } );
 
       //timer.Start( 400 );
 
       stage.onProcess.Add( function () {
+
         sprite.animationController.Process();
         timer.Process();
+      
       }, stage );
+    
     } );
     imageCache.Load( [
       { id: '1to8', src: './assets/images/1to8.png' }
     ], true );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

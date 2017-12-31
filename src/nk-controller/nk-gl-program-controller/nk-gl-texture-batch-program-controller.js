@@ -3,13 +3,17 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TRA = Nenkraft.Math.TriRectArray;
   function GLTextureBatchProgramController ( _gl ) {
+
     if ( !( this instanceof GLTextureBatchProgramController ) ) return new GLTextureBatchProgramController( _gl );
     Super.call( this, _gl, Nenkraft.SHADER_CODE.TEXTURE_2D_BATCH );
+  
   }
+
   GLTextureBatchProgramController.prototype = Object.create( Super.prototype );
   GLTextureBatchProgramController.prototype.constructor = GLTextureBatchProgramController;
   //Static
@@ -23,6 +27,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureBatchProgramController.prototype.previousNumberOfElements = null;
   //Methods
   GLTextureBatchProgramController.prototype.BindBasicTexture = function ( _texture ) {
+
     var gl = this.gl;
     this.aia = gl.getExtension( 'ANGLE_instanced_arrays' );
     this.originalTexture = _texture;
@@ -53,13 +58,17 @@ module.exports = function ( Nenkraft ) {
     this.AssignAttribute( 'aTransformation2' );
     this.AssignAttribute( 'aTransformation3' );
     this.AssignUniform( 'uImage' );
+  
   };
+
   GLTextureBatchProgramController.prototype.Execute = function ( _data, _numberOfElements ) {
+
     var gl = this.gl;
     var aia = this.aia;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
     if ( this !== Super.LAST_USED_CONTROLLER ) {
+
       gl.useProgram( this.program );
       gl.activeTexture( gl.TEXTURE0 );
       gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
@@ -72,13 +81,20 @@ module.exports = function ( Nenkraft ) {
       gl.vertexAttribPointer( attributes.aTexCoord, 2, gl.FLOAT, false, 0, 48 );
       aia.vertexAttribDivisorANGLE( attributes.aTexCoord, 0 );
       Super.LAST_USED_CONTROLLER = this;
+    
     }
+
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
     if ( _numberOfElements !== this.previousNumberOfElements ) {
+
       gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );
+    
     } else {
+
       gl.bufferSubData( gl.ARRAY_BUFFER, 0, _data );
+    
     }
+
     gl.enableVertexAttribArray( attributes.aProjection1 );
     gl.vertexAttribPointer( attributes.aProjection1, 3, gl.FLOAT, false, 108, 0 );
     aia.vertexAttribDivisorANGLE( attributes.aProjection1, 1 );
@@ -107,7 +123,10 @@ module.exports = function ( Nenkraft ) {
     gl.vertexAttribPointer( attributes.aTransformation3, 3, gl.FLOAT, false, 108, 96 );
     aia.vertexAttribDivisorANGLE( attributes.aTransformation3, 1 );
     aia.drawArraysInstancedANGLE( gl.TRIANGLE_STRIP, 0, 6, _numberOfElements );
+  
   };
+
   Nenkraft.Controller.GLTextureBatchProgramController = GLTextureBatchProgramController;
   Nenkraft.GLTextureBatchProgramController = GLTextureBatchProgramController;
+
 };

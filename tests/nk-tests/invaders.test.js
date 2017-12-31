@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Invaders' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', 1024 );
     c.setAttribute( 'height', 800 );
@@ -18,8 +20,7 @@ module.exports = function () {
     c.style.transform = 'translateX(-50%)';
 
     var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var ratio = W / H;
+    var H = c.height;
 
     var RI = nk.Utils.RandomInteger;
     var RF = nk.Utils.RandomFloat;
@@ -38,7 +39,7 @@ module.exports = function () {
 
     var worldScale = new nk.Vector2D( 2.0, 2.0 );
     var ship = null;
-    var enemyBullets = [];
+    // var enemyBullets = [];
     var playerBullets = [];
     var enemies = [];
     var shields = [];
@@ -59,13 +60,17 @@ module.exports = function () {
       src: './../assets/images/invaders/invaders.png',
       w: 16, h: 16, fw: 128, fh: 16
     }], true, function () {
+
       go();
+    
     } );
 
     function go () {
+
       stage.ticker.Start();
       pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
       playerBulletPool.Flood( function () {
+
         var b = new nk.Sprite( 0, 0, pc );
         b.scale.SetV( worldScale );
         b.UpdateShape();
@@ -78,8 +83,10 @@ module.exports = function () {
         };
         b.clip.Set( 16 * 7, 0, 16, 16 );
         return b;
+      
       }, 1000 );
       enemyPool.Flood( function () {
+
         var e = new nk.Sprite( 0, 0, pc );
         e.scale.SetV( worldScale );
         e.UpdateShape();
@@ -92,14 +99,17 @@ module.exports = function () {
         };
         e.clip.Set( 16 * RI( 1, 2 ), 0, 16, 16 );
         return e;
+      
       }, 1000 );
       createShip();
       createShields();
       setupListeners();
       setupProcess();
+    
     }
 
     function createShip () {
+
       if ( ship ) return;
       ship = new nk.Sprite( 0, 0, pc );
       ship.scale.SetV( worldScale );
@@ -114,11 +124,14 @@ module.exports = function () {
       ship.data.fireTimer = 0;
       ship.data.bulletsPerBlast = 50;
       stage.Mount( ship );
+    
     }
 
     function createPlayerBullet () {
+
       var i = ship.data.bulletsPerBlast;
       while ( i-- ) {
+
         var b = playerBulletPool.Retrieve();
         b.x = ship.x;
         b.y = ship.y;
@@ -128,15 +141,21 @@ module.exports = function () {
           nk.Math.Spread( 0, ship.data.bulletsPerBlast, RF( 1, 2 ), i )
         ) );
         if ( b.data.velocity.y > 0 ) {
+
           b.data.velocity.y = -b.data.velocity.y;
+        
         }
+
         b.data.lifeSpan = 200;
         playerBullets.push( b );
         stage.Mount( b );
+      
       }
+    
     }
 
     function createEnemy () {
+
       var e = enemyPool.Retrieve();
       e.x = RF( 0, W );
       e.y = 0 - e.height * 0.5;
@@ -145,10 +164,13 @@ module.exports = function () {
       e.data.health = enemyHealth;
       enemies.push( e );
       stage.Mount( e );
+    
     }
 
     function createShields () {
+
       for ( var i = 0; i < numShields; ++i ) {
+
         var s = new nk.Sprite( 0, 0, pc );
         s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
@@ -165,17 +187,22 @@ module.exports = function () {
         s.clip.Set( 16 * 3, 0, 16, 16 );
         shields.push( s );
         stage.Mount( s );
+      
       }
+    
     }
 
     function setupListeners () {
+
       stage.keyboard.onDown.Add( onKeyDown, ship );
       stage.keyboard.onUp.Add( onKeyUp, ship );
 
       function onKeyDown ( event ) {
+
         var kc = event.data.keyCode;
         //console.log( kc );
         switch ( kc ) {
+
           case 37:
             this.data.moveLeft = true;
             break;
@@ -186,12 +213,16 @@ module.exports = function () {
             this.data.fire = true;
             break;
           default: break;
+        
         }
+      
       }
 
       function onKeyUp ( event ) {
+
         var kc = event.data.keyCode;
         switch ( kc ) {
+
           case 37:
             this.data.moveLeft = false;
             break;
@@ -202,143 +233,218 @@ module.exports = function () {
             this.data.fire = false;
             break;
           default: break;
+        
         }
+      
       }
+    
     }
 
     function setupProcess () {
+
       stage.onProcess.Add( onProcess, stage );
 
       function onProcess () {
+
         handleShip();
         if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
+
           createEnemy();
+        
         }
+
         handleEnemies();
         root.Dump();
         var i;
         for ( i = 0; i < enemies.length; ++i ) {
+
           root.Add( enemies[ i ].bounds );
+        
         }
+
         handlePlayerBullets();
         if ( this.ticker.GetTPS() < 40 ) {
+
           console.log( this.ticker.GetTPS() );
+        
         }
+      
       }
 
       function handleShip () {
+
         var shipWHalf = ship.width * 0.5;
         if ( ship.data.moveLeft && ship.x > 0 + shipWHalf ) {
+
           ship.data.velocity.x = -ship.data.moveSpeed;
+        
         } else if ( ship.data.moveRight && ship.x < W - shipWHalf ) {
+
           ship.data.velocity.x = ship.data.moveSpeed;
+        
         } else {
+
           ship.data.velocity.x = 0;
+        
         }
+
         ship.position.AddV( ship.data.velocity );
         if ( ship.x < 0 + shipWHalf ) {
+
           ship.x = 0 + shipWHalf;
+        
         } else if ( ship.x > W - shipWHalf ) {
+
           ship.x = W - shipWHalf;
+        
         }
+
         if ( ship.data.fire && ship.data.fireTimer === 0 ) {
+
           createPlayerBullet();
           ship.data.fireTimer = ship.data.fireRate;
+        
         }
+
         if ( ship.data.fireTimer > 0 ) {
+
           ship.data.fireTimer--;
+        
         }
+      
       }
 
       function handlePlayerBullets () {
+
         for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
+
           bullet = playerBullets[ i ];
           if ( bullet ) {
+
             bullet.position.AddV( bullet.data.velocity );
             if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
+
               bullet.data.velocity.x = -bullet.data.velocity.x;
+            
             }
+
             bullet.ComputeBounds();
             if ( --bullet.data.lifeSpan <= 0 ) {
+
               bullet.Detach();
               playerBullets.splice( i, 1 );
               playerBulletPool.Store( bullet );
+            
             } else {
+
               // We can cheat, because we have so many objects.
               if ( RI( 1, 3 ) === 2 ) {
+
                 handlePlayerBullet_EnemyCollision( bullet, i );
+              
               }
+            
             }
+          
           }
 
         }
+      
       }
 
       function handleEnemies () {
+
         for ( var i = 0, enemy; i < enemies.length; ++i ) {
+
           enemy = enemies[ i ];
           if ( enemy ) {
+
             enemy.position.AddV( enemy.data.velocity );
             enemy.ComputeBounds();
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
+
               enemy.Detach();
               enemies.splice( i, 1 );
               enemyPool.Store( enemy );
+            
             } else {
+
               handleEnemy_ShieldCollision( enemy, i );
+            
             }
+          
           }
+        
         }
+      
       }
 
       function handlePlayerBullet_EnemyCollision ( bullet, index ) {
+
         if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
+
           var convergence = root.Converge( bullet.bounds );
           for ( var i = 0, enemy; i < convergence.length; ++i ) {
+
             enemy = convergence[ i ].belongsTo;
             if ( enemy ) {
+
               if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
+
                 enemy.data.health--;
                 bullet.Detach();
                 playerBullets.splice( index, 1 );
                 break;
+              
               }
+            
             }
+          
           }
+        
         }
+      
       }
 
       function handleEnemy_ShieldCollision ( enemy, index ) {
+
         if ( !enemy || enemy.y < shieldVerticalPosition - enemy.height ) return;
         for ( var i = 0, shield; i < shields.length; ++i ) {
+
           shield = shields[ i ];
           if ( shield ) {
+
             if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
+
               enemy.Detach();
               enemies.splice( index, 1 );
               enemyPool.Store( enemy );
               if ( --shield.data.health <= 0 ) {
+
                 shield.Detach();
                 shields.splice( i, 1 );
                 break;
+              
               } else {
+
                 shield.clip.tl.x += 16;
+              
               }
+
               break;
+            
             }
+          
           }
+        
         }
+      
       }
 
     }
 
-
-
-
-
-
-
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

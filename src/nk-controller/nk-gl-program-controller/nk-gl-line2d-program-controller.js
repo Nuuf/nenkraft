@@ -3,13 +3,17 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   function GLLine2DProgramController ( _gl ) {
+
     if ( !( this instanceof GLLine2DProgramController ) ) return new GLLine2DProgramController( _gl );
     Super.call( this, _gl, Nenkraft.SHADER_CODE.LINE2D );
     this.Initialise();
+  
   }
+
   GLLine2DProgramController.prototype = Object.create( Super.prototype );
   GLLine2DProgramController.prototype.constructor = GLLine2DProgramController;
   //Static
@@ -20,6 +24,7 @@ module.exports = function ( Nenkraft ) {
   GLLine2DProgramController.prototype.color = null;
   //Methods
   GLLine2DProgramController.prototype.Initialise = function () {
+
     var gl = this.gl;
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( [ -1, 0, 1, 0 ] );
@@ -30,8 +35,11 @@ module.exports = function ( Nenkraft ) {
     this.AssignAttribute( 'aPosition' );
     this.AssignUniform( 'uProjection' );
     this.AssignUniform( 'uColor' );
+  
   };
+
   GLLine2DProgramController.prototype.Execute = function ( _projection, _s, _e ) {
+
     var gl = this.gl;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
@@ -42,9 +50,12 @@ module.exports = function ( Nenkraft ) {
     vertices[ 2 ] = _e.x;
     vertices[ 3 ] = _e.y;
     if ( this !== Super.LAST_USED_CONTROLLER ) {
+
       gl.useProgram( this.program );
       Super.LAST_USED_CONTROLLER = this;
+    
     }
+
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
     gl.enableVertexAttribArray( attributes.aPosition );
@@ -52,7 +63,10 @@ module.exports = function ( Nenkraft ) {
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniform4f( uniforms.uColor, channel[ 0 ], channel[ 1 ], channel[ 2 ], channel[ 3 ] );
     gl.drawArrays( gl.LINES, 0, 2 );
+  
   };
+
   Nenkraft.Controller.GLLine2DProgramController = GLLine2DProgramController;
   Nenkraft.GLLine2DProgramController = GLLine2DProgramController;
+
 };

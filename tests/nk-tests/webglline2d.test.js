@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL Line2D' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -17,20 +19,13 @@ module.exports = function () {
 
     var W = c.width;
     var H = c.height;
-    var HW = W * 0.5;
-    var HH = H * 0.5;
-
-    var wRatio = W / H;
 
     var mX = W / 45;
     var mY = H / 45;
 
     var stage = new nk.Stage2D( c, 0, 0, false, true );
 
-
     var pc = new nk.GLLine2DProgramController( stage.gl );
-
-    var RF = nk.Utils.RandomFloat;
 
     var s = new nk.Vector2D();
 
@@ -38,24 +33,25 @@ module.exports = function () {
 
     var i = points.length;
     while ( i-- ) {
+
       var e = points[ i ];
       var path = new nk.Path.Line2D( s, e );
       path.LinkProgramController( pc );
       var g = new nk.Graphic2D( 0, 0, path );
       g.AttachTo( stage );
+    
     }
 
     function Update () {
+
       s.SetV( stage.mouse.position );
+    
     }
 
     stage.onProcess.Add( Update, stage );
 
-
-
-
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };

@@ -3,14 +3,18 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TriRectArray = Nenkraft.Math.TriRectArray;
   function GLCircleProgramController ( _gl ) {
+
     if ( !( this instanceof GLCircleProgramController ) ) return new GLCircleProgramController( _gl );
     Super.call( this, _gl, Nenkraft.SHADER_CODE.CIRCLE );
     this.Initialise();
+  
   }
+
   GLCircleProgramController.prototype = Object.create( Super.prototype );
   GLCircleProgramController.prototype.constructor = GLCircleProgramController;
   //Static
@@ -23,6 +27,7 @@ module.exports = function ( Nenkraft ) {
   GLCircleProgramController.prototype.outline = 5.0;
   //Methods
   GLCircleProgramController.prototype.Initialise = function () {
+
     var gl = this.gl;
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( Nenkraft.Math.TriRectArray( 0, 0, 1, 1 ) );
@@ -37,8 +42,11 @@ module.exports = function ( Nenkraft ) {
     this.AssignUniform( 'uOutlineColor' );
     this.AssignUniform( 'uRadius' );
     this.AssignUniform( 'uOutline' );
+  
   };
+
   GLCircleProgramController.prototype.Execute = function ( _projection, _x, _y, _radius ) {
+
     var gl = this.gl;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
@@ -47,9 +55,12 @@ module.exports = function ( Nenkraft ) {
     var outlineChannel = this.outlineColor.channel;
     TriRectArray( _x - _radius, _y - _radius, _radius * 2, _radius * 2, vertices );
     if ( this !== Super.LAST_USED_CONTROLLER ) {
+
       gl.useProgram( this.program );
       Super.LAST_USED_CONTROLLER = this;
+    
     }
+
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferSubData( gl.ARRAY_BUFFER, 0, vertices );
     gl.enableVertexAttribArray( attributes.aPosition );
@@ -60,7 +71,10 @@ module.exports = function ( Nenkraft ) {
     gl.uniform1f( uniforms.uOutline, this.outline );
     gl.uniform1f( uniforms.uRadius, _radius );
     gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );
+  
   };
+
   Nenkraft.Controller.GLCircleProgramController = GLCircleProgramController;
   Nenkraft.GLCircleProgramController = GLCircleProgramController;
+
 };

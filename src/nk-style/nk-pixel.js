@@ -3,11 +3,15 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   function Pixel ( _props ) {
+
     if ( !( this instanceof Pixel ) ) return new Pixel( _props );
     Nenkraft.Utils.ApplyProperties( this, _props );
+  
   }
+
   Pixel.prototype = Object.create( null );
   Pixel.prototype.constructor = Pixel;
   //Static
@@ -17,4 +21,5 @@ module.exports = function ( Nenkraft ) {
   Pixel.prototype.size = 1.0;
   //Methods
   Nenkraft.Style.Pixel = Pixel;
+
 };

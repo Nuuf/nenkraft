@@ -4,7 +4,10 @@
     "node": true
   },
   "globals": {
-    "Float32Array": true
+    "Math": true,
+    "Float32Array": true,
+    "Nenkraft": true,
+    "nk":true
   },
   "rules": {
     "indent": [
@@ -73,6 +76,26 @@
     ],
     "no-unneeded-ternary": [
       "error"
+    ],
+    "padded-blocks": [
+      "error",
+      "always"
+    ],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "block-like",
+        "next": "*"
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      { 
+        "max": 1,
+        "maxEOF": 0,
+        "maxBOF": 0
+      }
     ]
   }
 }

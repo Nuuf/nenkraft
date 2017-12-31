@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Text' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -14,7 +16,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -34,5 +35,7 @@ module.exports = function () {
     text.rotation = nk.Math.RADIAN * 24;
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

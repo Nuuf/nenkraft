@@ -3,11 +3,15 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   function Stroke ( _props ) {
+
     if ( !( this instanceof Stroke ) ) return new Stroke( _props );
     Nenkraft.Utils.ApplyProperties( this, _props );
+  
   }
+
   Stroke.prototype = Object.create( null );
   Stroke.prototype.constructor = Stroke;
   //Static
@@ -30,12 +34,15 @@ module.exports = function ( Nenkraft ) {
   Stroke.prototype.applied = true;
   //Methods
   Stroke.prototype.Apply = function ( _rc ) {
+
     _rc.strokeStyle = this.color;
     _rc.lineCap = this.lineCap;
     _rc.lineJoin = this.lineJoin;
     _rc.lineWidth = this.lineWidth;
     _rc.miterLimit = this.miterLimit;
+  
   };
 
   Nenkraft.Style.Stroke = Stroke;
+
 };

@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'TheMask' );
@@ -6,8 +7,8 @@ module.exports = function () {
   button.addEventListener( 'click', RunTheMask );
   buttonContainer.appendChild( button );
 
-
   function RunTheMask () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -102,10 +103,13 @@ module.exports = function () {
       container.Draw( rc );
 
       //requestAnimationFrame( Update );
+    
     }
 
     setInterval( Update, 1 );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

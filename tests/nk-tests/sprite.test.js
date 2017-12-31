@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Sprite' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -14,7 +16,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -30,6 +31,7 @@ module.exports = function () {
 
     var imageCache = new nk.ImageLoader();
     imageCache.onComplete.Add( function ( _event ) {
+
       console.log( _event.target, _event.data, 'complete' );
       sprite1 = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( '4dots' ) );
       sprite1.anchor.Set( 0.5 );
@@ -44,9 +46,12 @@ module.exports = function () {
       sprite5.anchor.Set( 0.5 );
 
       stage.AddChildren( sprite1, sprite2, sprite3, sprite4, sprite5 );
+    
     } );
     imageCache.onImageLoaded.Add( function ( _event ) {
+
       console.log( _event.target, _event.data, 'loaded' );
+    
     } );
     imageCache.Load( [
       { id: 'smudge', src: './assets/images/smudge.png' }
@@ -56,33 +61,45 @@ module.exports = function () {
       { id: 'gobj', src: './assets/images/glass-of-blueberryjuice.png' }
     ], true );
 
-
-
     var dragger = null;
 
     stage.mouse.onMove.Add( function ( _event ) {
+
       if ( dragger !== null ) {
+
         dragger.x = _event.data.position.x;
         dragger.y = _event.data.position.y;
+      
       }
+    
     }, stage );
     stage.mouse.onDown.Add( function ( _event ) {
+
       var p = _event.data.position;
       for ( var i = stage.children.length; i--; ) {
+
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
           dragger = stage.children[ i ];
 
           _event.stopPropagation = true;
 
           dragger.SendToFront();
           break;
+        
         }
+      
       }
+    
     }, stage );
-    stage.mouse.onUp.Add( function ( _event ) {
+    stage.mouse.onUp.Add( function ( ) {
+
       if ( dragger ) dragger = null;
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

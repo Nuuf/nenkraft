@@ -3,8 +3,10 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   function Keyboard ( _element ) {
+
     if ( !( this instanceof Keyboard ) ) return new Keyboard( _element );
     this.element = _element;
     this.element.setAttribute( 'tabindex', '1' );
@@ -15,7 +17,9 @@ module.exports = function ( Nenkraft ) {
 
     this.onDown = new Nenkraft.Event.LocalEvent();
     this.onUp = new Nenkraft.Event.LocalEvent();
+  
   }
+
   Keyboard.prototype = Object.create( null );
   Keyboard.prototype.constructor = Keyboard;
   //Static
@@ -24,14 +28,21 @@ module.exports = function ( Nenkraft ) {
 
   //Methods
   Keyboard.prototype.OnKeyDown = function ( _event ) {
+
     _event.preventDefault();
     _event.stopPropagation();
     this.onDown.Dispatch( this.element, _event );
+  
   };
+
   Keyboard.prototype.OnKeyUp = function ( _event ) {
+
     _event.preventDefault();
     _event.stopPropagation();
     this.onUp.Dispatch( this.element, _event );
+  
   };
+
   Nenkraft.Input.Keyboard = Keyboard;
+
 };

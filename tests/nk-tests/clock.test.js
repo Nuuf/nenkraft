@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Clock' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -14,11 +16,9 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
 
     var stage = new nk.Stage2D( c, HW, HH );
 
@@ -35,6 +35,7 @@ module.exports = function () {
 
     var i = clockPoints.vertices.length;
     while ( i-- ) {
+
       var p = stage.AddChild( new nk.Text(
         clockPoints.vertices[ i ].x,
         clockPoints.vertices[ i ].y,
@@ -48,9 +49,11 @@ module.exports = function () {
       p.style.text.fillColor = '#000';
       p.style.text.lineWidth = 2;
       p.style.text.ConcatFont();
+    
     }
 
     stage.onProcess.Add( function () {
+
       var date = new Date();
       var milliseconds = date.getMilliseconds();
       var seconds = date.getSeconds();
@@ -60,8 +63,11 @@ module.exports = function () {
       secondHand.path.e.RotateAroundV( secondHand.path.s, nk.Math.DTR( ( seconds * 6 ) - 90 ) - secondHand.path.e.GetAngle() );
       minuteHand.path.e.RotateAroundV( minuteHand.path.s, nk.Math.DTR( ( minutes * 6 ) - 90 ) - minuteHand.path.e.GetAngle() );
       hourHand.path.e.RotateAroundV( hourHand.path.s, nk.Math.DTR( ( ( 60 * hours + minutes ) * 0.5 ) - 90 ) - hourHand.path.e.GetAngle() );
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
