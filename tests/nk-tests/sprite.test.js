@@ -49,7 +49,7 @@ module.exports = function () {
       console.log( _event.target, _event.data, 'loaded' );
     } );
     imageCache.Load( [
-      { id: 'smudge', src: './assets/images/smudge.png' },
+      { id: 'smudge', src: './assets/images/smudge.png' }
     ], true );
     imageCache.Load( [
       { id: '4dots', src: './assets/images/4dots.png' },

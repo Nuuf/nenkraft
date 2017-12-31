@@ -49,7 +49,7 @@ mDown.onEnd.Add( function () {
 MotionManager.StartMultiple( 'up left' );
 
 
-var intervalId = setInterval( function () {
+setInterval( function () {
   MainCase.Render();
   MotionManager.Process();
   for ( var i = 0; i < players.length; ++i ) {

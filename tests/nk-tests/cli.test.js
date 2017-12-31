@@ -11,7 +11,7 @@ module.exports = function () {
     var CE = {
       UNKNOWN_COMMAND: '<span style="color: red;">Unknown command: DATA</span>',
       OPTION_REQUIRED: '<span style="color: lightblue;">Option required for command: DATA</span>',
-      DATA_MISSING: '<span style="color: pink;">Data required: DATA</span>',
+      DATA_MISSING: '<span style="color: pink;">Data required: DATA</span>'
     };
 
     var css = document.createElement( 'style' );

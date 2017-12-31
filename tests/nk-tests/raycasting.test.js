@@ -42,7 +42,7 @@ module.exports = function () {
           nk.Utils.RandomInteger( 30, 60 ),
           nk.Utils.RandomInteger( 3, 5 )
         );
-        p.Rotate( nk.Utils.RandomFloat( 0, nk.Math.PII ) )
+        p.Rotate( nk.Utils.RandomFloat( 0, nk.Math.PII ) );
         var g = new nk.Graphic2D( 0, 0, p );
         polygons.push( g );
       }
