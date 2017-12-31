@@ -14,16 +14,16 @@ var entry =
       './src/nk.js'
     ],
     tests: [
-      './tests/tests.js',
+      './tests/tests.js'
     ]
   } : {
-      nk: [
-        './src/nk.js',
-        './tests/tests.js',
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080'
-      ]
-    };
+    nk: [
+      './src/nk.js',
+      './tests/tests.js',
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080'
+    ]
+  };
 
 var plugins =
   PRODUCTION ? [
@@ -34,8 +34,8 @@ var plugins =
     } ),
     new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } )
   ] : [
-      new webpack.HotModuleReplacementPlugin()
-    ];
+    new webpack.HotModuleReplacementPlugin()
+  ];
 
 plugins.push(
   new webpack.DefinePlugin( {
@@ -57,9 +57,9 @@ console.log( JSON.stringify( entry.nkb ) || colors.red( 'undefined' ), os.EOL + 
 console.log( JSON.stringify( plugins ) || colors.red( 'undefined' ), os.EOL + 'plugins' );
 
 module.exports = function ( env ) {
-  var fileName = '[name].min.js';
+  var filename = '[name].min.js';
   if ( env && env.bigBundle ) {
-    fileName = '[name].js';
+    filename = '[name].js';
     plugins.shift();
   }
   return {
@@ -85,7 +85,7 @@ module.exports = function ( env ) {
     output: {
       path: path.join( __dirname, 'dist' ),
       publicPath: PRODUCTION ? './' : '/dist/',
-      filename: fileName
+      filename: filename
     }
   };
 };

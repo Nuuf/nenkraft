@@ -6,6 +6,6 @@ module.exports = function () {
     '* @version     0.4.5 (Alpha)',
     '* @copyright   (C) 2017 Gustav \'Nuuf\' Åberg',
     '* @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}',
-    '*/',
+    '*/'
   ].join( '\n' );
 };

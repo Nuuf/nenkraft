@@ -67,7 +67,7 @@ module.exports = function () {
       //obj.data.color.ConvertToHSLA();
       stage.AddChild( obj );
       objs.push( obj );
-    };
+    }
 
     stage.mouse.onDown.Add( function () {
       mouseDown = true;

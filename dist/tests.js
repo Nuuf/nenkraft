@@ -104,6 +104,7 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 //if ( DEVELOPMENT && module.hot ) module.hot.accept();
 
+
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
@@ -401,6 +402,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 90 */
 /***/ (function(module, exports) {
@@ -474,6 +476,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 91 */
 /***/ (function(module, exports) {
@@ -546,6 +549,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 92 */
@@ -662,6 +666,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 93 */
 /***/ (function(module, exports) {
@@ -679,7 +684,7 @@ module.exports = function () {
     var CE = {
       UNKNOWN_COMMAND: '<span style="color: red;">Unknown command: DATA</span>',
       OPTION_REQUIRED: '<span style="color: lightblue;">Option required for command: DATA</span>',
-      DATA_MISSING: '<span style="color: pink;">Data required: DATA</span>',
+      DATA_MISSING: '<span style="color: pink;">Data required: DATA</span>'
     };
 
     var css = document.createElement( 'style' );
@@ -853,6 +858,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 94 */
 /***/ (function(module, exports) {
@@ -924,6 +930,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 95 */
@@ -1064,6 +1071,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 96 */
 /***/ (function(module, exports) {
@@ -1137,7 +1145,7 @@ module.exports = function () {
       //obj.data.color.ConvertToHSLA();
       stage.AddChild( obj );
       objs.push( obj );
-    };
+    }
 
     stage.mouse.onDown.Add( function () {
       mouseDown = true;
@@ -1151,6 +1159,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 97 */
@@ -1238,6 +1247,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 98 */
 /***/ (function(module, exports) {
@@ -1321,6 +1331,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 99 */
 /***/ (function(module, exports) {
@@ -1386,6 +1397,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 100 */
@@ -1736,6 +1748,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 101 */
 /***/ (function(module, exports) {
@@ -1861,6 +1874,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 102 */
 /***/ (function(module, exports) {
@@ -1918,6 +1932,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 103 */
@@ -2016,6 +2031,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 104 */
 /***/ (function(module, exports) {
@@ -2090,6 +2106,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 105 */
@@ -2277,6 +2294,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 106 */
 /***/ (function(module, exports) {
@@ -2311,6 +2329,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 107 */
@@ -2424,6 +2443,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 108 */
 /***/ (function(module, exports) {
@@ -2481,6 +2501,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 109 */
@@ -2562,6 +2583,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 110 */
 /***/ (function(module, exports) {
@@ -2610,7 +2632,7 @@ module.exports = function () {
           nk.Utils.RandomInteger( 30, 60 ),
           nk.Utils.RandomInteger( 3, 5 )
         );
-        p.Rotate( nk.Utils.RandomFloat( 0, nk.Math.PII ) )
+        p.Rotate( nk.Utils.RandomFloat( 0, nk.Math.PII ) );
         var g = new nk.Graphic2D( 0, 0, p );
         polygons.push( g );
       }
@@ -2714,6 +2736,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 111 */
@@ -2847,6 +2870,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 112 */
 /***/ (function(module, exports) {
@@ -2902,7 +2926,7 @@ module.exports = function () {
       console.log( _event.target, _event.data, 'loaded' );
     } );
     imageCache.Load( [
-      { id: 'smudge', src: './assets/images/smudge.png' },
+      { id: 'smudge', src: './assets/images/smudge.png' }
     ], true );
     imageCache.Load( [
       { id: '4dots', src: './assets/images/4dots.png' },
@@ -2939,6 +2963,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 113 */
@@ -3052,6 +3077,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 114 */
 /***/ (function(module, exports) {
@@ -3094,6 +3120,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 115 */
@@ -3210,6 +3237,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 116 */
@@ -3334,6 +3362,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 117 */
 /***/ (function(module, exports) {
@@ -3407,6 +3436,7 @@ module.exports = function () {
     document.body.removeChild( buttonContainer );
   }
 };
+
 
 /***/ }),
 /* 118 */
@@ -3507,6 +3537,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 119 */
 /***/ (function(module, exports) {
@@ -3572,6 +3603,7 @@ module.exports = function () {
 
   }
 };
+
 
 /***/ }),
 /* 120 */
@@ -3652,6 +3684,7 @@ module.exports = function () {
 
   }
 };
+
 
 /***/ }),
 /* 121 */
@@ -3739,6 +3772,7 @@ module.exports = function () {
 
   }
 };
+
 
 /***/ }),
 /* 122 */
@@ -3884,6 +3918,7 @@ module.exports = function () {
   }
 };
 
+
 /***/ }),
 /* 123 */
 /***/ (function(module, exports) {
@@ -3977,6 +4012,7 @@ module.exports = function () {
 
   }
 };
+
 
 /***/ }),
 /* 124 */,
