@@ -3,13 +3,17 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TRA = Nenkraft.Math.TriRectArray;
   function GLTextureProgramController ( _gl ) {
+
     if ( !( this instanceof GLTextureProgramController ) ) return new GLTextureProgramController( _gl );
     Super.call( this, _gl, Nenkraft.SHADER_CODE.TEXTURE_2D );
+  
   }
+
   GLTextureProgramController.prototype = Object.create( Super.prototype );
   GLTextureProgramController.prototype.constructor = GLTextureProgramController;
   //Static
@@ -20,6 +24,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureProgramController.prototype.essenceBuffer = null;
   //Methods
   GLTextureProgramController.prototype.BindBasicTexture = function ( _texture ) {
+
     var gl = this.gl;
     this.originalTexture = _texture;
     this.boundTexture = gl.createTexture();
@@ -42,12 +47,16 @@ module.exports = function ( Nenkraft ) {
     this.AssignUniform( 'uProjection' );
     this.AssignUniform( 'uTranslation' );
     this.AssignUniform( 'uTransformation' );
+  
   };
+
   GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation ) {
+
     var gl = this.gl;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
     if ( this !== Super.LAST_USED_CONTROLLER ) {
+
       gl.useProgram( this.program );
       gl.activeTexture( gl.TEXTURE0 );
       gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
@@ -58,12 +67,17 @@ module.exports = function ( Nenkraft ) {
       gl.enableVertexAttribArray( attributes.aTexCoord );
       gl.vertexAttribPointer( attributes.aTexCoord, 2, gl.FLOAT, false, 0, 48 );
       Super.LAST_USED_CONTROLLER = this;
+    
     }
+
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniformMatrix3fv( uniforms.uTranslation, false, _translation );
     gl.uniformMatrix3fv( uniforms.uTransformation, false, _transformation );
     gl.drawArrays( gl.TRIANGLE_STRIP, 0, 6 );
+  
   };
+
   Nenkraft.Controller.GLTextureProgramController = GLTextureProgramController;
   Nenkraft.GLTextureProgramController = GLTextureProgramController;
+
 };

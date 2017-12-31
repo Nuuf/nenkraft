@@ -3,6 +3,7 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   Nenkraft.Geom = Object.create( null );
   Nenkraft.Style = Object.create( null );
   Nenkraft.Math = Object.create( null );
@@ -24,4 +25,5 @@ module.exports = function ( Nenkraft ) {
     'color:magenta;background-color:black;font-family:Arial;font-size:16px;',
     'color:yellow;background-color:black;font-family:Arial;font-size:18px;'
   );
+
 };

@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'WebGL PixelBatch' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -20,11 +22,6 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var wRatio = W / H;
-
-    var mX = W / 30;
-    var mY = H / 30;
-
     var stage = new nk.Stage2D( c, 0, 0, true, true );
     stage.ticker.Start();
 
@@ -32,11 +29,12 @@ module.exports = function () {
     stage.UseAsBatchParent( pc );
 
     var RF = nk.Utils.RandomFloat;
-    var RI = nk.Utils.RandomInteger;
 
     ( function () {
+
       var i = 100000;
       while ( i-- ) {
+
         var p = new nk.Path.Pixel2D( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
@@ -48,28 +46,34 @@ module.exports = function () {
         g.data.torque = RF( -nk.Math.RADIAN * 10, nk.Math.RADIAN * 10 );
         stage.Mount( g );
         g.UpdateTransform();
+      
       }
+
       stage.ComputeBatchBuffer();
 
     }() );
 
     stage.onProcess.Add( function prasd () {
+
       this.children.forEach( function ( child ) {
+
         child.data.velocity.Rotate( child.data.torque );
         child.position.AddV( child.data.velocity );
         child.UpdateInBuffer();
+      
       } );
       if ( stage.ticker.GetTPS() < 40 ) {
-        console.log( stage.ticker.GetTPS() );
-      }
-    }, stage );
 
+        console.log( stage.ticker.GetTPS() );
+      
+      }
+    
+    }, stage );
 
     console.log( stage.childDataBuffer );
 
-
     document.body.removeChild( buttonContainer );
 
-
   }
+
 };

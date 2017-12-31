@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Playground CLI' );
@@ -72,10 +73,7 @@ module.exports = function () {
     cb.addEventListener( 'click', onCommandboxClick );
     ci.addEventListener( 'keydown', onInputKeyDown );
 
-
-
     ////////////////
-
 
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth - 500 );
@@ -84,8 +82,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = 0;
     c.style.left = '500px';
-
-    var rc = c.getContext( '2d' );
 
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
@@ -107,23 +103,30 @@ module.exports = function () {
     register.Add( new nk.CP.Command(
       'commands',
       function () {
+
         register.commands.forEach( function ( command ) {
+
           insertParagraph( command.id[ 0 ] );
+        
         } );
+      
       }
     ) );
     register.Add( new nk.CP.Command(
       'clear',
       function () {
+
         cb.innerHTML = '';
         cb.appendChild( ci );
         ci.focus();
+      
       },
       'clear the screen'
     ) );
     register.Add( new nk.CP.Command(
       'moveto',
       function () {
+
         var data = arguments[ 1 ];
         var x = Number( data.x );
         var y = Number( data.y );
@@ -131,56 +134,85 @@ module.exports = function () {
         moveX.value = x;
         moveY.value = y;
         mm.StartMultiple( 'x y' );
+      
       },
       'move to x y'
     ) );
 
     function insertParagraph ( _str ) {
+
       var p = document.createElement( 'p' );
       p.className = 'paragraph';
       p.innerHTML = _str;
       cb.insertBefore( p, ci );
+    
     }
 
     function onInputKeyDown ( event ) {
+
       var stop = false;
       if ( event.keyCode === 13 ) {
+
         stop = true;
         if ( ci.value !== '' ) {
+
           var r = register.Parse( ci.value );
           cHistory.push( ci.value );
           cIndex = cHistory.length - 1;
           if ( r !== null ) {
+
             insertParagraph( CE.UNKNOWN_COMMAND.replace( /DATA/g, r ) );
+          
           }
+        
         }
+
         ci.value = '';
         cb.scrollTop = cb.scrollHeight;
+      
       } else if ( event.keyCode === 38 ) {
+
         if ( cIndex > -1 ) {
+
           stop = true;
           ci.value = cHistory[ cIndex-- ];
+        
         }
+      
       } else if ( event.keyCode === 40 ) {
+
         if ( cIndex < cHistory.length - 1 ) {
+
           stop = true;
           ci.value = cHistory[ ++cIndex ];
+        
         }
+      
       }
+
       if ( stop === true ) {
+
         event.preventDefault();
         event.stopPropagation();
+      
       }
+    
     }
 
-    function onCommandboxClick ( event ) {
+    function onCommandboxClick ( ) {
+
       ci.focus();
+    
     }
 
     stage.onProcess.Add( function () {
+
       mm.Process();
+    
     } );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

@@ -3,12 +3,16 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   'use strict';
   function Text ( _props ) {
+
     if ( !( this instanceof Text ) ) return new Text( _props );
     Nenkraft.Utils.ApplyProperties( this, _props );
     this.ConcatFont();
+  
   }
+
   Text.prototype = Object.create( null );
   Text.prototype.constructor = Text;
   //Static
@@ -39,16 +43,22 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.lineWidth = 0.5;
   //Methods
   Text.prototype.Apply = function ( _rc ) {
+
     _rc.fillStyle = this.fillColor;
     _rc.strokeStyle = this.strokeColor;
     _rc.font = this.font;
     _rc.textAlign = this.align;
     _rc.textBaseline = this.baseline;
     _rc.lineWidth = this.lineWidth;
+  
   };
+
   Text.prototype.ConcatFont = function () {
+
     this.font = this.fontSize + 'px ' + this.fontFamily;
+  
   };
 
   Nenkraft.Style.Text = Text;
+
 };

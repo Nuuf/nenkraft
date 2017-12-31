@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Butterflyish' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -46,7 +48,6 @@ module.exports = function () {
     var angle = 0;
     var speed = 3;
 
-
     var text = new nk.Text( 0, 0, 'Stop trying to hit me and hit me!' );
     text.style.text.align = nk.Style.TEXT_ALIGN.CENTER;
     text.style.text.baseline = nk.Style.TEXT_BASELINE.MIDDLE;
@@ -81,6 +82,7 @@ module.exports = function () {
       container.Draw( rc );
 
       //requestAnimationFrame( Update );
+    
     }
 
     setInterval( Update, 1 );
@@ -106,5 +108,7 @@ module.exports = function () {
     console.log( a );
 
     document.body.removeChild( buttonContainer );
+  
   }
+
 };

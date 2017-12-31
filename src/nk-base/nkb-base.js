@@ -3,6 +3,7 @@
 */
 
 module.exports = function ( Nenkraft ) {
+
   Nenkraft.Geom = Object.create( null );
   Nenkraft.Math = Object.create( null );
   Nenkraft.Utils = Object.create( null );
@@ -12,4 +13,5 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.VERSION = '0.4.5 (Alpha)';
   console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
+
 };

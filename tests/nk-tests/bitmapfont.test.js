@@ -1,4 +1,5 @@
 module.exports = function () {
+
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'BitmapFont' );
@@ -7,6 +8,7 @@ module.exports = function () {
   buttonContainer.appendChild( button );
 
   function Run () {
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -14,10 +16,6 @@ module.exports = function () {
     c.style.position = 'absolute';
     c.style.top = '0';
     c.style.left = '0';
-    var rc = c.getContext( '2d' );
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
 
     var stage = new nk.Stage2D( c, 0, 0 );
     stage.backgroundColor = '#FFF';
@@ -33,21 +31,27 @@ module.exports = function () {
       { id: 'fontimg', src: './assets/images/font.png' }
     ], true );
     xhrloader.onComplete.Add( function ( event ) {
+
       console.log( event.data );
       console.log( JSON.stringify( event.data.dataCache.items[ 0 ].data ) === JSON.stringify( event.data.dataCache.items[ 1 ].data ) );
       done++;
       Go();
+    
     } );
     imgloader.onComplete.Add( function ( event ) {
+
       console.log( event.data );
       done++;
       Go();
+    
     } );
 
     var test = null;
 
     function Go () {
+
       if ( done > 1 ) {
+
         test = new nk.BitmapText(
           0,
           0,
@@ -59,10 +63,13 @@ module.exports = function () {
         test.maxWidth = window.innerWidth;
         stage.AddChild( test );
         test.ComputeText();
+      
       }
+    
     }
 
-
     document.body.removeChild( buttonContainer );
+  
   }
+
 };
