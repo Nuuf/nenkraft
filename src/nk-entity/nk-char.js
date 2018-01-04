@@ -1,15 +1,17 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.CoreEntity2D;
+
   function Char ( _data ) {
 
     if ( !( this instanceof Char ) ) return new Char( _data );
     Super.call( this );
+
     if ( _data ) {
 
       this.id = parseInt( _data.id );
@@ -30,8 +32,10 @@ module.exports = function ( Nenkraft ) {
 
   Char.prototype = Object.create( Super.prototype );
   Char.prototype.constructor = Char;
-  //Static
-  //Members
+  /*
+   *Static
+   *Members
+   */
   Char.prototype.id = 0;
   Char.prototype.xoffset = 0;
   Char.prototype.yoffset = 0;
@@ -41,12 +45,14 @@ module.exports = function ( Nenkraft ) {
   //
   Char.prototype.translation = null;
   Char.prototype.transformation = null;
-  //Methods
+
+  // Methods
   Char.prototype.ApplyKernings = function ( _kernings ) {
 
     for ( var i = 0, attributes, l = _kernings.length; i < l; ++i ) {
 
       attributes = _kernings[ i ].attributes;
+
       if ( parseInt( attributes.first ) === this.id ) {
 
         this.kernings.push(
@@ -64,10 +70,12 @@ module.exports = function ( Nenkraft ) {
   Char.prototype.Crunch = function ( _prevChar ) {
 
     this.position.Set( 0 );
+
     if ( _prevChar != null ) {
 
       this.x = _prevChar.x + _prevChar.xadvance;
       this.y = this.yadvance = _prevChar.yadvance;
+
       if ( _prevChar.kernings.length > 0 && this.kernings.length > 0 ) {
 
         for ( var i = 0, kernings = this.kernings, l = kernings.length; i < l; i += 3 ) {
@@ -94,11 +102,15 @@ module.exports = function ( Nenkraft ) {
     if ( this.parent != null ) {
 
       var texture = this.parent.texture;
-      var scaleX = this.width / texture.fw;
-      var scaleY = this.height / texture.fh;
+      var tscaleX = this.width / texture.fw;
+      var tscaleY = this.height / texture.fh;
       this.UpdateTransform();
-      this.translation.SetTransform( 0, 0, scaleX, scaleY );
-      this.transformation.SetTransform( scaleX * this.cx / this.width, scaleY * this.cy / this.height, scaleX, scaleY );
+      this.translation.SetTransform( 0, 0, tscaleX, tscaleY );
+      this.transformation.SetTransform( 
+        tscaleX * this.cx / this.width, 
+        tscaleY * this.cy / this.height, 
+        tscaleX, tscaleY
+      );
     
     }
   

@@ -1,12 +1,13 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TRA = Nenkraft.Math.TriRectArray;
+
   function GLTextureBatchProgramController ( _gl ) {
 
     if ( !( this instanceof GLTextureBatchProgramController ) ) return new GLTextureBatchProgramController( _gl );
@@ -16,16 +17,17 @@ module.exports = function ( Nenkraft ) {
 
   GLTextureBatchProgramController.prototype = Object.create( Super.prototype );
   GLTextureBatchProgramController.prototype.constructor = GLTextureBatchProgramController;
-  //Static
+  // Static
 
-  //Members
+  // Members
   GLTextureBatchProgramController.prototype.originalTexture = null;
   GLTextureBatchProgramController.prototype.boundTexture = null;
   GLTextureBatchProgramController.prototype.essenceBuffer = null;
   GLTextureBatchProgramController.prototype.dataBuffer = null;
   GLTextureBatchProgramController.prototype.indexBuffer = null;
   GLTextureBatchProgramController.prototype.previousNumberOfElements = null;
-  //Methods
+
+  // Methods
   GLTextureBatchProgramController.prototype.BindBasicTexture = function ( _texture ) {
 
     var gl = this.gl;
@@ -67,6 +69,7 @@ module.exports = function ( Nenkraft ) {
     var aia = this.aia;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
+
     if ( this !== Super.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );
@@ -85,6 +88,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
+
     if ( _numberOfElements !== this.previousNumberOfElements ) {
 
       gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );

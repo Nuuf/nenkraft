@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   Nenkraft.Math.Ease = Object.create( null );
+
   Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
 
     return _amplitude * _time / _duration + _startValue;

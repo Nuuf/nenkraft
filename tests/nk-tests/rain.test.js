@@ -45,12 +45,14 @@ module.exports = function () {
       stage.onProcess.Add( function () {
 
         var i = this.children.length, child;
+
         while ( i-- ) {
 
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
           child.data.velocity.Add( gravity.x, gravity.y + child.data.mass / 100 );
           child.data.velocity.Add( wind.x / child.data.mass * 4, wind.y / child.data.mass * 4 );
+
           if ( !--child.data.lifespan ) {
 
             DropPool.Store( child.Detach() );

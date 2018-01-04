@@ -32,7 +32,8 @@ module.exports = function () {
 
     ( function () {
 
-      var i = 100000;
+      var i = 20000;
+
       while ( i-- ) {
 
         var p = new nk.Path.Pixel2D( 0, 0 );
@@ -62,6 +63,7 @@ module.exports = function () {
         child.UpdateInBuffer();
       
       } );
+
       if ( stage.ticker.GetTPS() < 40 ) {
 
         console.log( stage.ticker.GetTPS() );

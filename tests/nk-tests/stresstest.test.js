@@ -55,6 +55,7 @@ module.exports = function () {
 
       var i = am;
       am = am < 3 ? 3 : am--;
+
       while ( i-- ) {
 
         var sprite = spritePool.Retrieve();
@@ -81,6 +82,7 @@ module.exports = function () {
         holdCounter = 0;
         childrenMDC.push( numChildren );
         numTimes--;
+
         if ( numTimes > 0 ) {
 
           timer.Start( 120 );
@@ -103,7 +105,7 @@ module.exports = function () {
     var imageCache = new nk.ImageLoader( [ {
       id: 'tex',
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       texture = imageCache.GetBasicTexture( 'tex' );

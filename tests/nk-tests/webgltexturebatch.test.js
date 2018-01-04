@@ -31,7 +31,7 @@ module.exports = function () {
     stage.UseAsBatchParent( pc );
 
     var ic = new nk.ImageLoader();
-    ic.onComplete.Add( function ( ) {
+    ic.onComplete.Add( function () {
 
       var tex = ic.GetBasicTexture( 'colors' );
       pc.BindBasicTexture( tex );
@@ -39,11 +39,12 @@ module.exports = function () {
       ( function () {
 
         var i = 5000;
+
         while ( i-- ) {
 
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
-          var anim = ac.AddAnimation( 'test', RI( 5, 40 ) );
+          var anim = ac.CreateAnimation( 'test', RI( 5, 40 ) );
           anim.GenerateFrames( 64, 64, 1024, 64, 16 );
           ac.PlayAnimation( 'test', RI( 0, 15 ) );
           var vx = RI( 1, 3 );
@@ -88,7 +89,7 @@ module.exports = function () {
     } );
 
     ic.Load( [
-      { id: 'colors', src: './assets/images/colors.png', w: 64, h: 64 }
+      { id: 'colors', src: './assets/images/colors.png' }
     ], true );
 
     document.body.removeChild( buttonContainer );

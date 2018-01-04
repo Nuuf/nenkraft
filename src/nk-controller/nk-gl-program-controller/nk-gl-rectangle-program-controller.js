@@ -1,12 +1,13 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TriRectArray = Nenkraft.Math.TriRectArray;
+
   function GLRectangleProgramController ( _gl ) {
 
     if ( !( this instanceof GLRectangleProgramController ) ) return new GLRectangleProgramController( _gl );
@@ -17,15 +18,16 @@ module.exports = function ( Nenkraft ) {
 
   GLRectangleProgramController.prototype = Object.create( Super.prototype );
   GLRectangleProgramController.prototype.constructor = GLRectangleProgramController;
-  //Static
+  // Static
 
-  //Members
+  // Members
   GLRectangleProgramController.prototype.geometricBuffer = null;
   GLRectangleProgramController.prototype.vertices = null;
   GLRectangleProgramController.prototype.fillColor = null;
   GLRectangleProgramController.prototype.outlineColor = null;
   GLRectangleProgramController.prototype.outline = 5.0;
-  //Methods
+
+  // Methods
   GLRectangleProgramController.prototype.Initialise = function () {
 
     var gl = this.gl;
@@ -54,6 +56,7 @@ module.exports = function ( Nenkraft ) {
     var fillChannel = this.fillColor.channel;
     var outlineChannel = this.outlineColor.channel;
     TriRectArray( _x, _y, _w, _h, vertices );
+
     if ( this !== Super.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );

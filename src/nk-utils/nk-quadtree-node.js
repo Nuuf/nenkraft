@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function QuadtreeNode ( _aabb, _level, _objCap, _levelCap ) {
 
     if ( !( this instanceof QuadtreeNode ) ) return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
@@ -20,12 +21,12 @@ module.exports = function ( Nenkraft ) {
 
   QuadtreeNode.prototype = Object.create( null );
   QuadtreeNode.prototype.constructor = QuadtreeNode;
-  //Static
+  // Static
   QuadtreeNode.TOP_LEFT = 'TL';
   QuadtreeNode.TOP_RIGHT = 'TR';
   QuadtreeNode.BOTTOM_LEFT = 'BL';
   QuadtreeNode.BOTTOM_RIGHT = 'BR';
-  //Members
+  // Members
   QuadtreeNode.prototype.objectCap = 0;
   QuadtreeNode.prototype.levelCap = 0;
   QuadtreeNode.prototype.level = 0;
@@ -34,16 +35,19 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.prototype.convergence = null;
   QuadtreeNode.prototype.aabb = null;
   QuadtreeNode.prototype.hasSplit = false;
-  //Methods
+
+  // Methods
   QuadtreeNode.prototype.Add = function ( _object ) {
 
     var marking = '';
     var objects = this.objects;
     var nodes = this.nodes;
     var i = 0;
+
     if ( this.hasSplit === true ) {
 
       marking = this.Marking( _object );
+
       if ( marking !== null ) {
 
         nodes[ marking ].Add( _object );
@@ -54,6 +58,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     objects.push( _object );
+
     if ( this.level < this.levelCap ) {
 
       if ( objects.length > this.objectCap ) {
@@ -67,6 +72,7 @@ module.exports = function ( Nenkraft ) {
         while ( i < objects.length ) {
 
           marking = this.Marking( objects[ i ] );
+
           if ( marking !== null ) {
 
             nodes[ marking ].Add( objects.splice( i, 1 )[ 0 ] );
@@ -92,9 +98,11 @@ module.exports = function ( Nenkraft ) {
     convergence.push.apply( convergence, this.objects );
     var marking = null;
     var nodes = this.nodes;
+
     if ( this.hasSplit === true ) {
 
       marking = this.Marking( _object );
+
       if ( marking !== null ) {
 
         convergence.push.apply( convergence, nodes[ marking ].Converge( _object ) );
@@ -145,6 +153,7 @@ module.exports = function ( Nenkraft ) {
 
     var nodes = this.nodes;
     this.objects.length = 0;
+
     if ( this.hasSplit === true ) {
 
       nodes[ QuadtreeNode.TOP_LEFT ].Dump();
@@ -162,6 +171,7 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.prototype.Marking = function ( _object ) {
 
     var nodes = this.nodes;
+
     if ( nodes[ QuadtreeNode.TOP_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
 
       return QuadtreeNode.TOP_LEFT;

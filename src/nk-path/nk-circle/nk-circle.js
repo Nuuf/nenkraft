@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Geom.Circle;
+
   function Circle ( _x, _y, _radius, _style ) {
 
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius, _style );
@@ -16,11 +17,11 @@ module.exports = function ( Nenkraft ) {
 
   Circle.prototype = Object.create( Super.prototype );
   Circle.prototype.constructor = Circle;
-  //Static
+  // Static
 
-  //Members
+  // Members
 
-  //Methods
+  // Methods
   Circle.prototype.Draw = function ( _rc ) {
 
     var center = this.center, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
@@ -28,6 +29,7 @@ module.exports = function ( Nenkraft ) {
     _rc.arc( center.x, center.y, this.radius, 0, Nenkraft.Math.PII, false );
     _rc.closePath();
     if ( shadow.applied === true ) shadow.Apply( _rc );
+
     if ( fill.applied === true ) {
 
       fill.Apply( _rc );
@@ -73,6 +75,7 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.LinkStyle = function () {
 
     var pc = this.programController;
+
     if ( pc !== null && pc.fillColor !== null && pc.outlineColor !== null && pc.outline !== null ) {
 
       pc.fillColor.SetHex( this.style.fill.color );

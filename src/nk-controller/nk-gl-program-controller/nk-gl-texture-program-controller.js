@@ -1,12 +1,13 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TRA = Nenkraft.Math.TriRectArray;
+
   function GLTextureProgramController ( _gl ) {
 
     if ( !( this instanceof GLTextureProgramController ) ) return new GLTextureProgramController( _gl );
@@ -16,13 +17,14 @@ module.exports = function ( Nenkraft ) {
 
   GLTextureProgramController.prototype = Object.create( Super.prototype );
   GLTextureProgramController.prototype.constructor = GLTextureProgramController;
-  //Static
+  // Static
 
-  //Members
+  // Members
   GLTextureProgramController.prototype.originalTexture = null;
   GLTextureProgramController.prototype.boundTexture = null;
   GLTextureProgramController.prototype.essenceBuffer = null;
-  //Methods
+
+  // Methods
   GLTextureProgramController.prototype.BindBasicTexture = function ( _texture ) {
 
     var gl = this.gl;
@@ -55,6 +57,7 @@ module.exports = function ( Nenkraft ) {
     var gl = this.gl;
     var attributes = this.attributes;
     var uniforms = this.uniforms;
+
     if ( this !== Super.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );

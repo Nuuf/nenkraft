@@ -76,6 +76,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -92,7 +93,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     

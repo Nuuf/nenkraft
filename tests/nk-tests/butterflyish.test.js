@@ -27,11 +27,11 @@ module.exports = function () {
     color.ConvertToHSLA();
 
     var path = new nk.Path.Polygon2D();
-    //path.style.shadow.applied = true;
+    // path.style.shadow.applied = true;
     nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 100, 50, 8 );
 
     var bfly = new nk.Path.Polygon2D();
-    //bfly.style.shadow.applied = true;
+    // bfly.style.shadow.applied = true;
     bfly.style.stroke.lineWidth = 0.5;
     bfly.style.fill.applied = false;
     nk.Geom.Polygon2D.Construct.Butterfly( bfly, 0, 0, 150, 40 );
@@ -81,7 +81,7 @@ module.exports = function () {
 
       container.Draw( rc );
 
-      //requestAnimationFrame( Update );
+      // requestAnimationFrame( Update );
     
     }
 

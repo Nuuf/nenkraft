@@ -1,6 +1,6 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 var namespace = Object.create( null );
 
@@ -21,6 +21,7 @@ require( './nk-style/nk-text' )( namespace );
 require( './nk-style/nk-pixel' )( namespace );
 require( './nk-style/nk-style' )( namespace );
 require( './nk-texture/nk-basic-texture' )( namespace );
+require( './nk-texture/nk-spritesheet' )( namespace );
 require( './nk-event/nk-local-listener' )( namespace );
 require( './nk-event/nk-local-event' )( namespace );
 require( './nk-time/nk-ticker/nk-ticker' )( namespace );
@@ -67,6 +68,7 @@ require( './nk-cp/nk-command' )( namespace );
 require( './nk-cp/nk-register' )( namespace );
 require( './nk-load/nk-image-loader' )( namespace );
 require( './nk-load/nk-xhr-loader' )( namespace );
+require( './nk-load/nk-spritesheet-loader' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-line2d-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-rectangle-program-controller' )( namespace );
@@ -77,4 +79,4 @@ require( './nk-controller/nk-gl-program-controller/nk-gl-pixel-batch-program-con
 
 global.Nenkraft = global.nk = namespace;
 
-//if ( DEVELOPMENT && module.hot ) module.hot.accept();
+// if ( DEVELOPMENT && module.hot ) module.hot.accept();

@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Keyboard ( _element ) {
 
     if ( !( this instanceof Keyboard ) ) return new Keyboard( _element );
@@ -22,11 +23,11 @@ module.exports = function ( Nenkraft ) {
 
   Keyboard.prototype = Object.create( null );
   Keyboard.prototype.constructor = Keyboard;
-  //Static
+  // Static
 
-  //Members
+  // Members
 
-  //Methods
+  // Methods
   Keyboard.prototype.OnKeyDown = function ( _event ) {
 
     _event.preventDefault();

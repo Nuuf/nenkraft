@@ -32,6 +32,7 @@ module.exports = function () {
     ( function () {
 
       var i = 15;
+
       while ( i-- ) {
 
         var p = new nk.Path.Polygon2D();
@@ -55,6 +56,7 @@ module.exports = function () {
       var i = 360;
       var angle = Math.PI * 2 / i;
       var r = 180;
+
       while ( i-- ) {
 
         var th = angle * i;
@@ -82,10 +84,12 @@ module.exports = function () {
         ray.path.e.RotateAroundV( ray.path.s, ray.data.angle );
       
       } );
+
       for ( var i = 0; i < rays.length; ++i ) {
 
         var ray = rays[ i ];
         var polygon;
+
         for ( var k = 0; k < polygons.length; ++k ) {
 
           polygon = polygons[ k ].path;
@@ -101,6 +105,7 @@ module.exports = function () {
               vertexa,
               vertexb
             );
+
             if ( contactPoint ) {
 
               rays[ i ].path.e.SetV( contactPoint );
@@ -117,6 +122,7 @@ module.exports = function () {
             vertexa,
             vertexb
           );
+
           if ( contactPoint ) {
 
             rays[ i ].path.e.SetV( contactPoint );
@@ -142,6 +148,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -162,7 +169,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 

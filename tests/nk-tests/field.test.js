@@ -23,7 +23,7 @@ module.exports = function () {
     var stage = new nk.Stage2D( c, HW, HH );
     stage.clear = false;
     stage.backgroundColor = 'rgba(0,0,0,0.1)';
-    //stage.fill = false;
+    // stage.fill = false;
 
     var orig = new nk.Plaingraphic2D( 0, 0, new nk.Path.Circle( 0, 0, 200 ) );
     orig.path.style.fill.applied = false;
@@ -40,8 +40,11 @@ module.exports = function () {
         if ( !objs[ i ] ) break;
         nk.Math.AttractRepel( objs[ i ].position, orig.position, objs[ i ].data.vel, orig.path.radius * 2, 0.1 );
         objs[ i ].position.AddV( objs[ i ].data.vel );
-        //objs[ i ].data.color.IncreaseChannel( 0, 1 );
-        //objs[ i ].path.style.fill.color = objs[ i ].data.color.value;
+
+        /*
+         *objs[ i ].data.color.IncreaseChannel( 0, 1 );
+         *objs[ i ].path.style.fill.color = objs[ i ].data.color.value;
+         */
         if ( !--objs[ i ].data.lifeSpan ) {
 
           objs[ i ].Destroy();
@@ -54,6 +57,7 @@ module.exports = function () {
       if ( mouseDown ) {
 
         i = 2;
+
         while ( --i ) {
 
           MakeObj( stage.mouse.position.x, stage.mouse.position.y );
@@ -72,8 +76,10 @@ module.exports = function () {
       var obj = new nk.Plaingraphic2D( _x, _y, path );
       obj.data.vel = new nk.Vector2D( nk.Utils.RandomFloat( -4, 4 ), nk.Utils.RandomFloat( -4, 4 ) );
       obj.data.lifeSpan = 600;
-      //obj.data.color = new nk.Color( nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ) );
-      //obj.data.color.ConvertToHSLA();
+      /*
+       *obj.data.color = new nk.Color( nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ) );
+       *obj.data.color.ConvertToHSLA();
+       */
       stage.AddChild( obj );
       objs.push( obj );
     

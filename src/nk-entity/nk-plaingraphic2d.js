@@ -1,15 +1,17 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Plain2D;
+
   function Plaingraphic2D ( _x, _y, _path ) {
 
     if ( !( this instanceof Plaingraphic2D ) ) return new Plaingraphic2D( _x, _y, _path );
     Super.call( this, _x, _y );
+
     if ( _path !== undefined ) {
 
       if ( _path.w !== undefined && _path.h !== undefined ) {
@@ -35,12 +37,13 @@ module.exports = function ( Nenkraft ) {
 
   Plaingraphic2D.prototype = Object.create( Super.prototype );
   Plaingraphic2D.prototype.constructor = Plaingraphic2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Plaingraphic2D.prototype.path = null;
   Plaingraphic2D.prototype.interactive = true;
-  //Methods
+
+  // Methods
   Plaingraphic2D.prototype.Draw = function ( _rc ) {
 
     if ( this.render === true ) {
@@ -54,6 +57,7 @@ module.exports = function ( Nenkraft ) {
 
       this.transform.ApplyWorld( _rc );
       var path = this.path;
+
       if ( path && path.Draw && this.display === true ) {
 
         path.Draw( _rc );

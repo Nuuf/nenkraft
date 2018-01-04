@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Pixel ( _props ) {
 
     if ( !( this instanceof Pixel ) ) return new Pixel( _props );
@@ -14,12 +15,12 @@ module.exports = function ( Nenkraft ) {
 
   Pixel.prototype = Object.create( null );
   Pixel.prototype.constructor = Pixel;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Pixel.prototype.color = '#000000';
   Pixel.prototype.size = 1.0;
-  //Methods
+  // Methods
   Nenkraft.Style.Pixel = Pixel;
 
 };

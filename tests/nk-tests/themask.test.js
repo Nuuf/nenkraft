@@ -102,7 +102,7 @@ module.exports = function () {
 
       container.Draw( rc );
 
-      //requestAnimationFrame( Update );
+      // requestAnimationFrame( Update );
     
     }
 

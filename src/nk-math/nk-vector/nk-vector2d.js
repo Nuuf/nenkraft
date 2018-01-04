@@ -1,13 +1,15 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Vector2D ( _arg0, _arg1 ) {
 
     if ( !( this instanceof Vector2D ) ) return new Vector2D( _arg0, _arg1 );
+
     if ( _arg0 != undefined && _arg0.x != undefined && _arg0.y != undefined ) {
 
       this.x = _arg0.x;
@@ -35,7 +37,8 @@ module.exports = function ( Nenkraft ) {
 
   Vector2D.prototype = Object.create( null );
   Vector2D.prototype.constructor = Vector2D;
-  //Static
+
+  // Static
   Vector2D.TranslateMultiple = function ( _vectors, _vector ) {
 
     for ( var i = 0, l = _vectors.length; i < l; ++i ) {
@@ -51,9 +54,11 @@ module.exports = function ( Nenkraft ) {
     var min = Infinity;
     var max = -min;
     var dot = 0, result = _axis.Copy();
+
     for ( var i = 0, l = _vectors.length; i < l; ++i ) {
 
       dot = _vectors[ i ].GetDotV( _axis );
+
       if ( dot > max ) {
 
         max = dot;
@@ -74,6 +79,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Vector2D.Pool = new Nenkraft.Utils.Pool( Vector2D );
+
   Vector2D.Pool.Retrieve = function ( _x, _y ) {
 
     if ( this.objects.length === 0 ) {
@@ -88,12 +94,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Vector2D.Pool.Flood( function () { }, 100000 );
+  Vector2D.Pool.Flood( function () {}, 100000 );
   Vector2D.USE_POOL = true;
-  //Members
+  // Members
   Vector2D.prototype.x = 0;
   Vector2D.prototype.y = 0;
-  //Methods
+
+  // Methods
   Vector2D.prototype.Copy = function () {
 
     if ( Vector2D.USE_POOL === true ) {

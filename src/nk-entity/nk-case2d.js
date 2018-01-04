@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
+
   function Case2D ( _x, _y ) {
 
     if ( !( this instanceof Case2D ) ) return new Case2D( _x, _y );
@@ -15,9 +16,12 @@ module.exports = function ( Nenkraft ) {
 
   Case2D.prototype = Object.create( Super.prototype );
   Case2D.prototype.constructor = Case2D;
-  //Static
-  //Members
-  //Methods
+
+  /*
+   *Static
+   *Members
+   *Methods
+   */
   Case2D.prototype.Render = function () {
 
     if ( this.render === true ) {

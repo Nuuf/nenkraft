@@ -1,18 +1,20 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Sprite;
   var Char = Nenkraft.Entity.Char;
+
   function BitmapText ( _x, _y, _texture, _data, _text ) {
 
     if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
     Super.call( this, _x, _y, _texture );
     this.fontData = _data;
-    this.lineHeight = _data.data.font.common.attributes.lineHeight;
+    this.lineHeight = _data.font.common.attributes.lineHeight;
+
     if ( _text != null ) {
 
       this.text = _text;
@@ -26,18 +28,20 @@ module.exports = function ( Nenkraft ) {
 
   BitmapText.prototype = Object.create( Super.prototype );
   BitmapText.prototype.constructor = BitmapText;
-  //Static
+  // Static
 
-  //Members
+  // Members
   BitmapText.prototype.maxWidth = 1024;
   BitmapText.prototype.fontData = null;
   BitmapText.prototype.text = '';
   BitmapText.prototype.chars = null;
   BitmapText.prototype.lineHeight = 0;
-  //Methods
+
+  // Methods
   BitmapText.prototype.Draw = function ( _rc ) {
 
     this.PreDraw( _rc );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -48,6 +52,7 @@ module.exports = function ( Nenkraft ) {
       }
 
       this.transform.ApplyWorld( _rc );
+
       if ( this.display === true ) {
 
         _rc.globalAlpha = this.alpha;
@@ -69,6 +74,7 @@ module.exports = function ( Nenkraft ) {
   BitmapText.prototype.GLDraw = function ( _gl ) {
 
     this.GLPreDraw( _gl );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -146,14 +152,16 @@ module.exports = function ( Nenkraft ) {
 
     this.UpdateTransform();
     this.chars.length = 0;
-    var kernings = this.fontData.data.font.kernings.kerning;
+    var kernings = this.fontData.font.kernings.kerning;
     var lineNum = 0;
+
     for ( var i = 0, char, chars = this.chars, prevChar, text = this.text, l = text.length; i < l; ++i ) {
 
       prevChar = chars[ i - 1 ];
       char = new Char( this.GetCharData( text.charCodeAt( i ) ) );
       char.ApplyKernings( kernings );
       char.Crunch( prevChar );
+
       if ( ( char.position.x + char.width ) > this.maxWidth ) {
 
         char.position.Set( 0 );
@@ -172,7 +180,7 @@ module.exports = function ( Nenkraft ) {
 
   BitmapText.prototype.GetCharData = function ( _id ) {
 
-    for ( var i = 0, chars = this.fontData.data.font.chars.char, l = chars.length; i < l; ++i ) {
+    for ( var i = 0, chars = this.fontData.font.chars.char, l = chars.length; i < l; ++i ) {
 
       if ( parseInt( chars[ i ].attributes.id ) === _id ) {
 

@@ -39,6 +39,7 @@ module.exports = function () {
     stage.children[ 1 ].interactive = false;
 
     var i = 1000;
+
     while ( i-- ) {
 
       var path = new nk.Path.Circle( 0, 0, RI( 2, 30 ) );
@@ -73,6 +74,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -93,7 +95,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 

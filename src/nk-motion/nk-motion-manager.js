@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function MotionManager ( _target ) {
 
     if ( !( this instanceof MotionManager ) ) return new MotionManager( _target );
@@ -15,15 +16,17 @@ module.exports = function ( Nenkraft ) {
 
   MotionManager.prototype = Object.create( null );
   MotionManager.prototype.constructor = MotionManager;
-  //Static
+  // Static
 
-  //Members
+  // Members
   MotionManager.prototype.target = null;
   MotionManager.prototype.motions = null;
-  //Methods
+
+  // Methods
   MotionManager.prototype.Create = function ( _id, _propertyString, _value, _duration, _easing ) {
 
     var exists = this.GetMotion( _id );
+
     if ( exists === null ) {
 
       var motion = new Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
@@ -39,6 +42,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.Add = function ( _motion ) {
 
     var exists = this.GetMotion( _motion.id );
+
     if ( exists === null ) {
 
       this.motions.push( _motion );
@@ -50,6 +54,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.Start = function ( _id ) {
 
     var motion = this.GetMotion( _id );
+
     if ( motion !== null ) {
 
       motion.Start();
@@ -63,6 +68,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.StartMultiple = function ( _ids ) {
 
     _ids = _ids.split( ' ' );
+
     for ( var i = 0, l = _ids.length; i < l; ++i ) {
 
       this.Start( _ids[ i ] );
@@ -74,6 +80,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.Stop = function ( _id ) {
 
     var motion = this.GetMotion( _id );
+
     if ( motion !== null ) {
 
       motion.Stop();
@@ -87,6 +94,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.StopMultiple = function ( _ids ) {
 
     _ids = _ids.split( ' ' );
+
     for ( var i = 0, l = _ids.length; i < l; ++i ) {
 
       this.Stop( _ids[ i ] );
@@ -98,6 +106,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.Reset = function ( _id ) {
 
     var motion = this.GetMotion( _id );
+
     if ( motion !== null ) {
 
       motion.Reset();
@@ -111,6 +120,7 @@ module.exports = function ( Nenkraft ) {
   MotionManager.prototype.ResetMultiple = function ( _ids ) {
 
     _ids = _ids.split( ' ' );
+
     for ( var i = 0, l = _ids.length; i < l; ++i ) {
 
       this.Reset( _ids[ i ] );

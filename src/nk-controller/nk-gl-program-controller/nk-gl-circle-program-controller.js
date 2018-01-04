@@ -1,12 +1,13 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
   var TriRectArray = Nenkraft.Math.TriRectArray;
+
   function GLCircleProgramController ( _gl ) {
 
     if ( !( this instanceof GLCircleProgramController ) ) return new GLCircleProgramController( _gl );
@@ -17,15 +18,16 @@ module.exports = function ( Nenkraft ) {
 
   GLCircleProgramController.prototype = Object.create( Super.prototype );
   GLCircleProgramController.prototype.constructor = GLCircleProgramController;
-  //Static
+  // Static
 
-  //Members
+  // Members
   GLCircleProgramController.prototype.essenceBuffer = null;
   GLCircleProgramController.prototype.vertices = null;
   GLCircleProgramController.prototype.fillColor = null;
   GLCircleProgramController.prototype.outlineColor = null;
   GLCircleProgramController.prototype.outline = 5.0;
-  //Methods
+
+  // Methods
   GLCircleProgramController.prototype.Initialise = function () {
 
     var gl = this.gl;
@@ -54,6 +56,7 @@ module.exports = function ( Nenkraft ) {
     var fillChannel = this.fillColor.channel;
     var outlineChannel = this.outlineColor.channel;
     TriRectArray( _x - _radius, _y - _radius, _radius * 2, _radius * 2, vertices );
+
     if ( this !== Super.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );

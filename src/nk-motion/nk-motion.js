@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
 
     if ( !( this instanceof Motion ) ) return new Motion( _id, _target, _propertyString, _value, _duration, _easing );
@@ -24,9 +25,9 @@ module.exports = function ( Nenkraft ) {
 
   Motion.prototype = Object.create( null );
   Motion.prototype.constructor = Motion;
-  //Static
+  // Static
   Motion.DEFAULT_EASING = 'Linear';
-  //Members
+  // Members
   Motion.prototype.id = null;
   Motion.prototype.target = null;
   Motion.prototype.easing = null;
@@ -39,7 +40,8 @@ module.exports = function ( Nenkraft ) {
   Motion.prototype.property = null;
   Motion.prototype.propertyObject = null;
   Motion.prototype.running = false;
-  //Methods
+
+  // Methods
   Motion.prototype.Start = function () {
 
     var property = this.propertyString.split( '.' );
@@ -70,6 +72,7 @@ module.exports = function ( Nenkraft ) {
     if ( this.running === true ) {
 
       this.propertyObject[ this.property ] = this.easing( this.time, this.startValue, this.change, this.duration );
+
       if ( ++this.time >= this.duration ) {
 
         this.running = false;

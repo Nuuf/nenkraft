@@ -25,7 +25,7 @@ module.exports = function () {
     var stage = new nk.Stage2D( c, 0, 0, true );
     stage.ComputeBounds();
     stage.backgroundColor = 'rgba(255,255,255,1)';
-    //stage.clear = false;
+    // stage.clear = false;
     stage.ticker.StartAF();
 
     var fps = new nk.Text( 0, 0, '' );
@@ -90,6 +90,7 @@ module.exports = function () {
       
       } );
       nodes = root.ConcatNodes();
+
       for ( i; i < l; ++i ) {
 
         collider = colliders[ i ];
@@ -97,6 +98,7 @@ module.exports = function () {
         body1 = collider.data.body;
         vel = body1.velocity;
         collider.position.AddV( vel );
+
         if ( collider.x + collider.path.radius >= W ) {
 
           vel.x = -Math.abs( vel.x );
@@ -123,10 +125,12 @@ module.exports = function () {
 
           collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
+
           if ( collidee !== collider ) {
 
             result.occured = false;
             Collide( body1, body2, result );
+
             if ( result.occured === true ) {
 
               collider.data.timer.Start( 10 );

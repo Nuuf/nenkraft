@@ -73,7 +73,7 @@ module.exports = function () {
     cb.addEventListener( 'click', onCommandboxClick );
     ci.addEventListener( 'keydown', onInputKeyDown );
 
-    ////////////////
+    // //////////////
 
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth - 500 );
@@ -151,14 +151,17 @@ module.exports = function () {
     function onInputKeyDown ( event ) {
 
       var stop = false;
+
       if ( event.keyCode === 13 ) {
 
         stop = true;
+
         if ( ci.value !== '' ) {
 
           var r = register.Parse( ci.value );
           cHistory.push( ci.value );
           cIndex = cHistory.length - 1;
+
           if ( r !== null ) {
 
             insertParagraph( CE.UNKNOWN_COMMAND.replace( /DATA/g, r ) );
@@ -199,7 +202,7 @@ module.exports = function () {
     
     }
 
-    function onCommandboxClick ( ) {
+    function onCommandboxClick () {
 
       ci.focus();
     

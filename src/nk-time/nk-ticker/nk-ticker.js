@@ -1,16 +1,18 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Ticker ( _onProcess, _rate, _doNotStart ) {
 
     if ( !( this instanceof Ticker ) ) return new Ticker( _onProcess, _rate, _doNotStart );
     if ( typeof _onProcess !== 'function' ) throw new Error( 'Ticker: An onProcess function is required!' );
     this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
+
     if ( _doNotStart == undefined || _doNotStart === false ) {
 
       this.StartAF();
@@ -21,9 +23,10 @@ module.exports = function ( Nenkraft ) {
 
   Ticker.prototype = Object.create( null );
   Ticker.prototype.constructor = Ticker;
-  //Static
+  // Static
   Ticker.LOG = true;
   Ticker.GLOBAL_CSS = 'background-color:black;font-family:Arial;font-size:16px;';
+
   Ticker.Log = function () {
 
     if ( Ticker.LOG === false ) return;
@@ -31,7 +34,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  //Members
+  // Members
   Ticker.prototype.intervalId = null;
   Ticker.prototype.afId = null;
   Ticker.prototype.delta = 0;
@@ -39,7 +42,8 @@ module.exports = function ( Nenkraft ) {
   Ticker.prototype.now = 0;
   Ticker.prototype.desiredRate = 0;
   Ticker.prototype.supplyDelta = true;
-  //Methods
+
+  // Methods
   Ticker.prototype.Process = function () {
 
     this.ComputeDelta();

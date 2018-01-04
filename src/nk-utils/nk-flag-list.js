@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function FlagList () {
 
     if ( !( this instanceof FlagList ) ) return new FlagList();
@@ -13,10 +14,13 @@ module.exports = function ( Nenkraft ) {
 
   FlagList.prototype = Object.create( null );
   FlagList.prototype.constructor = FlagList;
-  //Static
-  //Members
+  /*
+   *Static
+   *Members
+   */
   FlagList.prototype.value = 0;
-  //Methods
+
+  // Methods
   FlagList.prototype.Add = function ( _value ) {
 
     this.value |= _value;

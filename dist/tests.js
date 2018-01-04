@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.4.5 (Alpha)
+* @version     0.5.0 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -70,7 +70,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 125);
+/******/ 	return __webpack_require__(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -92,7 +92,7 @@ __webpack_require__( 9 );
 
 var tests = [];
 
-var context = __webpack_require__(88);
+var context = __webpack_require__(90);
 
 context.keys().forEach( function ( file ) {
 
@@ -106,7 +106,7 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 }
 
-//if ( DEVELOPMENT && module.hot ) module.hot.accept();
+// if ( DEVELOPMENT && module.hot ) module.hot.accept();
 
 
 /***/ }),
@@ -240,45 +240,47 @@ module.exports = __webpack_require__.p + "assets/images/smudge.png";
 /* 85 */,
 /* 86 */,
 /* 87 */,
-/* 88 */
+/* 88 */,
+/* 89 */,
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 89,
-	"./animation.test": 90,
-	"./bitmapfont.test": 91,
-	"./butterflyish.test": 92,
-	"./cli.test": 93,
-	"./clock.test": 94,
-	"./elasticcollision.test": 95,
-	"./field.test": 96,
-	"./fractree.test": 97,
-	"./grabndrag.test": 98,
-	"./grid.test": 99,
-	"./invaders.test": 100,
-	"./magnet.test": 101,
-	"./motion.test": 102,
-	"./nightsky.test": 103,
-	"./particles.test": 104,
-	"./platformer.test": 105,
-	"./playground.test": 106,
-	"./polygoncollision.test": 107,
-	"./quadtree.test": 108,
-	"./rain.test": 109,
-	"./raycasting.test": 110,
-	"./reflectivecollision.test": 111,
-	"./sprite.test": 112,
-	"./stresstest.test": 113,
-	"./text.test": 114,
-	"./themask.test": 115,
-	"./webglanimation.test": 116,
-	"./webglbitmapfont.test": 117,
-	"./webglcircle.test": 118,
-	"./webglline2d.test": 119,
-	"./webglpixelbatch.test": 120,
-	"./webglrectangle.test": 121,
-	"./webglstresstest.test": 122,
-	"./webgltexturebatch.test": 123
+	"./aabbcollision.test": 91,
+	"./animation.test": 92,
+	"./bitmapfont.test": 93,
+	"./butterflyish.test": 94,
+	"./cli.test": 95,
+	"./clock.test": 96,
+	"./elasticcollision.test": 97,
+	"./field.test": 98,
+	"./fractree.test": 99,
+	"./grabndrag.test": 100,
+	"./grid.test": 101,
+	"./invaders.test": 102,
+	"./magnet.test": 103,
+	"./motion.test": 104,
+	"./nightsky.test": 105,
+	"./particles.test": 106,
+	"./platformer.test": 107,
+	"./playground.test": 108,
+	"./polygoncollision.test": 109,
+	"./quadtree.test": 110,
+	"./rain.test": 111,
+	"./raycasting.test": 112,
+	"./reflectivecollision.test": 113,
+	"./sprite.test": 114,
+	"./stresstest.test": 115,
+	"./text.test": 116,
+	"./themask.test": 117,
+	"./webglanimation.test": 118,
+	"./webglbitmapfont.test": 119,
+	"./webglcircle.test": 120,
+	"./webglline2d.test": 121,
+	"./webglpixelbatch.test": 122,
+	"./webglrectangle.test": 123,
+	"./webglstresstest.test": 124,
+	"./webgltexturebatch.test": 125
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -294,10 +296,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 88;
+webpackContext.id = 90;
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -386,6 +388,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -402,12 +405,12 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     
     } );
-    stage.mouse.onLeave.Add( function ( ) {
+    stage.mouse.onLeave.Add( function () {
 
       if ( dragger ) dragger = null;
     
@@ -421,7 +424,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -464,7 +467,7 @@ module.exports = function () {
       sprite.anchor.Set( 0.5 );
       sprite.scale.Set( 5.0 );
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
-      var animation = ac.AddAnimation( 'test', 20 );
+      var animation = ac.CreateAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
         '5': 120
       } );
@@ -483,7 +486,7 @@ module.exports = function () {
       
       } );
 
-      //timer.Start( 400 );
+      // timer.Start( 400 );
 
       stage.onProcess.Add( function () {
 
@@ -505,7 +508,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -586,7 +589,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -618,11 +621,11 @@ module.exports = function () {
     color.ConvertToHSLA();
 
     var path = new nk.Path.Polygon2D();
-    //path.style.shadow.applied = true;
+    // path.style.shadow.applied = true;
     nk.Geom.Polygon2D.Construct.Star( path, 0, 0, 100, 50, 8 );
 
     var bfly = new nk.Path.Polygon2D();
-    //bfly.style.shadow.applied = true;
+    // bfly.style.shadow.applied = true;
     bfly.style.stroke.lineWidth = 0.5;
     bfly.style.fill.applied = false;
     nk.Geom.Polygon2D.Construct.Butterfly( bfly, 0, 0, 150, 40 );
@@ -672,7 +675,7 @@ module.exports = function () {
 
       container.Draw( rc );
 
-      //requestAnimationFrame( Update );
+      // requestAnimationFrame( Update );
     
     }
 
@@ -706,7 +709,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -784,7 +787,7 @@ module.exports = function () {
     cb.addEventListener( 'click', onCommandboxClick );
     ci.addEventListener( 'keydown', onInputKeyDown );
 
-    ////////////////
+    // //////////////
 
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth - 500 );
@@ -862,14 +865,17 @@ module.exports = function () {
     function onInputKeyDown ( event ) {
 
       var stop = false;
+
       if ( event.keyCode === 13 ) {
 
         stop = true;
+
         if ( ci.value !== '' ) {
 
           var r = register.Parse( ci.value );
           cHistory.push( ci.value );
           cIndex = cHistory.length - 1;
+
           if ( r !== null ) {
 
             insertParagraph( CE.UNKNOWN_COMMAND.replace( /DATA/g, r ) );
@@ -910,7 +916,7 @@ module.exports = function () {
     
     }
 
-    function onCommandboxClick ( ) {
+    function onCommandboxClick () {
 
       ci.focus();
     
@@ -930,7 +936,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -969,6 +975,7 @@ module.exports = function () {
     var hourHand = stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Line2D( 0, 0, 150, 0 ) ) );
 
     var i = clockPoints.vertices.length;
+
     while ( i-- ) {
 
       var p = stage.AddChild( new nk.Text(
@@ -1009,7 +1016,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1039,7 +1046,7 @@ module.exports = function () {
     var stage = new nk.Stage2D( c, 0, 0, true );
     stage.ComputeBounds();
     stage.backgroundColor = 'rgba(255,255,255,1)';
-    //stage.clear = false;
+    // stage.clear = false;
     stage.ticker.StartAF();
 
     var fps = new nk.Text( 0, 0, '' );
@@ -1104,6 +1111,7 @@ module.exports = function () {
       
       } );
       nodes = root.ConcatNodes();
+
       for ( i; i < l; ++i ) {
 
         collider = colliders[ i ];
@@ -1111,6 +1119,7 @@ module.exports = function () {
         body1 = collider.data.body;
         vel = body1.velocity;
         collider.position.AddV( vel );
+
         if ( collider.x + collider.path.radius >= W ) {
 
           vel.x = -Math.abs( vel.x );
@@ -1137,10 +1146,12 @@ module.exports = function () {
 
           collidee = convergence[ j ].belongsTo;
           body2 = collidee.data.body;
+
           if ( collidee !== collider ) {
 
             result.occured = false;
             Collide( body1, body2, result );
+
             if ( result.occured === true ) {
 
               collider.data.timer.Start( 10 );
@@ -1184,7 +1195,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1212,7 +1223,7 @@ module.exports = function () {
     var stage = new nk.Stage2D( c, HW, HH );
     stage.clear = false;
     stage.backgroundColor = 'rgba(0,0,0,0.1)';
-    //stage.fill = false;
+    // stage.fill = false;
 
     var orig = new nk.Plaingraphic2D( 0, 0, new nk.Path.Circle( 0, 0, 200 ) );
     orig.path.style.fill.applied = false;
@@ -1229,8 +1240,11 @@ module.exports = function () {
         if ( !objs[ i ] ) break;
         nk.Math.AttractRepel( objs[ i ].position, orig.position, objs[ i ].data.vel, orig.path.radius * 2, 0.1 );
         objs[ i ].position.AddV( objs[ i ].data.vel );
-        //objs[ i ].data.color.IncreaseChannel( 0, 1 );
-        //objs[ i ].path.style.fill.color = objs[ i ].data.color.value;
+
+        /*
+         *objs[ i ].data.color.IncreaseChannel( 0, 1 );
+         *objs[ i ].path.style.fill.color = objs[ i ].data.color.value;
+         */
         if ( !--objs[ i ].data.lifeSpan ) {
 
           objs[ i ].Destroy();
@@ -1243,6 +1257,7 @@ module.exports = function () {
       if ( mouseDown ) {
 
         i = 2;
+
         while ( --i ) {
 
           MakeObj( stage.mouse.position.x, stage.mouse.position.y );
@@ -1261,8 +1276,10 @@ module.exports = function () {
       var obj = new nk.Plaingraphic2D( _x, _y, path );
       obj.data.vel = new nk.Vector2D( nk.Utils.RandomFloat( -4, 4 ), nk.Utils.RandomFloat( -4, 4 ) );
       obj.data.lifeSpan = 600;
-      //obj.data.color = new nk.Color( nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ) );
-      //obj.data.color.ConvertToHSLA();
+      /*
+       *obj.data.color = new nk.Color( nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ), nk.Utils.RandomInteger( 0, 255 ) );
+       *obj.data.color.ConvertToHSLA();
+       */
       stage.AddChild( obj );
       objs.push( obj );
     
@@ -1287,7 +1304,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1333,6 +1350,7 @@ module.exports = function () {
       mm.Create( 'moveY', 'y', 0, 120, 'SineInOut' );
       mm.Create( 'rotate', 'rotation', 0, 120, 'SineInOut' );
       mm.StartMultiple( 'moveX moveY rotate' );
+
       if ( this.w > 12 ) {
 
         this.Grow();
@@ -1343,6 +1361,7 @@ module.exports = function () {
 
     Branch.prototype = Object.create( nk.Graphic2D.prototype );
     Branch.prototype.constructor = Branch;
+
     Branch.prototype.Grow = function () {
 
       var newEndL = this.path.e.SubtractVC( this.path.s );
@@ -1387,7 +1406,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1428,6 +1447,7 @@ module.exports = function () {
     stage.AddChild( graphicRectangle );
 
     var t = 10;
+
     while ( --t ) {
 
       stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( -100, -100, 100, 100 ) ) );
@@ -1447,6 +1467,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -1469,7 +1490,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 
@@ -1489,7 +1510,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1529,6 +1550,7 @@ module.exports = function () {
     console.log( points );
 
     i = points.length;
+
     while ( i-- ) {
 
       container.AddChild( new nk.Graphic2D( points[ i ].x, points[ i ].y, new nk.Path.AABB2D( 0, 0, mx, my ) ) );
@@ -1538,6 +1560,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position.DivideVC( container.scale );
+
       for ( var i = container.children.length; i--; ) {
 
         if ( container.children[ i ].IntersectsPoint( p ) ) {
@@ -1572,7 +1595,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1602,6 +1625,7 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
     var RF = nk.Utils.RandomFloat;
     var COLLIDE = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
+    var SPREAD = nk.Math.Spread;
 
     var stage = new nk.Stage2D( c, 0, 0, true, true );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
@@ -1613,10 +1637,13 @@ module.exports = function () {
 
     var playerBulletPool = new nk.Pool();
     var enemyPool = new nk.Pool();
+    var particlePool = new nk.Pool();
+    var explosionPool = new nk.Pool();
 
     var worldScale = new nk.Vector2D( 2.0, 2.0 );
     var ship = null;
-    // var enemyBullets = [];
+    var particles = [];
+    var explosions = [];
     var playerBullets = [];
     var enemies = [];
     var shields = [];
@@ -1624,33 +1651,50 @@ module.exports = function () {
     var shieldHealth = 3;
     var numShields = 22;
 
+    var spritesheet = null;
+
     var shieldVerticalPosition = 500;
 
     var enemySpawnRate = 2;
-    var enemySpeed = 3.0;
-    var enemyHealth = 20;
+    var enemySpeed = 1.5;
+    var enemyHealth = 5;
 
     var root = new nk.QuadtreeNode( worldBounds, 0, 5, 5 );
 
-    var imageLoader = new nk.ImageLoader( [ {
-      id: 'sheet',
-      src: './../assets/images/invaders/invaders.png',
-      w: 16, h: 16, fw: 128, fh: 16
-    }], true, function () {
+    var spritesheetLoader = new nk.SpritesheetLoader(
+      [
+        {
+          id: 'sheet',
+          image: {
+            src: './../assets/images/invaders/invaders.png'
+          },
+          data: {
+            src: './../assets/xhr/invaders.json',
+            type: 'json'
+          }
+        }
+      ],
+      function() {
 
-      go();
-    
-    } );
+        spritesheet = spritesheetLoader.GetSpritesheet( 'sheet' );
+        spritesheet.GenerateFrames();
+
+        go();
+      
+      }
+    );
 
     function go () {
 
-      stage.ticker.Start();
-      pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
+      stage.ticker.StartAF();
+      pc.BindBasicTexture( spritesheet.basicTexture );
       playerBulletPool.Flood( function () {
 
         var b = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Bullet' ).Apply( b );
         b.scale.SetV( worldScale );
-        b.UpdateShape();
+        b.UpdateShape( new nk.AABB2D( 0, 0, 8, 8 ) );
+        b.rotation = RF( 0, Math.PI * 2 );
         b.anchor.Set( 0.5 );
         b.data.velocity = new nk.Vector2D();
         b.data.body = {
@@ -1658,15 +1702,16 @@ module.exports = function () {
           shape: b.shape,
           anchor: b.anchor
         };
-        b.clip.Set( 16 * 7, 0, 16, 16 );
+        b.UpdateTextureTransform();
         return b;
       
-      }, 1000 );
+      }, 5000 );
       enemyPool.Flood( function () {
 
         var e = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Enemy' + RI( 1, 2 ) ).Apply( e );
         e.scale.SetV( worldScale );
-        e.UpdateShape();
+        e.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
         e.anchor.Set( 0.5 );
         e.data.velocity = new nk.Vector2D();
         e.data.body = {
@@ -1674,10 +1719,57 @@ module.exports = function () {
           shape: e.shape,
           anchor: e.anchor
         };
-        e.clip.Set( 16 * RI( 1, 2 ), 0, 16, 16 );
+        e.UpdateTextureTransform();
         return e;
       
       }, 1000 );
+      particlePool.Flood( function() {
+
+        var p = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Particle' ).Apply( p );
+        p.scale.SetV( worldScale );
+        p.UpdateShape( new nk.AABB2D( 0, 0, 4, 4 ) );
+        p.anchor.Set( 0.5 );
+        p.data.velocity = new nk.Vector2D();
+        p.data.acceleration = new nk.Vector2D();
+        p.UpdateTextureTransform();
+        return p;
+      
+      }, 5000 );
+      explosionPool.Flood( function() {
+
+        var e = new nk.Sprite( 0, 0, pc );
+        var a = e.CreateAnimation( {
+          spritesheet: spritesheet,
+          id: 'explode',
+          frames: [
+            'Explo-f1',
+            'Explo-f2',
+            'Explo-f3',
+            'Explo-f4'
+          ],
+          rate: 6
+        } );
+        a.onEnd.Add( onExplosionDone, e );
+        a.overrideFrameRate = true;
+        e.scale.SetV( worldScale );
+        e.rotation = RF( 0, Math.PI * 2 );
+        e.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
+        e.anchor.Set( 0.5 );
+        e.UpdateTextureTransform();
+        return e;
+      
+      }, 200 );
+
+      function onExplosionDone() {
+
+        this.animationController.currentAnimation.Reset();
+        this.Detach();
+        explosions.splice( explosions.indexOf( this ), 1 );
+        explosionPool.Store( this );
+      
+      }
+
       createShip();
       createShields();
       setupListeners();
@@ -1689,8 +1781,10 @@ module.exports = function () {
 
       if ( ship ) return;
       ship = new nk.Sprite( 0, 0, pc );
+      spritesheet.GetFrameById( 'Ship' ).Apply( ship );
+      console.log( ship );
       ship.scale.SetV( worldScale );
-      ship.UpdateShape();
+      ship.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
       ship.anchor.Set( 0.5 );
       ship.x = HW;
       ship.y = H - ship.height * 0.5;
@@ -1699,33 +1793,36 @@ module.exports = function () {
       ship.data.fire = false;
       ship.data.fireRate = 2;
       ship.data.fireTimer = 0;
-      ship.data.bulletsPerBlast = 50;
-      stage.Mount( ship );
+      ship.data.bulletsPerBlast = 15;
+      stage.AddChild( ship );
+
+      ship.UpdateTextureTransform();
     
     }
 
     function createPlayerBullet () {
 
       var i = ship.data.bulletsPerBlast;
+
+      createExplosion( ship.x + RF( -100, 100 ), ship.y + RF( -100, -10 ) );
+
       while ( i-- ) {
 
         var b = playerBulletPool.Retrieve();
-        b.x = ship.x;
-        b.y = ship.y;
+        b.x = SPREAD( ship.x, ship.data.bulletsPerBlast, 3, i );
+        b.y = ship.y - ship.height * 0.5;
         b.data.velocity.x = 0;
-        b.data.velocity.y = RF( -20, -1 );
-        b.data.velocity.Rotate( nk.Math.DTR(
-          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RF( 1, 2 ), i )
-        ) );
+        b.data.velocity.y = RF( -25, -5 );
+
         if ( b.data.velocity.y > 0 ) {
 
           b.data.velocity.y = -b.data.velocity.y;
         
         }
 
-        b.data.lifeSpan = 200;
+        b.data.lifeSpan = 150;
         playerBullets.push( b );
-        stage.Mount( b );
+        stage.AddChild( b );
       
       }
     
@@ -1740,7 +1837,7 @@ module.exports = function () {
       e.data.velocity.y = enemySpeed;
       e.data.health = enemyHealth;
       enemies.push( e );
-      stage.Mount( e );
+      stage.AddChild( e );
     
     }
 
@@ -1749,9 +1846,10 @@ module.exports = function () {
       for ( var i = 0; i < numShields; ++i ) {
 
         var s = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Shield-f1' ).Apply( s );
         s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
-        s.UpdateShape();
+        s.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
         s.anchor.Set( 0.5 );
         s.data.health = shieldHealth;
         s.data.body = {
@@ -1761,11 +1859,39 @@ module.exports = function () {
         };
         s.x = nk.Math.Spread( HW, numShields, s.width * 1.2, i );
         s.y = shieldVerticalPosition;
-        s.clip.Set( 16 * 3, 0, 16, 16 );
+
         shields.push( s );
-        stage.Mount( s );
+        stage.AddChild( s );
+
+        s.UpdateTextureTransform();
       
       }
+    
+    }
+
+    function createParticles( _x, _y, _amount ) {
+
+      for ( var i = 0; i < _amount; ++i ) {
+
+        var p = particlePool.Retrieve();
+        p.position.Set( _x, _y );
+        p.data.velocity.Set( RF( -10, 10 ), RF( -10, 10 ) );
+        p.data.acceleration.Set( RF( 0.9, 0.95 ), RF( 1, 1 ) );
+        p.data.lifeSpan = RI( 30, 100 );
+        particles.push( p );
+        stage.AddChild( p );
+      
+      }
+    
+    }
+
+    function createExplosion( _x, _y ) {
+
+      var e = explosionPool.Retrieve();
+      e.position.Set( _x, _y );
+      e.animationController.PlayAnimation( 'explode' );
+      explosions.push( e );
+      stage.AddChild( e );
     
     }
 
@@ -1777,7 +1903,8 @@ module.exports = function () {
       function onKeyDown ( event ) {
 
         var kc = event.data.keyCode;
-        //console.log( kc );
+
+        // console.log( kc );
         switch ( kc ) {
 
           case 37:
@@ -1798,6 +1925,7 @@ module.exports = function () {
       function onKeyUp ( event ) {
 
         var kc = event.data.keyCode;
+
         switch ( kc ) {
 
           case 37:
@@ -1824,6 +1952,7 @@ module.exports = function () {
       function onProcess () {
 
         handleShip();
+
         if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
 
           createEnemy();
@@ -1833,6 +1962,7 @@ module.exports = function () {
         handleEnemies();
         root.Dump();
         var i;
+
         for ( i = 0; i < enemies.length; ++i ) {
 
           root.Add( enemies[ i ].bounds );
@@ -1840,6 +1970,11 @@ module.exports = function () {
         }
 
         handlePlayerBullets();
+
+        handleParticles();
+
+        handleExplosions();
+
         if ( this.ticker.GetTPS() < 40 ) {
 
           console.log( this.ticker.GetTPS() );
@@ -1851,6 +1986,7 @@ module.exports = function () {
       function handleShip () {
 
         var shipWHalf = ship.width * 0.5;
+
         if ( ship.data.moveLeft && ship.x > 0 + shipWHalf ) {
 
           ship.data.velocity.x = -ship.data.moveSpeed;
@@ -1866,6 +2002,7 @@ module.exports = function () {
         }
 
         ship.position.AddV( ship.data.velocity );
+
         if ( ship.x < 0 + shipWHalf ) {
 
           ship.x = 0 + shipWHalf;
@@ -1891,14 +2028,48 @@ module.exports = function () {
       
       }
 
+      function handleParticles() {
+
+        for ( var i = 0, particle; i < particles.length; ++i ) {
+
+          particle = particles[i];
+          particle.position.AddV( particle.data.velocity );
+          particle.data.velocity.MultiplyV( particle.data.acceleration );
+          particle.data.velocity.y += 0.1;
+
+          if ( --particle.data.lifeSpan <= 0 ) {
+
+            particle.Detach();
+            particles.splice( i, 1 );
+            particlePool.Store( particle );
+          
+          }
+        
+        }
+      
+      }
+
+      function handleExplosions() {
+
+        for ( var i = 0, explosion; i < explosions.length; ++i ) {
+
+          explosion = explosions[i];
+          explosion.animationController.Process();
+        
+        }
+      
+      }
+
       function handlePlayerBullets () {
 
         for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
 
           bullet = playerBullets[ i ];
+
           if ( bullet ) {
 
             bullet.position.AddV( bullet.data.velocity );
+
             if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
 
               bullet.data.velocity.x = -bullet.data.velocity.x;
@@ -1906,6 +2077,7 @@ module.exports = function () {
             }
 
             bullet.ComputeBounds();
+
             if ( --bullet.data.lifeSpan <= 0 ) {
 
               bullet.Detach();
@@ -1914,12 +2086,7 @@ module.exports = function () {
             
             } else {
 
-              // We can cheat, because we have so many objects.
-              if ( RI( 1, 3 ) === 2 ) {
-
-                handlePlayerBullet_EnemyCollision( bullet, i );
-              
-              }
+              handlePlayerBullet_EnemyCollision( bullet, i );
             
             }
           
@@ -1934,11 +2101,15 @@ module.exports = function () {
         for ( var i = 0, enemy; i < enemies.length; ++i ) {
 
           enemy = enemies[ i ];
+
           if ( enemy ) {
 
             enemy.position.AddV( enemy.data.velocity );
             enemy.ComputeBounds();
+
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
+
+              createParticles( enemy.x, enemy.y, 15 );
 
               enemy.Detach();
               enemies.splice( i, 1 );
@@ -1961,9 +2132,11 @@ module.exports = function () {
         if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
 
           var convergence = root.Converge( bullet.bounds );
+
           for ( var i = 0, enemy; i < convergence.length; ++i ) {
 
             enemy = convergence[ i ].belongsTo;
+
             if ( enemy ) {
 
               if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
@@ -1971,6 +2144,7 @@ module.exports = function () {
                 enemy.data.health--;
                 bullet.Detach();
                 playerBullets.splice( index, 1 );
+                playerBulletPool.Store( bullet );
                 break;
               
               }
@@ -1986,16 +2160,21 @@ module.exports = function () {
       function handleEnemy_ShieldCollision ( enemy, index ) {
 
         if ( !enemy || enemy.y < shieldVerticalPosition - enemy.height ) return;
+
         for ( var i = 0, shield; i < shields.length; ++i ) {
 
           shield = shields[ i ];
+
           if ( shield ) {
 
             if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
 
+              createParticles( enemy.x, enemy.y, 15 );
+
               enemy.Detach();
               enemies.splice( index, 1 );
               enemyPool.Store( enemy );
+
               if ( --shield.data.health <= 0 ) {
 
                 shield.Detach();
@@ -2005,6 +2184,7 @@ module.exports = function () {
               } else {
 
                 shield.clip.tl.x += 16;
+                shield.UpdateTextureTransform();
               
               }
 
@@ -2028,7 +2208,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2094,6 +2274,7 @@ module.exports = function () {
     ( function () {
 
       var i = 500;
+
       while ( i-- ) {
 
         CreateParticle();
@@ -2113,6 +2294,7 @@ module.exports = function () {
         nk.Math.AttractRepel( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
         particle.position.AddV( vel );
         vel.MultiplyV( particle.data.force.friction );
+
         if ( particle.x + particle.path.radius >= W ) {
 
           vel.x = -Math.abs( vel.x );
@@ -2139,6 +2321,7 @@ module.exports = function () {
 
         result.occured = false;
         Collide( magnet.data.body, particle.data.body, result );
+
         if ( result.occured === true ) {
 
           result.mtv.Multiply( result.mtd, result.mtd );
@@ -2163,6 +2346,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( event ) {
 
       var p = event.data.position;
+
       if ( magnet.IntersectsPoint( p ) ) {
 
         startDrag.SetV( p );
@@ -2174,7 +2358,7 @@ module.exports = function () {
       event.stopPropagation = true;
     
     } );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       dragIt = false;
     
@@ -2188,7 +2372,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2252,7 +2436,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2288,7 +2472,7 @@ module.exports = function () {
     }, {
       id: 'staticStar',
       src: nk.Utils.GenerateSimpleBase64Png( StaticStar )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       Go();
@@ -2340,7 +2524,7 @@ module.exports = function () {
       path.style.stroke.color = '#000';
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Butterfly( path, 0, 0, 4000, 50 );
-      //To get the difference in x,y
+      // To get the difference in x,y
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;
@@ -2368,7 +2552,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2415,6 +2599,7 @@ module.exports = function () {
     imageCache.onComplete.Add( function () {
 
       var i = 250;
+
       while ( i-- ) {
 
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.GetBasicTexture( 'particle' ) ) );
@@ -2435,6 +2620,7 @@ module.exports = function () {
       stage.onProcess.Add( function () {
 
         var i = this.children.length, child;
+
         while ( i-- ) {
 
           child = this.children[ i ];
@@ -2458,7 +2644,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2508,7 +2694,7 @@ module.exports = function () {
         return t;
       
       } )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       Start();
@@ -2558,6 +2744,7 @@ module.exports = function () {
 
       character.position.AddV( character.data.force.velocity );
       character.data.force.velocity.AddV( character.data.force.gravity );
+
       if ( character.data.move.left === true ) {
 
         character.position.SubtractV( character.data.force.move );
@@ -2588,6 +2775,7 @@ module.exports = function () {
           platforms[ i ].data.collisionData,
           result
         );
+
         if ( result.occured === true ) {
 
           if ( result.mtv.y < 0 && character.data.force.velocity.y > 0 ) {
@@ -2686,6 +2874,7 @@ module.exports = function () {
     function InitPlatforms () {
 
       var i = 200;
+
       while ( i-- ) {
 
         var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );
@@ -2709,7 +2898,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2744,7 +2933,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2798,6 +2987,7 @@ module.exports = function () {
     ( function () {
 
       var i = 50;
+
       while ( i-- ) {
 
         CreatePolygon();
@@ -2814,11 +3004,13 @@ module.exports = function () {
       for ( var i = 0, l = objs.length; i < l; ++i ) {
 
         var obj1 = objs[ i ];
+
         for ( var j = 0; j < l; ++j ) {
 
           var obj2 = objs[ j ];
           if ( obj2 === obj1 ) continue;
           result.Reset();
+
           if ( Collide( obj1, obj2, result ) ) {
 
             if ( dragger ) {
@@ -2855,6 +3047,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -2875,7 +3068,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     
@@ -2889,7 +3082,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2955,7 +3148,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3005,12 +3198,14 @@ module.exports = function () {
       stage.onProcess.Add( function () {
 
         var i = this.children.length, child;
+
         while ( i-- ) {
 
           child = this.children[ i ];
           child.position.AddV( child.data.velocity );
           child.data.velocity.Add( gravity.x, gravity.y + child.data.mass / 100 );
           child.data.velocity.Add( wind.x / child.data.mass * 4, wind.y / child.data.mass * 4 );
+
           if ( !--child.data.lifespan ) {
 
             DropPool.Store( child.Detach() );
@@ -3050,7 +3245,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3087,6 +3282,7 @@ module.exports = function () {
     ( function () {
 
       var i = 15;
+
       while ( i-- ) {
 
         var p = new nk.Path.Polygon2D();
@@ -3110,6 +3306,7 @@ module.exports = function () {
       var i = 360;
       var angle = Math.PI * 2 / i;
       var r = 180;
+
       while ( i-- ) {
 
         var th = angle * i;
@@ -3137,10 +3334,12 @@ module.exports = function () {
         ray.path.e.RotateAroundV( ray.path.s, ray.data.angle );
       
       } );
+
       for ( var i = 0; i < rays.length; ++i ) {
 
         var ray = rays[ i ];
         var polygon;
+
         for ( var k = 0; k < polygons.length; ++k ) {
 
           polygon = polygons[ k ].path;
@@ -3156,6 +3355,7 @@ module.exports = function () {
               vertexa,
               vertexb
             );
+
             if ( contactPoint ) {
 
               rays[ i ].path.e.SetV( contactPoint );
@@ -3172,6 +3372,7 @@ module.exports = function () {
             vertexa,
             vertexb
           );
+
           if ( contactPoint ) {
 
             rays[ i ].path.e.SetV( contactPoint );
@@ -3197,6 +3398,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -3217,7 +3419,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 
@@ -3235,7 +3437,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3297,6 +3499,7 @@ module.exports = function () {
       };
       lines.push( lg );
       stage.Mount( lg );
+
       if ( _interactive === false ) {
 
         lg.interactive = false;
@@ -3312,6 +3515,7 @@ module.exports = function () {
     ( function () {
 
       var i = 25;
+
       while ( i-- ) {
 
         CreateLine( RI( -HW, HW ), RI( -HH, HH ), 100, RI( 0, 360 ) );
@@ -3328,6 +3532,7 @@ module.exports = function () {
     ( function () {
 
       var i = 25;
+
       while ( i-- ) {
 
         CreateCircle( RI( -HW, HW ), RI( -HH, HH ), RI( 5, 10 ) );
@@ -3345,6 +3550,7 @@ module.exports = function () {
 
           result.Reset();
           Collide( circle.data.body, line.data.body, result );
+
           if ( result.occured ) {
 
             Response( circle.data.body, line.data.body, result );
@@ -3370,6 +3576,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -3390,7 +3597,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     
@@ -3404,7 +3611,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3485,6 +3692,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -3501,7 +3709,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     
@@ -3515,7 +3723,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3575,6 +3783,7 @@ module.exports = function () {
 
       var i = am;
       am = am < 3 ? 3 : am--;
+
       while ( i-- ) {
 
         var sprite = spritePool.Retrieve();
@@ -3601,6 +3810,7 @@ module.exports = function () {
         holdCounter = 0;
         childrenMDC.push( numChildren );
         numTimes--;
+
         if ( numTimes > 0 ) {
 
           timer.Start( 120 );
@@ -3623,7 +3833,7 @@ module.exports = function () {
     var imageCache = new nk.ImageLoader( [ {
       id: 'tex',
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       texture = imageCache.GetBasicTexture( 'tex' );
@@ -3656,7 +3866,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3703,7 +3913,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3810,7 +4020,7 @@ module.exports = function () {
 
       container.Draw( rc );
 
-      //requestAnimationFrame( Update );
+      // requestAnimationFrame( Update );
     
     }
 
@@ -3824,7 +4034,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3858,7 +4068,7 @@ module.exports = function () {
     var test = null;
 
     var imageCache = new nk.ImageLoader();
-    imageCache.onComplete.Add( function ( ) {
+    imageCache.onComplete.Add( function () {
 
       var p1 = new nk.GLTextureProgramController( stage.gl );
       var p2 = new nk.GLTextureProgramController( stage.gl );
@@ -3871,23 +4081,29 @@ module.exports = function () {
       test.anchor.Set( 0.5 );
       test.scale.Set( 5 );
       test.UpdateShape();
+      test.UpdateTextureTransform();
 
       spriteRef = new nk.Sprite( HW, HH - 200, p2 );
       spriteRef.anchor.Set( 0.5 );
+      spriteRef.UpdateTextureTransform();
 
       sprite = new nk.Sprite( HW, HH, p1 );
       sprite.anchor.Set( 0.5 );
       sprite.scale.Set( 5 );
       sprite.UpdateShape();
+      sprite.UpdateTextureTransform();
+
+      console.log( sprite );
 
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
-      var animation = ac.AddAnimation( 'test', 20 );
+      var animation = ac.CreateAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
         '5': 120
       } );
+      console.log( animation );
       animation.reverse = true;
       animation.onEnd.Add( function () {
-        //stage.ticker.Stop();
+        // stage.ticker.Stop();
       }, animation );
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef, test );
@@ -3900,7 +4116,7 @@ module.exports = function () {
     
     } );
     imageCache.Load( [
-      { id: '1to8', src: './assets/images/1to8.png', w: 64, h: 64 },
+      { id: '1to8', src: './assets/images/1to8.png' },
       { id: '1to8f', src: './assets/images/1to8.png' }
     ], true );
 
@@ -3921,6 +4137,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -3941,7 +4158,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 
@@ -3959,7 +4176,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4042,7 +4259,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4086,6 +4303,7 @@ module.exports = function () {
     stage.children[ 1 ].interactive = false;
 
     var i = 1000;
+
     while ( i-- ) {
 
       var path = new nk.Path.Circle( 0, 0, RI( 2, 30 ) );
@@ -4120,6 +4338,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -4140,7 +4359,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 
@@ -4158,7 +4377,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4195,6 +4414,7 @@ module.exports = function () {
     var points = nk.Math.SquareGrid( W + mX, H + mY, mX, mY, nk.Vector2D );
 
     var i = points.length;
+
     while ( i-- ) {
 
       var e = points[ i ];
@@ -4221,7 +4441,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4258,7 +4478,8 @@ module.exports = function () {
 
     ( function () {
 
-      var i = 100000;
+      var i = 20000;
+
       while ( i-- ) {
 
         var p = new nk.Path.Pixel2D( 0, 0 );
@@ -4288,6 +4509,7 @@ module.exports = function () {
         child.UpdateInBuffer();
       
       } );
+
       if ( stage.ticker.GetTPS() < 40 ) {
 
         console.log( stage.ticker.GetTPS() );
@@ -4306,7 +4528,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4341,6 +4563,7 @@ module.exports = function () {
     path.LinkProgramController( pc );
 
     var i = 1000;
+
     while ( i-- ) {
 
       var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
@@ -4365,6 +4588,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -4385,7 +4609,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 
@@ -4403,7 +4627,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4425,6 +4649,7 @@ module.exports = function () {
     c.style.top = 0;
     c.style.left = 0;
     var gl = c.getContext( 'webgl' );
+
     if ( !gl ) {
 
       gl = c.getContext( 'experimental-webgl' );
@@ -4486,6 +4711,7 @@ module.exports = function () {
 
       var i = am;
       am = am < 3 ? 3 : am--;
+
       while ( i-- ) {
 
         var obj = usedPool.Retrieve();
@@ -4511,6 +4737,7 @@ module.exports = function () {
         holdCounter = 0;
         childrenMDC.push( numChildren );
         numTimes--;
+
         if ( numTimes > 0 ) {
 
           timer.Start( 120 );
@@ -4533,7 +4760,7 @@ module.exports = function () {
     var imageCache = new nk.ImageLoader( [ {
       id: 'tex',
       src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       pcon = new nk.GLTextureProgramController( gl );
@@ -4581,7 +4808,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4617,7 +4844,7 @@ module.exports = function () {
     stage.UseAsBatchParent( pc );
 
     var ic = new nk.ImageLoader();
-    ic.onComplete.Add( function ( ) {
+    ic.onComplete.Add( function () {
 
       var tex = ic.GetBasicTexture( 'colors' );
       pc.BindBasicTexture( tex );
@@ -4625,11 +4852,12 @@ module.exports = function () {
       ( function () {
 
         var i = 5000;
+
         while ( i-- ) {
 
           var s = new nk.Sprite( HW, HH, tex );
           var ac = s.animationController = new nk.Animator.Controller( s );
-          var anim = ac.AddAnimation( 'test', RI( 5, 40 ) );
+          var anim = ac.CreateAnimation( 'test', RI( 5, 40 ) );
           anim.GenerateFrames( 64, 64, 1024, 64, 16 );
           ac.PlayAnimation( 'test', RI( 0, 15 ) );
           var vx = RI( 1, 3 );
@@ -4674,7 +4902,7 @@ module.exports = function () {
     } );
 
     ic.Load( [
-      { id: 'colors', src: './assets/images/colors.png', w: 64, h: 64 }
+      { id: 'colors', src: './assets/images/colors.png' }
     ], true );
 
     document.body.removeChild( buttonContainer );
@@ -4685,8 +4913,8 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */,
-/* 125 */
+/* 126 */,
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

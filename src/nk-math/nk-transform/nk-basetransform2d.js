@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Basetransform2D ( _x, _y ) {
 
     if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D();
@@ -17,11 +18,11 @@ module.exports = function ( Nenkraft ) {
 
   Basetransform2D.prototype = Object.create( null );
   Basetransform2D.prototype.constructor = Basetransform2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
 
-  //Methods
+  // Methods
   Basetransform2D.prototype.UpdateLocal = function () {
 
     this.localTransform.SetV( this.position );

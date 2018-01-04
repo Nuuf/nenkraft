@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
+
   function Graphic2D ( _x, _y, _path ) {
 
     if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
@@ -17,18 +18,20 @@ module.exports = function ( Nenkraft ) {
 
   Graphic2D.prototype = Object.create( Super.prototype );
   Graphic2D.prototype.constructor = Graphic2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Graphic2D.prototype.path = null;
   Graphic2D.prototype.anchor = null;
   Graphic2D.prototype.alpha = 1.0;
   Graphic2D.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Graphic2D.prototype.interactive = true;
-  //Methods
+
+  // Methods
   Graphic2D.prototype.Draw = function ( _rc ) {
 
     this.PreDraw( _rc );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -40,6 +43,7 @@ module.exports = function ( Nenkraft ) {
 
       this.transform.ApplyWorld( _rc );
       var path = this.path;
+
       if ( path && path.Draw && this.display === true ) {
 
         _rc.globalAlpha = this.alpha;
@@ -61,6 +65,7 @@ module.exports = function ( Nenkraft ) {
   Graphic2D.prototype.GLDraw = function ( _gl ) {
 
     this.GLPreDraw( _gl );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -71,6 +76,7 @@ module.exports = function ( Nenkraft ) {
       }
 
       var path = this.path;
+
       if ( path && path.GLDraw && this.display === true ) {
 
         path.GLDraw( _gl, this.transform );
@@ -99,6 +105,7 @@ module.exports = function ( Nenkraft ) {
 
     this.UpdateTransform();
     var transformData = this.transform.worldTransform.AsArray( true );
+
     if ( this.bufferData == null ) {
 
       this.bufferData = [];
@@ -116,6 +123,7 @@ module.exports = function ( Nenkraft ) {
     bufferData[ 6 ] = transformData[ 6 ];
     bufferData[ 7 ] = transformData[ 7 ];
     bufferData[ 8 ] = transformData[ 8 ];
+
     if ( this.path && this.path.GetBufferData ) {
 
       bufferData.push.apply( bufferData, this.path.GetBufferData() );
@@ -141,6 +149,7 @@ module.exports = function ( Nenkraft ) {
     buffer[ index + 6 ] = transformData[ 6 ];
     buffer[ index + 7 ] = transformData[ 7 ];
     buffer[ index + 8 ] = transformData[ 8 ];
+
     if ( this.path && this.path.UpdateInBuffer ) {
 
       this.path.UpdateInBuffer( buffer, index + 9 );

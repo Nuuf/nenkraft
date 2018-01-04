@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Transform2D ( _x, _y ) {
 
     if ( !( this instanceof Transform2D ) ) return new Transform2D( _x, _y );
@@ -19,15 +20,16 @@ module.exports = function ( Nenkraft ) {
 
   Transform2D.prototype = Object.create( null );
   Transform2D.prototype.constructor = Transform2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Transform2D.prototype.rotation = 0;
   Transform2D.prototype.skewCX = 1;
   Transform2D.prototype.skewSX = 0;
   Transform2D.prototype.skewCY = 0;
   Transform2D.prototype.skewSY = 1;
-  //Methods
+
+  // Methods
   Transform2D.prototype.Set = function ( _matrix ) {
 
     _matrix.Decompose( this );

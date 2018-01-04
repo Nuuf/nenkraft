@@ -1,13 +1,15 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function AABB2D ( _arg0, _arg1, _arg2, _arg3 ) {
 
     if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3 );
+
     if ( _arg0 instanceof Nenkraft.Vector2D && _arg1 instanceof Nenkraft.Vector2D ) {
 
       this.tl = _arg0;
@@ -46,13 +48,13 @@ module.exports = function ( Nenkraft ) {
 
   AABB2D.prototype = Object.create( null );
   AABB2D.prototype.constructor = AABB2D;
-  //Static
+  // Static
   AABB2D.TYPE = 1;
   AABB2D.TOP_LEFT = 'TL';
   AABB2D.TOP_RIGHT = 'TR';
   AABB2D.BOTTOM_LEFT = 'BL';
   AABB2D.BOTTOM_RIGHT = 'BR';
-  //Members
+  // Members
   AABB2D.prototype.TYPE = AABB2D.TYPE;
   AABB2D.prototype.w = 0;
   AABB2D.prototype.h = 0;
@@ -60,7 +62,8 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.hh = 0;
   AABB2D.prototype.area = 0;
   AABB2D.prototype.belongsTo = null;
-  //Methods
+
+  // Methods
   AABB2D.prototype.Set = function ( _tlx, _tly, _brx, _bry ) {
 
     this.tl.x = _tlx;
@@ -98,6 +101,7 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.GetQuadrant = function ( _quadrant ) {
 
     var tl = this.tl, br = this.br;
+
     switch ( _quadrant ) {
 
       case AABB2D.TOP_LEFT:

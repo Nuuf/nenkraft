@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Matrix2D () {
 
     if ( !( this instanceof Matrix2D ) ) return new Matrix2D();
@@ -14,9 +15,9 @@ module.exports = function ( Nenkraft ) {
 
   Matrix2D.prototype = Object.create( null );
   Matrix2D.prototype.constructor = Matrix2D;
-  //Static
+  // Static
   Matrix2D.EPSILON = 0.00001;
-  //Members
+  // Members
   Matrix2D.prototype.array = null;
   Matrix2D.prototype.a = 1;
   Matrix2D.prototype.b = 0;
@@ -24,7 +25,8 @@ module.exports = function ( Nenkraft ) {
   Matrix2D.prototype.d = 1;
   Matrix2D.prototype.e = 0;
   Matrix2D.prototype.f = 0;
-  //Methods
+
+  // Methods
   Matrix2D.prototype.Identity = function () {
 
     this.a = 1;
@@ -94,6 +96,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Matrix2D.prototype.TranslateTo = function( _x, _y ) {
+
+    this.e = _x;
+    this.f = _y;
+  
+  };
+
   Matrix2D.prototype.ApplyTranslation = function ( _x, _y ) {
 
     this.e = _x * this.a + _y * this.c + this.e;
@@ -146,9 +155,11 @@ module.exports = function ( Nenkraft ) {
     var skx = -Math.atan2( -c, d );
     var sky = Math.atan2( b, a );
     var delta = Math.abs( skx + sky );
+
     if ( delta < Matrix2D.EPSILON ) {
 
       _transform.rotation = sky;
+
       if ( a < 0 && d >= 0 ) {
 
         _transform.rotation += Math.PI;
@@ -177,6 +188,7 @@ module.exports = function ( Nenkraft ) {
   Matrix2D.prototype.AsArray = function ( _transpose ) {
 
     var array = this.array;
+
     if ( _transpose === true ) {
 
       array[ 0 ] = this.a;

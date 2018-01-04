@@ -1,15 +1,17 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var LLI = Nenkraft.Math.LineLineIntersection;
   var CPOL = Nenkraft.Math.ClosestPointOnLine;
+
   function Line2D ( _arg0, _arg1, _arg2, _arg3 ) {
 
     if ( !( this instanceof Line2D ) ) return new Line2D( _arg0, _arg1, _arg2, _arg3 );
+
     if ( _arg0 !== undefined && _arg0.x != null && _arg0.y != null && _arg1 !== undefined && _arg1.x != null && _arg1.y != null ) {
 
       this.s = _arg0;
@@ -33,13 +35,14 @@ module.exports = function ( Nenkraft ) {
 
   Line2D.prototype = Object.create( null );
   Line2D.prototype.constructor = Line2D;
-  //Static
+  // Static
   Line2D.TYPE = 0;
-  //Members
+  // Members
   Line2D.prototype.TYPE = Line2D.TYPE;
   Line2D.prototype.epsilon = 1000;
   Line2D.prototype.belongsTo = null;
-  //Methods
+
+  // Methods
   Line2D.prototype.Stretch = function ( _magnitude ) {
 
     var hm = _magnitude * 0.5;
@@ -76,6 +79,7 @@ module.exports = function ( Nenkraft ) {
     var s = this.s;
     var e = this.e;
     var cross = ( _v.y - s.y ) * ( e.x - s.x ) - ( _v.x - s.x ) * ( e.y - s.y );
+
     if ( Math.abs( cross ) > this.epsilon ) {
 
       return false;
@@ -83,6 +87,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     var dot = ( _v.x - s.x ) * ( e.x - s.x ) + ( _v.y - s.y ) * ( e.y - s.y );
+
     if ( dot < 0 ) {
 
       return false;

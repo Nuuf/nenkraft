@@ -31,7 +31,7 @@ module.exports = function () {
     }, {
       id: 'staticStar',
       src: nk.Utils.GenerateSimpleBase64Png( StaticStar )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       Go();
@@ -83,7 +83,7 @@ module.exports = function () {
       path.style.stroke.color = '#000';
       path.style.stroke.lineWidth = 3;
       nk.Geom.Polygon2D.Construct.Butterfly( path, 0, 0, 4000, 50 );
-      //To get the difference in x,y
+      // To get the difference in x,y
       var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
       var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
       return t;

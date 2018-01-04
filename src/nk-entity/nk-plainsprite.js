@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Plain2D;
+
   function Plainsprite ( _x, _y, _texture ) {
 
     if ( !( this instanceof Plainsprite ) ) return new Plainsprite( _x, _y, _texture );
@@ -20,12 +21,12 @@ module.exports = function ( Nenkraft ) {
 
   Plainsprite.prototype = Object.create( Super.prototype );
   Plainsprite.prototype.constructor = Plainsprite;
-  //Static
+  // Static
   Plainsprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
     Nenkraft.Utils.ImageFromDataURL(
       Nenkraft.Utils.GenerateSimpleBase64Png( function () {
 
-        //Oooh what fun.
+        // Oooh what fun.
         var path = new Nenkraft.Path.Polygon2D();
         path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
         path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
@@ -47,13 +48,14 @@ module.exports = function ( Nenkraft ) {
       } )
     ), 'DEFAULT_PLAINSPRITE_TEXTURE', 64, 64, 64, 64
   );
-  //Members
+  // Members
   Plainsprite.prototype.shape = null;
   Plainsprite.prototype.clip = null;
   Plainsprite.prototype.texture = null;
   Plainsprite.prototype.anchor = null;
   Plainsprite.prototype.interactive = true;
-  //Methods
+
+  // Methods
   Plainsprite.prototype.Draw = function ( _rc ) {
 
     if ( this.render === true ) {
@@ -66,6 +68,7 @@ module.exports = function ( Nenkraft ) {
       }
 
       this.transform.ApplyWorld( _rc );
+
       if ( this.display === true ) {
 
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;

@@ -32,6 +32,7 @@ module.exports = function () {
     var points = nk.Math.SquareGrid( W + mX, H + mY, mX, mY, nk.Vector2D );
 
     var i = points.length;
+
     while ( i-- ) {
 
       var e = points[ i ];

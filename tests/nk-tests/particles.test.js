@@ -42,6 +42,7 @@ module.exports = function () {
     imageCache.onComplete.Add( function () {
 
       var i = 250;
+
       while ( i-- ) {
 
         var child = stage.AddChild( new nk.Plainsprite( 0, 0, imageCache.GetBasicTexture( 'particle' ) ) );
@@ -62,6 +63,7 @@ module.exports = function () {
       stage.onProcess.Add( function () {
 
         var i = this.children.length, child;
+
         while ( i-- ) {
 
           child = this.children[ i ];

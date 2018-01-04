@@ -49,6 +49,7 @@ module.exports = function () {
     ( function () {
 
       var i = 50;
+
       while ( i-- ) {
 
         CreatePolygon();
@@ -65,11 +66,13 @@ module.exports = function () {
       for ( var i = 0, l = objs.length; i < l; ++i ) {
 
         var obj1 = objs[ i ];
+
         for ( var j = 0; j < l; ++j ) {
 
           var obj2 = objs[ j ];
           if ( obj2 === obj1 ) continue;
           result.Reset();
+
           if ( Collide( obj1, obj2, result ) ) {
 
             if ( dragger ) {
@@ -106,6 +109,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -126,7 +130,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     

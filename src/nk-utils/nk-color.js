@@ -1,12 +1,13 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var HexMap = Nenkraft.Utils.Base16ToBase10;
   var Clamp = Nenkraft.Utils.Clamp;
+
   function Color ( _r, _g, _b, _a ) {
 
     if ( !( this instanceof Color ) ) return new Color( _r, _g, _b, _a );
@@ -22,12 +23,13 @@ module.exports = function ( Nenkraft ) {
 
   Color.prototype = Object.create( null );
   Color.prototype.constructor = Color;
-  //Static
+  // Static
   var NORM = Color.NORM = 1 / 255;
-  //Members
+  // Members
   Color.prototype.value = '';
   Color.prototype.currentConversion = '';
-  //Methods
+
+  // Methods
   Color.prototype.Copy = function () {
 
     var color = new Color( this.channel[ 0 ], this.channel[ 1 ], this.channel[ 2 ], this.channel[ 3 ] );
@@ -63,6 +65,7 @@ module.exports = function ( Nenkraft ) {
     var r = this.channel[ 0 ] / 255, g = this.channel[ 1 ] / 255, b = this.channel[ 2 ] / 255;
     var max = Math.max( r, g, b ), min = Math.min( r, g, b ), maxnmin = max - min, maxpmin = max + min;
     var h = 0, s = 0, l = maxpmin * 0.5;
+
     if ( max !== min ) {
 
       s = ( l > 0.5 ) ? maxnmin / ( 2 - max - min ) : maxnmin / ( max + min );
@@ -74,6 +77,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     this.channel[ 0 ] = h * 360, this.channel[ 1 ] = s * 100, this.channel[ 2 ] = l * 100;
+
     if ( _round === true ) {
 
       this.channel[ 0 ] = Math.round( this.channel[ 0 ] );

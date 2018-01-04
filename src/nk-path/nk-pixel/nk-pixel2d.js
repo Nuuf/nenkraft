@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Math.Vector2D;
+
   function Pixel2D ( _x, _y, _style ) {
 
     if ( !( this instanceof Pixel2D ) ) return new Pixel2D( _x, _y, _style );
@@ -17,17 +18,20 @@ module.exports = function ( Nenkraft ) {
 
   Pixel2D.prototype = Object.create( Super.prototype );
   Pixel2D.prototype.constructor = Pixel2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Pixel2D.prototype.colorObj = null;
   Pixel2D.prototype.style = null;
   Pixel2D.prototype.programController = null;
   Pixel2D.prototype.bufferData = null;
-  //Methods
-  /* Pixel2D.prototype.Draw = function ( _rc ) {
-    //TODO
-  }; */
+
+  // Methods
+  /*
+   * Pixel2D.prototype.Draw = function ( _rc ) {
+   * //TODO
+   *}; 
+   */
   Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
 
     if ( this.programController !== null ) {
@@ -57,6 +61,7 @@ module.exports = function ( Nenkraft ) {
   Pixel2D.prototype.LinkStyle = function () {
 
     var pc = this.programController;
+
     if ( pc !== null && pc.color !== null ) {
 
       pc.color.SetHex( this.style.pixel.color );

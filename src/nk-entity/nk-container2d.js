@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.CoreEntity2D;
+
   function Container2D ( _x, _y ) {
 
     if ( !( this instanceof Container2D ) ) return new Container2D( _x, _y );
@@ -16,9 +17,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype = Object.create( Super.prototype );
   Container2D.prototype.constructor = Container2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Container2D.prototype.children = null;
   Container2D.prototype.render = true;
   Container2D.prototype.display = true;
@@ -31,8 +32,11 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.programController = null;
   Container2D.prototype.bufferStartIndex = 0;
   Container2D.prototype.bufferEndIndex = 0;
-  //
-  //Methods
+
+  /*
+   *
+   *Methods
+   */
   Container2D.prototype.PreDraw = function ( /* _rc */ ) {
     // Override
   };
@@ -44,6 +48,7 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.Draw = function ( _rc ) {
 
     this.PreDraw( _rc );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -66,6 +71,7 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.GLDraw = function ( _gl ) {
 
     this.GLPreDraw( _gl );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -134,9 +140,11 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.ComputeBatchBuffer = function ( _getBufferData ) {
 
     var childDataBuffer = [];
+
     for ( var i = 0, children = this.children, l = children.length, child, childData; i < l; ++i ) {
 
       child = children[ i ];
+
       if ( _getBufferData != null ) {
 
         childData = _getBufferData( child );
@@ -172,6 +180,7 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.AddChild = function ( _child ) {
 
     var parent = _child.parent;
+
     if ( parent !== null ) {
 
       parent.RemoveChild( _child );
@@ -187,6 +196,7 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.AddChildren = function () {
 
     var children = arguments;
+
     if ( Array.isArray( children[ 0 ] ) ) {
 
       children = children[ 0 ];
@@ -210,6 +220,7 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.AddSibling = function ( _sibling ) {
 
     var parent = this.parent;
+
     if ( parent !== null ) {
 
       parent.AddChild( _sibling );
@@ -224,6 +235,7 @@ module.exports = function ( Nenkraft ) {
 
     var children = this.children;
     var ix = children.indexOf( _child );
+
     if ( ix !== -1 ) {
 
       delete _child.parent;
@@ -238,10 +250,12 @@ module.exports = function ( Nenkraft ) {
     var children = this.children;
     var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
     var rChildren = [];
+
     for ( var i = 0, l = aChildren.length, child, ix; i < l; ++i ) {
 
       child = aChildren[ i ];
       ix = children.indexOf( child );
+
       if ( ix !== -1 ) {
 
         rChildren.push( children.splice( ix, 1 )[ 0 ] );
@@ -261,6 +275,7 @@ module.exports = function ( Nenkraft ) {
 
       var pChildren = this.parent.children;
       var ix = pChildren.indexOf( this );
+
       if ( ix !== -1 ) {
 
         pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
@@ -277,6 +292,7 @@ module.exports = function ( Nenkraft ) {
 
       var pChildren = this.parent.children;
       var ix = pChildren.indexOf( this );
+
       if ( ix !== -1 ) {
 
         pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
@@ -316,11 +332,13 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
 
     var children = this.children, closestChild = null;
+
     if ( children.length !== 0 ) {
 
       for ( var i = 0, l = children.length, child, distance = Infinity, tempDistance; i < l; ++i ) {
 
         child = children[ i ];
+
         if ( _filterCondition !== undefined ) {
 
           if ( _filterCondition( child ) === false ) continue;
@@ -328,6 +346,7 @@ module.exports = function ( Nenkraft ) {
         }
 
         tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
+
         if ( tempDistance < distance ) {
 
           distance = tempDistance;
@@ -348,11 +367,13 @@ module.exports = function ( Nenkraft ) {
   Container2D.prototype.GetChildFurthestFrom = function ( _object, _filterCondition ) {
 
     var children = this.children, closestChild = null;
+
     if ( children.length !== 0 ) {
 
       for ( var i = 0, l = children.length, child, distance = 0, tempDistance; i < l; ++i ) {
 
         child = children[ i ];
+
         if ( _filterCondition !== undefined ) {
 
           if ( _filterCondition( child ) === false ) continue;
@@ -360,6 +381,7 @@ module.exports = function ( Nenkraft ) {
         }
 
         tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
+
         if ( tempDistance > distance ) {
 
           distance = tempDistance;

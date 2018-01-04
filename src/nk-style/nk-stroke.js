@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Stroke ( _props ) {
 
     if ( !( this instanceof Stroke ) ) return new Stroke( _props );
@@ -14,7 +15,7 @@ module.exports = function ( Nenkraft ) {
 
   Stroke.prototype = Object.create( null );
   Stroke.prototype.constructor = Stroke;
-  //Static
+  // Static
   Nenkraft.Style.LINE_CAP = {
     ROUND: 'round',
     BUTT: 'butt',
@@ -25,14 +26,15 @@ module.exports = function ( Nenkraft ) {
     ROUND: 'round',
     MITER: 'miter'
   };
-  //Members
+  // Members
   Stroke.prototype.color = '#00FFFF';
   Stroke.prototype.lineCap = Nenkraft.Style.LINE_CAP.ROUND;
   Stroke.prototype.lineJoin = Nenkraft.Style.LINE_JOIN.ROUND;
   Stroke.prototype.lineWidth = 1;
   Stroke.prototype.miterLimit = 10;
   Stroke.prototype.applied = true;
-  //Methods
+
+  // Methods
   Stroke.prototype.Apply = function ( _rc ) {
 
     _rc.strokeStyle = this.color;

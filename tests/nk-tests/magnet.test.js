@@ -61,6 +61,7 @@ module.exports = function () {
     ( function () {
 
       var i = 500;
+
       while ( i-- ) {
 
         CreateParticle();
@@ -80,6 +81,7 @@ module.exports = function () {
         nk.Math.AttractRepel( particle.position, magnet.position, vel, magnet.path.radius * 3, 1 );
         particle.position.AddV( vel );
         vel.MultiplyV( particle.data.force.friction );
+
         if ( particle.x + particle.path.radius >= W ) {
 
           vel.x = -Math.abs( vel.x );
@@ -106,6 +108,7 @@ module.exports = function () {
 
         result.occured = false;
         Collide( magnet.data.body, particle.data.body, result );
+
         if ( result.occured === true ) {
 
           result.mtv.Multiply( result.mtd, result.mtd );
@@ -130,6 +133,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( event ) {
 
       var p = event.data.position;
+
       if ( magnet.IntersectsPoint( p ) ) {
 
         startDrag.SetV( p );
@@ -141,7 +145,7 @@ module.exports = function () {
       event.stopPropagation = true;
     
     } );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       dragIt = false;
     
