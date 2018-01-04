@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Circle ( _x, _y, _radius ) {
 
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
@@ -15,9 +16,9 @@ module.exports = function ( Nenkraft ) {
 
   Circle.prototype = Object.create( null );
   Circle.prototype.constructor = Circle;
-  //Static
+  // Static
   Circle.TYPE = 2;
-  //Members
+  // Members
   Circle.prototype.TYPE = Circle.TYPE;
   Circle.prototype.diameter = 0;
   Circle.prototype.w = 0;
@@ -26,7 +27,8 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.radiusUnsquared = 0;
   Circle.prototype.area = 0;
   Circle.prototype.belongsTo = null;
-  //Methods
+
+  // Methods
   Circle.prototype.Set = function ( _x, _y, _radius ) {
 
     this.center.Set( _x, _y );

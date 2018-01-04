@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function CoreEntity2D ( _x, _y ) {
 
     if ( !( this instanceof CoreEntity2D ) ) return new CoreEntity2D( _x, _y );
@@ -15,9 +16,9 @@ module.exports = function ( Nenkraft ) {
 
   CoreEntity2D.prototype = Object.create( null );
   CoreEntity2D.prototype.constructor = CoreEntity2D;
-  //Static
+  // Static
   CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
-  //Members
+  // Members
   CoreEntity2D.prototype.parent = null;
   CoreEntity2D.prototype.transform = null;
   CoreEntity2D.prototype.data = null;
@@ -25,7 +26,8 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.h = 0;
   CoreEntity2D.prototype.bounds = null;
   CoreEntity2D.prototype.boundsDirty = true;
-  //Methods
+
+  // Methods
   CoreEntity2D.prototype.UpdateTransform = function () {
 
     if ( this.parent ) {
@@ -51,6 +53,7 @@ module.exports = function ( Nenkraft ) {
 
     var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
+
     if ( this.bounds === null ) {
 
       this.bounds = new Nenkraft.Geom.AABB2D(

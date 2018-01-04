@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Debug () {
 
     throw new Error( 'Cannot be instantiated' );
@@ -12,12 +13,14 @@ module.exports = function ( Nenkraft ) {
   }
 
   Debug.Draw = {};
+
   Debug.Draw.AABB2D = function ( _rc, _aabb, _options ) {
 
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
     _rc.globalAlpha = 0.1;
     _rc.strokeStyle = 'rgba(100, 0, 100, 1)';
     _rc.fillStyle = 'rgba(0, 100, 0, 1)';
+
     if ( _options && _options.strokeStyle ) {
 
       _rc.strokeStyle = _options.strokeStyle;
@@ -37,6 +40,7 @@ module.exports = function ( Nenkraft ) {
     _rc.lineTo( _aabb.br.x, _aabb.br.y );
     _rc.lineTo( _aabb.tl.x, _aabb.br.y );
     _rc.closePath();
+
     if ( _options && _options.noStroke ) {
 
     } else {

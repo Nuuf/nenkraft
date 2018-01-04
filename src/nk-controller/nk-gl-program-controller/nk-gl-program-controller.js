@@ -1,15 +1,17 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function GLProgramController ( _gl, _shader ) {
 
     if ( !( this instanceof GLProgramController ) ) return new GLProgramController( _gl, _shader );
     this.gl = _gl;
     this.data = Object.create( null );
+
     if ( _gl != null && _shader != null ) {
 
       this.Init( _shader.v, _shader.f );
@@ -20,15 +22,16 @@ module.exports = function ( Nenkraft ) {
 
   GLProgramController.prototype = Object.create( null );
   GLProgramController.prototype.constructor = GLProgramController;
-  //Static
+  // Static
   GLProgramController.LAST_USED_CONTROLLER = null;
-  //Members
+  // Members
   GLProgramController.prototype.program = null;
   GLProgramController.prototype.gl = null;
   GLProgramController.prototype.attributes = null;
   GLProgramController.prototype.uniforms = null;
   GLProgramController.prototype.data = null;
-  //Methods
+
+  // Methods
   GLProgramController.prototype.Init = function ( _vs, _fs ) {
 
     var gl = this.gl;
@@ -38,6 +41,7 @@ module.exports = function ( Nenkraft ) {
     gl.attachShader( program, vShader );
     gl.attachShader( program, fShader );
     gl.linkProgram( program );
+
     if ( !gl.getProgramParameter( program, gl.LINK_STATUS ) ) {
 
       var info = gl.getProgramInfoLog( program );
@@ -60,6 +64,7 @@ module.exports = function ( Nenkraft ) {
     var shader = gl.createShader( _type );
     gl.shaderSource( shader, _script );
     gl.compileShader( shader );
+
     if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
 
       var info = gl.getShaderInfoLog( shader );
@@ -84,7 +89,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   GLProgramController.prototype.Execute = function () {
-    //Override
+    // Override
   };
 
   Nenkraft.Controller.GLProgramController = GLProgramController;

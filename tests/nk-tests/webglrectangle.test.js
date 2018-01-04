@@ -30,6 +30,7 @@ module.exports = function () {
     path.LinkProgramController( pc );
 
     var i = 1000;
+
     while ( i-- ) {
 
       var g = new nk.Graphic2D( RF( 0, W ), RF( 0, H ), path );
@@ -54,6 +55,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -74,7 +76,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 

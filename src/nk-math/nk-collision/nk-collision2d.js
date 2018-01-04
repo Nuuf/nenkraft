@@ -1,6 +1,6 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
@@ -14,6 +14,7 @@ module.exports = function ( Nenkraft ) {
   Collision2D.PolygonvsPolygon.Relative = Object.create( null );
   Collision2D.CirclevsLine = Object.create( null );
   Collision2D.CirclevsLine.Relative = Object.create( null );
+
   Collision2D.VectorSortMinMag = function ( _a, _b ) {
 
     return _a.GetMagnitudeSquared() - _b.GetMagnitudeSquared();
@@ -22,6 +23,7 @@ module.exports = function ( Nenkraft ) {
 
   var V2DMMD = Nenkraft.Vector2D.GetMinMaxDot;
   var CPOL = Nenkraft.Math.ClosestPointOnLine;
+
   Collision2D.AABB2DvsAABB2D.Result = function () {
 
     this.mtv = new Nenkraft.Vector2D();
@@ -29,6 +31,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Collision2D.AABB2DvsAABB2D.Result.prototype.occured = false;
+
   Collision2D.AABB2DvsAABB2D.Result.prototype.Reset = function () {
 
     this.mtv.Set( 0, 0 );
@@ -42,6 +45,7 @@ module.exports = function ( Nenkraft ) {
     var aabb2 = _obj2.shape, w2 = aabb2.w, h2 = aabb2.h, anchor2 = _obj2.anchor;
     var tl1 = aabb1.tl.SubtractVC( _obj1.relative );
     var tl2 = aabb2.tl.SubtractVC( _obj2.relative );
+
     if ( anchor1 != undefined ) {
 
       tl1.x += anchor1.x * w1;
@@ -60,6 +64,7 @@ module.exports = function ( Nenkraft ) {
     var tl1xw = tl1.x + w2;
     var br2yh = tl2.y + h1;
     var br1yh = tl1.y + h2;
+
     if (
       tl1.x < tl2xw &&
       tl2.x < tl1xw &&
@@ -103,6 +108,7 @@ module.exports = function ( Nenkraft ) {
   Collision2D.CirclevsCircle.Result.prototype.mtd = 0;
   Collision2D.CirclevsCircle.Result.prototype.delta = null;
   Collision2D.CirclevsCircle.Result.prototype.occured = false;
+
   Collision2D.CirclevsCircle.Result.prototype.Reset = function () {
 
     this.poc.a = null;
@@ -123,6 +129,7 @@ module.exports = function ( Nenkraft ) {
     var anchor1 = _obj1.anchor, anchor2 = _obj2.anchor;
     var pos1 = _obj1.relative.Copy();
     var pos2 = _obj2.relative.Copy();
+
     if ( anchor1 != undefined ) {
 
       pos1.x += anchor1.x * c1.diameter;
@@ -139,6 +146,7 @@ module.exports = function ( Nenkraft ) {
 
     var delta = pos2.SubtractVC( pos1 );
     var distanceSq = delta.GetMagnitudeSquared();
+
     if ( radii * radii > distanceSq ) {
 
       if ( _result != undefined ) {
@@ -217,6 +225,7 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.PolygonvsPolygon.Result.prototype.occured = false;
   Collision2D.PolygonvsPolygon.Result.prototype.mtd = Infinity;
+
   Collision2D.PolygonvsPolygon.Result.prototype.Reset = function () {
 
     this.occured = false;
@@ -232,6 +241,7 @@ module.exports = function ( Nenkraft ) {
     var d2 = V2DMMD( _obj2.shape.vertices, _axis );
     var offset = _obj2.relative.SubtractVC( _obj1.relative ).GetDotV( _axis );
     d2.Add( offset, offset );
+
     if ( d1.x > d2.y || d2.x > d1.y ) {
 
       return true;
@@ -246,6 +256,7 @@ module.exports = function ( Nenkraft ) {
       var d2x = d2.x;
       var d2y = d2.y;
       var o1 = 0, o2 = 0;
+
       if ( d1x < d2x ) {
 
         if ( d1y < d2y ) {
@@ -256,6 +267,7 @@ module.exports = function ( Nenkraft ) {
 
           o1 = d1y - d2x;
           o2 = d2y - d1x;
+
           if ( o1 < o2 ) {
 
             mtd = o1;
@@ -268,35 +280,34 @@ module.exports = function ( Nenkraft ) {
         
         }
       
+      } else if ( d1y > d2y ) {
+
+        mtd = d1x - d2y;
+        
       } else {
 
-        if ( d1y > d2y ) {
+        o1 = d1y - d2x;
+        o2 = d2y - d1x;
 
-          mtd = d1x - d2y;
-        
+        if ( o1 < o2 ) {
+
+          mtd = o1;
+          
         } else {
 
-          o1 = d1y - d2x;
-          o2 = d2y - d1x;
-          if ( o1 < o2 ) {
-
-            mtd = o1;
+          mtd = -o2;
           
-          } else {
-
-            mtd = -o2;
-          
-          }
-        
         }
-      
+        
       }
 
       var absMtd = Math.abs( mtd );
+
       if ( absMtd < _result.mtd ) {
 
         _result.mtd = absMtd;
         _result.olAxis.SetV( _axis );
+
         if ( mtd < 0 ) {
 
           _result.olAxis.Invert();
@@ -318,6 +329,7 @@ module.exports = function ( Nenkraft ) {
     var p1Normals = p1.normals;
     var p2Normals = p2.normals;
     var i = 0, p1l = p1Normals.length, p2l = p2Normals.length;
+
     for ( i; i < p1l; ++i ) {
 
       if ( AS( _obj1, _obj2, p1Normals[ i ], _result ) === true ) {
@@ -359,6 +371,7 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.CirclevsLine.Result.prototype.occured = false;
   Collision2D.CirclevsLine.Result.prototype.sore = 0;
+
   Collision2D.CirclevsLine.Result.prototype.Reset = function () {
 
     this.mtv.Set( 0, 0 );
@@ -379,6 +392,7 @@ module.exports = function ( Nenkraft ) {
     var cp = CPOL( s, e, cpos );
     var delta = cpos.SubtractVC( cp );
     var distanceSq = delta.GetMagnitudeSquared();
+
     if ( distanceSq < cshape.radiusSquared ) {
 
       if ( _result ) {
@@ -390,6 +404,7 @@ module.exports = function ( Nenkraft ) {
         _result.mtv.SetV( mtv );
         _result.cp.SetV( cp );
         _result.occured = true;
+
         if ( cp === s ) {
 
           _result.sore = 1;
@@ -418,6 +433,7 @@ module.exports = function ( Nenkraft ) {
     var n;
     var refl;
     var cp = _result.cp;
+
     if ( _result.sore !== 0 ) {
 
       n = cp.SubtractVC( cpos );

@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Fill ( _props ) {
 
     if ( !( this instanceof Fill ) ) return new Fill( _props );
@@ -14,12 +15,13 @@ module.exports = function ( Nenkraft ) {
 
   Fill.prototype = Object.create( null );
   Fill.prototype.constructor = Fill;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Fill.prototype.color = '#444499';
   Fill.prototype.applied = true;
-  //Methods
+
+  // Methods
   Fill.prototype.Apply = function ( _rc ) {
 
     _rc.fillStyle = this.color;

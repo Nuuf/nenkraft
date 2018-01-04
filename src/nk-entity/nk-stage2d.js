@@ -1,15 +1,17 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
+
   function Stage2D ( _canvas, _x, _y, _doNotStart, _useWebGL ) {
 
     if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart, _useWebGL );
     Super.call( this, _x, _y );
+
     if ( typeof _canvas === 'string' ) {
 
       _canvas = document.getElementById( _canvas );
@@ -19,9 +21,11 @@ module.exports = function ( Nenkraft ) {
     this.canvas = _canvas;
     this.w = _canvas.width;
     this.h = _canvas.height;
+
     if ( _useWebGL === true ) {
 
       this.gl = _canvas.getContext( 'webgl' );
+
       if ( this.gl == null ) {
 
         this.gl = _canvas.getContext( 'experimental-webgl' );
@@ -62,19 +66,21 @@ module.exports = function ( Nenkraft ) {
 
   Stage2D.prototype = Object.create( Super.prototype );
   Stage2D.prototype.constructor = Stage2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Stage2D.prototype.backgroundColor = 'rgba(10,20,30,1)';
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
   Stage2D.prototype.usingWebGL = false;
-  //Methods
+
+  // Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
 
     _rc.setTransform( 1, 0, 0, 1, 0, 0 );
     _rc.globalAlpha = 1.0;
     _rc.globalCompositeOperation = 'source-over';
+
     if ( this.fill === true ) {
 
       _rc.fillStyle = this.backgroundColor;

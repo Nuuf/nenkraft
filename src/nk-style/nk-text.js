@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Text ( _props ) {
 
     if ( !( this instanceof Text ) ) return new Text( _props );
@@ -15,7 +16,7 @@ module.exports = function ( Nenkraft ) {
 
   Text.prototype = Object.create( null );
   Text.prototype.constructor = Text;
-  //Static
+  // Static
   Nenkraft.Style.TEXT_ALIGN = {
     START: 'start',
     END: 'end',
@@ -31,7 +32,7 @@ module.exports = function ( Nenkraft ) {
     IDEOGRAPHIC: 'ideographic',
     BOTTOM: 'bottom'
   };
-  //Members
+  // Members
   Text.prototype.fillColor = '#444499';
   Text.prototype.strokeColor = '#00FFFF';
   Text.prototype.fontSize = 22;
@@ -41,7 +42,8 @@ module.exports = function ( Nenkraft ) {
   Text.prototype.baseline = Nenkraft.Style.TEXT_BASELINE.TOP;
   Text.prototype.applied = true;
   Text.prototype.lineWidth = 0.5;
-  //Methods
+
+  // Methods
   Text.prototype.Apply = function ( _rc ) {
 
     _rc.fillStyle = this.fillColor;

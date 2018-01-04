@@ -29,7 +29,7 @@ module.exports = function () {
     var test = null;
 
     var imageCache = new nk.ImageLoader();
-    imageCache.onComplete.Add( function ( ) {
+    imageCache.onComplete.Add( function () {
 
       var p1 = new nk.GLTextureProgramController( stage.gl );
       var p2 = new nk.GLTextureProgramController( stage.gl );
@@ -42,23 +42,29 @@ module.exports = function () {
       test.anchor.Set( 0.5 );
       test.scale.Set( 5 );
       test.UpdateShape();
+      test.UpdateTextureTransform();
 
       spriteRef = new nk.Sprite( HW, HH - 200, p2 );
       spriteRef.anchor.Set( 0.5 );
+      spriteRef.UpdateTextureTransform();
 
       sprite = new nk.Sprite( HW, HH, p1 );
       sprite.anchor.Set( 0.5 );
       sprite.scale.Set( 5 );
       sprite.UpdateShape();
+      sprite.UpdateTextureTransform();
+
+      console.log( sprite );
 
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
-      var animation = ac.AddAnimation( 'test', 20 );
+      var animation = ac.CreateAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
         '5': 120
       } );
+      console.log( animation );
       animation.reverse = true;
       animation.onEnd.Add( function () {
-        //stage.ticker.Stop();
+        // stage.ticker.Stop();
       }, animation );
       ac.PlayAnimation( 'test', 7 );
       stage.AddChildren( sprite, spriteRef, test );
@@ -71,7 +77,7 @@ module.exports = function () {
     
     } );
     imageCache.Load( [
-      { id: '1to8', src: './assets/images/1to8.png', w: 64, h: 64 },
+      { id: '1to8', src: './assets/images/1to8.png' },
       { id: '1to8f', src: './assets/images/1to8.png' }
     ], true );
 
@@ -92,6 +98,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -112,7 +119,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 

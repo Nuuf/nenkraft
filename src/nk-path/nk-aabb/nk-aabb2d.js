@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Geom.AABB2D;
+
   function AABB2D ( _arg0, _arg1, _arg2, _arg3, _style ) {
 
     if ( !( this instanceof AABB2D ) ) return new AABB2D( _arg0, _arg1, _arg2, _arg3, _style );
@@ -16,11 +17,11 @@ module.exports = function ( Nenkraft ) {
 
   AABB2D.prototype = Object.create( Super.prototype );
   AABB2D.prototype.constructor = AABB2D;
-  //Static
+  // Static
 
-  //Members
+  // Members
 
-  //Methods
+  // Methods
   AABB2D.prototype.Draw = function ( _rc ) {
 
     var tl = this.tl, br = this.br, style = this.style, fill = style.fill, stroke = style.stroke, shadow = style.shadow;
@@ -31,6 +32,7 @@ module.exports = function ( Nenkraft ) {
     _rc.lineTo( tl.x, br.y );
     _rc.closePath();
     if ( shadow.applied === true ) shadow.Apply( _rc );
+
     if ( fill.applied === true ) {
 
       fill.Apply( _rc );
@@ -76,6 +78,7 @@ module.exports = function ( Nenkraft ) {
   AABB2D.prototype.LinkStyle = function () {
 
     var pc = this.programController;
+
     if ( pc !== null && pc.fillColor !== null && pc.outlineColor !== null && pc.outline !== null ) {
 
       pc.fillColor.SetHex( this.style.fill.color );

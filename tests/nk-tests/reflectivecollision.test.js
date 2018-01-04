@@ -57,6 +57,7 @@ module.exports = function () {
       };
       lines.push( lg );
       stage.Mount( lg );
+
       if ( _interactive === false ) {
 
         lg.interactive = false;
@@ -72,6 +73,7 @@ module.exports = function () {
     ( function () {
 
       var i = 25;
+
       while ( i-- ) {
 
         CreateLine( RI( -HW, HW ), RI( -HH, HH ), 100, RI( 0, 360 ) );
@@ -88,6 +90,7 @@ module.exports = function () {
     ( function () {
 
       var i = 25;
+
       while ( i-- ) {
 
         CreateCircle( RI( -HW, HW ), RI( -HH, HH ), RI( 5, 10 ) );
@@ -105,6 +108,7 @@ module.exports = function () {
 
           result.Reset();
           Collide( circle.data.body, line.data.body, result );
+
           if ( result.occured ) {
 
             Response( circle.data.body, line.data.body, result );
@@ -130,6 +134,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -150,7 +155,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) dragger = null;
     

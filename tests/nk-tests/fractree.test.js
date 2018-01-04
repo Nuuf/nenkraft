@@ -41,6 +41,7 @@ module.exports = function () {
       mm.Create( 'moveY', 'y', 0, 120, 'SineInOut' );
       mm.Create( 'rotate', 'rotation', 0, 120, 'SineInOut' );
       mm.StartMultiple( 'moveX moveY rotate' );
+
       if ( this.w > 12 ) {
 
         this.Grow();
@@ -51,6 +52,7 @@ module.exports = function () {
 
     Branch.prototype = Object.create( nk.Graphic2D.prototype );
     Branch.prototype.constructor = Branch;
+
     Branch.prototype.Grow = function () {
 
       var newEndL = this.path.e.SubtractVC( this.path.s );

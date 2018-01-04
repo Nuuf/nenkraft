@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Assert ( _data, _compare, _value, _noSelfAssert ) {
 
     if ( _noSelfAssert == undefined || typeof _data.Assert !== 'function' ) {
@@ -57,6 +58,7 @@ module.exports = function ( Nenkraft ) {
   function Is ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data !== _value ) {
 
       failed = true;
@@ -70,6 +72,7 @@ module.exports = function ( Nenkraft ) {
   function IsNot ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data === _value ) {
 
       failed = true;
@@ -83,6 +86,7 @@ module.exports = function ( Nenkraft ) {
   function IsSameType ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
 
       if ( !Array.isArray( _data ) && !Array.isArray( _value ) ) {
@@ -91,23 +95,19 @@ module.exports = function ( Nenkraft ) {
       
       }
     
-    } else {
+    } else if ( _data === null || _value === null ) {
 
-      if ( _data === null || _value === null ) {
-
-        if ( _data !== _value ) {
-
-          failed = true;
-        
-        }
-      
-      }
-      else if ( typeof _data !== typeof _value ) {
+      if ( _data !== _value ) {
 
         failed = true;
-      
+        
       }
-    
+      
+    }
+    else if ( typeof _data !== typeof _value ) {
+
+      failed = true;
+      
     }
 
     Check( failed, _data, _value, _compare );
@@ -117,6 +117,7 @@ module.exports = function ( Nenkraft ) {
   function IsNotSameType ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
 
       if ( Array.isArray( _data ) && ( Array.isArray( _value ) ) ) {
@@ -125,23 +126,19 @@ module.exports = function ( Nenkraft ) {
       
       }
     
-    } else {
+    } else if ( _data === null || _value === null ) {
 
-      if ( _data === null || _value === null ) {
-
-        if ( _value === _data ) {
-
-          failed = true;
-        
-        }
-      
-      }
-      else if ( typeof _data === typeof _value ) {
+      if ( _value === _data ) {
 
         failed = true;
-      
+        
       }
-    
+      
+    }
+    else if ( typeof _data === typeof _value ) {
+
+      failed = true;
+      
     }
 
     Check( failed, _data, _value, _compare );
@@ -151,6 +148,7 @@ module.exports = function ( Nenkraft ) {
   function IsInstanceOf ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( !( _data instanceof _value ) ) {
 
       failed = true;
@@ -164,6 +162,7 @@ module.exports = function ( Nenkraft ) {
   function IsNotInstanceOf ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data instanceof _value ) {
 
       failed = true;
@@ -177,6 +176,7 @@ module.exports = function ( Nenkraft ) {
   function IsLessThan ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data >= _value ) {
 
       failed = true;
@@ -190,6 +190,7 @@ module.exports = function ( Nenkraft ) {
   function IsGreaterThan ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data <= _value ) {
 
       failed = true;
@@ -203,6 +204,7 @@ module.exports = function ( Nenkraft ) {
   function IsLessThanOrEqual ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data > _value ) {
 
       failed = true;
@@ -216,6 +218,7 @@ module.exports = function ( Nenkraft ) {
   function IsGreaterThanOrEqual ( _data, _value, _compare ) {
 
     var failed = false;
+
     if ( _data < _value ) {
 
       failed = true;
@@ -233,14 +236,10 @@ module.exports = function ( Nenkraft ) {
       ErrorInfo( _data, _value, _compare );
       throw new Error( 'Assertion failed: ' + _compare );
     
-    } else {
+    } else if ( Assert.LOG && window ) {
 
-      if ( Assert.LOG && window ) {
-
-        SuccessLog( _data, _value, _compare );
+      SuccessLog( _data, _value, _compare );
       
-      }
-    
     }
   
   }
@@ -309,9 +308,11 @@ module.exports = function ( Nenkraft ) {
   Assert.IS_GREATER_THAN = 'IS GREATER THAN';
   Assert.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
   Assert.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
+
   Assert.GlobalAssign = function () {
 
     var g;
+
     if ( window ) {
 
       g = window;
@@ -324,16 +325,16 @@ module.exports = function ( Nenkraft ) {
 
     if ( g ) {
 
-      g.IS = 'IS';
-      g.IS_NOT = 'IS NOT';
-      g.IS_SAME_TYPE = 'IS SAME TYPE';
-      g.IS_NOT_SAME_TYPE = 'IS NOT SAME TYPE';
-      g.IS_INSTANCE_OF = 'IS INSTANCE OF';
-      g.IS_NOT_INSTANCE_OF = 'IS NOT INSTANCE OF';
-      g.IS_LESS_THAN = 'IS LESS THAN';
-      g.IS_GREATER_THAN = 'IS GREATER THAN';
-      g.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
-      g.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
+      g.IS = Assert.IS;
+      g.IS_NOT = Assert.IS_NOT;
+      g.IS_SAME_TYPE = Assert.IS_SAME_TYPE;
+      g.IS_NOT_SAME_TYPE = Assert.IS_NOT_SAME_TYPE;
+      g.IS_INSTANCE_OF = Assert.IS_INSTANCE_OF;
+      g.IS_NOT_INSTANCE_OF = Assert.IS_NOT_INSTANCE_OF;
+      g.IS_LESS_THAN = Assert.IS_LESS_THAN;
+      g.IS_GREATER_THAN = Assert.IS_GREATER_THAN;
+      g.IS_LESS_THAN_OR_EQUAL = Assert.IS_LESS_THAN_OR_EQUAL;
+      g.IS_GREATER_THAN_OR_EQUAL = Assert.IS_GREATER_THAN_OR_EQUAL;
     
     } else {
 

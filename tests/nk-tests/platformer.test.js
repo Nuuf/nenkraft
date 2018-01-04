@@ -45,7 +45,7 @@ module.exports = function () {
         return t;
       
       } )
-    }], true );
+    } ], true );
     imageCache.onComplete.Add( function () {
 
       Start();
@@ -95,6 +95,7 @@ module.exports = function () {
 
       character.position.AddV( character.data.force.velocity );
       character.data.force.velocity.AddV( character.data.force.gravity );
+
       if ( character.data.move.left === true ) {
 
         character.position.SubtractV( character.data.force.move );
@@ -125,6 +126,7 @@ module.exports = function () {
           platforms[ i ].data.collisionData,
           result
         );
+
         if ( result.occured === true ) {
 
           if ( result.mtv.y < 0 && character.data.force.velocity.y > 0 ) {
@@ -223,6 +225,7 @@ module.exports = function () {
     function InitPlatforms () {
 
       var i = 200;
+
       while ( i-- ) {
 
         var platform = new nk.Sprite( nk.Utils.RandomInteger( -HW, HW ), nk.Utils.RandomInteger( -HH, HH ), imageCache.GetBasicTexture( 'platform' ) );

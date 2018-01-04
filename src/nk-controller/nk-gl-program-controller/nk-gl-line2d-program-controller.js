@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
+
   function GLLine2DProgramController ( _gl ) {
 
     if ( !( this instanceof GLLine2DProgramController ) ) return new GLLine2DProgramController( _gl );
@@ -16,13 +17,14 @@ module.exports = function ( Nenkraft ) {
 
   GLLine2DProgramController.prototype = Object.create( Super.prototype );
   GLLine2DProgramController.prototype.constructor = GLLine2DProgramController;
-  //Static
+  // Static
 
-  //Members
+  // Members
   GLLine2DProgramController.prototype.essenceBuffer = null;
   GLLine2DProgramController.prototype.vertices = null;
   GLLine2DProgramController.prototype.color = null;
-  //Methods
+
+  // Methods
   GLLine2DProgramController.prototype.Initialise = function () {
 
     var gl = this.gl;
@@ -49,6 +51,7 @@ module.exports = function ( Nenkraft ) {
     vertices[ 1 ] = _s.y;
     vertices[ 2 ] = _e.x;
     vertices[ 3 ] = _e.y;
+
     if ( this !== Super.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );

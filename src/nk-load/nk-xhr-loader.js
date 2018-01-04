@@ -1,25 +1,34 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
-  function XHRLoader ( _objs ) {
 
-    if ( !( this instanceof XHRLoader ) ) return new XHRLoader( _objs );
+  function XHRLoader ( _objects, _onComplete ) {
+
+    if ( !( this instanceof XHRLoader ) ) return new XHRLoader( _objects, _onComplete );
     this.XHRcache = new Nenkraft.Utils.Cache( XMLHttpRequest );
     this.dataCache = new Nenkraft.Utils.Cache();
     this.onXHRLoaded = new Nenkraft.Event.LocalEvent();
     this.onComplete = new Nenkraft.Event.LocalEvent();
+
+    if ( _onComplete != null ) {
+
+      this.onComplete.Add( _onComplete, this );
+    
+    }
+
+    if ( _objects != null ) this.Load( _objects );
   
   }
 
   XHRLoader.prototype = Object.create( null );
   XHRLoader.prototype.constructor = XHRLoader;
-  //Static
+  // Static
 
-  //Members
+  // Members
   XHRLoader.prototype.XHRcache = null;
   XHRLoader.prototype.dataCache = null;
   XHRLoader.prototype.count = 0;
@@ -27,11 +36,13 @@ module.exports = function ( Nenkraft ) {
   XHRLoader.prototype.toLoad = null;
   XHRLoader.prototype.onXHRLoaded = null;
   XHRLoader.prototype.onComplete = null;
-  //Methods
-  XHRLoader.prototype.Load = function ( _objs ) {
+
+  // Methods
+  XHRLoader.prototype.Load = function ( _objects ) {
 
     if ( this.toLoad === null ) this.toLoad = [];
-    this.toLoad.push.apply( this.toLoad, _objs );
+    this.toLoad.push.apply( this.toLoad, _objects );
+
     if ( this.loading === false ) {
 
       this.count = 0;
@@ -45,9 +56,11 @@ module.exports = function ( Nenkraft ) {
   XHRLoader.prototype.Haul = function ( _count ) {
 
     var item = this.toLoad[ _count ];
+
     if ( item != null ) {
 
       var xhr = new XMLHttpRequest();
+
       switch ( item.type ) {
 
         case 'json':
@@ -60,6 +73,7 @@ module.exports = function ( Nenkraft ) {
       }
 
       xhr.onerror = this.OnError.bind( this );
+
       if ( xhr.data != null ) {
 
         xhr.data.id = item.id;
@@ -89,6 +103,7 @@ module.exports = function ( Nenkraft ) {
   XHRLoader.prototype.OnLoadXML = function ( _event ) {
 
     var t = _event.currentTarget;
+
     if ( t.status === 200 && t.readyState === 4 ) {
 
       t.onload = null;
@@ -108,6 +123,7 @@ module.exports = function ( Nenkraft ) {
   XHRLoader.prototype.OnLoadJSON = function ( _event ) {
 
     var t = _event.currentTarget;
+
     if ( t.status === 200 && t.readyState === 4 ) {
 
       t.onload = null;
@@ -138,7 +154,7 @@ module.exports = function ( Nenkraft ) {
 
   XHRLoader.prototype.GetData = function ( _id ) {
 
-    return this.dataCache.GetById( _id );
+    return this.dataCache.GetById( _id ).data;
   
   };
 

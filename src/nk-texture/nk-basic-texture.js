@@ -1,14 +1,16 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function BasicTexture ( _image, _id, _w, _h, _fullWidth, _fullHeight ) {
 
     if ( !( this instanceof BasicTexture ) ) return new BasicTexture( _image, _w, _h, _fullWidth, _fullHeight );
     this.image = _image;
+
     if ( _id != null ) {
 
       this.id = _id;
@@ -63,16 +65,16 @@ module.exports = function ( Nenkraft ) {
 
   BasicTexture.prototype = Object.create( null );
   BasicTexture.prototype.constructor = BasicTexture;
-  //Static
+  // Static
 
-  //Members
+  // Members
   BasicTexture.prototype.image = null;
   BasicTexture.prototype.id = null;
   BasicTexture.prototype.w = 0;
   BasicTexture.prototype.h = 0;
   BasicTexture.prototype.fw = 0;
   BasicTexture.prototype.fh = 0;
-  //Methods
+  // Methods
   Nenkraft.Texture.BasicTexture = BasicTexture;
   Nenkraft.BasicTexture = BasicTexture;
 

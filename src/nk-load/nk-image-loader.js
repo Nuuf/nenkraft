@@ -1,32 +1,34 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
-  function ImageLoader ( _objs, _createTextures, _onComplete ) {
 
-    if ( !( this instanceof ImageLoader ) ) return new ImageLoader( _objs, _createTextures );
+  function ImageLoader ( _objects, _createTextures, _onComplete ) {
+
+    if ( !( this instanceof ImageLoader ) ) return new ImageLoader( _objects, _createTextures, _onComplete );
     this.imageCache = new Nenkraft.Utils.Cache( Image );
     this.basicTextureCache = new Nenkraft.Utils.Cache( Nenkraft.Texture.BasicTexture );
     this.onImageLoaded = new Nenkraft.Event.LocalEvent();
     this.onComplete = new Nenkraft.Event.LocalEvent();
+
     if ( _onComplete != null ) {
 
       this.onComplete.Add( _onComplete, this );
     
     }
 
-    if ( _objs !== undefined ) this.Load( _objs, _createTextures );
+    if ( _objects != null ) this.Load( _objects, _createTextures );
   
   }
 
   ImageLoader.prototype = Object.create( null );
   ImageLoader.prototype.constructor = ImageLoader;
-  //Static
+  // Static
 
-  //Members
+  // Members
   ImageLoader.prototype.imageCache = null;
   ImageLoader.prototype.basicTextureCache = null;
   ImageLoader.prototype.onImageLoaded = null;
@@ -35,11 +37,14 @@ module.exports = function ( Nenkraft ) {
   ImageLoader.prototype.loading = false;
   ImageLoader.prototype.toLoad = null;
   ImageLoader.prototype.createTextures = false;
-  //Methods
-  ImageLoader.prototype.Load = function ( _objs, _createTextures ) {
+
+  // Methods
+  ImageLoader.prototype.Load = function ( _objects, _createTextures ) {
 
     if ( this.toLoad === null ) this.toLoad = [];
-    this.toLoad.push.apply( this.toLoad, _objs );
+    
+    this.toLoad.push.apply( this.toLoad, _objects );
+
     if ( _createTextures != null ) {
 
       this.createTextures = _createTextures;
@@ -59,6 +64,7 @@ module.exports = function ( Nenkraft ) {
   ImageLoader.prototype.Haul = function ( _count ) {
 
     var item = this.toLoad[ _count ];
+
     if ( item != null ) {
 
       var image = new Image();
@@ -89,6 +95,7 @@ module.exports = function ( Nenkraft ) {
     delete t.onload;
     delete t.onerror;
     this.imageCache.StoreSafe( t );
+
     if ( this.createTextures === true ) {
 
       this.basicTextureCache.StoreSafe( new Nenkraft.Texture.BasicTexture( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh ) );

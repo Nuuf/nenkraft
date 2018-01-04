@@ -25,6 +25,7 @@ module.exports = function () {
     var RI = nk.Utils.RandomInteger;
     var RF = nk.Utils.RandomFloat;
     var COLLIDE = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
+    var SPREAD = nk.Math.Spread;
 
     var stage = new nk.Stage2D( c, 0, 0, true, true );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
@@ -36,10 +37,13 @@ module.exports = function () {
 
     var playerBulletPool = new nk.Pool();
     var enemyPool = new nk.Pool();
+    var particlePool = new nk.Pool();
+    var explosionPool = new nk.Pool();
 
     var worldScale = new nk.Vector2D( 2.0, 2.0 );
     var ship = null;
-    // var enemyBullets = [];
+    var particles = [];
+    var explosions = [];
     var playerBullets = [];
     var enemies = [];
     var shields = [];
@@ -47,33 +51,50 @@ module.exports = function () {
     var shieldHealth = 3;
     var numShields = 22;
 
+    var spritesheet = null;
+
     var shieldVerticalPosition = 500;
 
     var enemySpawnRate = 2;
-    var enemySpeed = 3.0;
-    var enemyHealth = 20;
+    var enemySpeed = 1.5;
+    var enemyHealth = 5;
 
     var root = new nk.QuadtreeNode( worldBounds, 0, 5, 5 );
 
-    var imageLoader = new nk.ImageLoader( [ {
-      id: 'sheet',
-      src: './../assets/images/invaders/invaders.png',
-      w: 16, h: 16, fw: 128, fh: 16
-    }], true, function () {
+    var spritesheetLoader = new nk.SpritesheetLoader(
+      [
+        {
+          id: 'sheet',
+          image: {
+            src: './../assets/images/invaders/invaders.png'
+          },
+          data: {
+            src: './../assets/xhr/invaders.json',
+            type: 'json'
+          }
+        }
+      ],
+      function() {
 
-      go();
-    
-    } );
+        spritesheet = spritesheetLoader.GetSpritesheet( 'sheet' );
+        spritesheet.GenerateFrames();
+
+        go();
+      
+      }
+    );
 
     function go () {
 
-      stage.ticker.Start();
-      pc.BindBasicTexture( imageLoader.GetBasicTexture( 'sheet' ) );
+      stage.ticker.StartAF();
+      pc.BindBasicTexture( spritesheet.basicTexture );
       playerBulletPool.Flood( function () {
 
         var b = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Bullet' ).Apply( b );
         b.scale.SetV( worldScale );
-        b.UpdateShape();
+        b.UpdateShape( new nk.AABB2D( 0, 0, 8, 8 ) );
+        b.rotation = RF( 0, Math.PI * 2 );
         b.anchor.Set( 0.5 );
         b.data.velocity = new nk.Vector2D();
         b.data.body = {
@@ -81,15 +102,16 @@ module.exports = function () {
           shape: b.shape,
           anchor: b.anchor
         };
-        b.clip.Set( 16 * 7, 0, 16, 16 );
+        b.UpdateTextureTransform();
         return b;
       
-      }, 1000 );
+      }, 5000 );
       enemyPool.Flood( function () {
 
         var e = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Enemy' + RI( 1, 2 ) ).Apply( e );
         e.scale.SetV( worldScale );
-        e.UpdateShape();
+        e.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
         e.anchor.Set( 0.5 );
         e.data.velocity = new nk.Vector2D();
         e.data.body = {
@@ -97,10 +119,57 @@ module.exports = function () {
           shape: e.shape,
           anchor: e.anchor
         };
-        e.clip.Set( 16 * RI( 1, 2 ), 0, 16, 16 );
+        e.UpdateTextureTransform();
         return e;
       
       }, 1000 );
+      particlePool.Flood( function() {
+
+        var p = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Particle' ).Apply( p );
+        p.scale.SetV( worldScale );
+        p.UpdateShape( new nk.AABB2D( 0, 0, 4, 4 ) );
+        p.anchor.Set( 0.5 );
+        p.data.velocity = new nk.Vector2D();
+        p.data.acceleration = new nk.Vector2D();
+        p.UpdateTextureTransform();
+        return p;
+      
+      }, 5000 );
+      explosionPool.Flood( function() {
+
+        var e = new nk.Sprite( 0, 0, pc );
+        var a = e.CreateAnimation( {
+          spritesheet: spritesheet,
+          id: 'explode',
+          frames: [
+            'Explo-f1',
+            'Explo-f2',
+            'Explo-f3',
+            'Explo-f4'
+          ],
+          rate: 6
+        } );
+        a.onEnd.Add( onExplosionDone, e );
+        a.overrideFrameRate = true;
+        e.scale.SetV( worldScale );
+        e.rotation = RF( 0, Math.PI * 2 );
+        e.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
+        e.anchor.Set( 0.5 );
+        e.UpdateTextureTransform();
+        return e;
+      
+      }, 200 );
+
+      function onExplosionDone() {
+
+        this.animationController.currentAnimation.Reset();
+        this.Detach();
+        explosions.splice( explosions.indexOf( this ), 1 );
+        explosionPool.Store( this );
+      
+      }
+
       createShip();
       createShields();
       setupListeners();
@@ -112,8 +181,10 @@ module.exports = function () {
 
       if ( ship ) return;
       ship = new nk.Sprite( 0, 0, pc );
+      spritesheet.GetFrameById( 'Ship' ).Apply( ship );
+      console.log( ship );
       ship.scale.SetV( worldScale );
-      ship.UpdateShape();
+      ship.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
       ship.anchor.Set( 0.5 );
       ship.x = HW;
       ship.y = H - ship.height * 0.5;
@@ -122,33 +193,36 @@ module.exports = function () {
       ship.data.fire = false;
       ship.data.fireRate = 2;
       ship.data.fireTimer = 0;
-      ship.data.bulletsPerBlast = 50;
-      stage.Mount( ship );
+      ship.data.bulletsPerBlast = 15;
+      stage.AddChild( ship );
+
+      ship.UpdateTextureTransform();
     
     }
 
     function createPlayerBullet () {
 
       var i = ship.data.bulletsPerBlast;
+
+      createExplosion( ship.x + RF( -100, 100 ), ship.y + RF( -100, -10 ) );
+
       while ( i-- ) {
 
         var b = playerBulletPool.Retrieve();
-        b.x = ship.x;
-        b.y = ship.y;
+        b.x = SPREAD( ship.x, ship.data.bulletsPerBlast, 3, i );
+        b.y = ship.y - ship.height * 0.5;
         b.data.velocity.x = 0;
-        b.data.velocity.y = RF( -20, -1 );
-        b.data.velocity.Rotate( nk.Math.DTR(
-          nk.Math.Spread( 0, ship.data.bulletsPerBlast, RF( 1, 2 ), i )
-        ) );
+        b.data.velocity.y = RF( -25, -5 );
+
         if ( b.data.velocity.y > 0 ) {
 
           b.data.velocity.y = -b.data.velocity.y;
         
         }
 
-        b.data.lifeSpan = 200;
+        b.data.lifeSpan = 150;
         playerBullets.push( b );
-        stage.Mount( b );
+        stage.AddChild( b );
       
       }
     
@@ -163,7 +237,7 @@ module.exports = function () {
       e.data.velocity.y = enemySpeed;
       e.data.health = enemyHealth;
       enemies.push( e );
-      stage.Mount( e );
+      stage.AddChild( e );
     
     }
 
@@ -172,9 +246,10 @@ module.exports = function () {
       for ( var i = 0; i < numShields; ++i ) {
 
         var s = new nk.Sprite( 0, 0, pc );
+        spritesheet.GetFrameById( 'Shield-f1' ).Apply( s );
         s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
-        s.UpdateShape();
+        s.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
         s.anchor.Set( 0.5 );
         s.data.health = shieldHealth;
         s.data.body = {
@@ -184,11 +259,39 @@ module.exports = function () {
         };
         s.x = nk.Math.Spread( HW, numShields, s.width * 1.2, i );
         s.y = shieldVerticalPosition;
-        s.clip.Set( 16 * 3, 0, 16, 16 );
+
         shields.push( s );
-        stage.Mount( s );
+        stage.AddChild( s );
+
+        s.UpdateTextureTransform();
       
       }
+    
+    }
+
+    function createParticles( _x, _y, _amount ) {
+
+      for ( var i = 0; i < _amount; ++i ) {
+
+        var p = particlePool.Retrieve();
+        p.position.Set( _x, _y );
+        p.data.velocity.Set( RF( -10, 10 ), RF( -10, 10 ) );
+        p.data.acceleration.Set( RF( 0.9, 0.95 ), RF( 1, 1 ) );
+        p.data.lifeSpan = RI( 30, 100 );
+        particles.push( p );
+        stage.AddChild( p );
+      
+      }
+    
+    }
+
+    function createExplosion( _x, _y ) {
+
+      var e = explosionPool.Retrieve();
+      e.position.Set( _x, _y );
+      e.animationController.PlayAnimation( 'explode' );
+      explosions.push( e );
+      stage.AddChild( e );
     
     }
 
@@ -200,7 +303,8 @@ module.exports = function () {
       function onKeyDown ( event ) {
 
         var kc = event.data.keyCode;
-        //console.log( kc );
+
+        // console.log( kc );
         switch ( kc ) {
 
           case 37:
@@ -221,6 +325,7 @@ module.exports = function () {
       function onKeyUp ( event ) {
 
         var kc = event.data.keyCode;
+
         switch ( kc ) {
 
           case 37:
@@ -247,6 +352,7 @@ module.exports = function () {
       function onProcess () {
 
         handleShip();
+
         if ( RI( 1, enemySpawnRate ) === enemySpawnRate ) {
 
           createEnemy();
@@ -256,6 +362,7 @@ module.exports = function () {
         handleEnemies();
         root.Dump();
         var i;
+
         for ( i = 0; i < enemies.length; ++i ) {
 
           root.Add( enemies[ i ].bounds );
@@ -263,6 +370,11 @@ module.exports = function () {
         }
 
         handlePlayerBullets();
+
+        handleParticles();
+
+        handleExplosions();
+
         if ( this.ticker.GetTPS() < 40 ) {
 
           console.log( this.ticker.GetTPS() );
@@ -274,6 +386,7 @@ module.exports = function () {
       function handleShip () {
 
         var shipWHalf = ship.width * 0.5;
+
         if ( ship.data.moveLeft && ship.x > 0 + shipWHalf ) {
 
           ship.data.velocity.x = -ship.data.moveSpeed;
@@ -289,6 +402,7 @@ module.exports = function () {
         }
 
         ship.position.AddV( ship.data.velocity );
+
         if ( ship.x < 0 + shipWHalf ) {
 
           ship.x = 0 + shipWHalf;
@@ -314,14 +428,48 @@ module.exports = function () {
       
       }
 
+      function handleParticles() {
+
+        for ( var i = 0, particle; i < particles.length; ++i ) {
+
+          particle = particles[i];
+          particle.position.AddV( particle.data.velocity );
+          particle.data.velocity.MultiplyV( particle.data.acceleration );
+          particle.data.velocity.y += 0.1;
+
+          if ( --particle.data.lifeSpan <= 0 ) {
+
+            particle.Detach();
+            particles.splice( i, 1 );
+            particlePool.Store( particle );
+          
+          }
+        
+        }
+      
+      }
+
+      function handleExplosions() {
+
+        for ( var i = 0, explosion; i < explosions.length; ++i ) {
+
+          explosion = explosions[i];
+          explosion.animationController.Process();
+        
+        }
+      
+      }
+
       function handlePlayerBullets () {
 
         for ( var i = 0, bullet; i < playerBullets.length; ++i ) {
 
           bullet = playerBullets[ i ];
+
           if ( bullet ) {
 
             bullet.position.AddV( bullet.data.velocity );
+
             if ( bullet.x > W - bullet.width * 0.5 || bullet.x < 0 + bullet.width * 0.5 ) {
 
               bullet.data.velocity.x = -bullet.data.velocity.x;
@@ -329,6 +477,7 @@ module.exports = function () {
             }
 
             bullet.ComputeBounds();
+
             if ( --bullet.data.lifeSpan <= 0 ) {
 
               bullet.Detach();
@@ -337,12 +486,7 @@ module.exports = function () {
             
             } else {
 
-              // We can cheat, because we have so many objects.
-              if ( RI( 1, 3 ) === 2 ) {
-
-                handlePlayerBullet_EnemyCollision( bullet, i );
-              
-              }
+              handlePlayerBullet_EnemyCollision( bullet, i );
             
             }
           
@@ -357,11 +501,15 @@ module.exports = function () {
         for ( var i = 0, enemy; i < enemies.length; ++i ) {
 
           enemy = enemies[ i ];
+
           if ( enemy ) {
 
             enemy.position.AddV( enemy.data.velocity );
             enemy.ComputeBounds();
+
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
+
+              createParticles( enemy.x, enemy.y, 15 );
 
               enemy.Detach();
               enemies.splice( i, 1 );
@@ -384,9 +532,11 @@ module.exports = function () {
         if ( bullet && bullet.x > 0 && bullet.x < W && bullet.y > 0 && bullet.y < H ) {
 
           var convergence = root.Converge( bullet.bounds );
+
           for ( var i = 0, enemy; i < convergence.length; ++i ) {
 
             enemy = convergence[ i ].belongsTo;
+
             if ( enemy ) {
 
               if ( COLLIDE( bullet.data.body, enemy.data.body ) ) {
@@ -394,6 +544,7 @@ module.exports = function () {
                 enemy.data.health--;
                 bullet.Detach();
                 playerBullets.splice( index, 1 );
+                playerBulletPool.Store( bullet );
                 break;
               
               }
@@ -409,16 +560,21 @@ module.exports = function () {
       function handleEnemy_ShieldCollision ( enemy, index ) {
 
         if ( !enemy || enemy.y < shieldVerticalPosition - enemy.height ) return;
+
         for ( var i = 0, shield; i < shields.length; ++i ) {
 
           shield = shields[ i ];
+
           if ( shield ) {
 
             if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
 
+              createParticles( enemy.x, enemy.y, 15 );
+
               enemy.Detach();
               enemies.splice( index, 1 );
               enemyPool.Store( enemy );
+
               if ( --shield.data.health <= 0 ) {
 
                 shield.Detach();
@@ -428,6 +584,7 @@ module.exports = function () {
               } else {
 
                 shield.clip.tl.x += 16;
+                shield.UpdateTextureTransform();
               
               }
 

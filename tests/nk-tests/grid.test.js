@@ -35,6 +35,7 @@ module.exports = function () {
     console.log( points );
 
     i = points.length;
+
     while ( i-- ) {
 
       container.AddChild( new nk.Graphic2D( points[ i ].x, points[ i ].y, new nk.Path.AABB2D( 0, 0, mx, my ) ) );
@@ -44,6 +45,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position.DivideVC( container.scale );
+
       for ( var i = container.children.length; i--; ) {
 
         if ( container.children[ i ].IntersectsPoint( p ) ) {

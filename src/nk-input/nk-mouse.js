@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Mouse ( _element, _offsetX, _offsetY ) {
 
     if ( !( this instanceof Mouse ) ) return new Mouse( _element, _offsetX, _offsetY );
@@ -29,11 +30,11 @@ module.exports = function ( Nenkraft ) {
 
   Mouse.prototype = Object.create( null );
   Mouse.prototype.constructor = Mouse;
-  //Static
+  // Static
 
-  //Members
+  // Members
 
-  //Methods
+  // Methods
   Mouse.prototype.OnMove = function ( _event ) {
 
     _event.preventDefault();

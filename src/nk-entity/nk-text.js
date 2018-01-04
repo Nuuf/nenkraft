@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
+
   function Text ( _x, _y, _text ) {
 
     if ( !( this instanceof Text ) ) return new Text( _x, _y );
@@ -17,17 +18,19 @@ module.exports = function ( Nenkraft ) {
 
   Text.prototype = Object.create( Super.prototype );
   Text.prototype.constructor = Text;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Text.prototype.text = '';
   Text.prototype.maxWidth = undefined;
   Text.prototype.alpha = 1.0;
   Text.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
-  //Methods
+
+  // Methods
   Text.prototype.Draw = function ( _rc ) {
 
     this.PreDraw( _rc );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -38,9 +41,11 @@ module.exports = function ( Nenkraft ) {
       }
 
       this.transform.ApplyWorld( _rc );
+
       if ( this.display === true ) {
 
         var style = this.style;
+
         if ( style.shadow.applied === true ) {
 
           style.shadow.Apply( _rc );

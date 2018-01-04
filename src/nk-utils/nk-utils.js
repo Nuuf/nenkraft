@@ -1,6 +1,6 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
@@ -9,6 +9,7 @@ module.exports = function ( Nenkraft ) {
   var CANVAS = null;
   var CANVASRC = null;
   var DPARSER = null;
+
   var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
 
     return ( Random() * ( _max - _min + 1 ) + _min ) | 0;
@@ -70,9 +71,11 @@ module.exports = function ( Nenkraft ) {
     _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
     _separator = _separator === undefined ? '-' : _separator;
     var id = '';
+
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
 
       ilpdd = i / lpd;
+
       if ( ilpdd !== 0 && II( ilpdd ) ) id += _separator;
       else {
 
@@ -97,14 +100,16 @@ module.exports = function ( Nenkraft ) {
     '0123456789abcdefghijklmnopqrstuwvxyz',
     '0123456789ABCDEFGHJIKLMNOPQRSTUWVXYZ'
   ];
-  Nenkraft.Utils.ApplyProperties = function ( _obj, _props ) {
+
+  Nenkraft.Utils.ApplyProperties = function ( _object, _props ) {
 
     if ( _props !== undefined ) {
 
       var key;
+
       for ( key in _props ) {
 
-        if ( _obj[ key ] !== undefined ) _obj[ key ] = _props[ key ];
+        if ( _object[ key ] !== undefined ) _object[ key ] = _props[ key ];
       
       }
     
@@ -112,7 +117,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.Nested = function ( _obj, _string, _getObjectHolding, _set, _value, _splitter ) {
+  Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
 
     if ( typeof _string === 'string' ) {
 
@@ -122,40 +127,43 @@ module.exports = function ( Nenkraft ) {
     }
 
     var key;
+
     if ( _string.length > 1 ) {
 
       key = _string.shift();
-      if ( _obj[ key ] !== undefined ) {
 
-        return Nenkraft.Utils.Nested( _obj[ key ], _string, _getObjectHolding, _set, _value, _splitter );
+      if ( _object[ key ] !== undefined ) {
+
+        return Nenkraft.Utils.Nested( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
       
       }
     
     } else {
 
       key = _string.shift();
-      if ( _obj[ key ] !== undefined ) {
+
+      if ( _object[ key ] !== undefined ) {
 
         if ( _set === true ) {
 
-          _obj[ key ] = _value;
+          _object[ key ] = _value;
           return;
         
         }
 
         if ( _getObjectHolding === true ) {
 
-          return _obj;
+          return _object;
         
         }
 
-        return _obj[ key ];
+        return _object[ key ];
       
       }
 
       if ( _set === true ) {
 
-        _obj[ key ] = _value;
+        _object[ key ] = _value;
         return;
       
       }
@@ -167,6 +175,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.ArrayGetRandom = function ( _array, _amount ) {
 
     var array = [], control = {}, _al = _array.length;
+
     for ( var i = 0, l = _amount; i < l; ++i ) {
 
       var ix = ( Random() * _al ) | 0;
@@ -187,6 +196,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.ArrayShuffle = function ( _array ) {
 
     var i = _array.length - 1, temp, rand;
+
     for ( ; i >= 0; --i ) {
 
       rand = ( Random() * i ) | 0;
@@ -200,10 +210,12 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Utils.Cipher = {};
   Nenkraft.Utils.Decipher = {};
+
   Nenkraft.Utils.Cipher.CCH1 = function ( _str, _cci ) {
 
     var output = [];
     _cci = _cci === undefined ? 1 : _cci;
+
     for ( var i = 0, chrs = _str.split( '' ), l = chrs.length, chr, otn; i < l; ++i ) {
 
       chr = chrs[ i ];
@@ -221,6 +233,7 @@ module.exports = function ( Nenkraft ) {
 
     var output = [];
     _cci = _cci === undefined ? 1 : _cci;
+
     for ( var i = 0, strs = _str.split( ' ' ), l = strs.length, str; i < l; ++i ) {
 
       str = strs[ i ];
@@ -236,6 +249,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.GenerateSimpleBase64Png = function ( _imageFunction ) {
 
     var drawable = _imageFunction();
+
     if ( CANVAS == null ) {
 
       CANVAS = document.createElement( 'canvas' );
@@ -274,11 +288,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.ObjectIsEmpty = function ( _obj ) {
+  Nenkraft.Utils.IsObjectEmpty = function ( _object ) {
 
-    for ( var key in _obj ) {
+    for ( var key in _object ) {
 
-      if ( _obj.hasOwnProperty( key ) ) {
+      if ( _object.hasOwnProperty( key ) ) {
 
         return false;
       
@@ -286,7 +300,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return JSON.stringify( _obj ) === JSON.stringify( {} );
+    return JSON.stringify( _object ) === JSON.stringify( {} );
   
   };
 
@@ -294,13 +308,16 @@ module.exports = function ( Nenkraft ) {
 
     var o = {};
     var i, l, attrs, attr, child, pchild, children = _pxml.childNodes, temp;
+
     if ( _pxml.nodeType === 1 ) {
 
       attrs = _pxml.attributes;
       l = attrs.length;
+
       if ( l > 0 ) {
 
         o.attributes = {};
+
         for ( i = 0, attr = attrs.item( i ); i < l; attr = attrs.item( ++i ) ) {
 
           o.attributes[ attr.nodeName ] = attr.nodeValue;
@@ -314,6 +331,7 @@ module.exports = function ( Nenkraft ) {
       if ( ! /^\s*$/g.exec( _pxml.nodeValue ) ) {
 
         o = _pxml.nodeValue;
+
         if ( _deleteWhitespace === true ) {
 
           o = o.replace( /^\s+|\s+&|\n/gmi, '' );
@@ -327,6 +345,7 @@ module.exports = function ( Nenkraft ) {
     if ( children != null ) {
 
       l = children.length;
+
       for ( i = 0, child = children.item( i ); i < l; child = children.item( ++i ) ) {
 
         if ( o[ child.nodeName ] === undefined ) {
@@ -339,7 +358,8 @@ module.exports = function ( Nenkraft ) {
 
             temp = o[ child.nodeName ];
             o[ child.nodeName ] = [];
-            if ( !Nenkraft.Utils.ObjectIsEmpty( temp ) ) {
+
+            if ( !Nenkraft.Utils.IsObjectEmpty( temp ) ) {
 
               o[ child.nodeName ].push( temp );
             
@@ -348,7 +368,8 @@ module.exports = function ( Nenkraft ) {
           }
 
           pchild = Nenkraft.Utils.ParsedXMLToJSON( child, _deleteWhitespace );
-          if ( !Nenkraft.Utils.ObjectIsEmpty( pchild ) ) {
+
+          if ( !Nenkraft.Utils.IsObjectEmpty( pchild ) ) {
 
             o[ child.nodeName ].push( pchild );
           
@@ -379,6 +400,58 @@ module.exports = function ( Nenkraft ) {
     }
 
     return Nenkraft.Utils.ParsedXMLToJSON( DPARSER.parseFromString( _xml, 'text/xml' ), _deleteWhitespace );
+  
+  };
+
+  var DC = Nenkraft.Utils.DeepClone = function( _object ) {
+
+    var r = null;
+    var ia = false;
+
+    if ( typeof _object === 'function' ) {
+
+      throw new TypeError( 'Object was of type: function. Not acceptable.' );
+
+    }
+
+    if ( Array.isArray( _object ) ) {
+
+      r = [];
+      ia = true;
+
+    } else if ( typeof obj === 'object' ) {
+
+      r = {};
+
+    } else {
+
+      return _object;
+
+    }
+
+    if ( ia ) {
+
+      for ( var i = 0; i < _object.length; ++i ) {
+
+        r[i] = DC( _object[i] );
+
+      }
+
+    } else {
+
+      for ( var key in _object ) {
+
+        if ( _object.hasOwnProperty( key ) ) {
+
+          r[key] = DC( _object[key] );
+
+        }
+
+      }
+
+    }
+
+    return r;
   
   };
 

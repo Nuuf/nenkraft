@@ -1,6 +1,6 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
@@ -9,6 +9,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
   Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
   Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
+
   Nenkraft.Math.DegreesToRadians = function ( _angle ) {
 
     return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
@@ -16,6 +17,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.Math.DTR = Nenkraft.Math.DegreesToRadians;
+
   Nenkraft.Math.RadiansToDegrees = function ( _angle ) {
 
     return _angle * Nenkraft.Math.RADIANS_TO_DEGREES;
@@ -23,6 +25,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.Math.RTD = Nenkraft.Math.RadiansToDegrees;
+
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
     var divisor = Math.pow( 10, _precision );
@@ -31,6 +34,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.Math.PR = Nenkraft.Math.PrecisionRound;
+
   Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
 
     return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
@@ -40,6 +44,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.AttractRepel = function ( _repeller, _attractor, _velocity, _radius, _strength ) {
 
     var delta = _attractor.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
+
     if ( distance < _radius * _radius ) {
 
       var theta = delta.GetAngle();
@@ -61,6 +66,7 @@ module.exports = function ( Nenkraft ) {
     var aby = _sA.y - _sB.y;
     var s = ( -d1.y * abx + d1.x * aby ) / l;
     var t = ( d2.x * aby - d2.y * abx ) / l;
+
     if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
 
       d1.Set( _sA.x + ( t * d1.x ), _sA.y + ( t * d1.y ) );
@@ -76,6 +82,7 @@ module.exports = function ( Nenkraft ) {
 
     var delta = _e.SubtractVC( _s );
     var u = ( ( _v.x - _s.x ) * delta.x + ( _v.y - _s.y ) * delta.y ) / delta.GetMagnitudeSquared();
+
     if ( u < 0 ) {
 
       return _s;
@@ -104,6 +111,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
 
     var grid = [];
+
     for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
 
       grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );

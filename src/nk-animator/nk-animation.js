@@ -1,49 +1,68 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Animation ( _controller, _id, _rate ) {
 
     if ( !( this instanceof Animation ) ) return new Animation( _controller, _id, _rate );
     this.frames = [];
     this.controller = _controller;
+    this.sprite = _controller.sprite;
     this.id = _id;
     this.onEnd = new Nenkraft.Event.LocalEvent();
     this.onStop = new Nenkraft.Event.LocalEvent();
     this.onStart = new Nenkraft.Event.LocalEvent();
-    if ( _rate != undefined ) this.rate = _rate;
+    if ( _rate != null ) this.rate = _rate;
   
   }
 
   Animation.prototype = Object.create( null );
   Animation.prototype.constructor = Animation;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Animation.prototype.currentFrame = 0;
   Animation.prototype.currentFrameIndex = 0;
   Animation.prototype.playing = false;
   Animation.prototype.id = null;
   Animation.prototype.rate = 60;
+  Animation.prototype.timer = 0;
   Animation.prototype.reverse = false;
-  //Methods
-  Animation.prototype.AddFrame = function ( _x, _y, _w, _h, _rate ) {
+  Animation.prototype.sprite = null;
+  Animation.prototype.overrideFrameRate = false;
 
-    _rate = _rate == undefined ? this.rate : _rate;
-    this.frames.push( new Nenkraft.Animator.Frame( _x, _y, _w, _h, _rate, this.controller.sprite ) );
+  // Methods
+  Animation.prototype.CreateFrame = function ( _x, _y, _w, _h, _rate ) {
+
+    _rate = _rate == null ? this.rate : _rate;
+    this.frames.push( new Nenkraft.Animator.Frame( _x, _y, _w, _h, _rate ) );
+  
+  };
+
+  Animation.prototype.AddFrame = function( _frame ) {
+    
+    if ( _frame.rate == null || _frame.rate <= 0 ) {
+
+      _frame.rate = this.rate;
+    
+    }
+
+    this.frames.push( _frame );
   
   };
 
   Animation.prototype.GenerateFrames = function ( _frameWidth, _frameHeight, _imageWidth, _imageHeight, _amount, _data ) {
 
-    _data = _data == undefined ? {} : _data;
+    _data = _data == null ? {} : _data;
+
     for ( var i = 0, rate, columns = _imageWidth / _imageHeight; i < _amount; ++i ) {
 
       rate = _data[ i ];
-      this.AddFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
+      this.CreateFrame( ( i % columns ) * _frameWidth, ( ( i / columns ) | 0 ) * _frameHeight, _frameWidth, _frameHeight, rate );
     
     }
   
@@ -51,13 +70,36 @@ module.exports = function ( Nenkraft ) {
 
   Animation.prototype.SetFrame = function ( _index ) {
 
-    _index = _index === undefined ? 0 : _index;
+    _index = _index == null ? 0 : _index;
     var frame = this.frames[ _index ];
+
     if ( frame !== undefined ) {
 
       this.currentFrame = frame;
       this.currentFrameIndex = _index;
-      this.currentFrame.Apply();
+      this.currentFrame.Apply( this.sprite );
+    
+    }
+  
+  };
+
+  Animation.prototype.SetFrameById = function( _id ) {
+
+    var index = this.GetFrameById( _id, true );
+    this.SetFrame( index );
+  
+  };
+
+  Animation.prototype.GetFrameById = function( _id, _returnIndex ) {
+
+    for ( var i = 0, frames = this.frames; i < frames.length; ++i ) {
+
+      if ( frames[i].id === _id ) {
+
+        if ( _returnIndex === true ) return i;
+        return frames[i];
+      
+      }
     
     }
   
@@ -81,28 +123,18 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.playing === true ) {
 
-      var currentFrame = this.currentFrame, frames = this.frames, done = false;
-      if ( currentFrame.Process() === true ) {
+      if ( this.overrideFrameRate === true ) {
 
-        var currentFrameIndex;
-        if ( this.reverse === false ) currentFrameIndex = ++this.currentFrameIndex;
-        else currentFrameIndex = --this.currentFrameIndex;
-        if ( currentFrameIndex >= frames.length ) {
+        if ( --this.timer <= 0 ) {
 
-          currentFrameIndex = this.currentFrameIndex = 0;
-          done = true;
+          this.timer = this.rate;
+          this.NextFrame();
         
         }
-        else if ( currentFrameIndex < 0 ) {
+      
+      } else if ( this.currentFrame.Process() === true ) {
 
-          currentFrameIndex = this.currentFrameIndex = this.frames.length - 1;
-          done = true;
-        
-        }
-
-        this.currentFrame = frames[ currentFrameIndex ];
-        this.currentFrame.Apply();
-        if ( done === true ) this.onEnd.Dispatch();
+        this.NextFrame();
       
       }
     
@@ -110,12 +142,37 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Animation.prototype.NextFrame = function() {
+
+    var frames = this.frames, fsl = frames.length, done = false;
+    if ( this.reverse === false ) ++this.currentFrameIndex;
+    else --this.currentFrameIndex;
+
+    if ( this.currentFrameIndex >= fsl ) {
+
+      this.currentFrameIndex = 0;
+      done = true;
+        
+    } else if ( this.currentFrameIndex < 0 ) {
+
+      this.currentFrameIndex = fsl - 1;
+      done = true;
+    
+    }
+
+    this.currentFrame = frames[ this.currentFrameIndex ];
+    this.currentFrame.Apply( this.sprite );
+    if ( done === true ) this.onEnd.Dispatch();
+  
+  };
+
   Animation.prototype.Clear = function () {
 
     this.frames = [];
-    delete this.currentFrame;
-    delete this.playing;
-    delete this.currentFrameIndex;
+    this.currentFrame = null;
+    this.playing = false;
+    this.currentFrameIndex = 0;
+    this.timer = this.rate;
   
   };
 
@@ -124,6 +181,16 @@ module.exports = function ( Nenkraft ) {
     this.SetFrame( _index );
     this.ResetAllFrames();
     this.Start();
+    this.timer = this.rate;
+  
+  };
+
+  Animation.prototype.Reset = function() {
+
+    this.SetFrame( 0 );
+    this.ResetAllFrames();
+    this.timer = this.rate;
+    this.playing = false;
   
   };
 

@@ -1,6 +1,6 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
@@ -18,7 +18,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.4.5 (Alpha)';
+  Nenkraft.VERSION = '0.5.0 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',

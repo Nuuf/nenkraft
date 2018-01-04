@@ -38,7 +38,7 @@ module.exports = function () {
       sprite.anchor.Set( 0.5 );
       sprite.scale.Set( 5.0 );
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
-      var animation = ac.AddAnimation( 'test', 20 );
+      var animation = ac.CreateAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
         '5': 120
       } );
@@ -57,7 +57,7 @@ module.exports = function () {
       
       } );
 
-      //timer.Start( 400 );
+      // timer.Start( 400 );
 
       stage.onProcess.Add( function () {
 

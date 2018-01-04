@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
+
   function Sprite ( _x, _y, _texture ) {
 
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
@@ -16,6 +17,7 @@ module.exports = function ( Nenkraft ) {
     this.textureTransformation = new Nenkraft.Math.Matrix2D();
     this.textureTranslation = new Nenkraft.Math.Matrix2D();
     this.originalShape = new Nenkraft.Geom.AABB2D();
+
     if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
 
       this.programController = _texture;
@@ -36,12 +38,12 @@ module.exports = function ( Nenkraft ) {
 
   Sprite.prototype = Object.create( Super.prototype );
   Sprite.prototype.constructor = Sprite;
-  //Static
+  // Static
   Sprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
     Nenkraft.Utils.ImageFromDataURL(
       Nenkraft.Utils.GenerateSimpleBase64Png( function () {
 
-        //Oooh what fun.
+        // Oooh what fun.
         var path = new Nenkraft.Path.Polygon2D();
         path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
         path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
@@ -63,7 +65,7 @@ module.exports = function ( Nenkraft ) {
       } )
     ), 'DEFAULT_SPRITE_TEXTURE', 64, 64, 64, 64
   );
-  //Members
+  // Members
   Sprite.prototype.shape = null;
   Sprite.prototype.originalShape = null;
   Sprite.prototype.clip = null;
@@ -75,10 +77,13 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.programController = null;
   Sprite.prototype.textureTransformation = null;
   Sprite.prototype.textureTranslation = null;
-  //Methods
+  Sprite.prototype.animationController = null;
+
+  // Methods
   Sprite.prototype.Draw = function ( _rc ) {
 
     this.PreDraw( _rc );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -89,6 +94,7 @@ module.exports = function ( Nenkraft ) {
       }
 
       this.transform.ApplyWorld( _rc );
+
       if ( this.display === true ) {
 
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
@@ -114,6 +120,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.GLDraw = function ( _gl ) {
 
     this.GLPreDraw( _gl );
+
     if ( this.render === true ) {
 
       if ( this.transformShouldUpdate === true ) {
@@ -125,7 +132,6 @@ module.exports = function ( Nenkraft ) {
 
       if ( this.display === true && this.programController !== null ) {
 
-        this.UpdateTextureTransform();
         this.programController.Execute(
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
@@ -159,6 +165,7 @@ module.exports = function ( Nenkraft ) {
     var transformData = this.transform.worldTransform.AsArray( true );
     var textureTranslationData = this.textureTranslation.AsArray( true );
     var textureTransformationData = this.textureTransformation.AsArray( true );
+
     if ( this.bufferData == null ) {
 
       this.bufferData = [];
@@ -239,14 +246,17 @@ module.exports = function ( Nenkraft ) {
 
   Sprite.prototype.UpdateTextureTransform = function () {
 
-    var translation = this.textureTranslation;
-    var transformation = this.textureTransformation;
-    var texture = this.texture;
-    var clip = this.clip;
-    translation.e = -this.w * this.anchor.x;
-    translation.f = -this.h * this.anchor.y;
-    transformation.e = texture.w / texture.fw * clip.tl.x / clip.br.x;
-    transformation.f = texture.h / texture.fh * clip.tl.y / clip.br.y;
+    var tscaleX = this.w / this.texture.fw;
+    var tscaleY = this.h / this.texture.fh;
+
+    this.textureTranslation.TranslateTo(
+      -this.w * this.anchor.x,
+      -this.h * this.anchor.y
+    );
+    this.textureTransformation.TranslateTo(
+      tscaleX * this.clip.tl.x / this.w,
+      tscaleY * this.clip.tl.y / this.h
+    );
   
   };
 
@@ -259,7 +269,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Sprite.prototype.UpdateShape = function () {
+  Sprite.prototype.UpdateShape = function ( _newShape ) {
+
+    if ( _newShape != null ) {
+
+      this.originalShape = _newShape;
+    
+    }
 
     this.shape.SetC( this.originalShape );
     this.shape.Scale( this.scale.x, this.scale.y );
@@ -269,14 +285,55 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.SetTexture = function ( _texture ) {
 
     this.texture = _texture;
-    this.w = _texture.w;
-    this.h = _texture.h;
-    this.clip.Set( 0, 0, this.w, this.h );
+    this.ClipReconfigure( 0, 0, _texture.w, _texture.h );
     this.shape.SetC( this.clip );
     this.originalShape.SetC( this.clip );
-    this.textureTransformation.a = _texture.w / _texture.fw;
-    this.textureTransformation.d = _texture.h / _texture.fh;
   
+  };
+
+  Sprite.prototype.ClipReconfigure = function( _x, _y, _w, _h ) {
+
+    var tscaleX = _w / this.texture.fw;
+    var tscaleY = _h / this.texture.fh;
+
+    this.clip.Set( _x, _y, _w, _h );
+    this.w = _w;
+    this.h = _h;
+    this.textureTranslation.SetTransform( 
+      -_w * this.anchor.x,
+      -_h * this.anchor.y,
+      tscaleX, tscaleY 
+    );
+    this.textureTransformation.SetTransform( 
+      tscaleX * this.clip.tl.x / _w,
+      tscaleY * this.clip.tl.y / _h,
+      tscaleX, tscaleY
+    );
+  
+  };
+
+  Sprite.prototype.CreateAnimation = function( _data ) {
+
+    if ( this.animationController === null ) {
+
+      this.animationController = new Nenkraft.Animator.Controller( this );
+    
+    }
+
+    var animation = this.animationController.CreateAnimation( _data.id, _data.rate );
+
+    if ( _data.spritesheet != null ) {
+
+      for ( var i = 0; i < _data.frames.length; ++i ) {
+
+        animation.AddFrame( _data.spritesheet.GetFrameById( _data.frames[i] ) );
+      
+      }
+    
+    }
+
+    return animation;
+    
   };
 
   Nenkraft.Entity.Sprite = Sprite;

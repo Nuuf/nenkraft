@@ -36,6 +36,7 @@ module.exports = function () {
     stage.AddChild( graphicRectangle );
 
     var t = 10;
+
     while ( --t ) {
 
       stage.AddChild( new nk.Graphic2D( HW, HH, new nk.Path.AABB2D( -100, -100, 100, 100 ) ) );
@@ -55,6 +56,7 @@ module.exports = function () {
     stage.mouse.onDown.Add( function ( _event ) {
 
       var p = _event.data.position;
+
       for ( var i = stage.children.length; i--; ) {
 
         if ( stage.children[ i ].IntersectsPoint( p ) ) {
@@ -77,7 +79,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function ( ) {
+    stage.mouse.onUp.Add( function () {
 
       if ( dragger ) {
 

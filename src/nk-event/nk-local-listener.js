@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function LocalListener ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
 
     if ( !( this instanceof LocalListener ) ) return new LocalListener( _holderContext, _listenerContext, _handle, _removeOnNextCall );
@@ -17,14 +18,15 @@ module.exports = function ( Nenkraft ) {
 
   LocalListener.prototype = Object.create( null );
   LocalListener.prototype.constructor = LocalListener;
-  //Static
+  // Static
 
-  //Members
+  // Members
 
-  //Methods
+  // Methods
   LocalListener.prototype.Execute = function () {
 
     this.handle.apply( this.context, arguments );
+
     if ( this.removeOnNextCall === true ) {
 
       this.Remove();

@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Pool ( _class ) {
 
     if ( !( this instanceof Pool ) ) return new Pool( _class );
@@ -15,15 +16,16 @@ module.exports = function ( Nenkraft ) {
 
   Pool.prototype = Object.create( null );
   Pool.prototype.constructor = Pool;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Pool.prototype.class = null;
   Pool.prototype.objects = null;
   Pool.prototype.floodFunction = null;
   Pool.prototype.floodAmount = 100;
   Pool.prototype.context = null;
-  //Methods
+
+  // Methods
   Pool.prototype.Store = function ( _object ) {
 
     this.objects.push( _object );
@@ -47,6 +49,7 @@ module.exports = function ( Nenkraft ) {
     if ( _func ) this.floodFunction = _func;
     if ( _amount ) this.floodAmount = _amount;
     if ( _context ) this.context = _context;
+
     for ( var i = 0; i < this.floodAmount; ++i ) {
 
       if ( this.class != null ) {

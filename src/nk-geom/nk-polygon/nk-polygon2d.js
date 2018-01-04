@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Polygon2D ( _vertices ) {
 
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices );
@@ -12,6 +13,7 @@ module.exports = function ( Nenkraft ) {
     this.normals = [];
     this.perimeterMidPoints = [];
     this.centroid = new Nenkraft.Vector2D();
+
     if ( _vertices != null ) {
 
       if ( _vertices[ 0 ] instanceof Nenkraft.Vector2D ) {
@@ -30,11 +32,13 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.prototype = Object.create( null );
   Polygon2D.prototype.constructor = Polygon2D;
-  //Static
+  // Static
   Polygon2D.TYPE = 3;
+
   Polygon2D.CreateCopy = function ( _polygon ) {
 
     var p = new Polygon2D();
+
     for ( var i = 0, vertices = _polygon.vertices, l = vertices.length; i < l; ++i ) {
 
       p.AddPoint( vertices[ i ].Copy() );
@@ -46,6 +50,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Polygon2D.Construct = Object.create( null );
+
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
 
     var tl = new Nenkraft.Vector2D( _x, _y );
@@ -75,6 +80,7 @@ module.exports = function ( Nenkraft ) {
 
     var i = 0, l = _acc, x, y, th, an = Math.PI * 2 / l;
     _po.Recreate( [] );
+
     for ( i; i < l; ++i ) {
 
       th = an * i;
@@ -115,6 +121,7 @@ module.exports = function ( Nenkraft ) {
 
     var i = 0, l = _cors * 2, x, y, th, an = Math.PI * 2 / l, ra;
     _po.Recreate( [] );
+
     for ( i; i < l; ++i ) {
 
       ra = ( i & 1 ) === 0 ? _ora : _ira;
@@ -135,6 +142,7 @@ module.exports = function ( Nenkraft ) {
 
     var i = 0, x, y, u, c = Polygon2D.Construct.Butterfly.C;
     _po.Recreate( [] );
+
     for ( i; i < _n; ++i ) {
 
       u = i * c._1 * Math.PI / _n;
@@ -166,6 +174,7 @@ module.exports = function ( Nenkraft ) {
     
     }
   };
+
   Polygon2D.Construct.Supershape = function ( _po, _x, _y, _ra, _acc, _m, _n1, _n2, _n3 ) {
 
     _n1 = _n1 === undefined ? 1 : _n1;
@@ -173,6 +182,7 @@ module.exports = function ( Nenkraft ) {
     _n3 = _n3 === undefined ? 1 : _n3;
     var i = 0, l = _acc, x, y, a, r, c = Polygon2D.Construct.Supershape.C, t1, t2;
     _po.Recreate( [] );
+
     for ( i; i < l; ++i ) {
 
       a = i * Math.PI * 2 / _acc;
@@ -215,12 +225,13 @@ module.exports = function ( Nenkraft ) {
     _A: 1,
     _B: 1
   };
-  //Members
+  // Members
   Polygon2D.prototype.TYPE = Polygon2D.TYPE;
   Polygon2D.prototype.aabb = null;
   Polygon2D.prototype.dirtyBounds = true;
   Polygon2D.prototype.belongsTo = null;
-  //Methods
+
+  // Methods
   Polygon2D.prototype.AddPoint = function ( _p ) {
 
     this.vertices.push( _p );
@@ -260,6 +271,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
     var mix = Infinity, max = -mix, miy = mix, may = -mix;
+
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
 
       p = ps[ i ];
@@ -285,6 +297,7 @@ module.exports = function ( Nenkraft ) {
     ap.AddV( aabb.br );
     ap.Multiply( _anchorX, _anchorY === undefined ? _anchorX : _anchorY );
     var i = 0, ps = this.vertices, l = ps.length, p;
+
     for ( i; i < l; ++i ) {
 
       p = ps[ i ];
@@ -300,6 +313,7 @@ module.exports = function ( Nenkraft ) {
 
     var centroid = this.centroid;
     centroid.Set( 0, 0 );
+
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
 
       p = ps[ i ];
@@ -316,6 +330,7 @@ module.exports = function ( Nenkraft ) {
 
     var normals = this.normals;
     normals.length = 0;
+
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -334,6 +349,7 @@ module.exports = function ( Nenkraft ) {
 
     var normals = this.normals;
     normals.length = 0;
+
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -352,6 +368,7 @@ module.exports = function ( Nenkraft ) {
 
     var perimeterMidPoints = this.perimeterMidPoints;
     perimeterMidPoints.length = 0;
+
     for (
       var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
       i < l;
@@ -377,10 +394,12 @@ module.exports = function ( Nenkraft ) {
     var vertices = this.vertices;
     var vertexi, vertexj;
     var l = vertices.length;
+
     for ( i = 0, j = l - 1; i < l; j = i++ ) {
 
       vertexi = vertices[ i ];
       vertexj = vertices[ j ];
+
       if (
         ( ( vertexi.y > y ) !== ( vertexj.y > y ) ) &&
         ( x < ( vertexj.x - vertexi.x ) * ( y - vertexi.y ) / ( vertexj.y - vertexi.y ) + vertexi.x )

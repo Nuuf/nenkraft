@@ -34,6 +34,7 @@ module.exports = function () {
     var hourHand = stage.AddChild( new nk.Graphic2D( 0, 0, new nk.Path.Line2D( 0, 0, 150, 0 ) ) );
 
     var i = clockPoints.vertices.length;
+
     while ( i-- ) {
 
       var p = stage.AddChild( new nk.Text(

@@ -1,11 +1,12 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Super = Nenkraft.Controller.GLProgramController;
+
   function GLPixelBatchProgramController ( _gl ) {
 
     if ( !( this instanceof GLPixelBatchProgramController ) ) return new GLPixelBatchProgramController( _gl );
@@ -16,12 +17,13 @@ module.exports = function ( Nenkraft ) {
 
   GLPixelBatchProgramController.prototype = Object.create( Super.prototype );
   GLPixelBatchProgramController.prototype.constructor = GLPixelBatchProgramController;
-  //Static
+  // Static
 
-  //Members
+  // Members
   GLPixelBatchProgramController.prototype.dataBuffer = null;
   GLPixelBatchProgramController.prototype.prevNumElements = 0;
-  //Methods
+
+  // Methods
   GLPixelBatchProgramController.prototype.Initialise = function () {
 
     var gl = this.gl;
@@ -39,6 +41,7 @@ module.exports = function ( Nenkraft ) {
 
     var gl = this.gl;
     var attributes = this.attributes;
+
     if ( Super.LAST_USED_CONTROLLER !== this ) {
 
       gl.useProgram( this.program );
@@ -46,6 +49,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     gl.bindBuffer( gl.ARRAY_BUFFER, this.dataBuffer );
+
     if ( _numElements !== this.prevNumElements ) {
 
       gl.bufferData( gl.ARRAY_BUFFER, _data, gl.DYNAMIC_DRAW );

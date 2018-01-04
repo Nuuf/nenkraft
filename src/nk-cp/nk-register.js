@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Register ( _options ) {
 
     if ( !( this instanceof Register ) ) return new Register( _options );
@@ -15,11 +16,12 @@ module.exports = function ( Nenkraft ) {
 
   Register.prototype = Object.create( null );
   Register.prototype.constructor = Register;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Register.prototype.splitter = ' ';
-  //Methods
+
+  // Methods
   Register.prototype.Add = function ( _command ) {
 
     this.commands.push( _command );
@@ -31,6 +33,7 @@ module.exports = function ( Nenkraft ) {
     for ( var i = 0, commands = this.commands, l = commands.length, command; i < l; ++i ) {
 
       command = this.commands[ i ];
+
       if ( command ) {
 
         for ( var j = 0, jl = command.id.length; j < jl; ++j ) {
@@ -52,6 +55,7 @@ module.exports = function ( Nenkraft ) {
     var strs = String( _str ).split( this.splitter );
     var cmdStr = strs.shift();
     var command = this.Get( cmdStr );
+
     if ( command ) {
 
       command.Execute( strs, {} );

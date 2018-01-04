@@ -1,27 +1,29 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Controller ( _sprite ) {
 
     if ( !( this instanceof Controller ) ) return new Controller( _sprite );
     this.animations = [];
-    if ( _sprite !== undefined ) this.sprite = _sprite;
+    if ( _sprite != null ) this.sprite = _sprite;
   
   }
 
   Controller.prototype = Object.create( null );
   Controller.prototype.constructor = Controller;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Controller.prototype.currentAnimation = null;
   Controller.prototype.sprite = null;
-  //Methods
-  Controller.prototype.AddAnimation = function ( _id, _rate ) {
+
+  // Methods
+  Controller.prototype.CreateAnimation = function ( _id, _rate ) {
 
     var animation = new Nenkraft.Animator.Animation( this, _id, _rate );
     this.animations.push( animation );
@@ -29,7 +31,14 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Controller.prototype.GetAnimation = function ( _id ) {
+  Controller.prototype.AddAnimation = function( _animation ) {
+
+    _animation.controller = this;
+    this.animations.push( _animation );
+  
+  };
+
+  Controller.prototype.GetAnimationById = function ( _id ) {
 
     for ( var i = 0, animations = this.animations, l = animations.length, animation; i < l; ++i ) {
 
@@ -42,13 +51,14 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Controller.prototype.PlayAnimation = function ( _id, _index ) {
+  Controller.prototype.PlayAnimation = function ( _id, _frameIndex ) {
 
-    var animation = this.GetAnimation( _id );
+    var animation = this.GetAnimationById( _id );
+
     if ( animation !== null ) {
 
       this.currentAnimation = animation;
-      animation.Restart( _index );
+      animation.Restart( _frameIndex );
     
     }
   

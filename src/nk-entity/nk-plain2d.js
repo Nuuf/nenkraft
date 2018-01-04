@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Plain2D ( _x, _y ) {
 
     if ( !( this instanceof Plain2D ) ) return new Plain2D( _x, _y );
@@ -15,9 +16,9 @@ module.exports = function ( Nenkraft ) {
 
   Plain2D.prototype = Object.create( null );
   Plain2D.prototype.constructor = Plain2D;
-  //Static
+  // Static
   Plain2D.NULL_TRANSFORM = new Nenkraft.Math.Basetransform2D();
-  //Members
+  // Members
   Plain2D.prototype.parent = null;
   Plain2D.prototype.w = 0;
   Plain2D.prototype.h = 0;
@@ -27,7 +28,8 @@ module.exports = function ( Nenkraft ) {
   Plain2D.prototype.display = true;
   Plain2D.prototype.transformShouldUpdate = true;
   Plain2D.prototype.transformAutomaticUpdate = true;
-  //Methods
+
+  // Methods
   Plain2D.prototype.UpdateTransform = function () {
 
     if ( this.parent ) {
@@ -52,6 +54,7 @@ module.exports = function ( Nenkraft ) {
 
     var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
     var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
+
     if ( this.bounds === null ) {
 
       this.bounds = new Nenkraft.Geom.AABB2D(
@@ -103,6 +106,7 @@ module.exports = function ( Nenkraft ) {
 
       var pChildren = this.parent.children;
       var ix = pChildren.indexOf( this );
+
       if ( ix !== -1 ) {
 
         pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
@@ -119,6 +123,7 @@ module.exports = function ( Nenkraft ) {
 
       var pChildren = this.parent.children;
       var ix = pChildren.indexOf( this );
+
       if ( ix !== -1 ) {
 
         pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );

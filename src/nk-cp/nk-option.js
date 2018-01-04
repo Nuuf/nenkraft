@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Option ( _id, _handle, _info, _priority, _breakIfExecuted ) {
 
     if ( !( this instanceof Option ) ) return new Option( _id, _handle, _info, _priority, _breakIfExecuted );
@@ -20,13 +21,14 @@ module.exports = function ( Nenkraft ) {
 
   Option.prototype = Object.create( null );
   Option.prototype.constructor = Option;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Option.prototype.command = null;
   Option.prototype.priority = 0;
   Option.prototype.breakIfExecuted = false;
-  //Methods
+
+  // Methods
   Option.prototype.Execute = function ( _dataStrs, _data ) {
 
     this.handle( _dataStrs, _data );

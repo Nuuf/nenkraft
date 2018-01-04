@@ -1,14 +1,21 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function Timer ( _stopTime ) {
 
     if ( !( this instanceof Timer ) ) return new Timer( _stopTime );
-    this.stopTime = Math.round( _stopTime === undefined ? null : _stopTime );
+
+    if ( _stopTime != null ) {
+
+      this.stopTime = _stopTime;
+    
+    }
+
     this.onStop = new Nenkraft.LocalEvent();
     this.onFinish = new Nenkraft.LocalEvent();
     this.onStart = new Nenkraft.LocalEvent();
@@ -20,14 +27,16 @@ module.exports = function ( Nenkraft ) {
 
   Timer.prototype = Object.create( null );
   Timer.prototype.constructor = Timer;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Timer.prototype.time = 0;
+  Timer.prototype.stopTime = 0;
   Timer.prototype.isRunning = false;
   Timer.prototype.canResume = false;
   Timer.prototype.count = 0;
-  //Methods
+
+  // Methods
   Timer.prototype.Reset = function () {
 
     this.onReset.Dispatch( this, null );
@@ -41,7 +50,8 @@ module.exports = function ( Nenkraft ) {
 
   Timer.prototype.Start = function ( _stopTime ) {
 
-    this.stopTime = Math.round( _stopTime === undefined ? this.stopTime : _stopTime );
+    this.stopTime = Math.round( _stopTime == null ? this.stopTime : _stopTime );
+
     if ( this.stopTime > 0 ) {
 
       this.time = 0;

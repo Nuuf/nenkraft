@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "A small rendering tool",
   "author": "Nuuf",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "main": "index.js",
   "license": "MIT",
   "eslintConfig": "./.eslintrc",
@@ -29,15 +29,16 @@
     "s-p": "cross-env NODE_ENV=production",
     "clean": "rimraf dist && rimraf server/public/nk.min.js",
     "copy-to-server": "copyfiles -f dist/nk.min.js server/public/",
-    "copy-un-files": "copyfiles -f assets/xhr/* dist/assets/xhr",
+    "copy-un-files": "copyfiles -f assets/xhr/* dist/assets/xhr/",
     "lint": "eslint src",
     "lint-f": "eslint src --fix",
     "lint-tests": "eslint tests",
     "lint-tests-f": "eslint tests --fix",
     "start": "npm run s-d node deve-server.js",
+    "post-build-full": "npm run copy-to-server && npm run copy-un-files",
     "build-dev": "npm run clean && npm run s-d webpack",
     "build": "npm run clean && npm run s-p webpack",
-    "build-x": "npm run clean && npm run s-p webpack && npm run s-p webpack -- --env.bigBundle && npm run copy-to-server && npm run copy-un-files",
+    "build-full": "npm run clean && npm run s-p webpack && npm run s-p webpack -- --env.bigBundle && npm run post-build-full",
     "electron": "electron ./electron/main.js"
   }
 }

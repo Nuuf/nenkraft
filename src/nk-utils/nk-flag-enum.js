@@ -1,10 +1,11 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+
   function FlagEnum () {
 
     if ( !( this instanceof FlagEnum ) ) return new FlagEnum();
@@ -13,14 +14,18 @@ module.exports = function ( Nenkraft ) {
 
   FlagEnum.prototype = Object.create( null );
   FlagEnum.prototype.constructor = FlagEnum;
-  //Static
-  //Members
+  /*
+   *Static
+   *Members
+   */
   FlagEnum.prototype.NONE = 0;
   FlagEnum.prototype.next = 1;
-  //Methods
+
+  // Methods
   FlagEnum.prototype.Add = function ( _id ) {
 
     _id = _id.toUpperCase();
+
     if ( this[ _id ] === undefined ) {
 
       this[ _id ] = this.next;

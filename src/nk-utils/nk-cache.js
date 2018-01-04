@@ -1,6 +1,6 @@
 /**
-* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-*/
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
 
 module.exports = function ( Nenkraft ) {
 
@@ -8,9 +8,11 @@ module.exports = function ( Nenkraft ) {
   var Assert = Nenkraft.Utils.Assert;
   var EO = Object.create( null );
   var ES = '';
+
   function Cache ( _type ) {
 
     if ( !( this instanceof Cache ) ) return new Cache( _type );
+
     if ( _type != null ) {
 
       this.type = _type;
@@ -23,14 +25,16 @@ module.exports = function ( Nenkraft ) {
 
   Cache.prototype = Object.create( null );
   Cache.prototype.constructor = Cache;
-  //Static
+  // Static
 
-  //Members
+  // Members
   Cache.prototype.type = null;
-  //Methods
+
+  // Methods
   Cache.prototype.Store = function ( _item ) {
 
     var valid = false;
+
     if ( _item == null ) {
 
       console.warn( 'Item is null. Cannot store null item.' );
@@ -73,6 +77,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     Assert( _item, Assert.IS_SAME_TYPE, EO );
+
     if ( _item.id ) {
 
       Assert( _item.id, Assert.IS_SAME_TYPE, ES );
