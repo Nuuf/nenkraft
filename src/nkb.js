@@ -16,7 +16,6 @@ require( './nk-event/nk-local-listener' )( namespace );
 require( './nk-event/nk-local-event' )( namespace );
 require( './nk-time/nk-timer/nk-timer' )( namespace );
 require( './nk-math/nk-vector/nk-vector2d' )( namespace );
-require( './nk-math/nk-vector/nk-limit-vector2d' )( namespace );
 require( './nk-math/nk-matrix/nk-matrix2d' )( namespace );
 require( './nk-math/nk-transform/nk-basetransform2d' )( namespace );
 require( './nk-math/nk-transform/nk-transform2d' )( namespace );

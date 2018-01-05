@@ -142,7 +142,7 @@ module.exports = function () {
         obj.transformAutomaticUpdate = false;
         obj.SetTexture( pcon.originalTexture );
       
-      }, 5000 );
+      }, 100000 );
       graphicPool.Flood( function ( obj ) {
 
         obj.x = Math.random() * W - HW;
@@ -150,7 +150,7 @@ module.exports = function () {
         obj.transformAutomaticUpdate = false;
         obj.SetPath( usedPath );
       
-      }, 5000 );
+      }, 100000 );
       timer.Start( 120 );
     
     } );

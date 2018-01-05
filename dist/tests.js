@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.0 (Alpha)
+* @version     0.5.1 (Alpha)
 * @copyright   (C) 2017 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -40,9 +40,6 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -70,29 +67,34 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 127);
+/******/ 	return __webpack_require__(__webpack_require__.s = 80);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */
+/******/ (Array(80).concat([
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__( 3 );
+module.exports = __webpack_require__(81);
 
-__webpack_require__( 4 );
-__webpack_require__( 5 );
-__webpack_require__( 8 );
-__webpack_require__( 10 );
-__webpack_require__( 11 );
-__webpack_require__( 6 );
-__webpack_require__( 7 );
-__webpack_require__( 9 );
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__( 82 );
+
+__webpack_require__( 83 );
+__webpack_require__( 84 );
+__webpack_require__( 85 );
+__webpack_require__( 86 );
+__webpack_require__( 87 );
+__webpack_require__( 88 );
+__webpack_require__( 89 );
+__webpack_require__( 90 );
 
 var tests = [];
 
-var context = __webpack_require__(90);
+var context = __webpack_require__(91);
 
 context.keys().forEach( function ( file ) {
 
@@ -110,177 +112,99 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 
 /***/ }),
-/* 3 */
+/* 82 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 4 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/1to8.png";
 
 /***/ }),
-/* 5 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/4dots.png";
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/images/colors.png";
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/images/font.png";
-
-/***/ }),
-/* 8 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/glass-of-blueberryjuice.png";
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/images/invaders/invaders.png";
-
-/***/ }),
-/* 10 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/raindrop.png";
 
 /***/ }),
-/* 11 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/smudge.png";
 
 /***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/images/colors.png";
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/images/font.png";
+
+/***/ }),
 /* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "assets/images/invaders/invaders.png";
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var map = {
-	"./aabbcollision.test": 91,
-	"./animation.test": 92,
-	"./bitmapfont.test": 93,
-	"./butterflyish.test": 94,
-	"./cli.test": 95,
-	"./clock.test": 96,
-	"./elasticcollision.test": 97,
-	"./field.test": 98,
-	"./fractree.test": 99,
-	"./grabndrag.test": 100,
-	"./grid.test": 101,
-	"./invaders.test": 102,
-	"./magnet.test": 103,
-	"./motion.test": 104,
-	"./nightsky.test": 105,
-	"./particles.test": 106,
-	"./platformer.test": 107,
-	"./playground.test": 108,
-	"./polygoncollision.test": 109,
-	"./quadtree.test": 110,
-	"./rain.test": 111,
-	"./raycasting.test": 112,
-	"./reflectivecollision.test": 113,
-	"./sprite.test": 114,
-	"./stresstest.test": 115,
-	"./text.test": 116,
-	"./themask.test": 117,
-	"./webglanimation.test": 118,
-	"./webglbitmapfont.test": 119,
-	"./webglcircle.test": 120,
-	"./webglline2d.test": 121,
-	"./webglpixelbatch.test": 122,
-	"./webglrectangle.test": 123,
-	"./webglstresstest.test": 124,
-	"./webgltexturebatch.test": 125
+	"./aabbcollision.test": 92,
+	"./animation.test": 93,
+	"./bitmapfont.test": 94,
+	"./butterflyish.test": 95,
+	"./cli.test": 96,
+	"./clock.test": 97,
+	"./elasticcollision.test": 98,
+	"./field.test": 99,
+	"./fractree.test": 100,
+	"./grabndrag.test": 101,
+	"./grid.test": 102,
+	"./invaders.test": 103,
+	"./magnet.test": 104,
+	"./motion.test": 105,
+	"./nightsky.test": 106,
+	"./particles.test": 107,
+	"./platformer.test": 108,
+	"./playground.test": 109,
+	"./polygoncollision.test": 110,
+	"./quadtree.test": 111,
+	"./rain.test": 112,
+	"./raycasting.test": 113,
+	"./reflectivecollision.test": 114,
+	"./sprite.test": 115,
+	"./stresstest.test": 116,
+	"./text.test": 117,
+	"./themask.test": 118,
+	"./webglanimation.test": 119,
+	"./webglbitmapfont.test": 120,
+	"./webglcircle.test": 121,
+	"./webglline2d.test": 122,
+	"./webglpixelbatch.test": 123,
+	"./webglrectangle.test": 124,
+	"./webglstresstest.test": 125,
+	"./webgltexturebatch.test": 126
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -296,10 +220,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 90;
+webpackContext.id = 91;
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -424,7 +348,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -508,7 +432,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -589,7 +513,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -709,7 +633,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -936,7 +860,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1016,7 +940,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1195,7 +1119,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1304,7 +1228,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1406,7 +1330,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1510,7 +1434,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1595,7 +1519,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1961,11 +1885,16 @@ module.exports = function () {
 
         handleEnemies();
         root.Dump();
-        var i;
 
-        for ( i = 0; i < enemies.length; ++i ) {
+        for ( var i = 0, enemy; i < enemies.length; ++i ) {
 
-          root.Add( enemies[ i ].bounds );
+          enemy = enemies[i];
+
+          if ( enemy && enemy.bounds ) {
+
+            root.Add( enemy.bounds );
+          
+          }
         
         }
 
@@ -2208,7 +2137,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2372,7 +2301,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2436,7 +2365,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2552,7 +2481,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2644,7 +2573,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2898,7 +2827,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2933,7 +2862,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3082,7 +3011,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3148,7 +3077,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3245,7 +3174,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3437,7 +3366,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3611,7 +3540,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3723,7 +3652,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3770,7 +3699,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 24;
+    var fps = 40;
 
     var am = 35;
 
@@ -3843,7 +3772,7 @@ module.exports = function () {
         obj.y = Math.random() * H - HH;
         obj.SetTexture( texture );
       
-      }, 50000 );
+      }, 100000 );
       timer.Start( 120 );
     
     } );
@@ -3866,7 +3795,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3913,7 +3842,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4034,7 +3963,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4176,7 +4105,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4259,7 +4188,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4377,7 +4306,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4441,7 +4370,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4528,7 +4457,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4627,7 +4556,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4774,7 +4703,7 @@ module.exports = function () {
         obj.transformAutomaticUpdate = false;
         obj.SetTexture( pcon.originalTexture );
       
-      }, 5000 );
+      }, 100000 );
       graphicPool.Flood( function ( obj ) {
 
         obj.x = Math.random() * W - HW;
@@ -4782,7 +4711,7 @@ module.exports = function () {
         obj.transformAutomaticUpdate = false;
         obj.SetPath( usedPath );
       
-      }, 5000 );
+      }, 100000 );
       timer.Start( 120 );
     
     } );
@@ -4808,7 +4737,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4912,14 +4841,6 @@ module.exports = function () {
 };
 
 
-/***/ }),
-/* 126 */,
-/* 127 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(2);
-
-
 /***/ })
-/******/ ]);
+/******/ ]));
 //# sourceMappingURL=tests.js.map

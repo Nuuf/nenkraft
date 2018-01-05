@@ -42,7 +42,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 24;
+    var fps = 40;
 
     var am = 35;
 
@@ -115,7 +115,7 @@ module.exports = function () {
         obj.y = Math.random() * H - HH;
         obj.SetTexture( texture );
       
-      }, 50000 );
+      }, 100000 );
       timer.Start( 120 );
     
     } );
