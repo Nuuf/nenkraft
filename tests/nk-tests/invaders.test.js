@@ -361,11 +361,16 @@ module.exports = function () {
 
         handleEnemies();
         root.Dump();
-        var i;
 
-        for ( i = 0; i < enemies.length; ++i ) {
+        for ( var i = 0, enemy; i < enemies.length; ++i ) {
 
-          root.Add( enemies[ i ].bounds );
+          enemy = enemies[i];
+
+          if ( enemy && enemy.bounds ) {
+
+            root.Add( enemy.bounds );
+          
+          }
         
         }
 
