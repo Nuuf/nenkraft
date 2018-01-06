@@ -13,6 +13,7 @@ module.exports = function ( Nenkraft ) {
     this.position = new Nenkraft.Vector2D();
     this.scale = new Nenkraft.Vector2D( 1, 1 );
     this.offset = new Nenkraft.Vector2D( _offsetX, _offsetY );
+    this.eventData = { position: this.position, native: null };
 
     this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
     this.element.addEventListener( 'mousedown', this.OnDown.bind( this ) );
@@ -33,6 +34,7 @@ module.exports = function ( Nenkraft ) {
   // Static
 
   // Members
+  Mouse.prototype.eventData = null;
 
   // Methods
   Mouse.prototype.OnMove = function ( _event ) {
@@ -44,21 +46,24 @@ module.exports = function ( Nenkraft ) {
     pos.Subtract( element.offsetLeft, element.offsetTop );
     pos.SubtractV( this.offset );
     pos.DivideV( this.scale );
-    this.onMove.Dispatch( this.element, { position: pos, native: _event } );
+    this.eventData.native = _event;
+    this.onMove.Dispatch( this.element, this.eventData );
   
   };
 
   Mouse.prototype.OnDown = function ( _event ) {
 
     _event.stopPropagation();
-    this.onDown.Dispatch( this.element, { position: this.position, native: _event } );
+    this.eventData.native = _event;
+    this.onDown.Dispatch( this.element, this.eventData );
   
   };
 
   Mouse.prototype.OnUp = function ( _event ) {
 
     _event.stopPropagation();
-    this.onUp.Dispatch( this.element, { position: this.position, native: _event } );
+    this.eventData.native = _event;
+    this.onUp.Dispatch( this.element, this.eventData );
   
   };
 
@@ -66,13 +71,15 @@ module.exports = function ( Nenkraft ) {
 
     _event.preventDefault();
     _event.stopPropagation();
-    this.onLeave.Dispatch( this.element, { position: this.position, native: _event } );
+    this.eventData.native = _event;
+    this.onLeave.Dispatch( this.element, this.eventData );
   
   };
 
   Mouse.prototype.OnWheel = function ( _event ) {
 
-    this.onWheel.Dispatch( this.element, { position: this.position, native: _event } );
+    this.eventData.native = _event;
+    this.onWheel.Dispatch( this.element, this.eventData );
   
   };
 

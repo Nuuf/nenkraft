@@ -4,7 +4,7 @@ module.exports = function () {
     '/**',
     '* @package     Nenkraft',
     '* @author      Gustav \'Nuuf\' Åberg <gustavrein@gmail.com>',
-    '* @version     0.5.1 (Alpha)',
+    '* @version     0.5.2 (Alpha)',
     '* @copyright   (C) 2017 Gustav \'Nuuf\' Åberg',
     '* @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}',
     '*/'

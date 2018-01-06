@@ -1,22 +1,32 @@
 module.exports = function ( namespace ) {
+
   'use strict';
-  //var Super = null;
+
+  // var Super = null;
   function Class ( param ) {
+
     if ( !( this instanceof Class ) ) return new Class( param );
-    //Super.call(this, param);
+    // Super.call(this, param);
     this.memExO = {};
+  
   }
-  Class.prototype = Object.create( null /*Super.prototype*/ );
+
+  Class.prototype = Object.create( null /* Super.prototype*/ );
   Class.prototype.constructor = Class;
-  //Static
+
+  // Static
   Class.SFunc = function () {
-    //return null;
+    // return null;
   };
-  //Members
+
+  // Members
   Class.prototype.memExV = 1;
-  //Methods
+
+  // Methods
   Class.prototype.methEx = function () {
-    //return null;
+    // return null;
   };
+
   namespace.Class = Class;
+
 };

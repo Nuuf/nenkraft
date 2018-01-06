@@ -12,5 +12,7 @@ var WebpackDevServer = require( 'webpack-dev-server' ),
     }
   } );
 server.listen( 8080, 'localhost', function () {
+
   console.log( '(-.-) server running, ENV=' + colors.green( process.env.NODE_ENV ) );
+
 } );

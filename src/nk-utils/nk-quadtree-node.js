@@ -9,10 +9,7 @@ module.exports = function ( Nenkraft ) {
   function QuadtreeNode ( _aabb, _level, _objCap, _levelCap ) {
 
     if ( !( this instanceof QuadtreeNode ) ) return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
-    this.aabb = _aabb;
-    this.level = _level;
-    this.objectCap = _objCap;
-    this.levelCap = _levelCap;
+    this.Set( _aabb, _level, _objCap, _levelCap );
     this.nodes = {};
     this.objects = [];
     this.convergence = [];
@@ -26,6 +23,23 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.TOP_RIGHT = 'TR';
   QuadtreeNode.BOTTOM_LEFT = 'BL';
   QuadtreeNode.BOTTOM_RIGHT = 'BR';
+  QuadtreeNode.Pool = new Nenkraft.Utils.Pool( QuadtreeNode );
+
+  QuadtreeNode.Pool.Retrieve = function( _aabb, _level, _objCap, _levelCap ) {
+
+    if ( this.objects.length === 0 ) {
+
+      this.Flood();
+    
+    }
+
+    var qtn = this.objects.pop();
+    qtn.Set( _aabb, _level, _objCap, _levelCap );
+    return qtn;
+  
+  };
+
+  QuadtreeNode.USE_POOL = true;
   // Members
   QuadtreeNode.prototype.objectCap = 0;
   QuadtreeNode.prototype.levelCap = 0;
@@ -37,6 +51,27 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.prototype.hasSplit = false;
 
   // Methods
+  QuadtreeNode.prototype.Set = function( _aabb, _level, _objCap, _levelCap ) {
+
+    this.aabb = _aabb;
+    this.level = _level;
+    this.objectCap = _objCap;
+    this.levelCap = _levelCap;
+  
+  };
+
+  QuadtreeNode.prototype.FromStore = function( _aabb, _level, _objCap, _levelCap ) {
+
+    if ( QuadtreeNode.USE_POOL === true ) {
+
+      return QuadtreeNode.Pool.Retrieve( _aabb, _level, _objCap, _levelCap );
+    
+    }
+
+    return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
+  
+  };
+
   QuadtreeNode.prototype.Add = function ( _object ) {
 
     var marking = '';
@@ -129,19 +164,19 @@ module.exports = function ( Nenkraft ) {
     var lc = this.levelCap;
     var nodes = this.nodes;
     var aabb = this.aabb;
-    nodes[ QuadtreeNode.TOP_LEFT ] = new QuadtreeNode(
+    nodes[ QuadtreeNode.TOP_LEFT ] = this.FromStore(
       aabb.GetQuadrant( QuadtreeNode.TOP_LEFT ),
       nl, oc, lc
     );
-    nodes[ QuadtreeNode.TOP_RIGHT ] = new QuadtreeNode(
+    nodes[ QuadtreeNode.TOP_RIGHT ] = this.FromStore(
       aabb.GetQuadrant( QuadtreeNode.TOP_RIGHT ),
       nl, oc, lc
     );
-    nodes[ QuadtreeNode.BOTTOM_LEFT ] = new QuadtreeNode(
+    nodes[ QuadtreeNode.BOTTOM_LEFT ] = this.FromStore(
       aabb.GetQuadrant( QuadtreeNode.BOTTOM_LEFT ),
       nl, oc, lc
     );
-    nodes[ QuadtreeNode.BOTTOM_RIGHT ] = new QuadtreeNode(
+    nodes[ QuadtreeNode.BOTTOM_RIGHT ] = this.FromStore(
       aabb.GetQuadrant( QuadtreeNode.BOTTOM_RIGHT ),
       nl, oc, lc
     );
@@ -160,6 +195,15 @@ module.exports = function ( Nenkraft ) {
       nodes[ QuadtreeNode.TOP_RIGHT ].Dump();
       nodes[ QuadtreeNode.BOTTOM_LEFT ].Dump();
       nodes[ QuadtreeNode.BOTTOM_RIGHT ].Dump();
+
+      if ( QuadtreeNode.USE_POOL === true ) {
+
+        nodes[QuadtreeNode.TOP_LEFT].Store();
+        nodes[ QuadtreeNode.TOP_RIGHT ].Store();
+        nodes[ QuadtreeNode.BOTTOM_LEFT ].Store();
+        nodes[ QuadtreeNode.BOTTOM_RIGHT ].Store();
+      
+      }
     
     }
 
@@ -214,7 +258,17 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  QuadtreeNode.prototype.Store = function() {
+
+    QuadtreeNode.Pool.Store( this );
+
+    // console.log( QuadtreeNode.Pool.objects.length );
+  
+  };
+
   Nenkraft.Utils.QuadtreeNode = QuadtreeNode;
   Nenkraft.QuadtreeNode = QuadtreeNode;
+
+  QuadtreeNode.Pool.Flood( function() {}, 1000 );
 
 };

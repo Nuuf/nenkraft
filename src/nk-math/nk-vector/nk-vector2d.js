@@ -94,7 +94,6 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Vector2D.Pool.Flood( function () {}, 100000 );
   Vector2D.USE_POOL = true;
   // Members
   Vector2D.prototype.x = 0;
@@ -110,6 +109,18 @@ module.exports = function ( Nenkraft ) {
     }
 
     return new Vector2D( this );
+  
+  };
+
+  Vector2D.prototype.FromStore = function( _x, _y ) {
+
+    if ( Vector2D.USE_POOL === true ) {
+
+      return Vector2D.Pool.Retrieve( _x, _y );
+    
+    }
+
+    return new Vector2D( _x, _y );
   
   };
 
@@ -425,25 +436,25 @@ module.exports = function ( Nenkraft ) {
 
   Vector2D.prototype.GetPerpendicularCCWV = function ( _v ) {
 
-    return new Vector2D( -( _v.y - this.y ), _v.x - this.x );
+    return this.FromStore( -( _v.y - this.y ), _v.x - this.x );
   
   };
 
   Vector2D.prototype.GetPerpendicularCCW = function ( _x, _y ) {
 
-    return new Vector2D( -( _y - this.y ), _x - this.x );
+    return this.FromStore( -( _y - this.y ), _x - this.x );
   
   };
 
   Vector2D.prototype.GetPerpendicularCWV = function ( _v ) {
 
-    return new Vector2D( _v.y - this.y, -( _v.x - this.x ) );
+    return this.FromStore( _v.y - this.y, -( _v.x - this.x ) );
   
   };
 
   Vector2D.prototype.GetPerpendicularCW = function ( _x, _y ) {
 
-    return new Vector2D( _y - this.y, -( _x - this.x ) );
+    return this.FromStore( _y - this.y, -( _x - this.x ) );
   
   };
 
@@ -512,7 +523,7 @@ module.exports = function ( Nenkraft ) {
   Vector2D.prototype.GetProjectionOntoV = function ( _v ) {
 
     var dot = this.GetDotV( _v );
-    if ( dot === 0 ) return new Vector2D();
+    if ( dot === 0 ) return this.FromStore( 0 );
     var mag = _v.GetMagnitude();
     var scl = dot / ( mag * mag );
     var p = _v.Copy();
@@ -526,7 +537,7 @@ module.exports = function ( Nenkraft ) {
     var p = this.Copy();
     p.Set( _x, _y );
     var dot = this.GetDotV( p );
-    if ( dot === 0 ) return new Vector2D();
+    if ( dot === 0 ) return this.FromStore( 0 );
     var mag = p.GetMagnitude();
     var scl = dot / ( mag * mag );
     p.Multiply( scl, scl );
@@ -574,5 +585,7 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.Vector2D = Vector2D;
   Nenkraft.Vector2D = Vector2D;
+
+  Vector2D.Pool.Flood( function () {}, 100000 );
 
 };
