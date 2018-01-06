@@ -9,6 +9,7 @@ var url = require( 'url' );
 var WINDOW = null;
 
 function CreateWindow () {
+
   WINDOW = new BrowserWindow( { width: 600, height: 400, title: 'Nenkraft' } );
   var menu = new Menu();
   menu.append( new MenuItem( { role: 'toggledevtools', label: 'DT' } ) );
@@ -22,18 +23,29 @@ function CreateWindow () {
   } ) );
   WINDOW.webContents.openDevTools();
   WINDOW.on( 'closed', function () {
+
     WINDOW = null;
+  
   } );
+
 }
 
 app.on( 'ready', CreateWindow );
 app.on( 'window-all-closed', function () {
+
   if ( process.platform !== 'darwin' ) {
+
     app.quit();
+  
   }
+
 } );
 app.on( 'activate', function () {
+
   if ( WINDOW === null ) {
+
     CreateWindow();
+  
   }
+
 } );

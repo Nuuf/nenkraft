@@ -380,7 +380,7 @@ module.exports = function () {
 
         handleExplosions();
 
-        if ( this.ticker.GetTPS() < 40 ) {
+        if ( this.ticker.GetTPS() < 24 ) {
 
           console.log( this.ticker.GetTPS() );
         
@@ -440,7 +440,6 @@ module.exports = function () {
           particle = particles[i];
           particle.position.AddV( particle.data.velocity );
           particle.data.velocity.MultiplyV( particle.data.acceleration );
-          particle.data.velocity.y += 0.1;
 
           if ( --particle.data.lifeSpan <= 0 ) {
 
@@ -514,7 +513,7 @@ module.exports = function () {
 
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
 
-              createParticles( enemy.x, enemy.y, 15 );
+              createParticles( enemy.x, enemy.y, RI( 4, 80 ) );
 
               enemy.Detach();
               enemies.splice( i, 1 );

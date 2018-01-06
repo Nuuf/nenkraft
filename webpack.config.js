@@ -15,6 +15,9 @@ var entry =
     ],
     tests: [
       './tests/tests.js'
+    ],
+    nkb: [
+      './src/nkb.js'
     ]
   } : {
     nk: [
@@ -30,7 +33,8 @@ var plugins =
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin( 'style-[contenthash:10].css' ),
     new HTMLWebpackPlugin( {
-      template: 'build_template.html'
+      template: 'build_template.html',
+      excludeChunks: [ 'nkb' ]
     } ),
     new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } )
   ] : [
@@ -57,11 +61,16 @@ console.log( JSON.stringify( entry.nkb ) || colors.red( 'undefined' ), os.EOL + 
 console.log( JSON.stringify( plugins ) || colors.red( 'undefined' ), os.EOL + 'plugins' );
 
 module.exports = function ( env ) {
+
   var filename = '[name].min.js';
+
   if ( env && env.bigBundle ) {
+
     filename = '[name].js';
     plugins.shift();
+  
   }
+
   return {
     devtool: 'source-map',
     entry: entry,
@@ -80,7 +89,7 @@ module.exports = function ( env ) {
         test: /\.shader|txt$/,
         use: [ 'raw-loader' ],
         exclude: /node_modules/
-      }]
+      } ]
     },
     output: {
       path: path.join( __dirname, 'dist' ),
@@ -88,4 +97,5 @@ module.exports = function ( env ) {
       filename: filename
     }
   };
+
 };
