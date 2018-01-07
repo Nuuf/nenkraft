@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 30);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -99,6 +99,99 @@ module.exports = g;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = function() {
+
+  Array.prototype.indexPop = function( index ) {
+
+    var last = this.length - 1;
+
+    if ( last > 1 && index <= last && index >= 0 ) {
+  
+      var temp = this[last];
+      this[last] = this[index];
+      this[index] = temp;
+  
+      return this.pop();
+    
+    }
+
+    return this.pop();
+  
+  };
+
+  Array.prototype.indexShift = function( index ) {
+  
+    if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
+  
+      var temp = this[0];
+      this[0] = this[index];
+      this[index] = temp;
+
+      return this.shift();
+    
+    }
+
+    return this.shift();
+  
+  };
+
+  Array.prototype.popSplice = function( index ) {
+
+    var i = this.length - 1;
+    if ( i < 1 ) return;
+    var returnee = this[index];
+
+    while ( index < i ) {
+ 
+      this[index] = this[index + 1]; 
+      index++; 
+    
+    }
+
+    this.pop();
+
+    return returnee;
+  
+  };
+
+  Array.prototype.shiftSplice = function( index ) {
+
+    var length = this.length;
+    if ( length < 1 ) return;
+    var returnee = this[index];
+
+    while ( index > 0 ) {
+
+      this[index] = this[index - 1];
+      index--;
+    
+    }
+
+    this.shift();
+
+    return returnee;
+  
+  };
+
+  Array.prototype.fickleSplice = function( index ) {
+
+    if ( index > ( this.length * 0.5 ) | 0 ) {
+
+      return this.popSplice( index );
+    
+    }
+
+    return this.shiftSplice( index );
+  
+  };
+
+};
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 /**
@@ -265,7 +358,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -623,7 +716,7 @@ module.exports = function ( Nenkraft ) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -717,7 +810,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -911,7 +1004,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /**
@@ -982,10 +1075,10 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Utils.UUID = function ( _length, _parts, _charSetIndex, _separator ) {
 
-    _length = _length === undefined ? 32 : _length;
-    _parts = _parts === undefined ? 4 : _parts;
-    _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
-    _separator = _separator === undefined ? '-' : _separator;
+    _length = _length == null ? 32 : _length;
+    _parts = _parts == null ? 4 : _parts;
+    _charSetIndex = _charSetIndex == null ? 0 : _charSetIndex;
+    _separator = _separator == null ? '-' : _separator;
     var id = '';
 
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
@@ -1033,11 +1126,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
+  var NESTED = Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
 
     if ( typeof _string === 'string' ) {
 
-      _splitter = _splitter === undefined ? '.' : _splitter;
+      _splitter = _splitter == null ? '.' : _splitter;
       _string = _string.split( _splitter );
     
     }
@@ -1050,7 +1143,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( _object[ key ] !== undefined ) {
 
-        return Nenkraft.Utils.Nested( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
+        return NESTED( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
       
       }
     
@@ -1375,7 +1468,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 /**
@@ -1437,7 +1530,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /**
@@ -1483,7 +1576,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 /**
@@ -1536,7 +1629,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /**
@@ -1661,7 +1754,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 /**
@@ -1787,7 +1880,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 /**
@@ -2384,7 +2477,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 /**
@@ -2615,7 +2708,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /**
@@ -2669,7 +2762,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 /**
@@ -2769,7 +2862,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 /**
@@ -2909,7 +3002,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 /**
@@ -3092,7 +3185,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /**
@@ -3518,7 +3611,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /**
@@ -3630,7 +3723,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 /**
@@ -4092,7 +4185,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 /**
@@ -4155,7 +4248,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /**
@@ -4275,7 +4368,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 /**
@@ -4439,7 +4532,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /**
@@ -4719,7 +4812,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /**
@@ -4892,7 +4985,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 /**
@@ -5310,7 +5403,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /**
@@ -5376,7 +5469,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /**
@@ -5423,7 +5516,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 /**
@@ -5618,7 +5711,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 /**
@@ -5696,14 +5789,14 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(31);
+module.exports = __webpack_require__(32);
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -5712,17 +5805,17 @@ module.exports = __webpack_require__(31);
 
 var namespace = Object.create( null );
 
-__webpack_require__( 32 )();
+__webpack_require__( 1 )();
 __webpack_require__( 33 )( namespace );
 __webpack_require__( 34 )( namespace );
-__webpack_require__( 1 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
 __webpack_require__( 5 )( namespace );
-__webpack_require__( 41 )( namespace );
 __webpack_require__( 6 )( namespace );
+__webpack_require__( 41 )( namespace );
 __webpack_require__( 7 )( namespace );
+__webpack_require__( 8 )( namespace );
 __webpack_require__( 42 )( namespace );
 __webpack_require__( 43 )( namespace );
 __webpack_require__( 44 )( namespace );
@@ -5731,10 +5824,9 @@ __webpack_require__( 46 )( namespace );
 __webpack_require__( 47 )( namespace );
 __webpack_require__( 48 )( namespace );
 __webpack_require__( 49 )( namespace );
-__webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
-__webpack_require__( 50 )( namespace );
 __webpack_require__( 10 )( namespace );
+__webpack_require__( 50 )( namespace );
 __webpack_require__( 11 )( namespace );
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 13 )( namespace );
@@ -5748,6 +5840,7 @@ __webpack_require__( 20 )( namespace );
 __webpack_require__( 21 )( namespace );
 __webpack_require__( 22 )( namespace );
 __webpack_require__( 23 )( namespace );
+__webpack_require__( 24 )( namespace );
 __webpack_require__( 51 )( namespace );
 __webpack_require__( 52 )( namespace );
 __webpack_require__( 53 )( namespace );
@@ -5756,9 +5849,9 @@ __webpack_require__( 55 )( namespace );
 __webpack_require__( 56 )( namespace );
 __webpack_require__( 57 )( namespace );
 __webpack_require__( 58 )( namespace );
-__webpack_require__( 24 )( namespace );
 __webpack_require__( 25 )( namespace );
 __webpack_require__( 26 )( namespace );
+__webpack_require__( 27 )( namespace );
 __webpack_require__( 59 )( namespace );
 __webpack_require__( 60 )( namespace );
 __webpack_require__( 61 )( namespace );
@@ -5771,9 +5864,9 @@ __webpack_require__( 67 )( namespace );
 __webpack_require__( 68 )( namespace );
 __webpack_require__( 69 )( namespace );
 __webpack_require__( 70 )( namespace );
-__webpack_require__( 27 )( namespace );
 __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
+__webpack_require__( 30 )( namespace );
 __webpack_require__( 71 )( namespace );
 __webpack_require__( 72 )( namespace );
 __webpack_require__( 73 )( namespace );
@@ -5790,99 +5883,6 @@ global.Nenkraft = global.nk = namespace;
 // if ( DEVELOPMENT && module.hot ) module.hot.accept();
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-module.exports = function() {
-
-  Array.prototype.indexPop = function( index ) {
-
-    var last = this.length - 1;
-
-    if ( last > 1 && index <= last && index >= 0 ) {
-  
-      var temp = this[last];
-      this[last] = this[index];
-      this[index] = temp;
-  
-      return this.pop();
-    
-    }
-
-    return this.pop();
-  
-  };
-
-  Array.prototype.indexShift = function( index ) {
-  
-    if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
-  
-      var temp = this[0];
-      this[0] = this[index];
-      this[index] = temp;
-
-      return this.shift();
-    
-    }
-
-    return this.shift();
-  
-  };
-
-  Array.prototype.popSplice = function( index ) {
-
-    var i = this.length - 1;
-    if ( i < 1 ) return;
-    var returnee = this[index];
-
-    while ( index < i ) {
- 
-      this[index] = this[index + 1]; 
-      index++; 
-    
-    }
-
-    this.pop();
-
-    return returnee;
-  
-  };
-
-  Array.prototype.shiftSplice = function( index ) {
-
-    var length = this.length;
-    if ( length < 1 ) return;
-    var returnee = this[index];
-
-    while ( index > 0 ) {
-
-      this[index] = this[index - 1];
-      index--;
-    
-    }
-
-    this.shift();
-
-    return returnee;
-  
-  };
-
-  Array.prototype.fickleSplice = function( index ) {
-
-    if ( index > ( this.length * 0.5 ) | 0 ) {
-
-      return this.popSplice( index );
-    
-    }
-
-    return this.shiftSplice( index );
-  
-  };
-
-};
-
 
 /***/ }),
 /* 33 */
@@ -7126,32 +7126,32 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Math.Vector2D;
 
-  function Pixel2D ( _x, _y, _style ) {
+  function Pixel ( _x, _y, _style ) {
 
-    if ( !( this instanceof Pixel2D ) ) return new Pixel2D( _x, _y, _style );
+    if ( !( this instanceof Pixel ) ) return new Pixel( _x, _y, _style );
     Super.call( this, _x, _y );
     this.style = new Nenkraft.Style.CreateP( _style );
     this.colorObj = new Nenkraft.Color();
   
   }
 
-  Pixel2D.prototype = Object.create( Super.prototype );
-  Pixel2D.prototype.constructor = Pixel2D;
+  Pixel.prototype = Object.create( Super.prototype );
+  Pixel.prototype.constructor = Pixel;
   // Static
 
   // Members
-  Pixel2D.prototype.colorObj = null;
-  Pixel2D.prototype.style = null;
-  Pixel2D.prototype.programController = null;
-  Pixel2D.prototype.bufferData = null;
+  Pixel.prototype.colorObj = null;
+  Pixel.prototype.style = null;
+  Pixel.prototype.programController = null;
+  Pixel.prototype.bufferData = null;
 
   // Methods
   /*
-   * Pixel2D.prototype.Draw = function ( _rc ) {
+   * Pixel.prototype.Draw = function ( _rc ) {
    * //TODO
    *}; 
    */
-  Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
+  Pixel.prototype.GLDraw = function ( _gl, _transform ) {
 
     if ( this.programController !== null ) {
 
@@ -7164,20 +7164,20 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Pixel2D.prototype.LinkProgramController = function ( _pc ) {
+  Pixel.prototype.LinkProgramController = function ( _pc ) {
 
     this.programController = _pc;
     this.LinkStyle();
   
   };
 
-  Pixel2D.prototype.UseProgramController = function ( _pc ) {
+  Pixel.prototype.UseProgramController = function ( _pc ) {
 
     this.programController = _pc;
   
   };
 
-  Pixel2D.prototype.LinkStyle = function () {
+  Pixel.prototype.LinkStyle = function () {
 
     var pc = this.programController;
 
@@ -7190,7 +7190,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Pixel2D.prototype.GetBufferData = function () {
+  Pixel.prototype.GetBufferData = function () {
 
     if ( this.bufferData == null ) {
 
@@ -7210,7 +7210,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Pixel2D.prototype.UpdateInBuffer = function ( _buffer, _index ) {
+  Pixel.prototype.UpdateInBuffer = function ( _buffer, _index ) {
 
     _buffer[ _index ] = this.x;
     _buffer[ _index + 1 ] = this.y;
@@ -7222,7 +7222,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Path.Pixel2D = Pixel2D;
+  Nenkraft.Path.Pixel = Pixel;
 
 };
 

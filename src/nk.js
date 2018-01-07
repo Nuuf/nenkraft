@@ -43,7 +43,7 @@ require( './nk-utils/nk-quadtree-node' )( namespace );
 require( './nk-input/nk-mouse' )( namespace );
 require( './nk-input/nk-keyboard' )( namespace );
 require( './nk-debug/nk-debug' )( namespace );
-require( './nk-path/nk-pixel/nk-pixel2d' )( namespace );
+require( './nk-path/nk-pixel/nk-pixel' )( namespace );
 require( './nk-path/nk-line/nk-line2d' )( namespace );
 require( './nk-path/nk-aabb/nk-aabb2d' )( namespace );
 require( './nk-path/nk-polygon/nk-polygon2d' )( namespace );

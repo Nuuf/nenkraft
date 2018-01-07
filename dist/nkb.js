@@ -103,165 +103,91 @@ module.exports = g;
 /***/ 1:
 /***/ (function(module, exports) {
 
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
+module.exports = function() {
 
-module.exports = function ( Nenkraft ) {
+  Array.prototype.indexPop = function( index ) {
 
-  'use strict';
-  Nenkraft.Math.PII = Math.PI * 2;
-  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
-  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
-  Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
+    var last = this.length - 1;
 
-  Nenkraft.Math.DegreesToRadians = function ( _angle ) {
-
-    return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
+    if ( last > 1 && index <= last && index >= 0 ) {
   
-  };
-
-  Nenkraft.Math.DTR = Nenkraft.Math.DegreesToRadians;
-
-  Nenkraft.Math.RadiansToDegrees = function ( _angle ) {
-
-    return _angle * Nenkraft.Math.RADIANS_TO_DEGREES;
+      var temp = this[last];
+      this[last] = this[index];
+      this[index] = temp;
   
-  };
-
-  Nenkraft.Math.RTD = Nenkraft.Math.RadiansToDegrees;
-
-  Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
-
-    var divisor = Math.pow( 10, _precision );
-    return Math.round( divisor * _value ) / divisor;
-  
-  };
-
-  Nenkraft.Math.PR = Nenkraft.Math.PrecisionRound;
-
-  Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
-
-    return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
-  
-  };
-
-  Nenkraft.Math.AttractRepel = function ( _repeller, _attractor, _velocity, _radius, _strength ) {
-
-    var delta = _attractor.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
-
-    if ( distance < _radius * _radius ) {
-
-      var theta = delta.GetAngle();
-      _velocity.Add(
-        Math.cos( theta ) * _strength,
-        Math.sin( theta ) * _strength
-      );
-    
-    }
-  
-  };
-
-  Nenkraft.Math.LineLineIntersection = function ( _sA, _eA, _sB, _eB ) {
-
-    var d1 = _eA.SubtractVC( _sA );
-    var d2 = _eB.SubtractVC( _sB );
-    var l = -d2.x * d1.y + d1.x * d2.y;
-    var abx = _sA.x - _sB.x;
-    var aby = _sA.y - _sB.y;
-    var s = ( -d1.y * abx + d1.x * aby ) / l;
-    var t = ( d2.x * aby - d2.y * abx ) / l;
-
-    if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
-
-      d1.Set( _sA.x + ( t * d1.x ), _sA.y + ( t * d1.y ) );
-      return d1;
+      return this.pop();
     
     }
 
-    return false;
+    return this.pop();
   
   };
 
-  Nenkraft.Math.ClosestPointOnLine = function ( _s, _e, _v ) {
+  Array.prototype.indexShift = function( index ) {
+  
+    if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
+  
+      var temp = this[0];
+      this[0] = this[index];
+      this[index] = temp;
 
-    var delta = _e.SubtractVC( _s );
-    var u = ( ( _v.x - _s.x ) * delta.x + ( _v.y - _s.y ) * delta.y ) / delta.GetMagnitudeSquared();
-
-    if ( u < 0 ) {
-
-      return _s;
-    
-    } else if ( u > 1 ) {
-
-      return _e;
+      return this.shift();
     
     }
 
-    delta.Set( _s.x + u * delta.x, _s.y + u * delta.y );
-    return delta;
+    return this.shift();
   
   };
 
-  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+  Array.prototype.popSplice = function( index ) {
 
-    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+    var i = this.length - 1;
+    if ( i < 1 ) return;
+    var returnee = this[index];
 
-      _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
-    
-    }
-  
-  };
-
-  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
-
-    var grid = [];
-
-    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
-
-      grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
+    while ( index < i ) {
+ 
+      this[index] = this[index + 1]; 
+      index++; 
     
     }
 
-    return grid;
+    this.pop();
+
+    return returnee;
   
   };
 
-  Nenkraft.Math.TriRectArray = function ( _x, _y, _w, _h, _arr ) {
+  Array.prototype.shiftSplice = function( index ) {
 
-    if ( _arr != null ) {
+    var length = this.length;
+    if ( length < 1 ) return;
+    var returnee = this[index];
 
-      _arr[ 0 ] = _x;
-      _arr[ 1 ] = _y;
-      _arr[ 2 ] = _x + _w;
-      _arr[ 3 ] = _y;
-      _arr[ 4 ] = _x;
-      _arr[ 5 ] = _y + _h;
-      _arr[ 6 ] = _x;
-      _arr[ 7 ] = _y + _h;
-      _arr[ 8 ] = _x + _w;
-      _arr[ 9 ] = _y;
-      _arr[ 10 ] = _x + _w;
-      _arr[ 11 ] = _y + _h;
-      return _arr;
+    while ( index > 0 ) {
+
+      this[index] = this[index - 1];
+      index--;
     
     }
 
-    return [
-      _x, _y,
-      _x + _w, _y,
-      _x, _y + _h,
-      _x, _y + _h,
-      _x + _w, _y,
-      _x + _w, _y + _h
-    ];
+    this.shift();
+
+    return returnee;
   
   };
 
-  Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
-  Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
-  Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
-  Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );
+  Array.prototype.fickleSplice = function( index ) {
+
+    if ( index > ( this.length * 0.5 ) | 0 ) {
+
+      return this.popSplice( index );
+    
+    }
+
+    return this.shiftSplice( index );
+  
+  };
 
 };
 
@@ -269,6 +195,132 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 
 /***/ 10:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function LocalEvent () {
+
+    if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
+    this.listeners = [];
+  
+  }
+
+  LocalEvent.prototype = Object.create( null );
+  LocalEvent.prototype.constructor = LocalEvent;
+  // Static
+
+  // Members
+  LocalEvent.prototype.stopPropagation = false;
+  LocalEvent.prototype.target = null;
+  LocalEvent.prototype.data = null;
+
+  // Methods
+  LocalEvent.prototype.GetListenerIndex = function ( _handle, _context ) {
+
+    var listeners = this.listeners;
+    if ( listeners.length === 0 ) return -1;
+
+    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
+
+      listener = listeners[ i ];
+
+      if ( listener.context === _context && listener.handle === _handle ) {
+
+        return i;
+      
+      }
+    
+    }
+
+    return -1;
+  
+  };
+
+  LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
+
+    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
+    this.listeners.push( listener );
+  
+  };
+
+  LocalEvent.prototype.Remove = function ( _handle, _context ) {
+
+    var ix = this.GetListenerIndex( _handle, _context );
+
+    if ( ix !== -1 ) {
+
+      this.listeners.fickleSplice( ix );
+    
+    }
+  
+  };
+
+  LocalEvent.prototype.Dump = function ( _context ) {
+
+    var listeners = this.listeners;
+    if ( listeners.length === 0 ) return;
+
+    if ( _context !== undefined ) {
+
+      for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
+
+        listener = listeners[ i ];
+
+        if ( listener.context === _context ) {
+
+          this.listeners.fickleSplice( i );
+        
+        }
+      
+      }
+    
+    }
+    else {
+
+      this.listeners.length = 0;
+    
+    }
+  
+  };
+
+  LocalEvent.prototype.Dispatch = function ( _target, _data ) {
+
+    var listeners = this.listeners;
+    if ( listeners.length === 0 ) return;
+    listeners = listeners.slice();
+    this.stopPropagation = false;
+    this.target = _target;
+    this.data = _data;
+
+    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
+
+      listener = listeners[ i ];
+      listener.Execute( this );
+      if ( this.stopPropagation === true ) break;
+    
+    }
+
+    delete this.target;
+    delete this.data;
+  
+  };
+
+  Nenkraft.Event.LocalEvent = LocalEvent;
+  Nenkraft.LocalEvent = LocalEvent;
+
+};
+
+
+/***/ }),
+
+/***/ 11:
 /***/ (function(module, exports) {
 
 /**
@@ -395,7 +447,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 11:
+/***/ 12:
 /***/ (function(module, exports) {
 
 /**
@@ -993,7 +1045,61 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 12:
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(129);
+
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+var namespace = Object.create( null );
+
+__webpack_require__( 1 )();
+__webpack_require__( 130 )( namespace );
+__webpack_require__( 2 )( namespace );
+__webpack_require__( 3 )( namespace );
+__webpack_require__( 4 )( namespace );
+__webpack_require__( 5 )( namespace );
+__webpack_require__( 6 )( namespace );
+__webpack_require__( 7 )( namespace );
+__webpack_require__( 8 )( namespace );
+__webpack_require__( 9 )( namespace );
+__webpack_require__( 10 )( namespace );
+__webpack_require__( 11 )( namespace );
+__webpack_require__( 12 )( namespace );
+__webpack_require__( 13 )( namespace );
+__webpack_require__( 14 )( namespace );
+__webpack_require__( 15 )( namespace );
+__webpack_require__( 21 )( namespace );
+__webpack_require__( 22 )( namespace );
+__webpack_require__( 23 )( namespace );
+__webpack_require__( 16 )( namespace );
+__webpack_require__( 17 )( namespace );
+__webpack_require__( 18 )( namespace );
+__webpack_require__( 19 )( namespace );
+__webpack_require__( 20 )( namespace );
+__webpack_require__( 24 )( namespace );
+__webpack_require__( 25 )( namespace );
+__webpack_require__( 26 )( namespace );
+__webpack_require__( 27 )( namespace );
+__webpack_require__( 28 )( namespace );
+__webpack_require__( 29 )( namespace );
+__webpack_require__( 30 )( namespace );
+
+module.exports = namespace;
+
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, exports) {
 
 /**
@@ -1225,60 +1331,31 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 128:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(129);
-
-
-/***/ }),
-
-/***/ 129:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 130:
+/***/ (function(module, exports) {
 
 /**
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
-var namespace = Object.create( null );
+module.exports = function ( Nenkraft ) {
 
-__webpack_require__( 130 )( namespace );
-__webpack_require__( 1 )( namespace );
-__webpack_require__( 2 )( namespace );
-__webpack_require__( 3 )( namespace );
-__webpack_require__( 4 )( namespace );
-__webpack_require__( 5 )( namespace );
-__webpack_require__( 6 )( namespace );
-__webpack_require__( 7 )( namespace );
-__webpack_require__( 8 )( namespace );
-__webpack_require__( 9 )( namespace );
-__webpack_require__( 10 )( namespace );
-__webpack_require__( 11 )( namespace );
-__webpack_require__( 12 )( namespace );
-__webpack_require__( 13 )( namespace );
-__webpack_require__( 14 )( namespace );
-__webpack_require__( 20 )( namespace );
-__webpack_require__( 21 )( namespace );
-__webpack_require__( 22 )( namespace );
-__webpack_require__( 15 )( namespace );
-__webpack_require__( 16 )( namespace );
-__webpack_require__( 17 )( namespace );
-__webpack_require__( 18 )( namespace );
-__webpack_require__( 19 )( namespace );
-__webpack_require__( 23 )( namespace );
-__webpack_require__( 24 )( namespace );
-__webpack_require__( 25 )( namespace );
-__webpack_require__( 26 )( namespace );
-__webpack_require__( 27 )( namespace );
-__webpack_require__( 28 )( namespace );
-__webpack_require__( 29 )( namespace );
+  Nenkraft.Geom = Object.create( null );
+  Nenkraft.Math = Object.create( null );
+  Nenkraft.Utils = Object.create( null );
+  Nenkraft.Entity = Object.create( null );
+  Nenkraft.Event = Object.create( null );
+  Nenkraft.Time = Object.create( null );
+  Nenkraft.CP = Object.create( null );
+  Nenkraft.VERSION = '0.5.3 (Alpha)';
+  console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
 
-module.exports = namespace;
+};
 
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
 /***/ (function(module, exports) {
 
 /**
@@ -1333,31 +1410,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 130:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  Nenkraft.Geom = Object.create( null );
-  Nenkraft.Math = Object.create( null );
-  Nenkraft.Utils = Object.create( null );
-  Nenkraft.Entity = Object.create( null );
-  Nenkraft.Event = Object.create( null );
-  Nenkraft.Time = Object.create( null );
-  Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.5.3 (Alpha)';
-  console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
-
-};
-
-
-/***/ }),
-
-/***/ 14:
+/***/ 15:
 /***/ (function(module, exports) {
 
 /**
@@ -1458,7 +1511,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 15:
+/***/ 16:
 /***/ (function(module, exports) {
 
 /**
@@ -1599,7 +1652,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports) {
 
 /**
@@ -1783,7 +1836,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 17:
+/***/ 18:
 /***/ (function(module, exports) {
 
 /**
@@ -2210,7 +2263,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 18:
+/***/ 19:
 /***/ (function(module, exports) {
 
 /**
@@ -2323,7 +2376,175 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 19:
+/***/ 2:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+  Nenkraft.Math.PII = Math.PI * 2;
+  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
+  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
+  Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
+
+  Nenkraft.Math.DegreesToRadians = function ( _angle ) {
+
+    return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
+  
+  };
+
+  Nenkraft.Math.DTR = Nenkraft.Math.DegreesToRadians;
+
+  Nenkraft.Math.RadiansToDegrees = function ( _angle ) {
+
+    return _angle * Nenkraft.Math.RADIANS_TO_DEGREES;
+  
+  };
+
+  Nenkraft.Math.RTD = Nenkraft.Math.RadiansToDegrees;
+
+  Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
+
+    var divisor = Math.pow( 10, _precision );
+    return Math.round( divisor * _value ) / divisor;
+  
+  };
+
+  Nenkraft.Math.PR = Nenkraft.Math.PrecisionRound;
+
+  Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
+
+    return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
+  
+  };
+
+  Nenkraft.Math.AttractRepel = function ( _repeller, _attractor, _velocity, _radius, _strength ) {
+
+    var delta = _attractor.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
+
+    if ( distance < _radius * _radius ) {
+
+      var theta = delta.GetAngle();
+      _velocity.Add(
+        Math.cos( theta ) * _strength,
+        Math.sin( theta ) * _strength
+      );
+    
+    }
+  
+  };
+
+  Nenkraft.Math.LineLineIntersection = function ( _sA, _eA, _sB, _eB ) {
+
+    var d1 = _eA.SubtractVC( _sA );
+    var d2 = _eB.SubtractVC( _sB );
+    var l = -d2.x * d1.y + d1.x * d2.y;
+    var abx = _sA.x - _sB.x;
+    var aby = _sA.y - _sB.y;
+    var s = ( -d1.y * abx + d1.x * aby ) / l;
+    var t = ( d2.x * aby - d2.y * abx ) / l;
+
+    if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
+
+      d1.Set( _sA.x + ( t * d1.x ), _sA.y + ( t * d1.y ) );
+      return d1;
+    
+    }
+
+    return false;
+  
+  };
+
+  Nenkraft.Math.ClosestPointOnLine = function ( _s, _e, _v ) {
+
+    var delta = _e.SubtractVC( _s );
+    var u = ( ( _v.x - _s.x ) * delta.x + ( _v.y - _s.y ) * delta.y ) / delta.GetMagnitudeSquared();
+
+    if ( u < 0 ) {
+
+      return _s;
+    
+    } else if ( u > 1 ) {
+
+      return _e;
+    
+    }
+
+    delta.Set( _s.x + u * delta.x, _s.y + u * delta.y );
+    return delta;
+  
+  };
+
+  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+
+    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+
+      _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
+    
+    }
+  
+  };
+
+  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
+
+    var grid = [];
+
+    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
+
+      grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
+    
+    }
+
+    return grid;
+  
+  };
+
+  Nenkraft.Math.TriRectArray = function ( _x, _y, _w, _h, _arr ) {
+
+    if ( _arr != null ) {
+
+      _arr[ 0 ] = _x;
+      _arr[ 1 ] = _y;
+      _arr[ 2 ] = _x + _w;
+      _arr[ 3 ] = _y;
+      _arr[ 4 ] = _x;
+      _arr[ 5 ] = _y + _h;
+      _arr[ 6 ] = _x;
+      _arr[ 7 ] = _y + _h;
+      _arr[ 8 ] = _x + _w;
+      _arr[ 9 ] = _y;
+      _arr[ 10 ] = _x + _w;
+      _arr[ 11 ] = _y + _h;
+      return _arr;
+    
+    }
+
+    return [
+      _x, _y,
+      _x + _w, _y,
+      _x, _y + _h,
+      _x, _y + _h,
+      _x + _w, _y,
+      _x + _w, _y + _h
+    ];
+  
+  };
+
+  Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );
+
+};
+
+
+/***/ }),
+
+/***/ 20:
 /***/ (function(module, exports) {
 
 /**
@@ -2786,366 +3007,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Assert ( _data, _compare, _value, _noSelfAssert ) {
-
-    if ( _noSelfAssert == undefined || typeof _data.Assert !== 'function' ) {
-
-      switch ( _compare ) {
-
-        case Assert.IS:
-          Is( _data, _value, _compare );
-          return;
-        case Assert.IS_NOT:
-          IsNot( _data, _value, _compare );
-          return;
-        case Assert.IS_SAME_TYPE:
-          IsSameType( _data, _value, _compare );
-          return;
-        case Assert.IS_NOT_SAME_TYPE:
-          IsNotSameType( _data, _value, _compare );
-          return;
-        case Assert.IS_INSTANCE_OF:
-          IsInstanceOf( _data, _value, _compare );
-          return;
-        case Assert.IS_NOT_INSTANCE_OF:
-          IsNotInstanceOf( _data, _value, _compare );
-          return;
-        case Assert.IS_LESS_THAN:
-          IsLessThan( _data, _value, _compare );
-          return;
-        case Assert.IS_GREATER_THAN:
-          IsGreaterThan( _data, _value, _compare );
-          return;
-        case Assert.IS_LESS_THAN_OR_EQUAL:
-          IsLessThanOrEqual( _data, _value, _compare );
-          return;
-        case Assert.IS_GREATER_THAN_OR_EQUAL:
-          IsGreaterThanOrEqual( _data, _value, _compare );
-          return;
-        default:
-          throw new Error( 'No comparison: ' + _compare );
-      
-      }
-    
-    } else {
-
-      _data.Assert( _compare, _value );
-    
-    }
-  
-  }
-
-  function Is ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data !== _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsNot ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data === _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsSameType ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
-
-      if ( !Array.isArray( _data ) && !Array.isArray( _value ) ) {
-
-        failed = true;
-      
-      }
-    
-    } else if ( _data === null || _value === null ) {
-
-      if ( _data !== _value ) {
-
-        failed = true;
-        
-      }
-      
-    }
-    else if ( typeof _data !== typeof _value ) {
-
-      failed = true;
-      
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsNotSameType ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
-
-      if ( Array.isArray( _data ) && ( Array.isArray( _value ) ) ) {
-
-        failed = true;
-      
-      }
-    
-    } else if ( _data === null || _value === null ) {
-
-      if ( _value === _data ) {
-
-        failed = true;
-        
-      }
-      
-    }
-    else if ( typeof _data === typeof _value ) {
-
-      failed = true;
-      
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsInstanceOf ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( !( _data instanceof _value ) ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value.name, _compare );
-  
-  }
-
-  function IsNotInstanceOf ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data instanceof _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value.name, _compare );
-  
-  }
-
-  function IsLessThan ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data >= _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsGreaterThan ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data <= _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsLessThanOrEqual ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data > _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function IsGreaterThanOrEqual ( _data, _value, _compare ) {
-
-    var failed = false;
-
-    if ( _data < _value ) {
-
-      failed = true;
-    
-    }
-
-    Check( failed, _data, _value, _compare );
-  
-  }
-
-  function Check ( _failed, _data, _value, _compare ) {
-
-    if ( _failed ) {
-
-      ErrorInfo( _data, _value, _compare );
-      throw new Error( 'Assertion failed: ' + _compare );
-    
-    } else if ( Assert.LOG && window ) {
-
-      SuccessLog( _data, _value, _compare );
-      
-    }
-  
-  }
-
-  function ErrorInfo ( _data, _value, _compare ) {
-
-    switch ( _compare ) {
-
-      case Assert.IS:
-        _compare = Assert.IS_NOT;
-        break;
-      case Assert.IS_NOT:
-        _compare = Assert.IS;
-        break;
-      case Assert.IS_SAME_TYPE:
-        _compare = Assert.IS_NOT_SAME_TYPE;
-        break;
-      case Assert.IS_NOT_SAME_TYPE:
-        _compare = Assert.IS_SAME_TYPE;
-        break;
-      case Assert.IS_INSTANCE_OF:
-        _compare = Assert.IS_NOT_INSTANCE_OF;
-        break;
-      case Assert.IS_NOT_INSTANCE_OF:
-        _compare = Assert.IS_INSTANCE_OF;
-        break;
-      case Assert.IS_LESS_THAN:
-        _compare = Assert.IS_GREATER_THAN_OR_EQUAL;
-        break;
-      case Assert.IS_GREATER_THAN:
-        _compare = Assert.IS_LESS_THAN_OR_EQUAL;
-        break;
-      case Assert.IS_LESS_THAN_OR_EQUAL:
-        _compare = Assert.IS_GREATER_THAN;
-        break;
-      case Assert.IS_GREATER_THAN_OR_EQUAL:
-        _compare = Assert.IS_LESS_THAN;
-        break;
-      default:
-        throw new Error( 'Unexpected error' );
-    
-    }
-
-    console.error( _data, _compare, _value );
-  
-  }
-
-  function SuccessLog ( _data, _value, _compare ) {
-
-    console.log( '%c<<||-?START?-||>>', 'background-color: black; color: #0FF; padding: 0px 25px;' );
-    console.log( '%cAssertion success: ', 'background-color: #333; color: #0F0; padding: 0px 25px;' );
-    console.log( _data );
-    console.log( _compare );
-    console.log( _value );
-    console.log( '%c>>||-?END?-||<<', 'background-color: black; color: #FF0; padding: 0px 25px;' );
-  
-  }
-
-  Assert.IS = 'IS';
-  Assert.IS_NOT = 'IS NOT';
-  Assert.IS_SAME_TYPE = 'IS SAME TYPE';
-  Assert.IS_NOT_SAME_TYPE = 'IS NOT SAME TYPE';
-  Assert.IS_INSTANCE_OF = 'IS INSTANCE OF';
-  Assert.IS_NOT_INSTANCE_OF = 'IS NOT INSTANCE OF';
-  Assert.IS_LESS_THAN = 'IS LESS THAN';
-  Assert.IS_GREATER_THAN = 'IS GREATER THAN';
-  Assert.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
-  Assert.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
-
-  Assert.GlobalAssign = function () {
-
-    var g;
-
-    if ( window ) {
-
-      g = window;
-    
-    } else if ( global ) {
-
-      g = global;
-    
-    }
-
-    if ( g ) {
-
-      g.IS = Assert.IS;
-      g.IS_NOT = Assert.IS_NOT;
-      g.IS_SAME_TYPE = Assert.IS_SAME_TYPE;
-      g.IS_NOT_SAME_TYPE = Assert.IS_NOT_SAME_TYPE;
-      g.IS_INSTANCE_OF = Assert.IS_INSTANCE_OF;
-      g.IS_NOT_INSTANCE_OF = Assert.IS_NOT_INSTANCE_OF;
-      g.IS_LESS_THAN = Assert.IS_LESS_THAN;
-      g.IS_GREATER_THAN = Assert.IS_GREATER_THAN;
-      g.IS_LESS_THAN_OR_EQUAL = Assert.IS_LESS_THAN_OR_EQUAL;
-      g.IS_GREATER_THAN_OR_EQUAL = Assert.IS_GREATER_THAN_OR_EQUAL;
-    
-    } else {
-
-      throw new Error( 'No global namespace' );
-    
-    }
-  
-  };
-
-  Assert.LOG = false;
-  Nenkraft.Utils.Assert = Assert;
-  Nenkraft.Assert = Assert;
-
-};
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports) {
 
 /**
@@ -3209,7 +3071,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports) {
 
 /**
@@ -3330,7 +3192,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 /**
@@ -3495,7 +3357,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 23:
+/***/ 24:
 /***/ (function(module, exports) {
 
 /**
@@ -3776,7 +3638,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 25:
 /***/ (function(module, exports) {
 
 /**
@@ -3950,7 +3812,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 25:
+/***/ 26:
 /***/ (function(module, exports) {
 
 /**
@@ -4369,7 +4231,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /***/ (function(module, exports) {
 
 /**
@@ -4436,7 +4298,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 27:
+/***/ 28:
 /***/ (function(module, exports) {
 
 /**
@@ -4484,7 +4346,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /***/ (function(module, exports) {
 
 /**
@@ -4680,7 +4542,366 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 29:
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Assert ( _data, _compare, _value, _noSelfAssert ) {
+
+    if ( _noSelfAssert == undefined || typeof _data.Assert !== 'function' ) {
+
+      switch ( _compare ) {
+
+        case Assert.IS:
+          Is( _data, _value, _compare );
+          return;
+        case Assert.IS_NOT:
+          IsNot( _data, _value, _compare );
+          return;
+        case Assert.IS_SAME_TYPE:
+          IsSameType( _data, _value, _compare );
+          return;
+        case Assert.IS_NOT_SAME_TYPE:
+          IsNotSameType( _data, _value, _compare );
+          return;
+        case Assert.IS_INSTANCE_OF:
+          IsInstanceOf( _data, _value, _compare );
+          return;
+        case Assert.IS_NOT_INSTANCE_OF:
+          IsNotInstanceOf( _data, _value, _compare );
+          return;
+        case Assert.IS_LESS_THAN:
+          IsLessThan( _data, _value, _compare );
+          return;
+        case Assert.IS_GREATER_THAN:
+          IsGreaterThan( _data, _value, _compare );
+          return;
+        case Assert.IS_LESS_THAN_OR_EQUAL:
+          IsLessThanOrEqual( _data, _value, _compare );
+          return;
+        case Assert.IS_GREATER_THAN_OR_EQUAL:
+          IsGreaterThanOrEqual( _data, _value, _compare );
+          return;
+        default:
+          throw new Error( 'No comparison: ' + _compare );
+      
+      }
+    
+    } else {
+
+      _data.Assert( _compare, _value );
+    
+    }
+  
+  }
+
+  function Is ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data !== _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsNot ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data === _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsSameType ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
+
+      if ( !Array.isArray( _data ) && !Array.isArray( _value ) ) {
+
+        failed = true;
+      
+      }
+    
+    } else if ( _data === null || _value === null ) {
+
+      if ( _data !== _value ) {
+
+        failed = true;
+        
+      }
+      
+    }
+    else if ( typeof _data !== typeof _value ) {
+
+      failed = true;
+      
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsNotSameType ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
+
+      if ( Array.isArray( _data ) && ( Array.isArray( _value ) ) ) {
+
+        failed = true;
+      
+      }
+    
+    } else if ( _data === null || _value === null ) {
+
+      if ( _value === _data ) {
+
+        failed = true;
+        
+      }
+      
+    }
+    else if ( typeof _data === typeof _value ) {
+
+      failed = true;
+      
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsInstanceOf ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( !( _data instanceof _value ) ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value.name, _compare );
+  
+  }
+
+  function IsNotInstanceOf ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data instanceof _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value.name, _compare );
+  
+  }
+
+  function IsLessThan ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data >= _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsGreaterThan ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data <= _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsLessThanOrEqual ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data > _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function IsGreaterThanOrEqual ( _data, _value, _compare ) {
+
+    var failed = false;
+
+    if ( _data < _value ) {
+
+      failed = true;
+    
+    }
+
+    Check( failed, _data, _value, _compare );
+  
+  }
+
+  function Check ( _failed, _data, _value, _compare ) {
+
+    if ( _failed ) {
+
+      ErrorInfo( _data, _value, _compare );
+      throw new Error( 'Assertion failed: ' + _compare );
+    
+    } else if ( Assert.LOG && window ) {
+
+      SuccessLog( _data, _value, _compare );
+      
+    }
+  
+  }
+
+  function ErrorInfo ( _data, _value, _compare ) {
+
+    switch ( _compare ) {
+
+      case Assert.IS:
+        _compare = Assert.IS_NOT;
+        break;
+      case Assert.IS_NOT:
+        _compare = Assert.IS;
+        break;
+      case Assert.IS_SAME_TYPE:
+        _compare = Assert.IS_NOT_SAME_TYPE;
+        break;
+      case Assert.IS_NOT_SAME_TYPE:
+        _compare = Assert.IS_SAME_TYPE;
+        break;
+      case Assert.IS_INSTANCE_OF:
+        _compare = Assert.IS_NOT_INSTANCE_OF;
+        break;
+      case Assert.IS_NOT_INSTANCE_OF:
+        _compare = Assert.IS_INSTANCE_OF;
+        break;
+      case Assert.IS_LESS_THAN:
+        _compare = Assert.IS_GREATER_THAN_OR_EQUAL;
+        break;
+      case Assert.IS_GREATER_THAN:
+        _compare = Assert.IS_LESS_THAN_OR_EQUAL;
+        break;
+      case Assert.IS_LESS_THAN_OR_EQUAL:
+        _compare = Assert.IS_GREATER_THAN;
+        break;
+      case Assert.IS_GREATER_THAN_OR_EQUAL:
+        _compare = Assert.IS_LESS_THAN;
+        break;
+      default:
+        throw new Error( 'Unexpected error' );
+    
+    }
+
+    console.error( _data, _compare, _value );
+  
+  }
+
+  function SuccessLog ( _data, _value, _compare ) {
+
+    console.log( '%c<<||-?START?-||>>', 'background-color: black; color: #0FF; padding: 0px 25px;' );
+    console.log( '%cAssertion success: ', 'background-color: #333; color: #0F0; padding: 0px 25px;' );
+    console.log( _data );
+    console.log( _compare );
+    console.log( _value );
+    console.log( '%c>>||-?END?-||<<', 'background-color: black; color: #FF0; padding: 0px 25px;' );
+  
+  }
+
+  Assert.IS = 'IS';
+  Assert.IS_NOT = 'IS NOT';
+  Assert.IS_SAME_TYPE = 'IS SAME TYPE';
+  Assert.IS_NOT_SAME_TYPE = 'IS NOT SAME TYPE';
+  Assert.IS_INSTANCE_OF = 'IS INSTANCE OF';
+  Assert.IS_NOT_INSTANCE_OF = 'IS NOT INSTANCE OF';
+  Assert.IS_LESS_THAN = 'IS LESS THAN';
+  Assert.IS_GREATER_THAN = 'IS GREATER THAN';
+  Assert.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
+  Assert.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
+
+  Assert.GlobalAssign = function () {
+
+    var g;
+
+    if ( window ) {
+
+      g = window;
+    
+    } else if ( global ) {
+
+      g = global;
+    
+    }
+
+    if ( g ) {
+
+      g.IS = Assert.IS;
+      g.IS_NOT = Assert.IS_NOT;
+      g.IS_SAME_TYPE = Assert.IS_SAME_TYPE;
+      g.IS_NOT_SAME_TYPE = Assert.IS_NOT_SAME_TYPE;
+      g.IS_INSTANCE_OF = Assert.IS_INSTANCE_OF;
+      g.IS_NOT_INSTANCE_OF = Assert.IS_NOT_INSTANCE_OF;
+      g.IS_LESS_THAN = Assert.IS_LESS_THAN;
+      g.IS_GREATER_THAN = Assert.IS_GREATER_THAN;
+      g.IS_LESS_THAN_OR_EQUAL = Assert.IS_LESS_THAN_OR_EQUAL;
+      g.IS_GREATER_THAN_OR_EQUAL = Assert.IS_GREATER_THAN_OR_EQUAL;
+    
+    } else {
+
+      throw new Error( 'No global namespace' );
+    
+    }
+  
+  };
+
+  Assert.LOG = false;
+  Nenkraft.Utils.Assert = Assert;
+  Nenkraft.Assert = Assert;
+
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, exports) {
 
 /**
@@ -4759,7 +4980,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /***/ (function(module, exports) {
 
 /**
@@ -4854,7 +5075,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /***/ (function(module, exports) {
 
 /**
@@ -5049,7 +5270,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /***/ (function(module, exports) {
 
 /**
@@ -5120,10 +5341,10 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Utils.UUID = function ( _length, _parts, _charSetIndex, _separator ) {
 
-    _length = _length === undefined ? 32 : _length;
-    _parts = _parts === undefined ? 4 : _parts;
-    _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
-    _separator = _separator === undefined ? '-' : _separator;
+    _length = _length == null ? 32 : _length;
+    _parts = _parts == null ? 4 : _parts;
+    _charSetIndex = _charSetIndex == null ? 0 : _charSetIndex;
+    _separator = _separator == null ? '-' : _separator;
     var id = '';
 
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
@@ -5171,11 +5392,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
+  var NESTED = Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
 
     if ( typeof _string === 'string' ) {
 
-      _splitter = _splitter === undefined ? '.' : _splitter;
+      _splitter = _splitter == null ? '.' : _splitter;
       _string = _string.split( _splitter );
     
     }
@@ -5188,7 +5409,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( _object[ key ] !== undefined ) {
 
-        return Nenkraft.Utils.Nested( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
+        return NESTED( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
       
       }
     
@@ -5514,7 +5735,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports) {
 
 /**
@@ -5577,7 +5798,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports) {
 
 /**
@@ -5624,7 +5845,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /***/ (function(module, exports) {
 
 /**
@@ -5672,132 +5893,6 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Event.LocalListener = LocalListener;
   Nenkraft.LocalListener = LocalListener;
-
-};
-
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function LocalEvent () {
-
-    if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
-    this.listeners = [];
-  
-  }
-
-  LocalEvent.prototype = Object.create( null );
-  LocalEvent.prototype.constructor = LocalEvent;
-  // Static
-
-  // Members
-  LocalEvent.prototype.stopPropagation = false;
-  LocalEvent.prototype.target = null;
-  LocalEvent.prototype.data = null;
-
-  // Methods
-  LocalEvent.prototype.GetListenerIndex = function ( _handle, _context ) {
-
-    var listeners = this.listeners;
-    if ( listeners.length === 0 ) return -1;
-
-    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
-
-      listener = listeners[ i ];
-
-      if ( listener.context === _context && listener.handle === _handle ) {
-
-        return i;
-      
-      }
-    
-    }
-
-    return -1;
-  
-  };
-
-  LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
-
-    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
-    this.listeners.push( listener );
-  
-  };
-
-  LocalEvent.prototype.Remove = function ( _handle, _context ) {
-
-    var ix = this.GetListenerIndex( _handle, _context );
-
-    if ( ix !== -1 ) {
-
-      this.listeners.fickleSplice( ix );
-    
-    }
-  
-  };
-
-  LocalEvent.prototype.Dump = function ( _context ) {
-
-    var listeners = this.listeners;
-    if ( listeners.length === 0 ) return;
-
-    if ( _context !== undefined ) {
-
-      for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
-
-        listener = listeners[ i ];
-
-        if ( listener.context === _context ) {
-
-          this.listeners.fickleSplice( i );
-        
-        }
-      
-      }
-    
-    }
-    else {
-
-      this.listeners.length = 0;
-    
-    }
-  
-  };
-
-  LocalEvent.prototype.Dispatch = function ( _target, _data ) {
-
-    var listeners = this.listeners;
-    if ( listeners.length === 0 ) return;
-    listeners = listeners.slice();
-    this.stopPropagation = false;
-    this.target = _target;
-    this.data = _data;
-
-    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
-
-      listener = listeners[ i ];
-      listener.Execute( this );
-      if ( this.stopPropagation === true ) break;
-    
-    }
-
-    delete this.target;
-    delete this.data;
-  
-  };
-
-  Nenkraft.Event.LocalEvent = LocalEvent;
-  Nenkraft.LocalEvent = LocalEvent;
 
 };
 

@@ -4415,7 +4415,7 @@ module.exports = function () {
 
       while ( i-- ) {
 
-        var p = new nk.Path.Pixel2D( 0, 0 );
+        var p = new nk.Path.Pixel( 0, 0 );
         p.colorObj.r = 0.4;
         p.colorObj.g = Math.random();
         p.colorObj.b = 0.8;

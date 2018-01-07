@@ -7,32 +7,32 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Math.Vector2D;
 
-  function Pixel2D ( _x, _y, _style ) {
+  function Pixel ( _x, _y, _style ) {
 
-    if ( !( this instanceof Pixel2D ) ) return new Pixel2D( _x, _y, _style );
+    if ( !( this instanceof Pixel ) ) return new Pixel( _x, _y, _style );
     Super.call( this, _x, _y );
     this.style = new Nenkraft.Style.CreateP( _style );
     this.colorObj = new Nenkraft.Color();
   
   }
 
-  Pixel2D.prototype = Object.create( Super.prototype );
-  Pixel2D.prototype.constructor = Pixel2D;
+  Pixel.prototype = Object.create( Super.prototype );
+  Pixel.prototype.constructor = Pixel;
   // Static
 
   // Members
-  Pixel2D.prototype.colorObj = null;
-  Pixel2D.prototype.style = null;
-  Pixel2D.prototype.programController = null;
-  Pixel2D.prototype.bufferData = null;
+  Pixel.prototype.colorObj = null;
+  Pixel.prototype.style = null;
+  Pixel.prototype.programController = null;
+  Pixel.prototype.bufferData = null;
 
   // Methods
   /*
-   * Pixel2D.prototype.Draw = function ( _rc ) {
+   * Pixel.prototype.Draw = function ( _rc ) {
    * //TODO
    *}; 
    */
-  Pixel2D.prototype.GLDraw = function ( _gl, _transform ) {
+  Pixel.prototype.GLDraw = function ( _gl, _transform ) {
 
     if ( this.programController !== null ) {
 
@@ -45,20 +45,20 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Pixel2D.prototype.LinkProgramController = function ( _pc ) {
+  Pixel.prototype.LinkProgramController = function ( _pc ) {
 
     this.programController = _pc;
     this.LinkStyle();
   
   };
 
-  Pixel2D.prototype.UseProgramController = function ( _pc ) {
+  Pixel.prototype.UseProgramController = function ( _pc ) {
 
     this.programController = _pc;
   
   };
 
-  Pixel2D.prototype.LinkStyle = function () {
+  Pixel.prototype.LinkStyle = function () {
 
     var pc = this.programController;
 
@@ -71,7 +71,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Pixel2D.prototype.GetBufferData = function () {
+  Pixel.prototype.GetBufferData = function () {
 
     if ( this.bufferData == null ) {
 
@@ -91,7 +91,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Pixel2D.prototype.UpdateInBuffer = function ( _buffer, _index ) {
+  Pixel.prototype.UpdateInBuffer = function ( _buffer, _index ) {
 
     _buffer[ _index ] = this.x;
     _buffer[ _index + 1 ] = this.y;
@@ -103,6 +103,6 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Path.Pixel2D = Pixel2D;
+  Nenkraft.Path.Pixel = Pixel;
 
 };
