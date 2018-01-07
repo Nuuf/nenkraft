@@ -238,8 +238,8 @@ module.exports = function ( Nenkraft ) {
 
     if ( ix !== -1 ) {
 
-      delete _child.parent;
-      return children.splice( ix, 1 )[ 0 ];
+      _child.parent = null;
+      return children.fickleSplice( ix );
     
     }
   
@@ -258,8 +258,8 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        rChildren.push( children.splice( ix, 1 )[ 0 ] );
-        delete child.parent;
+        rChildren.push( children.fickleSplice( ix ) );
+        child.parent = null;
       
       }
     
@@ -278,7 +278,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.push( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -295,7 +295,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.unshift( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -329,7 +329,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
+  Container2D.prototype.GetChildClosestTo = function ( _object, _filter ) {
 
     var children = this.children, closestChild = null;
 
@@ -339,9 +339,9 @@ module.exports = function ( Nenkraft ) {
 
         child = children[ i ];
 
-        if ( _filterCondition !== undefined ) {
+        if ( _filter !== undefined ) {
 
-          if ( _filterCondition( child ) === false ) continue;
+          if ( _filter( child ) === false ) continue;
         
         }
 
@@ -364,7 +364,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filterCondition ) {
+  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filter ) {
 
     var children = this.children, closestChild = null;
 
@@ -374,9 +374,9 @@ module.exports = function ( Nenkraft ) {
 
         child = children[ i ];
 
-        if ( _filterCondition !== undefined ) {
+        if ( _filter !== undefined ) {
 
-          if ( _filterCondition( child ) === false ) continue;
+          if ( _filter( child ) === false ) continue;
         
         }
 

@@ -1,8 +1,8 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.2 (Alpha)
-* @copyright   (C) 2017 Gustav 'Nuuf' Åberg
+* @version     0.5.3 (Alpha)
+* @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
 /******/ (function(modules) { // webpackBootstrap
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 127);
+/******/ 	return __webpack_require__(__webpack_require__.s = 128);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -103,165 +103,91 @@ module.exports = g;
 /***/ 1:
 /***/ (function(module, exports) {
 
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
+module.exports = function() {
 
-module.exports = function ( Nenkraft ) {
+  Array.prototype.indexPop = function( index ) {
 
-  'use strict';
-  Nenkraft.Math.PII = Math.PI * 2;
-  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
-  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
-  Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
+    var last = this.length - 1;
 
-  Nenkraft.Math.DegreesToRadians = function ( _angle ) {
-
-    return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
+    if ( last > 1 && index <= last && index >= 0 ) {
   
-  };
-
-  Nenkraft.Math.DTR = Nenkraft.Math.DegreesToRadians;
-
-  Nenkraft.Math.RadiansToDegrees = function ( _angle ) {
-
-    return _angle * Nenkraft.Math.RADIANS_TO_DEGREES;
+      var temp = this[last];
+      this[last] = this[index];
+      this[index] = temp;
   
-  };
-
-  Nenkraft.Math.RTD = Nenkraft.Math.RadiansToDegrees;
-
-  Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
-
-    var divisor = Math.pow( 10, _precision );
-    return Math.round( divisor * _value ) / divisor;
-  
-  };
-
-  Nenkraft.Math.PR = Nenkraft.Math.PrecisionRound;
-
-  Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
-
-    return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
-  
-  };
-
-  Nenkraft.Math.AttractRepel = function ( _repeller, _attractor, _velocity, _radius, _strength ) {
-
-    var delta = _attractor.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
-
-    if ( distance < _radius * _radius ) {
-
-      var theta = delta.GetAngle();
-      _velocity.Add(
-        Math.cos( theta ) * _strength,
-        Math.sin( theta ) * _strength
-      );
-    
-    }
-  
-  };
-
-  Nenkraft.Math.LineLineIntersection = function ( _sA, _eA, _sB, _eB ) {
-
-    var d1 = _eA.SubtractVC( _sA );
-    var d2 = _eB.SubtractVC( _sB );
-    var l = -d2.x * d1.y + d1.x * d2.y;
-    var abx = _sA.x - _sB.x;
-    var aby = _sA.y - _sB.y;
-    var s = ( -d1.y * abx + d1.x * aby ) / l;
-    var t = ( d2.x * aby - d2.y * abx ) / l;
-
-    if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
-
-      d1.Set( _sA.x + ( t * d1.x ), _sA.y + ( t * d1.y ) );
-      return d1;
+      return this.pop();
     
     }
 
-    return false;
+    return this.pop();
   
   };
 
-  Nenkraft.Math.ClosestPointOnLine = function ( _s, _e, _v ) {
+  Array.prototype.indexShift = function( index ) {
+  
+    if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
+  
+      var temp = this[0];
+      this[0] = this[index];
+      this[index] = temp;
 
-    var delta = _e.SubtractVC( _s );
-    var u = ( ( _v.x - _s.x ) * delta.x + ( _v.y - _s.y ) * delta.y ) / delta.GetMagnitudeSquared();
-
-    if ( u < 0 ) {
-
-      return _s;
-    
-    } else if ( u > 1 ) {
-
-      return _e;
+      return this.shift();
     
     }
 
-    delta.Set( _s.x + u * delta.x, _s.y + u * delta.y );
-    return delta;
+    return this.shift();
   
   };
 
-  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+  Array.prototype.popSplice = function( index ) {
 
-    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+    var i = this.length - 1;
+    if ( i < 1 ) return;
+    var returnee = this[index];
 
-      _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
-    
-    }
-  
-  };
-
-  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
-
-    var grid = [];
-
-    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
-
-      grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
+    while ( index < i ) {
+ 
+      this[index] = this[index + 1]; 
+      index++; 
     
     }
 
-    return grid;
+    this.pop();
+
+    return returnee;
   
   };
 
-  Nenkraft.Math.TriRectArray = function ( _x, _y, _w, _h, _arr ) {
+  Array.prototype.shiftSplice = function( index ) {
 
-    if ( _arr != null ) {
+    var length = this.length;
+    if ( length < 1 ) return;
+    var returnee = this[index];
 
-      _arr[ 0 ] = _x;
-      _arr[ 1 ] = _y;
-      _arr[ 2 ] = _x + _w;
-      _arr[ 3 ] = _y;
-      _arr[ 4 ] = _x;
-      _arr[ 5 ] = _y + _h;
-      _arr[ 6 ] = _x;
-      _arr[ 7 ] = _y + _h;
-      _arr[ 8 ] = _x + _w;
-      _arr[ 9 ] = _y;
-      _arr[ 10 ] = _x + _w;
-      _arr[ 11 ] = _y + _h;
-      return _arr;
+    while ( index > 0 ) {
+
+      this[index] = this[index - 1];
+      index--;
     
     }
 
-    return [
-      _x, _y,
-      _x + _w, _y,
-      _x, _y + _h,
-      _x, _y + _h,
-      _x + _w, _y,
-      _x + _w, _y + _h
-    ];
+    this.shift();
+
+    return returnee;
   
   };
 
-  Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
-  Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
-  Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
-  Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );
+  Array.prototype.fickleSplice = function( index ) {
+
+    if ( index > ( this.length * 0.5 ) | 0 ) {
+
+      return this.popSplice( index );
+    
+    }
+
+    return this.shiftSplice( index );
+  
+  };
 
 };
 
@@ -269,6 +195,132 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 
 /***/ 10:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function LocalEvent () {
+
+    if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
+    this.listeners = [];
+  
+  }
+
+  LocalEvent.prototype = Object.create( null );
+  LocalEvent.prototype.constructor = LocalEvent;
+  // Static
+
+  // Members
+  LocalEvent.prototype.stopPropagation = false;
+  LocalEvent.prototype.target = null;
+  LocalEvent.prototype.data = null;
+
+  // Methods
+  LocalEvent.prototype.GetListenerIndex = function ( _handle, _context ) {
+
+    var listeners = this.listeners;
+    if ( listeners.length === 0 ) return -1;
+
+    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
+
+      listener = listeners[ i ];
+
+      if ( listener.context === _context && listener.handle === _handle ) {
+
+        return i;
+      
+      }
+    
+    }
+
+    return -1;
+  
+  };
+
+  LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
+
+    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
+    this.listeners.push( listener );
+  
+  };
+
+  LocalEvent.prototype.Remove = function ( _handle, _context ) {
+
+    var ix = this.GetListenerIndex( _handle, _context );
+
+    if ( ix !== -1 ) {
+
+      this.listeners.fickleSplice( ix );
+    
+    }
+  
+  };
+
+  LocalEvent.prototype.Dump = function ( _context ) {
+
+    var listeners = this.listeners;
+    if ( listeners.length === 0 ) return;
+
+    if ( _context !== undefined ) {
+
+      for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
+
+        listener = listeners[ i ];
+
+        if ( listener.context === _context ) {
+
+          this.listeners.fickleSplice( i );
+        
+        }
+      
+      }
+    
+    }
+    else {
+
+      this.listeners.length = 0;
+    
+    }
+  
+  };
+
+  LocalEvent.prototype.Dispatch = function ( _target, _data ) {
+
+    var listeners = this.listeners;
+    if ( listeners.length === 0 ) return;
+    listeners = listeners.slice();
+    this.stopPropagation = false;
+    this.target = _target;
+    this.data = _data;
+
+    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
+
+      listener = listeners[ i ];
+      listener.Execute( this );
+      if ( this.stopPropagation === true ) break;
+    
+    }
+
+    delete this.target;
+    delete this.data;
+  
+  };
+
+  Nenkraft.Event.LocalEvent = LocalEvent;
+  Nenkraft.LocalEvent = LocalEvent;
+
+};
+
+
+/***/ }),
+
+/***/ 11:
 /***/ (function(module, exports) {
 
 /**
@@ -395,7 +447,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 11:
+/***/ 12:
 /***/ (function(module, exports) {
 
 /**
@@ -993,7 +1045,61 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 12:
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(129);
+
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+var namespace = Object.create( null );
+
+__webpack_require__( 1 )();
+__webpack_require__( 130 )( namespace );
+__webpack_require__( 2 )( namespace );
+__webpack_require__( 3 )( namespace );
+__webpack_require__( 4 )( namespace );
+__webpack_require__( 5 )( namespace );
+__webpack_require__( 6 )( namespace );
+__webpack_require__( 7 )( namespace );
+__webpack_require__( 8 )( namespace );
+__webpack_require__( 9 )( namespace );
+__webpack_require__( 10 )( namespace );
+__webpack_require__( 11 )( namespace );
+__webpack_require__( 12 )( namespace );
+__webpack_require__( 13 )( namespace );
+__webpack_require__( 14 )( namespace );
+__webpack_require__( 15 )( namespace );
+__webpack_require__( 21 )( namespace );
+__webpack_require__( 22 )( namespace );
+__webpack_require__( 23 )( namespace );
+__webpack_require__( 16 )( namespace );
+__webpack_require__( 17 )( namespace );
+__webpack_require__( 18 )( namespace );
+__webpack_require__( 19 )( namespace );
+__webpack_require__( 20 )( namespace );
+__webpack_require__( 24 )( namespace );
+__webpack_require__( 25 )( namespace );
+__webpack_require__( 26 )( namespace );
+__webpack_require__( 27 )( namespace );
+__webpack_require__( 28 )( namespace );
+__webpack_require__( 29 )( namespace );
+__webpack_require__( 30 )( namespace );
+
+module.exports = namespace;
+
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, exports) {
 
 /**
@@ -1225,60 +1331,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 127:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(128);
-
-
-/***/ }),
-
-/***/ 128:
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-var namespace = Object.create( null );
-
-__webpack_require__( 129 )( namespace );
-__webpack_require__( 1 )( namespace );
-__webpack_require__( 2 )( namespace );
-__webpack_require__( 3 )( namespace );
-__webpack_require__( 4 )( namespace );
-__webpack_require__( 5 )( namespace );
-__webpack_require__( 6 )( namespace );
-__webpack_require__( 7 )( namespace );
-__webpack_require__( 8 )( namespace );
-__webpack_require__( 9 )( namespace );
-__webpack_require__( 10 )( namespace );
-__webpack_require__( 11 )( namespace );
-__webpack_require__( 12 )( namespace );
-__webpack_require__( 13 )( namespace );
-__webpack_require__( 14 )( namespace );
-__webpack_require__( 20 )( namespace );
-__webpack_require__( 21 )( namespace );
-__webpack_require__( 22 )( namespace );
-__webpack_require__( 15 )( namespace );
-__webpack_require__( 16 )( namespace );
-__webpack_require__( 17 )( namespace );
-__webpack_require__( 18 )( namespace );
-__webpack_require__( 19 )( namespace );
-__webpack_require__( 23 )( namespace );
-__webpack_require__( 24 )( namespace );
-__webpack_require__( 25 )( namespace );
-__webpack_require__( 26 )( namespace );
-__webpack_require__( 27 )( namespace );
-__webpack_require__( 28 )( namespace );
-__webpack_require__( 29 )( namespace );
-
-module.exports = namespace;
-
-
-/***/ }),
-
-/***/ 129:
+/***/ 130:
 /***/ (function(module, exports) {
 
 /**
@@ -1294,7 +1347,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.5.2 (Alpha)';
+  Nenkraft.VERSION = '0.5.3 (Alpha)';
   console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
 
 };
@@ -1302,7 +1355,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
 /***/ (function(module, exports) {
 
 /**
@@ -1357,7 +1410,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 14:
+/***/ 15:
 /***/ (function(module, exports) {
 
 /**
@@ -1458,7 +1511,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 15:
+/***/ 16:
 /***/ (function(module, exports) {
 
 /**
@@ -1599,7 +1652,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports) {
 
 /**
@@ -1783,7 +1836,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 17:
+/***/ 18:
 /***/ (function(module, exports) {
 
 /**
@@ -2210,7 +2263,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 18:
+/***/ 19:
 /***/ (function(module, exports) {
 
 /**
@@ -2323,7 +2376,175 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 19:
+/***/ 2:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+  Nenkraft.Math.PII = Math.PI * 2;
+  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
+  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
+  Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
+
+  Nenkraft.Math.DegreesToRadians = function ( _angle ) {
+
+    return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
+  
+  };
+
+  Nenkraft.Math.DTR = Nenkraft.Math.DegreesToRadians;
+
+  Nenkraft.Math.RadiansToDegrees = function ( _angle ) {
+
+    return _angle * Nenkraft.Math.RADIANS_TO_DEGREES;
+  
+  };
+
+  Nenkraft.Math.RTD = Nenkraft.Math.RadiansToDegrees;
+
+  Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
+
+    var divisor = Math.pow( 10, _precision );
+    return Math.round( divisor * _value ) / divisor;
+  
+  };
+
+  Nenkraft.Math.PR = Nenkraft.Math.PrecisionRound;
+
+  Nenkraft.Math.Spread = function ( _start, _amount, _margin, _i ) {
+
+    return ( _start - ( _margin * ( _amount - 1 ) * 0.5 ) + ( _i * _margin ) );
+  
+  };
+
+  Nenkraft.Math.AttractRepel = function ( _repeller, _attractor, _velocity, _radius, _strength ) {
+
+    var delta = _attractor.SubtractVC( _repeller ), distance = delta.GetMagnitudeSquared();
+
+    if ( distance < _radius * _radius ) {
+
+      var theta = delta.GetAngle();
+      _velocity.Add(
+        Math.cos( theta ) * _strength,
+        Math.sin( theta ) * _strength
+      );
+    
+    }
+  
+  };
+
+  Nenkraft.Math.LineLineIntersection = function ( _sA, _eA, _sB, _eB ) {
+
+    var d1 = _eA.SubtractVC( _sA );
+    var d2 = _eB.SubtractVC( _sB );
+    var l = -d2.x * d1.y + d1.x * d2.y;
+    var abx = _sA.x - _sB.x;
+    var aby = _sA.y - _sB.y;
+    var s = ( -d1.y * abx + d1.x * aby ) / l;
+    var t = ( d2.x * aby - d2.y * abx ) / l;
+
+    if ( s >= 0 && s <= 1 && t >= 0 && t <= 1 ) {
+
+      d1.Set( _sA.x + ( t * d1.x ), _sA.y + ( t * d1.y ) );
+      return d1;
+    
+    }
+
+    return false;
+  
+  };
+
+  Nenkraft.Math.ClosestPointOnLine = function ( _s, _e, _v ) {
+
+    var delta = _e.SubtractVC( _s );
+    var u = ( ( _v.x - _s.x ) * delta.x + ( _v.y - _s.y ) * delta.y ) / delta.GetMagnitudeSquared();
+
+    if ( u < 0 ) {
+
+      return _s;
+    
+    } else if ( u > 1 ) {
+
+      return _e;
+    
+    }
+
+    delta.Set( _s.x + u * delta.x, _s.y + u * delta.y );
+    return delta;
+  
+  };
+
+  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+
+    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+
+      _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
+    
+    }
+  
+  };
+
+  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
+
+    var grid = [];
+
+    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
+
+      grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
+    
+    }
+
+    return grid;
+  
+  };
+
+  Nenkraft.Math.TriRectArray = function ( _x, _y, _w, _h, _arr ) {
+
+    if ( _arr != null ) {
+
+      _arr[ 0 ] = _x;
+      _arr[ 1 ] = _y;
+      _arr[ 2 ] = _x + _w;
+      _arr[ 3 ] = _y;
+      _arr[ 4 ] = _x;
+      _arr[ 5 ] = _y + _h;
+      _arr[ 6 ] = _x;
+      _arr[ 7 ] = _y + _h;
+      _arr[ 8 ] = _x + _w;
+      _arr[ 9 ] = _y;
+      _arr[ 10 ] = _x + _w;
+      _arr[ 11 ] = _y + _h;
+      return _arr;
+    
+    }
+
+    return [
+      _x, _y,
+      _x + _w, _y,
+      _x, _y + _h,
+      _x, _y + _h,
+      _x + _w, _y,
+      _x + _w, _y + _h
+    ];
+  
+  };
+
+  Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );
+
+};
+
+
+/***/ }),
+
+/***/ 20:
 /***/ (function(module, exports) {
 
 /**
@@ -2786,7 +3007,1542 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 21:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+  Nenkraft.Math.Ease = Object.create( null );
+
+  Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
+
+    return _amplitude * _time / _duration + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.QuadIn = function ( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration;
+    return _amplitude * _time * _time + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.QuadOut = function ( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration;
+    return -_amplitude * _time * ( _time - 2 ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.QuadInOut = function ( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration * 0.5;
+    if ( _time < 1 ) return _amplitude * 0.5 * _time * _time + _startValue;
+    _time--;
+    return -_amplitude * 0.5 * ( _time * ( _time - 2 ) - 1 ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.SineIn = function ( _time, _startValue, _amplitude, _duration ) {
+
+    return -_amplitude * Math.cos( _time / _duration * ( Math.PI * 0.5 ) ) + _amplitude + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.SineOut = function ( _time, _startValue, _amplitude, _duration ) {
+
+    return _amplitude * Math.sin( _time / _duration * ( Math.PI * 0.5 ) ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.SineInOut = function ( _time, _startValue, _amplitude, _duration ) {
+
+    return -_amplitude * 0.5 * ( Math.cos( Math.PI * _time / _duration ) - 1 ) + _startValue;
+  
+  };
+
+};
+
+
+/***/ }),
+
+/***/ 22:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
+
+    if ( !( this instanceof Motion ) ) return new Motion( _id, _target, _propertyString, _value, _duration, _easing );
+    this.id = _id;
+    this.target = _target;
+    this.propertyString = _propertyString;
+    if ( _value !== undefined ) this.value = _value;
+    if ( _duration !== undefined ) this.duration = _duration;
+    this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
+    this.onStart = new Nenkraft.Event.LocalEvent();
+    this.onEnd = new Nenkraft.Event.LocalEvent();
+    this.onStop = new Nenkraft.Event.LocalEvent();
+    this.onReconfigure = new Nenkraft.Event.LocalEvent();
+    this.onReset = new Nenkraft.Event.LocalEvent();
+  
+  }
+
+  Motion.prototype = Object.create( null );
+  Motion.prototype.constructor = Motion;
+  // Static
+  Motion.DEFAULT_EASING = 'Linear';
+  // Members
+  Motion.prototype.id = null;
+  Motion.prototype.target = null;
+  Motion.prototype.easing = null;
+  Motion.prototype.duration = 1000;
+  Motion.prototype.time = 0;
+  Motion.prototype.value = 1;
+  Motion.prototype.startValue = 0;
+  Motion.prototype.propertyString = null;
+  Motion.prototype.change = 0;
+  Motion.prototype.property = null;
+  Motion.prototype.propertyObject = null;
+  Motion.prototype.running = false;
+
+  // Methods
+  Motion.prototype.Start = function () {
+
+    var property = this.propertyString.split( '.' );
+    this.property = property[ property.length - 1 ];
+    this.propertyObject = Nenkraft.Utils.Nested( this.target, this.propertyString, true );
+    this.startValue = this.propertyObject[ this.property ];
+    this.change = this.value - this.startValue;
+    this.time = 0;
+    this.running = true;
+    this.onStart.Dispatch( this, null );
+  
+  };
+
+  Motion.prototype.Stop = function () {
+
+    delete this.property;
+    delete this.propertyObject;
+    delete this.startValue;
+    delete this.change;
+    delete this.time;
+    delete this.running;
+    this.onStop.Dispatch( this, null );
+  
+  };
+
+  Motion.prototype.Process = function () {
+
+    if ( this.running === true ) {
+
+      this.propertyObject[ this.property ] = this.easing( this.time, this.startValue, this.change, this.duration );
+
+      if ( ++this.time >= this.duration ) {
+
+        this.running = false;
+        this.propertyObject[ this.property ] = this.value;
+        this.onEnd.Dispatch( this, null );
+      
+      }
+    
+    }
+  
+  };
+
+  Motion.prototype.Reconfigure = function ( _propertyString, _value, _duration, _easing ) {
+
+    if ( _propertyString !== undefined ) this.propertyString = _propertyString;
+    this.value = _value;
+    this.duration = _duration;
+    this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
+    this.onReconfigure.Dispatch( this, null );
+  
+  };
+
+  Motion.prototype.Reset = function () {
+
+    if ( this.propertyObject === null || this.property === null ) return false;
+    this.propertyObject[ this.property ] = this.startValue;
+    delete this.property;
+    delete this.propertyObject;
+    delete this.startValue;
+    delete this.change;
+    delete this.time;
+    delete this.running;
+    this.onReset.Dispatch( this, null );
+  
+  };
+
+  Nenkraft.Motion = Motion;
+
+};
+
+
+/***/ }),
+
+/***/ 23:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function MotionManager ( _target ) {
+
+    if ( !( this instanceof MotionManager ) ) return new MotionManager( _target );
+    this.motions = [];
+    this.target = _target;
+  
+  }
+
+  MotionManager.prototype = Object.create( null );
+  MotionManager.prototype.constructor = MotionManager;
+  // Static
+
+  // Members
+  MotionManager.prototype.target = null;
+  MotionManager.prototype.motions = null;
+
+  // Methods
+  MotionManager.prototype.Create = function ( _id, _propertyString, _value, _duration, _easing ) {
+
+    var exists = this.GetMotion( _id );
+
+    if ( exists === null ) {
+
+      var motion = new Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
+      this.motions.push( motion );
+      return motion;
+    
+    }
+
+    return null;
+  
+  };
+
+  MotionManager.prototype.Add = function ( _motion ) {
+
+    var exists = this.GetMotion( _motion.id );
+
+    if ( exists === null ) {
+
+      this.motions.push( _motion );
+    
+    }
+  
+  };
+
+  MotionManager.prototype.Start = function ( _id ) {
+
+    var motion = this.GetMotion( _id );
+
+    if ( motion !== null ) {
+
+      motion.Start();
+    
+    }
+
+    return motion;
+  
+  };
+
+  MotionManager.prototype.StartMultiple = function ( _ids ) {
+
+    _ids = _ids.split( ' ' );
+
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
+
+      this.Start( _ids[ i ] );
+    
+    }
+  
+  };
+
+  MotionManager.prototype.Stop = function ( _id ) {
+
+    var motion = this.GetMotion( _id );
+
+    if ( motion !== null ) {
+
+      motion.Stop();
+    
+    }
+
+    return motion;
+  
+  };
+
+  MotionManager.prototype.StopMultiple = function ( _ids ) {
+
+    _ids = _ids.split( ' ' );
+
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
+
+      this.Stop( _ids[ i ] );
+    
+    }
+  
+  };
+
+  MotionManager.prototype.Reset = function ( _id ) {
+
+    var motion = this.GetMotion( _id );
+
+    if ( motion !== null ) {
+
+      motion.Reset();
+    
+    }
+
+    return motion;
+  
+  };
+
+  MotionManager.prototype.ResetMultiple = function ( _ids ) {
+
+    _ids = _ids.split( ' ' );
+
+    for ( var i = 0, l = _ids.length; i < l; ++i ) {
+
+      this.Reset( _ids[ i ] );
+    
+    }
+  
+  };
+
+  MotionManager.prototype.Process = function () {
+
+    for ( var i = 0, motions = this.motions, l = motions.length, motion; i < l; ++i ) {
+
+      motion = motions[ i ];
+      motion.Process();
+    
+    }
+  
+  };
+
+  MotionManager.prototype.GetMotion = function ( _id ) {
+
+    for ( var i = 0, motions = this.motions, l = motions.length, motion; i < l; ++i ) {
+
+      motion = motions[ i ];
+      if ( motion.id === _id ) return motion;
+    
+    }
+
+    return null;
+  
+  };
+
+  Nenkraft.MotionManager = MotionManager;
+
+};
+
+
+/***/ }),
+
+/***/ 24:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function QuadtreeNode ( _aabb, _level, _objCap, _levelCap ) {
+
+    if ( !( this instanceof QuadtreeNode ) ) return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
+    this.Set( _aabb, _level, _objCap, _levelCap );
+    this.nodes = {};
+    this.objects = [];
+    this.convergence = [];
+  
+  }
+
+  QuadtreeNode.prototype = Object.create( null );
+  QuadtreeNode.prototype.constructor = QuadtreeNode;
+  // Static
+  QuadtreeNode.TOP_LEFT = 'TL';
+  QuadtreeNode.TOP_RIGHT = 'TR';
+  QuadtreeNode.BOTTOM_LEFT = 'BL';
+  QuadtreeNode.BOTTOM_RIGHT = 'BR';
+  QuadtreeNode.Pool = new Nenkraft.Utils.Pool( QuadtreeNode );
+
+  QuadtreeNode.Pool.Retrieve = function( _aabb, _level, _objCap, _levelCap ) {
+
+    if ( this.objects.length === 0 ) {
+
+      this.Flood();
+    
+    }
+
+    var qtn = this.objects.pop();
+    qtn.Set( _aabb, _level, _objCap, _levelCap );
+    return qtn;
+  
+  };
+
+  QuadtreeNode.USE_POOL = true;
+  // Members
+  QuadtreeNode.prototype.objectCap = 0;
+  QuadtreeNode.prototype.levelCap = 0;
+  QuadtreeNode.prototype.level = 0;
+  QuadtreeNode.prototype.nodes = null;
+  QuadtreeNode.prototype.objects = null;
+  QuadtreeNode.prototype.convergence = null;
+  QuadtreeNode.prototype.aabb = null;
+  QuadtreeNode.prototype.hasSplit = false;
+
+  // Methods
+  QuadtreeNode.prototype.Set = function( _aabb, _level, _objCap, _levelCap ) {
+
+    this.aabb = _aabb;
+    this.level = _level;
+    this.objectCap = _objCap;
+    this.levelCap = _levelCap;
+  
+  };
+
+  QuadtreeNode.prototype.FromStore = function( _aabb, _level, _objCap, _levelCap ) {
+
+    if ( QuadtreeNode.USE_POOL === true ) {
+
+      return QuadtreeNode.Pool.Retrieve( _aabb, _level, _objCap, _levelCap );
+    
+    }
+
+    return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
+  
+  };
+
+  QuadtreeNode.prototype.Add = function ( _object ) {
+
+    var marking = '';
+    var objects = this.objects;
+    var nodes = this.nodes;
+    var i = 0;
+
+    if ( this.hasSplit === true ) {
+
+      marking = this.Marking( _object );
+
+      if ( marking !== null ) {
+
+        nodes[ marking ].Add( _object );
+        return;
+      
+      }
+    
+    }
+
+    objects.push( _object );
+
+    if ( this.level < this.levelCap ) {
+
+      if ( objects.length > this.objectCap ) {
+
+        if ( this.hasSplit === false ) {
+
+          this.Split();
+        
+        }
+
+        while ( i < objects.length ) {
+
+          marking = this.Marking( objects[ i ] );
+
+          if ( marking !== null ) {
+
+            nodes[ marking ].Add( objects.fickleSplice( i ) );
+          
+          } else {
+
+            ++i;
+          
+          }
+        
+        }
+      
+      }
+    
+    }
+  
+  };
+
+  QuadtreeNode.prototype.Converge = function ( _object ) {
+
+    var convergence = this.convergence;
+    convergence.length = 0;
+    convergence.push.apply( convergence, this.objects );
+    var marking = null;
+    var nodes = this.nodes;
+
+    if ( this.hasSplit === true ) {
+
+      marking = this.Marking( _object );
+
+      if ( marking !== null ) {
+
+        convergence.push.apply( convergence, nodes[ marking ].Converge( _object ) );
+      
+      } else {
+
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
+        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
+      
+      }
+    
+    }
+
+    return convergence;
+  
+  };
+
+  QuadtreeNode.prototype.Split = function () {
+
+    var nl = this.level + 1;
+    var oc = this.objectCap;
+    var lc = this.levelCap;
+    var nodes = this.nodes;
+    var aabb = this.aabb;
+    nodes[ QuadtreeNode.TOP_LEFT ] = this.FromStore(
+      aabb.GetQuadrant( QuadtreeNode.TOP_LEFT ),
+      nl, oc, lc
+    );
+    nodes[ QuadtreeNode.TOP_RIGHT ] = this.FromStore(
+      aabb.GetQuadrant( QuadtreeNode.TOP_RIGHT ),
+      nl, oc, lc
+    );
+    nodes[ QuadtreeNode.BOTTOM_LEFT ] = this.FromStore(
+      aabb.GetQuadrant( QuadtreeNode.BOTTOM_LEFT ),
+      nl, oc, lc
+    );
+    nodes[ QuadtreeNode.BOTTOM_RIGHT ] = this.FromStore(
+      aabb.GetQuadrant( QuadtreeNode.BOTTOM_RIGHT ),
+      nl, oc, lc
+    );
+    this.hasSplit = true;
+  
+  };
+
+  QuadtreeNode.prototype.Dump = function () {
+
+    var nodes = this.nodes;
+    this.objects.length = 0;
+
+    if ( this.hasSplit === true ) {
+
+      nodes[ QuadtreeNode.TOP_LEFT ].Dump();
+      nodes[ QuadtreeNode.TOP_RIGHT ].Dump();
+      nodes[ QuadtreeNode.BOTTOM_LEFT ].Dump();
+      nodes[ QuadtreeNode.BOTTOM_RIGHT ].Dump();
+
+      if ( QuadtreeNode.USE_POOL === true ) {
+
+        nodes[QuadtreeNode.TOP_LEFT].Store();
+        nodes[ QuadtreeNode.TOP_RIGHT ].Store();
+        nodes[ QuadtreeNode.BOTTOM_LEFT ].Store();
+        nodes[ QuadtreeNode.BOTTOM_RIGHT ].Store();
+      
+      }
+    
+    }
+
+    this.nodes = {};
+    this.hasSplit = false;
+  
+  };
+
+  QuadtreeNode.prototype.Marking = function ( _object ) {
+
+    var nodes = this.nodes;
+
+    if ( nodes[ QuadtreeNode.TOP_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
+
+      return QuadtreeNode.TOP_LEFT;
+    
+    }
+
+    if ( nodes[ QuadtreeNode.TOP_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
+
+      return QuadtreeNode.TOP_RIGHT;
+    
+    }
+
+    if ( nodes[ QuadtreeNode.BOTTOM_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
+
+      return QuadtreeNode.BOTTOM_LEFT;
+    
+    }
+
+    if ( nodes[ QuadtreeNode.BOTTOM_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
+
+      return QuadtreeNode.BOTTOM_RIGHT;
+    
+    }
+
+    return null;
+  
+  };
+
+  QuadtreeNode.prototype.ConcatNodes = function ( _nodeList ) {
+
+    if ( _nodeList === undefined ) _nodeList = [];
+    _nodeList.push( this );
+    var nodes = this.nodes;
+    if ( this.hasSplit === false ) return _nodeList;
+    nodes[ QuadtreeNode.TOP_LEFT ].ConcatNodes( _nodeList );
+    nodes[ QuadtreeNode.TOP_RIGHT ].ConcatNodes( _nodeList );
+    nodes[ QuadtreeNode.BOTTOM_LEFT ].ConcatNodes( _nodeList );
+    nodes[ QuadtreeNode.BOTTOM_RIGHT ].ConcatNodes( _nodeList );
+    return _nodeList;
+  
+  };
+
+  QuadtreeNode.prototype.Store = function() {
+
+    QuadtreeNode.Pool.Store( this );
+
+    // console.log( QuadtreeNode.Pool.objects.length );
+  
+  };
+
+  Nenkraft.Utils.QuadtreeNode = QuadtreeNode;
+  Nenkraft.QuadtreeNode = QuadtreeNode;
+
+  QuadtreeNode.Pool.Flood( function() {}, 1000 );
+
+};
+
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function CoreEntity2D ( _x, _y ) {
+
+    if ( !( this instanceof CoreEntity2D ) ) return new CoreEntity2D( _x, _y );
+    this.transform = new Nenkraft.Math.Transform2D( _x, _y );
+    this.data = Object.create( null );
+  
+  }
+
+  CoreEntity2D.prototype = Object.create( null );
+  CoreEntity2D.prototype.constructor = CoreEntity2D;
+  // Static
+  CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
+  // Members
+  CoreEntity2D.prototype.parent = null;
+  CoreEntity2D.prototype.transform = null;
+  CoreEntity2D.prototype.data = null;
+  CoreEntity2D.prototype.w = 0;
+  CoreEntity2D.prototype.h = 0;
+  CoreEntity2D.prototype.bounds = null;
+  CoreEntity2D.prototype.boundsDirty = true;
+
+  // Methods
+  CoreEntity2D.prototype.UpdateTransform = function () {
+
+    if ( this.parent ) {
+
+      this.transform.UpdateWorld( this.parent.transform.worldTransform );
+    
+    } else {
+
+      this.transform.UpdateWorld( CoreEntity2D.NULL_TRANSFORM.worldTransform );
+    
+    }
+  
+  };
+
+  CoreEntity2D.prototype.GetWorldPosition = function () {
+
+    var wt = this.transform.worldTransform;
+    return new Nenkraft.Vector2D( wt.e, wt.f );
+  
+  };
+
+  CoreEntity2D.prototype.ComputeBounds = function ( _anchor ) {
+
+    var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
+    var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
+
+    if ( this.bounds === null ) {
+
+      this.bounds = new Nenkraft.Geom.AABB2D(
+        this.x - this.width * ax,
+        this.y - this.height * ay,
+        this.x + this.width,
+        this.y + this.height
+      );
+      this.bounds.belongsTo = this;
+    
+    } else {
+
+      this.bounds.Set(
+        this.x - this.width * ax,
+        this.y - this.height * ay,
+        this.x + this.width,
+        this.y + this.height
+      );
+    
+    }
+
+    this.boundsDirty = false;
+    return this.bounds;
+  
+  };
+
+  Object.defineProperty( CoreEntity2D.prototype, 'rotation', {
+    get: function () {
+
+      return this.transform.rotation;
+    
+    },
+    set: function ( _value ) {
+
+      this.transform.rotation = _value;
+      this.transform.UpdateSkew();
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'scale', {
+    get: function () {
+
+      return this.transform.scale;
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'position', {
+    get: function () {
+
+      return this.transform.position;
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'pivot', {
+    get: function () {
+
+      return this.transform.pivot;
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'x', {
+    get: function () {
+
+      return this.transform.position.x;
+    
+    },
+    set: function ( _value ) {
+
+      this.transform.position.x = _value;
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'y', {
+    get: function () {
+
+      return this.transform.position.y;
+    
+    },
+    set: function ( _value ) {
+
+      this.transform.position.y = _value;
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'width', {
+    get: function () {
+
+      return this.w * this.scale.x;
+    
+    },
+    set: function ( _value ) {
+
+      this.w = _value;
+    
+    }
+  } );
+  Object.defineProperty( CoreEntity2D.prototype, 'height', {
+    get: function () {
+
+      return this.h * this.scale.y;
+    
+    },
+    set: function ( _value ) {
+
+      this.h = _value;
+    
+    }
+  } );
+  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
+
+};
+
+
+/***/ }),
+
+/***/ 26:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+  var Super = Nenkraft.Entity.CoreEntity2D;
+
+  function Container2D ( _x, _y ) {
+
+    if ( !( this instanceof Container2D ) ) return new Container2D( _x, _y );
+    Super.call( this, _x, _y );
+    this.children = [];
+  
+  }
+
+  Container2D.prototype = Object.create( Super.prototype );
+  Container2D.prototype.constructor = Container2D;
+  // Static
+
+  // Members
+  Container2D.prototype.children = null;
+  Container2D.prototype.render = true;
+  Container2D.prototype.display = true;
+  Container2D.prototype.transformShouldUpdate = true;
+  Container2D.prototype.transformAutomaticUpdate = true;
+  //
+  Container2D.prototype.isBatchParent = false;
+  Container2D.prototype.childDataBuffer = null;
+  Container2D.prototype.bufferData = null;
+  Container2D.prototype.programController = null;
+  Container2D.prototype.bufferStartIndex = 0;
+  Container2D.prototype.bufferEndIndex = 0;
+
+  /*
+   *
+   *Methods
+   */
+  Container2D.prototype.PreDraw = function ( /* _rc */ ) {
+    // Override
+  };
+
+  Container2D.prototype.GLPreDraw = function ( /* _gl */ ) {
+    // Override
+  };
+
+  Container2D.prototype.Draw = function ( _rc ) {
+
+    this.PreDraw( _rc );
+
+    if ( this.render === true ) {
+
+      if ( this.transformShouldUpdate === true ) {
+
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      
+      }
+
+      if ( this.children.length > 0 && this.display === true ) {
+
+        this.DrawChildren( _rc );
+      
+      }
+    
+    }
+  
+  };
+
+  Container2D.prototype.GLDraw = function ( _gl ) {
+
+    this.GLPreDraw( _gl );
+
+    if ( this.render === true ) {
+
+      if ( this.transformShouldUpdate === true ) {
+
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      
+      }
+
+      if ( this.children.length > 0 && this.display === true ) {
+
+        if ( this.isBatchParent === true ) {
+
+          this.GLBatchDrawChildren();
+        
+        } else {
+
+          this.GLDrawChildren( _gl );
+        
+        }
+      
+      }
+    
+    }
+  
+  };
+
+  Container2D.prototype.RequestTransformUpdate = function () {
+
+    this.transformShouldUpdate = true;
+  
+  };
+
+  Container2D.prototype.DrawChildren = function ( _rc ) {
+
+    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+
+      child = children[ i ];
+      if ( child.Draw ) child.Draw( _rc );
+    
+    }
+  
+  };
+
+  Container2D.prototype.GLDrawChildren = function ( _gl ) {
+
+    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+
+      child = children[ i ];
+      if ( child.GLDraw ) child.GLDraw( _gl );
+    
+    }
+  
+  };
+
+  Container2D.prototype.GLBatchDrawChildren = function () {
+
+    if ( this.childDataBuffer != null && this.programController != null ) {
+
+      this.programController.Execute( this.childDataBuffer, this.children.length );
+    
+    }
+  
+  };
+
+  Container2D.prototype.ComputeBatchBuffer = function ( _getBufferData ) {
+
+    var childDataBuffer = [];
+
+    for ( var i = 0, children = this.children, l = children.length, child, childData; i < l; ++i ) {
+
+      child = children[ i ];
+
+      if ( _getBufferData != null ) {
+
+        childData = _getBufferData( child );
+      
+      } else {
+
+        childData = child.GetBufferData();
+      
+      }
+
+      child.bufferStartIndex = childDataBuffer.length;
+      child.bufferEndIndex = childDataBuffer.length + childData.length;
+      childDataBuffer.push.apply( childDataBuffer, childData );
+    
+    }
+
+    this.childDataBuffer = new Float32Array( childDataBuffer );
+  
+  };
+
+  Container2D.prototype.UpdateInBuffer = function () {
+
+    throw new Error( 'Cannot update buffer data directly on Container2D object!' );
+  
+  };
+
+  Container2D.prototype.GetBufferData = function () {
+
+    throw new Error( 'Cannot access buffer data directly on Container2D object!' );
+  
+  };
+
+  Container2D.prototype.AddChild = function ( _child ) {
+
+    var parent = _child.parent;
+
+    if ( parent !== null ) {
+
+      parent.RemoveChild( _child );
+    
+    }
+
+    this.children.push( _child );
+    _child.parent = this;
+    return _child;
+  
+  };
+
+  Container2D.prototype.AddChildren = function () {
+
+    var children = arguments;
+
+    if ( Array.isArray( children[ 0 ] ) ) {
+
+      children = children[ 0 ];
+    
+    }
+
+    for ( var i = 0, l = children.length; i < l; ++i ) {
+
+      this.AddChild( children[ i ] );
+    
+    }
+  
+  };
+
+  Container2D.prototype.Mount = function () {
+
+    this.AddChildren.apply( this, arguments );
+  
+  };
+
+  Container2D.prototype.AddSibling = function ( _sibling ) {
+
+    var parent = this.parent;
+
+    if ( parent !== null ) {
+
+      parent.AddChild( _sibling );
+    
+    }
+
+    return _sibling;
+  
+  };
+
+  Container2D.prototype.RemoveChild = function ( _child ) {
+
+    var children = this.children;
+    var ix = children.indexOf( _child );
+
+    if ( ix !== -1 ) {
+
+      _child.parent = null;
+      return children.fickleSplice( ix );
+    
+    }
+  
+  };
+
+  Container2D.prototype.RemoveChildren = function () {
+
+    var children = this.children;
+    var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
+    var rChildren = [];
+
+    for ( var i = 0, l = aChildren.length, child, ix; i < l; ++i ) {
+
+      child = aChildren[ i ];
+      ix = children.indexOf( child );
+
+      if ( ix !== -1 ) {
+
+        rChildren.push( children.fickleSplice( ix ) );
+        child.parent = null;
+      
+      }
+    
+    }
+
+    return rChildren;
+  
+  };
+
+  Container2D.prototype.SendToFront = function () {
+
+    if ( this.parent !== null ) {
+
+      var pChildren = this.parent.children;
+      var ix = pChildren.indexOf( this );
+
+      if ( ix !== -1 ) {
+
+        pChildren.push( pChildren.fickleSplice( ix ) );
+      
+      }
+    
+    }
+  
+  };
+
+  Container2D.prototype.SendToBack = function () {
+
+    if ( this.parent !== null ) {
+
+      var pChildren = this.parent.children;
+      var ix = pChildren.indexOf( this );
+
+      if ( ix !== -1 ) {
+
+        pChildren.unshift( pChildren.fickleSplice( ix ) );
+      
+      }
+    
+    }
+  
+  };
+
+  Container2D.prototype.Dump = function () {
+
+    this.children.length = 0;
+  
+  };
+
+  Container2D.prototype.Destroy = function () {
+
+    this.Dump();
+    if ( this.parent !== null ) this.parent.RemoveChild( this );
+  
+  };
+
+  Container2D.prototype.AttachTo = function ( _parent ) {
+
+    _parent.AddChild( this );
+  
+  };
+
+  Container2D.prototype.Detach = function () {
+
+    if ( this.parent !== null ) return this.parent.RemoveChild( this );
+    return null;
+  
+  };
+
+  Container2D.prototype.GetChildClosestTo = function ( _object, _filter ) {
+
+    var children = this.children, closestChild = null;
+
+    if ( children.length !== 0 ) {
+
+      for ( var i = 0, l = children.length, child, distance = Infinity, tempDistance; i < l; ++i ) {
+
+        child = children[ i ];
+
+        if ( _filter !== undefined ) {
+
+          if ( _filter( child ) === false ) continue;
+        
+        }
+
+        tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
+
+        if ( tempDistance < distance ) {
+
+          distance = tempDistance;
+          closestChild = child;
+        
+        }
+      
+      }
+
+      return closestChild;
+    
+    }
+
+    return null;
+  
+  };
+
+  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filter ) {
+
+    var children = this.children, closestChild = null;
+
+    if ( children.length !== 0 ) {
+
+      for ( var i = 0, l = children.length, child, distance = 0, tempDistance; i < l; ++i ) {
+
+        child = children[ i ];
+
+        if ( _filter !== undefined ) {
+
+          if ( _filter( child ) === false ) continue;
+        
+        }
+
+        tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
+
+        if ( tempDistance > distance ) {
+
+          distance = tempDistance;
+          closestChild = child;
+        
+        }
+      
+      }
+
+      return closestChild;
+    
+    }
+
+    return null;
+  
+  };
+
+  Container2D.prototype.UseAsBatchParent = function ( _pc ) {
+
+    this.isBatchParent = true;
+    this.programController = _pc;
+  
+  };
+
+  Nenkraft.Entity.Container2D = Container2D;
+  Nenkraft.Container2D = Container2D;
+
+};
+
+
+/***/ }),
+
+/***/ 27:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+  var Super = Nenkraft.Entity.Container2D;
+
+  function Case2D ( _x, _y ) {
+
+    if ( !( this instanceof Case2D ) ) return new Case2D( _x, _y );
+    Super.call( this, _x, _y );
+  
+  }
+
+  Case2D.prototype = Object.create( Super.prototype );
+  Case2D.prototype.constructor = Case2D;
+
+  /*
+   *Static
+   *Members
+   *Methods
+   */
+  Case2D.prototype.Render = function () {
+
+    if ( this.render === true ) {
+
+      if ( this.transformShouldUpdate === true ) {
+
+        this.UpdateTransform();
+        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
+      
+      }
+
+      if ( this.children.length > 0 ) {
+
+        this.RenderChildren();
+      
+      }
+    
+    }
+  
+  };
+
+  Case2D.prototype.RenderChildren = function () {
+
+    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+
+      child = children[ i ];
+      if ( child.Render ) child.Render();
+    
+    }
+  
+  };
+
+  Nenkraft.Entity.Case2D = Case2D;
+  Nenkraft.Case2D = Case2D;
+
+};
+
+
+/***/ }),
+
+/***/ 28:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Option ( _id, _handle, _info, _priority, _breakIfExecuted ) {
+
+    if ( !( this instanceof Option ) ) return new Option( _id, _handle, _info, _priority, _breakIfExecuted );
+
+    this.id = _id.split( ' ' );
+    this.handle = _handle;
+    this.info = _info;
+    if ( _priority !== undefined ) this.priority = _priority;
+    if ( _breakIfExecuted !== undefined ) this.breakIfExecuted = _breakIfExecuted;
+    this.data = {};
+  
+  }
+
+  Option.prototype = Object.create( null );
+  Option.prototype.constructor = Option;
+  // Static
+
+  // Members
+  Option.prototype.command = null;
+  Option.prototype.priority = 0;
+  Option.prototype.breakIfExecuted = false;
+
+  // Methods
+  Option.prototype.Execute = function ( _dataStrs, _data ) {
+
+    this.handle( _dataStrs, _data );
+    return this.breakIfExecuted;
+  
+  };
+
+  Nenkraft.CP.Option = Option;
+
+};
+
+
+/***/ }),
+
+/***/ 29:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Command ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
+
+    if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
+
+    this.id = _id.split( ' ' );
+    this.handle = _handle;
+    this.info = _info;
+    this.data = {};
+    this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
+    this.dsCopy = [];
+    if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
+  
+  }
+
+  Command.prototype = Object.create( null );
+  Command.prototype.constructor = Command;
+  // Static
+  Command.OPTION_PREFIX = '';
+  // Members
+  Command.prototype.dataSeparator = '=';
+  Command.prototype.options = null;
+  Command.prototype.allOptionIds = null;
+  Command.prototype.fullInfo = null;
+  Command.prototype.optionPrefix = null;
+  Command.prototype.continueToPrime = true;
+  Command.prototype.dsCopy = null;
+
+  // Methods
+  Command.prototype.Execute = function ( _dataStrs, _data ) {
+
+    this.HandleData( _dataStrs, _data );
+
+    if ( this.HandleOptions( _dataStrs, _data ) === true ) {
+
+      this.handle( _dataStrs, _data );
+    
+    }
+  
+  };
+
+  Command.prototype.AddOption = function ( _id, _handle, _info, _priority, _breakIfExecuted, _optionPrefix ) {
+
+    _optionPrefix = _optionPrefix === undefined ? this.optionPrefix : _optionPrefix;
+    if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
+    if ( this.options === null ) this.options = [];
+    _priority = _priority === undefined ? 0 : _priority;
+    var opt = new Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
+    opt.command = this;
+
+    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
+
+      option = options[ i ];
+
+      if ( option.priority <= _priority ) {
+
+        options.splice( i, 0, opt );
+        this.allOptionIds = this.GetAllOptionIds();
+        return this;
+      
+      }
+    
+    }
+
+    this.options.push( opt );
+    this.allOptionIds = this.GetAllOptionIds();
+    return this;
+  
+  };
+
+  Command.prototype.HandleData = function ( _dataStrs, _data ) {
+
+    var dsCopy = this.dsCopy;
+    dsCopy.push.apply( dsCopy, _dataStrs );
+
+    for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
+
+      str = dsCopy[ i ];
+      data = str.split( ds );
+
+      if ( data.length === 2 ) {
+
+        _dataStrs.fickleSplice( i );
+        _data[ data[ 0 ] ] = data[ 1 ];
+      
+      }
+    
+    }
+
+    dsCopy.length = 0;
+  
+  };
+
+  Command.prototype.HandleOptions = function ( _dataStrs, _data ) {
+
+    if ( _dataStrs.length === 0 ) {
+
+      return this.continueToPrime;
+    
+    }
+
+    var matchingOptionIds = this.GetAndRemoveMatchingOptionIds( _dataStrs );
+    if ( matchingOptionIds === null ) return this.continueToPrime;
+
+    for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
+
+      option = this.GetOptionById( matchingOptionIds[ i ] );
+      if ( option.Execute( _dataStrs, _data ) === true ) return false;
+    
+    }
+
+    return this.continueToPrime;
+  
+  };
+
+  Command.prototype.GetOptionById = function ( _id ) {
+
+    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
+
+      option = options[ i ];
+      if ( option.id.indexOf( _id ) !== -1 ) return option;
+    
+    }
+
+    return null;
+  
+  };
+
+  Command.prototype.GetAllOptionIds = function () {
+
+    var allOptionIds = [];
+
+    for ( var i = 0, options = this.options, l = options.length; i < l; ++i ) {
+
+      allOptionIds.push.apply( allOptionIds, options[ i ].id );
+    
+    }
+
+    return allOptionIds;
+  
+  };
+
+  Command.prototype.GetAndRemoveMatchingOptionIds = function ( _dataStrs ) {
+
+    var allOptionIds = this.allOptionIds;
+    if ( allOptionIds === null ) return null;
+    var optionIds = [];
+
+    for ( var i = 0, l = allOptionIds.length; i < l; ++i ) {
+
+      var ix = _dataStrs.indexOf( allOptionIds[ i ] );
+
+      if ( ix !== -1 ) {
+
+        optionIds.push( _dataStrs.fickleSplice( ix ) );
+      
+      }
+    
+    }
+
+    return optionIds;
+  
+  };
+
+  Command.prototype.GenerateInfoString = function () {
+
+    var str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
+
+    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
+
+      option = options[ i ];
+      str += 'OPTION: ' + option.id.join( ', ' ) + ' -> ' + option.info + '\n';
+    
+    }
+
+    return str;
+  
+  };
+
+  Nenkraft.CP.Command = Command;
+
+};
+
+
+/***/ }),
+
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3145,1537 +4901,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 20:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-  Nenkraft.Math.Ease = Object.create( null );
-
-  Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
-
-    return _amplitude * _time / _duration + _startValue;
-  
-  };
-
-  Nenkraft.Math.Ease.QuadIn = function ( _time, _startValue, _amplitude, _duration ) {
-
-    _time /= _duration;
-    return _amplitude * _time * _time + _startValue;
-  
-  };
-
-  Nenkraft.Math.Ease.QuadOut = function ( _time, _startValue, _amplitude, _duration ) {
-
-    _time /= _duration;
-    return -_amplitude * _time * ( _time - 2 ) + _startValue;
-  
-  };
-
-  Nenkraft.Math.Ease.QuadInOut = function ( _time, _startValue, _amplitude, _duration ) {
-
-    _time /= _duration * 0.5;
-    if ( _time < 1 ) return _amplitude * 0.5 * _time * _time + _startValue;
-    _time--;
-    return -_amplitude * 0.5 * ( _time * ( _time - 2 ) - 1 ) + _startValue;
-  
-  };
-
-  Nenkraft.Math.Ease.SineIn = function ( _time, _startValue, _amplitude, _duration ) {
-
-    return -_amplitude * Math.cos( _time / _duration * ( Math.PI * 0.5 ) ) + _amplitude + _startValue;
-  
-  };
-
-  Nenkraft.Math.Ease.SineOut = function ( _time, _startValue, _amplitude, _duration ) {
-
-    return _amplitude * Math.sin( _time / _duration * ( Math.PI * 0.5 ) ) + _startValue;
-  
-  };
-
-  Nenkraft.Math.Ease.SineInOut = function ( _time, _startValue, _amplitude, _duration ) {
-
-    return -_amplitude * 0.5 * ( Math.cos( Math.PI * _time / _duration ) - 1 ) + _startValue;
-  
-  };
-
-};
-
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Motion ( _id, _target, _propertyString, _value, _duration, _easing ) {
-
-    if ( !( this instanceof Motion ) ) return new Motion( _id, _target, _propertyString, _value, _duration, _easing );
-    this.id = _id;
-    this.target = _target;
-    this.propertyString = _propertyString;
-    if ( _value !== undefined ) this.value = _value;
-    if ( _duration !== undefined ) this.duration = _duration;
-    this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
-    this.onStart = new Nenkraft.Event.LocalEvent();
-    this.onEnd = new Nenkraft.Event.LocalEvent();
-    this.onStop = new Nenkraft.Event.LocalEvent();
-    this.onReconfigure = new Nenkraft.Event.LocalEvent();
-    this.onReset = new Nenkraft.Event.LocalEvent();
-  
-  }
-
-  Motion.prototype = Object.create( null );
-  Motion.prototype.constructor = Motion;
-  // Static
-  Motion.DEFAULT_EASING = 'Linear';
-  // Members
-  Motion.prototype.id = null;
-  Motion.prototype.target = null;
-  Motion.prototype.easing = null;
-  Motion.prototype.duration = 1000;
-  Motion.prototype.time = 0;
-  Motion.prototype.value = 1;
-  Motion.prototype.startValue = 0;
-  Motion.prototype.propertyString = null;
-  Motion.prototype.change = 0;
-  Motion.prototype.property = null;
-  Motion.prototype.propertyObject = null;
-  Motion.prototype.running = false;
-
-  // Methods
-  Motion.prototype.Start = function () {
-
-    var property = this.propertyString.split( '.' );
-    this.property = property[ property.length - 1 ];
-    this.propertyObject = Nenkraft.Utils.Nested( this.target, this.propertyString, true );
-    this.startValue = this.propertyObject[ this.property ];
-    this.change = this.value - this.startValue;
-    this.time = 0;
-    this.running = true;
-    this.onStart.Dispatch( this, null );
-  
-  };
-
-  Motion.prototype.Stop = function () {
-
-    delete this.property;
-    delete this.propertyObject;
-    delete this.startValue;
-    delete this.change;
-    delete this.time;
-    delete this.running;
-    this.onStop.Dispatch( this, null );
-  
-  };
-
-  Motion.prototype.Process = function () {
-
-    if ( this.running === true ) {
-
-      this.propertyObject[ this.property ] = this.easing( this.time, this.startValue, this.change, this.duration );
-
-      if ( ++this.time >= this.duration ) {
-
-        this.running = false;
-        this.propertyObject[ this.property ] = this.value;
-        this.onEnd.Dispatch( this, null );
-      
-      }
-    
-    }
-  
-  };
-
-  Motion.prototype.Reconfigure = function ( _propertyString, _value, _duration, _easing ) {
-
-    if ( _propertyString !== undefined ) this.propertyString = _propertyString;
-    this.value = _value;
-    this.duration = _duration;
-    this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
-    this.onReconfigure.Dispatch( this, null );
-  
-  };
-
-  Motion.prototype.Reset = function () {
-
-    if ( this.propertyObject === null || this.property === null ) return false;
-    this.propertyObject[ this.property ] = this.startValue;
-    delete this.property;
-    delete this.propertyObject;
-    delete this.startValue;
-    delete this.change;
-    delete this.time;
-    delete this.running;
-    this.onReset.Dispatch( this, null );
-  
-  };
-
-  Nenkraft.Motion = Motion;
-
-};
-
-
-/***/ }),
-
-/***/ 22:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function MotionManager ( _target ) {
-
-    if ( !( this instanceof MotionManager ) ) return new MotionManager( _target );
-    this.motions = [];
-    this.target = _target;
-  
-  }
-
-  MotionManager.prototype = Object.create( null );
-  MotionManager.prototype.constructor = MotionManager;
-  // Static
-
-  // Members
-  MotionManager.prototype.target = null;
-  MotionManager.prototype.motions = null;
-
-  // Methods
-  MotionManager.prototype.Create = function ( _id, _propertyString, _value, _duration, _easing ) {
-
-    var exists = this.GetMotion( _id );
-
-    if ( exists === null ) {
-
-      var motion = new Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
-      this.motions.push( motion );
-      return motion;
-    
-    }
-
-    return null;
-  
-  };
-
-  MotionManager.prototype.Add = function ( _motion ) {
-
-    var exists = this.GetMotion( _motion.id );
-
-    if ( exists === null ) {
-
-      this.motions.push( _motion );
-    
-    }
-  
-  };
-
-  MotionManager.prototype.Start = function ( _id ) {
-
-    var motion = this.GetMotion( _id );
-
-    if ( motion !== null ) {
-
-      motion.Start();
-    
-    }
-
-    return motion;
-  
-  };
-
-  MotionManager.prototype.StartMultiple = function ( _ids ) {
-
-    _ids = _ids.split( ' ' );
-
-    for ( var i = 0, l = _ids.length; i < l; ++i ) {
-
-      this.Start( _ids[ i ] );
-    
-    }
-  
-  };
-
-  MotionManager.prototype.Stop = function ( _id ) {
-
-    var motion = this.GetMotion( _id );
-
-    if ( motion !== null ) {
-
-      motion.Stop();
-    
-    }
-
-    return motion;
-  
-  };
-
-  MotionManager.prototype.StopMultiple = function ( _ids ) {
-
-    _ids = _ids.split( ' ' );
-
-    for ( var i = 0, l = _ids.length; i < l; ++i ) {
-
-      this.Stop( _ids[ i ] );
-    
-    }
-  
-  };
-
-  MotionManager.prototype.Reset = function ( _id ) {
-
-    var motion = this.GetMotion( _id );
-
-    if ( motion !== null ) {
-
-      motion.Reset();
-    
-    }
-
-    return motion;
-  
-  };
-
-  MotionManager.prototype.ResetMultiple = function ( _ids ) {
-
-    _ids = _ids.split( ' ' );
-
-    for ( var i = 0, l = _ids.length; i < l; ++i ) {
-
-      this.Reset( _ids[ i ] );
-    
-    }
-  
-  };
-
-  MotionManager.prototype.Process = function () {
-
-    for ( var i = 0, motions = this.motions, l = motions.length, motion; i < l; ++i ) {
-
-      motion = motions[ i ];
-      motion.Process();
-    
-    }
-  
-  };
-
-  MotionManager.prototype.GetMotion = function ( _id ) {
-
-    for ( var i = 0, motions = this.motions, l = motions.length, motion; i < l; ++i ) {
-
-      motion = motions[ i ];
-      if ( motion.id === _id ) return motion;
-    
-    }
-
-    return null;
-  
-  };
-
-  Nenkraft.MotionManager = MotionManager;
-
-};
-
-
-/***/ }),
-
-/***/ 23:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function QuadtreeNode ( _aabb, _level, _objCap, _levelCap ) {
-
-    if ( !( this instanceof QuadtreeNode ) ) return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
-    this.Set( _aabb, _level, _objCap, _levelCap );
-    this.nodes = {};
-    this.objects = [];
-    this.convergence = [];
-  
-  }
-
-  QuadtreeNode.prototype = Object.create( null );
-  QuadtreeNode.prototype.constructor = QuadtreeNode;
-  // Static
-  QuadtreeNode.TOP_LEFT = 'TL';
-  QuadtreeNode.TOP_RIGHT = 'TR';
-  QuadtreeNode.BOTTOM_LEFT = 'BL';
-  QuadtreeNode.BOTTOM_RIGHT = 'BR';
-  QuadtreeNode.Pool = new Nenkraft.Utils.Pool( QuadtreeNode );
-
-  QuadtreeNode.Pool.Retrieve = function( _aabb, _level, _objCap, _levelCap ) {
-
-    if ( this.objects.length === 0 ) {
-
-      this.Flood();
-    
-    }
-
-    var qtn = this.objects.pop();
-    qtn.Set( _aabb, _level, _objCap, _levelCap );
-    return qtn;
-  
-  };
-
-  QuadtreeNode.USE_POOL = true;
-  // Members
-  QuadtreeNode.prototype.objectCap = 0;
-  QuadtreeNode.prototype.levelCap = 0;
-  QuadtreeNode.prototype.level = 0;
-  QuadtreeNode.prototype.nodes = null;
-  QuadtreeNode.prototype.objects = null;
-  QuadtreeNode.prototype.convergence = null;
-  QuadtreeNode.prototype.aabb = null;
-  QuadtreeNode.prototype.hasSplit = false;
-
-  // Methods
-  QuadtreeNode.prototype.Set = function( _aabb, _level, _objCap, _levelCap ) {
-
-    this.aabb = _aabb;
-    this.level = _level;
-    this.objectCap = _objCap;
-    this.levelCap = _levelCap;
-  
-  };
-
-  QuadtreeNode.prototype.FromStore = function( _aabb, _level, _objCap, _levelCap ) {
-
-    if ( QuadtreeNode.USE_POOL === true ) {
-
-      return QuadtreeNode.Pool.Retrieve( _aabb, _level, _objCap, _levelCap );
-    
-    }
-
-    return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
-  
-  };
-
-  QuadtreeNode.prototype.Add = function ( _object ) {
-
-    var marking = '';
-    var objects = this.objects;
-    var nodes = this.nodes;
-    var i = 0;
-
-    if ( this.hasSplit === true ) {
-
-      marking = this.Marking( _object );
-
-      if ( marking !== null ) {
-
-        nodes[ marking ].Add( _object );
-        return;
-      
-      }
-    
-    }
-
-    objects.push( _object );
-
-    if ( this.level < this.levelCap ) {
-
-      if ( objects.length > this.objectCap ) {
-
-        if ( this.hasSplit === false ) {
-
-          this.Split();
-        
-        }
-
-        while ( i < objects.length ) {
-
-          marking = this.Marking( objects[ i ] );
-
-          if ( marking !== null ) {
-
-            nodes[ marking ].Add( objects.splice( i, 1 )[ 0 ] );
-          
-          } else {
-
-            ++i;
-          
-          }
-        
-        }
-      
-      }
-    
-    }
-  
-  };
-
-  QuadtreeNode.prototype.Converge = function ( _object ) {
-
-    var convergence = this.convergence;
-    convergence.length = 0;
-    convergence.push.apply( convergence, this.objects );
-    var marking = null;
-    var nodes = this.nodes;
-
-    if ( this.hasSplit === true ) {
-
-      marking = this.Marking( _object );
-
-      if ( marking !== null ) {
-
-        convergence.push.apply( convergence, nodes[ marking ].Converge( _object ) );
-      
-      } else {
-
-        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_LEFT ].Converge( _object ) );
-        convergence.push.apply( convergence, nodes[ QuadtreeNode.TOP_RIGHT ].Converge( _object ) );
-        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_LEFT ].Converge( _object ) );
-        convergence.push.apply( convergence, nodes[ QuadtreeNode.BOTTOM_RIGHT ].Converge( _object ) );
-      
-      }
-    
-    }
-
-    return convergence;
-  
-  };
-
-  QuadtreeNode.prototype.Split = function () {
-
-    var nl = this.level + 1;
-    var oc = this.objectCap;
-    var lc = this.levelCap;
-    var nodes = this.nodes;
-    var aabb = this.aabb;
-    nodes[ QuadtreeNode.TOP_LEFT ] = this.FromStore(
-      aabb.GetQuadrant( QuadtreeNode.TOP_LEFT ),
-      nl, oc, lc
-    );
-    nodes[ QuadtreeNode.TOP_RIGHT ] = this.FromStore(
-      aabb.GetQuadrant( QuadtreeNode.TOP_RIGHT ),
-      nl, oc, lc
-    );
-    nodes[ QuadtreeNode.BOTTOM_LEFT ] = this.FromStore(
-      aabb.GetQuadrant( QuadtreeNode.BOTTOM_LEFT ),
-      nl, oc, lc
-    );
-    nodes[ QuadtreeNode.BOTTOM_RIGHT ] = this.FromStore(
-      aabb.GetQuadrant( QuadtreeNode.BOTTOM_RIGHT ),
-      nl, oc, lc
-    );
-    this.hasSplit = true;
-  
-  };
-
-  QuadtreeNode.prototype.Dump = function () {
-
-    var nodes = this.nodes;
-    this.objects.length = 0;
-
-    if ( this.hasSplit === true ) {
-
-      nodes[ QuadtreeNode.TOP_LEFT ].Dump();
-      nodes[ QuadtreeNode.TOP_RIGHT ].Dump();
-      nodes[ QuadtreeNode.BOTTOM_LEFT ].Dump();
-      nodes[ QuadtreeNode.BOTTOM_RIGHT ].Dump();
-
-      if ( QuadtreeNode.USE_POOL === true ) {
-
-        nodes[QuadtreeNode.TOP_LEFT].Store();
-        nodes[ QuadtreeNode.TOP_RIGHT ].Store();
-        nodes[ QuadtreeNode.BOTTOM_LEFT ].Store();
-        nodes[ QuadtreeNode.BOTTOM_RIGHT ].Store();
-      
-      }
-    
-    }
-
-    this.nodes = {};
-    this.hasSplit = false;
-  
-  };
-
-  QuadtreeNode.prototype.Marking = function ( _object ) {
-
-    var nodes = this.nodes;
-
-    if ( nodes[ QuadtreeNode.TOP_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
-
-      return QuadtreeNode.TOP_LEFT;
-    
-    }
-
-    if ( nodes[ QuadtreeNode.TOP_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
-
-      return QuadtreeNode.TOP_RIGHT;
-    
-    }
-
-    if ( nodes[ QuadtreeNode.BOTTOM_LEFT ].aabb.ContainsAABB2D( _object ) === true ) {
-
-      return QuadtreeNode.BOTTOM_LEFT;
-    
-    }
-
-    if ( nodes[ QuadtreeNode.BOTTOM_RIGHT ].aabb.ContainsAABB2D( _object ) === true ) {
-
-      return QuadtreeNode.BOTTOM_RIGHT;
-    
-    }
-
-    return null;
-  
-  };
-
-  QuadtreeNode.prototype.ConcatNodes = function ( _nodeList ) {
-
-    if ( _nodeList === undefined ) _nodeList = [];
-    _nodeList.push( this );
-    var nodes = this.nodes;
-    if ( this.hasSplit === false ) return _nodeList;
-    nodes[ QuadtreeNode.TOP_LEFT ].ConcatNodes( _nodeList );
-    nodes[ QuadtreeNode.TOP_RIGHT ].ConcatNodes( _nodeList );
-    nodes[ QuadtreeNode.BOTTOM_LEFT ].ConcatNodes( _nodeList );
-    nodes[ QuadtreeNode.BOTTOM_RIGHT ].ConcatNodes( _nodeList );
-    return _nodeList;
-  
-  };
-
-  QuadtreeNode.prototype.Store = function() {
-
-    QuadtreeNode.Pool.Store( this );
-
-    // console.log( QuadtreeNode.Pool.objects.length );
-  
-  };
-
-  Nenkraft.Utils.QuadtreeNode = QuadtreeNode;
-  Nenkraft.QuadtreeNode = QuadtreeNode;
-
-  QuadtreeNode.Pool.Flood( function() {}, 1000 );
-
-};
-
-
-/***/ }),
-
-/***/ 24:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function CoreEntity2D ( _x, _y ) {
-
-    if ( !( this instanceof CoreEntity2D ) ) return new CoreEntity2D( _x, _y );
-    this.transform = new Nenkraft.Math.Transform2D( _x, _y );
-    this.data = Object.create( null );
-  
-  }
-
-  CoreEntity2D.prototype = Object.create( null );
-  CoreEntity2D.prototype.constructor = CoreEntity2D;
-  // Static
-  CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
-  // Members
-  CoreEntity2D.prototype.parent = null;
-  CoreEntity2D.prototype.transform = null;
-  CoreEntity2D.prototype.data = null;
-  CoreEntity2D.prototype.w = 0;
-  CoreEntity2D.prototype.h = 0;
-  CoreEntity2D.prototype.bounds = null;
-  CoreEntity2D.prototype.boundsDirty = true;
-
-  // Methods
-  CoreEntity2D.prototype.UpdateTransform = function () {
-
-    if ( this.parent ) {
-
-      this.transform.UpdateWorld( this.parent.transform.worldTransform );
-    
-    } else {
-
-      this.transform.UpdateWorld( CoreEntity2D.NULL_TRANSFORM.worldTransform );
-    
-    }
-  
-  };
-
-  CoreEntity2D.prototype.GetWorldPosition = function () {
-
-    var wt = this.transform.worldTransform;
-    return new Nenkraft.Vector2D( wt.e, wt.f );
-  
-  };
-
-  CoreEntity2D.prototype.ComputeBounds = function ( _anchor ) {
-
-    var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
-    var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
-
-    if ( this.bounds === null ) {
-
-      this.bounds = new Nenkraft.Geom.AABB2D(
-        this.x - this.width * ax,
-        this.y - this.height * ay,
-        this.x + this.width,
-        this.y + this.height
-      );
-      this.bounds.belongsTo = this;
-    
-    } else {
-
-      this.bounds.Set(
-        this.x - this.width * ax,
-        this.y - this.height * ay,
-        this.x + this.width,
-        this.y + this.height
-      );
-    
-    }
-
-    this.boundsDirty = false;
-    return this.bounds;
-  
-  };
-
-  Object.defineProperty( CoreEntity2D.prototype, 'rotation', {
-    get: function () {
-
-      return this.transform.rotation;
-    
-    },
-    set: function ( _value ) {
-
-      this.transform.rotation = _value;
-      this.transform.UpdateSkew();
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'scale', {
-    get: function () {
-
-      return this.transform.scale;
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'position', {
-    get: function () {
-
-      return this.transform.position;
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'pivot', {
-    get: function () {
-
-      return this.transform.pivot;
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'x', {
-    get: function () {
-
-      return this.transform.position.x;
-    
-    },
-    set: function ( _value ) {
-
-      this.transform.position.x = _value;
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'y', {
-    get: function () {
-
-      return this.transform.position.y;
-    
-    },
-    set: function ( _value ) {
-
-      this.transform.position.y = _value;
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'width', {
-    get: function () {
-
-      return this.w * this.scale.x;
-    
-    },
-    set: function ( _value ) {
-
-      this.w = _value;
-    
-    }
-  } );
-  Object.defineProperty( CoreEntity2D.prototype, 'height', {
-    get: function () {
-
-      return this.h * this.scale.y;
-    
-    },
-    set: function ( _value ) {
-
-      this.h = _value;
-    
-    }
-  } );
-  Nenkraft.Entity.CoreEntity2D = CoreEntity2D;
-
-};
-
-
-/***/ }),
-
-/***/ 25:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-  var Super = Nenkraft.Entity.CoreEntity2D;
-
-  function Container2D ( _x, _y ) {
-
-    if ( !( this instanceof Container2D ) ) return new Container2D( _x, _y );
-    Super.call( this, _x, _y );
-    this.children = [];
-  
-  }
-
-  Container2D.prototype = Object.create( Super.prototype );
-  Container2D.prototype.constructor = Container2D;
-  // Static
-
-  // Members
-  Container2D.prototype.children = null;
-  Container2D.prototype.render = true;
-  Container2D.prototype.display = true;
-  Container2D.prototype.transformShouldUpdate = true;
-  Container2D.prototype.transformAutomaticUpdate = true;
-  //
-  Container2D.prototype.isBatchParent = false;
-  Container2D.prototype.childDataBuffer = null;
-  Container2D.prototype.bufferData = null;
-  Container2D.prototype.programController = null;
-  Container2D.prototype.bufferStartIndex = 0;
-  Container2D.prototype.bufferEndIndex = 0;
-
-  /*
-   *
-   *Methods
-   */
-  Container2D.prototype.PreDraw = function ( /* _rc */ ) {
-    // Override
-  };
-
-  Container2D.prototype.GLPreDraw = function ( /* _gl */ ) {
-    // Override
-  };
-
-  Container2D.prototype.Draw = function ( _rc ) {
-
-    this.PreDraw( _rc );
-
-    if ( this.render === true ) {
-
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
-
-      if ( this.children.length > 0 && this.display === true ) {
-
-        this.DrawChildren( _rc );
-      
-      }
-    
-    }
-  
-  };
-
-  Container2D.prototype.GLDraw = function ( _gl ) {
-
-    this.GLPreDraw( _gl );
-
-    if ( this.render === true ) {
-
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
-
-      if ( this.children.length > 0 && this.display === true ) {
-
-        if ( this.isBatchParent === true ) {
-
-          this.GLBatchDrawChildren();
-        
-        } else {
-
-          this.GLDrawChildren( _gl );
-        
-        }
-      
-      }
-    
-    }
-  
-  };
-
-  Container2D.prototype.RequestTransformUpdate = function () {
-
-    this.transformShouldUpdate = true;
-  
-  };
-
-  Container2D.prototype.DrawChildren = function ( _rc ) {
-
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
-
-      child = children[ i ];
-      if ( child.Draw ) child.Draw( _rc );
-    
-    }
-  
-  };
-
-  Container2D.prototype.GLDrawChildren = function ( _gl ) {
-
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
-
-      child = children[ i ];
-      if ( child.GLDraw ) child.GLDraw( _gl );
-    
-    }
-  
-  };
-
-  Container2D.prototype.GLBatchDrawChildren = function () {
-
-    if ( this.childDataBuffer != null && this.programController != null ) {
-
-      this.programController.Execute( this.childDataBuffer, this.children.length );
-    
-    }
-  
-  };
-
-  Container2D.prototype.ComputeBatchBuffer = function ( _getBufferData ) {
-
-    var childDataBuffer = [];
-
-    for ( var i = 0, children = this.children, l = children.length, child, childData; i < l; ++i ) {
-
-      child = children[ i ];
-
-      if ( _getBufferData != null ) {
-
-        childData = _getBufferData( child );
-      
-      } else {
-
-        childData = child.GetBufferData();
-      
-      }
-
-      child.bufferStartIndex = childDataBuffer.length;
-      child.bufferEndIndex = childDataBuffer.length + childData.length;
-      childDataBuffer.push.apply( childDataBuffer, childData );
-    
-    }
-
-    this.childDataBuffer = new Float32Array( childDataBuffer );
-  
-  };
-
-  Container2D.prototype.UpdateInBuffer = function () {
-
-    throw new Error( 'Cannot update buffer data directly on Container2D object!' );
-  
-  };
-
-  Container2D.prototype.GetBufferData = function () {
-
-    throw new Error( 'Cannot access buffer data directly on Container2D object!' );
-  
-  };
-
-  Container2D.prototype.AddChild = function ( _child ) {
-
-    var parent = _child.parent;
-
-    if ( parent !== null ) {
-
-      parent.RemoveChild( _child );
-    
-    }
-
-    this.children.push( _child );
-    _child.parent = this;
-    return _child;
-  
-  };
-
-  Container2D.prototype.AddChildren = function () {
-
-    var children = arguments;
-
-    if ( Array.isArray( children[ 0 ] ) ) {
-
-      children = children[ 0 ];
-    
-    }
-
-    for ( var i = 0, l = children.length; i < l; ++i ) {
-
-      this.AddChild( children[ i ] );
-    
-    }
-  
-  };
-
-  Container2D.prototype.Mount = function () {
-
-    this.AddChildren.apply( this, arguments );
-  
-  };
-
-  Container2D.prototype.AddSibling = function ( _sibling ) {
-
-    var parent = this.parent;
-
-    if ( parent !== null ) {
-
-      parent.AddChild( _sibling );
-    
-    }
-
-    return _sibling;
-  
-  };
-
-  Container2D.prototype.RemoveChild = function ( _child ) {
-
-    var children = this.children;
-    var ix = children.indexOf( _child );
-
-    if ( ix !== -1 ) {
-
-      delete _child.parent;
-      return children.splice( ix, 1 )[ 0 ];
-    
-    }
-  
-  };
-
-  Container2D.prototype.RemoveChildren = function () {
-
-    var children = this.children;
-    var aChildren = arguments[ 0 ].length ? arguments[ 0 ] : arguments;
-    var rChildren = [];
-
-    for ( var i = 0, l = aChildren.length, child, ix; i < l; ++i ) {
-
-      child = aChildren[ i ];
-      ix = children.indexOf( child );
-
-      if ( ix !== -1 ) {
-
-        rChildren.push( children.splice( ix, 1 )[ 0 ] );
-        delete child.parent;
-      
-      }
-    
-    }
-
-    return rChildren;
-  
-  };
-
-  Container2D.prototype.SendToFront = function () {
-
-    if ( this.parent !== null ) {
-
-      var pChildren = this.parent.children;
-      var ix = pChildren.indexOf( this );
-
-      if ( ix !== -1 ) {
-
-        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
-      
-      }
-    
-    }
-  
-  };
-
-  Container2D.prototype.SendToBack = function () {
-
-    if ( this.parent !== null ) {
-
-      var pChildren = this.parent.children;
-      var ix = pChildren.indexOf( this );
-
-      if ( ix !== -1 ) {
-
-        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
-      
-      }
-    
-    }
-  
-  };
-
-  Container2D.prototype.Dump = function () {
-
-    this.children.length = 0;
-  
-  };
-
-  Container2D.prototype.Destroy = function () {
-
-    this.Dump();
-    if ( this.parent !== null ) this.parent.RemoveChild( this );
-  
-  };
-
-  Container2D.prototype.AttachTo = function ( _parent ) {
-
-    _parent.AddChild( this );
-  
-  };
-
-  Container2D.prototype.Detach = function () {
-
-    if ( this.parent !== null ) return this.parent.RemoveChild( this );
-    return null;
-  
-  };
-
-  Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
-
-    var children = this.children, closestChild = null;
-
-    if ( children.length !== 0 ) {
-
-      for ( var i = 0, l = children.length, child, distance = Infinity, tempDistance; i < l; ++i ) {
-
-        child = children[ i ];
-
-        if ( _filterCondition !== undefined ) {
-
-          if ( _filterCondition( child ) === false ) continue;
-        
-        }
-
-        tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
-
-        if ( tempDistance < distance ) {
-
-          distance = tempDistance;
-          closestChild = child;
-        
-        }
-      
-      }
-
-      return closestChild;
-    
-    }
-
-    return null;
-  
-  };
-
-  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filterCondition ) {
-
-    var children = this.children, closestChild = null;
-
-    if ( children.length !== 0 ) {
-
-      for ( var i = 0, l = children.length, child, distance = 0, tempDistance; i < l; ++i ) {
-
-        child = children[ i ];
-
-        if ( _filterCondition !== undefined ) {
-
-          if ( _filterCondition( child ) === false ) continue;
-        
-        }
-
-        tempDistance = Math.abs( child.position.GetDistanceSquared( _object.x, _object.y ) );
-
-        if ( tempDistance > distance ) {
-
-          distance = tempDistance;
-          closestChild = child;
-        
-        }
-      
-      }
-
-      return closestChild;
-    
-    }
-
-    return null;
-  
-  };
-
-  Container2D.prototype.UseAsBatchParent = function ( _pc ) {
-
-    this.isBatchParent = true;
-    this.programController = _pc;
-  
-  };
-
-  Nenkraft.Entity.Container2D = Container2D;
-  Nenkraft.Container2D = Container2D;
-
-};
-
-
-/***/ }),
-
-/***/ 26:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-  var Super = Nenkraft.Entity.Container2D;
-
-  function Case2D ( _x, _y ) {
-
-    if ( !( this instanceof Case2D ) ) return new Case2D( _x, _y );
-    Super.call( this, _x, _y );
-  
-  }
-
-  Case2D.prototype = Object.create( Super.prototype );
-  Case2D.prototype.constructor = Case2D;
-
-  /*
-   *Static
-   *Members
-   *Methods
-   */
-  Case2D.prototype.Render = function () {
-
-    if ( this.render === true ) {
-
-      if ( this.transformShouldUpdate === true ) {
-
-        this.UpdateTransform();
-        if ( this.transformAutomaticUpdate === false ) this.transformShouldUpdate = false;
-      
-      }
-
-      if ( this.children.length > 0 ) {
-
-        this.RenderChildren();
-      
-      }
-    
-    }
-  
-  };
-
-  Case2D.prototype.RenderChildren = function () {
-
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
-
-      child = children[ i ];
-      if ( child.Render ) child.Render();
-    
-    }
-  
-  };
-
-  Nenkraft.Entity.Case2D = Case2D;
-  Nenkraft.Case2D = Case2D;
-
-};
-
-
-/***/ }),
-
-/***/ 27:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Option ( _id, _handle, _info, _priority, _breakIfExecuted ) {
-
-    if ( !( this instanceof Option ) ) return new Option( _id, _handle, _info, _priority, _breakIfExecuted );
-
-    this.id = _id.split( ' ' );
-    this.handle = _handle;
-    this.info = _info;
-    if ( _priority !== undefined ) this.priority = _priority;
-    if ( _breakIfExecuted !== undefined ) this.breakIfExecuted = _breakIfExecuted;
-    this.data = {};
-  
-  }
-
-  Option.prototype = Object.create( null );
-  Option.prototype.constructor = Option;
-  // Static
-
-  // Members
-  Option.prototype.command = null;
-  Option.prototype.priority = 0;
-  Option.prototype.breakIfExecuted = false;
-
-  // Methods
-  Option.prototype.Execute = function ( _dataStrs, _data ) {
-
-    this.handle( _dataStrs, _data );
-    return this.breakIfExecuted;
-  
-  };
-
-  Nenkraft.CP.Option = Option;
-
-};
-
-
-/***/ }),
-
-/***/ 28:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Command ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
-
-    if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
-
-    this.id = _id.split( ' ' );
-    this.handle = _handle;
-    this.info = _info;
-    this.data = {};
-    this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
-    if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
-  
-  }
-
-  Command.prototype = Object.create( null );
-  Command.prototype.constructor = Command;
-  // Static
-  Command.OPTION_PREFIX = '';
-  // Members
-  Command.prototype.dataSeparator = '=';
-  Command.prototype.options = null;
-  Command.prototype.allOptionIds = null;
-  Command.prototype.fullInfo = null;
-  Command.prototype.optionPrefix = null;
-  Command.prototype.continueToPrime = true;
-
-  // Methods
-  Command.prototype.Execute = function ( _dataStrs, _data ) {
-
-    this.HandleData( _dataStrs, _data );
-
-    if ( this.HandleOptions( _dataStrs, _data ) === true ) {
-
-      this.handle( _dataStrs, _data );
-    
-    }
-  
-  };
-
-  Command.prototype.AddOption = function ( _id, _handle, _info, _priority, _breakIfExecuted, _optionPrefix ) {
-
-    _optionPrefix = _optionPrefix === undefined ? this.optionPrefix : _optionPrefix;
-    if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
-    if ( this.options === null ) this.options = [];
-    _priority = _priority === undefined ? 0 : _priority;
-    var opt = new Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
-    opt.command = this;
-
-    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
-
-      option = options[ i ];
-
-      if ( option.priority <= _priority ) {
-
-        options.splice( i, 0, opt );
-        this.allOptionIds = this.GetAllOptionIds();
-        return this;
-      
-      }
-    
-    }
-
-    this.options.push( opt );
-    this.allOptionIds = this.GetAllOptionIds();
-    return this;
-  
-  };
-
-  Command.prototype.HandleData = function ( _dataStrs, _data ) {
-
-    var dsCopy = _dataStrs.slice();
-
-    for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
-
-      str = dsCopy[ i ];
-      data = str.split( ds );
-
-      if ( data.length === 2 ) {
-
-        _dataStrs.splice( i, 1 );
-        _data[ data[ 0 ] ] = data[ 1 ];
-      
-      }
-    
-    }
-  
-  };
-
-  Command.prototype.HandleOptions = function ( _dataStrs, _data ) {
-
-    if ( _dataStrs.length === 0 ) {
-
-      return this.continueToPrime;
-    
-    }
-
-    var matchingOptionIds = this.GetAndRemoveMatchingOptionIds( _dataStrs );
-    if ( matchingOptionIds === null ) return this.continueToPrime;
-
-    for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
-
-      option = this.GetOptionById( matchingOptionIds[ i ] );
-      if ( option.Execute( _dataStrs, _data ) === true ) return false;
-    
-    }
-
-    return this.continueToPrime;
-  
-  };
-
-  Command.prototype.GetOptionById = function ( _id ) {
-
-    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
-
-      option = options[ i ];
-      if ( option.id.indexOf( _id ) !== -1 ) return option;
-    
-    }
-
-    return null;
-  
-  };
-
-  Command.prototype.GetAllOptionIds = function () {
-
-    var allOptionIds = [];
-
-    for ( var i = 0, options = this.options, l = options.length; i < l; ++i ) {
-
-      allOptionIds.push.apply( allOptionIds, options[ i ].id );
-    
-    }
-
-    return allOptionIds;
-  
-  };
-
-  Command.prototype.GetAndRemoveMatchingOptionIds = function ( _dataStrs ) {
-
-    var allOptionIds = this.allOptionIds;
-    if ( allOptionIds === null ) return null;
-    var optionIds = [];
-
-    for ( var i = 0, l = allOptionIds.length; i < l; ++i ) {
-
-      var ix = _dataStrs.indexOf( allOptionIds[ i ] );
-
-      if ( ix !== -1 ) {
-
-        optionIds.push( _dataStrs.splice( ix, 1 )[ 0 ] );
-      
-      }
-    
-    }
-
-    return optionIds;
-  
-  };
-
-  Command.prototype.GenerateInfoString = function () {
-
-    var str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
-
-    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
-
-      option = options[ i ];
-      str += 'OPTION: ' + option.id.join( ', ' ) + ' -> ' + option.info + '\n';
-    
-    }
-
-    return str;
-  
-  };
-
-  Nenkraft.CP.Command = Command;
-
-};
-
-
-/***/ }),
-
-/***/ 29:
+/***/ 30:
 /***/ (function(module, exports) {
 
 /**
@@ -4754,7 +4980,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /***/ (function(module, exports) {
 
 /**
@@ -4849,7 +5075,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /***/ (function(module, exports) {
 
 /**
@@ -5044,7 +5270,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /***/ (function(module, exports) {
 
 /**
@@ -5115,10 +5341,10 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Utils.UUID = function ( _length, _parts, _charSetIndex, _separator ) {
 
-    _length = _length === undefined ? 32 : _length;
-    _parts = _parts === undefined ? 4 : _parts;
-    _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
-    _separator = _separator === undefined ? '-' : _separator;
+    _length = _length == null ? 32 : _length;
+    _parts = _parts == null ? 4 : _parts;
+    _charSetIndex = _charSetIndex == null ? 0 : _charSetIndex;
+    _separator = _separator == null ? '-' : _separator;
     var id = '';
 
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
@@ -5166,11 +5392,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
+  var NESTED = Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
 
     if ( typeof _string === 'string' ) {
 
-      _splitter = _splitter === undefined ? '.' : _splitter;
+      _splitter = _splitter == null ? '.' : _splitter;
       _string = _string.split( _splitter );
     
     }
@@ -5183,7 +5409,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( _object[ key ] !== undefined ) {
 
-        return Nenkraft.Utils.Nested( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
+        return NESTED( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
       
       }
     
@@ -5509,7 +5735,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports) {
 
 /**
@@ -5572,7 +5798,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports) {
 
 /**
@@ -5619,7 +5845,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /***/ (function(module, exports) {
 
 /**
@@ -5667,132 +5893,6 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Event.LocalListener = LocalListener;
   Nenkraft.LocalListener = LocalListener;
-
-};
-
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function LocalEvent () {
-
-    if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
-    this.listeners = [];
-  
-  }
-
-  LocalEvent.prototype = Object.create( null );
-  LocalEvent.prototype.constructor = LocalEvent;
-  // Static
-
-  // Members
-  LocalEvent.prototype.stopPropagation = false;
-  LocalEvent.prototype.target = null;
-  LocalEvent.prototype.data = null;
-
-  // Methods
-  LocalEvent.prototype.GetListenerIndex = function ( _handle, _context ) {
-
-    var listeners = this.listeners;
-    if ( listeners.length === 0 ) return -1;
-
-    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
-
-      listener = listeners[ i ];
-
-      if ( listener.context === _context && listener.handle === _handle ) {
-
-        return i;
-      
-      }
-    
-    }
-
-    return -1;
-  
-  };
-
-  LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
-
-    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
-    this.listeners.push( listener );
-  
-  };
-
-  LocalEvent.prototype.Remove = function ( _handle, _context ) {
-
-    var ix = this.GetListenerIndex( _handle, _context );
-
-    if ( ix !== -1 ) {
-
-      this.listeners.splice( ix, 1 );
-    
-    }
-  
-  };
-
-  LocalEvent.prototype.Dump = function ( _context ) {
-
-    var listeners = this.listeners;
-    if ( listeners.length === 0 ) return;
-
-    if ( _context !== undefined ) {
-
-      for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
-
-        listener = listeners[ i ];
-
-        if ( listener.context === _context ) {
-
-          this.listeners.splice( i, 1 );
-        
-        }
-      
-      }
-    
-    }
-    else {
-
-      this.listeners.length = 0;
-    
-    }
-  
-  };
-
-  LocalEvent.prototype.Dispatch = function ( _target, _data ) {
-
-    var listeners = this.listeners;
-    if ( listeners.length === 0 ) return;
-    listeners = listeners.slice();
-    this.stopPropagation = false;
-    this.target = _target;
-    this.data = _data;
-
-    for ( var i = 0, l = listeners.length, listener; i < l; ++i ) {
-
-      listener = listeners[ i ];
-      listener.Execute( this );
-      if ( this.stopPropagation === true ) break;
-    
-    }
-
-    delete this.target;
-    delete this.data;
-  
-  };
-
-  Nenkraft.Event.LocalEvent = LocalEvent;
-  Nenkraft.LocalEvent = LocalEvent;
 
 };
 

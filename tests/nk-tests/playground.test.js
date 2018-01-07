@@ -22,6 +22,10 @@ module.exports = function () {
 
     window.stage = stage;
 
+    var x = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
+
+    console.log( x.fickleSplice( 3 ), x );
+
     document.body.removeChild( buttonContainer );
   
   }

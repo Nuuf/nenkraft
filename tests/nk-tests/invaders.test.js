@@ -165,7 +165,7 @@ module.exports = function () {
 
         this.animationController.currentAnimation.Reset();
         this.Detach();
-        explosions.splice( explosions.indexOf( this ), 1 );
+        explosions.fickleSplice( explosions.indexOf( this ) );
         explosionPool.Store( this );
       
       }
@@ -438,15 +438,16 @@ module.exports = function () {
         for ( var i = 0, particle; i < particles.length; ++i ) {
 
           particle = particles[i];
+
           particle.position.AddV( particle.data.velocity );
           particle.data.velocity.MultiplyV( particle.data.acceleration );
-
+  
           if ( --particle.data.lifeSpan <= 0 ) {
-
+  
             particle.Detach();
-            particles.splice( i, 1 );
+            particles.fickleSplice( i );
             particlePool.Store( particle );
-          
+            
           }
         
         }
@@ -485,7 +486,7 @@ module.exports = function () {
             if ( --bullet.data.lifeSpan <= 0 ) {
 
               bullet.Detach();
-              playerBullets.splice( i, 1 );
+              playerBullets.fickleSplice( i );
               playerBulletPool.Store( bullet );
             
             } else {
@@ -516,7 +517,7 @@ module.exports = function () {
               createParticles( enemy.x, enemy.y, RI( 4, 80 ) );
 
               enemy.Detach();
-              enemies.splice( i, 1 );
+              enemies.fickleSplice( i );
               enemyPool.Store( enemy );
             
             } else {
@@ -547,7 +548,7 @@ module.exports = function () {
 
                 enemy.data.health--;
                 bullet.Detach();
-                playerBullets.splice( index, 1 );
+                playerBullets.fickleSplice( index );
                 playerBulletPool.Store( bullet );
                 break;
               
@@ -576,13 +577,13 @@ module.exports = function () {
               createParticles( enemy.x, enemy.y, 15 );
 
               enemy.Detach();
-              enemies.splice( index, 1 );
+              enemies.fickleSplice( index );
               enemyPool.Store( enemy );
 
               if ( --shield.data.health <= 0 ) {
 
                 shield.Detach();
-                shields.splice( i, 1 );
+                shields.fickleSplice( i );
                 break;
               
               } else {

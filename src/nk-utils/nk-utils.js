@@ -66,10 +66,10 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Utils.UUID = function ( _length, _parts, _charSetIndex, _separator ) {
 
-    _length = _length === undefined ? 32 : _length;
-    _parts = _parts === undefined ? 4 : _parts;
-    _charSetIndex = _charSetIndex === undefined ? 0 : _charSetIndex;
-    _separator = _separator === undefined ? '-' : _separator;
+    _length = _length == null ? 32 : _length;
+    _parts = _parts == null ? 4 : _parts;
+    _charSetIndex = _charSetIndex == null ? 0 : _charSetIndex;
+    _separator = _separator == null ? '-' : _separator;
     var id = '';
 
     for ( var i = 0, lpd = ( _length / _parts ) | 0, ilpdd, at, charset = Nenkraft.Utils.CharacterSets[ _charSetIndex ]; i < _length; ++i ) {
@@ -117,11 +117,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
+  var NESTED = Nenkraft.Utils.Nested = function ( _object, _string, _getObjectHolding, _set, _value, _splitter ) {
 
     if ( typeof _string === 'string' ) {
 
-      _splitter = _splitter === undefined ? '.' : _splitter;
+      _splitter = _splitter == null ? '.' : _splitter;
       _string = _string.split( _splitter );
     
     }
@@ -134,7 +134,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( _object[ key ] !== undefined ) {
 
-        return Nenkraft.Utils.Nested( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
+        return NESTED( _object[ key ], _string, _getObjectHolding, _set, _value, _splitter );
       
       }
     

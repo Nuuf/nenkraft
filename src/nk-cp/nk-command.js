@@ -15,6 +15,7 @@ module.exports = function ( Nenkraft ) {
     this.info = _info;
     this.data = {};
     this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
+    this.dsCopy = [];
     if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
   
   }
@@ -30,6 +31,7 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.fullInfo = null;
   Command.prototype.optionPrefix = null;
   Command.prototype.continueToPrime = true;
+  Command.prototype.dsCopy = null;
 
   // Methods
   Command.prototype.Execute = function ( _dataStrs, _data ) {
@@ -75,7 +77,8 @@ module.exports = function ( Nenkraft ) {
 
   Command.prototype.HandleData = function ( _dataStrs, _data ) {
 
-    var dsCopy = _dataStrs.slice();
+    var dsCopy = this.dsCopy;
+    dsCopy.push.apply( dsCopy, _dataStrs );
 
     for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
 
@@ -84,12 +87,14 @@ module.exports = function ( Nenkraft ) {
 
       if ( data.length === 2 ) {
 
-        _dataStrs.splice( i, 1 );
+        _dataStrs.fickleSplice( i );
         _data[ data[ 0 ] ] = data[ 1 ];
       
       }
     
     }
+
+    dsCopy.length = 0;
   
   };
 
@@ -154,7 +159,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        optionIds.push( _dataStrs.splice( ix, 1 )[ 0 ] );
+        optionIds.push( _dataStrs.fickleSplice( ix ) );
       
       }
     

@@ -71,7 +71,7 @@ module.exports = function () {
 
           _event.stopPropagation = true;
 
-          dragger.SendToFront();
+          dragger.SendToBack();
           break;
         
         }

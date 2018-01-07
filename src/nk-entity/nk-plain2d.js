@@ -109,7 +109,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.push( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -126,7 +126,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.unshift( pChildren.fickleSplice( ix ) );
       
       }
     
