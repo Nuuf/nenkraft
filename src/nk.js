@@ -4,6 +4,7 @@
 
 var namespace = Object.create( null );
 
+require( './nk-polyfill/nk-polyfill' )();
 require( './nk-base/nk-base' )( namespace );
 require( './nk-shader/nk-load-shaders' )( namespace );
 require( './nk-math/nk-math' )( namespace );

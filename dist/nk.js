@@ -1,8 +1,8 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.2 (Alpha)
-* @copyright   (C) 2017 Gustav 'Nuuf' Åberg
+* @version     0.5.3 (Alpha)
+* @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
 /******/ (function(modules) { // webpackBootstrap
@@ -1598,7 +1598,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( ix !== -1 ) {
 
-      this.listeners.splice( ix, 1 );
+      this.listeners.fickleSplice( ix );
     
     }
   
@@ -1617,7 +1617,7 @@ module.exports = function ( Nenkraft ) {
 
         if ( listener.context === _context ) {
 
-          this.listeners.splice( i, 1 );
+          this.listeners.fickleSplice( i );
         
         }
       
@@ -4554,7 +4554,7 @@ module.exports = function ( Nenkraft ) {
 
           if ( marking !== null ) {
 
-            nodes[ marking ].Add( objects.splice( i, 1 )[ 0 ] );
+            nodes[ marking ].Add( objects.fickleSplice( i ) );
           
           } else {
 
@@ -5135,8 +5135,8 @@ module.exports = function ( Nenkraft ) {
 
     if ( ix !== -1 ) {
 
-      delete _child.parent;
-      return children.splice( ix, 1 )[ 0 ];
+      _child.parent = null;
+      return children.fickleSplice( ix );
     
     }
   
@@ -5155,8 +5155,8 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        rChildren.push( children.splice( ix, 1 )[ 0 ] );
-        delete child.parent;
+        rChildren.push( children.fickleSplice( ix ) );
+        child.parent = null;
       
       }
     
@@ -5175,7 +5175,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.push( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -5192,7 +5192,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.unshift( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -5226,7 +5226,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
+  Container2D.prototype.GetChildClosestTo = function ( _object, _filter ) {
 
     var children = this.children, closestChild = null;
 
@@ -5236,9 +5236,9 @@ module.exports = function ( Nenkraft ) {
 
         child = children[ i ];
 
-        if ( _filterCondition !== undefined ) {
+        if ( _filter !== undefined ) {
 
-          if ( _filterCondition( child ) === false ) continue;
+          if ( _filter( child ) === false ) continue;
         
         }
 
@@ -5261,7 +5261,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filterCondition ) {
+  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filter ) {
 
     var children = this.children, closestChild = null;
 
@@ -5271,9 +5271,9 @@ module.exports = function ( Nenkraft ) {
 
         child = children[ i ];
 
-        if ( _filterCondition !== undefined ) {
+        if ( _filter !== undefined ) {
 
-          if ( _filterCondition( child ) === false ) continue;
+          if ( _filter( child ) === false ) continue;
         
         }
 
@@ -5443,6 +5443,7 @@ module.exports = function ( Nenkraft ) {
     this.info = _info;
     this.data = {};
     this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
+    this.dsCopy = [];
     if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
   
   }
@@ -5458,6 +5459,7 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.fullInfo = null;
   Command.prototype.optionPrefix = null;
   Command.prototype.continueToPrime = true;
+  Command.prototype.dsCopy = null;
 
   // Methods
   Command.prototype.Execute = function ( _dataStrs, _data ) {
@@ -5503,7 +5505,8 @@ module.exports = function ( Nenkraft ) {
 
   Command.prototype.HandleData = function ( _dataStrs, _data ) {
 
-    var dsCopy = _dataStrs.slice();
+    var dsCopy = this.dsCopy;
+    dsCopy.push.apply( dsCopy, _dataStrs );
 
     for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
 
@@ -5512,12 +5515,14 @@ module.exports = function ( Nenkraft ) {
 
       if ( data.length === 2 ) {
 
-        _dataStrs.splice( i, 1 );
+        _dataStrs.fickleSplice( i );
         _data[ data[ 0 ] ] = data[ 1 ];
       
       }
     
     }
+
+    dsCopy.length = 0;
   
   };
 
@@ -5582,7 +5587,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        optionIds.push( _dataStrs.splice( ix, 1 )[ 0 ] );
+        optionIds.push( _dataStrs.fickleSplice( ix ) );
       
       }
     
@@ -5707,17 +5712,17 @@ module.exports = __webpack_require__(31);
 
 var namespace = Object.create( null );
 
-__webpack_require__( 32 )( namespace );
+__webpack_require__( 32 )();
 __webpack_require__( 33 )( namespace );
+__webpack_require__( 34 )( namespace );
 __webpack_require__( 1 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
 __webpack_require__( 5 )( namespace );
-__webpack_require__( 40 )( namespace );
+__webpack_require__( 41 )( namespace );
 __webpack_require__( 6 )( namespace );
 __webpack_require__( 7 )( namespace );
-__webpack_require__( 41 )( namespace );
 __webpack_require__( 42 )( namespace );
 __webpack_require__( 43 )( namespace );
 __webpack_require__( 44 )( namespace );
@@ -5725,9 +5730,10 @@ __webpack_require__( 45 )( namespace );
 __webpack_require__( 46 )( namespace );
 __webpack_require__( 47 )( namespace );
 __webpack_require__( 48 )( namespace );
+__webpack_require__( 49 )( namespace );
 __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
-__webpack_require__( 49 )( namespace );
+__webpack_require__( 50 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
 __webpack_require__( 12 )( namespace );
@@ -5742,7 +5748,6 @@ __webpack_require__( 20 )( namespace );
 __webpack_require__( 21 )( namespace );
 __webpack_require__( 22 )( namespace );
 __webpack_require__( 23 )( namespace );
-__webpack_require__( 50 )( namespace );
 __webpack_require__( 51 )( namespace );
 __webpack_require__( 52 )( namespace );
 __webpack_require__( 53 )( namespace );
@@ -5750,10 +5755,10 @@ __webpack_require__( 54 )( namespace );
 __webpack_require__( 55 )( namespace );
 __webpack_require__( 56 )( namespace );
 __webpack_require__( 57 )( namespace );
+__webpack_require__( 58 )( namespace );
 __webpack_require__( 24 )( namespace );
 __webpack_require__( 25 )( namespace );
 __webpack_require__( 26 )( namespace );
-__webpack_require__( 58 )( namespace );
 __webpack_require__( 59 )( namespace );
 __webpack_require__( 60 )( namespace );
 __webpack_require__( 61 )( namespace );
@@ -5765,10 +5770,10 @@ __webpack_require__( 66 )( namespace );
 __webpack_require__( 67 )( namespace );
 __webpack_require__( 68 )( namespace );
 __webpack_require__( 69 )( namespace );
+__webpack_require__( 70 )( namespace );
 __webpack_require__( 27 )( namespace );
 __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
-__webpack_require__( 70 )( namespace );
 __webpack_require__( 71 )( namespace );
 __webpack_require__( 72 )( namespace );
 __webpack_require__( 73 )( namespace );
@@ -5778,6 +5783,7 @@ __webpack_require__( 76 )( namespace );
 __webpack_require__( 77 )( namespace );
 __webpack_require__( 78 )( namespace );
 __webpack_require__( 79 )( namespace );
+__webpack_require__( 80 )( namespace );
 
 global.Nenkraft = global.nk = namespace;
 
@@ -5787,6 +5793,99 @@ global.Nenkraft = global.nk = namespace;
 
 /***/ }),
 /* 32 */
+/***/ (function(module, exports) {
+
+module.exports = function() {
+
+  Array.prototype.indexPop = function( index ) {
+
+    var last = this.length - 1;
+
+    if ( last > 1 && index <= last && index >= 0 ) {
+  
+      var temp = this[last];
+      this[last] = this[index];
+      this[index] = temp;
+  
+      return this.pop();
+    
+    }
+
+    return this.pop();
+  
+  };
+
+  Array.prototype.indexShift = function( index ) {
+  
+    if ( this.length > 1 && index <= this.length - 1 && index >= 0 ) {
+  
+      var temp = this[0];
+      this[0] = this[index];
+      this[index] = temp;
+
+      return this.shift();
+    
+    }
+
+    return this.shift();
+  
+  };
+
+  Array.prototype.popSplice = function( index ) {
+
+    var i = this.length - 1;
+    if ( i < 1 ) return;
+    var returnee = this[index];
+
+    while ( index < i ) {
+ 
+      this[index] = this[index + 1]; 
+      index++; 
+    
+    }
+
+    this.pop();
+
+    return returnee;
+  
+  };
+
+  Array.prototype.shiftSplice = function( index ) {
+
+    var length = this.length;
+    if ( length < 1 ) return;
+    var returnee = this[index];
+
+    while ( index > 0 ) {
+
+      this[index] = this[index - 1];
+      index--;
+    
+    }
+
+    this.shift();
+
+    return returnee;
+  
+  };
+
+  Array.prototype.fickleSplice = function( index ) {
+
+    if ( index > ( this.length * 0.5 ) | 0 ) {
+
+      return this.popSplice( index );
+    
+    }
+
+    return this.shiftSplice( index );
+  
+  };
+
+};
+
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports) {
 
 /**
@@ -5809,7 +5908,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );
-  Nenkraft.VERSION = '0.5.2 (Alpha)';
+  Nenkraft.VERSION = '0.5.3 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
     'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
@@ -5821,7 +5920,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5850,55 +5949,55 @@ module.exports = function ( Nenkraft ) {
   }
 
   Nenkraft.SHADER_CODE = {
-    TEXTURE_2D: Parse( __webpack_require__( 34 ) ),
-    TEXTURE_2D_BATCH: Parse( __webpack_require__( 35 ) ),
-    LINE2D: Parse( __webpack_require__( 36 ) ),
-    RECTANGLE: Parse( __webpack_require__( 37 ) ),
-    CIRCLE: Parse( __webpack_require__( 38 ) ),
-    PIXEL_BATCH: Parse( __webpack_require__( 39 ) )
+    TEXTURE_2D: Parse( __webpack_require__( 35 ) ),
+    TEXTURE_2D_BATCH: Parse( __webpack_require__( 36 ) ),
+    LINE2D: Parse( __webpack_require__( 37 ) ),
+    RECTANGLE: Parse( __webpack_require__( 38 ) ),
+    CIRCLE: Parse( __webpack_require__( 39 ) ),
+    PIXEL_BATCH: Parse( __webpack_require__( 40 ) )
   };
 
 };
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\nattribute vec2 aTexCoord;\r\n\r\nuniform mat3 uProjection;\r\nuniform mat3 uTranslation;\r\nuniform mat3 uTransformation;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vTexCoord = ( uTransformation * vec3( aTexCoord, 1.0 ) ).xy;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord );\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\nattribute vec2 aTexCoord;\r\n\r\nattribute vec3 aProjection1;\r\nattribute vec3 aProjection2;\r\nattribute vec3 aProjection3;\r\n\r\nattribute vec3 aTranslation1;\r\nattribute vec3 aTranslation2;\r\nattribute vec3 aTranslation3;\r\n\r\nattribute vec3 aTransformation1;\r\nattribute vec3 aTransformation2;\r\nattribute vec3 aTransformation3;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );\r\n  mat3 translation = mat3( aTranslation1, aTranslation2, aTranslation3 );\r\n  mat3 transformation = mat3( aTransformation1, aTransformation2, aTransformation3 );\r\n  gl_Position = vec4( ( projection * translation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vTexCoord = ( transformation * vec3( aTexCoord, 1.0 ) ).xy;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord );\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\n\r\nuniform mat3 uProjection;\r\nuniform lowp vec4 uColor;\r\n\r\nvarying lowp vec4 vColor;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vColor = uColor;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying lowp vec4 vColor;\r\n\r\nvoid main() {\r\n  gl_FragColor = vColor;\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\n\r\nuniform mat3 uProjection;\r\nuniform lowp vec4 uFillColor;\r\nuniform lowp vec4 uOutlineColor;\r\nuniform vec2 uSize;\r\nuniform float uOutline;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vBorderX;\r\nvarying float vNegBorderX;\r\nvarying float vBorderY;\r\nvarying float vNegBorderY;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vFillColor = uFillColor;\r\n  vOutlineColor = uOutlineColor;\r\n  vPosition = aPosition;\r\n  vBorderX = -uSize.x * 0.5 + uOutline;\r\n  vNegBorderX = uSize.x * 0.5 - uOutline;\r\n  vBorderY = -uSize.y * 0.5 + uOutline;\r\n  vNegBorderY = uSize.y * 0.5 - uOutline;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vBorderX;\r\nvarying float vNegBorderX;\r\nvarying float vBorderY;\r\nvarying float vNegBorderY;\r\n\r\nvoid main() {\r\n  if (\r\n    vPosition.x > vBorderX &&\r\n    vPosition.x < vNegBorderX && \r\n    vPosition.y > vBorderY && \r\n    vPosition.y < vNegBorderY\r\n  ) {\r\n    gl_FragColor = vFillColor;\r\n  } else {\r\n    gl_FragColor = vOutlineColor;\r\n  }\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\n\r\nuniform mat3 uProjection;\r\nuniform lowp vec4 uFillColor;\r\nuniform lowp vec4 uOutlineColor;\r\nuniform float uRadius;\r\nuniform float uOutline;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vRadius;\r\nvarying float vOutline;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vFillColor = uFillColor;\r\n  vOutlineColor = uOutlineColor;\r\n  vPosition = aPosition;\r\n  vRadius = uRadius;\r\n  vOutline = uOutline;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying lowp vec4 vFillColor;\r\nvarying lowp vec4 vOutlineColor;\r\nvarying vec2 vPosition;\r\nvarying float vRadius;\r\nvarying float vOutline;\r\n\r\nvoid main() {\r\n  float d = dot( vPosition, vPosition );\r\n  float rs = vRadius * vRadius;\r\n  float ors = vRadius - vOutline;\r\n  ors = ors * ors;\r\n  if ( d < rs && d > ors ) {\r\n    gl_FragColor = vOutlineColor;\r\n  } else if ( d < rs ) {\r\n    gl_FragColor = vFillColor;\r\n  }\r\n}\r\n@fragment-end@"
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec3 aProjection1;\r\nattribute vec3 aProjection2;\r\nattribute vec3 aProjection3;\r\nattribute vec2 aPosition;\r\nattribute vec4 aColor;\r\nattribute float aPointSize;\r\n\r\nvarying vec4 vColor;\r\n\r\nvoid main() {\r\n  mat3 projection = mat3( aProjection1, aProjection2, aProjection3 );\r\n  gl_Position = vec4( ( projection * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  gl_PointSize = aPointSize;\r\n  vColor = aColor;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nvarying vec4 vColor;\r\n\r\nvoid main() {\r\n  gl_FragColor = vColor;\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /**
@@ -6102,7 +6201,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 /**
@@ -6141,7 +6240,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /**
@@ -6186,7 +6285,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 /**
@@ -6242,7 +6341,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 /**
@@ -6314,7 +6413,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -6346,7 +6445,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 /**
@@ -6445,7 +6544,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /**
@@ -6532,7 +6631,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 /**
@@ -6600,7 +6699,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 /**
@@ -6782,7 +6881,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 /**
@@ -6890,7 +6989,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 /**
@@ -6945,7 +7044,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports) {
 
 /**
@@ -7015,7 +7114,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports) {
 
 /**
@@ -7129,7 +7228,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports) {
 
 /**
@@ -7222,7 +7321,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports) {
 
 /**
@@ -7324,7 +7423,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /**
@@ -7390,7 +7489,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports) {
 
 /**
@@ -7489,7 +7588,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 /**
@@ -7627,7 +7726,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports) {
 
 /**
@@ -7830,7 +7929,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 /**
@@ -7944,7 +8043,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.push( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -7961,7 +8060,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.unshift( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -8038,7 +8137,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -8127,7 +8226,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports) {
 
 /**
@@ -8241,7 +8340,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 /**
@@ -8333,7 +8432,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports) {
 
 /**
@@ -8681,7 +8780,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 /**
@@ -8808,7 +8907,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 /**
@@ -9012,7 +9111,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 /**
@@ -9087,7 +9186,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports) {
 
 /**
@@ -9303,7 +9402,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 /**
@@ -9395,7 +9494,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -9532,7 +9631,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 /**
@@ -9702,7 +9801,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 /**
@@ -9840,7 +9939,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -9944,7 +10043,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -10025,7 +10124,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 /**
@@ -10114,7 +10213,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -10203,7 +10302,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -10295,7 +10394,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 /**
@@ -10437,7 +10536,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 /**

@@ -110,7 +110,7 @@ module.exports = function ( Nenkraft ) {
 
           if ( marking !== null ) {
 
-            nodes[ marking ].Add( objects.splice( i, 1 )[ 0 ] );
+            nodes[ marking ].Add( objects.fickleSplice( i ) );
           
           } else {
 

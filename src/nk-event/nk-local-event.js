@@ -57,7 +57,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( ix !== -1 ) {
 
-      this.listeners.splice( ix, 1 );
+      this.listeners.fickleSplice( ix );
     
     }
   
@@ -76,7 +76,7 @@ module.exports = function ( Nenkraft ) {
 
         if ( listener.context === _context ) {
 
-          this.listeners.splice( i, 1 );
+          this.listeners.fickleSplice( i );
         
         }
       

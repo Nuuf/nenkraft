@@ -1,8 +1,8 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.2 (Alpha)
-* @copyright   (C) 2017 Gustav 'Nuuf' Åberg
+* @version     0.5.3 (Alpha)
+* @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
 /******/ (function(modules) { // webpackBootstrap
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 127);
+/******/ 	return __webpack_require__(__webpack_require__.s = 128);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1225,15 +1225,15 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 127:
+/***/ 128:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(128);
+module.exports = __webpack_require__(129);
 
 
 /***/ }),
 
-/***/ 128:
+/***/ 129:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1242,7 +1242,7 @@ module.exports = __webpack_require__(128);
 
 var namespace = Object.create( null );
 
-__webpack_require__( 129 )( namespace );
+__webpack_require__( 130 )( namespace );
 __webpack_require__( 1 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
@@ -1274,30 +1274,6 @@ __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
 
 module.exports = namespace;
-
-
-/***/ }),
-
-/***/ 129:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  Nenkraft.Geom = Object.create( null );
-  Nenkraft.Math = Object.create( null );
-  Nenkraft.Utils = Object.create( null );
-  Nenkraft.Entity = Object.create( null );
-  Nenkraft.Event = Object.create( null );
-  Nenkraft.Time = Object.create( null );
-  Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.5.2 (Alpha)';
-  console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
-
-};
 
 
 /***/ }),
@@ -1351,6 +1327,30 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.Math.Basetransform2D = Basetransform2D;
+
+};
+
+
+/***/ }),
+
+/***/ 130:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  Nenkraft.Geom = Object.create( null );
+  Nenkraft.Math = Object.create( null );
+  Nenkraft.Utils = Object.create( null );
+  Nenkraft.Entity = Object.create( null );
+  Nenkraft.Event = Object.create( null );
+  Nenkraft.Time = Object.create( null );
+  Nenkraft.CP = Object.create( null );
+  Nenkraft.VERSION = '0.5.3 (Alpha)';
+  console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
 
 };
 
@@ -3610,7 +3610,7 @@ module.exports = function ( Nenkraft ) {
 
           if ( marking !== null ) {
 
-            nodes[ marking ].Add( objects.splice( i, 1 )[ 0 ] );
+            nodes[ marking ].Add( objects.fickleSplice( i ) );
           
           } else {
 
@@ -4193,8 +4193,8 @@ module.exports = function ( Nenkraft ) {
 
     if ( ix !== -1 ) {
 
-      delete _child.parent;
-      return children.splice( ix, 1 )[ 0 ];
+      _child.parent = null;
+      return children.fickleSplice( ix );
     
     }
   
@@ -4213,8 +4213,8 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        rChildren.push( children.splice( ix, 1 )[ 0 ] );
-        delete child.parent;
+        rChildren.push( children.fickleSplice( ix ) );
+        child.parent = null;
       
       }
     
@@ -4233,7 +4233,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.push( pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.push( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -4250,7 +4250,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.splice( 0, 0, pChildren.splice( ix, 1 )[ 0 ] );
+        pChildren.unshift( pChildren.fickleSplice( ix ) );
       
       }
     
@@ -4284,7 +4284,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Container2D.prototype.GetChildClosestTo = function ( _object, _filterCondition ) {
+  Container2D.prototype.GetChildClosestTo = function ( _object, _filter ) {
 
     var children = this.children, closestChild = null;
 
@@ -4294,9 +4294,9 @@ module.exports = function ( Nenkraft ) {
 
         child = children[ i ];
 
-        if ( _filterCondition !== undefined ) {
+        if ( _filter !== undefined ) {
 
-          if ( _filterCondition( child ) === false ) continue;
+          if ( _filter( child ) === false ) continue;
         
         }
 
@@ -4319,7 +4319,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filterCondition ) {
+  Container2D.prototype.GetChildFurthestFrom = function ( _object, _filter ) {
 
     var children = this.children, closestChild = null;
 
@@ -4329,9 +4329,9 @@ module.exports = function ( Nenkraft ) {
 
         child = children[ i ];
 
-        if ( _filterCondition !== undefined ) {
+        if ( _filter !== undefined ) {
 
-          if ( _filterCondition( child ) === false ) continue;
+          if ( _filter( child ) === false ) continue;
         
         }
 
@@ -4504,6 +4504,7 @@ module.exports = function ( Nenkraft ) {
     this.info = _info;
     this.data = {};
     this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
+    this.dsCopy = [];
     if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
   
   }
@@ -4519,6 +4520,7 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.fullInfo = null;
   Command.prototype.optionPrefix = null;
   Command.prototype.continueToPrime = true;
+  Command.prototype.dsCopy = null;
 
   // Methods
   Command.prototype.Execute = function ( _dataStrs, _data ) {
@@ -4564,7 +4566,8 @@ module.exports = function ( Nenkraft ) {
 
   Command.prototype.HandleData = function ( _dataStrs, _data ) {
 
-    var dsCopy = _dataStrs.slice();
+    var dsCopy = this.dsCopy;
+    dsCopy.push.apply( dsCopy, _dataStrs );
 
     for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
 
@@ -4573,12 +4576,14 @@ module.exports = function ( Nenkraft ) {
 
       if ( data.length === 2 ) {
 
-        _dataStrs.splice( i, 1 );
+        _dataStrs.fickleSplice( i );
         _data[ data[ 0 ] ] = data[ 1 ];
       
       }
     
     }
+
+    dsCopy.length = 0;
   
   };
 
@@ -4643,7 +4648,7 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        optionIds.push( _dataStrs.splice( ix, 1 )[ 0 ] );
+        optionIds.push( _dataStrs.fickleSplice( ix ) );
       
       }
     
@@ -5735,7 +5740,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( ix !== -1 ) {
 
-      this.listeners.splice( ix, 1 );
+      this.listeners.fickleSplice( ix );
     
     }
   
@@ -5754,7 +5759,7 @@ module.exports = function ( Nenkraft ) {
 
         if ( listener.context === _context ) {
 
-          this.listeners.splice( i, 1 );
+          this.listeners.fickleSplice( i );
         
         }
       
