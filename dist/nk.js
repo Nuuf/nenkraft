@@ -5907,7 +5907,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Input = Object.create( null );
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
-  Nenkraft.Animator = Object.create( null );
+  Nenkraft.Animator = Object.create( null );        
   Nenkraft.VERSION = '0.5.3 (Alpha)';
   console.log(
     '%cnenkraft %cversion %c' + Nenkraft.VERSION,
