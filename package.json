@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "A small rendering tool",
   "author": "nuuf",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "main": "index.js",
   "license": "MIT",
   "eslintConfig": "./.eslintrc",

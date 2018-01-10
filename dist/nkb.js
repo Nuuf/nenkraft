@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.4 (Alpha)
+* @version     0.5.5 (Alpha)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1346,7 +1346,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.5.4 (Alpha)';
+  Nenkraft.VERSION = '0.5.5 (Alpha)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -4640,10 +4640,10 @@ module.exports = function ( Nenkraft ) {
 
     if ( Array.isArray( _data ) || Array.isArray( _value ) ) {
 
-      if ( !Array.isArray( _data ) && !Array.isArray( _value ) ) {
+      if ( !Array.isArray( _data ) !== !Array.isArray( _value ) ) {
 
         failed = true;
-      
+
       }
     
     } else if ( _data === null || _value === null ) {
@@ -4860,32 +4860,30 @@ module.exports = function ( Nenkraft ) {
   Assert.IS_LESS_THAN_OR_EQUAL = 'IS LESS THAN OR EQUAL';
   Assert.IS_GREATER_THAN_OR_EQUAL = 'IS GREATER THAN OR EQUAL';
 
-  Assert.GlobalAssign = function () {
+  Assert.Assign = function ( _g ) {
 
-    var g;
+    if ( window && !_g ) {
 
-    if ( window ) {
-
-      g = window;
+      _g = window;
     
-    } else if ( global ) {
+    } else if ( global && _g ) {
 
-      g = global;
+      _g = global;
     
     }
 
-    if ( g ) {
+    if ( _g ) {
 
-      g.IS = Assert.IS;
-      g.IS_NOT = Assert.IS_NOT;
-      g.IS_SAME_TYPE = Assert.IS_SAME_TYPE;
-      g.IS_NOT_SAME_TYPE = Assert.IS_NOT_SAME_TYPE;
-      g.IS_INSTANCE_OF = Assert.IS_INSTANCE_OF;
-      g.IS_NOT_INSTANCE_OF = Assert.IS_NOT_INSTANCE_OF;
-      g.IS_LESS_THAN = Assert.IS_LESS_THAN;
-      g.IS_GREATER_THAN = Assert.IS_GREATER_THAN;
-      g.IS_LESS_THAN_OR_EQUAL = Assert.IS_LESS_THAN_OR_EQUAL;
-      g.IS_GREATER_THAN_OR_EQUAL = Assert.IS_GREATER_THAN_OR_EQUAL;
+      _g.IS = Assert.IS;
+      _g.IS_NOT = Assert.IS_NOT;
+      _g.IS_SAME_TYPE = Assert.IS_SAME_TYPE;
+      _g.IS_NOT_SAME_TYPE = Assert.IS_NOT_SAME_TYPE;
+      _g.IS_INSTANCE_OF = Assert.IS_INSTANCE_OF;
+      _g.IS_NOT_INSTANCE_OF = Assert.IS_NOT_INSTANCE_OF;
+      _g.IS_LESS_THAN = Assert.IS_LESS_THAN;
+      _g.IS_GREATER_THAN = Assert.IS_GREATER_THAN;
+      _g.IS_LESS_THAN_OR_EQUAL = Assert.IS_LESS_THAN_OR_EQUAL;
+      _g.IS_GREATER_THAN_OR_EQUAL = Assert.IS_GREATER_THAN_OR_EQUAL;
     
     } else {
 
