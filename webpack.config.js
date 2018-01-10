@@ -76,6 +76,9 @@ if ( PRODUCTION ) {
   entry = {
     nk: [
       './src/nk.js'
+    ],
+    nkb: [
+      './src/nkb.js'
     ]
   };
 

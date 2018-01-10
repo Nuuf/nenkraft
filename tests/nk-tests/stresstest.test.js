@@ -9,6 +9,8 @@ module.exports = function () {
 
   function Run () {
 
+    nk.Sprite.BUILD_DEFAULT_TEXTURE();
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
