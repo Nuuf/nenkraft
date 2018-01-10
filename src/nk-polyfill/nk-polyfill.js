@@ -36,11 +36,11 @@ module.exports = function() {
 
   Array.prototype.popSplice = function( index ) {
 
-    var i = this.length - 1;
-    if ( i < 1 ) return;
+    var l = this.length - 1;
+    if ( l < 1 ) return;
     var returnee = this[index];
 
-    while ( index < i ) {
+    while ( index < l ) {
  
       this[index] = this[index + 1]; 
       index++; 
@@ -55,8 +55,7 @@ module.exports = function() {
 
   Array.prototype.shiftSplice = function( index ) {
 
-    var length = this.length;
-    if ( length < 1 ) return;
+    if ( this.length < 1 ) return;
     var returnee = this[index];
 
     while ( index > 0 ) {

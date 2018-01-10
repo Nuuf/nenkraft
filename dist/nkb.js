@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.3 (Alpha)
+* @version     0.5.4 (Alpha)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -141,11 +141,11 @@ module.exports = function() {
 
   Array.prototype.popSplice = function( index ) {
 
-    var i = this.length - 1;
-    if ( i < 1 ) return;
+    var l = this.length - 1;
+    if ( l < 1 ) return;
     var returnee = this[index];
 
-    while ( index < i ) {
+    while ( index < l ) {
  
       this[index] = this[index + 1]; 
       index++; 
@@ -160,8 +160,7 @@ module.exports = function() {
 
   Array.prototype.shiftSplice = function( index ) {
 
-    var length = this.length;
-    if ( length < 1 ) return;
+    if ( this.length < 1 ) return;
     var returnee = this[index];
 
     while ( index > 0 ) {
@@ -1347,8 +1346,13 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.5.3 (Alpha)';
-  console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
+  Nenkraft.VERSION = '0.5.4 (Alpha)';
+
+  Nenkraft.PRINT_VERSION = function() {
+
+    console.log( 'nenkraft-behind version ' + Nenkraft.VERSION );
+  
+  };
 
 };
 

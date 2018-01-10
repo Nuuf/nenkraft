@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "A small rendering tool",
   "author": "nuuf",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "main": "index.js",
   "license": "MIT",
   "eslintConfig": "./.eslintrc",
@@ -30,7 +30,7 @@
     "s-l": "cross-env NODE_ENV=librarybundle",
     "clean": "rimraf dist && rimraf server/public/nk.min.js",
     "clean-npm": "rimraf ./npm/src",
-    "clean-full": "npm run clean && npm run clean-npm",
+    "clean-everything": "npm run clean && npm run clean-npm",
     "copy-to-server": "copyfiles -f dist/nk.min.js server/public/",
     "copy-un-files": "copyfiles -f assets/xhr/* dist/assets/xhr/",
     "lint": "eslint src",
@@ -44,6 +44,8 @@
     "build-full": "npm run build && npm run s-p webpack -- --env.bigBundle && npm run post-build-full",
     "build-npm": "npm run clean-npm && npm run s-l webpack -- --env.libBundle",
     "build-everything": "npm run build-full && npm run build-npm",
-    "electron": "electron ./electron/main.js"
+    "electron": "electron ./electron/main.js",
+    "ce": "npm run clean-everything",
+    "be": "npm run build-everything"
   }
 }

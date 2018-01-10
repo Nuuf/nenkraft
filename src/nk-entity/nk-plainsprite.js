@@ -21,33 +21,43 @@ module.exports = function ( Nenkraft ) {
 
   Plainsprite.prototype = Object.create( Super.prototype );
   Plainsprite.prototype.constructor = Plainsprite;
-  // Static
-  Plainsprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
-    Nenkraft.Utils.ImageFromDataURL(
-      Nenkraft.Utils.GenerateSimpleBase64Png( function () {
 
-        // Oooh what fun.
-        var path = new Nenkraft.Path.Polygon2D();
-        path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-        path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-        path.ComputeBounds();
-        path.style.fill.color = 'rgba(66,66,66,0.5)';
-        path.style.stroke.color = '#3399FF';
-        path.style.stroke.lineWidth = 3;
-        return new Nenkraft.Graphic2D( 0, 0, path );
-      
-      } )
-    ), 'DEFAULT_PLAINSPRITE_TEXTURE', 64, 64, 64, 64
-  );
+  // Static
+  Plainsprite.DEFAULT_TEXTURE = null;
+
+  Plainsprite.BUILD_DEFAULT_TEXTURE = function() {
+
+    Plainsprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
+      Nenkraft.Utils.ImageFromDataURL(
+        Nenkraft.Utils.GenerateSimpleBase64Png( function () {
+  
+          // Oooh what fun.
+          var path = new Nenkraft.Path.Polygon2D();
+          path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+          path.ComputeBounds();
+          path.style.fill.color = 'rgba(66,66,66,0.5)';
+          path.style.stroke.color = '#3399FF';
+          path.style.stroke.lineWidth = 3;
+          return new Nenkraft.Graphic2D( 0, 0, path );
+        
+        } )
+      ), 'DEFAULT_PLAINSPRITE_TEXTURE', 64, 64, 64, 64
+    );
+
+    delete Plainsprite.BUILD_DEFAULT_TEXTURE;
+  
+  };
+
   // Members
   Plainsprite.prototype.shape = null;
   Plainsprite.prototype.clip = null;

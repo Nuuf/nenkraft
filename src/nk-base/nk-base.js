@@ -18,12 +18,17 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.5.3 (Alpha)';
-  console.log(
-    '%cnenkraft %cversion %c' + Nenkraft.VERSION,
-    'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
-    'color:magenta;background-color:black;font-family:Arial;font-size:16px;',
-    'color:yellow;background-color:black;font-family:Arial;font-size:18px;'
-  );
+  Nenkraft.VERSION = '0.5.4 (Alpha)';
+
+  Nenkraft.PRINT_VERSION = function() {
+
+    console.log(
+      '%cnenkraft %cversion %c' + Nenkraft.VERSION,
+      'color:cyan;background-color:black;font-family:Arial;font-size:16px;font-weight:900;',
+      'color:magenta;background-color:black;font-family:Arial;font-size:16px;',
+      'color:yellow;background-color:black;font-family:Arial;font-size:18px;'
+    );
+  
+  };
 
 };
