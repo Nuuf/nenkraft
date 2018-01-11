@@ -286,13 +286,9 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Vector2D.prototype.RotateBy = function ( _a ) {
+  Vector2D.prototype.RotateAbsolute = function ( _a ) {
 
-    var angle = this.GetAngle() + _a;
-    var s = Math.sin( angle ), c = Math.cos( angle );
-    var tx = this.x, ty = this.y;
-    this.x = tx * c - ty * s;
-    this.y = tx * s + ty * c;
+    this.Rotate( _a - this.GetAngle() );
   
   };
 
@@ -312,18 +308,18 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Vector2D.prototype.RotateAroundByV = function ( _v, _a ) {
+  Vector2D.prototype.RotateAbsoluteAroundV = function ( _v, _a ) {
 
     this.SubtractV( _v );
-    this.RotateBy( _a );
+    this.RotateAbsolute( _a );
     this.AddV( _v );
   
   };
 
-  Vector2D.prototype.RotateAroundBy = function ( _x, _y, _a ) {
+  Vector2D.prototype.RotateAbsoluteAround = function ( _x, _y, _a ) {
 
     this.Subtract( _x, _y );
-    this.RotateBy( _a );
+    this.RotateAbsolute( _a );
     this.Add( _x, _y );
   
   };
