@@ -1,6 +1,6 @@
 var libs = {
-  Nenkraft: require( './src/nk.min' ),
-  NenkraftBehind: require( './src/nkb.min' )
+  Nenkraft: require( './dist/nk.min' ),
+  NenkraftBehind: require( './dist/nkb.min' )
 };
 libs.default = libs.Nenkraft;
 

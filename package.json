@@ -29,7 +29,7 @@
     "s-p": "cross-env NODE_ENV=production",
     "s-l": "cross-env NODE_ENV=librarybundle",
     "clean": "rimraf dist && rimraf server/public/nk.min.js",
-    "clean-npm": "rimraf ./npm/src",
+    "clean-npm": "rimraf ./npm/dist",
     "clean-everything": "npm run clean && npm run clean-npm",
     "copy-to-server": "copyfiles -f dist/nk.min.js server/public/",
     "copy-un-files": "copyfiles -f assets/xhr/* dist/assets/xhr/",

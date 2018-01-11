@@ -16,44 +16,25 @@ However; you are free to do so if you want to.
 ### How-to
 ------
 
-Click [here](https://raw.githubusercontent.com/Nuuf/nenkraft/master/dist/nk.min.js) for the mini-file
+> Install
 
 ```
-  $ git clone https://github.com/Nuuf/nenkraft.git
-  $ npm i
-  $ npm start
+  $ npm install nenkraft
+  $ yarn add nenkraft
 ```
 
-> Optional: Dev with electron.
+> Require
 
-```
-  $ npm i -g electron
-  $ npm run electron
-```
-
-> Optional: Just serve it
-
-```
-  $ npm i -g http-server
-  $ http-server dist
+```javascript
+  var nk = require('nenkraft').default;
+  // or
+  var nk = require('nenkraft').Nenkraft;
+  // or (the server version)
+  var nkb = require('nenkraft').NenkraftBehind;
 ```
 
-> Optional: Entity Server
-
-```
-  $ cd server 
-  $ npm i
-  $ node index.js
-```
-
-> Optional: Clean/Rebuild
-
-```
-  $ npm run clean
-  $ npm run build-full
-```
 
 Click [here](https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests) for examples (source code) (Examples are by no means optimized or fully functional)
 Click [here](http://www.spiritsoferutanya.com) for examples (live)
 
-[logo]: ./assets/images/nenkraft-banner.png "nenkraft"
+[logo]: https://raw.githubusercontent.com/Nuuf/nenkraft/master/assets/images/nenkraft-banner.png "nenkraft"

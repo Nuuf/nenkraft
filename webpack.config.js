@@ -89,7 +89,7 @@ if ( PRODUCTION ) {
 
   output.library = 'nk';
   output.libraryTarget = 'umd';
-  output.path = path.join( __dirname, 'npm/src' );
+  output.path = path.join( __dirname, 'npm/dist' );
   output.publicPath = './';
 
 }
