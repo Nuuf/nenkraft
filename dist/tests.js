@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.6 (Alpha)
+* @version     0.5.7 (Alpha)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -2852,13 +2852,26 @@ module.exports = function () {
     c.style.left = '0';
     window.c = c;
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( c, window.innerWidth * 0.5, window.innerHeight * 0.5 );
 
     window.stage = stage;
 
-    var x = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
+    var lineP = new nk.Path.Line2D( 100, 0, 360, 0 );
+    var g = new nk.Graphic2D( 0, 0, lineP );
 
-    console.log( x.fickleSplice( 3 ), x );
+    var angleDeg = 0;
+
+    stage.AddChild( g );
+
+    stage.onProcess.Add( function() {
+
+      lineP.e.RotateAbsoluteAroundV( lineP.s, nk.Math.DTR( angleDeg ) );
+
+      angleDeg += 0.1;
+
+      lineP.s.Rotate( nk.Math.RADIAN );
+    
+    } );
 
     document.body.removeChild( buttonContainer );
   
