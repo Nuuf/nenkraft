@@ -16,6 +16,7 @@ require( './nk-utils/nk-flag-enum' )( namespace );
 require( './nk-event/nk-local-listener' )( namespace );
 require( './nk-event/nk-local-event' )( namespace );
 require( './nk-time/nk-timer/nk-timer' )( namespace );
+require( './nk-time/nk-ticker/nk-server-ticker' )( namespace );
 require( './nk-math/nk-vector/nk-vector2d' )( namespace );
 require( './nk-math/nk-matrix/nk-matrix2d' )( namespace );
 require( './nk-math/nk-transform/nk-basetransform2d' )( namespace );

@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.5.7 (Alpha)
+* @version     0.6.0 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -5901,7 +5901,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.5.7 (Alpha)';
+  Nenkraft.VERSION = '0.6.0 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -6748,8 +6748,7 @@ module.exports = function ( Nenkraft ) {
   // Methods
   Ticker.prototype.Process = function () {
 
-    this.ComputeDelta();
-    this.onProcess( this.delta );
+    this.onProcess( this.ComputeDelta() );
   
   };
 
@@ -6764,9 +6763,11 @@ module.exports = function ( Nenkraft ) {
 
   Ticker.prototype.ComputeDelta = function () {
 
-    this.now = new Date().getTime();
+    this.now = Date.now();
     this.delta = this.now - this.then;
     this.then = this.now;
+
+    return this.delta;
   
   };
 
@@ -6796,7 +6797,7 @@ module.exports = function ( Nenkraft ) {
       if ( _force === true ) {
 
         this.Stop();
-        this.intervalId = setInterval( this.Process, this.desiredRate );
+        this.intervalId = setInterval( this.Process.bind( this ), this.desiredRate );
         Ticker.Log( '%cTicker: Starting interval!', 'color:#0F0;'.concat( Ticker.GLOBAL_CSS ) );
       
       }

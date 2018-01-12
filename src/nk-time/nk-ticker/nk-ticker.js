@@ -46,8 +46,7 @@ module.exports = function ( Nenkraft ) {
   // Methods
   Ticker.prototype.Process = function () {
 
-    this.ComputeDelta();
-    this.onProcess( this.delta );
+    this.onProcess( this.ComputeDelta() );
   
   };
 
@@ -62,9 +61,11 @@ module.exports = function ( Nenkraft ) {
 
   Ticker.prototype.ComputeDelta = function () {
 
-    this.now = new Date().getTime();
+    this.now = Date.now();
     this.delta = this.now - this.then;
     this.then = this.now;
+
+    return this.delta;
   
   };
 
@@ -94,7 +95,7 @@ module.exports = function ( Nenkraft ) {
       if ( _force === true ) {
 
         this.Stop();
-        this.intervalId = setInterval( this.Process, this.desiredRate );
+        this.intervalId = setInterval( this.Process.bind( this ), this.desiredRate );
         Ticker.Log( '%cTicker: Starting interval!', 'color:#0F0;'.concat( Ticker.GLOBAL_CSS ) );
       
       }

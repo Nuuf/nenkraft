@@ -72,7 +72,7 @@ mDown.onEnd.Add( function () {
 
 MotionManager.StartMultiple( 'up left' );
 
-setInterval( function () {
+function Process() {
 
   MainCase.Render();
   MotionManager.Process();
@@ -89,4 +89,6 @@ setInterval( function () {
   
   }
 
-}, 1000 / 60 );
+}
+
+nk.ServerTicker( Process, 60 );
