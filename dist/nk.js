@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.0 (Beta)
+* @version     0.6.1 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -5871,7 +5871,13 @@ __webpack_require__( 78 )( namespace );
 __webpack_require__( 79 )( namespace );
 __webpack_require__( 80 )( namespace );
 
-global.Nenkraft = global.nk = namespace;
+if ( true ) {
+
+  global.Nenkraft = global.nk = namespace;
+
+}
+
+module.exports = namespace;
 
 // if ( DEVELOPMENT && module.hot ) module.hot.accept();
 
@@ -5901,7 +5907,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.6.0 (Beta)';
+  Nenkraft.VERSION = '0.6.1 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
