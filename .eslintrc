@@ -7,7 +7,10 @@
     "Math": true,
     "Float32Array": true,
     "Nenkraft": true,
-    "nk":true
+    "nk":true,
+    "LIBRARYBUNDLE": true,
+    "PRODUCTION": true,
+    "DEVELOPMENT": true
   },
   "rules": {
     "indent": [

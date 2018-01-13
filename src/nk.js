@@ -77,6 +77,12 @@ require( './nk-controller/nk-gl-program-controller/nk-gl-texture-program-control
 require( './nk-controller/nk-gl-program-controller/nk-gl-texture-batch-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-pixel-batch-program-controller' )( namespace );
 
-global.Nenkraft = global.nk = namespace;
+if ( PRODUCTION || DEVELOPMENT ) {
+
+  global.Nenkraft = global.nk = namespace;
+
+}
+
+module.exports = namespace;
 
 // if ( DEVELOPMENT && module.hot ) module.hot.accept();

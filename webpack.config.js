@@ -87,9 +87,9 @@ if ( PRODUCTION ) {
     new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } )
   ];
 
-  output.library = 'nk';
-  output.libraryTarget = 'umd';
-  output.path = path.join( __dirname, 'npm/dist' );
+  output.library = '[name]';
+  output.libraryTarget = 'commonjs';
+  output.path = path.join( __dirname, 'package/dist' );
   output.publicPath = './';
 
 }
