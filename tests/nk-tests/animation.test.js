@@ -36,7 +36,8 @@ module.exports = function () {
 
       sprite = new nk.Sprite( 0, 0, _event.data.basicTextureCache.GetById( '1to8' ) );
       sprite.anchor.Set( 0.5 );
-      sprite.scale.Set( 5.0 );
+      sprite.width = 64 * 5;
+      sprite.height = 64 * 5;
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.CreateAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {

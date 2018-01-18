@@ -18,42 +18,8 @@ However; you are free to do so if you want to.
 
 Click [here](https://raw.githubusercontent.com/Nuuf/nenkraft/master/dist/nk.min.js) for the mini-file
 
-```
-  $ git clone https://github.com/Nuuf/nenkraft.git
-  $ npm i
-  $ npm start
-```
-
-> Optional: Dev with electron.
-
-```
-  $ npm i -g electron
-  $ npm run electron
-```
-
-> Optional: Just serve it
-
-```
-  $ npm i -g http-server
-  $ http-server dist
-```
-
-> Optional: Entity Server
-
-```
-  $ cd server 
-  $ npm i
-  $ node index.js
-```
-
-> Optional: Clean/Rebuild
-
-```
-  $ npm run clean
-  $ npm run build-full
-```
-
 Click [here](https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests) for examples (source code) (Examples are by no means optimized or fully functional)
+
 Click [here](http://www.spiritsoferutanya.com) for examples (live)
 
 [logo]: ./assets/images/nenkraft-banner.png "nenkraft"

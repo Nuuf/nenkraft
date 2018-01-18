@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.1 (Beta)
+* @version     0.6.2 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -389,7 +389,8 @@ module.exports = function () {
 
       sprite = new nk.Sprite( 0, 0, _event.data.basicTextureCache.GetById( '1to8' ) );
       sprite.anchor.Set( 0.5 );
-      sprite.scale.Set( 5.0 );
+      sprite.width = 64 * 5;
+      sprite.height = 64 * 5;
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.CreateAnimation( 'test', 20 );
       animation.GenerateFrames( 64, 64, 512, 64, 8, {
@@ -1564,7 +1565,7 @@ module.exports = function () {
     var particlePool = new nk.Pool();
     var explosionPool = new nk.Pool();
 
-    var worldScale = new nk.Vector2D( 2.0, 2.0 );
+    var worldScale = new nk.Vector2D( 1.8 );
     var ship = null;
     var particles = [];
     var explosions = [];
@@ -1575,22 +1576,56 @@ module.exports = function () {
     var shieldHealth = 3;
     var numShields = 22;
 
-    var spritesheet = null;
+    var sheet = null;
+    var sheetDefault = null;
+    var sheetRed = null;
+    var sheetBlue = null;
+    var sheetGreen = null;
 
-    var shieldVerticalPosition = 500;
+    var shieldVerticalPosition = 650;
 
-    var enemySpawnRate = 2;
+    var enemySpawnRate = 3;
     var enemySpeed = 1.5;
-    var enemyHealth = 5;
+    var enemyHealth = 8;
 
     var root = new nk.QuadtreeNode( worldBounds, 0, 5, 5 );
 
     var spritesheetLoader = new nk.SpritesheetLoader(
       [
         {
-          id: 'sheet',
+          id: 'sheet-default',
           image: {
-            src: './../assets/images/invaders/invaders.png'
+            src: './../assets/images/invaders/invaders-sheet.png'
+          },
+          data: {
+            src: './../assets/xhr/invaders.json',
+            type: 'json'
+          }
+        },
+        {
+          id: 'sheet-red',
+          image: {
+            src: './../assets/images/invaders/invaders-sheet-red.png'
+          },
+          data: {
+            src: './../assets/xhr/invaders.json',
+            type: 'json'
+          }
+        },
+        {
+          id: 'sheet-blue',
+          image: {
+            src: './../assets/images/invaders/invaders-sheet-blue.png'
+          },
+          data: {
+            src: './../assets/xhr/invaders.json',
+            type: 'json'
+          }
+        },
+        {
+          id: 'sheet-green',
+          image: {
+            src: './../assets/images/invaders/invaders-sheet-green.png'
           },
           data: {
             src: './../assets/xhr/invaders.json',
@@ -1600,8 +1635,19 @@ module.exports = function () {
       ],
       function() {
 
-        spritesheet = spritesheetLoader.GetSpritesheet( 'sheet' );
-        spritesheet.GenerateFrames();
+        sheetDefault = spritesheetLoader.GetSpritesheet( 'sheet-default' );
+        sheetDefault.GenerateFrames();
+
+        sheetRed= spritesheetLoader.GetSpritesheet( 'sheet-red' );
+        sheetRed.GenerateFrames();
+
+        sheetBlue = spritesheetLoader.GetSpritesheet( 'sheet-blue' );
+        sheetBlue.GenerateFrames();
+
+        sheetGreen = spritesheetLoader.GetSpritesheet( 'sheet-green' );
+        sheetGreen.GenerateFrames();
+
+        sheet = sheetDefault;
 
         go();
       
@@ -1611,11 +1657,15 @@ module.exports = function () {
     function go () {
 
       stage.ticker.StartAF();
-      pc.BindBasicTexture( spritesheet.basicTexture );
+      pc.BindBasicTexture( sheetDefault.basicTexture, 0 );
+      pc.BindBasicTexture( sheetRed.basicTexture, 1 ); 
+      pc.BindBasicTexture( sheetBlue.basicTexture, 2 );
+      pc.BindBasicTexture( sheetGreen.basicTexture, 3 );
+
       playerBulletPool.Flood( function () {
 
-        var b = new nk.Sprite( 0, 0, pc );
-        spritesheet.GetFrameById( 'Bullet' ).Apply( b );
+        var b = new nk.Sprite( 0, 0, pc, 0 );
+        sheet.GetFrameById( 'Bullet' ).Apply( b );
         b.scale.SetV( worldScale );
         b.UpdateShape( new nk.AABB2D( 0, 0, 8, 8 ) );
         b.rotation = RF( 0, Math.PI * 2 );
@@ -1632,8 +1682,8 @@ module.exports = function () {
       }, 5000 );
       enemyPool.Flood( function () {
 
-        var e = new nk.Sprite( 0, 0, pc );
-        spritesheet.GetFrameById( 'Enemy' + RI( 1, 2 ) ).Apply( e );
+        var e = new nk.Sprite( 0, 0, pc, 3 );
+        sheet.GetFrameById( 'Enemy' + RI( 1, 2 ) ).Apply( e );
         e.scale.SetV( worldScale );
         e.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
         e.anchor.Set( 0.5 );
@@ -1649,8 +1699,8 @@ module.exports = function () {
       }, 1000 );
       particlePool.Flood( function() {
 
-        var p = new nk.Sprite( 0, 0, pc );
-        spritesheet.GetFrameById( 'Particle' ).Apply( p );
+        var p = new nk.Sprite( 0, 0, pc, 1 );
+        sheet.GetFrameById( 'Particle' ).Apply( p );
         p.scale.SetV( worldScale );
         p.UpdateShape( new nk.AABB2D( 0, 0, 4, 4 ) );
         p.anchor.Set( 0.5 );
@@ -1662,9 +1712,10 @@ module.exports = function () {
       }, 5000 );
       explosionPool.Flood( function() {
 
-        var e = new nk.Sprite( 0, 0, pc );
+        var e = new nk.Sprite( 0, 0, pc, 2 );
+        sheet.GetFrameById( 'Explo-f1' ).Apply( e );
         var a = e.CreateAnimation( {
-          spritesheet: spritesheet,
+          spritesheet: sheet,
           id: 'explode',
           frames: [
             'Explo-f1',
@@ -1705,8 +1756,7 @@ module.exports = function () {
 
       if ( ship ) return;
       ship = new nk.Sprite( 0, 0, pc );
-      spritesheet.GetFrameById( 'Ship' ).Apply( ship );
-      console.log( ship );
+      sheet.GetFrameById( 'Ship' ).Apply( ship );
       ship.scale.SetV( worldScale );
       ship.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
       ship.anchor.Set( 0.5 );
@@ -1715,7 +1765,7 @@ module.exports = function () {
       ship.data.velocity = new nk.Vector2D();
       ship.data.moveSpeed = 8;
       ship.data.fire = false;
-      ship.data.fireRate = 2;
+      ship.data.fireRate = 4;
       ship.data.fireTimer = 0;
       ship.data.bulletsPerBlast = 15;
       stage.AddChild( ship );
@@ -1770,7 +1820,7 @@ module.exports = function () {
       for ( var i = 0; i < numShields; ++i ) {
 
         var s = new nk.Sprite( 0, 0, pc );
-        spritesheet.GetFrameById( 'Shield-f1' ).Apply( s );
+        sheet.GetFrameById( 'Shield-f1' ).Apply( s );
         s.transformAutomaticUpdate = false;
         s.scale.SetV( worldScale );
         s.UpdateShape( new nk.AABB2D( 0, 0, 16, 16 ) );
@@ -1798,6 +1848,7 @@ module.exports = function () {
       for ( var i = 0; i < _amount; ++i ) {
 
         var p = particlePool.Retrieve();
+        p.scale.Set( RF( 2, 3 ) );
         p.position.Set( _x, _y );
         p.data.velocity.Set( RF( -10, 10 ), RF( -10, 10 ) );
         p.data.acceleration.Set( RF( 0.9, 0.95 ), RF( 1, 1 ) );
@@ -2038,7 +2089,7 @@ module.exports = function () {
 
             if ( enemy.data.health <= 0 || enemy.y > H + enemy.height * 0.5 ) {
 
-              createParticles( enemy.x, enemy.y, RI( 4, 80 ) );
+              createParticles( enemy.x, enemy.y, RI( 15, 200 ) );
 
               enemy.Detach();
               enemies.fickleSplice( i );
@@ -2098,7 +2149,7 @@ module.exports = function () {
 
             if ( COLLIDE( enemy.data.body, shield.data.body ) ) {
 
-              createParticles( enemy.x, enemy.y, 15 );
+              createParticles( enemy.x, enemy.y, 100 );
 
               enemy.Detach();
               enemies.fickleSplice( index );
@@ -3110,6 +3161,8 @@ module.exports = function () {
 
   function Run () {
 
+    nk.Plainsprite.BUILD_DEFAULT_TEXTURE();
+
     var c = document.getElementsByTagName( 'canvas' )[ 0 ];
     c.setAttribute( 'width', window.innerWidth );
     c.setAttribute( 'height', window.innerHeight );
@@ -4044,11 +4097,10 @@ module.exports = function () {
 
       sprite = new nk.Sprite( HW, HH, p1 );
       sprite.anchor.Set( 0.5 );
-      sprite.scale.Set( 5 );
+      sprite.width = 64 * 5;
+      sprite.height = 64 * 5;
       sprite.UpdateShape();
       sprite.UpdateTextureTransform();
-
-      console.log( sprite );
 
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.CreateAnimation( 'test', 20 );
@@ -4652,7 +4704,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 40;
+    var fps = 30;
 
     var am = 35;
 
@@ -4729,7 +4781,7 @@ module.exports = function () {
         obj.y = Math.random() * H - HH;
         obj.programController = pcon;
         obj.transformAutomaticUpdate = false;
-        obj.SetTexture( pcon.originalTexture );
+        obj.SetTexture( pcon.originalTexture0 );
       
       }, 100000 );
       graphicPool.Flood( function ( obj ) {

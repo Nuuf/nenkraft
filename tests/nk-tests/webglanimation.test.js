@@ -52,11 +52,10 @@ module.exports = function () {
 
       sprite = new nk.Sprite( HW, HH, p1 );
       sprite.anchor.Set( 0.5 );
-      sprite.scale.Set( 5 );
+      sprite.width = 64 * 5;
+      sprite.height = 64 * 5;
       sprite.UpdateShape();
       sprite.UpdateTextureTransform();
-
-      console.log( sprite );
 
       var ac = sprite.animationController = new nk.Animator.Controller( sprite );
       var animation = ac.CreateAnimation( 'test', 20 );
