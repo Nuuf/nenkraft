@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.1 (Beta)
+* @version     0.6.2 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1037,6 +1037,25 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.IsFloat = function ( _value ) {
 
     return Number( _value ) === _value && _value % 1 !== 0;
+  
+  };
+
+  Nenkraft.Utils.Sign = function( _value, _1IfZero ) {
+
+    if ( _value === 0 ) {
+
+      if ( _1IfZero === true ) {
+
+        return 1;
+      
+      }
+
+      return 0;
+    
+    }
+
+    if ( _value > 0 ) return 1;
+    return -1;
   
   };
 
@@ -5907,7 +5926,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.6.1 (Beta)';
+  Nenkraft.VERSION = '0.6.2 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -5968,7 +5987,7 @@ module.exports = function ( Nenkraft ) {
 /* 35 */
 /***/ (function(module, exports) {
 
-module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nattribute vec2 aPosition;\r\nattribute vec2 aTexCoord;\r\n\r\nuniform mat3 uProjection;\r\nuniform mat3 uTranslation;\r\nuniform mat3 uTransformation;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition, 1.0 ) ).xy, 0.0, 1.0 );\r\n  vTexCoord = ( uTransformation * vec3( aTexCoord, 1.0 ) ).xy;\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord );\r\n}\r\n@fragment-end@\r\n"
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nprecision mediump float;\r\n\r\nattribute vec2 aPosition0;\r\nattribute vec2 aTexCoord0;\r\n\r\nattribute vec2 aPosition1;\r\nattribute vec2 aTexCoord1;\r\n\r\nattribute vec2 aPosition2;\r\nattribute vec2 aTexCoord2;\r\n\r\nattribute vec2 aPosition3;\r\nattribute vec2 aTexCoord3;\r\n\r\nuniform mat3 uProjection;\r\nuniform mat3 uTranslation;\r\nuniform mat3 uTransformation;\r\n\r\nuniform float uOTF;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  if ( uOTF == 0.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition0, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord0, 1.0 ) ).xy;\r\n  } else if ( uOTF == 1.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition1, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord1, 1.0 ) ).xy;\r\n  } else if ( uOTF == 2.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition2, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord2, 1.0 ) ).xy;\r\n  } else if ( uOTF == 3.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition3, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord3, 1.0 ) ).xy;\r\n  }\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord );\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
 /* 36 */
@@ -6627,6 +6646,8 @@ module.exports = function ( Nenkraft ) {
   BasicTexture.prototype.h = 0;
   BasicTexture.prototype.fw = 0;
   BasicTexture.prototype.fh = 0;
+  //
+  BasicTexture.prototype.uniformId = 0;
   // Methods
   Nenkraft.Texture.BasicTexture = BasicTexture;
   Nenkraft.BasicTexture = BasicTexture;
@@ -8459,7 +8480,7 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
 
-  function Sprite ( _x, _y, _texture ) {
+  function Sprite ( _x, _y, _texture, _otf ) {
 
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
     Super.call( this, _x, _y );
@@ -8473,7 +8494,16 @@ module.exports = function ( Nenkraft ) {
     if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
 
       this.programController = _texture;
-      this.SetTexture( _texture.originalTexture );
+
+      if ( _otf != null ) {
+
+        this.SetTexture( _texture['originalTexture' + _otf] );
+      
+      } else {
+
+        this.SetTexture( _texture.originalTexture0 );
+      
+      }
     
     }
     else if ( _texture == null ) {
@@ -8597,7 +8627,8 @@ module.exports = function ( Nenkraft ) {
         this.programController.Execute(
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
-          this.textureTransformation.AsArray( true )
+          this.textureTransformation.AsArray( true ),
+          this.texture.uniformId
         );
       
       }
@@ -8726,7 +8757,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
-    cv.Add( this.w * this.anchor.x * this.scale.x, this.h * this.anchor.y * this.scale.y );
+    cv.Add( this.width * this.anchor.x, this.height * this.anchor.y );
     return this.shape.IntersectsPoint( cv );
   
   };
@@ -8758,13 +8789,24 @@ module.exports = function ( Nenkraft ) {
     var tscaleX = _w / this.texture.fw;
     var tscaleY = _h / this.texture.fh;
 
+    var width = this.width;
+    var height = this.height;
+
     this.clip.Set( _x, _y, _w, _h );
     this.w = _w;
     this.h = _h;
+
+    if ( width !== 0 && height !== 0 ) {
+
+      this.width = width;
+      this.height = height;
+    
+    }
+    
     this.textureTranslation.SetTransform( 
       -_w * this.anchor.x,
       -_h * this.anchor.y,
-      tscaleX, tscaleY 
+      tscaleX, tscaleY
     );
     this.textureTransformation.SetTransform( 
       tscaleX * this.clip.tl.x / _w,
@@ -8797,6 +8839,31 @@ module.exports = function ( Nenkraft ) {
     return animation;
     
   };
+
+  Object.defineProperty( Sprite.prototype, 'width', {
+    get: function () {
+
+      return this.w * this.scale.x;
+    
+    },
+    set: function ( _value ) {
+
+      this.scale.x = _value / this.w;
+    
+    }
+  } );
+  Object.defineProperty( Sprite.prototype, 'height', {
+    get: function () {
+
+      return this.h * this.scale.y;
+    
+    },
+    set: function ( _value ) {
+
+      this.scale.y = _value / this.h;
+    
+    }
+  } );
 
   Nenkraft.Entity.Sprite = Sprite;
   Nenkraft.Sprite = Sprite;
@@ -9923,8 +9990,6 @@ module.exports = function ( Nenkraft ) {
       this.tempBasicTexture.fw = size.w;
       this.tempBasicTexture.fh = size.h;
 
-      console.log( this.tempBasicTexture );
-
       var spritesheet = new Nenkraft.Texture.Spritesheet( this.tempBasicTexture, this.tempData );
 
       this.spritesheetCache.StoreSafe( spritesheet );
@@ -10344,6 +10409,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof GLTextureProgramController ) ) return new GLTextureProgramController( _gl );
     Super.call( this, _gl, Nenkraft.SHADER_CODE.TEXTURE_2D );
+    this.Initialise();
   
   }
 
@@ -10352,39 +10418,77 @@ module.exports = function ( Nenkraft ) {
   // Static
 
   // Members
-  GLTextureProgramController.prototype.originalTexture = null;
-  GLTextureProgramController.prototype.boundTexture = null;
-  GLTextureProgramController.prototype.essenceBuffer = null;
+  GLTextureProgramController.prototype.originalTexture0 = null;
+  GLTextureProgramController.prototype.boundTexture0 = null;
+  GLTextureProgramController.prototype.essenceBuffer0 = null;
+  GLTextureProgramController.prototype.originalTexture1 = null;
+  GLTextureProgramController.prototype.boundTexture1 = null;
+  GLTextureProgramController.prototype.essenceBuffer1 = null;
+  GLTextureProgramController.prototype.originalTexture2 = null;
+  GLTextureProgramController.prototype.boundTexture2 = null;
+  GLTextureProgramController.prototype.essenceBuffer2 = null;
+  GLTextureProgramController.prototype.originalTexture3 = null;
+  GLTextureProgramController.prototype.boundTexture3 = null;
+  GLTextureProgramController.prototype.essenceBuffer3 = null;
+  GLTextureProgramController.prototype.lastUsedOTF = 0;
 
   // Methods
-  GLTextureProgramController.prototype.BindBasicTexture = function ( _texture ) {
+  GLTextureProgramController.prototype.Initialise = function() {
 
-    var gl = this.gl;
-    this.originalTexture = _texture;
-    this.boundTexture = gl.createTexture();
-    this.essenceBuffer = gl.createBuffer();
-    var essence = TRA( 0, 0, _texture.w, _texture.h );
-    essence.push.apply( essence, TRA( 0, 0, 1, 1 ) );
-    gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
-    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
-    gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
-    gl.bindBuffer( gl.ARRAY_BUFFER, null );
-    gl.bindTexture( gl.TEXTURE_2D, null );
-    this.AssignAttribute( 'aPosition' );
-    this.AssignAttribute( 'aTexCoord' );
+    this.AssignAttribute( 'aPosition0' );
+    this.AssignAttribute( 'aTexCoord0' );
+    this.AssignAttribute( 'aPosition1' );
+    this.AssignAttribute( 'aTexCoord1' );
+    this.AssignAttribute( 'aPosition2' );
+    this.AssignAttribute( 'aTexCoord2' );
+    this.AssignAttribute( 'aPosition3' );
+    this.AssignAttribute( 'aTexCoord3' );
     this.AssignUniform( 'uImage' );
+    this.AssignUniform( 'uOTF' );
     this.AssignUniform( 'uProjection' );
     this.AssignUniform( 'uTranslation' );
     this.AssignUniform( 'uTransformation' );
   
   };
 
-  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation ) {
+  GLTextureProgramController.prototype.BindBasicTexture = function ( _texture, _otf ) {
+
+    if ( _otf == null || _otf < 0 || _otf > 3 ) _otf = 0;
+    var gl = this.gl;
+    _texture.uniformId = _otf;
+    this['originalTexture' + _otf] = _texture;
+    this['boundTexture' + _otf] = gl.createTexture();
+    this['essenceBuffer' + _otf] = gl.createBuffer();
+    var essence = TRA( 0, 0, _texture.w, _texture.h );
+    essence.push.apply( essence, TRA( 0, 0, 1, 1 ) );
+    gl.bindTexture( gl.TEXTURE_2D, this['boundTexture' + _otf] );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
+    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
+    gl.bindBuffer( gl.ARRAY_BUFFER, this['essenceBuffer' + _otf] );
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
+    gl.bindBuffer( gl.ARRAY_BUFFER, null );
+    gl.bindTexture( gl.TEXTURE_2D, null );
+  
+  };
+
+  GLTextureProgramController.prototype.BindOTF = function( _gl, _uniforms, _attributes, _otf ) {
+
+    if ( this['boundTexture' + _otf] == null ) return;
+
+    _gl.activeTexture( _gl.TEXTURE0 + _otf );
+    _gl.bindTexture( _gl.TEXTURE_2D, this['boundTexture' + _otf] );
+    _gl.bindBuffer( _gl.ARRAY_BUFFER, this['essenceBuffer' + _otf] );
+    _gl.enableVertexAttribArray( _attributes['aPosition' + _otf] );
+    _gl.vertexAttribPointer( _attributes['aPosition' + _otf], 2, _gl.FLOAT, false, 0, 0 );
+    _gl.enableVertexAttribArray( _attributes['aTexCoord' + _otf] );
+    _gl.vertexAttribPointer( _attributes['aTexCoord' + _otf], 2, _gl.FLOAT, false, 0, 48 );
+  
+  };
+
+  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _uniformId ) {
 
     var gl = this.gl;
     var attributes = this.attributes;
@@ -10393,15 +10497,22 @@ module.exports = function ( Nenkraft ) {
     if ( this !== Super.LAST_USED_CONTROLLER ) {
 
       gl.useProgram( this.program );
-      gl.activeTexture( gl.TEXTURE0 );
-      gl.bindTexture( gl.TEXTURE_2D, this.boundTexture );
-      gl.uniform1i( uniforms.uImage, 0 );
-      gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
-      gl.enableVertexAttribArray( attributes.aPosition );
-      gl.vertexAttribPointer( attributes.aPosition, 2, gl.FLOAT, false, 0, 0 );
-      gl.enableVertexAttribArray( attributes.aTexCoord );
-      gl.vertexAttribPointer( attributes.aTexCoord, 2, gl.FLOAT, false, 0, 48 );
+
+      this.BindOTF( gl, uniforms, attributes, 0 );
+      this.BindOTF( gl, uniforms, attributes, 1 );
+      this.BindOTF( gl, uniforms, attributes, 2 );
+      this.BindOTF( gl, uniforms, attributes, 3 );
+
+      gl.uniform1f( uniforms.uOTF, _uniformId );
+      gl.uniform1i( uniforms.uImage, _uniformId );
       Super.LAST_USED_CONTROLLER = this;
+      this.lastUsedOTF = _uniformId;
+    
+    } else if ( _uniformId !== this.lastUsedOTF ) {
+
+      gl.uniform1f( uniforms.uOTF, _uniformId );
+      gl.uniform1i( uniforms.uImage, _uniformId );
+      this.lastUsedOTF = _uniformId;
     
     }
 

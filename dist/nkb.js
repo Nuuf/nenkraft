@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.1 (Beta)
+* @version     0.6.2 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1037,6 +1037,25 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Utils.IsFloat = function ( _value ) {
 
     return Number( _value ) === _value && _value % 1 !== 0;
+  
+  };
+
+  Nenkraft.Utils.Sign = function( _value, _1IfZero ) {
+
+    if ( _value === 0 ) {
+
+      if ( _1IfZero === true ) {
+
+        return 1;
+      
+      }
+
+      return 0;
+    
+    }
+
+    if ( _value > 0 ) return 1;
+    return -1;
   
   };
 
@@ -5948,7 +5967,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.6.1 (Beta)';
+  Nenkraft.VERSION = '0.6.2 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 

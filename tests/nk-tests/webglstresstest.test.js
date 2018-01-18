@@ -65,7 +65,7 @@ module.exports = function () {
     var numTimes = 20;
     var hold = 20;
     var holdCounter = 0;
-    var fps = 40;
+    var fps = 30;
 
     var am = 35;
 
@@ -142,7 +142,7 @@ module.exports = function () {
         obj.y = Math.random() * H - HH;
         obj.programController = pcon;
         obj.transformAutomaticUpdate = false;
-        obj.SetTexture( pcon.originalTexture );
+        obj.SetTexture( pcon.originalTexture0 );
       
       }, 100000 );
       graphicPool.Flood( function ( obj ) {

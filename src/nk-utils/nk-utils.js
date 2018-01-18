@@ -34,6 +34,25 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Nenkraft.Utils.Sign = function( _value, _1IfZero ) {
+
+    if ( _value === 0 ) {
+
+      if ( _1IfZero === true ) {
+
+        return 1;
+      
+      }
+
+      return 0;
+    
+    }
+
+    if ( _value > 0 ) return 1;
+    return -1;
+  
+  };
+
   Nenkraft.Utils.Clamp = function ( _value, _min, _max ) {
 
     if ( _value < _min ) return _min;

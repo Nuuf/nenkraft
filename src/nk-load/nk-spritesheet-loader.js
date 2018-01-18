@@ -92,8 +92,6 @@ module.exports = function ( Nenkraft ) {
       this.tempBasicTexture.fw = size.w;
       this.tempBasicTexture.fh = size.h;
 
-      console.log( this.tempBasicTexture );
-
       var spritesheet = new Nenkraft.Texture.Spritesheet( this.tempBasicTexture, this.tempData );
 
       this.spritesheetCache.StoreSafe( spritesheet );

@@ -7,7 +7,7 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
 
-  function Sprite ( _x, _y, _texture ) {
+  function Sprite ( _x, _y, _texture, _otf ) {
 
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
     Super.call( this, _x, _y );
@@ -21,7 +21,16 @@ module.exports = function ( Nenkraft ) {
     if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
 
       this.programController = _texture;
-      this.SetTexture( _texture.originalTexture );
+
+      if ( _otf != null ) {
+
+        this.SetTexture( _texture['originalTexture' + _otf] );
+      
+      } else {
+
+        this.SetTexture( _texture.originalTexture0 );
+      
+      }
     
     }
     else if ( _texture == null ) {
@@ -145,7 +154,8 @@ module.exports = function ( Nenkraft ) {
         this.programController.Execute(
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
-          this.textureTransformation.AsArray( true )
+          this.textureTransformation.AsArray( true ),
+          this.texture.uniformId
         );
       
       }
@@ -274,7 +284,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.interactive === false ) return false;
     var cv = _v.SubtractVC( this.position );
-    cv.Add( this.w * this.anchor.x * this.scale.x, this.h * this.anchor.y * this.scale.y );
+    cv.Add( this.width * this.anchor.x, this.height * this.anchor.y );
     return this.shape.IntersectsPoint( cv );
   
   };
@@ -306,13 +316,24 @@ module.exports = function ( Nenkraft ) {
     var tscaleX = _w / this.texture.fw;
     var tscaleY = _h / this.texture.fh;
 
+    var width = this.width;
+    var height = this.height;
+
     this.clip.Set( _x, _y, _w, _h );
     this.w = _w;
     this.h = _h;
+
+    if ( width !== 0 && height !== 0 ) {
+
+      this.width = width;
+      this.height = height;
+    
+    }
+    
     this.textureTranslation.SetTransform( 
       -_w * this.anchor.x,
       -_h * this.anchor.y,
-      tscaleX, tscaleY 
+      tscaleX, tscaleY
     );
     this.textureTransformation.SetTransform( 
       tscaleX * this.clip.tl.x / _w,
@@ -345,6 +366,31 @@ module.exports = function ( Nenkraft ) {
     return animation;
     
   };
+
+  Object.defineProperty( Sprite.prototype, 'width', {
+    get: function () {
+
+      return this.w * this.scale.x;
+    
+    },
+    set: function ( _value ) {
+
+      this.scale.x = _value / this.w;
+    
+    }
+  } );
+  Object.defineProperty( Sprite.prototype, 'height', {
+    get: function () {
+
+      return this.h * this.scale.y;
+    
+    },
+    set: function ( _value ) {
+
+      this.scale.y = _value / this.h;
+    
+    }
+  } );
 
   Nenkraft.Entity.Sprite = Sprite;
   Nenkraft.Sprite = Sprite;
