@@ -133,7 +133,9 @@ module.exports = function ( Nenkraft ) {
       this.programController.Execute(
         char.transform.worldTransform.AsArray( true ),
         char.translation.AsArray( true ),
-        char.transformation.AsArray( true )
+        char.transformation.AsArray( true ),
+        this.alpha,
+        0
       );
     
     }

@@ -47,51 +47,52 @@ module.exports = function ( Nenkraft ) {
     this.AssignAttribute( 'aPosition3' );
     this.AssignAttribute( 'aTexCoord3' );
     this.AssignUniform( 'uImage' );
-    this.AssignUniform( 'uOTF' );
+    this.AssignUniform( 'uUnitId' );
     this.AssignUniform( 'uProjection' );
     this.AssignUniform( 'uTranslation' );
     this.AssignUniform( 'uTransformation' );
+    this.AssignUniform( 'uAlpha' );
   
   };
 
-  GLTextureProgramController.prototype.BindBasicTexture = function ( _texture, _otf ) {
+  GLTextureProgramController.prototype.BindBasicTexture = function ( _texture, _unitId ) {
 
-    if ( _otf == null || _otf < 0 || _otf > 3 ) _otf = 0;
+    if ( _unitId == null || _unitId < 0 || _unitId > 3 ) _unitId = 0;
     var gl = this.gl;
-    _texture.uniformId = _otf;
-    this['originalTexture' + _otf] = _texture;
-    this['boundTexture' + _otf] = gl.createTexture();
-    this['essenceBuffer' + _otf] = gl.createBuffer();
+    _texture.uniformId = _unitId;
+    this['originalTexture' + _unitId] = _texture;
+    this['boundTexture' + _unitId] = gl.createTexture();
+    this['essenceBuffer' + _unitId] = gl.createBuffer();
     var essence = TRA( 0, 0, _texture.w, _texture.h );
     essence.push.apply( essence, TRA( 0, 0, 1, 1 ) );
-    gl.bindTexture( gl.TEXTURE_2D, this['boundTexture' + _otf] );
+    gl.bindTexture( gl.TEXTURE_2D, this['boundTexture' + _unitId] );
     gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT );
     gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT );
     gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
     gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
     gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, _texture.image );
-    gl.bindBuffer( gl.ARRAY_BUFFER, this['essenceBuffer' + _otf] );
+    gl.bindBuffer( gl.ARRAY_BUFFER, this['essenceBuffer' + _unitId] );
     gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( essence ), gl.STATIC_DRAW );
     gl.bindBuffer( gl.ARRAY_BUFFER, null );
     gl.bindTexture( gl.TEXTURE_2D, null );
   
   };
 
-  GLTextureProgramController.prototype.BindOTF = function( _gl, _uniforms, _attributes, _otf ) {
+  GLTextureProgramController.prototype.BindOTF = function( _gl, _uniforms, _attributes, _unitId ) {
 
-    if ( this['boundTexture' + _otf] == null ) return;
+    if ( this['boundTexture' + _unitId] == null ) return;
 
-    _gl.activeTexture( _gl.TEXTURE0 + _otf );
-    _gl.bindTexture( _gl.TEXTURE_2D, this['boundTexture' + _otf] );
-    _gl.bindBuffer( _gl.ARRAY_BUFFER, this['essenceBuffer' + _otf] );
-    _gl.enableVertexAttribArray( _attributes['aPosition' + _otf] );
-    _gl.vertexAttribPointer( _attributes['aPosition' + _otf], 2, _gl.FLOAT, false, 0, 0 );
-    _gl.enableVertexAttribArray( _attributes['aTexCoord' + _otf] );
-    _gl.vertexAttribPointer( _attributes['aTexCoord' + _otf], 2, _gl.FLOAT, false, 0, 48 );
+    _gl.activeTexture( _gl.TEXTURE0 + _unitId );
+    _gl.bindTexture( _gl.TEXTURE_2D, this['boundTexture' + _unitId] );
+    _gl.bindBuffer( _gl.ARRAY_BUFFER, this['essenceBuffer' + _unitId] );
+    _gl.enableVertexAttribArray( _attributes['aPosition' + _unitId] );
+    _gl.vertexAttribPointer( _attributes['aPosition' + _unitId], 2, _gl.FLOAT, false, 0, 0 );
+    _gl.enableVertexAttribArray( _attributes['aTexCoord' + _unitId] );
+    _gl.vertexAttribPointer( _attributes['aTexCoord' + _unitId], 2, _gl.FLOAT, false, 0, 48 );
   
   };
 
-  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _uniformId ) {
+  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _alpha, _uniformId ) {
 
     var gl = this.gl;
     var attributes = this.attributes;
@@ -106,19 +107,20 @@ module.exports = function ( Nenkraft ) {
       this.BindOTF( gl, uniforms, attributes, 2 );
       this.BindOTF( gl, uniforms, attributes, 3 );
 
-      gl.uniform1f( uniforms.uOTF, _uniformId );
+      gl.uniform1f( uniforms.uUnitId, _uniformId );
       gl.uniform1i( uniforms.uImage, _uniformId );
       Super.LAST_USED_CONTROLLER = this;
       this.lastUsedOTF = _uniformId;
     
     } else if ( _uniformId !== this.lastUsedOTF ) {
 
-      gl.uniform1f( uniforms.uOTF, _uniformId );
+      gl.uniform1f( uniforms.uUnitId, _uniformId );
       gl.uniform1i( uniforms.uImage, _uniformId );
       this.lastUsedOTF = _uniformId;
     
     }
 
+    gl.uniform1f( uniforms.uAlpha, _alpha );
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniformMatrix3fv( uniforms.uTranslation, false, _translation );
     gl.uniformMatrix3fv( uniforms.uTransformation, false, _transformation );

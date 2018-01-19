@@ -7,7 +7,7 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
 
-  function Sprite ( _x, _y, _texture, _otf ) {
+  function Sprite ( _x, _y, _texture, _unitId ) {
 
     if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
     Super.call( this, _x, _y );
@@ -22,9 +22,9 @@ module.exports = function ( Nenkraft ) {
 
       this.programController = _texture;
 
-      if ( _otf != null ) {
+      if ( _unitId != null ) {
 
-        this.SetTexture( _texture['originalTexture' + _otf] );
+        this.SetTexture( _texture['originalTexture' + _unitId] );
       
       } else {
 
@@ -155,6 +155,7 @@ module.exports = function ( Nenkraft ) {
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
           this.textureTransformation.AsArray( true ),
+          this.alpha,
           this.texture.uniformId
         );
       

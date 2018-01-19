@@ -21,21 +21,21 @@ uniform mat3 uProjection;
 uniform mat3 uTranslation;
 uniform mat3 uTransformation;
 
-uniform float uOTF;
+uniform float uUnitId;
 
 varying vec2 vTexCoord;
 
 void main() {
-  if ( uOTF == 0.0 ) {
+  if ( uUnitId == 0.0 ) {
     gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition0, 1.0 ) ).xy, 0.0, 1.0 );
     vTexCoord = ( uTransformation * vec3( aTexCoord0, 1.0 ) ).xy;
-  } else if ( uOTF == 1.0 ) {
+  } else if ( uUnitId == 1.0 ) {
     gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition1, 1.0 ) ).xy, 0.0, 1.0 );
     vTexCoord = ( uTransformation * vec3( aTexCoord1, 1.0 ) ).xy;
-  } else if ( uOTF == 2.0 ) {
+  } else if ( uUnitId == 2.0 ) {
     gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition2, 1.0 ) ).xy, 0.0, 1.0 );
     vTexCoord = ( uTransformation * vec3( aTexCoord2, 1.0 ) ).xy;
-  } else if ( uOTF == 3.0 ) {
+  } else if ( uUnitId == 3.0 ) {
     gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition3, 1.0 ) ).xy, 0.0, 1.0 );
     vTexCoord = ( uTransformation * vec3( aTexCoord3, 1.0 ) ).xy;
   }
@@ -46,10 +46,11 @@ void main() {
 precision mediump float;
 
 uniform sampler2D uImage;
+uniform float uAlpha;
 
 varying vec2 vTexCoord;
 
 void main() {
-  gl_FragColor = texture2D( uImage, vTexCoord );
+  gl_FragColor = texture2D( uImage, vTexCoord ) * vec4( 1.0, 1.0, 1.0, uAlpha );
 }
 @fragment-end@
