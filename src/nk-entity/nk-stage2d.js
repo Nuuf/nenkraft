@@ -42,7 +42,7 @@ module.exports = function ( Nenkraft ) {
         0.0392156862745098,
         0.0784313725490196,
         0.11764705882352941,
-        0
+        1.0
       );
       this.usingWebGL = true;
       this.scale.Set( 2 / this.w, -2 / this.h );
@@ -50,6 +50,8 @@ module.exports = function ( Nenkraft ) {
       this.position.Add( _x * this.scale.x, _y * this.scale.y );
       this.UpdateTransform();
       this.ticker = new Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _doNotStart );
+
+      this.GLConfig( this.gl );
     
     } else {
 
@@ -95,13 +97,18 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Stage2D.prototype.GLPreDraw = function ( _gl ) {
+  Stage2D.prototype.GLConfig = function( _gl ) {
 
     _gl.viewport( 0, 0, this.w, this.h );
-    _gl.clear( _gl.COLOR_BUFFER_BIT );
     _gl.enable( _gl.BLEND );
     _gl.disable( _gl.DEPTH_TEST );
     _gl.blendFunc( _gl.SRC_ALPHA, _gl.ONE_MINUS_SRC_ALPHA );
+  
+  };
+
+  Stage2D.prototype.GLPreDraw = function ( _gl ) {
+
+    _gl.clear( _gl.COLOR_BUFFER_BIT );
   
   };
 

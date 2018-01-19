@@ -8,6 +8,10 @@ require( './../assets/images/smudge.png' );
 require( './../assets/images/colors.png' );
 require( './../assets/images/font.png' );
 require( './../assets/images/invaders/invaders.png' );
+require( './../assets/images/invaders/invaders-sheet.png' );
+require( './../assets/images/invaders/invaders-sheet-red.png' );
+require( './../assets/images/invaders/invaders-sheet-blue.png' );
+require( './../assets/images/invaders/invaders-sheet-green.png' );
 
 var tests = [];
 

@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.2 (Beta)
+* @version     0.6.3 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -91,10 +91,14 @@ __webpack_require__( 88 );
 __webpack_require__( 89 );
 __webpack_require__( 90 );
 __webpack_require__( 91 );
+__webpack_require__( 92 );
+__webpack_require__( 93 );
+__webpack_require__( 94 );
+__webpack_require__( 95 );
 
 var tests = [];
 
-var context = __webpack_require__(92);
+var context = __webpack_require__(96);
 
 context.keys().forEach( function ( file ) {
 
@@ -169,42 +173,66 @@ module.exports = __webpack_require__.p + "assets/images/invaders/invaders.png";
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet.png";
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-red.png";
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-blue.png";
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-green.png";
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var map = {
-	"./aabbcollision.test": 93,
-	"./animation.test": 94,
-	"./bitmapfont.test": 95,
-	"./butterflyish.test": 96,
-	"./cli.test": 97,
-	"./clock.test": 98,
-	"./elasticcollision.test": 99,
-	"./field.test": 100,
-	"./fractree.test": 101,
-	"./grabndrag.test": 102,
-	"./grid.test": 103,
-	"./invaders.test": 104,
-	"./magnet.test": 105,
-	"./motion.test": 106,
-	"./nightsky.test": 107,
-	"./particles.test": 108,
-	"./platformer.test": 109,
-	"./playground.test": 110,
-	"./polygoncollision.test": 111,
-	"./quadtree.test": 112,
-	"./rain.test": 113,
-	"./raycasting.test": 114,
-	"./reflectivecollision.test": 115,
-	"./sprite.test": 116,
-	"./stresstest.test": 117,
-	"./text.test": 118,
-	"./themask.test": 119,
-	"./webglanimation.test": 120,
-	"./webglbitmapfont.test": 121,
-	"./webglcircle.test": 122,
-	"./webglline2d.test": 123,
-	"./webglpixelbatch.test": 124,
-	"./webglrectangle.test": 125,
-	"./webglstresstest.test": 126,
-	"./webgltexturebatch.test": 127
+	"./aabbcollision.test": 97,
+	"./animation.test": 98,
+	"./bitmapfont.test": 99,
+	"./butterflyish.test": 100,
+	"./cli.test": 101,
+	"./clock.test": 102,
+	"./elasticcollision.test": 103,
+	"./field.test": 104,
+	"./fractree.test": 105,
+	"./grabndrag.test": 106,
+	"./grid.test": 107,
+	"./invaders.test": 108,
+	"./magnet.test": 109,
+	"./motion.test": 110,
+	"./nightsky.test": 111,
+	"./particles.test": 112,
+	"./platformer.test": 113,
+	"./playground.test": 114,
+	"./polygoncollision.test": 115,
+	"./quadtree.test": 116,
+	"./rain.test": 117,
+	"./raycasting.test": 118,
+	"./reflectivecollision.test": 119,
+	"./sprite.test": 120,
+	"./stresstest.test": 121,
+	"./text.test": 122,
+	"./themask.test": 123,
+	"./webglanimation.test": 124,
+	"./webglbitmapfont.test": 125,
+	"./webglcircle.test": 126,
+	"./webglline2d.test": 127,
+	"./webglpixelbatch.test": 128,
+	"./webglrectangle.test": 129,
+	"./webglstresstest.test": 130,
+	"./webgltexturebatch.test": 131
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -220,10 +248,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 92;
+webpackContext.id = 96;
 
 /***/ }),
-/* 93 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -348,7 +376,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 94 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -433,7 +461,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 95 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -514,7 +542,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 96 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -634,7 +662,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 97 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -861,7 +889,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 98 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -941,7 +969,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1120,7 +1148,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1229,7 +1257,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1331,7 +1359,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1435,7 +1463,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1520,7 +1548,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2188,7 +2216,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2352,7 +2380,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2418,7 +2446,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2534,7 +2562,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2626,7 +2654,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2880,7 +2908,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2932,7 +2960,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3081,7 +3109,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3147,7 +3175,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3246,7 +3274,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3438,7 +3466,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3612,7 +3640,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3727,7 +3755,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3872,7 +3900,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3919,7 +3947,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4040,7 +4068,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4183,7 +4211,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4266,7 +4294,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4384,7 +4412,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4448,7 +4476,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4535,7 +4563,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4634,7 +4662,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4817,7 +4845,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
