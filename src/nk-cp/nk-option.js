@@ -29,9 +29,9 @@ module.exports = function ( Nenkraft ) {
   Option.prototype.breakIfExecuted = false;
 
   // Methods
-  Option.prototype.Execute = function ( _dataStrs, _data ) {
+  Option.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
 
-    this.handle( _dataStrs, _data );
+    this.handle( _dataStrs, _data, _staticData );
     return this.breakIfExecuted;
   
   };

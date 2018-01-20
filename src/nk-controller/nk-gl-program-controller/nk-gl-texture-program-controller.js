@@ -33,7 +33,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureProgramController.prototype.originalTexture3 = null;
   GLTextureProgramController.prototype.boundTexture3 = null;
   GLTextureProgramController.prototype.essenceBuffer3 = null;
-  GLTextureProgramController.prototype.lastUsedOTF = 0;
+  GLTextureProgramController.prototype.lastUsedUnit = 0;
 
   // Methods
   GLTextureProgramController.prototype.Initialise = function() {
@@ -51,7 +51,7 @@ module.exports = function ( Nenkraft ) {
     this.AssignUniform( 'uProjection' );
     this.AssignUniform( 'uTranslation' );
     this.AssignUniform( 'uTransformation' );
-    this.AssignUniform( 'uAlpha' );
+    this.AssignUniform( 'uTint' );
   
   };
 
@@ -78,7 +78,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  GLTextureProgramController.prototype.BindOTF = function( _gl, _uniforms, _attributes, _unitId ) {
+  GLTextureProgramController.prototype.BindUnit = function( _gl, _uniforms, _attributes, _unitId ) {
 
     if ( this['boundTexture' + _unitId] == null ) return;
 
@@ -92,7 +92,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _alpha, _uniformId ) {
+  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _tint, _unitId ) {
 
     var gl = this.gl;
     var attributes = this.attributes;
@@ -102,25 +102,25 @@ module.exports = function ( Nenkraft ) {
 
       gl.useProgram( this.program );
 
-      this.BindOTF( gl, uniforms, attributes, 0 );
-      this.BindOTF( gl, uniforms, attributes, 1 );
-      this.BindOTF( gl, uniforms, attributes, 2 );
-      this.BindOTF( gl, uniforms, attributes, 3 );
+      this.BindUnit( gl, uniforms, attributes, 0 );
+      this.BindUnit( gl, uniforms, attributes, 1 );
+      this.BindUnit( gl, uniforms, attributes, 2 );
+      this.BindUnit( gl, uniforms, attributes, 3 );
 
-      gl.uniform1f( uniforms.uUnitId, _uniformId );
-      gl.uniform1i( uniforms.uImage, _uniformId );
+      gl.uniform1f( uniforms.uUnitId, _unitId );
+      gl.uniform1i( uniforms.uImage, _unitId );
       Super.LAST_USED_CONTROLLER = this;
-      this.lastUsedOTF = _uniformId;
+      this.lastUsedUnit = _unitId;
     
-    } else if ( _uniformId !== this.lastUsedOTF ) {
+    } else if ( _unitId !== this.lastUsedUnit ) {
 
-      gl.uniform1f( uniforms.uUnitId, _uniformId );
-      gl.uniform1i( uniforms.uImage, _uniformId );
-      this.lastUsedOTF = _uniformId;
+      gl.uniform1f( uniforms.uUnitId, _unitId );
+      gl.uniform1i( uniforms.uImage, _unitId );
+      this.lastUsedUnit = _unitId;
     
     }
 
-    gl.uniform1f( uniforms.uAlpha, _alpha );
+    gl.uniform4fv( uniforms.uTint, _tint );
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniformMatrix3fv( uniforms.uTranslation, false, _translation );
     gl.uniformMatrix3fv( uniforms.uTransformation, false, _transformation );

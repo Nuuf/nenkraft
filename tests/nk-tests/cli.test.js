@@ -100,7 +100,7 @@ module.exports = function () {
 
     var register = new nk.CP.Register();
     nk.CP.Command.OPTION_PREFIX = '--';
-    register.Add( new nk.CP.Command(
+    register.AddCommand( new nk.CP.Command(
       'commands',
       function () {
 
@@ -112,7 +112,7 @@ module.exports = function () {
       
       }
     ) );
-    register.Add( new nk.CP.Command(
+    register.AddCommand( new nk.CP.Command(
       'clear',
       function () {
 
@@ -123,7 +123,7 @@ module.exports = function () {
       },
       'clear the screen'
     ) );
-    register.Add( new nk.CP.Command(
+    register.AddCommand( new nk.CP.Command(
       'moveto',
       function () {
 
