@@ -17,6 +17,7 @@ module.exports = function ( Nenkraft ) {
     this.textureTransformation = new Nenkraft.Math.Matrix2D();
     this.textureTranslation = new Nenkraft.Math.Matrix2D();
     this.originalShape = new Nenkraft.Geom.AABB2D();
+    this.tint = new Nenkraft.Color( 1.0, 1.0, 1.0, 1.0 );
 
     if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
 
@@ -90,7 +91,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.clip = null;
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
-  Sprite.prototype.alpha = 1.0;
+  Sprite.prototype.tint = null;
   Sprite.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Sprite.prototype.interactive = true;
   Sprite.prototype.programController = null;
@@ -117,7 +118,7 @@ module.exports = function ( Nenkraft ) {
       if ( this.display === true ) {
 
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
-        _rc.globalAlpha = this.alpha;
+        _rc.globalAlpha = this.tint.channel[3];
         _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
           this.texture.image,
@@ -155,7 +156,7 @@ module.exports = function ( Nenkraft ) {
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
           this.textureTransformation.AsArray( true ),
-          this.alpha,
+          this.tint.channel,
           this.texture.uniformId
         );
       
@@ -389,6 +390,18 @@ module.exports = function ( Nenkraft ) {
     set: function ( _value ) {
 
       this.scale.y = _value / this.h;
+    
+    }
+  } );
+  Object.defineProperty( Sprite.prototype, 'alpha', {
+    get: function() {
+
+      return this.tint.channel[3];
+    
+    },
+    set: function( _value ) {
+
+      this.tint.channel[3] = _value;
     
     }
   } );

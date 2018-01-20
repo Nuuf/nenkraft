@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.3 (Beta)
+* @version     0.6.4 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.6.3 (Beta)';
+  Nenkraft.VERSION = '0.6.4 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -4450,9 +4450,9 @@ module.exports = function ( Nenkraft ) {
   Option.prototype.breakIfExecuted = false;
 
   // Methods
-  Option.prototype.Execute = function ( _dataStrs, _data ) {
+  Option.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
 
-    this.handle( _dataStrs, _data );
+    this.handle( _dataStrs, _data, _staticData );
     return this.breakIfExecuted;
   
   };
@@ -4501,15 +4501,16 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.optionPrefix = null;
   Command.prototype.continueToPrime = true;
   Command.prototype.dsCopy = null;
+  Command.prototype.register = null;
 
   // Methods
-  Command.prototype.Execute = function ( _dataStrs, _data ) {
+  Command.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
 
     this.HandleData( _dataStrs, _data );
 
-    if ( this.HandleOptions( _dataStrs, _data ) === true ) {
+    if ( this.HandleOptions( _dataStrs, _data, _staticData ) === true ) {
 
-      this.handle( _dataStrs, _data );
+      this.handle( _dataStrs, _data, _staticData );
     
     }
   
@@ -4567,7 +4568,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Command.prototype.HandleOptions = function ( _dataStrs, _data ) {
+  Command.prototype.HandleOptions = function ( _dataStrs, _data, _staticData ) {
 
     if ( _dataStrs.length === 0 ) {
 
@@ -4581,7 +4582,7 @@ module.exports = function ( Nenkraft ) {
     for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
 
       option = this.GetOptionById( matchingOptionIds[ i ] );
-      if ( option.Execute( _dataStrs, _data ) === true ) return false;
+      if ( option.Execute( _dataStrs, _data, _staticData ) === true ) return false;
     
     }
 
@@ -5044,13 +5045,33 @@ module.exports = function ( Nenkraft ) {
   Register.prototype.splitter = ' ';
 
   // Methods
-  Register.prototype.Add = function ( _command ) {
+  Register.prototype.AddCommand = function ( _command ) {
 
-    this.commands.push( _command );
+    if ( _command.register === null ) {
+
+      this.commands.push( _command );
+      _command.register = this;
+      return _command;
+    
+    }
   
   };
 
-  Register.prototype.Get = function ( _id ) {
+  Register.prototype.RemoveCommand = function( _command ) {
+
+    var commands = this.commands;
+    var ix = commands.indexOf( _command );
+
+    if ( ix !== -1 ) {
+
+      _command.register = null;
+      return commands.fickleSplice( ix );
+    
+    }
+  
+  };
+
+  Register.prototype.GetCommand = function ( _id ) {
 
     for ( var i = 0, commands = this.commands, l = commands.length, command; i < l; ++i ) {
 
@@ -5072,15 +5093,15 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Register.prototype.Parse = function ( _str ) {
+  Register.prototype.Parse = function ( _str, _staticData ) {
 
     var strs = String( _str ).split( this.splitter );
     var cmdStr = strs.shift();
-    var command = this.Get( cmdStr );
+    var command = this.GetCommand( cmdStr );
 
     if ( command ) {
 
-      command.Execute( strs, {} );
+      command.Execute( strs, {}, _staticData );
       return null;
     
     }

@@ -134,7 +134,7 @@ module.exports = function ( Nenkraft ) {
         char.transform.worldTransform.AsArray( true ),
         char.translation.AsArray( true ),
         char.transformation.AsArray( true ),
-        this.alpha,
+        this.tint.channel,
         0
       );
     

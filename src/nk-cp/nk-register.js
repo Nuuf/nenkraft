@@ -22,13 +22,33 @@ module.exports = function ( Nenkraft ) {
   Register.prototype.splitter = ' ';
 
   // Methods
-  Register.prototype.Add = function ( _command ) {
+  Register.prototype.AddCommand = function ( _command ) {
 
-    this.commands.push( _command );
+    if ( _command.register === null ) {
+
+      this.commands.push( _command );
+      _command.register = this;
+      return _command;
+    
+    }
   
   };
 
-  Register.prototype.Get = function ( _id ) {
+  Register.prototype.RemoveCommand = function( _command ) {
+
+    var commands = this.commands;
+    var ix = commands.indexOf( _command );
+
+    if ( ix !== -1 ) {
+
+      _command.register = null;
+      return commands.fickleSplice( ix );
+    
+    }
+  
+  };
+
+  Register.prototype.GetCommand = function ( _id ) {
 
     for ( var i = 0, commands = this.commands, l = commands.length, command; i < l; ++i ) {
 
@@ -50,15 +70,15 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Register.prototype.Parse = function ( _str ) {
+  Register.prototype.Parse = function ( _str, _staticData ) {
 
     var strs = String( _str ).split( this.splitter );
     var cmdStr = strs.shift();
-    var command = this.Get( cmdStr );
+    var command = this.GetCommand( cmdStr );
 
     if ( command ) {
 
-      command.Execute( strs, {} );
+      command.Execute( strs, {}, _staticData );
       return null;
     
     }

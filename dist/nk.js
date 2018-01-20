@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.3 (Beta)
+* @version     0.6.4 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -5515,9 +5515,9 @@ module.exports = function ( Nenkraft ) {
   Option.prototype.breakIfExecuted = false;
 
   // Methods
-  Option.prototype.Execute = function ( _dataStrs, _data ) {
+  Option.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
 
-    this.handle( _dataStrs, _data );
+    this.handle( _dataStrs, _data, _staticData );
     return this.breakIfExecuted;
   
   };
@@ -5565,15 +5565,16 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.optionPrefix = null;
   Command.prototype.continueToPrime = true;
   Command.prototype.dsCopy = null;
+  Command.prototype.register = null;
 
   // Methods
-  Command.prototype.Execute = function ( _dataStrs, _data ) {
+  Command.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
 
     this.HandleData( _dataStrs, _data );
 
-    if ( this.HandleOptions( _dataStrs, _data ) === true ) {
+    if ( this.HandleOptions( _dataStrs, _data, _staticData ) === true ) {
 
-      this.handle( _dataStrs, _data );
+      this.handle( _dataStrs, _data, _staticData );
     
     }
   
@@ -5631,7 +5632,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Command.prototype.HandleOptions = function ( _dataStrs, _data ) {
+  Command.prototype.HandleOptions = function ( _dataStrs, _data, _staticData ) {
 
     if ( _dataStrs.length === 0 ) {
 
@@ -5645,7 +5646,7 @@ module.exports = function ( Nenkraft ) {
     for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
 
       option = this.GetOptionById( matchingOptionIds[ i ] );
-      if ( option.Execute( _dataStrs, _data ) === true ) return false;
+      if ( option.Execute( _dataStrs, _data, _staticData ) === true ) return false;
     
     }
 
@@ -5750,13 +5751,33 @@ module.exports = function ( Nenkraft ) {
   Register.prototype.splitter = ' ';
 
   // Methods
-  Register.prototype.Add = function ( _command ) {
+  Register.prototype.AddCommand = function ( _command ) {
 
-    this.commands.push( _command );
+    if ( _command.register === null ) {
+
+      this.commands.push( _command );
+      _command.register = this;
+      return _command;
+    
+    }
   
   };
 
-  Register.prototype.Get = function ( _id ) {
+  Register.prototype.RemoveCommand = function( _command ) {
+
+    var commands = this.commands;
+    var ix = commands.indexOf( _command );
+
+    if ( ix !== -1 ) {
+
+      _command.register = null;
+      return commands.fickleSplice( ix );
+    
+    }
+  
+  };
+
+  Register.prototype.GetCommand = function ( _id ) {
 
     for ( var i = 0, commands = this.commands, l = commands.length, command; i < l; ++i ) {
 
@@ -5778,15 +5799,15 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Register.prototype.Parse = function ( _str ) {
+  Register.prototype.Parse = function ( _str, _staticData ) {
 
     var strs = String( _str ).split( this.splitter );
     var cmdStr = strs.shift();
-    var command = this.Get( cmdStr );
+    var command = this.GetCommand( cmdStr );
 
     if ( command ) {
 
-      command.Execute( strs, {} );
+      command.Execute( strs, {}, _staticData );
       return null;
     
     }
@@ -5926,7 +5947,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.6.3 (Beta)';
+  Nenkraft.VERSION = '0.6.4 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -5987,7 +6008,7 @@ module.exports = function ( Nenkraft ) {
 /* 35 */
 /***/ (function(module, exports) {
 
-module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nprecision mediump float;\r\n\r\nattribute vec2 aPosition0;\r\nattribute vec2 aTexCoord0;\r\n\r\nattribute vec2 aPosition1;\r\nattribute vec2 aTexCoord1;\r\n\r\nattribute vec2 aPosition2;\r\nattribute vec2 aTexCoord2;\r\n\r\nattribute vec2 aPosition3;\r\nattribute vec2 aTexCoord3;\r\n\r\nuniform mat3 uProjection;\r\nuniform mat3 uTranslation;\r\nuniform mat3 uTransformation;\r\n\r\nuniform float uUnitId;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  if ( uUnitId == 0.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition0, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord0, 1.0 ) ).xy;\r\n  } else if ( uUnitId == 1.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition1, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord1, 1.0 ) ).xy;\r\n  } else if ( uUnitId == 2.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition2, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord2, 1.0 ) ).xy;\r\n  } else if ( uUnitId == 3.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition3, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord3, 1.0 ) ).xy;\r\n  }\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\nuniform float uAlpha;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord ) * vec4( 1.0, 1.0, 1.0, uAlpha );\r\n}\r\n@fragment-end@\r\n"
+module.exports = "/**\r\n* @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>\r\n*/\r\n\r\n@vertex@\r\nprecision mediump float;\r\n\r\nattribute vec2 aPosition0;\r\nattribute vec2 aTexCoord0;\r\n\r\nattribute vec2 aPosition1;\r\nattribute vec2 aTexCoord1;\r\n\r\nattribute vec2 aPosition2;\r\nattribute vec2 aTexCoord2;\r\n\r\nattribute vec2 aPosition3;\r\nattribute vec2 aTexCoord3;\r\n\r\nuniform mat3 uProjection;\r\nuniform mat3 uTranslation;\r\nuniform mat3 uTransformation;\r\n\r\nuniform float uUnitId;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  if ( uUnitId == 0.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition0, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord0, 1.0 ) ).xy;\r\n  } else if ( uUnitId == 1.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition1, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord1, 1.0 ) ).xy;\r\n  } else if ( uUnitId == 2.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition2, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord2, 1.0 ) ).xy;\r\n  } else if ( uUnitId == 3.0 ) {\r\n    gl_Position = vec4( ( uProjection * uTranslation * vec3( aPosition3, 1.0 ) ).xy, 0.0, 1.0 );\r\n    vTexCoord = ( uTransformation * vec3( aTexCoord3, 1.0 ) ).xy;\r\n  }\r\n}\r\n@vertex-end@\r\n\r\n@fragment@\r\nprecision mediump float;\r\n\r\nuniform sampler2D uImage;\r\nuniform vec4 uTint;\r\n\r\nvarying vec2 vTexCoord;\r\n\r\nvoid main() {\r\n  gl_FragColor = texture2D( uImage, vTexCoord ) * uTint;\r\n}\r\n@fragment-end@\r\n"
 
 /***/ }),
 /* 36 */
@@ -8497,6 +8518,7 @@ module.exports = function ( Nenkraft ) {
     this.textureTransformation = new Nenkraft.Math.Matrix2D();
     this.textureTranslation = new Nenkraft.Math.Matrix2D();
     this.originalShape = new Nenkraft.Geom.AABB2D();
+    this.tint = new Nenkraft.Color( 1.0, 1.0, 1.0, 1.0 );
 
     if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
 
@@ -8570,7 +8592,7 @@ module.exports = function ( Nenkraft ) {
   Sprite.prototype.clip = null;
   Sprite.prototype.texture = null;
   Sprite.prototype.anchor = null;
-  Sprite.prototype.alpha = 1.0;
+  Sprite.prototype.tint = null;
   Sprite.prototype.gco = Nenkraft.Style.GCO.DEFAULT;
   Sprite.prototype.interactive = true;
   Sprite.prototype.programController = null;
@@ -8597,7 +8619,7 @@ module.exports = function ( Nenkraft ) {
       if ( this.display === true ) {
 
         var clip = this.clip, tl = clip.tl, br = clip.br, w = this.w, h = this.h, anchor = this.anchor;
-        _rc.globalAlpha = this.alpha;
+        _rc.globalAlpha = this.tint.channel[3];
         _rc.globalCompositeOperation = this.gco;
         _rc.drawImage(
           this.texture.image,
@@ -8635,7 +8657,7 @@ module.exports = function ( Nenkraft ) {
           this.transform.worldTransform.AsArray( true ),
           this.textureTranslation.AsArray( true ),
           this.textureTransformation.AsArray( true ),
-          this.alpha,
+          this.tint.channel,
           this.texture.uniformId
         );
       
@@ -8869,6 +8891,18 @@ module.exports = function ( Nenkraft ) {
     set: function ( _value ) {
 
       this.scale.y = _value / this.h;
+    
+    }
+  } );
+  Object.defineProperty( Sprite.prototype, 'alpha', {
+    get: function() {
+
+      return this.tint.channel[3];
+    
+    },
+    set: function( _value ) {
+
+      this.tint.channel[3] = _value;
     
     }
   } );
@@ -9146,7 +9180,7 @@ module.exports = function ( Nenkraft ) {
         char.transform.worldTransform.AsArray( true ),
         char.translation.AsArray( true ),
         char.transformation.AsArray( true ),
-        this.alpha,
+        this.tint.channel,
         0
       );
     
@@ -10440,7 +10474,7 @@ module.exports = function ( Nenkraft ) {
   GLTextureProgramController.prototype.originalTexture3 = null;
   GLTextureProgramController.prototype.boundTexture3 = null;
   GLTextureProgramController.prototype.essenceBuffer3 = null;
-  GLTextureProgramController.prototype.lastUsedOTF = 0;
+  GLTextureProgramController.prototype.lastUsedUnit = 0;
 
   // Methods
   GLTextureProgramController.prototype.Initialise = function() {
@@ -10458,7 +10492,7 @@ module.exports = function ( Nenkraft ) {
     this.AssignUniform( 'uProjection' );
     this.AssignUniform( 'uTranslation' );
     this.AssignUniform( 'uTransformation' );
-    this.AssignUniform( 'uAlpha' );
+    this.AssignUniform( 'uTint' );
   
   };
 
@@ -10485,7 +10519,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  GLTextureProgramController.prototype.BindOTF = function( _gl, _uniforms, _attributes, _unitId ) {
+  GLTextureProgramController.prototype.BindUnit = function( _gl, _uniforms, _attributes, _unitId ) {
 
     if ( this['boundTexture' + _unitId] == null ) return;
 
@@ -10499,7 +10533,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _alpha, _uniformId ) {
+  GLTextureProgramController.prototype.Execute = function ( _projection, _translation, _transformation, _tint, _unitId ) {
 
     var gl = this.gl;
     var attributes = this.attributes;
@@ -10509,25 +10543,25 @@ module.exports = function ( Nenkraft ) {
 
       gl.useProgram( this.program );
 
-      this.BindOTF( gl, uniforms, attributes, 0 );
-      this.BindOTF( gl, uniforms, attributes, 1 );
-      this.BindOTF( gl, uniforms, attributes, 2 );
-      this.BindOTF( gl, uniforms, attributes, 3 );
+      this.BindUnit( gl, uniforms, attributes, 0 );
+      this.BindUnit( gl, uniforms, attributes, 1 );
+      this.BindUnit( gl, uniforms, attributes, 2 );
+      this.BindUnit( gl, uniforms, attributes, 3 );
 
-      gl.uniform1f( uniforms.uUnitId, _uniformId );
-      gl.uniform1i( uniforms.uImage, _uniformId );
+      gl.uniform1f( uniforms.uUnitId, _unitId );
+      gl.uniform1i( uniforms.uImage, _unitId );
       Super.LAST_USED_CONTROLLER = this;
-      this.lastUsedOTF = _uniformId;
+      this.lastUsedUnit = _unitId;
     
-    } else if ( _uniformId !== this.lastUsedOTF ) {
+    } else if ( _unitId !== this.lastUsedUnit ) {
 
-      gl.uniform1f( uniforms.uUnitId, _uniformId );
-      gl.uniform1i( uniforms.uImage, _uniformId );
-      this.lastUsedOTF = _uniformId;
+      gl.uniform1f( uniforms.uUnitId, _unitId );
+      gl.uniform1i( uniforms.uImage, _unitId );
+      this.lastUsedUnit = _unitId;
     
     }
 
-    gl.uniform1f( uniforms.uAlpha, _alpha );
+    gl.uniform4fv( uniforms.uTint, _tint );
     gl.uniformMatrix3fv( uniforms.uProjection, false, _projection );
     gl.uniformMatrix3fv( uniforms.uTranslation, false, _translation );
     gl.uniformMatrix3fv( uniforms.uTransformation, false, _transformation );

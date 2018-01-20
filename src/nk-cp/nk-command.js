@@ -32,15 +32,16 @@ module.exports = function ( Nenkraft ) {
   Command.prototype.optionPrefix = null;
   Command.prototype.continueToPrime = true;
   Command.prototype.dsCopy = null;
+  Command.prototype.register = null;
 
   // Methods
-  Command.prototype.Execute = function ( _dataStrs, _data ) {
+  Command.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
 
     this.HandleData( _dataStrs, _data );
 
-    if ( this.HandleOptions( _dataStrs, _data ) === true ) {
+    if ( this.HandleOptions( _dataStrs, _data, _staticData ) === true ) {
 
-      this.handle( _dataStrs, _data );
+      this.handle( _dataStrs, _data, _staticData );
     
     }
   
@@ -98,7 +99,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Command.prototype.HandleOptions = function ( _dataStrs, _data ) {
+  Command.prototype.HandleOptions = function ( _dataStrs, _data, _staticData ) {
 
     if ( _dataStrs.length === 0 ) {
 
@@ -112,7 +113,7 @@ module.exports = function ( Nenkraft ) {
     for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
 
       option = this.GetOptionById( matchingOptionIds[ i ] );
-      if ( option.Execute( _dataStrs, _data ) === true ) return false;
+      if ( option.Execute( _dataStrs, _data, _staticData ) === true ) return false;
     
     }
 
