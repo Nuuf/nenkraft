@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.4 (Beta)
+* @version     0.6.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -2394,50 +2394,54 @@ module.exports = function () {
 
   function Run () {
 
-    nk.Sprite.BUILD_DEFAULT_TEXTURE();
+    nk.Sprite.BUILD_DEFAULT_TEXTURE( go );
 
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = '0';
-    c.style.left = '0';
+    function go() {
 
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-
-    var stage = new nk.Stage2D( c, HW, HH );
-
-    var motObj = new nk.Sprite( 0, 0 );
-    motObj.anchor.Set( 0.5 );
-    motObj.scale.Set( 0, 1 );
-    motObj.AttachTo( stage );
-
-    var mm = new nk.MotionManager( motObj );
-    var xM = mm.Create( 'x', 'x' );
-    var yM = mm.Create( 'y', 'y' );
-    mm.Create( 'sx', 'scale.x', 1, 10 );
-    mm.Create( 'sy', 'scale.y', 1, 10 );
-
-    stage.mouse.onUp.Add( function ( _event ) {
-
-      if ( xM.running ) xM.Stop();
-      if ( yM.running ) yM.Stop();
-      mm.ResetMultiple( 'sx sy' );
-      xM.Reconfigure( undefined, _event.data.position.x, 60 );
-      yM.Reconfigure( undefined, _event.data.position.y, 60 );
-
-      mm.StartMultiple( 'x y sx sy' );
-
-    }, stage );
-
-    stage.onProcess.Add( function () {
-
-      mm.Process();
-    
-    } );
-
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+  
+      var W = c.width, HW = W * 0.5;
+      var H = c.height, HH = H * 0.5;
+  
+      var stage = new nk.Stage2D( c, HW, HH );
+  
+      var motObj = new nk.Sprite( 0, 0 );
+      motObj.anchor.Set( 0.5 );
+      motObj.scale.Set( 0, 1 );
+      motObj.AttachTo( stage );
+  
+      var mm = new nk.MotionManager( motObj );
+      var xM = mm.Create( 'x', 'x' );
+      var yM = mm.Create( 'y', 'y' );
+      mm.Create( 'sx', 'scale.x', 1, 10 );
+      mm.Create( 'sy', 'scale.y', 1, 10 );
+  
+      stage.mouse.onUp.Add( function ( _event ) {
+  
+        if ( xM.running ) xM.Stop();
+        if ( yM.running ) yM.Stop();
+        mm.ResetMultiple( 'sx sy' );
+        xM.Reconfigure( undefined, _event.data.position.x, 60 );
+        yM.Reconfigure( undefined, _event.data.position.y, 60 );
+  
+        mm.StartMultiple( 'x y sx sy' );
+  
+      }, stage );
+  
+      stage.onProcess.Add( function () {
+  
+        mm.Process();
+      
+      } );
+  
+    }
+   
     document.body.removeChild( buttonContainer );
   
   }
@@ -3654,98 +3658,105 @@ module.exports = function () {
 
   function Run () {
 
-    nk.Sprite.BUILD_DEFAULT_TEXTURE();
-    nk.Plainsprite.BUILD_DEFAULT_TEXTURE();
+    nk.Sprite.BUILD_DEFAULT_TEXTURE( function() {
 
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = '0';
-    c.style.left = '0';
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-
-    var stage = new nk.Stage2D( c, HW, HH, true );
-    stage.ticker.StartAF();
-
-    var sprite1 = null;
-    var sprite2 = null;
-    var sprite3 = null;
-    var sprite4 = null;
-    var sprite5 = null;
-
-    var imageCache = new nk.ImageLoader();
-    imageCache.onComplete.Add( function ( _event ) {
-
-      console.log( _event.target, _event.data, 'complete' );
-      sprite1 = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( '4dots' ) );
-      sprite1.anchor.Set( 0.5 );
-      sprite2 = new nk.Sprite( 100, 50, imageCache.GetBasicTexture( 'smudge' ) );
-      sprite2.anchor.Set( 0.5 );
-      sprite3 = new nk.Sprite( -100, 100, imageCache.GetBasicTexture( 'gobj' ) );
-      sprite3.anchor.Set( 0.5 );
-      sprite3.clip.tl.Set( 0, 64 );
-      sprite4 = new nk.Sprite( 100, 100 );
-      sprite4.anchor.Set( 0.5 );
-      sprite5 = new nk.Plainsprite( 200, 0 );
-      sprite5.anchor.Set( 0.5 );
-
-      stage.AddChildren( sprite1, sprite2, sprite3, sprite4, sprite5 );
+      nk.Plainsprite.BUILD_DEFAULT_TEXTURE( go );
     
     } );
-    imageCache.onImageLoaded.Add( function ( _event ) {
 
-      console.log( _event.target, _event.data, 'loaded' );
+    function go() {
+
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+
+      var W = c.width, HW = W * 0.5;
+      var H = c.height, HH = H * 0.5;
+
+      var stage = new nk.Stage2D( c, HW, HH, true );
+      stage.ticker.StartAF();
+
+      var sprite1 = null;
+      var sprite2 = null;
+      var sprite3 = null;
+      var sprite4 = null;
+      var sprite5 = null;
+
+      var imageCache = new nk.ImageLoader();
+      imageCache.onComplete.Add( function ( _event ) {
+
+        console.log( _event.target, _event.data, 'complete' );
+        sprite1 = new nk.Sprite( 0, 0, imageCache.GetBasicTexture( '4dots' ) );
+        sprite1.anchor.Set( 0.5 );
+        sprite2 = new nk.Sprite( 100, 50, imageCache.GetBasicTexture( 'smudge' ) );
+        sprite2.anchor.Set( 0.5 );
+        sprite3 = new nk.Sprite( -100, 100, imageCache.GetBasicTexture( 'gobj' ) );
+        sprite3.anchor.Set( 0.5 );
+        sprite3.clip.tl.Set( 0, 64 );
+        sprite4 = new nk.Sprite( 100, 100 );
+        sprite4.anchor.Set( 0.5 );
+        sprite5 = new nk.Plainsprite( 200, 0 );
+        sprite5.anchor.Set( 0.5 );
+
+        stage.AddChildren( sprite1, sprite2, sprite3, sprite4, sprite5 );
     
-    } );
-    imageCache.Load( [
-      { id: 'smudge', src: './assets/images/smudge.png' }
-    ], true );
-    imageCache.Load( [
-      { id: '4dots', src: './assets/images/4dots.png' },
-      { id: 'gobj', src: './assets/images/glass-of-blueberryjuice.png' }
-    ], true );
+      } );
+      imageCache.onImageLoaded.Add( function ( _event ) {
 
-    var dragger = null;
+        console.log( _event.target, _event.data, 'loaded' );
+    
+      } );
+      imageCache.Load( [
+        { id: 'smudge', src: './assets/images/smudge.png' }
+      ], true );
+      imageCache.Load( [
+        { id: '4dots', src: './assets/images/4dots.png' },
+        { id: 'gobj', src: './assets/images/glass-of-blueberryjuice.png' }
+      ], true );
 
-    stage.mouse.onMove.Add( function ( _event ) {
+      var dragger = null;
 
-      if ( dragger !== null ) {
+      stage.mouse.onMove.Add( function ( _event ) {
 
-        dragger.x = _event.data.position.x;
-        dragger.y = _event.data.position.y;
+        if ( dragger !== null ) {
+
+          dragger.x = _event.data.position.x;
+          dragger.y = _event.data.position.y;
       
-      }
-    
-    }, stage );
-    stage.mouse.onDown.Add( function ( _event ) {
-
-      var p = _event.data.position;
-
-      for ( var i = stage.children.length; i--; ) {
-
-        if ( stage.children[ i ].IntersectsPoint( p ) ) {
-
-          dragger = stage.children[ i ];
-
-          _event.stopPropagation = true;
-
-          dragger.SendToFront();
-          break;
-        
         }
-      
-      }
     
-    }, stage );
-    stage.mouse.onUp.Add( function () {
+      }, stage );
+      stage.mouse.onDown.Add( function ( _event ) {
 
-      if ( dragger ) dragger = null;
+        var p = _event.data.position;
+
+        for ( var i = stage.children.length; i--; ) {
+
+          if ( stage.children[ i ].IntersectsPoint( p ) ) {
+
+            dragger = stage.children[ i ];
+
+            _event.stopPropagation = true;
+
+            dragger.SendToFront();
+            break;
+        
+          }
+      
+        }
     
-    } );
+      }, stage );
+      stage.mouse.onUp.Add( function () {
+
+        if ( dragger ) dragger = null;
+    
+      } );
+    
+    }
 
     document.body.removeChild( buttonContainer );
   
@@ -3769,126 +3780,130 @@ module.exports = function () {
 
   function Run () {
 
-    nk.Sprite.BUILD_DEFAULT_TEXTURE();
+    nk.Sprite.BUILD_DEFAULT_TEXTURE( go );
 
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = 0;
-    c.style.left = 0;
-    var rc = c.getContext( '2d' );
+    function go() {
 
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-
-    var container = new nk.Container2D( HW, HH );
-
-    var texture = null;
-
-    function CreateTexture () {
-
-      var path = new nk.Path.Polygon2D();
-      path.style.stroke.lineWidth = 3;
-      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 12 );
-      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
-      return t;
-    
-    }
-
-    var ticker = new nk.Ticker( Update, 1000, true );
-    ticker.Start();
-
-    var numTimes = 20;
-    var hold = 20;
-    var holdCounter = 0;
-    var fps = 40;
-
-    var am = 35;
-
-    var childrenMDC = [];
-
-    var spritePool = new nk.Pool( nk.Sprite );
-
-    var timer = new nk.Timer();
-    timer.onFinish.Add( function () {
-
-      var i = am;
-      am = am < 3 ? 3 : am--;
-
-      while ( i-- ) {
-
-        var sprite = spritePool.Retrieve();
-        sprite.transformAutomaticUpdate = false;
-        container.AddChild( sprite );
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = 0;
+      c.style.left = 0;
+      var rc = c.getContext( '2d' );
+  
+      var W = c.width, HW = W * 0.5;
+      var H = c.height, HH = H * 0.5;
+  
+      var container = new nk.Container2D( HW, HH );
+  
+      var texture = null;
+  
+      function CreateTexture () {
+  
+        var path = new nk.Path.Polygon2D();
+        path.style.stroke.lineWidth = 3;
+        nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 30, 12 );
+        var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+        var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+        return t;
       
       }
-
-      if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
-
-        this.Start( 1 );
-      
-      }
-      else {
-
-        var numChildren = container.children.length;
-        console.log( numChildren, ticker.GetTPS() );
-        container.children.forEach( function ( child ) {
-
-          spritePool.Store( child );
+  
+      var ticker = new nk.Ticker( Update, 1000, true );
+      ticker.Start();
+  
+      var numTimes = 20;
+      var hold = 20;
+      var holdCounter = 0;
+      var fps = 40;
+  
+      var am = 35;
+  
+      var childrenMDC = [];
+  
+      var spritePool = new nk.Pool( nk.Sprite );
+  
+      var timer = new nk.Timer();
+      timer.onFinish.Add( function () {
+  
+        var i = am;
+        am = am < 3 ? 3 : am--;
+  
+        while ( i-- ) {
+  
+          var sprite = spritePool.Retrieve();
+          sprite.transformAutomaticUpdate = false;
+          container.AddChild( sprite );
         
-        } );
-        container.Dump();
-        holdCounter = 0;
-        childrenMDC.push( numChildren );
-        numTimes--;
-
-        if ( numTimes > 0 ) {
-
-          timer.Start( 120 );
+        }
+  
+        if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
+  
+          this.Start( 1 );
         
-        } else {
-
-          childrenMDC.sort( function ( a, b ) {
-
-            return a - b;
+        }
+        else {
+  
+          var numChildren = container.children.length;
+          console.log( numChildren, ticker.GetTPS() );
+          container.children.forEach( function ( child ) {
+  
+            spritePool.Store( child );
           
           } );
-          console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+          container.Dump();
+          holdCounter = 0;
+          childrenMDC.push( numChildren );
+          numTimes--;
+  
+          if ( numTimes > 0 ) {
+  
+            timer.Start( 120 );
+          
+          } else {
+  
+            childrenMDC.sort( function ( a, b ) {
+  
+              return a - b;
+            
+            } );
+            console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+          
+          }
         
         }
       
-      }
-    
-    }, timer );
-
-    var imageCache = new nk.ImageLoader( [ {
-      id: 'tex',
-      src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    } ], true );
-    imageCache.onComplete.Add( function () {
-
-      texture = imageCache.GetBasicTexture( 'tex' );
-      spritePool.Flood( function ( obj ) {
-
-        obj.x = Math.random() * W - HW;
-        obj.y = Math.random() * H - HH;
-        obj.SetTexture( texture );
+      }, timer );
+  
+      var imageCache = new nk.ImageLoader( [ {
+        id: 'tex',
+        src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
+      } ], true );
+      imageCache.onComplete.Add( function () {
+  
+        texture = imageCache.GetBasicTexture( 'tex' );
+        spritePool.Flood( function ( obj ) {
+  
+          obj.x = Math.random() * W - HW;
+          obj.y = Math.random() * H - HH;
+          obj.SetTexture( texture );
+        
+        }, 100000 );
+        timer.Start( 120 );
       
-      }, 100000 );
-      timer.Start( 120 );
-    
-    } );
-
-    function Update () {
-
-      rc.setTransform( 1, 0, 0, 1, 0, 0 );
-      rc.fillStyle = 'rgba(0, 0, 0, 1)';
-      rc.fillRect( 0, 0, W, H );
-      container.Draw( rc );
-      timer.Process();
+      } );
+  
+      function Update () {
+  
+        rc.setTransform( 1, 0, 0, 1, 0, 0 );
+        rc.fillStyle = 'rgba(0, 0, 0, 1)';
+        rc.fillRect( 0, 0, W, H );
+        container.Draw( rc );
+        timer.Process();
+      
+      }
     
     }
 
@@ -4082,126 +4097,130 @@ module.exports = function () {
 
   function Run () {
 
-    nk.Sprite.BUILD_DEFAULT_TEXTURE();
+    nk.Sprite.BUILD_DEFAULT_TEXTURE( go );
 
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = '0';
-    c.style.left = '0';
+    function go() {
 
-    var W = c.width;
-    var H = c.height;
-    var HW = W * 0.5;
-    var HH = H * 0.5;
-
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
-
-    var sprite = null;
-    var spriteRef = null;
-    var test = null;
-
-    var imageCache = new nk.ImageLoader();
-    imageCache.onComplete.Add( function () {
-
-      var p1 = new nk.GLTextureProgramController( stage.gl );
-      var p2 = new nk.GLTextureProgramController( stage.gl );
-      var p3 = new nk.GLTextureProgramController( stage.gl );
-      p1.BindBasicTexture( imageCache.GetBasicTexture( '1to8' ) );
-      p2.BindBasicTexture( imageCache.GetBasicTexture( '1to8f' ) );
-      p3.BindBasicTexture( nk.Sprite.DEFAULT_TEXTURE );
-
-      test = new nk.Sprite( HW, HH, p3 );
-      test.anchor.Set( 0.5 );
-      test.scale.Set( 5 );
-      test.UpdateShape();
-      test.UpdateTextureTransform();
-
-      spriteRef = new nk.Sprite( HW, HH - 200, p2 );
-      spriteRef.anchor.Set( 0.5 );
-      spriteRef.UpdateTextureTransform();
-
-      sprite = new nk.Sprite( HW, HH, p1 );
-      sprite.anchor.Set( 0.5 );
-      sprite.width = 64 * 5;
-      sprite.height = 64 * 5;
-      sprite.UpdateShape();
-      sprite.UpdateTextureTransform();
-
-      var ac = sprite.animationController = new nk.Animator.Controller( sprite );
-      var animation = ac.CreateAnimation( 'test', 20 );
-      animation.GenerateFrames( 64, 64, 512, 64, 8, {
-        '5': 120
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+  
+      var W = c.width;
+      var H = c.height;
+      var HW = W * 0.5;
+      var HH = H * 0.5;
+  
+      var stage = new nk.Stage2D( c, 0, 0, false, true );
+  
+      var sprite = null;
+      var spriteRef = null;
+      var test = null;
+  
+      var imageCache = new nk.ImageLoader();
+      imageCache.onComplete.Add( function () {
+  
+        var p1 = new nk.GLTextureProgramController( stage.gl );
+        var p2 = new nk.GLTextureProgramController( stage.gl );
+        var p3 = new nk.GLTextureProgramController( stage.gl );
+        p1.BindBasicTexture( imageCache.GetBasicTexture( '1to8' ) );
+        p2.BindBasicTexture( imageCache.GetBasicTexture( '1to8f' ) );
+        p3.BindBasicTexture( nk.Sprite.DEFAULT_TEXTURE );
+  
+        test = new nk.Sprite( HW, HH, p3 );
+        test.anchor.Set( 0.5 );
+        test.scale.Set( 5 );
+        test.UpdateShape();
+        test.UpdateTextureTransform();
+  
+        spriteRef = new nk.Sprite( HW, HH - 200, p2 );
+        spriteRef.anchor.Set( 0.5 );
+        spriteRef.UpdateTextureTransform();
+  
+        sprite = new nk.Sprite( HW, HH, p1 );
+        sprite.anchor.Set( 0.5 );
+        sprite.width = 64 * 5;
+        sprite.height = 64 * 5;
+        sprite.UpdateShape();
+        sprite.UpdateTextureTransform();
+  
+        var ac = sprite.animationController = new nk.Animator.Controller( sprite );
+        var animation = ac.CreateAnimation( 'test', 20 );
+        animation.GenerateFrames( 64, 64, 512, 64, 8, {
+          '5': 120
+        } );
+        console.log( animation );
+        animation.reverse = true;
+        animation.onEnd.Add( function () {
+          // stage.ticker.Stop();
+        }, animation );
+        ac.PlayAnimation( 'test', 7 );
+        stage.AddChildren( sprite, spriteRef, test );
+  
+        stage.onProcess.Add( function () {
+  
+          sprite.animationController.Process();
+        
+        }, stage );
+      
       } );
-      console.log( animation );
-      animation.reverse = true;
-      animation.onEnd.Add( function () {
-        // stage.ticker.Stop();
-      }, animation );
-      ac.PlayAnimation( 'test', 7 );
-      stage.AddChildren( sprite, spriteRef, test );
-
-      stage.onProcess.Add( function () {
-
-        sprite.animationController.Process();
-      
-      }, stage );
-    
-    } );
-    imageCache.Load( [
-      { id: '1to8', src: './assets/images/1to8.png' },
-      { id: '1to8f', src: './assets/images/1to8.png' }
-    ], true );
-
-    var dragger = null;
-    var dragStart = new nk.Vector2D();
-    var dragOffset = new nk.Vector2D();
-
-    stage.mouse.onMove.Add( function ( _event ) {
-
-      if ( dragger !== null ) {
-
-        dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
-        dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
-      
-      }
-    
-    }, stage );
-    stage.mouse.onDown.Add( function ( _event ) {
-
-      var p = _event.data.position;
-
-      for ( var i = stage.children.length; i--; ) {
-
-        if ( stage.children[ i ].IntersectsPoint( p ) ) {
-
-          dragStart.SetV( p );
-
-          dragger = stage.children[ i ];
-
-          dragOffset.SetV( dragger );
-
-          _event.stopPropagation = true;
-
-          dragger.SendToFront();
-          break;
+      imageCache.Load( [
+        { id: '1to8', src: './assets/images/1to8.png' },
+        { id: '1to8f', src: './assets/images/1to8.png' }
+      ], true );
+  
+      var dragger = null;
+      var dragStart = new nk.Vector2D();
+      var dragOffset = new nk.Vector2D();
+  
+      stage.mouse.onMove.Add( function ( _event ) {
+  
+        if ( dragger !== null ) {
+  
+          dragger.x = _event.data.position.x + dragOffset.x - dragStart.x;
+          dragger.y = _event.data.position.y + dragOffset.y - dragStart.y;
         
         }
       
-      }
-    
-    }, stage );
-    stage.mouse.onUp.Add( function () {
-
-      if ( dragger ) {
-
-        dragger = null;
+      }, stage );
+      stage.mouse.onDown.Add( function ( _event ) {
+  
+        var p = _event.data.position;
+  
+        for ( var i = stage.children.length; i--; ) {
+  
+          if ( stage.children[ i ].IntersectsPoint( p ) ) {
+  
+            dragStart.SetV( p );
+  
+            dragger = stage.children[ i ];
+  
+            dragOffset.SetV( dragger );
+  
+            _event.stopPropagation = true;
+  
+            dragger.SendToFront();
+            break;
+          
+          }
+        
+        }
       
-      }
+      }, stage );
+      stage.mouse.onUp.Add( function () {
+  
+        if ( dragger ) {
+  
+          dragger = null;
+        
+        }
+      
+      } );
     
-    } );
+    }
 
     document.body.removeChild( buttonContainer );
 
@@ -4676,164 +4695,168 @@ module.exports = function () {
 
   function Run () {
     
-    nk.Sprite.BUILD_DEFAULT_TEXTURE();
+    nk.Sprite.BUILD_DEFAULT_TEXTURE( go );
 
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = 0;
-    c.style.left = 0;
-    var gl = c.getContext( 'webgl' );
+    function go() {
 
-    if ( !gl ) {
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = 0;
+      c.style.left = 0;
+      var gl = c.getContext( 'webgl' );
 
-      gl = c.getContext( 'experimental-webgl' );
+      if ( !gl ) {
+
+        gl = c.getContext( 'experimental-webgl' );
     
-    }
-
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-
-    var container = new nk.Container2D( 0, 0 );
-    container.scale.Set( 2 / W, -2 / H );
-    container.position.Add( -1 + 1, 0 );
-    container.UpdateTransform();
-
-    var pcon = null;
-    var pcon0 = null;
-    var pcon1 = null;
-
-    var cpath = new nk.Path.Circle( 0, 0, 25 );
-    pcon0 = new nk.GLCircleProgramController( gl );
-    cpath.LinkProgramController( pcon0 );
-
-    var rpath = new nk.Path.AABB2D( -25, -25, 25, 25 );
-    pcon1 = new nk.GLRectangleProgramController( gl );
-    rpath.LinkProgramController( pcon1 );
-
-    var usedPath = rpath;
-
-    function CreateTexture () {
-
-      var path = new nk.Path.Polygon2D();
-      path.style.stroke.lineWidth = 1;
-      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 32, 12 );
-      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
-      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
-      return t;
-    
-    }
-
-    var ticker = new nk.Ticker( Update, 1000, true );
-    ticker.Start();
-
-    var numTimes = 20;
-    var hold = 20;
-    var holdCounter = 0;
-    var fps = 30;
-
-    var am = 35;
-
-    var childrenMDC = [];
-
-    var spritePool = new nk.Pool( nk.Sprite );
-    var graphicPool = new nk.Pool( nk.Graphic2D );
-
-    var usedPool = spritePool;
-
-    var timer = new nk.Timer();
-    timer.onFinish.Add( function () {
-
-      var i = am;
-      am = am < 3 ? 3 : am--;
-
-      while ( i-- ) {
-
-        var obj = usedPool.Retrieve();
-        container.AddChild( obj );
-      
       }
 
-      if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
+      var W = c.width, HW = W * 0.5;
+      var H = c.height, HH = H * 0.5;
 
-        this.Start( 1 );
-      
+      var container = new nk.Container2D( 0, 0 );
+      container.scale.Set( 2 / W, -2 / H );
+      container.position.Add( -1 + 1, 0 );
+      container.UpdateTransform();
+
+      var pcon = null;
+      var pcon0 = null;
+      var pcon1 = null;
+
+      var cpath = new nk.Path.Circle( 0, 0, 25 );
+      pcon0 = new nk.GLCircleProgramController( gl );
+      cpath.LinkProgramController( pcon0 );
+
+      var rpath = new nk.Path.AABB2D( -25, -25, 25, 25 );
+      pcon1 = new nk.GLRectangleProgramController( gl );
+      rpath.LinkProgramController( pcon1 );
+
+      var usedPath = rpath;
+
+      function CreateTexture () {
+
+        var path = new nk.Path.Polygon2D();
+        path.style.stroke.lineWidth = 1;
+        nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 32, 12 );
+        var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+        var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+        return t;
+    
       }
-      else {
 
-        var numChildren = container.children.length;
-        console.log( numChildren, ticker.GetTPS() );
-        container.children.forEach( function ( child ) {
+      var ticker = new nk.Ticker( Update, 1000, true );
+      ticker.Start();
 
-          usedPool.Store( child );
-        
-        } );
-        container.Dump();
-        holdCounter = 0;
-        childrenMDC.push( numChildren );
-        numTimes--;
+      var numTimes = 20;
+      var hold = 20;
+      var holdCounter = 0;
+      var fps = 30;
 
-        if ( numTimes > 0 ) {
+      var am = 35;
 
-          timer.Start( 120 );
-        
-        } else {
+      var childrenMDC = [];
 
-          childrenMDC.sort( function ( a, b ) {
+      var spritePool = new nk.Pool( nk.Sprite );
+      var graphicPool = new nk.Pool( nk.Graphic2D );
 
-            return a - b;
-          
-          } );
-          console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
-        
+      var usedPool = spritePool;
+
+      var timer = new nk.Timer();
+      timer.onFinish.Add( function () {
+
+        var i = am;
+        am = am < 3 ? 3 : am--;
+
+        while ( i-- ) {
+
+          var obj = usedPool.Retrieve();
+          container.AddChild( obj );
+      
         }
+
+        if ( ticker.GetTPS() > fps || holdCounter++ < hold ) {
+
+          this.Start( 1 );
       
+        }
+        else {
+
+          var numChildren = container.children.length;
+          console.log( numChildren, ticker.GetTPS() );
+          container.children.forEach( function ( child ) {
+
+            usedPool.Store( child );
+        
+          } );
+          container.Dump();
+          holdCounter = 0;
+          childrenMDC.push( numChildren );
+          numTimes--;
+
+          if ( numTimes > 0 ) {
+
+            timer.Start( 120 );
+        
+          } else {
+
+            childrenMDC.sort( function ( a, b ) {
+
+              return a - b;
+          
+            } );
+            console.log( childrenMDC, '\nMIN: ' + childrenMDC[ 0 ], 'MED: ' + childrenMDC[ Math.round( childrenMDC.length / 2 ) ], 'MAX: ' + childrenMDC[ childrenMDC.length - 1 ] );
+        
+          }
+      
+        }
+    
+      }, timer );
+
+      var imageCache = new nk.ImageLoader( [ {
+        id: 'tex',
+        src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
+      } ], true );
+      imageCache.onComplete.Add( function () {
+
+        pcon = new nk.GLTextureProgramController( gl );
+        pcon.BindBasicTexture( imageCache.GetBasicTexture( 'tex' ) );
+
+        spritePool.Flood( function ( obj ) {
+
+          obj.x = Math.random() * W - HW;
+          obj.y = Math.random() * H - HH;
+          obj.programController = pcon;
+          obj.transformAutomaticUpdate = false;
+          obj.SetTexture( pcon.originalTexture0 );
+      
+        }, 100000 );
+        graphicPool.Flood( function ( obj ) {
+
+          obj.x = Math.random() * W - HW;
+          obj.y = Math.random() * H - HH;
+          obj.transformAutomaticUpdate = false;
+          obj.SetPath( usedPath );
+      
+        }, 100000 );
+        timer.Start( 120 );
+    
+      } );
+
+      function Update () {
+
+        gl.viewport( 0, 0, W, H );
+        gl.clear( gl.COLOR_BUFFER_BIT );
+        gl.enable( gl.BLEND );
+        gl.disable( gl.DEPTH_TEST );
+        gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
+        container.GLDraw( gl );
+        timer.Process();
+        gl.flush();
+    
       }
-    
-    }, timer );
-
-    var imageCache = new nk.ImageLoader( [ {
-      id: 'tex',
-      src: nk.Utils.GenerateSimpleBase64Png( CreateTexture )
-    } ], true );
-    imageCache.onComplete.Add( function () {
-
-      pcon = new nk.GLTextureProgramController( gl );
-      pcon.BindBasicTexture( imageCache.GetBasicTexture( 'tex' ) );
-
-      spritePool.Flood( function ( obj ) {
-
-        obj.x = Math.random() * W - HW;
-        obj.y = Math.random() * H - HH;
-        obj.programController = pcon;
-        obj.transformAutomaticUpdate = false;
-        obj.SetTexture( pcon.originalTexture0 );
-      
-      }, 100000 );
-      graphicPool.Flood( function ( obj ) {
-
-        obj.x = Math.random() * W - HW;
-        obj.y = Math.random() * H - HH;
-        obj.transformAutomaticUpdate = false;
-        obj.SetPath( usedPath );
-      
-      }, 100000 );
-      timer.Start( 120 );
-    
-    } );
-
-    function Update () {
-
-      gl.viewport( 0, 0, W, H );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      gl.enable( gl.BLEND );
-      gl.disable( gl.DEPTH_TEST );
-      gl.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
-      container.GLDraw( gl );
-      timer.Process();
-      gl.flush();
     
     }
 
