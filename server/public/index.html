@@ -12,35 +12,38 @@
 
   <script>
 
-    nk.Sprite.BUILD_DEFAULT_TEXTURE();
+    nk.Sprite.BUILD_DEFAULT_TEXTURE(go);
 
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = '0';
-    c.style.left = '0';
-    var rc = c.getContext( '2d' );
+    function go() {
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+      var rc = c.getContext( '2d' );
 
-    var W = c.width, HW = W * 0.5;
-    var H = c.height, HH = H * 0.5;
-    var widthByHeight = W / H;
+      var W = c.width, HW = W * 0.5;
+      var H = c.height, HH = H * 0.5;
+      var widthByHeight = W / H;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+      var stage = new nk.Stage2D( c, HW, HH );
 
-    var testCase = new nk.Sprite();
-    testCase.AttachTo( stage );
+      var testCase = new nk.Sprite();
+      testCase.AttachTo( stage );
 
-    var host = window.document.location.host.replace( /:.*/, '' );
-    var ws = new WebSocket( 'ws://' + host + ':8080' );
-    var msg = document.getElementById( 'msg' );
-    ws.onmessage = function ( event ) {
-      var data = JSON.parse( event.data );
-      msg.innerHTML = event.data;
-      testCase.x = data.x;
-      testCase.y = data.y;
-    };
+      var host = window.document.location.host.replace( /:.*/, '' );
+      var ws = new WebSocket( 'ws://' + host + ':8080' );
+      var msg = document.getElementById( 'msg' );
+      ws.onmessage = function ( event ) {
+        var data = JSON.parse( event.data );
+        msg.innerHTML = event.data;
+        testCase.x = data.x;
+        testCase.y = data.y;
+      };
+    }
+
   </script>
 </body>
 

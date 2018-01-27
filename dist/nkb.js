@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.4 (Beta)
+* @version     0.6.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.6.4 (Beta)';
+  Nenkraft.VERSION = '0.6.5 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -5697,12 +5697,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h ) {
+  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h, _onLoad ) {
 
     var image = new Image();
-    image.src = _url;
     image.width = _w;
     image.height = _h;
+    image.onload = _onLoad;
+    image.src = _url;
     return image;
   
   };

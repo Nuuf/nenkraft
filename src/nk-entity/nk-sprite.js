@@ -52,7 +52,7 @@ module.exports = function ( Nenkraft ) {
   // Static
   Sprite.DEFAULT_TEXTURE = null;
 
-  Sprite.BUILD_DEFAULT_TEXTURE = function() {
+  Sprite.BUILD_DEFAULT_TEXTURE = function( _onLoad ) {
 
     Sprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
       Nenkraft.Utils.ImageFromDataURL(
@@ -77,7 +77,7 @@ module.exports = function ( Nenkraft ) {
           path.style.stroke.lineWidth = 3;
           return new Nenkraft.Graphic2D( 0, 0, path );
         
-        } )
+        } ), 64, 64, _onLoad
       ), 'DEFAULT_SPRITE_TEXTURE', 64, 64, 64, 64
     );
 

@@ -285,12 +285,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h ) {
+  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h, _onLoad ) {
 
     var image = new Image();
-    image.src = _url;
     image.width = _w;
     image.height = _h;
+    image.onload = _onLoad;
+    image.src = _url;
     return image;
   
   };

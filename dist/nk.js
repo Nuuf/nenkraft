@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.4 (Beta)
+* @version     0.6.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1291,12 +1291,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h ) {
+  Nenkraft.Utils.ImageFromDataURL = function ( _url, _w, _h, _onLoad ) {
 
     var image = new Image();
-    image.src = _url;
     image.width = _w;
     image.height = _h;
+    image.onload = _onLoad;
+    image.src = _url;
     return image;
   
   };
@@ -5947,7 +5948,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.6.4 (Beta)';
+  Nenkraft.VERSION = '0.6.5 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -8310,7 +8311,7 @@ module.exports = function ( Nenkraft ) {
   // Static
   Plainsprite.DEFAULT_TEXTURE = null;
 
-  Plainsprite.BUILD_DEFAULT_TEXTURE = function() {
+  Plainsprite.BUILD_DEFAULT_TEXTURE = function( _onLoad ) {
 
     Plainsprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
       Nenkraft.Utils.ImageFromDataURL(
@@ -8335,7 +8336,7 @@ module.exports = function ( Nenkraft ) {
           path.style.stroke.lineWidth = 3;
           return new Nenkraft.Graphic2D( 0, 0, path );
         
-        } )
+        } ), 64, 64, _onLoad
       ), 'DEFAULT_PLAINSPRITE_TEXTURE', 64, 64, 64, 64
     );
 
@@ -8553,7 +8554,7 @@ module.exports = function ( Nenkraft ) {
   // Static
   Sprite.DEFAULT_TEXTURE = null;
 
-  Sprite.BUILD_DEFAULT_TEXTURE = function() {
+  Sprite.BUILD_DEFAULT_TEXTURE = function( _onLoad ) {
 
     Sprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
       Nenkraft.Utils.ImageFromDataURL(
@@ -8578,7 +8579,7 @@ module.exports = function ( Nenkraft ) {
           path.style.stroke.lineWidth = 3;
           return new Nenkraft.Graphic2D( 0, 0, path );
         
-        } )
+        } ), 64, 64, _onLoad
       ), 'DEFAULT_SPRITE_TEXTURE', 64, 64, 64, 64
     );
 
