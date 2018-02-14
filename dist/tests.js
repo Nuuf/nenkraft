@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.5 (Beta)
+* @version     0.7.0 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,23 +67,22 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 81);
+/******/ 	return __webpack_require__(__webpack_require__.s = 82);
 /******/ })
 /************************************************************************/
-/******/ (Array(81).concat([
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(82);
-
-
-/***/ }),
+/******/ (Array(82).concat([
 /* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__( 83 );
+module.exports = __webpack_require__(83);
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__( 84 );
+
 __webpack_require__( 85 );
 __webpack_require__( 86 );
 __webpack_require__( 87 );
@@ -95,10 +94,11 @@ __webpack_require__( 92 );
 __webpack_require__( 93 );
 __webpack_require__( 94 );
 __webpack_require__( 95 );
+__webpack_require__( 96 );
 
 var tests = [];
 
-var context = __webpack_require__(96);
+var context = __webpack_require__(97);
 
 context.keys().forEach( function ( file ) {
 
@@ -116,123 +116,124 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/1to8.png";
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/4dots.png";
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/glass-of-blueberryjuice.png";
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/raindrop.png";
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/smudge.png";
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/colors.png";
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/font.png";
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders.png";
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet.png";
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-red.png";
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-blue.png";
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-green.png";
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 97,
-	"./animation.test": 98,
-	"./bitmapfont.test": 99,
-	"./butterflyish.test": 100,
-	"./cli.test": 101,
-	"./clock.test": 102,
-	"./elasticcollision.test": 103,
-	"./field.test": 104,
-	"./fractree.test": 105,
-	"./grabndrag.test": 106,
-	"./grid.test": 107,
-	"./invaders.test": 108,
-	"./magnet.test": 109,
-	"./motion.test": 110,
-	"./nightsky.test": 111,
-	"./particles.test": 112,
-	"./platformer.test": 113,
-	"./playground.test": 114,
-	"./polygoncollision.test": 115,
-	"./quadtree.test": 116,
-	"./rain.test": 117,
-	"./raycasting.test": 118,
-	"./reflectivecollision.test": 119,
-	"./sprite.test": 120,
-	"./stresstest.test": 121,
-	"./text.test": 122,
-	"./themask.test": 123,
-	"./webglanimation.test": 124,
-	"./webglbitmapfont.test": 125,
-	"./webglcircle.test": 126,
-	"./webglline2d.test": 127,
-	"./webglpixelbatch.test": 128,
-	"./webglrectangle.test": 129,
-	"./webglstresstest.test": 130,
-	"./webgltexturebatch.test": 131
+	"./aabbcollision.test": 98,
+	"./animation.test": 99,
+	"./bitmapfont.test": 100,
+	"./butterflyish.test": 101,
+	"./camera.test": 102,
+	"./cli.test": 103,
+	"./clock.test": 104,
+	"./elasticcollision.test": 105,
+	"./field.test": 106,
+	"./fractree.test": 107,
+	"./grabndrag.test": 108,
+	"./grid.test": 109,
+	"./invaders.test": 110,
+	"./magnet.test": 111,
+	"./motion.test": 112,
+	"./nightsky.test": 113,
+	"./particles.test": 114,
+	"./platformer.test": 115,
+	"./playground.test": 116,
+	"./polygoncollision.test": 117,
+	"./quadtree.test": 118,
+	"./rain.test": 119,
+	"./raycasting.test": 120,
+	"./reflectivecollision.test": 121,
+	"./sprite.test": 122,
+	"./stresstest.test": 123,
+	"./text.test": 124,
+	"./themask.test": 125,
+	"./webglanimation.test": 126,
+	"./webglbitmapfont.test": 127,
+	"./webglcircle.test": 128,
+	"./webglline2d.test": 129,
+	"./webglpixelbatch.test": 130,
+	"./webglrectangle.test": 131,
+	"./webglstresstest.test": 132,
+	"./webgltexturebatch.test": 133
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -248,10 +249,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 96;
+webpackContext.id = 97;
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -376,7 +377,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -461,7 +462,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -542,7 +543,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -662,7 +663,73 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'Camera' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+    window.c = c;
+
+    nk.Plainsprite.BUILD_DEFAULT_TEXTURE( go );
+
+    function go() {
+
+      var stage = new nk.Stage2D( c, window.innerWidth * 0.5, window.innerHeight * 0.5 );
+      var camera = stage.AddChild( new nk.Camera2D( new nk.Vector2D( 0, 0 ), null ) );
+      var root = camera.AddChild( new nk.Container2D() );
+
+      window.stage = stage;
+  
+      var target = new nk.Plainsprite( 0, 0 );
+
+      root.AddChild( new nk.Plainsprite( 200, 200 ) );
+      root.AddChild( new nk.Plainsprite( -200, -200 ) );
+      root.AddChild( new nk.Plainsprite( -200, 200 ) );
+      root.AddChild( new nk.Plainsprite( 200, -200 ) );
+
+      root.AddChild( target );
+
+      camera.SetTarget( target );
+
+      stage.onProcess.Add( function() {
+
+        camera.Process();
+      
+      } );
+
+      stage.mouse.onDown.Add( function( event ) {
+
+        target.position.SetV( event.data.position.SubtractVC( camera.position ) );
+      
+      } );
+    
+    }
+
+    document.body.removeChild( buttonContainer );
+  
+  }
+
+};
+
+
+/***/ }),
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -889,7 +956,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -969,7 +1036,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1148,7 +1215,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1257,7 +1324,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1359,7 +1426,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1463,7 +1530,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1548,7 +1615,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2216,7 +2283,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2380,7 +2447,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2450,7 +2517,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2566,7 +2633,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2658,7 +2725,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2912,7 +2979,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2956,6 +3023,10 @@ module.exports = function () {
     
     } );
 
+    var x = new nk.Vector2D( 0, 0 );
+    console.log( x );
+    x.Assert();
+
     document.body.removeChild( buttonContainer );
   
   }
@@ -2964,7 +3035,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3113,7 +3184,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3179,7 +3250,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3278,7 +3349,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3470,7 +3541,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3644,7 +3715,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3766,7 +3837,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3915,7 +3986,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3962,7 +4033,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4083,7 +4154,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4230,7 +4301,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4313,7 +4384,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4431,7 +4502,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4495,7 +4566,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4582,7 +4653,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4681,7 +4752,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4868,7 +4939,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports) {
 
 module.exports = function () {

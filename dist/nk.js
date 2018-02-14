@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.6.5 (Beta)
+* @version     0.7.0 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -455,7 +455,7 @@ module.exports = function ( Nenkraft ) {
 
         failed = true;
 
-      }
+      }  
     
     } else if ( _data === null || _value === null ) {
 
@@ -465,11 +465,22 @@ module.exports = function ( Nenkraft ) {
         
       }
       
-    }
-    else if ( typeof _data !== typeof _value ) {
+    } else if ( typeof _data !== typeof _value ) {
 
       failed = true;
       
+    } else if ( typeof _data === 'number' || typeof _value === 'number' ) {
+
+      if ( isNaN( _data ) || isNaN( _value ) ) {
+
+        if ( _data !== _value ) {
+
+          failed = true;
+      
+        }
+      
+      }
+    
     }
 
     Check( failed, _data, _value, _compare );
@@ -496,11 +507,22 @@ module.exports = function ( Nenkraft ) {
         
       }
       
-    }
-    else if ( typeof _data === typeof _value ) {
+    } else if ( typeof _data === typeof _value ) {
 
       failed = true;
       
+    } else if ( typeof _data === 'number' || typeof _value === 'number' ) {
+
+      if ( isNaN( _data ) || isNaN( _value ) ) {
+
+        if ( isNaN( _data ) && isNaN( _value ) ) {
+
+          failed = true;
+        
+        }
+      
+      }
+    
     }
 
     Check( failed, _data, _value, _compare );
@@ -5898,10 +5920,10 @@ __webpack_require__( 67 )( namespace );
 __webpack_require__( 68 )( namespace );
 __webpack_require__( 69 )( namespace );
 __webpack_require__( 70 )( namespace );
+__webpack_require__( 71 )( namespace );
 __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
 __webpack_require__( 30 )( namespace );
-__webpack_require__( 71 )( namespace );
 __webpack_require__( 72 )( namespace );
 __webpack_require__( 73 )( namespace );
 __webpack_require__( 74 )( namespace );
@@ -5911,6 +5933,7 @@ __webpack_require__( 77 )( namespace );
 __webpack_require__( 78 )( namespace );
 __webpack_require__( 79 )( namespace );
 __webpack_require__( 80 )( namespace );
+__webpack_require__( 81 )( namespace );
 
 if ( true ) {
 
@@ -5948,7 +5971,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.6.5 (Beta)';
+  Nenkraft.VERSION = '0.7.0 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -9258,6 +9281,96 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
 
   'use strict';
+  var Super = Nenkraft.Entity.Container2D;
+
+  function Camera2D ( _focus, _target ) {
+
+    if ( !( this instanceof Camera2D ) ) return new Camera2D( _focus, _target );
+    Super.call( this );
+
+    this.focus = _focus;
+
+    if ( _target != null ) {
+
+      this.target = _target;
+    
+    }
+
+    this.velocity = new Nenkraft.Vector2D();
+  
+  }
+
+  Camera2D.prototype = Object.create( Super.prototype );
+  Camera2D.prototype.constructor = Camera2D;
+  /*
+   *Static
+   *Members
+   */
+  Camera2D.prototype.focus = null;
+  Camera2D.prototype.target = null;
+  Camera2D.prototype.velocity = null;
+  Camera2D.prototype.stopRadiusSq = 1000;
+  Camera2D.prototype.EPSILON = 0.0002;
+
+  // Methods
+  Camera2D.prototype.Process = function() {
+
+    var target = this.target;
+
+    if ( target !== null ) {
+
+      var targetPosition = target.position.Copy();
+      targetPosition.Invert();
+      targetPosition.AddV( this.focus );
+
+      var delta = this.position.SubtractVC( targetPosition );
+
+      var distance = delta.GetLengthSquared();
+
+      if ( distance < this.stopRadiusSq ) {
+
+        return;
+      
+      }
+
+      distance *= this.EPSILON;
+
+      var theta = delta.GetAngle();
+
+      this.velocity.Set( 
+        distance * Math.cos( theta ),
+        distance * Math.sin( theta )
+      );
+
+      this.position.SubtractV( this.velocity );
+    
+    }
+  
+  };
+
+  Camera2D.prototype.SetTarget = function( _target ) {
+
+    this.target = _target;
+  
+  };
+
+  Nenkraft.Entity.Camera2D = Camera2D;
+  Nenkraft.Camera2D = Camera2D;
+
+};
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
 
   function Frame ( _x, _y, _w, _h, _rate, _id ) {
 
@@ -9323,7 +9436,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 /**
@@ -9539,7 +9652,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -9631,7 +9744,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 /**
@@ -9768,7 +9881,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 /**
@@ -9938,7 +10051,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -10074,7 +10187,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -10178,7 +10291,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 /**
@@ -10259,7 +10372,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -10348,7 +10461,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -10437,7 +10550,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 /**
@@ -10577,7 +10690,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 /**
@@ -10719,7 +10832,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 /**

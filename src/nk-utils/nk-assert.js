@@ -93,7 +93,7 @@ module.exports = function ( Nenkraft ) {
 
         failed = true;
 
-      }
+      }  
     
     } else if ( _data === null || _value === null ) {
 
@@ -103,11 +103,22 @@ module.exports = function ( Nenkraft ) {
         
       }
       
-    }
-    else if ( typeof _data !== typeof _value ) {
+    } else if ( typeof _data !== typeof _value ) {
 
       failed = true;
       
+    } else if ( typeof _data === 'number' || typeof _value === 'number' ) {
+
+      if ( isNaN( _data ) || isNaN( _value ) ) {
+
+        if ( _data !== _value ) {
+
+          failed = true;
+      
+        }
+      
+      }
+    
     }
 
     Check( failed, _data, _value, _compare );
@@ -134,11 +145,22 @@ module.exports = function ( Nenkraft ) {
         
       }
       
-    }
-    else if ( typeof _data === typeof _value ) {
+    } else if ( typeof _data === typeof _value ) {
 
       failed = true;
       
+    } else if ( typeof _data === 'number' || typeof _value === 'number' ) {
+
+      if ( isNaN( _data ) || isNaN( _value ) ) {
+
+        if ( isNaN( _data ) && isNaN( _value ) ) {
+
+          failed = true;
+        
+        }
+      
+      }
+    
     }
 
     Check( failed, _data, _value, _compare );
