@@ -39,6 +39,10 @@ module.exports = function () {
     
     } );
 
+    var x = new nk.Vector2D( 0, 0 );
+    console.log( x );
+    x.Assert();
+
     document.body.removeChild( buttonContainer );
   
   }

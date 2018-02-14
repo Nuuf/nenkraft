@@ -4,11 +4,12 @@ var WebpackDevServer = require( 'webpack-dev-server' ),
   config = require( './webpack.config.js' )(),
   compiler = webpack( config ),
   server = new WebpackDevServer( compiler, {
-    hot: true,
+    hot: false,
     filename: config.output.filename,
     publicPath: config.output.publicPath,
     stats: {
-      colors: true
+      colors: true,
+      warnings: true
     }
   } );
 server.listen( 8080, 'localhost', function () {

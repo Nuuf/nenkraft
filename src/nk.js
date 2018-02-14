@@ -60,6 +60,7 @@ require( './nk-entity/nk-text' )( namespace );
 require( './nk-entity/nk-sprite' )( namespace );
 require( './nk-entity/nk-char' )( namespace );
 require( './nk-entity/nk-bitmap-text' )( namespace );
+require( './nk-entity/nk-camera2d' )( namespace );
 require( './nk-animator/nk-frame' )( namespace );
 require( './nk-animator/nk-animation' )( namespace );
 require( './nk-animator/nk-controller' )( namespace );

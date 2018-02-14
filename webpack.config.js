@@ -55,15 +55,13 @@ if ( PRODUCTION ) {
 
   entry = {
     nk: [
+      'webpack-dev-server/client?http://localhost:8080',
       './src/nk.js',
-      './tests/tests.js',
-      'webpack/hot/dev-server',
-      'webpack-dev-server/client?http://localhost:8080'
+      './tests/tests.js'
     ]
   };
 
   plugins = [
-    new webpack.HotModuleReplacementPlugin()
   ];
 
   cssIdentifier = '[path][name]--[local]';
