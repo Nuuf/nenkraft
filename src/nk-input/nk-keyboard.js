@@ -16,8 +16,8 @@ module.exports = function ( Nenkraft ) {
     this.element.addEventListener( 'keydown', this.OnKeyDown.bind( this ) );
     this.element.addEventListener( 'keyup', this.OnKeyUp.bind( this ) );
 
-    this.onDown = new Nenkraft.Event.LocalEvent();
-    this.onUp = new Nenkraft.Event.LocalEvent();
+    this.onDown = Nenkraft.Event.LocalEvent();
+    this.onUp = Nenkraft.Event.LocalEvent();
   
   }
 

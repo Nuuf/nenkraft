@@ -13,9 +13,9 @@ module.exports = function ( Nenkraft ) {
     this.controller = _controller;
     this.sprite = _controller.sprite;
     this.id = _id;
-    this.onEnd = new Nenkraft.Event.LocalEvent();
-    this.onStop = new Nenkraft.Event.LocalEvent();
-    this.onStart = new Nenkraft.Event.LocalEvent();
+    this.onEnd = Nenkraft.Event.LocalEvent();
+    this.onStop = Nenkraft.Event.LocalEvent();
+    this.onStart = Nenkraft.Event.LocalEvent();
     if ( _rate != null ) this.rate = _rate;
   
   }
@@ -39,7 +39,7 @@ module.exports = function ( Nenkraft ) {
   Animation.prototype.CreateFrame = function ( _x, _y, _w, _h, _rate ) {
 
     _rate = _rate == null ? this.rate : _rate;
-    this.frames.push( new Nenkraft.Animator.Frame( _x, _y, _w, _h, _rate ) );
+    this.frames.push( Nenkraft.Animator.Frame( _x, _y, _w, _h, _rate ) );
   
   };
 

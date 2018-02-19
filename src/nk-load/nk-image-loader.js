@@ -9,10 +9,10 @@ module.exports = function ( Nenkraft ) {
   function ImageLoader ( _objects, _createTextures, _onComplete ) {
 
     if ( !( this instanceof ImageLoader ) ) return new ImageLoader( _objects, _createTextures, _onComplete );
-    this.imageCache = new Nenkraft.Utils.Cache( Image );
-    this.basicTextureCache = new Nenkraft.Utils.Cache( Nenkraft.Texture.BasicTexture );
-    this.onImageLoaded = new Nenkraft.Event.LocalEvent();
-    this.onComplete = new Nenkraft.Event.LocalEvent();
+    this.imageCache = Nenkraft.Utils.Cache( Image );
+    this.basicTextureCache = Nenkraft.Utils.Cache( Nenkraft.Texture.BasicTexture );
+    this.onImageLoaded = Nenkraft.Event.LocalEvent();
+    this.onComplete = Nenkraft.Event.LocalEvent();
 
     if ( _onComplete != null ) {
 
@@ -98,7 +98,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.createTextures === true ) {
 
-      this.basicTextureCache.StoreSafe( new Nenkraft.Texture.BasicTexture( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh ) );
+      this.basicTextureCache.StoreSafe( Nenkraft.Texture.BasicTexture( t, null, t.data.w, t.data.h, t.data.fw, t.data.fh ) );
     
     }
 

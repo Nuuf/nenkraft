@@ -16,12 +16,12 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    this.onStop = new Nenkraft.LocalEvent();
-    this.onFinish = new Nenkraft.LocalEvent();
-    this.onStart = new Nenkraft.LocalEvent();
-    this.onReset = new Nenkraft.LocalEvent();
-    this.onPause = new Nenkraft.LocalEvent();
-    this.onResume = new Nenkraft.LocalEvent();
+    this.onStop = Nenkraft.LocalEvent();
+    this.onFinish = Nenkraft.LocalEvent();
+    this.onStart = Nenkraft.LocalEvent();
+    this.onReset = Nenkraft.LocalEvent();
+    this.onPause = Nenkraft.LocalEvent();
+    this.onResume = Nenkraft.LocalEvent();
   
   }
 

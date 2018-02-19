@@ -46,7 +46,7 @@ module.exports = function ( Nenkraft ) {
 
   LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
 
-    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
+    var listener = Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
     this.listeners.push( listener );
   
   };

@@ -11,8 +11,8 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof Pixel ) ) return new Pixel( _x, _y, _style );
     Super.call( this, _x, _y );
-    this.style = new Nenkraft.Style.CreateP( _style );
-    this.colorObj = new Nenkraft.Color();
+    this.style = Nenkraft.Style.CreateP( _style );
+    this.colorObj = Nenkraft.Color();
   
   }
 

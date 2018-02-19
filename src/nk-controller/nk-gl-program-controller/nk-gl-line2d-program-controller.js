@@ -30,7 +30,7 @@ module.exports = function ( Nenkraft ) {
     var gl = this.gl;
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( [ -1, 0, 1, 0 ] );
-    this.color = new Nenkraft.Color();
+    this.color = Nenkraft.Color();
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, this.vertices, gl.DYNAMIC_DRAW );
     gl.bindBuffer( gl.ARRAY_BUFFER, null );

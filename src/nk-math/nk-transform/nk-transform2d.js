@@ -10,11 +10,11 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof Transform2D ) ) return new Transform2D( _x, _y );
     this.position = Nenkraft.Vector2D( _x, _y );
-    this.scale = new Nenkraft.Vector2D( 1, 1 );
-    this.skew = new Nenkraft.Vector2D( 0, 0 );
-    this.pivot = new Nenkraft.Vector2D( 0, 0 );
-    this.localTransform = new Nenkraft.Matrix2D();
-    this.worldTransform = new Nenkraft.Matrix2D();
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.skew = Nenkraft.Vector2D( 0, 0 );
+    this.pivot = Nenkraft.Vector2D( 0, 0 );
+    this.localTransform = Nenkraft.Matrix2D();
+    this.worldTransform = Nenkraft.Matrix2D();
   
   }
 

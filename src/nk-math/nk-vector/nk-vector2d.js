@@ -78,7 +78,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Vector2D.Pool = new Nenkraft.Utils.Pool( Vector2D );
+  Vector2D.Pool = Nenkraft.Utils.Pool( Vector2D );
 
   Vector2D.Pool.Retrieve = function ( _x, _y ) {
 
@@ -108,7 +108,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return new Vector2D( this );
+    return Vector2D( this );
   
   };
 
@@ -120,7 +120,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return new Vector2D( _x, _y );
+    return Vector2D( _x, _y );
   
   };
 

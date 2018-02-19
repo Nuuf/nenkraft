@@ -58,6 +58,7 @@ require( './nk-entity/nk-plaingraphic2d' )( namespace );
 require( './nk-entity/nk-plainsprite' )( namespace );
 require( './nk-entity/nk-text' )( namespace );
 require( './nk-entity/nk-sprite' )( namespace );
+require( './nk-entity/nk-tilesprite' )( namespace );
 require( './nk-entity/nk-char' )( namespace );
 require( './nk-entity/nk-bitmap-text' )( namespace );
 require( './nk-entity/nk-camera2d' )( namespace );
@@ -77,6 +78,7 @@ require( './nk-controller/nk-gl-program-controller/nk-gl-circle-program-controll
 require( './nk-controller/nk-gl-program-controller/nk-gl-texture-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-texture-batch-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-pixel-batch-program-controller' )( namespace );
+require( './nk-editor/nk-editor' )( namespace );
 
 if ( PRODUCTION || DEVELOPMENT ) {
 

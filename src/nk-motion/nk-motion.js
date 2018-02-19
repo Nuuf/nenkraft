@@ -15,11 +15,11 @@ module.exports = function ( Nenkraft ) {
     if ( _value !== undefined ) this.value = _value;
     if ( _duration !== undefined ) this.duration = _duration;
     this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
-    this.onStart = new Nenkraft.Event.LocalEvent();
-    this.onEnd = new Nenkraft.Event.LocalEvent();
-    this.onStop = new Nenkraft.Event.LocalEvent();
-    this.onReconfigure = new Nenkraft.Event.LocalEvent();
-    this.onReset = new Nenkraft.Event.LocalEvent();
+    this.onStart = Nenkraft.Event.LocalEvent();
+    this.onEnd = Nenkraft.Event.LocalEvent();
+    this.onStop = Nenkraft.Event.LocalEvent();
+    this.onReconfigure = Nenkraft.Event.LocalEvent();
+    this.onReset = Nenkraft.Event.LocalEvent();
   
   }
 

@@ -11,7 +11,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof Graphic2D ) ) return new Graphic2D( _x, _y, _path );
     Super.call( this, _x, _y );
-    this.anchor = new Nenkraft.Vector2D();
+    this.anchor = Nenkraft.Vector2D();
     this.SetPath( _path );
   
   }

@@ -23,8 +23,8 @@ module.exports = function ( Nenkraft ) {
       this.yoffset = parseInt( _data.yoffset );
       this.xadvance = parseInt( _data.xadvance );
       this.kernings = [];
-      this.translation = new Nenkraft.Matrix2D();
-      this.transformation = new Nenkraft.Matrix2D();
+      this.translation = Nenkraft.Matrix2D();
+      this.transformation = Nenkraft.Matrix2D();
     
     }
   

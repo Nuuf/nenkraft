@@ -67,7 +67,7 @@ module.exports = function () {
       var numTimes = 20;
       var hold = 20;
       var holdCounter = 0;
-      var fps = 30;
+      var fps = 40;
 
       var am = 35;
 

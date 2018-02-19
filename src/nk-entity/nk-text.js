@@ -9,7 +9,7 @@ module.exports = function ( Nenkraft ) {
 
   function Text ( _x, _y, _text ) {
 
-    if ( !( this instanceof Text ) ) return new Text( _x, _y );
+    if ( !( this instanceof Text ) ) return new Text( _x, _y, _text );
     Super.call( this, _x, _y );
     if ( _text !== undefined ) this.text = _text;
     this.style = Nenkraft.Style.CreateSaT();

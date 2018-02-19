@@ -8,7 +8,7 @@ module.exports = function ( Nenkraft ) {
 
   function BasicTexture ( _image, _id, _w, _h, _fullWidth, _fullHeight ) {
 
-    if ( !( this instanceof BasicTexture ) ) return new BasicTexture( _image, _w, _h, _fullWidth, _fullHeight );
+    if ( !( this instanceof BasicTexture ) ) return new BasicTexture( _image, _id, _w, _h, _fullWidth, _fullHeight );
     this.image = _image;
 
     if ( _id != null ) {

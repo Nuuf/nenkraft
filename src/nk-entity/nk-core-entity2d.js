@@ -9,7 +9,7 @@ module.exports = function ( Nenkraft ) {
   function CoreEntity2D ( _x, _y ) {
 
     if ( !( this instanceof CoreEntity2D ) ) return new CoreEntity2D( _x, _y );
-    this.transform = new Nenkraft.Math.Transform2D( _x, _y );
+    this.transform = Nenkraft.Math.Transform2D( _x, _y );
     this.data = Object.create( null );
   
   }
@@ -17,7 +17,7 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype = Object.create( null );
   CoreEntity2D.prototype.constructor = CoreEntity2D;
   // Static
-  CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
+  CoreEntity2D.NULL_TRANSFORM = Nenkraft.Math.Transform2D();
   // Members
   CoreEntity2D.prototype.parent = null;
   CoreEntity2D.prototype.transform = null;
@@ -45,7 +45,7 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.GetWorldPosition = function () {
 
     var wt = this.transform.worldTransform;
-    return new Nenkraft.Vector2D( wt.e, wt.f );
+    return Nenkraft.Vector2D( wt.e, wt.f );
   
   };
 
@@ -56,7 +56,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.bounds === null ) {
 
-      this.bounds = new Nenkraft.Geom.AABB2D(
+      this.bounds = Nenkraft.Geom.AABB2D(
         this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,

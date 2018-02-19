@@ -20,7 +20,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    this.velocity = new Nenkraft.Vector2D();
+    this.velocity = Nenkraft.Vector2D();
   
   }
 
