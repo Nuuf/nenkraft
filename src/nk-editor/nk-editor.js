@@ -64,7 +64,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Editor.prototype.OnMouseUp = function ( _event ) {
+  Editor.prototype.OnMouseUp = function ( /* _event */ ) {
 
     // var mousePoint = _event.data.position.SubtractVC( this.camera.position );
 
