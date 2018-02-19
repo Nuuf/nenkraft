@@ -29,7 +29,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( exists === null ) {
 
-      var motion = new Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
+      var motion = Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
       this.motions.push( motion );
       return motion;
     

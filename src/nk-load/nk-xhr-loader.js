@@ -9,10 +9,10 @@ module.exports = function ( Nenkraft ) {
   function XHRLoader ( _objects, _onComplete ) {
 
     if ( !( this instanceof XHRLoader ) ) return new XHRLoader( _objects, _onComplete );
-    this.XHRcache = new Nenkraft.Utils.Cache( XMLHttpRequest );
-    this.dataCache = new Nenkraft.Utils.Cache();
-    this.onXHRLoaded = new Nenkraft.Event.LocalEvent();
-    this.onComplete = new Nenkraft.Event.LocalEvent();
+    this.XHRcache = Nenkraft.Utils.Cache( XMLHttpRequest );
+    this.dataCache = Nenkraft.Utils.Cache();
+    this.onXHRLoaded = Nenkraft.Event.LocalEvent();
+    this.onComplete = Nenkraft.Event.LocalEvent();
 
     if ( _onComplete != null ) {
 

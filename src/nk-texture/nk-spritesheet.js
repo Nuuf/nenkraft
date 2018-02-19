@@ -13,7 +13,7 @@ module.exports = function ( Nenkraft ) {
     this.id = _basicTexture.id;
     this.basicTexture = _basicTexture;
     this.data = _data;
-    this.frameCache = new Nenkraft.Utils.Cache( Nenkraft.Animator.Frame );
+    this.frameCache = Nenkraft.Utils.Cache( Nenkraft.Animator.Frame );
   
   }
 
@@ -37,7 +37,7 @@ module.exports = function ( Nenkraft ) {
       frame = frames[i];
       frameData = frame.frame;
       frameTag = frameTags[i];
-      this.frameCache.Store( new Nenkraft.Animator.Frame(
+      this.frameCache.Store( Nenkraft.Animator.Frame(
         frameData.x,
         frameData.y,
         frameData.w,

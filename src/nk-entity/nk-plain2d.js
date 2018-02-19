@@ -9,7 +9,7 @@ module.exports = function ( Nenkraft ) {
   function Plain2D ( _x, _y ) {
 
     if ( !( this instanceof Plain2D ) ) return new Plain2D( _x, _y );
-    this.transform = new Nenkraft.Math.Basetransform2D( _x, _y );
+    this.transform = Nenkraft.Math.Basetransform2D( _x, _y );
     this.data = Object.create( null );
   
   }
@@ -17,7 +17,7 @@ module.exports = function ( Nenkraft ) {
   Plain2D.prototype = Object.create( null );
   Plain2D.prototype.constructor = Plain2D;
   // Static
-  Plain2D.NULL_TRANSFORM = new Nenkraft.Math.Basetransform2D();
+  Plain2D.NULL_TRANSFORM = Nenkraft.Math.Basetransform2D();
   // Members
   Plain2D.prototype.parent = null;
   Plain2D.prototype.w = 0;
@@ -57,7 +57,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.bounds === null ) {
 
-      this.bounds = new Nenkraft.Geom.AABB2D(
+      this.bounds = Nenkraft.Geom.AABB2D(
         this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,

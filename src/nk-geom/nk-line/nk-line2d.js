@@ -20,14 +20,14 @@ module.exports = function ( Nenkraft ) {
     }
     else if ( _arg0 !== undefined && _arg1 !== undefined && _arg2 !== undefined && _arg3 !== undefined ) {
 
-      this.s = new Nenkraft.Vector2D( _arg0, _arg1 );
-      this.e = new Nenkraft.Vector2D( _arg2, _arg3 );
+      this.s = Nenkraft.Vector2D( _arg0, _arg1 );
+      this.e = Nenkraft.Vector2D( _arg2, _arg3 );
     
     }
     else {
 
-      this.s = new Nenkraft.Vector2D();
-      this.e = new Nenkraft.Vector2D();
+      this.s = Nenkraft.Vector2D();
+      this.e = Nenkraft.Vector2D();
     
     }
   

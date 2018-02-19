@@ -9,15 +9,15 @@ module.exports = function ( Nenkraft ) {
 
   function Sprite ( _x, _y, _texture, _unitId ) {
 
-    if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture );
+    if ( !( this instanceof Sprite ) ) return new Sprite( _x, _y, _texture, _unitId );
     Super.call( this, _x, _y );
-    this.anchor = new Nenkraft.Vector2D( 0, 0 );
-    this.clip = new Nenkraft.Geom.AABB2D();
-    this.shape = new Nenkraft.Geom.AABB2D();
-    this.textureTransformation = new Nenkraft.Math.Matrix2D();
-    this.textureTranslation = new Nenkraft.Math.Matrix2D();
-    this.originalShape = new Nenkraft.Geom.AABB2D();
-    this.tint = new Nenkraft.Color( 1.0, 1.0, 1.0, 1.0 );
+    this.anchor = Nenkraft.Vector2D( 0, 0 );
+    this.clip = Nenkraft.Geom.AABB2D();
+    this.shape = Nenkraft.Geom.AABB2D();
+    this.textureTransformation = Nenkraft.Math.Matrix2D();
+    this.textureTranslation = Nenkraft.Math.Matrix2D();
+    this.originalShape = Nenkraft.Geom.AABB2D();
+    this.tint = Nenkraft.Color( 1.0, 1.0, 1.0, 1.0 );
 
     if ( _texture instanceof Nenkraft.GLTextureProgramController ) {
 
@@ -54,28 +54,28 @@ module.exports = function ( Nenkraft ) {
 
   Sprite.BUILD_DEFAULT_TEXTURE = function( _onLoad ) {
 
-    Sprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
+    Sprite.DEFAULT_TEXTURE = Nenkraft.Texture.BasicTexture(
       Nenkraft.Utils.ImageFromDataURL(
         Nenkraft.Utils.GenerateSimpleBase64Png( function () {
   
           // Oooh what fun.
-          var path = new Nenkraft.Path.Polygon2D();
-          path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+          var path = Nenkraft.Path.Polygon2D();
+          path.AddPoint( Nenkraft.Vector2D( 0, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 64 ) );
+          path.AddPoint( Nenkraft.Vector2D( 0, 64 ) );
+          path.AddPoint( Nenkraft.Vector2D( 0, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 64 ) );
+          path.AddPoint( Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( Nenkraft.Vector2D( 0, 64 ) );
           path.ComputeBounds();
           path.style.fill.color = 'rgba(66,66,66,0.5)';
           path.style.stroke.color = '#00FFFF';
           path.style.stroke.lineWidth = 3;
-          return new Nenkraft.Graphic2D( 0, 0, path );
+          return Nenkraft.Graphic2D( 0, 0, path );
         
         } ), 64, 64, _onLoad
       ), 'DEFAULT_SPRITE_TEXTURE', 64, 64, 64, 64
@@ -349,7 +349,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.animationController === null ) {
 
-      this.animationController = new Nenkraft.Animator.Controller( this );
+      this.animationController = Nenkraft.Animator.Controller( this );
     
     }
 

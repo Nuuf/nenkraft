@@ -49,20 +49,20 @@ module.exports = function ( Nenkraft ) {
       this.position.Add( -1, 1 );
       this.position.Add( _x * this.scale.x, _y * this.scale.y );
       this.UpdateTransform();
-      this.ticker = new Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _doNotStart );
+      this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _doNotStart );
 
       this.GLConfig( this.gl );
     
     } else {
 
       this.rc = _canvas.getContext( '2d' );
-      this.ticker = new Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
+      this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
     
     }
 
-    this.onProcess = new Nenkraft.Event.LocalEvent();
-    this.mouse = new Nenkraft.Input.Mouse( _canvas, _x, _y );
-    this.keyboard = new Nenkraft.Input.Keyboard( _canvas );
+    this.onProcess = Nenkraft.Event.LocalEvent();
+    this.mouse = Nenkraft.Input.Mouse( _canvas, _x, _y );
+    this.keyboard = Nenkraft.Input.Keyboard( _canvas );
   
   }
 

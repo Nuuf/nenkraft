@@ -10,9 +10,9 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof Mouse ) ) return new Mouse( _element, _offsetX, _offsetY );
     this.element = _element;
-    this.position = new Nenkraft.Vector2D();
-    this.scale = new Nenkraft.Vector2D( 1, 1 );
-    this.offset = new Nenkraft.Vector2D( _offsetX, _offsetY );
+    this.position = Nenkraft.Vector2D();
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.offset = Nenkraft.Vector2D( _offsetX, _offsetY );
     this.eventData = { position: this.position, native: null };
 
     this.element.addEventListener( 'mousemove', this.OnMove.bind( this ) );
@@ -21,11 +21,11 @@ module.exports = function ( Nenkraft ) {
     this.element.addEventListener( 'mouseleave', this.OnLeave.bind( this ) );
     this.element.addEventListener( 'wheel', this.OnWheel.bind( this ), { passive: true } );
 
-    this.onMove = new Nenkraft.Event.LocalEvent();
-    this.onDown = new Nenkraft.Event.LocalEvent();
-    this.onUp = new Nenkraft.Event.LocalEvent();
-    this.onLeave = new Nenkraft.Event.LocalEvent();
-    this.onWheel = new Nenkraft.Event.LocalEvent();
+    this.onMove = Nenkraft.Event.LocalEvent();
+    this.onDown = Nenkraft.Event.LocalEvent();
+    this.onUp = Nenkraft.Event.LocalEvent();
+    this.onLeave = Nenkraft.Event.LocalEvent();
+    this.onWheel = Nenkraft.Event.LocalEvent();
   
   }
 

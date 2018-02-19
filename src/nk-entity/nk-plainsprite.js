@@ -11,9 +11,9 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof Plainsprite ) ) return new Plainsprite( _x, _y, _texture );
     Super.call( this, _x, _y );
-    this.anchor = new Nenkraft.Vector2D( 0, 0 );
-    this.clip = new Nenkraft.Geom.AABB2D();
-    this.shape = new Nenkraft.Geom.AABB2D();
+    this.anchor = Nenkraft.Vector2D( 0, 0 );
+    this.clip = Nenkraft.Geom.AABB2D();
+    this.shape = Nenkraft.Geom.AABB2D();
     if ( _texture == null ) _texture = Plainsprite.DEFAULT_TEXTURE;
     this.SetTexture( _texture );
   
@@ -27,28 +27,28 @@ module.exports = function ( Nenkraft ) {
 
   Plainsprite.BUILD_DEFAULT_TEXTURE = function( _onLoad ) {
 
-    Plainsprite.DEFAULT_TEXTURE = new Nenkraft.Texture.BasicTexture(
+    Plainsprite.DEFAULT_TEXTURE = Nenkraft.Texture.BasicTexture(
       Nenkraft.Utils.ImageFromDataURL(
         Nenkraft.Utils.GenerateSimpleBase64Png( function () {
   
           // Oooh what fun.
-          var path = new Nenkraft.Path.Polygon2D();
-          path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 0, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 0 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 64, 64 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 32, 32 ) );
-          path.AddPoint( new Nenkraft.Vector2D( 0, 64 ) );
+          var path = Nenkraft.Path.Polygon2D();
+          path.AddPoint( Nenkraft.Vector2D( 0, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 64 ) );
+          path.AddPoint( Nenkraft.Vector2D( 0, 64 ) );
+          path.AddPoint( Nenkraft.Vector2D( 0, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 0 ) );
+          path.AddPoint( Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( Nenkraft.Vector2D( 64, 64 ) );
+          path.AddPoint( Nenkraft.Vector2D( 32, 32 ) );
+          path.AddPoint( Nenkraft.Vector2D( 0, 64 ) );
           path.ComputeBounds();
           path.style.fill.color = 'rgba(66,66,66,0.5)';
           path.style.stroke.color = '#3399FF';
           path.style.stroke.lineWidth = 3;
-          return new Nenkraft.Graphic2D( 0, 0, path );
+          return Nenkraft.Graphic2D( 0, 0, path );
         
         } ), 64, 64, _onLoad
       ), 'DEFAULT_PLAINSPRITE_TEXTURE', 64, 64, 64, 64

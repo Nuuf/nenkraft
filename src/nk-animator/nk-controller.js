@@ -25,7 +25,7 @@ module.exports = function ( Nenkraft ) {
   // Methods
   Controller.prototype.CreateAnimation = function ( _id, _rate ) {
 
-    var animation = new Nenkraft.Animator.Animation( this, _id, _rate );
+    var animation = Nenkraft.Animator.Animation( this, _id, _rate );
     this.animations.push( animation );
     return animation;
   

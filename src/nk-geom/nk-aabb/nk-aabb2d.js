@@ -25,20 +25,20 @@ module.exports = function ( Nenkraft ) {
       _arg1.y !== undefined
     ) {
 
-      this.tl = new Nenkraft.Vector2D( _arg0.x, _arg0.y );
-      this.br = new Nenkraft.Vector2D( _arg1.x, _arg1.y );
+      this.tl = Nenkraft.Vector2D( _arg0.x, _arg0.y );
+      this.br = Nenkraft.Vector2D( _arg1.x, _arg1.y );
     
     }
     else if ( _arg0 !== undefined && _arg1 !== undefined && _arg2 !== undefined && _arg3 !== undefined ) {
 
-      this.tl = new Nenkraft.Vector2D( _arg0, _arg1 );
-      this.br = new Nenkraft.Vector2D( _arg2, _arg3 );
+      this.tl = Nenkraft.Vector2D( _arg0, _arg1 );
+      this.br = Nenkraft.Vector2D( _arg2, _arg3 );
     
     }
     else {
 
-      this.tl = new Nenkraft.Vector2D();
-      this.br = new Nenkraft.Vector2D();
+      this.tl = Nenkraft.Vector2D();
+      this.br = Nenkraft.Vector2D();
     
     }
 
@@ -105,28 +105,28 @@ module.exports = function ( Nenkraft ) {
     switch ( _quadrant ) {
 
       case AABB2D.TOP_LEFT:
-        return new AABB2D(
+        return AABB2D(
           tl.x,
           tl.y,
           tl.x + this.hw,
           tl.y + this.hh
         );
       case AABB2D.TOP_RIGHT:
-        return new AABB2D(
+        return AABB2D(
           tl.x + this.hw,
           tl.y,
           br.x,
           tl.y + this.hh
         );
       case AABB2D.BOTTOM_LEFT:
-        return new AABB2D(
+        return AABB2D(
           tl.x,
           tl.y + this.hh,
           tl.x + this.hw,
           br.y
         );
       case AABB2D.BOTTOM_RIGHT:
-        return new AABB2D(
+        return AABB2D(
           tl.x + this.hw,
           tl.y + this.hh,
           br.x,

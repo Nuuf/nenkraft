@@ -35,7 +35,7 @@ module.exports = function () {
     function CreatePolygon () {
 
       var p = new nk.Path.Polygon2D();
-      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 10, 60 ), RI( 3, 6 ) );
+      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 35, 60 ), RI( 3, 7 ) );
       var pg = new nk.Graphic2D( 0, 0, p );
       stage.Mount( pg );
       objs.push( {

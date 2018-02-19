@@ -33,8 +33,8 @@ module.exports = function ( Nenkraft ) {
     var gl = this.gl;
     this.essenceBuffer = gl.createBuffer();
     this.vertices = new Float32Array( Nenkraft.Math.TriRectArray( 0, 0, 1, 1 ) );
-    this.fillColor = new Nenkraft.Color();
-    this.outlineColor = new Nenkraft.Color();
+    this.fillColor = Nenkraft.Color();
+    this.outlineColor = Nenkraft.Color();
     gl.bindBuffer( gl.ARRAY_BUFFER, this.essenceBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, this.vertices, gl.DYNAMIC_DRAW );
     gl.bindBuffer( gl.ARRAY_BUFFER, null );

@@ -8,12 +8,12 @@ module.exports = function ( Nenkraft ) {
 
   function SpritesheetLoader ( _objects, _onComplete ) {
 
-    if ( !( this instanceof SpritesheetLoader ) ) return new SpritesheetLoader( _objects );
-    this.spritesheetCache = new Nenkraft.Utils.Cache( Nenkraft.Texture.Spritesheet );
-    this.xhrLoader = new Nenkraft.Load.XHRLoader();
-    this.imageLoader = new Nenkraft.Load.ImageLoader();
-    this.onComplete = new Nenkraft.Event.LocalEvent();
-    this.onSpritesheetLoaded = new Nenkraft.Event.LocalEvent();
+    if ( !( this instanceof SpritesheetLoader ) ) return new SpritesheetLoader( _objects, _onComplete );
+    this.spritesheetCache = Nenkraft.Utils.Cache( Nenkraft.Texture.Spritesheet );
+    this.xhrLoader = Nenkraft.Load.XHRLoader();
+    this.imageLoader = Nenkraft.Load.ImageLoader();
+    this.onComplete = Nenkraft.Event.LocalEvent();
+    this.onSpritesheetLoaded = Nenkraft.Event.LocalEvent();
 
     this.xhrLoader.onXHRLoaded.Add( this.OnPartXHRLoaded, this );
     this.imageLoader.onImageLoaded.Add( this.OnPartImageLoaded, this );
@@ -92,7 +92,7 @@ module.exports = function ( Nenkraft ) {
       this.tempBasicTexture.fw = size.w;
       this.tempBasicTexture.fh = size.h;
 
-      var spritesheet = new Nenkraft.Texture.Spritesheet( this.tempBasicTexture, this.tempData );
+      var spritesheet = Nenkraft.Texture.Spritesheet( this.tempBasicTexture, this.tempData );
 
       this.spritesheetCache.StoreSafe( spritesheet );
 

@@ -53,7 +53,7 @@ module.exports = function ( Nenkraft ) {
     if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
     if ( this.options === null ) this.options = [];
     _priority = _priority === undefined ? 0 : _priority;
-    var opt = new Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
+    var opt = Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
     opt.command = this;
 
     for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {

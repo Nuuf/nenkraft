@@ -9,11 +9,11 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateAll = function ( _style ) {
 
     return {
-      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
-      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
-      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
-      text: new Nenkraft.Style.Text( _style ? _style.text : null ),
-      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
+      fill: Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      stroke: Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
+      text: Nenkraft.Style.Text( _style ? _style.text : null ),
+      pixel: Nenkraft.Style.Pixel( _style ? _style.pixel : null )
     };
   
   };
@@ -21,9 +21,9 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateFSSa = function ( _style ) {
 
     return {
-      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
-      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
-      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+      fill: Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      stroke: Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: Nenkraft.Style.Shadow( _style ? _style.shadow : null )
     };
   
   };
@@ -31,8 +31,8 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateSSa = function ( _style ) {
 
     return {
-      stroke: new Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
-      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+      stroke: Nenkraft.Style.Stroke( _style ? _style.stroke : null ),
+      shadow: Nenkraft.Style.Shadow( _style ? _style.shadow : null )
     };
   
   };
@@ -40,8 +40,8 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateFSa = function ( _style ) {
 
     return {
-      fill: new Nenkraft.Style.Fill( _style ? _style.fill : null ),
-      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null )
+      fill: Nenkraft.Style.Fill( _style ? _style.fill : null ),
+      shadow: Nenkraft.Style.Shadow( _style ? _style.shadow : null )
     };
   
   };
@@ -49,8 +49,8 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateSaT = function ( _style ) {
 
     return {
-      shadow: new Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
-      text: new Nenkraft.Style.Text( _style ? _style.text : null )
+      shadow: Nenkraft.Style.Shadow( _style ? _style.shadow : null ),
+      text: Nenkraft.Style.Text( _style ? _style.text : null )
     };
   
   };
@@ -58,7 +58,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Style.CreateP = function ( _style ) {
 
     return {
-      pixel: new Nenkraft.Style.Pixel( _style ? _style.pixel : null )
+      pixel: Nenkraft.Style.Pixel( _style ? _style.pixel : null )
     };
   
   };

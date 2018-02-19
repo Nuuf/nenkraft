@@ -23,7 +23,7 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.TOP_RIGHT = 'TR';
   QuadtreeNode.BOTTOM_LEFT = 'BL';
   QuadtreeNode.BOTTOM_RIGHT = 'BR';
-  QuadtreeNode.Pool = new Nenkraft.Utils.Pool( QuadtreeNode );
+  QuadtreeNode.Pool = Nenkraft.Utils.Pool( QuadtreeNode );
 
   QuadtreeNode.Pool.Retrieve = function( _aabb, _level, _objCap, _levelCap ) {
 
@@ -68,7 +68,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
+    return QuadtreeNode( _aabb, _level, _objCap, _levelCap );
   
   };
 

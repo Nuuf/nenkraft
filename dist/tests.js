@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.7.0 (Beta)
+* @version     0.7.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,24 +67,22 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 82);
+/******/ 	return __webpack_require__(__webpack_require__.s = 84);
 /******/ })
 /************************************************************************/
-/******/ (Array(82).concat([
-/* 82 */
+/******/ (Array(84).concat([
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(83);
+module.exports = __webpack_require__(85);
 
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__( 84 );
-
-__webpack_require__( 85 );
 __webpack_require__( 86 );
+
 __webpack_require__( 87 );
 __webpack_require__( 88 );
 __webpack_require__( 89 );
@@ -95,10 +93,12 @@ __webpack_require__( 93 );
 __webpack_require__( 94 );
 __webpack_require__( 95 );
 __webpack_require__( 96 );
+__webpack_require__( 97 );
+__webpack_require__( 98 );
 
 var tests = [];
 
-var context = __webpack_require__(97);
+var context = __webpack_require__(99);
 
 context.keys().forEach( function ( file ) {
 
@@ -116,124 +116,127 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 85 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/1to8.png";
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/4dots.png";
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/glass-of-blueberryjuice.png";
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/raindrop.png";
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/smudge.png";
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/colors.png";
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/font.png";
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders.png";
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet.png";
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-red.png";
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-blue.png";
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "assets/images/invaders/invaders-sheet-green.png";
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 98,
-	"./animation.test": 99,
-	"./bitmapfont.test": 100,
-	"./butterflyish.test": 101,
-	"./camera.test": 102,
-	"./cli.test": 103,
-	"./clock.test": 104,
-	"./elasticcollision.test": 105,
-	"./field.test": 106,
-	"./fractree.test": 107,
-	"./grabndrag.test": 108,
-	"./grid.test": 109,
-	"./invaders.test": 110,
-	"./magnet.test": 111,
-	"./motion.test": 112,
-	"./nightsky.test": 113,
-	"./particles.test": 114,
-	"./platformer.test": 115,
-	"./playground.test": 116,
-	"./polygoncollision.test": 117,
-	"./quadtree.test": 118,
-	"./rain.test": 119,
-	"./raycasting.test": 120,
-	"./reflectivecollision.test": 121,
-	"./sprite.test": 122,
-	"./stresstest.test": 123,
-	"./text.test": 124,
-	"./themask.test": 125,
-	"./webglanimation.test": 126,
-	"./webglbitmapfont.test": 127,
-	"./webglcircle.test": 128,
-	"./webglline2d.test": 129,
-	"./webglpixelbatch.test": 130,
-	"./webglrectangle.test": 131,
-	"./webglstresstest.test": 132,
-	"./webgltexturebatch.test": 133
+	"./aabbcollision.test": 100,
+	"./animation.test": 101,
+	"./bitmapfont.test": 102,
+	"./butterflyish.test": 103,
+	"./camera.test": 104,
+	"./cli.test": 105,
+	"./clock.test": 106,
+	"./editor.test": 107,
+	"./elasticcollision.test": 108,
+	"./field.test": 109,
+	"./fractree.test": 110,
+	"./grabndrag.test": 111,
+	"./grid.test": 112,
+	"./invaders.test": 113,
+	"./magnet.test": 114,
+	"./motion.test": 115,
+	"./nightsky.test": 116,
+	"./particles.test": 117,
+	"./platformer.test": 118,
+	"./playground.test": 119,
+	"./polygoncollision.test": 120,
+	"./quadtree.test": 121,
+	"./rain.test": 122,
+	"./raycasting.test": 123,
+	"./reflectivecollision.test": 124,
+	"./sprite.test": 125,
+	"./stresstest.test": 126,
+	"./text.test": 127,
+	"./themask.test": 128,
+	"./tilesprite.test": 129,
+	"./webglanimation.test": 130,
+	"./webglbitmapfont.test": 131,
+	"./webglcircle.test": 132,
+	"./webglline2d.test": 133,
+	"./webglpixelbatch.test": 134,
+	"./webglrectangle.test": 135,
+	"./webglstresstest.test": 136,
+	"./webgltexturebatch.test": 137,
+	"./webgltilesprite.test": 138
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -249,10 +252,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 97;
+webpackContext.id = 99;
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -377,7 +380,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -462,7 +465,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -543,7 +546,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -663,7 +666,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -729,7 +732,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -956,7 +959,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1036,7 +1039,45 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 107 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'Editor' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+
+    var editor = nk.Editor();
+
+    var c = editor.stage.canvas;
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    editor.MountTo( document.body );
+    editor.stage.w = c.width;
+    editor.stage.h = c.height;
+
+    console.log( editor );
+
+    document.body.removeChild( buttonContainer );
+  
+  }
+
+};
+
+
+/***/ }),
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1215,7 +1256,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1324,7 +1365,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1426,7 +1467,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1530,7 +1571,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1615,7 +1656,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2283,7 +2324,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2447,7 +2488,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2517,7 +2558,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2633,7 +2674,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2725,7 +2766,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2979,7 +3020,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3035,7 +3076,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3075,7 +3116,7 @@ module.exports = function () {
     function CreatePolygon () {
 
       var p = new nk.Path.Polygon2D();
-      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 10, 60 ), RI( 3, 6 ) );
+      nk.Geom.Polygon2D.Construct.Cyclic( p, 0, 0, RI( 35, 60 ), RI( 3, 7 ) );
       var pg = new nk.Graphic2D( 0, 0, p );
       stage.Mount( pg );
       objs.push( {
@@ -3184,7 +3225,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3250,7 +3291,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3349,7 +3390,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3541,7 +3582,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3715,7 +3756,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3837,7 +3878,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3986,7 +4027,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4033,7 +4074,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4154,7 +4195,61 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 129 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'Tilesprite' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+
+    nk.Tilesprite.BUILD_DEFAULT_TEXTURE( go );
+
+    function go() {
+
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+
+      var W = c.width;
+      var H = c.height;
+  
+      var stage = new nk.Stage2D( c, 0, 0, false, false );
+
+      var tilesprite = new nk.Tilesprite( W * 0.5 - W * 0.25, H * 0.5 - H * 0.25 );
+      tilesprite.GeneratePattern( stage.rc, W * 0.5, H * 0.5 );
+
+      stage.AddChild( tilesprite );
+
+      stage.onProcess.Add( function() {
+
+        tilesprite.OffsetPattern( 1, 1 );
+      
+      } );
+
+      console.log( tilesprite );
+    
+    }
+
+    document.body.removeChild( buttonContainer );
+
+  }
+
+};
+
+
+/***/ }),
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4301,7 +4396,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4384,7 +4479,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 128 */
+/* 132 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4502,7 +4597,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 129 */
+/* 133 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4566,7 +4661,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 130 */
+/* 134 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4653,7 +4748,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 131 */
+/* 135 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4752,7 +4847,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 132 */
+/* 136 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4824,7 +4919,7 @@ module.exports = function () {
       var numTimes = 20;
       var hold = 20;
       var holdCounter = 0;
-      var fps = 30;
+      var fps = 40;
 
       var am = 35;
 
@@ -4939,7 +5034,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 133 */
+/* 137 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5035,6 +5130,63 @@ module.exports = function () {
     ic.Load( [
       { id: 'colors', src: './assets/images/colors.png' }
     ], true );
+
+    document.body.removeChild( buttonContainer );
+
+  }
+
+};
+
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'WebGL Tilesprite' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+
+    nk.Tilesprite.BUILD_DEFAULT_TEXTURE( go );
+
+    function go() {
+
+      var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+      c.setAttribute( 'width', window.innerWidth );
+      c.setAttribute( 'height', window.innerHeight );
+      c.style.display = 'initial';
+      c.style.position = 'absolute';
+      c.style.top = '0';
+      c.style.left = '0';
+
+      var W = c.width;
+      var H = c.height;
+  
+      var stage = new nk.Stage2D( c, 0, 0, false, true );
+
+      var pc = nk.GLTextureProgramController( stage.gl );
+      pc.BindBasicTexture( nk.Tilesprite.DEFAULT_TEXTURE );
+
+      var tilesprite = new nk.Tilesprite( W * 0.5 - W * 0.25, H * 0.5 - H * 0.25, pc );
+      tilesprite.GeneratePattern( null, W * 0.5, H * 0.5 );
+
+      stage.AddChild( tilesprite );
+
+      stage.onProcess.Add( function() {
+
+        tilesprite.OffsetPattern( 1, 1 );
+      
+      } );
+
+      console.log( tilesprite );
+    
+    }
 
     document.body.removeChild( buttonContainer );
 

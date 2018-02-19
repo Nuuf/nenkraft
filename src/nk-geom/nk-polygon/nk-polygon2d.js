@@ -12,7 +12,7 @@ module.exports = function ( Nenkraft ) {
     this.vertices = [];
     this.normals = [];
     this.perimeterMidPoints = [];
-    this.centroid = new Nenkraft.Vector2D();
+    this.centroid = Nenkraft.Vector2D();
 
     if ( _vertices != null ) {
 
@@ -53,10 +53,10 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
 
-    var tl = new Nenkraft.Vector2D( _x, _y );
-    var tr = new Nenkraft.Vector2D( _x + _w, _y );
-    var br = new Nenkraft.Vector2D( _x + _w, _y + _h );
-    var bl = new Nenkraft.Vector2D( _x, _y + _h );
+    var tl = Nenkraft.Vector2D( _x, _y );
+    var tr = Nenkraft.Vector2D( _x + _w, _y );
+    var br = Nenkraft.Vector2D( _x + _w, _y + _h );
+    var bl = Nenkraft.Vector2D( _x, _y + _h );
     _po.Recreate( [ tl, tr, br, bl ] );
     _po.ComputeBounds();
     _po.GetNormalsA();
@@ -66,9 +66,9 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.Construct.Isosceles = function ( _po, _x, _y, _w, _h ) {
 
-    var tm = new Nenkraft.Vector2D( _x, _y );
-    var br = new Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
-    var bl = new Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
+    var tm = Nenkraft.Vector2D( _x, _y );
+    var br = Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
+    var bl = Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
     _po.Recreate( [ tm, br, bl ] );
     _po.ComputeBounds();
     _po.GetNormalsA();
@@ -86,7 +86,7 @@ module.exports = function ( Nenkraft ) {
       th = an * i;
       x = Math.cos( th ) * _ra;
       y = Math.sin( th ) * _ra;
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -103,13 +103,13 @@ module.exports = function ( Nenkraft ) {
     _po.Recreate( [] );
     x = Math.cos( 0 ) * _side;
     y = Math.sin( 0 ) * _side;
-    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     x = Math.cos( an ) * _side;
     y = Math.sin( an ) * _side;
-    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     x = Math.cos( an * 2 ) * _side;
     y = Math.sin( an * 2 ) * _side;
-    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     _po.Rotate( Nenkraft.Math.RADIAN * -90 );
     _po.ComputeBounds();
     _po.GetNormalsA();
@@ -128,7 +128,7 @@ module.exports = function ( Nenkraft ) {
       th = an * i;
       x = Math.cos( th ) * ra;
       y = Math.sin( th ) * ra;
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -148,7 +148,7 @@ module.exports = function ( Nenkraft ) {
       u = i * c._1 * Math.PI / _n;
       x = Math.cos( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
       y = Math.sin( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -211,7 +211,7 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -246,7 +246,7 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.prototype.PushPoint = function ( _x, _y ) {
 
-    this.vertices.push( new Nenkraft.Vector2D( _x, _y ) );
+    this.vertices.push( Nenkraft.Vector2D( _x, _y ) );
   
   };
 
@@ -269,7 +269,7 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.prototype.ComputeBounds = function () {
 
-    if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
+    if ( this.aabb === null ) this.aabb = Nenkraft.Geom.AABB2D();
     var mix = Infinity, max = -mix, miy = mix, may = -mix;
 
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {

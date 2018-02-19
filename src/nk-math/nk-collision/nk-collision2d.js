@@ -26,7 +26,7 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.AABB2DvsAABB2D.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D();
+    this.mtv = Nenkraft.Vector2D();
   
   };
 
@@ -75,10 +75,10 @@ module.exports = function ( Nenkraft ) {
       if ( _result != undefined ) {
 
         var tvs = [
-          new Nenkraft.Vector2D( tl1.x - tl2xw, 0 ),
-          new Nenkraft.Vector2D( tl1xw - tl2.x, 0 ),
-          new Nenkraft.Vector2D( 0, tl1.y - br2yh ),
-          new Nenkraft.Vector2D( 0, br1yh - tl2.y )
+          Nenkraft.Vector2D( tl1.x - tl2xw, 0 ),
+          Nenkraft.Vector2D( tl1xw - tl2.x, 0 ),
+          Nenkraft.Vector2D( 0, tl1.y - br2yh ),
+          Nenkraft.Vector2D( 0, br1yh - tl2.y )
         ];
         tvs.sort( Collision2D.VectorSortMinMag );
         _result.mtv.SetV( tvs[ 0 ] );
@@ -96,7 +96,7 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.CirclevsCircle.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D( 0, 0 );
+    this.mtv = Nenkraft.Vector2D( 0, 0 );
     this.poc = {
       a: null,
       b: null,
@@ -153,18 +153,18 @@ module.exports = function ( Nenkraft ) {
 
         var distance = Math.sqrt( distanceSq );
         var dm = ( c1.radiusSquared - c2.radiusSquared + distanceSq ) / ( distance + distance );
-        var poc1 = new Nenkraft.Vector2D(
+        var poc1 = Nenkraft.Vector2D(
           pos1.x + ( delta.x * dm / distance ),
           pos1.y + ( delta.y * dm / distance )
         );
         var de = Math.sqrt( ( c1.radiusSquared ) - ( dm * dm ) ) / distance;
         var rx = -delta.y * de;
         var ry = delta.x * de;
-        var poc2 = new Nenkraft.Vector2D(
+        var poc2 = Nenkraft.Vector2D(
           poc1.x + rx,
           poc1.y + ry
         );
-        var poc3 = new Nenkraft.Vector2D(
+        var poc3 = Nenkraft.Vector2D(
           poc1.x - rx,
           poc1.y - ry
         );
@@ -218,8 +218,8 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.PolygonvsPolygon.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D( 0, 0 );
-    this.olAxis = new Nenkraft.Vector2D( 0, 0 );
+    this.mtv = Nenkraft.Vector2D( 0, 0 );
+    this.olAxis = Nenkraft.Vector2D( 0, 0 );
   
   };
 
@@ -364,8 +364,8 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.CirclevsLine.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D( 0, 0 );
-    this.cp = new Nenkraft.Vector2D( 0, 0 );
+    this.mtv = Nenkraft.Vector2D( 0, 0 );
+    this.cp = Nenkraft.Vector2D( 0, 0 );
   
   };
 

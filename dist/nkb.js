@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.7.0 (Beta)
+* @version     0.7.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 134);
+/******/ 	return __webpack_require__(__webpack_require__.s = 139);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -244,7 +244,7 @@ module.exports = function ( Nenkraft ) {
 
   LocalEvent.prototype.Add = function ( _handle, _context, _removeOnNextCall ) {
 
-    var listener = new Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
+    var listener = Nenkraft.LocalListener( this, _context, _handle, _removeOnNextCall );
     this.listeners.push( listener );
   
   };
@@ -340,12 +340,12 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    this.onStop = new Nenkraft.LocalEvent();
-    this.onFinish = new Nenkraft.LocalEvent();
-    this.onStart = new Nenkraft.LocalEvent();
-    this.onReset = new Nenkraft.LocalEvent();
-    this.onPause = new Nenkraft.LocalEvent();
-    this.onResume = new Nenkraft.LocalEvent();
+    this.onStop = Nenkraft.LocalEvent();
+    this.onFinish = Nenkraft.LocalEvent();
+    this.onStart = Nenkraft.LocalEvent();
+    this.onReset = Nenkraft.LocalEvent();
+    this.onPause = Nenkraft.LocalEvent();
+    this.onResume = Nenkraft.LocalEvent();
   
   }
 
@@ -529,7 +529,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Vector2D.Pool = new Nenkraft.Utils.Pool( Vector2D );
+  Vector2D.Pool = Nenkraft.Utils.Pool( Vector2D );
 
   Vector2D.Pool.Retrieve = function ( _x, _y ) {
 
@@ -559,7 +559,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return new Vector2D( this );
+    return Vector2D( this );
   
   };
 
@@ -571,7 +571,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return new Vector2D( _x, _y );
+    return Vector2D( _x, _y );
   
   };
 
@@ -1272,15 +1272,70 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 134:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(135);
+module.exports = __webpack_require__(140);
 
 
 /***/ }),
 
-/***/ 135:
+/***/ 14:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Basetransform2D ( _x, _y ) {
+
+    if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D( _x, _y );
+    this.position = Nenkraft.Vector2D( _x, _y );
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.localTransform = Nenkraft.Vector2D( 0, 0 );
+    this.worldTransform = Nenkraft.Vector2D( 0, 0 );
+  
+  }
+
+  Basetransform2D.prototype = Object.create( null );
+  Basetransform2D.prototype.constructor = Basetransform2D;
+  // Static
+
+  // Members
+
+  // Methods
+  Basetransform2D.prototype.UpdateLocal = function () {
+
+    this.localTransform.SetV( this.position );
+  
+  };
+
+  Basetransform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
+
+    var localTransform = this.localTransform;
+    localTransform.SetV( this.position );
+    this.worldTransform.Set( _parentWorldTransform.e + localTransform.x, _parentWorldTransform.f + localTransform.y );
+  
+  };
+
+  Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
+
+    _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
+  
+  };
+
+  Nenkraft.Math.Basetransform2D = Basetransform2D;
+
+};
+
+
+/***/ }),
+
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1290,7 +1345,7 @@ module.exports = __webpack_require__(135);
 var namespace = Object.create( null );
 
 __webpack_require__( 1 )();
-__webpack_require__( 136 )( namespace );
+__webpack_require__( 141 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
@@ -1301,7 +1356,7 @@ __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
-__webpack_require__( 137 )( namespace );
+__webpack_require__( 142 )( namespace );
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 14 )( namespace );
@@ -1327,7 +1382,7 @@ module.exports = namespace;
 
 /***/ }),
 
-/***/ 136:
+/***/ 141:
 /***/ (function(module, exports) {
 
 /**
@@ -1343,7 +1398,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.7.0 (Beta)';
+  Nenkraft.VERSION = '0.7.5 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -1356,7 +1411,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 137:
+/***/ 142:
 /***/ (function(module, exports) {
 
 /**
@@ -1473,61 +1528,6 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 14:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Basetransform2D ( _x, _y ) {
-
-    if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D();
-    this.position = new Nenkraft.Vector2D( _x, _y );
-    this.scale = new Nenkraft.Vector2D( 1, 1 );
-    this.localTransform = new Nenkraft.Vector2D( 0, 0 );
-    this.worldTransform = new Nenkraft.Vector2D( 0, 0 );
-  
-  }
-
-  Basetransform2D.prototype = Object.create( null );
-  Basetransform2D.prototype.constructor = Basetransform2D;
-  // Static
-
-  // Members
-
-  // Methods
-  Basetransform2D.prototype.UpdateLocal = function () {
-
-    this.localTransform.SetV( this.position );
-  
-  };
-
-  Basetransform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
-
-    var localTransform = this.localTransform;
-    localTransform.SetV( this.position );
-    this.worldTransform.Set( _parentWorldTransform.e + localTransform.x, _parentWorldTransform.f + localTransform.y );
-  
-  };
-
-  Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
-
-    _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
-  
-  };
-
-  Nenkraft.Math.Basetransform2D = Basetransform2D;
-
-};
-
-
-/***/ }),
-
 /***/ 15:
 /***/ (function(module, exports) {
 
@@ -1543,11 +1543,11 @@ module.exports = function ( Nenkraft ) {
 
     if ( !( this instanceof Transform2D ) ) return new Transform2D( _x, _y );
     this.position = Nenkraft.Vector2D( _x, _y );
-    this.scale = new Nenkraft.Vector2D( 1, 1 );
-    this.skew = new Nenkraft.Vector2D( 0, 0 );
-    this.pivot = new Nenkraft.Vector2D( 0, 0 );
-    this.localTransform = new Nenkraft.Matrix2D();
-    this.worldTransform = new Nenkraft.Matrix2D();
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.skew = Nenkraft.Vector2D( 0, 0 );
+    this.pivot = Nenkraft.Vector2D( 0, 0 );
+    this.localTransform = Nenkraft.Matrix2D();
+    this.worldTransform = Nenkraft.Matrix2D();
   
   }
 
@@ -1654,14 +1654,14 @@ module.exports = function ( Nenkraft ) {
     }
     else if ( _arg0 !== undefined && _arg1 !== undefined && _arg2 !== undefined && _arg3 !== undefined ) {
 
-      this.s = new Nenkraft.Vector2D( _arg0, _arg1 );
-      this.e = new Nenkraft.Vector2D( _arg2, _arg3 );
+      this.s = Nenkraft.Vector2D( _arg0, _arg1 );
+      this.e = Nenkraft.Vector2D( _arg2, _arg3 );
     
     }
     else {
 
-      this.s = new Nenkraft.Vector2D();
-      this.e = new Nenkraft.Vector2D();
+      this.s = Nenkraft.Vector2D();
+      this.e = Nenkraft.Vector2D();
     
     }
   
@@ -1800,20 +1800,20 @@ module.exports = function ( Nenkraft ) {
       _arg1.y !== undefined
     ) {
 
-      this.tl = new Nenkraft.Vector2D( _arg0.x, _arg0.y );
-      this.br = new Nenkraft.Vector2D( _arg1.x, _arg1.y );
+      this.tl = Nenkraft.Vector2D( _arg0.x, _arg0.y );
+      this.br = Nenkraft.Vector2D( _arg1.x, _arg1.y );
     
     }
     else if ( _arg0 !== undefined && _arg1 !== undefined && _arg2 !== undefined && _arg3 !== undefined ) {
 
-      this.tl = new Nenkraft.Vector2D( _arg0, _arg1 );
-      this.br = new Nenkraft.Vector2D( _arg2, _arg3 );
+      this.tl = Nenkraft.Vector2D( _arg0, _arg1 );
+      this.br = Nenkraft.Vector2D( _arg2, _arg3 );
     
     }
     else {
 
-      this.tl = new Nenkraft.Vector2D();
-      this.br = new Nenkraft.Vector2D();
+      this.tl = Nenkraft.Vector2D();
+      this.br = Nenkraft.Vector2D();
     
     }
 
@@ -1880,28 +1880,28 @@ module.exports = function ( Nenkraft ) {
     switch ( _quadrant ) {
 
       case AABB2D.TOP_LEFT:
-        return new AABB2D(
+        return AABB2D(
           tl.x,
           tl.y,
           tl.x + this.hw,
           tl.y + this.hh
         );
       case AABB2D.TOP_RIGHT:
-        return new AABB2D(
+        return AABB2D(
           tl.x + this.hw,
           tl.y,
           br.x,
           tl.y + this.hh
         );
       case AABB2D.BOTTOM_LEFT:
-        return new AABB2D(
+        return AABB2D(
           tl.x,
           tl.y + this.hh,
           tl.x + this.hw,
           br.y
         );
       case AABB2D.BOTTOM_RIGHT:
-        return new AABB2D(
+        return AABB2D(
           tl.x + this.hw,
           tl.y + this.hh,
           br.x,
@@ -1971,7 +1971,7 @@ module.exports = function ( Nenkraft ) {
     this.vertices = [];
     this.normals = [];
     this.perimeterMidPoints = [];
-    this.centroid = new Nenkraft.Vector2D();
+    this.centroid = Nenkraft.Vector2D();
 
     if ( _vertices != null ) {
 
@@ -2012,10 +2012,10 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
 
-    var tl = new Nenkraft.Vector2D( _x, _y );
-    var tr = new Nenkraft.Vector2D( _x + _w, _y );
-    var br = new Nenkraft.Vector2D( _x + _w, _y + _h );
-    var bl = new Nenkraft.Vector2D( _x, _y + _h );
+    var tl = Nenkraft.Vector2D( _x, _y );
+    var tr = Nenkraft.Vector2D( _x + _w, _y );
+    var br = Nenkraft.Vector2D( _x + _w, _y + _h );
+    var bl = Nenkraft.Vector2D( _x, _y + _h );
     _po.Recreate( [ tl, tr, br, bl ] );
     _po.ComputeBounds();
     _po.GetNormalsA();
@@ -2025,9 +2025,9 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.Construct.Isosceles = function ( _po, _x, _y, _w, _h ) {
 
-    var tm = new Nenkraft.Vector2D( _x, _y );
-    var br = new Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
-    var bl = new Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
+    var tm = Nenkraft.Vector2D( _x, _y );
+    var br = Nenkraft.Vector2D( _x + _w * 0.5, _y + _h );
+    var bl = Nenkraft.Vector2D( _x - _w * 0.5, _y + _h );
     _po.Recreate( [ tm, br, bl ] );
     _po.ComputeBounds();
     _po.GetNormalsA();
@@ -2045,7 +2045,7 @@ module.exports = function ( Nenkraft ) {
       th = an * i;
       x = Math.cos( th ) * _ra;
       y = Math.sin( th ) * _ra;
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -2062,13 +2062,13 @@ module.exports = function ( Nenkraft ) {
     _po.Recreate( [] );
     x = Math.cos( 0 ) * _side;
     y = Math.sin( 0 ) * _side;
-    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     x = Math.cos( an ) * _side;
     y = Math.sin( an ) * _side;
-    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     x = Math.cos( an * 2 ) * _side;
     y = Math.sin( an * 2 ) * _side;
-    _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+    _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     _po.Rotate( Nenkraft.Math.RADIAN * -90 );
     _po.ComputeBounds();
     _po.GetNormalsA();
@@ -2087,7 +2087,7 @@ module.exports = function ( Nenkraft ) {
       th = an * i;
       x = Math.cos( th ) * ra;
       y = Math.sin( th ) * ra;
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -2107,7 +2107,7 @@ module.exports = function ( Nenkraft ) {
       u = i * c._1 * Math.PI / _n;
       x = Math.cos( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
       y = Math.sin( u ) * ( Math.exp( Math.cos( u ) ) - c._2 * Math.cos( c._3 * u ) - Math.pow( Math.sin( u / c._4 ), c._5 ) ) * _ra;
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -2170,7 +2170,7 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-      _po.AddPoint( new Nenkraft.Vector2D( _x + x, _y + y ) );
+      _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     
     }
 
@@ -2205,7 +2205,7 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.prototype.PushPoint = function ( _x, _y ) {
 
-    this.vertices.push( new Nenkraft.Vector2D( _x, _y ) );
+    this.vertices.push( Nenkraft.Vector2D( _x, _y ) );
   
   };
 
@@ -2228,7 +2228,7 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.prototype.ComputeBounds = function () {
 
-    if ( this.aabb === null ) this.aabb = new Nenkraft.Geom.AABB2D();
+    if ( this.aabb === null ) this.aabb = Nenkraft.Geom.AABB2D();
     var mix = Infinity, max = -mix, miy = mix, may = -mix;
 
     for ( var i = 0, ps = this.vertices, l = ps.length, p; i < l; ++i ) {
@@ -2395,7 +2395,7 @@ module.exports = function ( Nenkraft ) {
   function Circle ( _x, _y, _radius ) {
 
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
-    this.center = new Nenkraft.Vector2D( _x, _y );
+    this.center = Nenkraft.Vector2D( _x, _y );
     this.radius = _radius === undefined ? 32 : _radius;
   
   }
@@ -2693,7 +2693,7 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.AABB2DvsAABB2D.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D();
+    this.mtv = Nenkraft.Vector2D();
   
   };
 
@@ -2742,10 +2742,10 @@ module.exports = function ( Nenkraft ) {
       if ( _result != undefined ) {
 
         var tvs = [
-          new Nenkraft.Vector2D( tl1.x - tl2xw, 0 ),
-          new Nenkraft.Vector2D( tl1xw - tl2.x, 0 ),
-          new Nenkraft.Vector2D( 0, tl1.y - br2yh ),
-          new Nenkraft.Vector2D( 0, br1yh - tl2.y )
+          Nenkraft.Vector2D( tl1.x - tl2xw, 0 ),
+          Nenkraft.Vector2D( tl1xw - tl2.x, 0 ),
+          Nenkraft.Vector2D( 0, tl1.y - br2yh ),
+          Nenkraft.Vector2D( 0, br1yh - tl2.y )
         ];
         tvs.sort( Collision2D.VectorSortMinMag );
         _result.mtv.SetV( tvs[ 0 ] );
@@ -2763,7 +2763,7 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.CirclevsCircle.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D( 0, 0 );
+    this.mtv = Nenkraft.Vector2D( 0, 0 );
     this.poc = {
       a: null,
       b: null,
@@ -2820,18 +2820,18 @@ module.exports = function ( Nenkraft ) {
 
         var distance = Math.sqrt( distanceSq );
         var dm = ( c1.radiusSquared - c2.radiusSquared + distanceSq ) / ( distance + distance );
-        var poc1 = new Nenkraft.Vector2D(
+        var poc1 = Nenkraft.Vector2D(
           pos1.x + ( delta.x * dm / distance ),
           pos1.y + ( delta.y * dm / distance )
         );
         var de = Math.sqrt( ( c1.radiusSquared ) - ( dm * dm ) ) / distance;
         var rx = -delta.y * de;
         var ry = delta.x * de;
-        var poc2 = new Nenkraft.Vector2D(
+        var poc2 = Nenkraft.Vector2D(
           poc1.x + rx,
           poc1.y + ry
         );
-        var poc3 = new Nenkraft.Vector2D(
+        var poc3 = Nenkraft.Vector2D(
           poc1.x - rx,
           poc1.y - ry
         );
@@ -2885,8 +2885,8 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.PolygonvsPolygon.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D( 0, 0 );
-    this.olAxis = new Nenkraft.Vector2D( 0, 0 );
+    this.mtv = Nenkraft.Vector2D( 0, 0 );
+    this.olAxis = Nenkraft.Vector2D( 0, 0 );
   
   };
 
@@ -3031,8 +3031,8 @@ module.exports = function ( Nenkraft ) {
 
   Collision2D.CirclevsLine.Result = function () {
 
-    this.mtv = new Nenkraft.Vector2D( 0, 0 );
-    this.cp = new Nenkraft.Vector2D( 0, 0 );
+    this.mtv = Nenkraft.Vector2D( 0, 0 );
+    this.cp = Nenkraft.Vector2D( 0, 0 );
   
   };
 
@@ -3209,11 +3209,11 @@ module.exports = function ( Nenkraft ) {
     if ( _value !== undefined ) this.value = _value;
     if ( _duration !== undefined ) this.duration = _duration;
     this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
-    this.onStart = new Nenkraft.Event.LocalEvent();
-    this.onEnd = new Nenkraft.Event.LocalEvent();
-    this.onStop = new Nenkraft.Event.LocalEvent();
-    this.onReconfigure = new Nenkraft.Event.LocalEvent();
-    this.onReset = new Nenkraft.Event.LocalEvent();
+    this.onStart = Nenkraft.Event.LocalEvent();
+    this.onEnd = Nenkraft.Event.LocalEvent();
+    this.onStop = Nenkraft.Event.LocalEvent();
+    this.onReconfigure = Nenkraft.Event.LocalEvent();
+    this.onReset = Nenkraft.Event.LocalEvent();
   
   }
 
@@ -3344,7 +3344,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( exists === null ) {
 
-      var motion = new Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
+      var motion = Nenkraft.Motion( _id, this.target, _propertyString, _value, _duration, _easing );
       this.motions.push( motion );
       return motion;
     
@@ -3503,7 +3503,7 @@ module.exports = function ( Nenkraft ) {
   QuadtreeNode.TOP_RIGHT = 'TR';
   QuadtreeNode.BOTTOM_LEFT = 'BL';
   QuadtreeNode.BOTTOM_RIGHT = 'BR';
-  QuadtreeNode.Pool = new Nenkraft.Utils.Pool( QuadtreeNode );
+  QuadtreeNode.Pool = Nenkraft.Utils.Pool( QuadtreeNode );
 
   QuadtreeNode.Pool.Retrieve = function( _aabb, _level, _objCap, _levelCap ) {
 
@@ -3548,7 +3548,7 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    return new QuadtreeNode( _aabb, _level, _objCap, _levelCap );
+    return QuadtreeNode( _aabb, _level, _objCap, _levelCap );
   
   };
 
@@ -3770,7 +3770,7 @@ module.exports = function ( Nenkraft ) {
   function CoreEntity2D ( _x, _y ) {
 
     if ( !( this instanceof CoreEntity2D ) ) return new CoreEntity2D( _x, _y );
-    this.transform = new Nenkraft.Math.Transform2D( _x, _y );
+    this.transform = Nenkraft.Math.Transform2D( _x, _y );
     this.data = Object.create( null );
   
   }
@@ -3778,7 +3778,7 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype = Object.create( null );
   CoreEntity2D.prototype.constructor = CoreEntity2D;
   // Static
-  CoreEntity2D.NULL_TRANSFORM = new Nenkraft.Math.Transform2D();
+  CoreEntity2D.NULL_TRANSFORM = Nenkraft.Math.Transform2D();
   // Members
   CoreEntity2D.prototype.parent = null;
   CoreEntity2D.prototype.transform = null;
@@ -3806,7 +3806,7 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.GetWorldPosition = function () {
 
     var wt = this.transform.worldTransform;
-    return new Nenkraft.Vector2D( wt.e, wt.f );
+    return Nenkraft.Vector2D( wt.e, wt.f );
   
   };
 
@@ -3817,7 +3817,7 @@ module.exports = function ( Nenkraft ) {
 
     if ( this.bounds === null ) {
 
-      this.bounds = new Nenkraft.Geom.AABB2D(
+      this.bounds = Nenkraft.Geom.AABB2D(
         this.x - this.width * ax,
         this.y - this.height * ay,
         this.x + this.width,
@@ -4522,7 +4522,7 @@ module.exports = function ( Nenkraft ) {
     if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
     if ( this.options === null ) this.options = [];
     _priority = _priority === undefined ? 0 : _priority;
-    var opt = new Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
+    var opt = Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
     opt.command = this;
 
     for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {

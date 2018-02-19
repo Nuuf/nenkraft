@@ -9,7 +9,7 @@ module.exports = function ( Nenkraft ) {
   function Circle ( _x, _y, _radius ) {
 
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
-    this.center = new Nenkraft.Vector2D( _x, _y );
+    this.center = Nenkraft.Vector2D( _x, _y );
     this.radius = _radius === undefined ? 32 : _radius;
   
   }
