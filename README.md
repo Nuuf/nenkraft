@@ -22,4 +22,4 @@ Click [here](https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests) for ex
 
 Click [here](http://www.spiritsoferutanya.com) for examples (live)
 
-[logo]: ./assets/images/nenkraft-banner.png "nenkraft"
+[logo]: nenkraft-banner.png "nenkraft"

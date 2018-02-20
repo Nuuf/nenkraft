@@ -37,4 +37,4 @@ However; you are free to do so if you want to.
 Click [here](https://github.com/Nuuf/nenkraft/tree/master/tests/nk-tests) for examples (source code) (Examples are by no means optimized or fully functional)
 Click [here](http://www.spiritsoferutanya.com) for examples (live)
 
-[logo]: https://raw.githubusercontent.com/Nuuf/nenkraft/master/assets/images/nenkraft-banner.png "nenkraft"
+[logo]: https://raw.githubusercontent.com/Nuuf/nenkraft/master/nenkraft-banner.png "nenkraft"

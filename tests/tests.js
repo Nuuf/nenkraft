@@ -1,18 +1,5 @@
 require( './../style/default.css' );
 
-require( './../assets/images/1to8.png' );
-require( './../assets/images/4dots.png' );
-require( './../assets/images/glass-of-blueberryjuice.png' );
-require( './../assets/images/raindrop.png' );
-require( './../assets/images/smudge.png' );
-require( './../assets/images/colors.png' );
-require( './../assets/images/font.png' );
-require( './../assets/images/invaders/invaders.png' );
-require( './../assets/images/invaders/invaders-sheet.png' );
-require( './../assets/images/invaders/invaders-sheet-red.png' );
-require( './../assets/images/invaders/invaders-sheet-blue.png' );
-require( './../assets/images/invaders/invaders-sheet-green.png' );
-
 var tests = [];
 
 var context = require.context( './nk-tests', true, /\.(test)$/ );

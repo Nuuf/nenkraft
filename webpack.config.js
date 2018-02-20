@@ -6,6 +6,7 @@ var
   banner = require( './banner' )(),
   ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
   HTMLWebpackPlugin = require( 'html-webpack-plugin' ),
+  CopyWebpackPlugin = require( 'copy-webpack-plugin' ),
   PRODUCTION = process.env.NODE_ENV === 'production',
   DEVELOPMENT = process.env.NODE_ENV === 'development',
   LIBRARYBUNDLE = process.env.NODE_ENV === 'librarybundle',
@@ -41,7 +42,10 @@ if ( PRODUCTION ) {
       template: 'build_template.html',
       excludeChunks: [ 'nkb' ]
     } ),
-    new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } )
+    new webpack.BannerPlugin( { banner: banner, raw: true, entryOnly: true } ),
+    new CopyWebpackPlugin( [
+      { from: './assets/**/*', toType: 'dir' }
+    ] )
   ];
 
   cssIdentifier = '[hash:base64:10]';
