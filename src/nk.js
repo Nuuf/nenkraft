@@ -12,9 +12,11 @@ require( './nk-utils/nk-assert' )( namespace );
 require( './nk-utils/nk-pool' )( namespace );
 require( './nk-utils/nk-cache' )( namespace );
 require( './nk-utils/nk-utils' )( namespace );
+require( './nk-utils/nk-browser-utils' )( namespace );
 require( './nk-utils/nk-color' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
+require( './nk-utils/nk-canvas-manager' )( namespace );
 require( './nk-style/nk-fill' )( namespace );
 require( './nk-style/nk-shadow' )( namespace );
 require( './nk-style/nk-stroke' )( namespace );
@@ -78,7 +80,6 @@ require( './nk-controller/nk-gl-program-controller/nk-gl-circle-program-controll
 require( './nk-controller/nk-gl-program-controller/nk-gl-texture-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-texture-batch-program-controller' )( namespace );
 require( './nk-controller/nk-gl-program-controller/nk-gl-pixel-batch-program-controller' )( namespace );
-require( './nk-editor/nk-editor' )( namespace );
 
 if ( PRODUCTION || DEVELOPMENT ) {
 

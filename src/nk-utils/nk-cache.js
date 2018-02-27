@@ -29,6 +29,7 @@ module.exports = function ( Nenkraft ) {
 
   // Members
   Cache.prototype.type = null;
+  Cache.prototype.items = null;
 
   // Methods
   Cache.prototype.Store = function ( _item ) {

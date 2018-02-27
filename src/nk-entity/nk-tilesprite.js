@@ -118,9 +118,21 @@ module.exports = function ( Nenkraft ) {
 
   Tilesprite.prototype.OffsetPattern = function( _x, _y ) {
 
-    var patternOffset = this.patternOffset;
-    patternOffset.Add( _x, _y );
+    this.patternOffset.Add( _x, _y );
     this.textureTransformation.Translate( -_x / this.w, -_y / this.h );
+  
+  };
+
+  Tilesprite.prototype.SetPatternOffset = function ( _x, _y ) {
+
+    this.patternOffset.Set( _x, _y );
+    this.textureTransformation.TranslateTo( -_x / this.w, -_y / this.h );
+  
+  };
+
+  Tilesprite.prototype.GetPatternOffset = function() {
+
+    return this.patternOffset;
   
   };
 

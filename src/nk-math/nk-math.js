@@ -10,21 +10,17 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
   Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
 
-  Nenkraft.Math.DegreesToRadians = function ( _angle ) {
+  Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
 
     return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
   
   };
 
-  Nenkraft.Math.DTR = Nenkraft.Math.DegreesToRadians;
-
-  Nenkraft.Math.RadiansToDegrees = function ( _angle ) {
+  Nenkraft.Math.RadiansToDegrees = Nenkraft.Math.RTD = function ( _angle ) {
 
     return _angle * Nenkraft.Math.RADIANS_TO_DEGREES;
   
   };
-
-  Nenkraft.Math.RTD = Nenkraft.Math.RadiansToDegrees;
 
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
@@ -151,6 +147,23 @@ module.exports = function ( Nenkraft ) {
       _x + _w, _y + _h
     ];
   
+  };
+
+  var GCD = Nenkraft.Math.GreatestCommonDivisor = Nenkraft.Math.GCD = function( _x, _y ) {
+
+    if ( _y === 0 ) return _x;
+    return GCD( _y, _x % _y );
+  
+  };
+
+  Nenkraft.Math.SimplifyAspectRatio = Nenkraft.Math.SAR = function( _x, _y, _array ) {
+
+    var gcd = GCD( _x, _y );
+    var array = _array == null ? [] : _array;
+    array[0] = _x / gcd;
+    array[1] = _y / gcd;
+    return array;
+
   };
 
   Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
