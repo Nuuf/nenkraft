@@ -1,0 +1,38 @@
+#menuContainer {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#showMenuButton {
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+}
+
+#menuList li {
+  cursor: pointer;
+}
+
+#EIMContainer {
+  position: absolute;
+  display: none;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#showEIMButton {
+  position: absolute;
+  display: block;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
