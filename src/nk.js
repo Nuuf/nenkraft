@@ -64,6 +64,8 @@ require( './nk-entity/nk-tilesprite' )( namespace );
 require( './nk-entity/nk-char' )( namespace );
 require( './nk-entity/nk-bitmap-text' )( namespace );
 require( './nk-entity/nk-camera2d' )( namespace );
+require( './nk-particles/nk-particle' )( namespace );
+require( './nk-particles/nk-particle-system' )( namespace );
 require( './nk-animator/nk-frame' )( namespace );
 require( './nk-animator/nk-animation' )( namespace );
 require( './nk-animator/nk-controller' )( namespace );

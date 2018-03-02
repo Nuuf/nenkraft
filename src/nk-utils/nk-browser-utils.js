@@ -9,7 +9,7 @@ module.exports = function ( Nenkraft ) {
   var CANVASRC = null;
   var DPARSER = null;
 
-  Nenkraft.Utils.GenerateSimpleBase64Png = function ( _imageFunction ) {
+  Nenkraft.Utils.GenerateSimpleBase64Png = function ( _imageFunction, _forceWidth, _forceHeight ) {
 
     var drawable = _imageFunction();
 
@@ -21,8 +21,22 @@ module.exports = function ( Nenkraft ) {
     }
 
     CANVASRC.clearRect( 0, 0, CANVAS.width, CANVAS.height );
+
     CANVAS.width = drawable.w;
     CANVAS.height = drawable.h;
+
+    if ( _forceWidth != null ) {
+
+      CANVAS.width = _forceWidth;
+    
+    }
+
+    if ( _forceHeight != null ) {
+
+      CANVAS.height = _forceHeight;
+    
+    }
+
     CANVASRC.setTransform( 1, 0, 0, 1, 0, 0 );
     drawable.Draw( CANVASRC );
     return CANVAS.toDataURL( 'image/png' );

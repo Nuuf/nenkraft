@@ -22,7 +22,11 @@ module.exports = function () {
 
     var l = 200;
 
-    var stage = new nk.Stage2D( c, HW, H );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: H
+    } );
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {

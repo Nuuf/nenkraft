@@ -21,7 +21,11 @@ module.exports = function () {
     var W = c.width;
     var H = c.height;
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     var container = new nk.Container2D();
     stage.AddChild( container );
 

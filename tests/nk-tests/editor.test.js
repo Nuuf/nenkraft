@@ -44,7 +44,11 @@ module.exports = function () {
   
       function Init() {
   
-        stage = nk.Stage2D( c, 0, 0 );
+        stage = nk.Stage2D( { 
+          canvas: c,
+          x: 0,
+          y: 0
+        } );
         root = nk.Container2D();
         trunk = nk.Container2D();
         camera = nk.Camera2D();
@@ -76,6 +80,8 @@ module.exports = function () {
         camera.AddChild( trunk );
         trunk.AddChild( scene );
 
+        scene.AddChild( nk.Sprite( 0, 0 ) );
+
         stage.mouse.onDown.Add( function( event ) {
 
           dragStart.SetV( event.data.position );
@@ -93,7 +99,11 @@ module.exports = function () {
 
             for ( var i = 0; i < sceneChildren.length; ++i ) {
 
+              console.log( intersectionPoint );
+
               if ( sceneChildren[i].IntersectsPoint( intersectionPoint ) ) {
+
+                console.log( 0 );
 
                 dragger = sceneChildren[i];
                 dragOffset.SetV( dragger.position );

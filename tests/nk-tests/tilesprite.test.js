@@ -24,7 +24,13 @@ module.exports = function () {
       var W = c.width;
       var H = c.height;
   
-      var stage = new nk.Stage2D( c, 0, 0, false, false );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: 0,
+        y: 0,
+        halt: false,
+        mode: '2d'
+      } );
 
       var tilesprite = new nk.Tilesprite( W * 0.5 - W * 0.25, H * 0.5 - H * 0.25 );
       tilesprite.GeneratePattern( stage.rc, W * 0.5, H * 0.5 );

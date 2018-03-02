@@ -24,7 +24,11 @@ module.exports = function () {
       var W = c.width, HW = W * 0.5;
       var H = c.height, HH = H * 0.5;
   
-      var stage = new nk.Stage2D( c, HW, HH );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: HW,
+        y: HH
+      } );
   
       var motObj = new nk.Sprite( 0, 0 );
       motObj.anchor.Set( 0.5 );

@@ -20,7 +20,13 @@ module.exports = function () {
     var W = c.width;
     var H = c.height;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLRectangleProgramController( stage.gl );
 

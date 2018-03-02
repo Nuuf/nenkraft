@@ -17,7 +17,11 @@ module.exports = function () {
     c.style.top = '0';
     c.style.left = '0';
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     stage.backgroundColor = '#FFF';
 
     var xhrloader = new nk.XHRLoader();

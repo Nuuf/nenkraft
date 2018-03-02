@@ -167,13 +167,13 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.UpdateInBuffer = function () {
 
-    throw new Error( 'Cannot update buffer data directly on Container2D object!' );
+    throw new Error( 'Cannot update buffer data directly!' );
   
   };
 
   Container2D.prototype.GetBufferData = function () {
 
-    throw new Error( 'Cannot access buffer data directly on Container2D object!' );
+    throw new Error( 'Cannot access buffer data directly!' );
   
   };
 

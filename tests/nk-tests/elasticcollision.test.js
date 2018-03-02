@@ -22,7 +22,12 @@ module.exports = function () {
     var W = c.width;
     var H = c.height;
 
-    var stage = new nk.Stage2D( c, 0, 0, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0, 
+      y: 0,
+      halt: true
+    } );
     stage.ComputeBounds();
     stage.backgroundColor = 'rgba(255,255,255,1)';
     // stage.clear = false;

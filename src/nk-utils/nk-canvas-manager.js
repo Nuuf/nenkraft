@@ -105,6 +105,12 @@ module.exports = function ( Nenkraft ) {
         _w / this.w,
         _h / this.h
       );
+
+      if ( this.stage.usingWebGL === true ) {
+        
+        this.stage.GLConfig();
+
+      }
     
     }
 

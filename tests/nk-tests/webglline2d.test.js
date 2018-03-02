@@ -23,7 +23,13 @@ module.exports = function () {
     var mX = W / 45;
     var mY = H / 45;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLLine2DProgramController( stage.gl );
 

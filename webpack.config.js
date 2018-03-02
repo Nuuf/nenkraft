@@ -123,6 +123,10 @@ module.exports = function ( env ) {
     entry: entry,
     plugins: plugins,
     externals: {},
+    // mode: DEVELOPMENT ? 'development' : 'production',
+    performance: {
+      maxEntrypointSize: 1000000
+    },
     module: {
       rules: [ {
         test: /\.png|jpg|gif$/,
