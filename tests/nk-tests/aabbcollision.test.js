@@ -17,7 +17,11 @@ module.exports = function () {
     c.style.top = '100px';
     c.style.left = '100px';
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     stage.scale.Set( 1, 1 );
     stage.mouse.scale.SetV( stage.scale );
 

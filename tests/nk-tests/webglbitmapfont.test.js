@@ -17,7 +17,13 @@ module.exports = function () {
     c.style.top = '0';
     c.style.left = '0';
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     var fontPc = new nk.GLTextureProgramController( stage.gl );
 

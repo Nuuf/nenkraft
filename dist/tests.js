@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.8.0 (Beta)
+* @version     0.9.0 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,25 +67,25 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 85);
+/******/ 	return __webpack_require__(__webpack_require__.s = 87);
 /******/ })
 /************************************************************************/
-/******/ (Array(85).concat([
-/* 85 */
+/******/ (Array(87).concat([
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(86);
+module.exports = __webpack_require__(88);
 
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__( 87 );
+__webpack_require__( 89 );
 
 var tests = [];
 
-var context = __webpack_require__(88);
+var context = __webpack_require__(90);
 
 context.keys().forEach( function ( file ) {
 
@@ -103,56 +103,56 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 89,
-	"./animation.test": 90,
-	"./bitmapfont.test": 91,
-	"./butterflyish.test": 92,
-	"./camera.test": 93,
-	"./cli.test": 94,
-	"./clock.test": 95,
-	"./editor.test": 96,
-	"./elasticcollision.test": 98,
-	"./field.test": 99,
-	"./fractree.test": 100,
-	"./grabndrag.test": 101,
-	"./grid.test": 102,
-	"./invaders.test": 103,
-	"./magnet.test": 104,
-	"./motion.test": 105,
-	"./nightsky.test": 106,
-	"./particles.test": 107,
-	"./platformer.test": 108,
-	"./playground.test": 109,
-	"./polygoncollision.test": 110,
-	"./quadtree.test": 111,
-	"./rain.test": 112,
-	"./raycasting.test": 113,
-	"./reflectivecollision.test": 114,
-	"./scaling.test": 115,
-	"./sprite.test": 116,
-	"./stresstest.test": 117,
-	"./text.test": 118,
-	"./themask.test": 119,
-	"./tilesprite.test": 120,
-	"./webglanimation.test": 121,
-	"./webglbitmapfont.test": 122,
-	"./webglcircle.test": 123,
-	"./webglline2d.test": 124,
-	"./webglpixelbatch.test": 125,
-	"./webglrectangle.test": 126,
-	"./webglstresstest.test": 127,
-	"./webgltexturebatch.test": 128,
-	"./webgltilesprite.test": 129
+	"./aabbcollision.test": 91,
+	"./animation.test": 92,
+	"./bitmapfont.test": 93,
+	"./butterflyish.test": 94,
+	"./camera.test": 95,
+	"./cli.test": 96,
+	"./clock.test": 97,
+	"./editor.test": 98,
+	"./elasticcollision.test": 100,
+	"./field.test": 101,
+	"./fractree.test": 102,
+	"./grabndrag.test": 103,
+	"./grid.test": 104,
+	"./invaders.test": 105,
+	"./magnet.test": 106,
+	"./motion.test": 107,
+	"./nightsky.test": 108,
+	"./particles.test": 109,
+	"./particlesystem.test": 110,
+	"./platformer.test": 111,
+	"./polygoncollision.test": 112,
+	"./quadtree.test": 113,
+	"./rain.test": 114,
+	"./raycasting.test": 115,
+	"./reflectivecollision.test": 116,
+	"./scaling.test": 117,
+	"./sprite.test": 118,
+	"./stresstest.test": 119,
+	"./text.test": 120,
+	"./themask.test": 121,
+	"./tilesprite.test": 122,
+	"./webglanimation.test": 123,
+	"./webglbitmapfont.test": 124,
+	"./webglcircle.test": 125,
+	"./webglline2d.test": 126,
+	"./webglpixelbatch.test": 127,
+	"./webglrectangle.test": 128,
+	"./webglstresstest.test": 129,
+	"./webgltexturebatch.test": 130,
+	"./webgltilesprite.test": 131
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -168,10 +168,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 88;
+webpackContext.id = 90;
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -193,7 +193,11 @@ module.exports = function () {
     c.style.top = '100px';
     c.style.left = '100px';
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     stage.scale.Set( 1, 1 );
     stage.mouse.scale.SetV( stage.scale );
 
@@ -296,7 +300,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -321,7 +325,12 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: true
+    } );
     stage.ticker.StartAF();
 
     var sprite = null;
@@ -381,7 +390,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -403,7 +412,11 @@ module.exports = function () {
     c.style.top = '0';
     c.style.left = '0';
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     stage.backgroundColor = '#FFF';
 
     var xhrloader = new nk.XHRLoader();
@@ -462,7 +475,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -582,7 +595,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -609,7 +622,11 @@ module.exports = function () {
 
     function go() {
 
-      var stage = new nk.Stage2D( c, window.innerWidth * 0.5, window.innerHeight * 0.5 );
+      var stage = new nk.Stage2D( {
+        canvas: c,
+        x: window.innerWidth * 0.5,
+        y: window.innerHeight * 0.5
+      } );
       var camera = stage.AddChild( new nk.Camera2D( new nk.Vector2D( 0, 0 ), null ) );
       var root = camera.AddChild( new nk.Container2D() );
 
@@ -648,7 +665,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -742,7 +759,12 @@ module.exports = function () {
     var cIndex = -1;
     var cHistory = [];
 
-    var stage = new nk.Stage2D( c, HW, HH, false );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: false
+    } );
 
     var circleEntity = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 50 ) );
     stage.AddChild( circleEntity );
@@ -875,7 +897,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -900,7 +922,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
 
     var clockPoints = new nk.Geom.Polygon2D();
     nk.Geom.Polygon2D.Construct.Cyclic( clockPoints, 0, 0, 300, 12 );
@@ -955,12 +981,12 @@ module.exports = function () {
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function () {
 
-  __webpack_require__( 97 );
+  __webpack_require__( 99 );
 
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
@@ -1004,7 +1030,11 @@ module.exports = function () {
   
       function Init() {
   
-        stage = nk.Stage2D( c, 0, 0 );
+        stage = nk.Stage2D( { 
+          canvas: c,
+          x: 0,
+          y: 0
+        } );
         root = nk.Container2D();
         trunk = nk.Container2D();
         camera = nk.Camera2D();
@@ -1036,6 +1066,8 @@ module.exports = function () {
         camera.AddChild( trunk );
         trunk.AddChild( scene );
 
+        scene.AddChild( nk.Sprite( 0, 0 ) );
+
         stage.mouse.onDown.Add( function( event ) {
 
           dragStart.SetV( event.data.position );
@@ -1053,7 +1085,11 @@ module.exports = function () {
 
             for ( var i = 0; i < sceneChildren.length; ++i ) {
 
+              console.log( intersectionPoint );
+
               if ( sceneChildren[i].IntersectsPoint( intersectionPoint ) ) {
+
+                console.log( 0 );
 
                 dragger = sceneChildren[i];
                 dragOffset.SetV( dragger.position );
@@ -1342,13 +1378,13 @@ module.exports = function () {
 
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1375,7 +1411,12 @@ module.exports = function () {
     var W = c.width;
     var H = c.height;
 
-    var stage = new nk.Stage2D( c, 0, 0, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0, 
+      y: 0,
+      halt: true
+    } );
     stage.ComputeBounds();
     stage.backgroundColor = 'rgba(255,255,255,1)';
     // stage.clear = false;
@@ -1527,7 +1568,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1552,7 +1593,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
     stage.clear = false;
     stage.backgroundColor = 'rgba(0,0,0,0.1)';
     // stage.fill = false;
@@ -1636,7 +1681,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1663,7 +1708,11 @@ module.exports = function () {
 
     var l = 200;
 
-    var stage = new nk.Stage2D( c, HW, H );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: H
+    } );
     stage.scale.Set( 1, -1 );
 
     function Branch ( start, end ) {
@@ -1738,7 +1787,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1763,7 +1812,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
 
     var text = new nk.Text( 100, 100, 'Grab and drag' );
 
@@ -1842,7 +1895,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1868,7 +1921,11 @@ module.exports = function () {
     var W = c.width;
     var H = c.height;
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     var container = new nk.Container2D();
     stage.AddChild( container );
 
@@ -1927,7 +1984,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1959,7 +2016,13 @@ module.exports = function () {
     var COLLIDE = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
     var SPREAD = nk.Math.Spread;
 
-    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: true,
+      mode: 'WebGL'
+    } );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     var pc = new nk.GLTextureProgramController( stage.gl );
 
@@ -2595,7 +2658,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2620,7 +2683,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
 
     var magnet = new nk.Plaingraphic2D( HW, HH, new nk.Path.Circle( 0, 0, 30 ) );
     magnet.data.body = {
@@ -2759,7 +2826,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2788,7 +2855,11 @@ module.exports = function () {
       var W = c.width, HW = W * 0.5;
       var H = c.height, HH = H * 0.5;
   
-      var stage = new nk.Stage2D( c, HW, HH );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: HW,
+        y: HH
+      } );
   
       var motObj = new nk.Sprite( 0, 0 );
       motObj.anchor.Set( 0.5 );
@@ -2829,7 +2900,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2854,7 +2925,12 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: true
+    } );
     stage.ticker.StartAF();
 
     var staticStars = [];
@@ -2945,7 +3021,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2970,7 +3046,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
     stage.clear = false;
     stage.fill = false;
     stage.gco = nk.Style.GCO.COLOR_DODGE;
@@ -3037,7 +3117,140 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 110 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'ParticleSystem' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '50%';
+    c.style.left = '50%';
+    c.style.transform = 'translate(-50%, -50%)';
+
+    var W = 1920, HW = W * 0.5;
+    var H = 1080, HH = H * 0.5;
+
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      mode: 'WebGL'
+    } );
+    var root = nk.Container2D();
+    var scene = nk.Container2D();
+
+    stage.AddChild( root );
+    root.AddChild( scene );
+
+    var RADIAN = nk.Math.RADIAN;
+
+    scene.position.Set( HW, HH );
+    scene.scale.Set( 3 );
+
+    nk.CanvasManager( c, W, H, nk.CanvasManager.KEEP_ASPECT_RATIO_FIT )
+      .BindStage( stage )
+      .BindContainer( root )
+      .Trigger();
+
+    function CreateTexture () {
+
+      var path = new nk.Path.Polygon2D();
+      path.style.stroke.lineWidth = 1;
+      nk.Geom.Polygon2D.Construct.Cyclic( path, 0, 0, 4, 5 );
+      var d = path.aabb.br.AbsoluteCopy().SubtractVC( path.aabb.tl.AbsoluteCopy() );
+      var t = new nk.Graphic2D( ( path.aabb.w * 0.5 ) - ( d.x * 0.5 ), ( path.aabb.h * 0.5 ) - ( d.y * 0.5 ), path );
+      return t;
+  
+    }
+
+    var imageLoader = nk.ImageLoader( [ {
+      id: 'tex',
+      src: nk.Utils.GenerateSimpleBase64Png( CreateTexture, 8, 8 )
+    } ], true );
+    imageLoader.onComplete.Add( function() {
+
+      var pcon = nk.GLTextureProgramController( stage.gl );
+      pcon.BindBasicTexture( imageLoader.GetBasicTexture( 'tex' ) );
+
+      var pdata = {
+        texture: pcon,
+        anchor: 0.5,
+        amount: 1,
+        rotation: {
+          min: 0,
+          max: RADIAN * 360
+        },
+        position: {
+          x: {
+            values: [ -100, 100 ]
+          },
+          y: {
+            values: [ -100, 100 ]
+          }
+        },
+        lifespan: 100,
+        velocity: {
+          x: {
+            min: -2,
+            max: 2
+          },
+          y: {
+            min: -2,
+            max: 2
+          }
+        },
+        acceleration: {
+          x: 1.05,
+          y: 0.99
+        },
+        fade: true,
+        deflate: true,
+        torque: {
+          min: -RADIAN * 10,
+          max: RADIAN * 10
+        },
+        spin: {
+          min: -RADIAN,
+          max: RADIAN
+        }
+      };
+  
+      var ps = nk.ParticleSystem();
+  
+      scene.AddChild( ps );
+  
+      stage.onProcess.Add( function() {
+  
+        ps.Process();
+  
+        ps.Emit( pdata );
+      
+      } );
+  
+      console.log( stage, ps );
+    
+    } );
+
+    document.body.removeChild( buttonContainer );
+  
+  }
+
+};
+
+
+/***/ }),
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3062,7 +3275,12 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: true
+    } );
 
     var imageCache = new nk.ImageLoader( [ {
       id: 'character',
@@ -3291,63 +3509,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
-/***/ (function(module, exports) {
-
-module.exports = function () {
-
-  var buttonContainer = document.getElementById( 'buttons' );
-  var button = document.createElement( 'input' );
-  button.setAttribute( 'value', 'Playground' );
-  button.setAttribute( 'type', 'button' );
-  button.addEventListener( 'click', Run );
-  buttonContainer.appendChild( button );
-
-  function Run () {
-
-    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
-    c.setAttribute( 'width', window.innerWidth );
-    c.setAttribute( 'height', window.innerHeight );
-    c.style.display = 'initial';
-    c.style.position = 'absolute';
-    c.style.top = '0';
-    c.style.left = '0';
-    window.c = c;
-
-    var stage = new nk.Stage2D( c, window.innerWidth * 0.5, window.innerHeight * 0.5 );
-
-    window.stage = stage;
-
-    var lineP = new nk.Path.Line2D( 100, 0, 360, 0 );
-    var g = new nk.Graphic2D( 0, 0, lineP );
-
-    var angleDeg = 0;
-
-    stage.AddChild( g );
-
-    stage.onProcess.Add( function() {
-
-      lineP.e.RotateAbsoluteAroundV( lineP.s, nk.Math.DTR( angleDeg ) );
-
-      angleDeg += 0.1;
-
-      lineP.s.Rotate( nk.Math.RADIAN );
-    
-    } );
-
-    var x = new nk.Vector2D( 0, 0 );
-    console.log( x );
-    x.Assert();
-
-    document.body.removeChild( buttonContainer );
-  
-  }
-
-};
-
-
-/***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3372,7 +3534,12 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: true
+    } );
     stage.ticker.SetDesiredRate( 120 );
     stage.ticker.Start();
 
@@ -3496,7 +3663,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3519,7 +3686,11 @@ module.exports = function () {
     c.style.left = '0';
     var rc = c.getContext( '2d' );
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     stage.ComputeBounds();
 
     var bounds = new nk.AABB2D();
@@ -3562,7 +3733,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3589,7 +3760,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
 
     var gravity = new nk.Vector2D( 0, 0.0982 );
     var wind = new nk.Vector2D();
@@ -3661,7 +3836,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3686,7 +3861,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
 
     var dragger = null;
     var dragStart = new nk.Vector2D();
@@ -3853,7 +4032,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3878,7 +4057,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
 
     var dragger = null;
     var dragStart = new nk.Vector2D();
@@ -4027,7 +4210,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4052,16 +4235,44 @@ module.exports = function () {
       var c = document.getElementsByTagName( 'canvas' )[ 0 ];
       c.style.display = 'initial';
       c.style.position = 'absolute';
-      c.style.top = '0';
-      c.style.left = '0';
+      c.style.top = '50%';
+      c.style.left = '50%';
+      c.style.transform = 'translate(-50%, -50%)';
 
-      var W = c.width, HW = W * 0.5;
-      var H = c.height, HH = H * 0.5;
+      var 
+        stage,
+        root,
+        scene;
 
-      var stage = new nk.Stage2D( c, HW, HH, true );
+      var W = 1920, HW = W * 0.5;
+      var H = 1080, HH = H * 0.5;
+
+      stage = new nk.Stage2D( { 
+        canvas: c,
+        x: 0,
+        y: 0,
+        halt: true,
+        mode: 'WebGL'
+      } );
       stage.ticker.StartAF();
 
-      nk.CanvasManager( c, 1920, 1080, nk.CanvasManager.KEEP_ASPECT_RATIO ).BindStage( stage ).Trigger();
+      root = nk.Container2D();
+      scene = nk.Container2D();
+
+      stage.AddChild( root );
+      root.AddChild( scene );
+
+      scene.position.Set( HW, HH );
+
+      nk.CanvasManager( c, W, H, nk.CanvasManager.KEEP_ASPECT_RATIO_FIT )
+        .BindStage( stage )
+        .BindContainer( root )
+        .Trigger();
+
+      var pc = new nk.GLCircleProgramController( stage.gl );
+      var path = new nk.Path.Circle( 0, 0, 100 );
+      path.LinkProgramController( pc );
+      scene.AddChild( nk.Graphic2D( 0, 0, path ) );
     
     }
 
@@ -4073,7 +4284,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4106,7 +4317,12 @@ module.exports = function () {
       var W = c.width, HW = W * 0.5;
       var H = c.height, HH = H * 0.5;
 
-      var stage = new nk.Stage2D( c, HW, HH, true );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: HW,
+        y: HH,
+        halt: true
+      } );
       stage.ticker.StartAF();
 
       var sprite1 = null;
@@ -4195,7 +4411,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4344,7 +4560,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4369,7 +4585,11 @@ module.exports = function () {
     var W = c.width, HW = W * 0.5;
     var H = c.height, HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, HW, HH );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
 
     var text = new nk.Text( 0, 0,
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
@@ -4391,7 +4611,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4512,7 +4732,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4541,7 +4761,13 @@ module.exports = function () {
       var W = c.width;
       var H = c.height;
   
-      var stage = new nk.Stage2D( c, 0, 0, false, false );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: 0,
+        y: 0,
+        halt: false,
+        mode: '2d'
+      } );
 
       var tilesprite = new nk.Tilesprite( W * 0.5 - W * 0.25, H * 0.5 - H * 0.25 );
       tilesprite.GeneratePattern( stage.rc, W * 0.5, H * 0.5 );
@@ -4566,7 +4792,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4597,7 +4823,13 @@ module.exports = function () {
       var HW = W * 0.5;
       var HH = H * 0.5;
   
-      var stage = new nk.Stage2D( c, 0, 0, false, true );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: 0,
+        y: 0,
+        halt: false,
+        mode: 'WebGL'
+      } );
   
       var sprite = null;
       var spriteRef = null;
@@ -4713,7 +4945,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4735,7 +4967,13 @@ module.exports = function () {
     c.style.top = '0';
     c.style.left = '0';
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     var fontPc = new nk.GLTextureProgramController( stage.gl );
 
@@ -4796,7 +5034,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4823,7 +5061,13 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLCircleProgramController( stage.gl );
     var pcLine = new nk.GLLine2DProgramController( stage.gl );
@@ -4914,7 +5158,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4942,7 +5186,13 @@ module.exports = function () {
     var mX = W / 45;
     var mY = H / 45;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLLine2DProgramController( stage.gl );
 
@@ -4978,7 +5228,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5005,7 +5255,13 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: true,
+      mode: 'WebGL'
+    } );
     stage.ticker.Start();
 
     var pc = new nk.GLPixelBatchProgramController( stage.gl );
@@ -5065,7 +5321,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5090,7 +5346,13 @@ module.exports = function () {
     var W = c.width;
     var H = c.height;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLRectangleProgramController( stage.gl );
 
@@ -5164,7 +5426,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5351,7 +5613,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5381,7 +5643,13 @@ module.exports = function () {
     var RF = nk.Utils.RandomFloat;
     var RI = nk.Utils.RandomInteger;
 
-    var stage = window.stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = window.stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLTextureBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );
@@ -5456,7 +5724,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5485,7 +5753,13 @@ module.exports = function () {
       var W = c.width;
       var H = c.height;
   
-      var stage = new nk.Stage2D( c, 0, 0, false, true );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: 0,
+        y: 0,
+        halt: false,
+        mode: 'WebGL'
+      } );
 
       var pc = nk.GLTextureProgramController( stage.gl );
       pc.BindBasicTexture( nk.Tilesprite.DEFAULT_TEXTURE );

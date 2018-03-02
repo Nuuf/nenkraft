@@ -27,7 +27,13 @@ module.exports = function () {
     var COLLIDE = nk.Math.Collision2D.AABB2DvsAABB2D.Relative.Collide;
     var SPREAD = nk.Math.Spread;
 
-    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: true,
+      mode: 'WebGL'
+    } );
     stage.gl.clearColor( 1.0, 1.0, 1.0, 1.0 );
     var pc = new nk.GLTextureProgramController( stage.gl );
 

@@ -22,7 +22,11 @@ module.exports = function () {
 
     function go() {
 
-      var stage = new nk.Stage2D( c, window.innerWidth * 0.5, window.innerHeight * 0.5 );
+      var stage = new nk.Stage2D( {
+        canvas: c,
+        x: window.innerWidth * 0.5,
+        y: window.innerHeight * 0.5
+      } );
       var camera = stage.AddChild( new nk.Camera2D( new nk.Vector2D( 0, 0 ), null ) );
       var root = camera.AddChild( new nk.Container2D() );
 

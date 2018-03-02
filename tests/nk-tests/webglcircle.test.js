@@ -22,7 +22,13 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLCircleProgramController( stage.gl );
     var pcLine = new nk.GLLine2DProgramController( stage.gl );

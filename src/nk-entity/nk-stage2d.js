@@ -7,28 +7,32 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   var Super = Nenkraft.Entity.Container2D;
 
-  function Stage2D ( _canvas, _x, _y, _doNotStart, _useWebGL ) {
+  function Stage2D ( _options ) {
 
-    if ( !( this instanceof Stage2D ) ) return new Stage2D( _canvas, _x, _y, _doNotStart, _useWebGL );
-    Super.call( this, _x, _y );
+    if ( !( this instanceof Stage2D ) ) return new Stage2D( _options );
+    Super.call( this, _options.x, _options.y );
+    this.positionReconfiguration = Nenkraft.Vector2D( _options.x, _options.y );
 
-    if ( typeof _canvas === 'string' ) {
+    if ( typeof _options.canvas === 'string' ) {
 
-      _canvas = document.getElementById( _canvas );
+      _options.canvas = document.getElementById( _options.canvas );
     
     }
 
-    this.canvas = _canvas;
-    this.w = _canvas.width;
-    this.h = _canvas.height;
+    this.canvas = _options.canvas;
+    this.w = _options.canvas.width;
+    this.h = _options.canvas.height;
 
-    if ( _useWebGL === true ) {
+    if ( _options.mode === 'WebGL' ) {
 
-      this.gl = _canvas.getContext( 'webgl' );
+      this.gl = _options.canvas.getContext( 'webgl', {
+        antialias: _options.antialias,
+        preserveDrawingBuffer: true
+      } );
 
       if ( this.gl == null ) {
 
-        this.gl = _canvas.getContext( 'experimental-webgl' );
+        this.gl = _options.canvas.getContext( 'experimental-webgl' );
       
       }
 
@@ -45,24 +49,21 @@ module.exports = function ( Nenkraft ) {
         1.0
       );
       this.usingWebGL = true;
-      this.scale.Set( 2 / this.w, -2 / this.h );
-      this.position.Add( -1, 1 );
-      this.position.Add( _x * this.scale.x, _y * this.scale.y );
-      this.UpdateTransform();
-      this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _doNotStart );
+
+      this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _options.halt );
 
       this.GLConfig( this.gl );
     
     } else {
 
-      this.rc = _canvas.getContext( '2d' );
-      this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _doNotStart );
+      this.rc = _options.canvas.getContext( '2d' );
+      this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _options.halt );
     
     }
 
     this.onProcess = Nenkraft.Event.LocalEvent();
-    this.mouse = Nenkraft.Input.Mouse( _canvas, _x, _y );
-    this.keyboard = Nenkraft.Input.Keyboard( _canvas );
+    this.mouse = Nenkraft.Input.Mouse( _options.canvas, _options.x, _options.y );
+    this.keyboard = Nenkraft.Input.Keyboard( _options.canvas );
   
   }
 
@@ -75,6 +76,7 @@ module.exports = function ( Nenkraft ) {
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
   Stage2D.prototype.usingWebGL = false;
+  Stage2D.prototype.positionReconfiguration = null;
 
   // Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
@@ -99,6 +101,16 @@ module.exports = function ( Nenkraft ) {
 
   Stage2D.prototype.GLConfig = function( _gl ) {
 
+    if ( _gl == null ) _gl = this.gl;
+
+    this.position.Set( 0, 0 );
+    this.scale.Set( 2 / this.w, -2 / this.h );
+    this.position.Add( -1, 1 );
+    this.position.Add( 
+      this.positionReconfiguration.x * this.scale.x, 
+      this.positionReconfiguration.y * this.scale.y
+    );
+    this.UpdateTransform();
     _gl.viewport( 0, 0, this.w, this.h );
     _gl.enable( _gl.BLEND );
     _gl.disable( _gl.DEPTH_TEST );
@@ -108,7 +120,11 @@ module.exports = function ( Nenkraft ) {
 
   Stage2D.prototype.GLPreDraw = function ( _gl ) {
 
-    _gl.clear( _gl.COLOR_BUFFER_BIT );
+    if ( this.clear === true ) {
+
+      _gl.clear( _gl.COLOR_BUFFER_BIT );
+    
+    }
   
   };
 

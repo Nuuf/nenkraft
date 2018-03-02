@@ -89,7 +89,12 @@ module.exports = function () {
     var cIndex = -1;
     var cHistory = [];
 
-    var stage = new nk.Stage2D( c, HW, HH, false );
+    var stage = new nk.Stage2D( {
+      canvas: c,
+      x: HW,
+      y: HH,
+      halt: false
+    } );
 
     var circleEntity = new nk.Graphic2D( 0, 0, new nk.Path.Circle( 0, 0, 50 ) );
     stage.AddChild( circleEntity );

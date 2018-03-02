@@ -18,7 +18,11 @@ module.exports = function () {
     c.style.left = '0';
     var rc = c.getContext( '2d' );
 
-    var stage = new nk.Stage2D( c, 0, 0 );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0
+    } );
     stage.ComputeBounds();
 
     var bounds = new nk.AABB2D();

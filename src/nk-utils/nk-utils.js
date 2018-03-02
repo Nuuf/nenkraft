@@ -13,7 +13,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.RandomFloat = function ( _min, _max ) {
+  var RF = Nenkraft.Utils.RandomFloat = function ( _min, _max ) {
 
     return Random() * ( _max - _min ) + _min;
   
@@ -77,6 +77,22 @@ module.exports = function ( Nenkraft ) {
 
     var vrm = _value % _roof, vrd = _value / _roof;
     return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
+  
+  };
+
+  Nenkraft.Utils.MinMaxOrValue = function( _options ) {
+
+    if ( _options.min != null && _options.max != null ) {
+        
+      return RF( _options.min, _options.max );
+
+    } else if ( _options.values != null && _options.values.length > 0 ) {
+
+      return _options.values[RI( 0, _options.values.length-1 )];
+
+    }
+
+    return _options;
   
   };
 

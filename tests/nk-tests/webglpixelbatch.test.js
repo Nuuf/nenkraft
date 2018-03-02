@@ -22,7 +22,13 @@ module.exports = function () {
     var HW = W * 0.5;
     var HH = H * 0.5;
 
-    var stage = new nk.Stage2D( c, 0, 0, true, true );
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: true,
+      mode: 'WebGL'
+    } );
     stage.ticker.Start();
 
     var pc = new nk.GLPixelBatchProgramController( stage.gl );

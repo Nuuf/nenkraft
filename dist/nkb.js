@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.8.0 (Beta)
+* @version     0.9.0 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 130);
+/******/ 	return __webpack_require__(__webpack_require__.s = 132);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1272,15 +1272,15 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 130:
+/***/ 132:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(131);
+module.exports = __webpack_require__(133);
 
 
 /***/ }),
 
-/***/ 131:
+/***/ 133:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1290,7 +1290,7 @@ module.exports = __webpack_require__(131);
 var namespace = Object.create( null );
 
 __webpack_require__( 1 )();
-__webpack_require__( 132 )( namespace );
+__webpack_require__( 134 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
@@ -1301,7 +1301,7 @@ __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
-__webpack_require__( 133 )( namespace );
+__webpack_require__( 135 )( namespace );
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 14 )( namespace );
@@ -1327,7 +1327,7 @@ module.exports = namespace;
 
 /***/ }),
 
-/***/ 132:
+/***/ 134:
 /***/ (function(module, exports) {
 
 /**
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.8.0 (Beta)';
+  Nenkraft.VERSION = '0.9.0 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -1356,7 +1356,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 133:
+/***/ 135:
 /***/ (function(module, exports) {
 
 /**
@@ -1367,14 +1367,14 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
-  function ServerTicker ( _onProcess, _rate, _doNotStart ) {
+  function ServerTicker ( _onProcess, _rate, _halt ) {
 
-    if ( !( this instanceof ServerTicker ) ) return new ServerTicker( _onProcess, _rate, _doNotStart );
+    if ( !( this instanceof ServerTicker ) ) return new ServerTicker( _onProcess, _rate, _halt );
     if ( typeof _onProcess !== 'function' ) throw new Error( 'ServerTicker: An onProcess function is required!' );
     this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
 
-    if ( _doNotStart == undefined || _doNotStart === false ) {
+    if ( _halt == undefined || _halt === false ) {
 
       this.Start();
     
@@ -4115,13 +4115,13 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.UpdateInBuffer = function () {
 
-    throw new Error( 'Cannot update buffer data directly on Container2D object!' );
+    throw new Error( 'Cannot update buffer data directly!' );
   
   };
 
   Container2D.prototype.GetBufferData = function () {
 
-    throw new Error( 'Cannot access buffer data directly on Container2D object!' );
+    throw new Error( 'Cannot access buffer data directly!' );
   
   };
 
@@ -5461,7 +5461,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.RandomFloat = function ( _min, _max ) {
+  var RF = Nenkraft.Utils.RandomFloat = function ( _min, _max ) {
 
     return Random() * ( _max - _min ) + _min;
   
@@ -5525,6 +5525,22 @@ module.exports = function ( Nenkraft ) {
 
     var vrm = _value % _roof, vrd = _value / _roof;
     return Math.ceil( vrm === 0 ? vrd + 1 : vrd ) + _splitter + ( 1 + vrm );
+  
+  };
+
+  Nenkraft.Utils.MinMaxOrValue = function( _options ) {
+
+    if ( _options.min != null && _options.max != null ) {
+        
+      return RF( _options.min, _options.max );
+
+    } else if ( _options.values != null && _options.values.length > 0 ) {
+
+      return _options.values[RI( 0, _options.values.length-1 )];
+
+    }
+
+    return _options;
   
   };
 

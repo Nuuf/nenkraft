@@ -2,7 +2,7 @@
   "name": "nenkraft",
   "description": "A small rendering tool",
   "author": "nuuf",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "index.js",
   "license": "MIT",
   "eslintConfig": "./.eslintrc",
@@ -21,7 +21,8 @@
     "rimraf": "*",
     "style-loader": "*",
     "url-loader": "*",
-    "webpack": "*",
+    "webpack": "3.*",
+    "webpack-cli": "*",
     "webpack-dev-server": "*"
   },
   "scripts": {

@@ -25,7 +25,13 @@ module.exports = function () {
     var RF = nk.Utils.RandomFloat;
     var RI = nk.Utils.RandomInteger;
 
-    var stage = window.stage = new nk.Stage2D( c, 0, 0, false, true );
+    var stage = window.stage = new nk.Stage2D( { 
+      canvas: c,
+      x: 0,
+      y: 0,
+      halt: false,
+      mode: 'WebGL'
+    } );
 
     var pc = new nk.GLTextureBatchProgramController( stage.gl );
     stage.UseAsBatchParent( pc );

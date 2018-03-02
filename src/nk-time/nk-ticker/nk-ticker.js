@@ -6,14 +6,14 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
-  function Ticker ( _onProcess, _rate, _doNotStart ) {
+  function Ticker ( _onProcess, _rate, _halt ) {
 
-    if ( !( this instanceof Ticker ) ) return new Ticker( _onProcess, _rate, _doNotStart );
+    if ( !( this instanceof Ticker ) ) return new Ticker( _onProcess, _rate, _halt );
     if ( typeof _onProcess !== 'function' ) throw new Error( 'Ticker: An onProcess function is required!' );
     this.SetDesiredRate( _rate );
     this.onProcess = _onProcess;
 
-    if ( _doNotStart == undefined || _doNotStart === false ) {
+    if ( _halt == undefined || _halt === false ) {
 
       this.StartAF();
     

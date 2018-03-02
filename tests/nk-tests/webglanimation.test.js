@@ -26,7 +26,13 @@ module.exports = function () {
       var HW = W * 0.5;
       var HH = H * 0.5;
   
-      var stage = new nk.Stage2D( c, 0, 0, false, true );
+      var stage = new nk.Stage2D( { 
+        canvas: c,
+        x: 0,
+        y: 0,
+        halt: false,
+        mode: 'WebGL'
+      } );
   
       var sprite = null;
       var spriteRef = null;
