@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.0 (Beta)
+* @version     0.9.1 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 132);
+/******/ 	return __webpack_require__(__webpack_require__.s = 135);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1272,15 +1272,15 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 132:
+/***/ 135:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(133);
+module.exports = __webpack_require__(136);
 
 
 /***/ }),
 
-/***/ 133:
+/***/ 136:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1290,7 +1290,7 @@ module.exports = __webpack_require__(133);
 var namespace = Object.create( null );
 
 __webpack_require__( 1 )();
-__webpack_require__( 134 )( namespace );
+__webpack_require__( 137 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
@@ -1301,7 +1301,7 @@ __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
-__webpack_require__( 135 )( namespace );
+__webpack_require__( 138 )( namespace );
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 14 )( namespace );
@@ -1327,7 +1327,7 @@ module.exports = namespace;
 
 /***/ }),
 
-/***/ 134:
+/***/ 137:
 /***/ (function(module, exports) {
 
 /**
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.9.0 (Beta)';
+  Nenkraft.VERSION = '0.9.1 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -1356,7 +1356,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 135:
+/***/ 138:
 /***/ (function(module, exports) {
 
 /**
@@ -2504,12 +2504,20 @@ module.exports = function ( Nenkraft ) {
 module.exports = function ( Nenkraft ) {
 
   'use strict';
-  Nenkraft.Math.PII = Math.PI * 2;
-  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
-  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
+
+  var PI = Math.PI;
+  var Sin = Math.sin;
+  var Cos = Math.cos;
+  var Pow = Math.pow;
+  var Round = Math.round;
+
+  Nenkraft.Math.PII = PI * 2;
+  Nenkraft.Math.PI5 = PI * 0.5;
+  Nenkraft.Math.DEGREES_TO_RADIANS = PI / 180;
+  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / PI;
   Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
 
-  Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
+  var DTR = Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
 
     return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
   
@@ -2523,8 +2531,8 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
-    var divisor = Math.pow( 10, _precision );
-    return Math.round( divisor * _value ) / divisor;
+    var divisor = Pow( 10, _precision );
+    return Round( divisor * _value ) / divisor;
   
   };
 
@@ -2544,11 +2552,18 @@ module.exports = function ( Nenkraft ) {
 
       var theta = delta.GetAngle();
       _velocity.Add(
-        Math.cos( theta ) * _strength,
-        Math.sin( theta ) * _strength
+        Cos( theta ) * _strength,
+        Sin( theta ) * _strength
       );
     
     }
+  
+  };
+
+  Nenkraft.Math.Oscillate = function( _time, _from, _to, _amplitude ) {
+
+    var delta = ( _to - _from ) * 0.5;
+    return ( _from + delta ) + ( Sin( DTR( _time * _amplitude ) ) * delta );
   
   };
 
@@ -2593,9 +2608,9 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+  Nenkraft.Math.LikeASquareGrid = function ( _points, _w, _marginX, _marginY ) {
 
-    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+    for ( var i = 0, l = _points.length, columns = ( _w / _marginX ) | 0; i < l; ++i ) {
 
       _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
     
@@ -2603,11 +2618,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
+  Nenkraft.Math.SquareGrid = function ( _w, _h, _marginX, _marginY, _creatableClass ) {
 
     var grid = [];
 
-    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
+    for ( var i = 0, columns = ( _w / _marginX ) | 0, rows = ( _h / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
 
       grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
     
@@ -2666,6 +2681,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'PI5', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );
@@ -3150,6 +3166,10 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   Nenkraft.Math.Ease = Object.create( null );
 
+  var Sin = Math.sin;
+  var Cos = Math.cos;
+  var PI = Math.PI;
+
   Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
 
     return _amplitude * _time / _duration + _startValue;
@@ -3181,21 +3201,23 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.Ease.SineIn = function ( _time, _startValue, _amplitude, _duration ) {
 
-    return -_amplitude * Math.cos( _time / _duration * ( Math.PI * 0.5 ) ) + _amplitude + _startValue;
+    return -_amplitude * Cos( _time / _duration * ( PI * 0.5 ) ) + _amplitude + _startValue;
   
   };
 
   Nenkraft.Math.Ease.SineOut = function ( _time, _startValue, _amplitude, _duration ) {
 
-    return _amplitude * Math.sin( _time / _duration * ( Math.PI * 0.5 ) ) + _startValue;
+    return _amplitude * Sin( _time / _duration * ( PI * 0.5 ) ) + _startValue;
   
   };
 
   Nenkraft.Math.Ease.SineInOut = function ( _time, _startValue, _amplitude, _duration ) {
 
-    return -_amplitude * 0.5 * ( Math.cos( Math.PI * _time / _duration ) - 1 ) + _startValue;
+    return -_amplitude * 0.5 * ( Cos( PI * _time / _duration ) - 1 ) + _startValue;
   
   };
+
+  Nenkraft.Ease = Nenkraft.Math.Ease;
 
 };
 
@@ -4055,10 +4077,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.DrawChildren = function ( _rc ) {
 
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+    for ( var i = 0, children = this.children, l = children.length; i < l; ++i ) {
 
-      child = children[ i ];
-      if ( child.Draw ) child.Draw( _rc );
+      children[i].Draw( _rc );
     
     }
   
@@ -4066,10 +4087,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.GLDrawChildren = function ( _gl ) {
 
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+    for ( var i = 0, children = this.children, l = children.length; i < l; ++i ) {
 
-      child = children[ i ];
-      if ( child.GLDraw ) child.GLDraw( _gl );
+      children[i].GLDraw( _gl );
     
     }
   
@@ -5536,7 +5556,7 @@ module.exports = function ( Nenkraft ) {
 
     } else if ( _options.values != null && _options.values.length > 0 ) {
 
-      return _options.values[RI( 0, _options.values.length-1 )];
+      return _options.values[RI( 0, _options.values.length - 1 )];
 
     }
 

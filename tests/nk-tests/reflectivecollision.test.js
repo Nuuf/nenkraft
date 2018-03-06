@@ -50,9 +50,9 @@ module.exports = function () {
     
     }
 
-    function CreateLine ( _x, _y, _width, _rotation, _interactive ) {
+    function CreateLine ( _x, _y, _w, _rotation, _interactive ) {
 
-      var l = new nk.Path.Line2D( -_width * 0.5, 0, _width * 0.5, 0 );
+      var l = new nk.Path.Line2D( -_w * 0.5, 0, _w * 0.5, 0 );
       l.Rotate( nk.Math.RADIAN * _rotation );
       var lg = new nk.Graphic2D( _x, _y, l );
       lg.data.body = {

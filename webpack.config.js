@@ -18,7 +18,7 @@ var
 
 output = {
   path: path.join( __dirname, 'dist' ),
-  filename:  '[name].min.js'
+  filename: '[name].min.js'
 };
 
 if ( PRODUCTION ) {
@@ -35,7 +35,7 @@ if ( PRODUCTION ) {
     ]
   };
 
-  plugins =[
+  plugins = [
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin( 'style-[contenthash:10].css' ),
     new HTMLWebpackPlugin( {

@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.0 (Beta)
+* @version     0.9.1 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -200,12 +200,20 @@ module.exports = function() {
 module.exports = function ( Nenkraft ) {
 
   'use strict';
-  Nenkraft.Math.PII = Math.PI * 2;
-  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
-  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
+
+  var PI = Math.PI;
+  var Sin = Math.sin;
+  var Cos = Math.cos;
+  var Pow = Math.pow;
+  var Round = Math.round;
+
+  Nenkraft.Math.PII = PI * 2;
+  Nenkraft.Math.PI5 = PI * 0.5;
+  Nenkraft.Math.DEGREES_TO_RADIANS = PI / 180;
+  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / PI;
   Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
 
-  Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
+  var DTR = Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
 
     return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
   
@@ -219,8 +227,8 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
-    var divisor = Math.pow( 10, _precision );
-    return Math.round( divisor * _value ) / divisor;
+    var divisor = Pow( 10, _precision );
+    return Round( divisor * _value ) / divisor;
   
   };
 
@@ -240,11 +248,18 @@ module.exports = function ( Nenkraft ) {
 
       var theta = delta.GetAngle();
       _velocity.Add(
-        Math.cos( theta ) * _strength,
-        Math.sin( theta ) * _strength
+        Cos( theta ) * _strength,
+        Sin( theta ) * _strength
       );
     
     }
+  
+  };
+
+  Nenkraft.Math.Oscillate = function( _time, _from, _to, _amplitude ) {
+
+    var delta = ( _to - _from ) * 0.5;
+    return ( _from + delta ) + ( Sin( DTR( _time * _amplitude ) ) * delta );
   
   };
 
@@ -289,9 +304,9 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+  Nenkraft.Math.LikeASquareGrid = function ( _points, _w, _marginX, _marginY ) {
 
-    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+    for ( var i = 0, l = _points.length, columns = ( _w / _marginX ) | 0; i < l; ++i ) {
 
       _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
     
@@ -299,11 +314,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
+  Nenkraft.Math.SquareGrid = function ( _w, _h, _marginX, _marginY, _creatableClass ) {
 
     var grid = [];
 
-    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
+    for ( var i = 0, columns = ( _w / _marginX ) | 0, rows = ( _h / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
 
       grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
     
@@ -362,6 +377,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'PI5', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );
@@ -1130,7 +1146,7 @@ module.exports = function ( Nenkraft ) {
 
     } else if ( _options.values != null && _options.values.length > 0 ) {
 
-      return _options.values[RI( 0, _options.values.length-1 )];
+      return _options.values[RI( 0, _options.values.length - 1 )];
 
     }
 
@@ -4129,6 +4145,10 @@ module.exports = function ( Nenkraft ) {
   'use strict';
   Nenkraft.Math.Ease = Object.create( null );
 
+  var Sin = Math.sin;
+  var Cos = Math.cos;
+  var PI = Math.PI;
+
   Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
 
     return _amplitude * _time / _duration + _startValue;
@@ -4160,21 +4180,23 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.Ease.SineIn = function ( _time, _startValue, _amplitude, _duration ) {
 
-    return -_amplitude * Math.cos( _time / _duration * ( Math.PI * 0.5 ) ) + _amplitude + _startValue;
+    return -_amplitude * Cos( _time / _duration * ( PI * 0.5 ) ) + _amplitude + _startValue;
   
   };
 
   Nenkraft.Math.Ease.SineOut = function ( _time, _startValue, _amplitude, _duration ) {
 
-    return _amplitude * Math.sin( _time / _duration * ( Math.PI * 0.5 ) ) + _startValue;
+    return _amplitude * Sin( _time / _duration * ( PI * 0.5 ) ) + _startValue;
   
   };
 
   Nenkraft.Math.Ease.SineInOut = function ( _time, _startValue, _amplitude, _duration ) {
 
-    return -_amplitude * 0.5 * ( Math.cos( Math.PI * _time / _duration ) - 1 ) + _startValue;
+    return -_amplitude * 0.5 * ( Cos( PI * _time / _duration ) - 1 ) + _startValue;
   
   };
+
+  Nenkraft.Ease = Nenkraft.Math.Ease;
 
 };
 
@@ -5029,10 +5051,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.DrawChildren = function ( _rc ) {
 
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+    for ( var i = 0, children = this.children, l = children.length; i < l; ++i ) {
 
-      child = children[ i ];
-      if ( child.Draw ) child.Draw( _rc );
+      children[i].Draw( _rc );
     
     }
   
@@ -5040,10 +5061,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.GLDrawChildren = function ( _gl ) {
 
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+    for ( var i = 0, children = this.children, l = children.length; i < l; ++i ) {
 
-      child = children[ i ];
-      if ( child.GLDraw ) child.GLDraw( _gl );
+      children[i].GLDraw( _gl );
     
     }
   
@@ -5823,10 +5843,10 @@ __webpack_require__( 73 )( namespace );
 __webpack_require__( 74 )( namespace );
 __webpack_require__( 75 )( namespace );
 __webpack_require__( 76 )( namespace );
+__webpack_require__( 77 )( namespace );
 __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
 __webpack_require__( 30 )( namespace );
-__webpack_require__( 77 )( namespace );
 __webpack_require__( 78 )( namespace );
 __webpack_require__( 79 )( namespace );
 __webpack_require__( 80 )( namespace );
@@ -5836,6 +5856,7 @@ __webpack_require__( 83 )( namespace );
 __webpack_require__( 84 )( namespace );
 __webpack_require__( 85 )( namespace );
 __webpack_require__( 86 )( namespace );
+__webpack_require__( 87 )( namespace );
 
 if ( true ) {
 
@@ -5873,7 +5894,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.9.0 (Beta)';
+  Nenkraft.VERSION = '0.9.1 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -7986,14 +8007,47 @@ module.exports = function ( Nenkraft ) {
       );
       this.usingWebGL = true;
 
-      this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _options.halt );
+      if ( _options.noTicker !== true ) {
+
+        this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _options.halt );
+      
+      }
 
       this.GLConfig( this.gl );
     
     } else {
 
       this.rc = _options.canvas.getContext( '2d' );
-      this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _options.halt );
+
+      if ( _options.noTicker !== true ) {
+
+        this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _options.halt );
+      
+      }
+    
+    }
+
+    if ( _options.backgroundColor != null ) {
+
+      this.backgroundColor = _options.backgroundColor;
+    
+    }
+
+    if ( _options.clear === false ) {
+
+      this.clear = false;
+    
+    }
+
+    if ( _options.fill === false ) {
+
+      this.fill = false;
+    
+    }
+
+    if ( _options.id != null ) {
+
+      this.id = _options.id;
     
     }
 
@@ -8008,11 +8062,14 @@ module.exports = function ( Nenkraft ) {
   // Static
 
   // Members
+  Stage2D.prototype.id = null;
+  Stage2D.prototype.canvas = null;
   Stage2D.prototype.backgroundColor = 'rgba(10,20,30,1)';
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
   Stage2D.prototype.usingWebGL = false;
   Stage2D.prototype.positionReconfiguration = null;
+  Stage2D.prototype.canvasManager = null;
 
   // Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
@@ -8085,6 +8142,23 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Stage2D.prototype.MixedProcess = function( _delta ) {
+
+    if ( this.usingWebGL === true ) {
+
+      this.GLDraw( this.gl );
+      this.GLPostDraw( this.gl );
+    
+    } else {
+
+      this.Draw( this.rc );
+    
+    }
+
+    this.onProcess.Dispatch( this, _delta );
+
+  };
+
   Nenkraft.Entity.Stage2D = Stage2D;
   Nenkraft.Stage2D = Stage2D;
 
@@ -8093,6 +8167,133 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 /* 62 */
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Stadium ( _options ) {
+
+    if ( !( this instanceof Stadium ) ) return new Stadium( _options );
+    this.SetOptions( _options );
+    this.stages = [];
+
+    this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _options.halt );
+  
+  }
+
+  Stadium.prototype = Object.create( null );
+  Stadium.prototype.constructor = Stadium;
+  // Static
+
+  // Members
+  Stadium.prototype.stages = null;
+  Stadium.prototype.currentStage = null;
+  Stadium.prototype.onlyCurrent = false;
+  Stadium.prototype.options = null;
+  Stadium.prototype.ticker = null;
+
+  // Methods
+  Stadium.prototype.SetOptions = function( _options ) {
+
+    if ( _options != null ) {
+
+      this.options = _options; 
+    
+    }
+  
+  };
+
+  Stadium.prototype.CreateStage2D = function( _options ) {
+
+    var id = null;
+
+    if ( typeof _options === 'string' ) {
+
+      id = _options;
+      _options = null;
+    
+    }
+
+    if ( _options == null ) _options = this.options;
+    if ( _options == null ) _options = {};
+
+    if ( id !== null ) {
+
+      _options.id = id;
+    
+    }
+
+    var canvas = document.createElement( 'canvas' );
+    if ( _options.width != null ) canvas.width = _options.width;
+    if ( _options.height != null ) canvas.height = _options.height;
+    if ( _options.className != null ) canvas.className = _options.className;
+
+    if ( _options.rootNode == null ) _options.rootNode = document.body;
+
+    _options.rootNode.appendChild( canvas );
+    _options.canvas = canvas;
+    _options.noTicker = true;
+    _options.halt = true;
+
+    var stage = Nenkraft.Stage2D( _options );
+
+    _options.id = undefined;
+    _options.canvas = undefined;
+
+    this.stages.push( stage );
+
+    return stage;
+
+  };
+
+  Stadium.prototype.GetStages = function() {
+
+    var rStages = [];
+
+    for ( var i = 0, stages = this.stages, l = stages.length, stage; i < l; ++i ) {
+
+      stage = stages[i];
+
+      for ( var j = 0; j < arguments.length; ++j ) {
+
+        if ( stage.id === arguments[j] ) {
+
+          rStages.push( stage );
+        
+        } 
+      
+      }
+    
+    }
+
+    return rStages;
+
+  };
+
+  Stadium.prototype.Process = function( _delta ) {
+
+    for ( var i = 0, stages = this.stages, l = stages.length; i < l; ++i ) {
+
+      stages[i].MixedProcess( _delta );
+    
+    }
+  
+  };
+
+  Nenkraft.Entity.Stadium = Stadium;
+  Nenkraft.Stadium = Stadium;
+
+};
+
+
+/***/ }),
+/* 63 */
 /***/ (function(module, exports) {
 
 /**
@@ -8295,7 +8496,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 /**
@@ -8503,7 +8704,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports) {
 
 /**
@@ -8592,7 +8793,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 /**
@@ -8716,7 +8917,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 /**
@@ -8808,7 +9009,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 /**
@@ -9226,7 +9427,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports) {
 
 /**
@@ -9311,7 +9512,7 @@ module.exports = function ( Nenkraft ) {
         _rc.globalCompositeOperation = this.gco;
         _rc.fillStyle = this.pattern;
         _rc.beginPath();
-        _rc.rect( 0, 0, this.width, this.height );
+        _rc.rect( 0, 0, this.w, this.h );
         _rc.closePath();
         _rc.translate( this.patternOffset.x, this.patternOffset.y );
         _rc.fill();
@@ -9328,19 +9529,19 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Tilesprite.prototype.GeneratePattern = function( _rc, _width, _height ) {
+  Tilesprite.prototype.GeneratePattern = function( _rc, _w, _h ) {
 
     if ( this.programController == null ) {
 
       this.pattern = _rc.createPattern( this.texture.image, null );
-      this.w = _width;
-      this.h = _height;
+      this.w = _w;
+      this.h = _h;
       this.scale.Set( 1.0 );
     
     } else {
 
-      this.width = _width;
-      this.height = _height;
+      this.width = _w;
+      this.height = _h;
       this.textureTransformation.SetTransform( 0, 0, this.scale.x, this.scale.y );
     
     }
@@ -9374,7 +9575,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 /**
@@ -9501,7 +9702,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -9707,7 +9908,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 /**
@@ -9797,7 +9998,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 /**
@@ -9808,6 +10009,61 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
   var MinMaxOrValue = Nenkraft.Utils.MinMaxOrValue;
+  var Oscillate = Nenkraft.Math.Oscillate;
+  var RI = Nenkraft.Utils.RandomInteger;
+
+  /** Oscillation */
+  function Oscillation() {
+
+    if ( !( this instanceof Oscillation ) ) return new Oscillation();
+  
+  }
+
+  Oscillation.prototype = Object.create( null );
+  Oscillation.prototype.constructor = Oscillation;
+
+  // Static
+
+  // Members
+  Oscillation.prototype.velocityX = null;
+  Oscillation.prototype.velocityY = null;
+  Oscillation.prototype.torque = null;
+  Oscillation.prototype.accelerationX = null;
+  Oscillation.prototype.accelerationY = null;
+  Oscillation.prototype.spin = null;
+  Oscillation.prototype.growthX = null;
+  Oscillation.prototype.growthY = null;
+
+  // Methods
+  Oscillation.prototype.CreateOscillatingObject = function( _key, _from, _to, _amplitude ) {
+
+    if ( this[_key] !== null ) throw new Error( 'Invalid key' );
+
+    this[_key] = {
+      from: _from,
+      to: _to,
+      amplitude: _amplitude
+    };
+  
+  };
+
+  Oscillation.prototype.SetOscillatingObject = function( _key, _from, _to, _amplitude ) {
+
+    var obj = this[_key];
+
+    if ( obj == null ) {
+
+      return this.CreateOscillatingObject( _key, _from, _to, _amplitude );
+    
+    }
+
+    obj.from = _from;
+    obj.to = _to;
+    obj.amplitude = _amplitude;
+  
+  };
+
+  /** Oscillation */
 
   function Particle ( _options ) {
 
@@ -9815,7 +10071,7 @@ module.exports = function ( Nenkraft ) {
     this.velocity = Nenkraft.Vector2D();
     this.torque = 0;
     this.spin = 0;
-    this.grow = Nenkraft.Vector2D( 1, 1 );
+    this.growth = Nenkraft.Vector2D( 1, 1 );
     this.acceleration = Nenkraft.Vector2D( 1, 1 );
     this.gravity = Nenkraft.Vector2D();
     this.Renew( _options );
@@ -9826,6 +10082,7 @@ module.exports = function ( Nenkraft ) {
   Particle.prototype.constructor = Particle;
   // Static
   Particle.Pool = Nenkraft.Utils.Pool( Particle );
+  Particle.Oscillation = Oscillation;
 
   Particle.Pool.Retrieve = function( _options ) {
 
@@ -9847,7 +10104,7 @@ module.exports = function ( Nenkraft ) {
   Particle.prototype.velocity = null;
   Particle.prototype.torque = null;
   Particle.prototype.spin = null;
-  Particle.prototype.grow = null;
+  Particle.prototype.growth = null;
   Particle.prototype.acceleration = null;
   Particle.prototype.fade = false;
   Particle.prototype.deflate = false;
@@ -9857,20 +10114,24 @@ module.exports = function ( Nenkraft ) {
   Particle.prototype.dead = false;
   Particle.prototype.entity = null;
   Particle.prototype.system = null;
+  Particle.prototype.oscillation = null;
+  Particle.prototype.oscillationOffset = 0;
 
   // Methods
   Particle.prototype.Process = function () {
 
     if ( this.dead === true ) return;
 
-    if ( this.lifespan-- > 0 ) {
+    if ( this.lifespan++ < this.lifespanTot ) {
 
       var entity = this.entity, velocity = this.velocity;
-      var lifespanPerc = this.lifespan / this.lifespanTot;
+      var lifespanPerc = 1 - this.lifespan / this.lifespanTot;
+      var osc = this.oscillation;
 
       velocity.AddV( this.gravity );
       velocity.MultiplyV( this.acceleration );
-      velocity.Rotate( this.torque );
+
+      if ( this.torque !== 0 ) velocity.Rotate( this.torque );
   
       entity.position.AddV( velocity );
 
@@ -9886,11 +10147,105 @@ module.exports = function ( Nenkraft ) {
       
       } else {
 
-        entity.scale.MultiplyV( this.grow );
+        entity.scale.MultiplyV( this.growth );
       
       }
 
       entity.rotation += this.spin;
+
+      if ( osc !== null ) {
+
+        var oscTime = this.lifespan + this.oscillationOffset;
+
+        if ( osc.torque != null ) {
+
+          this.torque = Oscillate(
+            oscTime, 
+            osc.torque.from,
+            osc.torque.to,
+            osc.torque.amplitude
+          );
+        
+        }
+
+        if ( osc.spin != null ) {
+
+          this.spin = Oscillate(
+            oscTime, 
+            osc.spin.from,
+            osc.spin.to,
+            osc.spin.amplitude
+          );
+        
+        }
+
+        if ( osc.velocityX != null ) {
+
+          this.velocity.x = Oscillate(
+            oscTime, 
+            osc.velocityX.from,
+            osc.velocityX.to,
+            osc.velocityX.amplitude
+          );
+        
+        }
+
+        if ( osc.velocityY != null ) {
+
+          this.velocity.y = Oscillate(
+            oscTime, 
+            osc.velocityY.from,
+            osc.velocityY.to,
+            osc.velocityY.amplitude
+          );
+        
+        }
+
+        if ( osc.accelerationX != null ) {
+
+          this.acceleration.x = Oscillate(
+            oscTime, 
+            osc.accelerationX.from,
+            osc.accelerationX.to,
+            osc.accelerationX.amplitude
+          );
+        
+        }
+
+        if ( osc.accelerationY != null ) {
+
+          this.acceleration.y = Oscillate(
+            oscTime, 
+            osc.accelerationY.from,
+            osc.accelerationY.to,
+            osc.accelerationY.amplitude
+          );
+        
+        }
+
+        if ( osc.growthX != null ) {
+
+          this.growth.x = Oscillate(
+            oscTime, 
+            osc.growthX.from,
+            osc.growthX.to,
+            osc.growthX.amplitude
+          );
+        
+        }
+
+        if ( osc.growthY != null ) {
+
+          this.growth.y = Oscillate(
+            oscTime, 
+            osc.growthY.from,
+            osc.growthY.to,
+            osc.growthY.amplitude
+          );
+        
+        }
+      
+      }
     
     } else {
 
@@ -9903,10 +10258,10 @@ module.exports = function ( Nenkraft ) {
 
   Particle.prototype.Renew = function( _options ) {
 
+    if ( _options == null ) return;
+
     this.dead = false;
     var entity = this.entity;
-
-    if ( _options == null ) return;
 
     if ( _options.path != null ) {
 
@@ -9920,7 +10275,7 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-    } else if ( _options.texture ) {
+    } else if ( _options.texture != null ) {
 
       if ( entity === null ) {
       
@@ -9939,6 +10294,14 @@ module.exports = function ( Nenkraft ) {
     
       }
 
+      if ( _options.frames != null ) {
+
+        _options.frames[RI( 0, _options.frames.length - 1 )].Apply( entity );
+        entity.scale.Set( 1 );
+        entity.UpdateTextureTransform();
+      
+      }
+
     } else {
 
       throw new Error( 'Path or Texture needed!' );
@@ -9947,10 +10310,17 @@ module.exports = function ( Nenkraft ) {
 
     if ( _options.position != null ) {
 
-      entity.position.Set(
-        MinMaxOrValue( _options.position.x ), 
-        MinMaxOrValue( _options.position.y )
-      );
+      if ( _options.position.x != null ) {
+
+        entity.position.x = MinMaxOrValue( _options.position.x );
+      
+      }
+
+      if ( _options.position.y != null ) {
+
+        entity.position.y = MinMaxOrValue( _options.position.y );
+      
+      }
     
     }
 
@@ -9968,28 +10338,49 @@ module.exports = function ( Nenkraft ) {
 
     if ( _options.velocity != null ) {
 
-      this.velocity.Set( 
-        MinMaxOrValue( _options.velocity.x ), 
-        MinMaxOrValue( _options.velocity.y )
-      );
+      if ( _options.velocity.x != null ) {
+
+        this.velocity.x = MinMaxOrValue( _options.velocity.x );
+      
+      }
+
+      if ( _options.velocity.y != null ) {
+
+        this.velocity.y = MinMaxOrValue( _options.velocity.y );
+      
+      }
 
     }
 
     if ( _options.acceleration != null ) {
 
-      this.acceleration.Set( 
-        MinMaxOrValue( _options.acceleration.x ), 
-        MinMaxOrValue( _options.acceleration.y )
-      );
+      if ( _options.acceleration.x != null ) {
+
+        this.acceleration.x = MinMaxOrValue( _options.acceleration.x );
+      
+      }
+
+      if ( _options.acceleration.y != null ) {
+
+        this.acceleration.y = MinMaxOrValue( _options.acceleration.y );
+      
+      }
     
     }
 
-    if ( _options.grow != null ) {
+    if ( _options.growth != null ) {
 
-      this.grow.Set(
-        MinMaxOrValue( _options.grow.x ), 
-        MinMaxOrValue( _options.grow.y )
-      );
+      if ( _options.growth.x != null ) {
+
+        this.growth.x = MinMaxOrValue( _options.growth.x );
+      
+      }
+
+      if ( _options.growth.y != null ) {
+
+        this.growth.y = MinMaxOrValue( _options.growth.y );
+      
+      }
     
     }
 
@@ -10017,18 +10408,138 @@ module.exports = function ( Nenkraft ) {
     
     }
 
+    if ( _options.oscillation != null ) {
+
+      var optOsc = _options.oscillation;
+      var osc = this.oscillation;
+
+      if ( osc === null ) {
+
+        osc = this.oscillation = Oscillation();
+      
+      }
+
+      if ( optOsc.offset != null ) {
+        
+        this.oscillationOffset = MinMaxOrValue( optOsc.offset );
+
+      }
+
+      if ( optOsc.torque != null ) {
+
+        osc.SetOscillatingObject( 
+          'torque', 
+          optOsc.torque.from,
+          optOsc.torque.to,
+          optOsc.torque.amplitude
+        );
+        
+      }
+
+      if ( optOsc.spin != null ) {
+
+        osc.SetOscillatingObject( 
+          'spin', 
+          optOsc.spin.from,
+          optOsc.spin.to,
+          optOsc.spin.amplitude
+        );
+        
+      }
+
+      if ( optOsc.velocity != null ) {
+
+        if ( optOsc.velocity.x != null ) {
+
+          osc.SetOscillatingObject( 
+            'velocityX', 
+            optOsc.velocity.x.from,
+            optOsc.velocity.x.to,
+            optOsc.velocity.x.amplitude
+          );
+
+        }
+
+        if ( optOsc.velocity.y != null ) {
+
+          osc.SetOscillatingObject( 
+            'velocityY', 
+            optOsc.velocity.y.from,
+            optOsc.velocity.y.to,
+            optOsc.velocity.y.amplitude
+          );
+
+        }
+      
+      }
+
+      if ( optOsc.acceleration != null ) {
+
+        if ( optOsc.acceleration.x != null ) {
+
+          osc.SetOscillatingObject( 
+            'accelerationX', 
+            optOsc.acceleration.x.from,
+            optOsc.acceleration.x.to,
+            optOsc.acceleration.x.amplitude
+          );
+
+        }
+
+        if ( optOsc.acceleration.y != null ) {
+
+          osc.SetOscillatingObject( 
+            'accelerationY', 
+            optOsc.acceleration.y.from,
+            optOsc.acceleration.y.to,
+            optOsc.acceleration.y.amplitude
+          );
+
+        }
+      
+      }
+
+      if ( optOsc.growth != null ) {
+
+        if ( optOsc.growth.x != null ) {
+
+          osc.SetOscillatingObject( 
+            'growthX', 
+            optOsc.growth.x.from,
+            optOsc.growth.x.to,
+            optOsc.growth.x.amplitude
+          );
+
+        }
+
+        if ( optOsc.growth.y != null ) {
+
+          osc.SetOscillatingObject( 
+            'growthY', 
+            optOsc.growth.y.from,
+            optOsc.growth.y.to,
+            optOsc.growth.y.amplitude
+          );
+
+        }
+      
+      }
+
+    }
+
   };
 
   Particle.prototype.SetLifespan = function( _value ) {
 
-    this.lifespan = this.lifespanTot = _value;
+    this.lifespan = 0;
+    this.lifespanTot = _value;
   
   };
 
   Particle.prototype.ResetEntity = function() {
 
     var entity = this.entity;
-    entity.scale.Set( 1, 1 );
+    entity.scale.Set( 1 );
     entity.alpha = 1;
     entity.display = true;
     entity.rotation = 0;
@@ -10067,7 +10578,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -10187,7 +10698,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -10262,7 +10773,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 /**
@@ -10478,7 +10989,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -10570,7 +11081,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -10707,7 +11218,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 /**
@@ -10877,7 +11388,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 /**
@@ -11013,7 +11524,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 /**
@@ -11117,7 +11628,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 /**
@@ -11198,7 +11709,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 /**
@@ -11287,7 +11798,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 /**
@@ -11376,7 +11887,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports) {
 
 /**
@@ -11516,7 +12027,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports) {
 
 /**
@@ -11658,7 +12169,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports) {
 
 /**

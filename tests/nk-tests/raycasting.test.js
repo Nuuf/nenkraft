@@ -57,15 +57,15 @@ module.exports = function () {
 
     ( function () {
 
-      var i = 360;
+      var i = 180;
       var angle = Math.PI * 2 / i;
-      var r = 180;
+      var r = 360;
 
       while ( i-- ) {
 
         var th = angle * i;
         var line = new nk.Path.Ray2D( 0, 0, 0, 0 );
-        line.style.stroke.lineWidth = 1;
+        line.style.stroke.lineWidth = 0.1;
         var gr = new nk.Graphic2D( 0, 0, line );
         gr.interactive = false;
         gr.data.angle = th;

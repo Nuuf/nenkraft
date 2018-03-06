@@ -107,10 +107,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.DrawChildren = function ( _rc ) {
 
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+    for ( var i = 0, children = this.children, l = children.length; i < l; ++i ) {
 
-      child = children[ i ];
-      if ( child.Draw ) child.Draw( _rc );
+      children[i].Draw( _rc );
     
     }
   
@@ -118,10 +117,9 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.GLDrawChildren = function ( _gl ) {
 
-    for ( var i = 0, children = this.children, l = children.length, child; i < l; ++i ) {
+    for ( var i = 0, children = this.children, l = children.length; i < l; ++i ) {
 
-      child = children[ i ];
-      if ( child.GLDraw ) child.GLDraw( _gl );
+      children[i].GLDraw( _gl );
     
     }
   
