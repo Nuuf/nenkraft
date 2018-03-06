@@ -80,7 +80,7 @@ module.exports = function ( Nenkraft ) {
         _rc.globalCompositeOperation = this.gco;
         _rc.fillStyle = this.pattern;
         _rc.beginPath();
-        _rc.rect( 0, 0, this.width, this.height );
+        _rc.rect( 0, 0, this.w, this.h );
         _rc.closePath();
         _rc.translate( this.patternOffset.x, this.patternOffset.y );
         _rc.fill();
@@ -97,19 +97,19 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Tilesprite.prototype.GeneratePattern = function( _rc, _width, _height ) {
+  Tilesprite.prototype.GeneratePattern = function( _rc, _w, _h ) {
 
     if ( this.programController == null ) {
 
       this.pattern = _rc.createPattern( this.texture.image, null );
-      this.w = _width;
-      this.h = _height;
+      this.w = _w;
+      this.h = _h;
       this.scale.Set( 1.0 );
     
     } else {
 
-      this.width = _width;
-      this.height = _height;
+      this.width = _w;
+      this.height = _h;
       this.textureTransformation.SetTransform( 0, 0, this.scale.x, this.scale.y );
     
     }

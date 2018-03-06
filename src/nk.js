@@ -54,6 +54,7 @@ require( './nk-entity/nk-core-entity2d' )( namespace );
 require( './nk-entity/nk-container2d' )( namespace );
 require( './nk-entity/nk-case2d' )( namespace );
 require( './nk-entity/nk-stage2d' )( namespace );
+require( './nk-entity/nk-stadium' )( namespace );
 require( './nk-entity/nk-graphic2d' )( namespace );
 require( './nk-entity/nk-plain2d' )( namespace );
 require( './nk-entity/nk-plaingraphic2d' )( namespace );

@@ -119,7 +119,7 @@ module.exports = function () {
         sheetDefault = spritesheetLoader.GetSpritesheet( 'sheet-default' );
         sheetDefault.GenerateFrames();
 
-        sheetRed= spritesheetLoader.GetSpritesheet( 'sheet-red' );
+        sheetRed = spritesheetLoader.GetSpritesheet( 'sheet-red' );
         sheetRed.GenerateFrames();
 
         sheetBlue = spritesheetLoader.GetSpritesheet( 'sheet-blue' );
@@ -138,6 +138,7 @@ module.exports = function () {
     function go () {
 
       stage.ticker.StartAF();
+      console.log( sheetDefault.basicTexture );
       pc.BindBasicTexture( sheetDefault.basicTexture, 0 );
       pc.BindBasicTexture( sheetRed.basicTexture, 1 ); 
       pc.BindBasicTexture( sheetBlue.basicTexture, 2 );

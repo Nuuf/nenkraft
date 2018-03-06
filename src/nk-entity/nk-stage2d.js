@@ -50,14 +50,47 @@ module.exports = function ( Nenkraft ) {
       );
       this.usingWebGL = true;
 
-      this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _options.halt );
+      if ( _options.noTicker !== true ) {
+
+        this.ticker = Nenkraft.Time.Ticker( this.GLProcess.bind( this ), 60, _options.halt );
+      
+      }
 
       this.GLConfig( this.gl );
     
     } else {
 
       this.rc = _options.canvas.getContext( '2d' );
-      this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _options.halt );
+
+      if ( _options.noTicker !== true ) {
+
+        this.ticker = Nenkraft.Time.Ticker( this.Process.bind( this ), 60, _options.halt );
+      
+      }
+    
+    }
+
+    if ( _options.backgroundColor != null ) {
+
+      this.backgroundColor = _options.backgroundColor;
+    
+    }
+
+    if ( _options.clear === false ) {
+
+      this.clear = false;
+    
+    }
+
+    if ( _options.fill === false ) {
+
+      this.fill = false;
+    
+    }
+
+    if ( _options.id != null ) {
+
+      this.id = _options.id;
     
     }
 
@@ -72,11 +105,14 @@ module.exports = function ( Nenkraft ) {
   // Static
 
   // Members
+  Stage2D.prototype.id = null;
+  Stage2D.prototype.canvas = null;
   Stage2D.prototype.backgroundColor = 'rgba(10,20,30,1)';
   Stage2D.prototype.clear = true;
   Stage2D.prototype.fill = true;
   Stage2D.prototype.usingWebGL = false;
   Stage2D.prototype.positionReconfiguration = null;
+  Stage2D.prototype.canvasManager = null;
 
   // Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
@@ -147,6 +183,23 @@ module.exports = function ( Nenkraft ) {
     this.GLPostDraw( this.gl );
     this.onProcess.Dispatch( this, _delta );
   
+  };
+
+  Stage2D.prototype.MixedProcess = function( _delta ) {
+
+    if ( this.usingWebGL === true ) {
+
+      this.GLDraw( this.gl );
+      this.GLPostDraw( this.gl );
+    
+    } else {
+
+      this.Draw( this.rc );
+    
+    }
+
+    this.onProcess.Dispatch( this, _delta );
+
   };
 
   Nenkraft.Entity.Stage2D = Stage2D;

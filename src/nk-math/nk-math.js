@@ -5,12 +5,20 @@
 module.exports = function ( Nenkraft ) {
 
   'use strict';
-  Nenkraft.Math.PII = Math.PI * 2;
-  Nenkraft.Math.DEGREES_TO_RADIANS = Math.PI / 180;
-  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / Math.PI;
+
+  var PI = Math.PI;
+  var Sin = Math.sin;
+  var Cos = Math.cos;
+  var Pow = Math.pow;
+  var Round = Math.round;
+
+  Nenkraft.Math.PII = PI * 2;
+  Nenkraft.Math.PI5 = PI * 0.5;
+  Nenkraft.Math.DEGREES_TO_RADIANS = PI / 180;
+  Nenkraft.Math.RADIANS_TO_DEGREES = 180 / PI;
   Nenkraft.Math.RADIAN = Nenkraft.Math.DEGREES_TO_RADIANS;
 
-  Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
+  var DTR = Nenkraft.Math.DegreesToRadians = Nenkraft.Math.DTR = function ( _angle ) {
 
     return _angle * Nenkraft.Math.DEGREES_TO_RADIANS;
   
@@ -24,8 +32,8 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
-    var divisor = Math.pow( 10, _precision );
-    return Math.round( divisor * _value ) / divisor;
+    var divisor = Pow( 10, _precision );
+    return Round( divisor * _value ) / divisor;
   
   };
 
@@ -45,11 +53,18 @@ module.exports = function ( Nenkraft ) {
 
       var theta = delta.GetAngle();
       _velocity.Add(
-        Math.cos( theta ) * _strength,
-        Math.sin( theta ) * _strength
+        Cos( theta ) * _strength,
+        Sin( theta ) * _strength
       );
     
     }
+  
+  };
+
+  Nenkraft.Math.Oscillate = function( _time, _from, _to, _amplitude ) {
+
+    var delta = ( _to - _from ) * 0.5;
+    return ( _from + delta ) + ( Sin( DTR( _time * _amplitude ) ) * delta );
   
   };
 
@@ -94,9 +109,9 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Math.LikeASquareGrid = function ( _points, _width, _marginX, _marginY ) {
+  Nenkraft.Math.LikeASquareGrid = function ( _points, _w, _marginX, _marginY ) {
 
-    for ( var i = 0, l = _points.length, columns = ( _width / _marginX ) | 0; i < l; ++i ) {
+    for ( var i = 0, l = _points.length, columns = ( _w / _marginX ) | 0; i < l; ++i ) {
 
       _points[ i ].Set( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY );
     
@@ -104,11 +119,11 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Math.SquareGrid = function ( _width, _height, _marginX, _marginY, _creatableClass ) {
+  Nenkraft.Math.SquareGrid = function ( _w, _h, _marginX, _marginY, _creatableClass ) {
 
     var grid = [];
 
-    for ( var i = 0, columns = ( _width / _marginX ) | 0, rows = ( _height / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
+    for ( var i = 0, columns = ( _w / _marginX ) | 0, rows = ( _h / _marginY ) | 0, l = columns * rows; i < l; ++i ) {
 
       grid.push( new _creatableClass( ( i % columns ) * _marginX, ( ( i / columns ) | 0 ) * _marginY ) );
     
@@ -167,6 +182,7 @@ module.exports = function ( Nenkraft ) {
   };
 
   Object.defineProperty( Nenkraft.Math, 'PII', { writable: false } );
+  Object.defineProperty( Nenkraft.Math, 'PI5', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'DEGREES_TO_RADIANS', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIANS_TO_DEGREES', { writable: false } );
   Object.defineProperty( Nenkraft.Math, 'RADIAN', { writable: false } );

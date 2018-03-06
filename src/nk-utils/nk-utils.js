@@ -88,7 +88,7 @@ module.exports = function ( Nenkraft ) {
 
     } else if ( _options.values != null && _options.values.length > 0 ) {
 
-      return _options.values[RI( 0, _options.values.length-1 )];
+      return _options.values[RI( 0, _options.values.length - 1 )];
 
     }
 

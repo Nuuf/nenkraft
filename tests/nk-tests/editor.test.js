@@ -38,8 +38,8 @@ module.exports = function () {
       var imageLoader = nk.ImageLoader();
       imageLoader.onComplete.Add( Init );
       imageLoader.Load( [
-        { id: 'backgroundTile', src:'./assets/images/editor/tile.png' },
-        { id: 'origin', src:'./assets/images/editor/origin.png' }
+        { id: 'backgroundTile', src: './assets/images/editor/tile.png' },
+        { id: 'origin', src: './assets/images/editor/origin.png' }
       ], true );
   
       function Init() {
