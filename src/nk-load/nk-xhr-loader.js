@@ -61,13 +61,15 @@ module.exports = function ( Nenkraft ) {
 
       var xhr = new XMLHttpRequest();
 
+      xhr.open( 'GET', item.src );
+
       switch ( item.type ) {
 
         case 'json':
-          xhr.onload = this.OnLoadJSON.bind( this );
+          xhr.onreadystatechange = this.OnLoadJSON.bind( this );
           break;
         default:
-          xhr.onload = this.OnLoadXML.bind( this );
+          xhr.onreadystatechange = this.OnLoadXML.bind( this );
           break;
       
       }
@@ -86,7 +88,6 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-      xhr.open( 'GET', item.src );
       xhr.send();
     
     } else {
@@ -104,7 +105,7 @@ module.exports = function ( Nenkraft ) {
 
     var t = _event.currentTarget;
 
-    if ( t.status === 200 && t.readyState === 4 ) {
+    if ( ( t.status === 200 || t.responseText != null ) && t.readyState === 4 ) {
 
       t.onload = null;
       t.onerror = null;
@@ -115,6 +116,8 @@ module.exports = function ( Nenkraft ) {
       } );
       this.onXHRLoaded.Dispatch( t, { count: this.count } );
       this.Haul( ++this.count );
+
+      t.abort();
     
     }
   
@@ -124,7 +127,7 @@ module.exports = function ( Nenkraft ) {
 
     var t = _event.currentTarget;
 
-    if ( t.status === 200 && t.readyState === 4 ) {
+    if ( ( t.status === 200 || t.responseText != null ) && t.readyState === 4 ) {
 
       t.onload = null;
       t.onerror = null;
@@ -135,13 +138,16 @@ module.exports = function ( Nenkraft ) {
       } );
       this.onXHRLoaded.Dispatch( t, { count: this.count } );
       this.Haul( ++this.count );
+
+      t.abort();
     
     }
   
   };
 
-  XHRLoader.prototype.OnError = function () {
+  XHRLoader.prototype.OnError = function ( _event ) {
 
+    console.error( _event );
     throw new Error( 'Request failed' );
   
   };

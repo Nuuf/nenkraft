@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.1 (Beta)
+* @version     0.9.2 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,25 +67,25 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 88);
+/******/ 	return __webpack_require__(__webpack_require__.s = 89);
 /******/ })
 /************************************************************************/
-/******/ (Array(88).concat([
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(89);
-
-
-/***/ }),
+/******/ (Array(89).concat([
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__( 90 );
+module.exports = __webpack_require__(90);
+
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__( 91 );
 
 var tests = [];
 
-var context = __webpack_require__(91);
+var context = __webpack_require__(92);
 
 context.keys().forEach( function ( file ) {
 
@@ -103,58 +103,58 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 92,
-	"./animation.test": 93,
-	"./bitmapfont.test": 94,
-	"./butterflyish.test": 95,
-	"./camera.test": 96,
-	"./cli.test": 97,
-	"./clock.test": 98,
-	"./editor.test": 99,
-	"./elasticcollision.test": 101,
-	"./field.test": 102,
-	"./fractree.test": 103,
-	"./grabndrag.test": 104,
-	"./grid.test": 105,
-	"./invaders.test": 106,
-	"./magnet.test": 107,
-	"./motion.test": 108,
-	"./multiplecanvases.test": 109,
-	"./nightsky.test": 110,
-	"./particles.test": 111,
-	"./particlesystem.test": 112,
-	"./platformer.test": 113,
-	"./playground.test": 114,
-	"./polygoncollision.test": 115,
-	"./quadtree.test": 116,
-	"./rain.test": 117,
-	"./raycasting.test": 118,
-	"./reflectivecollision.test": 119,
-	"./scaling.test": 120,
-	"./sprite.test": 121,
-	"./stresstest.test": 122,
-	"./text.test": 123,
-	"./themask.test": 124,
-	"./tilesprite.test": 125,
-	"./webglanimation.test": 126,
-	"./webglbitmapfont.test": 127,
-	"./webglcircle.test": 128,
-	"./webglline2d.test": 129,
-	"./webglpixelbatch.test": 130,
-	"./webglrectangle.test": 131,
-	"./webglstresstest.test": 132,
-	"./webgltexturebatch.test": 133,
-	"./webgltilesprite.test": 134
+	"./aabbcollision.test": 93,
+	"./animation.test": 94,
+	"./bitmapfont.test": 95,
+	"./butterflyish.test": 96,
+	"./camera.test": 97,
+	"./cli.test": 98,
+	"./clock.test": 99,
+	"./editor.test": 100,
+	"./elasticcollision.test": 102,
+	"./field.test": 103,
+	"./fractree.test": 104,
+	"./grabndrag.test": 105,
+	"./grid.test": 106,
+	"./invaders.test": 107,
+	"./magnet.test": 108,
+	"./motion.test": 109,
+	"./multiplecanvases.test": 110,
+	"./nightsky.test": 111,
+	"./particles.test": 112,
+	"./particlesystem.test": 113,
+	"./platformer.test": 114,
+	"./playground.test": 115,
+	"./polygoncollision.test": 116,
+	"./quadtree.test": 117,
+	"./rain.test": 118,
+	"./raycasting.test": 119,
+	"./reflectivecollision.test": 120,
+	"./scaling.test": 121,
+	"./sprite.test": 122,
+	"./stresstest.test": 123,
+	"./text.test": 124,
+	"./themask.test": 125,
+	"./tilesprite.test": 126,
+	"./webglanimation.test": 127,
+	"./webglbitmapfont.test": 128,
+	"./webglcircle.test": 129,
+	"./webglline2d.test": 130,
+	"./webglpixelbatch.test": 131,
+	"./webglrectangle.test": 132,
+	"./webglstresstest.test": 133,
+	"./webgltexturebatch.test": 134,
+	"./webgltilesprite.test": 135
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -170,10 +170,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 91;
+webpackContext.id = 92;
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -302,7 +302,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -392,7 +392,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -477,7 +477,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -597,7 +597,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -667,7 +667,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -899,7 +899,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -983,12 +983,12 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function () {
 
-  __webpack_require__( 100 );
+  __webpack_require__( 101 );
 
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
@@ -1380,13 +1380,13 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1570,7 +1570,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1598,11 +1598,12 @@ module.exports = function () {
     var stage = new nk.Stage2D( { 
       canvas: c,
       x: HW,
-      y: HH
+      y: HH,
+      clear: false,
+      backgroundColor: 'rgba(0,0,0,0.1)'
     } );
-    stage.clear = false;
-    stage.backgroundColor = 'rgba(0,0,0,0.1)';
-    // stage.fill = false;
+
+    console.warn( 'Touch events enabled, use touchscreen device or toolbar' );
 
     var orig = new nk.Plaingraphic2D( 0, 0, new nk.Path.Circle( 0, 0, 200 ) );
     orig.path.style.fill.applied = false;
@@ -1639,7 +1640,7 @@ module.exports = function () {
 
         while ( --i ) {
 
-          MakeObj( stage.mouse.position.x, stage.mouse.position.y );
+          MakeObj( stage.touch.x, stage.touch.y );
         
         }
       
@@ -1664,12 +1665,12 @@ module.exports = function () {
     
     }
 
-    stage.mouse.onDown.Add( function () {
+    stage.touch.onStart.Add( function () {
 
       mouseDown = true;
     
     } );
-    stage.mouse.onUp.Add( function () {
+    stage.touch.onEnd.Add( function () {
 
       mouseDown = false;
     
@@ -1683,7 +1684,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1789,7 +1790,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1820,6 +1821,8 @@ module.exports = function () {
       y: 0
     } );
 
+    console.warn( 'Touch events enabled, use touchscreen device or toolbar' );
+
     var text = new nk.Text( 100, 100, 'Grab and drag' );
 
     var graphicCircle = new nk.Graphic2D( 350, 150, new nk.Path.Circle( 0, 0, 100 ) );
@@ -1841,7 +1844,7 @@ module.exports = function () {
     
     }
 
-    stage.mouse.onMove.Add( function ( _event ) {
+    stage.touch.onMove.Add( function ( _event ) {
 
       if ( dragger !== null ) {
 
@@ -1851,7 +1854,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onDown.Add( function ( _event ) {
+    stage.touch.onStart.Add( function ( _event ) {
 
       var p = _event.data.position;
 
@@ -1877,7 +1880,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function () {
+    stage.touch.onEnd.Add( function () {
 
       if ( dragger ) {
 
@@ -1897,7 +1900,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1986,7 +1989,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2661,7 +2664,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2829,7 +2832,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2861,8 +2864,11 @@ module.exports = function () {
       var stage = new nk.Stage2D( { 
         canvas: c,
         x: HW,
-        y: HH
+        y: HH,
+        noTouch: false
       } );
+
+      console.warn( 'Touch events enabled, use touchscreen device or toolbar' );
   
       var motObj = new nk.Sprite( 0, 0 );
       motObj.anchor.Set( 0.5 );
@@ -2875,7 +2881,7 @@ module.exports = function () {
       mm.Create( 'sx', 'scale.x', 1, 10 );
       mm.Create( 'sy', 'scale.y', 1, 10 );
   
-      stage.mouse.onUp.Add( function ( _event ) {
+      stage.touch.onEnd.Add( function ( _event ) {
   
         if ( xM.running ) xM.Stop();
         if ( yM.running ) yM.Stop();
@@ -2903,7 +2909,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3006,7 +3012,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3127,7 +3133,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3223,7 +3229,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3356,7 +3362,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3615,7 +3621,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3737,7 +3743,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3891,7 +3897,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3961,7 +3967,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4064,7 +4070,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4260,7 +4266,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4438,7 +4444,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4512,7 +4518,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4639,7 +4645,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4788,7 +4794,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4839,7 +4845,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4960,7 +4966,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5020,7 +5026,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5173,7 +5179,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5262,7 +5268,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5386,7 +5392,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5456,7 +5462,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5549,7 +5555,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5654,7 +5660,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5841,7 +5847,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5952,7 +5958,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 module.exports = function () {

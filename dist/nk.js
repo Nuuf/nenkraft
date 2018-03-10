@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.1 (Beta)
+* @version     0.9.2 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -5824,10 +5824,10 @@ __webpack_require__( 57 )( namespace );
 __webpack_require__( 58 )( namespace );
 __webpack_require__( 59 )( namespace );
 __webpack_require__( 60 )( namespace );
+__webpack_require__( 61 )( namespace );
 __webpack_require__( 25 )( namespace );
 __webpack_require__( 26 )( namespace );
 __webpack_require__( 27 )( namespace );
-__webpack_require__( 61 )( namespace );
 __webpack_require__( 62 )( namespace );
 __webpack_require__( 63 )( namespace );
 __webpack_require__( 64 )( namespace );
@@ -5844,10 +5844,10 @@ __webpack_require__( 74 )( namespace );
 __webpack_require__( 75 )( namespace );
 __webpack_require__( 76 )( namespace );
 __webpack_require__( 77 )( namespace );
+__webpack_require__( 78 )( namespace );
 __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
 __webpack_require__( 30 )( namespace );
-__webpack_require__( 78 )( namespace );
 __webpack_require__( 79 )( namespace );
 __webpack_require__( 80 )( namespace );
 __webpack_require__( 81 )( namespace );
@@ -5857,6 +5857,7 @@ __webpack_require__( 84 )( namespace );
 __webpack_require__( 85 )( namespace );
 __webpack_require__( 86 )( namespace );
 __webpack_require__( 87 )( namespace );
+__webpack_require__( 88 )( namespace );
 
 if ( true ) {
 
@@ -5894,7 +5895,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.9.1 (Beta)';
+  Nenkraft.VERSION = '0.9.2 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -7291,19 +7292,17 @@ module.exports = function ( Nenkraft ) {
 
     _event.preventDefault();
     _event.stopPropagation();
-    var element = this.element, pos = this.position;
-    pos.Set( _event.pageX, _event.pageY );
-    pos.Subtract( element.offsetLeft, element.offsetTop );
-    pos.SubtractV( this.offset );
-    pos.DivideV( this.scale );
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onMove.Dispatch( this.element, this.eventData );
+    return false;
   
   };
 
   Mouse.prototype.OnDown = function ( _event ) {
 
     _event.stopPropagation();
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onDown.Dispatch( this.element, this.eventData );
   
@@ -7319,7 +7318,6 @@ module.exports = function ( Nenkraft ) {
 
   Mouse.prototype.OnLeave = function ( _event ) {
 
-    _event.preventDefault();
     _event.stopPropagation();
     this.eventData.native = _event;
     this.onLeave.Dispatch( this.element, this.eventData );
@@ -7328,8 +7326,19 @@ module.exports = function ( Nenkraft ) {
 
   Mouse.prototype.OnWheel = function ( _event ) {
 
+    _event.stopPropagation();
     this.eventData.native = _event;
     this.onWheel.Dispatch( this.element, this.eventData );
+  
+  };
+
+  Mouse.prototype.CalculatePosition = function( _x, _y ) {
+
+    var pos = this.position;
+    pos.Set( _x, _y );
+    pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
+    pos.SubtractV( this.offset );
+    pos.DivideV( this.scale );
   
   };
 
@@ -7419,6 +7428,113 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  function Touch ( _element, _offsetX, _offsetY ) {
+
+    if ( !( this instanceof Touch ) ) return new Touch( _element, _offsetX, _offsetY );
+    this.element = _element;
+    this.position = Nenkraft.Vector2D();
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.offset = Nenkraft.Vector2D( _offsetX, _offsetY );
+    this.eventData = { position: this.position, native: null };
+
+    this.element.addEventListener( 'touchmove', this.OnMove.bind( this ) );
+    this.element.addEventListener( 'touchstart', this.OnStart.bind( this ), { passive: true } );
+    this.element.addEventListener( 'touchend', this.OnEnd.bind( this ) );
+    this.element.addEventListener( 'touchcancel', this.OnCancel.bind( this ) );
+
+    this.onMove = Nenkraft.Event.LocalEvent();
+    this.onStart = Nenkraft.Event.LocalEvent();
+    this.onEnd = Nenkraft.Event.LocalEvent();
+    this.onCancel = Nenkraft.Event.LocalEvent();
+  
+  }
+
+  Touch.prototype = Object.create( null );
+  Touch.prototype.constructor = Touch;
+  // Static
+
+  // Members
+  Touch.prototype.eventData = null;
+
+  // Methods
+  Touch.prototype.OnMove = function ( _event ) {
+
+    _event.preventDefault();
+    _event.stopPropagation();
+    this.CalculatePosition( _event.touches.item( 0 ).pageX, _event.touches.item( 0 ).pageY );
+    this.eventData.native = _event;
+    this.onMove.Dispatch( this.element, this.eventData );
+    return false;
+  
+  };
+
+  Touch.prototype.OnStart = function ( _event ) {
+
+    _event.stopPropagation();
+    this.CalculatePosition( _event.touches.item( 0 ).pageX, _event.touches.item( 0 ).pageY );
+    this.eventData.native = _event;
+    this.onStart.Dispatch( this.element, this.eventData );
+  
+  };
+
+  Touch.prototype.OnEnd = function ( _event ) {
+
+    _event.stopPropagation();
+    this.eventData.native = _event;
+    this.onEnd.Dispatch( this.element, this.eventData );
+  
+  };
+
+  Touch.prototype.OnCancel = function ( _event ) {
+
+    _event.stopPropagation();
+    this.eventData.native = _event;
+    this.onCancel.Dispatch( this.element, this.eventData );
+  
+  };
+
+  Touch.prototype.CalculatePosition = function( _x, _y ) {
+
+    var pos = this.position;
+    pos.Set( _x, _y );
+    pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
+    pos.SubtractV( this.offset );
+    pos.DivideV( this.scale );
+  
+  };
+
+  Object.defineProperty( Touch.prototype, 'x', {
+    get: function () {
+
+      return this.position.x;
+    
+    }
+  } );
+  Object.defineProperty( Touch.prototype, 'y', {
+    get: function () {
+
+      return this.position.y;
+    
+    }
+  } );
+
+  Nenkraft.Input.Touch = Touch;
+
+};
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
   function Debug () {
 
     throw new Error( 'Cannot be instantiated' );
@@ -7478,7 +7594,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /**
@@ -7592,7 +7708,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports) {
 
 /**
@@ -7685,7 +7801,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 /**
@@ -7787,7 +7903,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports) {
 
 /**
@@ -7853,7 +7969,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 /**
@@ -7952,7 +8068,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -8052,8 +8168,24 @@ module.exports = function ( Nenkraft ) {
     }
 
     this.onProcess = Nenkraft.Event.LocalEvent();
-    this.mouse = Nenkraft.Input.Mouse( _options.canvas, _options.x, _options.y );
-    this.keyboard = Nenkraft.Input.Keyboard( _options.canvas );
+
+    if ( _options.noMouse !== true ) {
+
+      this.mouse = Nenkraft.Input.Mouse( _options.canvas, _options.x, _options.y );
+    
+    }
+
+    if ( _options.noKeyboard !== true ) {
+
+      this.keyboard = Nenkraft.Input.Keyboard( _options.canvas );
+    
+    }
+
+    if ( _options.noTouch !== true ) {
+
+      this.touch = Nenkraft.Input.Touch( _options.canvas, _options.x, _options.y );
+
+    }
   
   }
 
@@ -8070,6 +8202,9 @@ module.exports = function ( Nenkraft ) {
   Stage2D.prototype.usingWebGL = false;
   Stage2D.prototype.positionReconfiguration = null;
   Stage2D.prototype.canvasManager = null;
+  Stage2D.prototype.mouse = null;
+  Stage2D.prototype.keyboard = null;
+  Stage2D.prototype.touch = null;
 
   // Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {
@@ -8166,7 +8301,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports) {
 
 /**
@@ -8293,7 +8428,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 /**
@@ -8496,7 +8631,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports) {
 
 /**
@@ -8704,7 +8839,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 /**
@@ -8793,7 +8928,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports) {
 
 /**
@@ -8917,7 +9052,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 /**
@@ -9009,7 +9144,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports) {
 
 /**
@@ -9427,7 +9562,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 /**
@@ -9575,7 +9710,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /**
@@ -9702,7 +9837,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 /**
@@ -9908,7 +10043,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 /**
@@ -9998,7 +10133,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -10578,7 +10713,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -10698,7 +10833,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 /**
@@ -10773,7 +10908,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -10989,7 +11124,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -11081,7 +11216,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 /**
@@ -11218,7 +11353,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 /**
@@ -11284,13 +11419,15 @@ module.exports = function ( Nenkraft ) {
 
       var xhr = new XMLHttpRequest();
 
+      xhr.open( 'GET', item.src );
+
       switch ( item.type ) {
 
         case 'json':
-          xhr.onload = this.OnLoadJSON.bind( this );
+          xhr.onreadystatechange = this.OnLoadJSON.bind( this );
           break;
         default:
-          xhr.onload = this.OnLoadXML.bind( this );
+          xhr.onreadystatechange = this.OnLoadXML.bind( this );
           break;
       
       }
@@ -11309,7 +11446,6 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-      xhr.open( 'GET', item.src );
       xhr.send();
     
     } else {
@@ -11327,7 +11463,7 @@ module.exports = function ( Nenkraft ) {
 
     var t = _event.currentTarget;
 
-    if ( t.status === 200 && t.readyState === 4 ) {
+    if ( ( t.status === 200 || t.responseText != null ) && t.readyState === 4 ) {
 
       t.onload = null;
       t.onerror = null;
@@ -11338,6 +11474,8 @@ module.exports = function ( Nenkraft ) {
       } );
       this.onXHRLoaded.Dispatch( t, { count: this.count } );
       this.Haul( ++this.count );
+
+      t.abort();
     
     }
   
@@ -11347,7 +11485,7 @@ module.exports = function ( Nenkraft ) {
 
     var t = _event.currentTarget;
 
-    if ( t.status === 200 && t.readyState === 4 ) {
+    if ( ( t.status === 200 || t.responseText != null ) && t.readyState === 4 ) {
 
       t.onload = null;
       t.onerror = null;
@@ -11358,13 +11496,16 @@ module.exports = function ( Nenkraft ) {
       } );
       this.onXHRLoaded.Dispatch( t, { count: this.count } );
       this.Haul( ++this.count );
+
+      t.abort();
     
     }
   
   };
 
-  XHRLoader.prototype.OnError = function () {
+  XHRLoader.prototype.OnError = function ( _event ) {
 
+    console.error( _event );
     throw new Error( 'Request failed' );
   
   };
@@ -11388,7 +11529,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 /**
@@ -11524,7 +11665,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 /**
@@ -11628,7 +11769,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 /**
@@ -11709,7 +11850,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 /**
@@ -11798,7 +11939,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports) {
 
 /**
@@ -11887,7 +12028,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports) {
 
 /**
@@ -12027,7 +12168,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports) {
 
 /**
@@ -12169,7 +12310,7 @@ module.exports = function ( Nenkraft ) {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports) {
 
 /**

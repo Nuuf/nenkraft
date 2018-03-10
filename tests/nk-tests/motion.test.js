@@ -27,8 +27,11 @@ module.exports = function () {
       var stage = new nk.Stage2D( { 
         canvas: c,
         x: HW,
-        y: HH
+        y: HH,
+        noTouch: false
       } );
+
+      console.warn( 'Touch events enabled, use touchscreen device or toolbar' );
   
       var motObj = new nk.Sprite( 0, 0 );
       motObj.anchor.Set( 0.5 );
@@ -41,7 +44,7 @@ module.exports = function () {
       mm.Create( 'sx', 'scale.x', 1, 10 );
       mm.Create( 'sy', 'scale.y', 1, 10 );
   
-      stage.mouse.onUp.Add( function ( _event ) {
+      stage.touch.onEnd.Add( function ( _event ) {
   
         if ( xM.running ) xM.Stop();
         if ( yM.running ) yM.Stop();

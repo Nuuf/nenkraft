@@ -95,8 +95,24 @@ module.exports = function ( Nenkraft ) {
     }
 
     this.onProcess = Nenkraft.Event.LocalEvent();
-    this.mouse = Nenkraft.Input.Mouse( _options.canvas, _options.x, _options.y );
-    this.keyboard = Nenkraft.Input.Keyboard( _options.canvas );
+
+    if ( _options.noMouse !== true ) {
+
+      this.mouse = Nenkraft.Input.Mouse( _options.canvas, _options.x, _options.y );
+    
+    }
+
+    if ( _options.noKeyboard !== true ) {
+
+      this.keyboard = Nenkraft.Input.Keyboard( _options.canvas );
+    
+    }
+
+    if ( _options.noTouch !== true ) {
+
+      this.touch = Nenkraft.Input.Touch( _options.canvas, _options.x, _options.y );
+
+    }
   
   }
 
@@ -113,6 +129,9 @@ module.exports = function ( Nenkraft ) {
   Stage2D.prototype.usingWebGL = false;
   Stage2D.prototype.positionReconfiguration = null;
   Stage2D.prototype.canvasManager = null;
+  Stage2D.prototype.mouse = null;
+  Stage2D.prototype.keyboard = null;
+  Stage2D.prototype.touch = null;
 
   // Methods
   Stage2D.prototype.PreDraw = function ( _rc ) {

@@ -41,19 +41,17 @@ module.exports = function ( Nenkraft ) {
 
     _event.preventDefault();
     _event.stopPropagation();
-    var element = this.element, pos = this.position;
-    pos.Set( _event.pageX, _event.pageY );
-    pos.Subtract( element.offsetLeft, element.offsetTop );
-    pos.SubtractV( this.offset );
-    pos.DivideV( this.scale );
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onMove.Dispatch( this.element, this.eventData );
+    return false;
   
   };
 
   Mouse.prototype.OnDown = function ( _event ) {
 
     _event.stopPropagation();
+    this.CalculatePosition( _event.pageX, _event.pageY );
     this.eventData.native = _event;
     this.onDown.Dispatch( this.element, this.eventData );
   
@@ -69,7 +67,6 @@ module.exports = function ( Nenkraft ) {
 
   Mouse.prototype.OnLeave = function ( _event ) {
 
-    _event.preventDefault();
     _event.stopPropagation();
     this.eventData.native = _event;
     this.onLeave.Dispatch( this.element, this.eventData );
@@ -78,8 +75,19 @@ module.exports = function ( Nenkraft ) {
 
   Mouse.prototype.OnWheel = function ( _event ) {
 
+    _event.stopPropagation();
     this.eventData.native = _event;
     this.onWheel.Dispatch( this.element, this.eventData );
+  
+  };
+
+  Mouse.prototype.CalculatePosition = function( _x, _y ) {
+
+    var pos = this.position;
+    pos.Set( _x, _y );
+    pos.Subtract( this.element.offsetLeft, this.element.offsetTop );
+    pos.SubtractV( this.offset );
+    pos.DivideV( this.scale );
   
   };
 
