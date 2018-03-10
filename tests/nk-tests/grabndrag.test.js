@@ -26,6 +26,8 @@ module.exports = function () {
       y: 0
     } );
 
+    console.warn( 'Touch events enabled, use touchscreen device or toolbar' );
+
     var text = new nk.Text( 100, 100, 'Grab and drag' );
 
     var graphicCircle = new nk.Graphic2D( 350, 150, new nk.Path.Circle( 0, 0, 100 ) );
@@ -47,7 +49,7 @@ module.exports = function () {
     
     }
 
-    stage.mouse.onMove.Add( function ( _event ) {
+    stage.touch.onMove.Add( function ( _event ) {
 
       if ( dragger !== null ) {
 
@@ -57,7 +59,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onDown.Add( function ( _event ) {
+    stage.touch.onStart.Add( function ( _event ) {
 
       var p = _event.data.position;
 
@@ -83,7 +85,7 @@ module.exports = function () {
       }
     
     }, stage );
-    stage.mouse.onUp.Add( function () {
+    stage.touch.onEnd.Add( function () {
 
       if ( dragger ) {
 

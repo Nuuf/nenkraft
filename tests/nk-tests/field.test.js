@@ -23,11 +23,12 @@ module.exports = function () {
     var stage = new nk.Stage2D( { 
       canvas: c,
       x: HW,
-      y: HH
+      y: HH,
+      clear: false,
+      backgroundColor: 'rgba(0,0,0,0.1)'
     } );
-    stage.clear = false;
-    stage.backgroundColor = 'rgba(0,0,0,0.1)';
-    // stage.fill = false;
+
+    console.warn( 'Touch events enabled, use touchscreen device or toolbar' );
 
     var orig = new nk.Plaingraphic2D( 0, 0, new nk.Path.Circle( 0, 0, 200 ) );
     orig.path.style.fill.applied = false;
@@ -64,7 +65,7 @@ module.exports = function () {
 
         while ( --i ) {
 
-          MakeObj( stage.mouse.position.x, stage.mouse.position.y );
+          MakeObj( stage.touch.x, stage.touch.y );
         
         }
       
@@ -89,12 +90,12 @@ module.exports = function () {
     
     }
 
-    stage.mouse.onDown.Add( function () {
+    stage.touch.onStart.Add( function () {
 
       mouseDown = true;
     
     } );
-    stage.mouse.onUp.Add( function () {
+    stage.touch.onEnd.Add( function () {
 
       mouseDown = false;
     

@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.1 (Beta)
+* @version     0.9.2 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 135);
+/******/ 	return __webpack_require__(__webpack_require__.s = 136);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1272,15 +1272,15 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 135:
+/***/ 136:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(136);
+module.exports = __webpack_require__(137);
 
 
 /***/ }),
 
-/***/ 136:
+/***/ 137:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1290,7 +1290,7 @@ module.exports = __webpack_require__(136);
 var namespace = Object.create( null );
 
 __webpack_require__( 1 )();
-__webpack_require__( 137 )( namespace );
+__webpack_require__( 138 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
@@ -1301,7 +1301,7 @@ __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
-__webpack_require__( 138 )( namespace );
+__webpack_require__( 139 )( namespace );
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 14 )( namespace );
@@ -1327,7 +1327,7 @@ module.exports = namespace;
 
 /***/ }),
 
-/***/ 137:
+/***/ 138:
 /***/ (function(module, exports) {
 
 /**
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.9.1 (Beta)';
+  Nenkraft.VERSION = '0.9.2 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -1356,7 +1356,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 138:
+/***/ 139:
 /***/ (function(module, exports) {
 
 /**
