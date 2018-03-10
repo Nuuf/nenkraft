@@ -101,10 +101,23 @@ module.exports = function ( Nenkraft ) {
       this.stage.w = _w;
       this.stage.h = _h;
 
-      this.stage.mouse.scale.Set(
-        _w / this.w,
-        _h / this.h
-      );
+      if ( this.stage.mouse ) {
+
+        this.stage.mouse.scale.Set(
+          _w / this.w,
+          _h / this.h
+        );
+      
+      } 
+
+      if ( this.stage.touch ) {
+
+        this.stage.touch.scale.Set(
+          _w / this.w,
+          _h / this.h
+        );
+      
+      }
 
       if ( this.stage.usingWebGL === true ) {
         

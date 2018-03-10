@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.2 (Beta)
+* @version     0.9.3 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -5895,7 +5895,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.9.2 (Beta)';
+  Nenkraft.VERSION = '0.9.3 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -6471,10 +6471,23 @@ module.exports = function ( Nenkraft ) {
       this.stage.w = _w;
       this.stage.h = _h;
 
-      this.stage.mouse.scale.Set(
-        _w / this.w,
-        _h / this.h
-      );
+      if ( this.stage.mouse ) {
+
+        this.stage.mouse.scale.Set(
+          _w / this.w,
+          _h / this.h
+        );
+      
+      } 
+
+      if ( this.stage.touch ) {
+
+        this.stage.touch.scale.Set(
+          _w / this.w,
+          _h / this.h
+        );
+      
+      }
 
       if ( this.stage.usingWebGL === true ) {
         
