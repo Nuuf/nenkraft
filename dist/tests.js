@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.3 (Beta)
+* @version     0.9.4 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -136,25 +136,26 @@ var map = {
 	"./platformer.test": 114,
 	"./playground.test": 115,
 	"./polygoncollision.test": 116,
-	"./quadtree.test": 117,
-	"./rain.test": 118,
-	"./raycasting.test": 119,
-	"./reflectivecollision.test": 120,
-	"./scaling.test": 121,
-	"./sprite.test": 122,
-	"./stresstest.test": 123,
-	"./text.test": 124,
-	"./themask.test": 125,
-	"./tilesprite.test": 126,
-	"./webglanimation.test": 127,
-	"./webglbitmapfont.test": 128,
-	"./webglcircle.test": 129,
-	"./webglline2d.test": 130,
-	"./webglpixelbatch.test": 131,
-	"./webglrectangle.test": 132,
-	"./webglstresstest.test": 133,
-	"./webgltexturebatch.test": 134,
-	"./webgltilesprite.test": 135
+	"./polyline.test": 117,
+	"./quadtree.test": 118,
+	"./rain.test": 119,
+	"./raycasting.test": 120,
+	"./reflectivecollision.test": 121,
+	"./scaling.test": 122,
+	"./sprite.test": 123,
+	"./stresstest.test": 124,
+	"./text.test": 125,
+	"./themask.test": 126,
+	"./tilesprite.test": 127,
+	"./webglanimation.test": 128,
+	"./webglbitmapfont.test": 129,
+	"./webglcircle.test": 130,
+	"./webglline2d.test": 131,
+	"./webglpixelbatch.test": 132,
+	"./webglrectangle.test": 133,
+	"./webglstresstest.test": 134,
+	"./webgltexturebatch.test": 135,
+	"./webgltilesprite.test": 136
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -3904,6 +3905,81 @@ module.exports = function () {
 
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
+  button.setAttribute( 'value', 'Polyline' );
+  button.setAttribute( 'type', 'button' );
+  button.addEventListener( 'click', Run );
+  buttonContainer.appendChild( button );
+
+  function Run () {
+
+    var W = window.innerWidth, HW = W * 0.5;
+    var H = window.innerHeight, HH = H * 0.5;
+
+    var c = document.getElementsByTagName( 'canvas' )[ 0 ];
+    c.setAttribute( 'width', window.innerWidth );
+    c.setAttribute( 'height', window.innerHeight );
+    c.style.display = 'initial';
+    c.style.position = 'absolute';
+    c.style.top = '0';
+    c.style.left = '0';
+
+    var stage = new nk.Stage2D( { 
+      canvas: c,
+      x: HW,
+      y: HH
+    } );
+
+    var polygon = nk.Path.Polygon2D();
+    nk.Geom.Polygon2D.Construct.Star( polygon, 0, 0, 400, 250, 12 );
+
+    var lines = nk.Geom.Polygon2D.ExtractSegments( polygon );
+
+    console.log( lines );
+
+    var timer = nk.Timer();
+    timer.Start( 120 );
+    timer.onFinish.Add( function() {
+
+      stage.ticker.Stop();
+    
+    } );
+
+    // stage.AddChild( nk.Graphic2D( 0, 0, polygon ) );
+
+    lines.forEach( function( line ){
+
+      stage.AddChild( nk.Graphic2D( 0, 0, nk.Path.Line2D( line.s, line.e ) ) );
+    
+    } );
+
+    stage.onProcess.Add( function() {
+
+      timer.Process();
+
+      stage.children.forEach( function( child ) {
+
+        child.x += Math.random() * 2 - 1;
+        child.y += Math.random() * 2 - 1;
+      
+      } );
+    
+    } );
+
+    document.body.removeChild( buttonContainer );
+  
+  }
+
+};
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+
+  var buttonContainer = document.getElementById( 'buttons' );
+  var button = document.createElement( 'input' );
   button.setAttribute( 'value', 'Quadtree' );
   button.setAttribute( 'type', 'button' );
   button.addEventListener( 'click', Run );
@@ -3967,7 +4043,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4070,7 +4146,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4266,7 +4342,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4444,7 +4520,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4518,7 +4594,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4645,7 +4721,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4794,7 +4870,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4845,7 +4921,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4966,7 +5042,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5026,7 +5102,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5179,7 +5255,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5268,7 +5344,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5392,7 +5468,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5462,7 +5538,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5555,7 +5631,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5660,7 +5736,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5847,7 +5923,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5958,7 +6034,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
