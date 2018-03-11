@@ -49,6 +49,25 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Polygon2D.ExtractSegments = function( _polygon, _segments ) {
+
+    if ( _segments == null ) _segments = [];
+
+    for (
+      var i = 0, vertices = _polygon.vertices, vertex = vertices[ i ], l = vertices.length - 1;
+      i < l;
+      vertex = vertices[ ++i ] ) {
+
+      _segments.push( Nenkraft.Geom.Line2D( vertex, vertices[ i + 1 ] ) );
+    
+    }
+
+    _segments.push( Nenkraft.Geom.Line2D( vertices[ l ], vertices[ 0 ] ) );
+
+    return _segments;
+  
+  };
+
   Polygon2D.Construct = Object.create( null );
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
@@ -351,7 +370,7 @@ module.exports = function ( Nenkraft ) {
     normals.length = 0;
 
     for (
-      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
 
@@ -370,7 +389,7 @@ module.exports = function ( Nenkraft ) {
     perimeterMidPoints.length = 0;
 
     for (
-      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
 

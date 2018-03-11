@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.3 (Beta)
+* @version     0.9.4 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 136);
+/******/ 	return __webpack_require__(__webpack_require__.s = 137);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1272,15 +1272,15 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 136:
+/***/ 137:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(137);
+module.exports = __webpack_require__(138);
 
 
 /***/ }),
 
-/***/ 137:
+/***/ 138:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1290,7 +1290,7 @@ module.exports = __webpack_require__(137);
 var namespace = Object.create( null );
 
 __webpack_require__( 1 )();
-__webpack_require__( 138 )( namespace );
+__webpack_require__( 139 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
@@ -1301,7 +1301,7 @@ __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
-__webpack_require__( 139 )( namespace );
+__webpack_require__( 140 )( namespace );
 __webpack_require__( 12 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 14 )( namespace );
@@ -1327,7 +1327,7 @@ module.exports = namespace;
 
 /***/ }),
 
-/***/ 138:
+/***/ 139:
 /***/ (function(module, exports) {
 
 /**
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.9.3 (Beta)';
+  Nenkraft.VERSION = '0.9.4 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -1356,7 +1356,62 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 139:
+/***/ 14:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  function Basetransform2D ( _x, _y ) {
+
+    if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D( _x, _y );
+    this.position = Nenkraft.Vector2D( _x, _y );
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.localTransform = Nenkraft.Vector2D( 0, 0 );
+    this.worldTransform = Nenkraft.Vector2D( 0, 0 );
+  
+  }
+
+  Basetransform2D.prototype = Object.create( null );
+  Basetransform2D.prototype.constructor = Basetransform2D;
+  // Static
+
+  // Members
+
+  // Methods
+  Basetransform2D.prototype.UpdateLocal = function () {
+
+    this.localTransform.SetV( this.position );
+  
+  };
+
+  Basetransform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
+
+    var localTransform = this.localTransform;
+    localTransform.SetV( this.position );
+    this.worldTransform.Set( _parentWorldTransform.e + localTransform.x, _parentWorldTransform.f + localTransform.y );
+  
+  };
+
+  Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
+
+    _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
+  
+  };
+
+  Nenkraft.Math.Basetransform2D = Basetransform2D;
+
+};
+
+
+/***/ }),
+
+/***/ 140:
 /***/ (function(module, exports) {
 
 /**
@@ -1467,61 +1522,6 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Time.ServerTicker = ServerTicker;
   Nenkraft.ServerTicker = ServerTicker;
-
-};
-
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Basetransform2D ( _x, _y ) {
-
-    if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D( _x, _y );
-    this.position = Nenkraft.Vector2D( _x, _y );
-    this.scale = Nenkraft.Vector2D( 1, 1 );
-    this.localTransform = Nenkraft.Vector2D( 0, 0 );
-    this.worldTransform = Nenkraft.Vector2D( 0, 0 );
-  
-  }
-
-  Basetransform2D.prototype = Object.create( null );
-  Basetransform2D.prototype.constructor = Basetransform2D;
-  // Static
-
-  // Members
-
-  // Methods
-  Basetransform2D.prototype.UpdateLocal = function () {
-
-    this.localTransform.SetV( this.position );
-  
-  };
-
-  Basetransform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
-
-    var localTransform = this.localTransform;
-    localTransform.SetV( this.position );
-    this.worldTransform.Set( _parentWorldTransform.e + localTransform.x, _parentWorldTransform.f + localTransform.y );
-  
-  };
-
-  Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
-
-    _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
-  
-  };
-
-  Nenkraft.Math.Basetransform2D = Basetransform2D;
 
 };
 
@@ -2008,6 +2008,25 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Polygon2D.ExtractSegments = function( _polygon, _segments ) {
+
+    if ( _segments == null ) _segments = [];
+
+    for (
+      var i = 0, vertices = _polygon.vertices, vertex = vertices[ i ], l = vertices.length - 1;
+      i < l;
+      vertex = vertices[ ++i ] ) {
+
+      _segments.push( Nenkraft.Geom.Line2D( vertex, vertices[ i + 1 ] ) );
+    
+    }
+
+    _segments.push( Nenkraft.Geom.Line2D( vertices[ l ], vertices[ 0 ] ) );
+
+    return _segments;
+  
+  };
+
   Polygon2D.Construct = Object.create( null );
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
@@ -2310,7 +2329,7 @@ module.exports = function ( Nenkraft ) {
     normals.length = 0;
 
     for (
-      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
 
@@ -2329,7 +2348,7 @@ module.exports = function ( Nenkraft ) {
     perimeterMidPoints.length = 0;
 
     for (
-      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
 

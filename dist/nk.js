@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.3 (Beta)
+* @version     0.9.4 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3187,6 +3187,25 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Polygon2D.ExtractSegments = function( _polygon, _segments ) {
+
+    if ( _segments == null ) _segments = [];
+
+    for (
+      var i = 0, vertices = _polygon.vertices, vertex = vertices[ i ], l = vertices.length - 1;
+      i < l;
+      vertex = vertices[ ++i ] ) {
+
+      _segments.push( Nenkraft.Geom.Line2D( vertex, vertices[ i + 1 ] ) );
+    
+    }
+
+    _segments.push( Nenkraft.Geom.Line2D( vertices[ l ], vertices[ 0 ] ) );
+
+    return _segments;
+  
+  };
+
   Polygon2D.Construct = Object.create( null );
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
@@ -3489,7 +3508,7 @@ module.exports = function ( Nenkraft ) {
     normals.length = 0;
 
     for (
-      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
 
@@ -3508,7 +3527,7 @@ module.exports = function ( Nenkraft ) {
     perimeterMidPoints.length = 0;
 
     for (
-      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = this.vertices.length - 1;
+      var i = 0, vertices = this.vertices, vertex = vertices[ i ], l = vertices.length - 1;
       i < l;
       vertex = vertices[ ++i ] ) {
 
@@ -5895,7 +5914,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.9.3 (Beta)';
+  Nenkraft.VERSION = '0.9.4 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
