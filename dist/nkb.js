@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.4 (Beta)
+* @version     0.9.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1343,7 +1343,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '0.9.4 (Beta)';
+  Nenkraft.VERSION = '0.9.5 (Beta)';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -5809,7 +5809,7 @@ module.exports = function ( Nenkraft ) {
       r = [];
       ia = true;
 
-    } else if ( typeof obj === 'object' ) {
+    } else if ( typeof _object === 'object' ) {
 
       r = {};
 

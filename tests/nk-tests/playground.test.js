@@ -106,6 +106,21 @@ module.exports = function () {
       } );
   
       console.log( stage, ps );
+
+      var x = {
+        y: [
+          0, 0, { z: 0 }
+        ],
+        t: {
+          p: 0
+        }
+      };
+
+      var copy = nk.Utils.DeepClone( x );
+
+      console.log( copy === x, x, copy );
+
+      copy.t.p = 1;
     
     } );
 
