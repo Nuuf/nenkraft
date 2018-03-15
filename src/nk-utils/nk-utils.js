@@ -322,7 +322,7 @@ module.exports = function ( Nenkraft ) {
       r = [];
       ia = true;
 
-    } else if ( typeof obj === 'object' ) {
+    } else if ( typeof _object === 'object' ) {
 
       r = {};
 

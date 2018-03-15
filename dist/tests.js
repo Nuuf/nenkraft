@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.4 (Beta)
+* @version     0.9.5 (Beta)
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3733,6 +3733,21 @@ module.exports = function () {
       } );
   
       console.log( stage, ps );
+
+      var x = {
+        y: [
+          0, 0, { z: 0 }
+        ],
+        t: {
+          p: 0
+        }
+      };
+
+      var copy = nk.Utils.DeepClone( x );
+
+      console.log( copy === x, x, copy );
+
+      copy.t.p = 1;
     
     } );
 
