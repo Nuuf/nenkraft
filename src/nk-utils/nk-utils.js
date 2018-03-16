@@ -6,6 +6,7 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Random = Math.random;
+  var PR = Nenkraft.Math.PR;
 
   var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
 
@@ -80,7 +81,27 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.MinMaxOrValue = function( _options ) {
+  Nenkraft.Utils.GenerateSequence = function( _from, _to, _interval, _precision ) {
+
+    var sequence = [];
+
+    for ( var i = _from; i < _to; i += _interval ) {
+
+      sequence.push( PR( i, _precision ) );
+    
+    }
+
+    return sequence;
+  
+  };
+
+  var RIA = Nenkraft.Utils.RandomInArray = function( _array ) {
+
+    return _array[RI( 0, _array.length - 1 )];
+  
+  };
+
+  Nenkraft.Utils.MinMaxOrValue = function( _options, _other ) {
 
     if ( _options.min != null && _options.max != null ) {
         
@@ -88,7 +109,11 @@ module.exports = function ( Nenkraft ) {
 
     } else if ( _options.values != null && _options.values.length > 0 ) {
 
-      return _options.values[RI( 0, _options.values.length - 1 )];
+      return RIA( _options.values );
+
+    } else if ( _other != null && _options[_other].length > 0 ) {
+
+      return RIA( _options[_other] );
 
     }
 

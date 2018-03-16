@@ -6,6 +6,9 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  var RF = Nenkraft.Utils.RandomFloat;
+  var RI = Nenkraft.Utils.RandomInteger;
+
   function Polygon2D ( _vertices ) {
 
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices );
@@ -68,6 +71,36 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Polygon2D.GenerateRandomPoints = function( _polygon, _amount, _int, _outside ) {
+
+    _polygon.ComputeBounds();
+    if ( _outside == null ) _outside = false;
+
+    var randFunc = RF;
+    var tl = _polygon.aabb.tl;
+    var br = _polygon.aabb.br;
+    var points = [];
+
+    if ( _int === true ) randFunc = RI;
+
+    for ( var i = 0; i < _amount; ++i ) {
+      
+      var point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      while ( _polygon.IntersectsPoint( point ) === _outside ) {
+
+        point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      }
+
+      points.push( point );
+
+    }
+
+    return points;
+
+  };
+
   Polygon2D.Construct = Object.create( null );
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
@@ -117,17 +150,17 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _side ) {
 
-    var an = 2.0943951023931953;
+    var th = 2.0943951023931953;
     var x, y;
     _po.Recreate( [] );
     x = Math.cos( 0 ) * _side;
     y = Math.sin( 0 ) * _side;
     _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
-    x = Math.cos( an ) * _side;
-    y = Math.sin( an ) * _side;
+    x = Math.cos( th ) * _side;
+    y = Math.sin( th ) * _side;
     _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
-    x = Math.cos( an * 2 ) * _side;
-    y = Math.sin( an * 2 ) * _side;
+    x = Math.cos( th * 2 ) * _side;
+    y = Math.sin( th * 2 ) * _side;
     _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     _po.Rotate( Nenkraft.Math.RADIAN * -90 );
     _po.ComputeBounds();

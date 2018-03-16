@@ -6,6 +6,9 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  var RF = Nenkraft.Utils.RandomFloat;
+  var RI = Nenkraft.Utils.RandomInteger;
+
   function Circle ( _x, _y, _radius ) {
 
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
@@ -18,6 +21,36 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.constructor = Circle;
   // Static
   Circle.TYPE = 2;
+
+  Circle.GenerateRandomPoints = function( _circle, _amount, _int, _outside ) {
+
+    if ( _outside == null ) _outside = false;
+
+    var randFunc = RF;
+    var tl = Nenkraft.Vector2D( _circle.x - _circle.radius, _circle.y - _circle.radius );
+    var br = Nenkraft.Vector2D( _circle.x + _circle.radius, _circle.y + _circle.radius );
+    var points = [];
+
+    if ( _int === true ) randFunc = RI;
+
+    for ( var i = 0; i < _amount; ++i ) {
+      
+      var point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      while ( _circle.IntersectsPoint( point ) === _outside ) {
+
+        point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      }
+
+      points.push( point );
+
+    }
+
+    return points;
+
+  };
+
   // Members
   Circle.prototype.TYPE = Circle.TYPE;
   Circle.prototype.diameter = 0;

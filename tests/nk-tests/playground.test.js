@@ -124,6 +124,17 @@ module.exports = function () {
     
     } );
 
+    ( function() {
+
+      var a = nk.Vector2D( 100, 100 );
+      var b = nk.Vector2D( 450, 670 );
+      var c = a.GetWeightedAverageV( b, 0.5 );
+      var parts = nk.Geom.Line2D( a, b ).Cut( 0.33, 0.66 );
+  
+      console.log( c, parts );
+    
+    }() );
+
     document.body.removeChild( buttonContainer );
   
   }

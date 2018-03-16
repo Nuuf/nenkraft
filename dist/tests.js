@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.5 (Beta)
+* @version     1.0.0
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3258,7 +3258,8 @@ module.exports = function () {
       canvas: c,
       x: 0,
       y: 0,
-      mode: 'WebGL'
+      mode: 'WebGL',
+      clear: true
     } );
     var root = nk.Container2D();
     var scene = nk.Container2D();
@@ -3296,46 +3297,70 @@ module.exports = function () {
       var pcon = nk.GLTextureProgramController( stage.gl );
       pcon.BindBasicTexture( imageLoader.GetBasicTexture( 'tex' ) );
 
+      var shapePolygon = nk.Geom.Polygon2D();
+      nk.Geom.Polygon2D.Construct.Star( shapePolygon, 0, 0, 50, 25, 5 );
+      var points = nk.Geom.Polygon2D.GenerateRandomPoints( shapePolygon, 1000, false, true );
+
+      /*
+       *var shapeCircle = nk.Geom.Circle( 0, 0, 100 );
+       *var points = nk.Geom.Circle.GenerateRandomPoints( shapeCircle, 1000, false, false );
+       *
+       * var shapePolygon = nk.Geom.Polygon2D();
+       * nk.Geom.Polygon2D.Construct.Star( shapePolygon, 0, 0, 200, 50, 5 );
+       * var points = [];
+       * var lines = nk.Geom.Polygon2D.ExtractSegments( shapePolygon );
+       * var cuts = nk.Utils.GenerateSequence( 0.1, 0.9, 0.1, 1 );
+       * lines.forEach( function( line ) {
+       *
+       * line.Cut( cuts, points );
+       *
+       * } );
+       *
+       *console.log( points, lines, cuts );
+       *
+       *var shapeCircle = nk.Geom.Polygon2D();
+       *nk.Geom.Polygon2D.Construct.Cyclic( shapeCircle, 0, 0, 100, 1000 );
+       *var points = shapeCircle.vertices;
+       */
+
       var pdata = {
         texture: pcon,
         anchor: 0.5,
-        amount: 1,
+        amount: 5,
         rotation: {
           min: 0,
           max: RADIAN * 360
         },
         position: {
-          x: {
-            values: [ -100, 100 ]
-          },
-          y: {
-            values: [ -100, 100 ]
-          }
+          points: points
         },
-        lifespan: 100,
+        lifespan: 200,
         velocity: {
-          x: {
-            min: -2,
-            max: 2
-          },
+          x: 0,
           y: {
             min: -2,
             max: 2
           }
-        },
-        acceleration: {
-          x: 1.05,
-          y: 0.99
         },
         fade: true,
         deflate: true,
-        torque: {
-          min: -RADIAN * 10,
-          max: RADIAN * 10
-        },
         spin: {
-          min: -RADIAN,
-          max: RADIAN
+          min: -RADIAN * 360,
+          max: RADIAN * 360
+        },
+        oscillation: {
+          gravity: {
+            y: {
+              from: -0.1,
+              to: 0.1,
+              amplitude: 7
+            },
+            x: {
+              from: -0.4,
+              to: 0.25,
+              amplitude: 7
+            }
+          }
         }
       };
   
@@ -3750,6 +3775,17 @@ module.exports = function () {
       copy.t.p = 1;
     
     } );
+
+    ( function() {
+
+      var a = nk.Vector2D( 100, 100 );
+      var b = nk.Vector2D( 450, 670 );
+      var c = a.GetWeightedAverageV( b, 0.5 );
+      var parts = nk.Geom.Line2D( a, b ).Cut( 0.33, 0.66 );
+  
+      console.log( c, parts );
+    
+    }() );
 
     document.body.removeChild( buttonContainer );
   
