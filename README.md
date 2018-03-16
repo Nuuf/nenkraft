@@ -4,7 +4,6 @@
 [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/nenkraft/badge?style=rounded)](https://www.jsdelivr.com/package/npm/nenkraft)
 [![Npm Version](https://img.shields.io/npm/v/nenkraft.svg)](https://www.npmjs.com/package/nenkraft)
 
-# (Beta)
 ------
 
 #### Nenkraft is a small rendering tool. (MIT License)

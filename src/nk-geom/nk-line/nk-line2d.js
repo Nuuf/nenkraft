@@ -62,6 +62,20 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Line2D.prototype.Cut = function( _cuts, _points ) {
+
+    if ( _points == null ) _points = [];
+
+    for ( var i = 0; i < _cuts.length; ++i ) {
+
+      _points.push( this.s.GetWeightedAverageV( this.e, _cuts[i] ) );
+    
+    }
+
+    return _points;
+
+  };
+
   Line2D.prototype.GetLength = function () {
 
     return this.s.GetDistanceV( this.e );

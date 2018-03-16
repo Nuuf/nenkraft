@@ -6,6 +6,7 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
   var MinMaxOrValue = Nenkraft.Utils.MinMaxOrValue;
+  var RandomInArray = Nenkraft.Utils.RandomInArray;
   var Oscillate = Nenkraft.Math.Oscillate;
   var RI = Nenkraft.Utils.RandomInteger;
 
@@ -30,6 +31,8 @@ module.exports = function ( Nenkraft ) {
   Oscillation.prototype.spin = null;
   Oscillation.prototype.growthX = null;
   Oscillation.prototype.growthY = null;
+  Oscillation.prototype.gravityX = null;
+  Oscillation.prototype.gravityY = null;
 
   // Methods
   Oscillation.prototype.CreateOscillatingObject = function( _key, _from, _to, _amplitude ) {
@@ -198,6 +201,28 @@ module.exports = function ( Nenkraft ) {
         
         }
 
+        if ( osc.gravityX != null ) {
+
+          this.gravity.x = Oscillate(
+            oscTime, 
+            osc.gravityX.from,
+            osc.gravityX.to,
+            osc.gravityX.amplitude
+          );
+        
+        }
+
+        if ( osc.gravityY != null ) {
+
+          this.gravity.y = Oscillate(
+            oscTime, 
+            osc.gravityY.from,
+            osc.gravityY.to,
+            osc.gravityY.amplitude
+          );
+        
+        }
+
         if ( osc.accelerationX != null ) {
 
           this.acceleration.x = Oscillate(
@@ -305,21 +330,15 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    if ( _options.position != null ) {
+    this.RenewVector( _options.position, entity.position );
 
-      if ( _options.position.x != null ) {
+    this.RenewVector( _options.velocity, this.velocity );
 
-        entity.position.x = MinMaxOrValue( _options.position.x );
-      
-      }
+    this.RenewVector( _options.gravity, this.gravity );
 
-      if ( _options.position.y != null ) {
+    this.RenewVector( _options.acceleration, this.acceleration );
 
-        entity.position.y = MinMaxOrValue( _options.position.y );
-      
-      }
-    
-    }
+    this.RenewVector( _options.growth, this.growth );
 
     if ( _options.rotation != null ) {
 
@@ -330,54 +349,6 @@ module.exports = function ( Nenkraft ) {
     if ( _options.lifespan != null ) {
 
       this.SetLifespan( _options.lifespan );
-    
-    }
-
-    if ( _options.velocity != null ) {
-
-      if ( _options.velocity.x != null ) {
-
-        this.velocity.x = MinMaxOrValue( _options.velocity.x );
-      
-      }
-
-      if ( _options.velocity.y != null ) {
-
-        this.velocity.y = MinMaxOrValue( _options.velocity.y );
-      
-      }
-
-    }
-
-    if ( _options.acceleration != null ) {
-
-      if ( _options.acceleration.x != null ) {
-
-        this.acceleration.x = MinMaxOrValue( _options.acceleration.x );
-      
-      }
-
-      if ( _options.acceleration.y != null ) {
-
-        this.acceleration.y = MinMaxOrValue( _options.acceleration.y );
-      
-      }
-    
-    }
-
-    if ( _options.growth != null ) {
-
-      if ( _options.growth.x != null ) {
-
-        this.growth.x = MinMaxOrValue( _options.growth.x );
-      
-      }
-
-      if ( _options.growth.y != null ) {
-
-        this.growth.y = MinMaxOrValue( _options.growth.y );
-      
-      }
     
     }
 
@@ -470,6 +441,32 @@ module.exports = function ( Nenkraft ) {
       
       }
 
+      if ( optOsc.gravity != null ) {
+
+        if ( optOsc.gravity.x != null ) {
+
+          osc.SetOscillatingObject( 
+            'gravityX', 
+            optOsc.gravity.x.from,
+            optOsc.gravity.x.to,
+            optOsc.gravity.x.amplitude
+          );
+
+        }
+
+        if ( optOsc.gravity.y != null ) {
+
+          osc.SetOscillatingObject( 
+            'gravityY', 
+            optOsc.gravity.y.from,
+            optOsc.gravity.y.to,
+            optOsc.gravity.y.amplitude
+          );
+
+        }
+      
+      }
+
       if ( optOsc.acceleration != null ) {
 
         if ( optOsc.acceleration.x != null ) {
@@ -524,6 +521,34 @@ module.exports = function ( Nenkraft ) {
 
     }
 
+  };
+
+  Particle.prototype.RenewVector = function( _object, _vector ) {
+
+    if ( _object != null ) {
+
+      if ( _object.points != null ) {
+
+        _vector.SetV( RandomInArray( _object.points ) );
+        
+      } else {
+
+        if ( _object.x != null ) {
+
+          _vector.x = MinMaxOrValue( _object.x );
+        
+        }
+  
+        if ( _object.y != null ) {
+  
+          _vector.y = MinMaxOrValue( _object.y );
+        
+        }
+      
+      }
+    
+    }
+  
   };
 
   Particle.prototype.SetLifespan = function( _value ) {

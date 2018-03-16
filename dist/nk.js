@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     0.9.5 (Beta)
+* @version     1.0.0
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -227,6 +227,7 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
+    if ( _precision == null ) return _value;
     var divisor = Pow( 10, _precision );
     return Round( divisor * _value ) / divisor;
   
@@ -1064,6 +1065,7 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
   var Random = Math.random;
+  var PR = Nenkraft.Math.PR;
 
   var RI = Nenkraft.Utils.RandomInteger = function ( _min, _max ) {
 
@@ -1138,7 +1140,27 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Nenkraft.Utils.MinMaxOrValue = function( _options ) {
+  Nenkraft.Utils.GenerateSequence = function( _from, _to, _interval, _precision ) {
+
+    var sequence = [];
+
+    for ( var i = _from; i < _to; i += _interval ) {
+
+      sequence.push( PR( i, _precision ) );
+    
+    }
+
+    return sequence;
+  
+  };
+
+  var RIA = Nenkraft.Utils.RandomInArray = function( _array ) {
+
+    return _array[RI( 0, _array.length - 1 )];
+  
+  };
+
+  Nenkraft.Utils.MinMaxOrValue = function( _options, _other ) {
 
     if ( _options.min != null && _options.max != null ) {
         
@@ -1146,7 +1168,11 @@ module.exports = function ( Nenkraft ) {
 
     } else if ( _options.values != null && _options.values.length > 0 ) {
 
-      return _options.values[RI( 0, _options.values.length - 1 )];
+      return RIA( _options.values );
+
+    } else if ( _other != null && _options[_other].length > 0 ) {
+
+      return RIA( _options[_other] );
 
     }
 
@@ -2109,8 +2135,8 @@ module.exports = function ( Nenkraft ) {
 
   Vector2D.prototype.Invert = function () {
 
-    this.x = this.x * -1;
-    this.y = this.y * -1;
+    this.x = -this.x;
+    this.y = -this.y;
   
   };
 
@@ -2178,6 +2204,24 @@ module.exports = function ( Nenkraft ) {
     d.Normalize();
     d.Multiply( _m, _m );
     this.AddV( d );
+  
+  };
+
+  Vector2D.prototype.GetWeightedAverage = function( _x, _y, _perc ) {
+
+    return this.FromStore(
+      this.x * ( 1 - _perc ) + _x * _perc,
+      this.y * ( 1 - _perc ) + _y * _perc
+    );
+
+  };
+
+  Vector2D.prototype.GetWeightedAverageV = function( _v, _perc ) {
+
+    return this.FromStore(
+      this.x * ( 1 - _perc ) + _v.x * _perc,
+      this.y * ( 1 - _perc ) + _v.y * _perc
+    );
   
   };
 
@@ -2877,6 +2921,20 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Line2D.prototype.Cut = function( _cuts, _points ) {
+
+    if ( _points == null ) _points = [];
+
+    for ( var i = 0; i < _cuts.length; ++i ) {
+
+      _points.push( this.s.GetWeightedAverageV( this.e, _cuts[i] ) );
+    
+    }
+
+    return _points;
+
+  };
+
   Line2D.prototype.GetLength = function () {
 
     return this.s.GetDistanceV( this.e );
@@ -3144,6 +3202,9 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  var RF = Nenkraft.Utils.RandomFloat;
+  var RI = Nenkraft.Utils.RandomInteger;
+
   function Polygon2D ( _vertices ) {
 
     if ( !( this instanceof Polygon2D ) ) return new Polygon2D( _vertices );
@@ -3206,6 +3267,36 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Polygon2D.GenerateRandomPoints = function( _polygon, _amount, _int, _outside ) {
+
+    _polygon.ComputeBounds();
+    if ( _outside == null ) _outside = false;
+
+    var randFunc = RF;
+    var tl = _polygon.aabb.tl;
+    var br = _polygon.aabb.br;
+    var points = [];
+
+    if ( _int === true ) randFunc = RI;
+
+    for ( var i = 0; i < _amount; ++i ) {
+      
+      var point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      while ( _polygon.IntersectsPoint( point ) === _outside ) {
+
+        point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      }
+
+      points.push( point );
+
+    }
+
+    return points;
+
+  };
+
   Polygon2D.Construct = Object.create( null );
 
   Polygon2D.Construct.Rectangular = function ( _po, _x, _y, _w, _h ) {
@@ -3255,17 +3346,17 @@ module.exports = function ( Nenkraft ) {
 
   Polygon2D.Construct.Equilateral = function ( _po, _x, _y, _side ) {
 
-    var an = 2.0943951023931953;
+    var th = 2.0943951023931953;
     var x, y;
     _po.Recreate( [] );
     x = Math.cos( 0 ) * _side;
     y = Math.sin( 0 ) * _side;
     _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
-    x = Math.cos( an ) * _side;
-    y = Math.sin( an ) * _side;
+    x = Math.cos( th ) * _side;
+    y = Math.sin( th ) * _side;
     _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
-    x = Math.cos( an * 2 ) * _side;
-    y = Math.sin( an * 2 ) * _side;
+    x = Math.cos( th * 2 ) * _side;
+    y = Math.sin( th * 2 ) * _side;
     _po.AddPoint( Nenkraft.Vector2D( _x + x, _y + y ) );
     _po.Rotate( Nenkraft.Math.RADIAN * -90 );
     _po.ComputeBounds();
@@ -3589,6 +3680,9 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  var RF = Nenkraft.Utils.RandomFloat;
+  var RI = Nenkraft.Utils.RandomInteger;
+
   function Circle ( _x, _y, _radius ) {
 
     if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
@@ -3601,6 +3695,36 @@ module.exports = function ( Nenkraft ) {
   Circle.prototype.constructor = Circle;
   // Static
   Circle.TYPE = 2;
+
+  Circle.GenerateRandomPoints = function( _circle, _amount, _int, _outside ) {
+
+    if ( _outside == null ) _outside = false;
+
+    var randFunc = RF;
+    var tl = Nenkraft.Vector2D( _circle.x - _circle.radius, _circle.y - _circle.radius );
+    var br = Nenkraft.Vector2D( _circle.x + _circle.radius, _circle.y + _circle.radius );
+    var points = [];
+
+    if ( _int === true ) randFunc = RI;
+
+    for ( var i = 0; i < _amount; ++i ) {
+      
+      var point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      while ( _circle.IntersectsPoint( point ) === _outside ) {
+
+        point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      }
+
+      points.push( point );
+
+    }
+
+    return points;
+
+  };
+
   // Members
   Circle.prototype.TYPE = Circle.TYPE;
   Circle.prototype.diameter = 0;
@@ -5914,7 +6038,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '0.9.5 (Beta)';
+  Nenkraft.VERSION = '1.0.0';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -10176,6 +10300,7 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
   var MinMaxOrValue = Nenkraft.Utils.MinMaxOrValue;
+  var RandomInArray = Nenkraft.Utils.RandomInArray;
   var Oscillate = Nenkraft.Math.Oscillate;
   var RI = Nenkraft.Utils.RandomInteger;
 
@@ -10200,6 +10325,8 @@ module.exports = function ( Nenkraft ) {
   Oscillation.prototype.spin = null;
   Oscillation.prototype.growthX = null;
   Oscillation.prototype.growthY = null;
+  Oscillation.prototype.gravityX = null;
+  Oscillation.prototype.gravityY = null;
 
   // Methods
   Oscillation.prototype.CreateOscillatingObject = function( _key, _from, _to, _amplitude ) {
@@ -10368,6 +10495,28 @@ module.exports = function ( Nenkraft ) {
         
         }
 
+        if ( osc.gravityX != null ) {
+
+          this.gravity.x = Oscillate(
+            oscTime, 
+            osc.gravityX.from,
+            osc.gravityX.to,
+            osc.gravityX.amplitude
+          );
+        
+        }
+
+        if ( osc.gravityY != null ) {
+
+          this.gravity.y = Oscillate(
+            oscTime, 
+            osc.gravityY.from,
+            osc.gravityY.to,
+            osc.gravityY.amplitude
+          );
+        
+        }
+
         if ( osc.accelerationX != null ) {
 
           this.acceleration.x = Oscillate(
@@ -10475,21 +10624,15 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    if ( _options.position != null ) {
+    this.RenewVector( _options.position, entity.position );
 
-      if ( _options.position.x != null ) {
+    this.RenewVector( _options.velocity, this.velocity );
 
-        entity.position.x = MinMaxOrValue( _options.position.x );
-      
-      }
+    this.RenewVector( _options.gravity, this.gravity );
 
-      if ( _options.position.y != null ) {
+    this.RenewVector( _options.acceleration, this.acceleration );
 
-        entity.position.y = MinMaxOrValue( _options.position.y );
-      
-      }
-    
-    }
+    this.RenewVector( _options.growth, this.growth );
 
     if ( _options.rotation != null ) {
 
@@ -10500,54 +10643,6 @@ module.exports = function ( Nenkraft ) {
     if ( _options.lifespan != null ) {
 
       this.SetLifespan( _options.lifespan );
-    
-    }
-
-    if ( _options.velocity != null ) {
-
-      if ( _options.velocity.x != null ) {
-
-        this.velocity.x = MinMaxOrValue( _options.velocity.x );
-      
-      }
-
-      if ( _options.velocity.y != null ) {
-
-        this.velocity.y = MinMaxOrValue( _options.velocity.y );
-      
-      }
-
-    }
-
-    if ( _options.acceleration != null ) {
-
-      if ( _options.acceleration.x != null ) {
-
-        this.acceleration.x = MinMaxOrValue( _options.acceleration.x );
-      
-      }
-
-      if ( _options.acceleration.y != null ) {
-
-        this.acceleration.y = MinMaxOrValue( _options.acceleration.y );
-      
-      }
-    
-    }
-
-    if ( _options.growth != null ) {
-
-      if ( _options.growth.x != null ) {
-
-        this.growth.x = MinMaxOrValue( _options.growth.x );
-      
-      }
-
-      if ( _options.growth.y != null ) {
-
-        this.growth.y = MinMaxOrValue( _options.growth.y );
-      
-      }
     
     }
 
@@ -10640,6 +10735,32 @@ module.exports = function ( Nenkraft ) {
       
       }
 
+      if ( optOsc.gravity != null ) {
+
+        if ( optOsc.gravity.x != null ) {
+
+          osc.SetOscillatingObject( 
+            'gravityX', 
+            optOsc.gravity.x.from,
+            optOsc.gravity.x.to,
+            optOsc.gravity.x.amplitude
+          );
+
+        }
+
+        if ( optOsc.gravity.y != null ) {
+
+          osc.SetOscillatingObject( 
+            'gravityY', 
+            optOsc.gravity.y.from,
+            optOsc.gravity.y.to,
+            optOsc.gravity.y.amplitude
+          );
+
+        }
+      
+      }
+
       if ( optOsc.acceleration != null ) {
 
         if ( optOsc.acceleration.x != null ) {
@@ -10694,6 +10815,34 @@ module.exports = function ( Nenkraft ) {
 
     }
 
+  };
+
+  Particle.prototype.RenewVector = function( _object, _vector ) {
+
+    if ( _object != null ) {
+
+      if ( _object.points != null ) {
+
+        _vector.SetV( RandomInArray( _object.points ) );
+        
+      } else {
+
+        if ( _object.x != null ) {
+
+          _vector.x = MinMaxOrValue( _object.x );
+        
+        }
+  
+        if ( _object.y != null ) {
+  
+          _vector.y = MinMaxOrValue( _object.y );
+        
+        }
+      
+      }
+    
+    }
+  
   };
 
   Particle.prototype.SetLifespan = function( _value ) {

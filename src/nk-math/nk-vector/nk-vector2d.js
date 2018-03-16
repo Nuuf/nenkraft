@@ -272,8 +272,8 @@ module.exports = function ( Nenkraft ) {
 
   Vector2D.prototype.Invert = function () {
 
-    this.x = this.x * -1;
-    this.y = this.y * -1;
+    this.x = -this.x;
+    this.y = -this.y;
   
   };
 
@@ -341,6 +341,24 @@ module.exports = function ( Nenkraft ) {
     d.Normalize();
     d.Multiply( _m, _m );
     this.AddV( d );
+  
+  };
+
+  Vector2D.prototype.GetWeightedAverage = function( _x, _y, _perc ) {
+
+    return this.FromStore(
+      this.x * ( 1 - _perc ) + _x * _perc,
+      this.y * ( 1 - _perc ) + _y * _perc
+    );
+
+  };
+
+  Vector2D.prototype.GetWeightedAverageV = function( _v, _perc ) {
+
+    return this.FromStore(
+      this.x * ( 1 - _perc ) + _v.x * _perc,
+      this.y * ( 1 - _perc ) + _v.y * _perc
+    );
   
   };
 

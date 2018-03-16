@@ -32,6 +32,7 @@ module.exports = function ( Nenkraft ) {
 
   Nenkraft.Math.PrecisionRound = function ( _value, _precision ) {
 
+    if ( _precision == null ) return _value;
     var divisor = Pow( 10, _precision );
     return Round( divisor * _value ) / divisor;
   
