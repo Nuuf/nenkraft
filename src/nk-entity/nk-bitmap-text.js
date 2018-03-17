@@ -154,14 +154,21 @@ module.exports = function ( Nenkraft ) {
 
     this.UpdateTransform();
     this.chars.length = 0;
-    var kernings = this.fontData.font.kernings.kerning;
+    var kernings = null;
+
+    if ( this.fontData.font.kernings ) {
+
+      kernings = this.fontData.font.kernings.kerning;
+    
+    }
+
     var lineNum = 0;
 
     for ( var i = 0, char, chars = this.chars, prevChar, text = this.text, l = text.length; i < l; ++i ) {
 
       prevChar = chars[ i - 1 ];
       char = new Char( this.GetCharData( text.charCodeAt( i ) ) );
-      char.ApplyKernings( kernings );
+      if ( kernings !== null ) char.ApplyKernings( kernings );
       char.Crunch( prevChar );
 
       if ( ( char.position.x + char.width ) > this.maxWidth ) {

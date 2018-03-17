@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.0
+* @version     1.0.1
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -427,10 +427,12 @@ module.exports = function () {
     var done = 0;
     xhrloader.Load( [
       { id: 'fontdataxml', src: './assets/xhr/font.fnt', type: 'xml' },
-      { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' }
+      { id: 'fontdatajson', src: './assets/xhr/font.json', type: 'json' },
+      { id: 'fontNoK', src: './assets/xhr/fontNoK.xml', type: 'xml' }
     ] );
     imgloader.Load( [
-      { id: 'fontimg', src: './assets/images/font.png' }
+      { id: 'fontimg', src: './assets/images/font.png' },
+      { id: 'fontNoK', src: './assets/images/fontNoK.png' }
     ], true );
     xhrloader.onComplete.Add( function ( event ) {
 
@@ -449,6 +451,7 @@ module.exports = function () {
     } );
 
     var test = null;
+    var test2 = null;
 
     function Go () {
 
@@ -463,8 +466,19 @@ module.exports = function () {
         );
         console.log( test );
         test.maxWidth = window.innerWidth;
-        stage.AddChild( test );
+        // stage.AddChild( test );
         test.ComputeText();
+
+        test2 = nk.BitmapText(
+          0, 0,
+          imgloader.GetBasicTexture( 'fontNoK' ),
+          xhrloader.GetData( 'fontNoK' ),
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        );
+        test2.maxWidth = window.innerWidth * 0.6;
+        test2.lineHeight = 40;
+        test2.AttachTo( stage );
+        test2.ComputeText();
       
       }
     
