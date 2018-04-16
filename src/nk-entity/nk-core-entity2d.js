@@ -26,6 +26,7 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.h = 0;
   CoreEntity2D.prototype.bounds = null;
   CoreEntity2D.prototype.boundsDirty = true;
+  CoreEntity2D.prototype.globalPosition = null;
 
   // Methods
   CoreEntity2D.prototype.UpdateTransform = function () {
@@ -45,7 +46,18 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.GetWorldPosition = function () {
 
     var wt = this.transform.worldTransform;
-    return Nenkraft.Vector2D( wt.e, wt.f );
+
+    if ( this.globalPosition === null ) {
+
+      this.globalPosition = Nenkraft.Vector2D( wt.e, wt.f );
+    
+    } else {
+
+      this.globalPosition.Set( wt.e, wt.f );
+      
+    }
+
+    return this.globalPosition;
   
   };
 

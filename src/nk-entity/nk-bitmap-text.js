@@ -142,13 +142,9 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  BitmapText.prototype.GetBufferData = function () {
+  BitmapText.prototype.GetBufferData = Nenkraft.Entity.Container2D.prototype.GetBufferData;
 
-  };
-
-  BitmapText.prototype.UpdateInBuffer = function () {
-
-  };
+  BitmapText.prototype.UpdateInBuffer = Nenkraft.Entity.Container2D.prototype.UpdateInBuffer;
 
   BitmapText.prototype.ComputeText = function () {
 
@@ -163,27 +159,53 @@ module.exports = function ( Nenkraft ) {
     }
 
     var lineNum = 0;
+    var newLines = 0;
+    var newLineAdvance = false;
+    var w = 0;
+    var h = 0;
+    var tW = 0;
+    var tH = 0;
 
     for ( var i = 0, char, chars = this.chars, prevChar, text = this.text, l = text.length; i < l; ++i ) {
 
-      prevChar = chars[ i - 1 ];
-      char = new Char( this.GetCharData( text.charCodeAt( i ) ) );
+      prevChar = chars[ i - 1 - newLines ];
+      var charCode = text.charCodeAt( i );
+
+      if ( charCode === 10 ) {
+
+        newLines++;
+        newLineAdvance = true;
+        continue;
+      
+      }
+
+      char = new Char( this.GetCharData( charCode ) );
       if ( kernings !== null ) char.ApplyKernings( kernings );
       char.Crunch( prevChar );
 
-      if ( ( char.position.x + char.width ) > this.maxWidth ) {
+      tW = char.position.x + char.width;
+      tH = char.position.y + char.height;
+
+      if ( ( tW ) > this.maxWidth || newLineAdvance === true ) {
 
         char.position.Set( 0 );
         char.yadvance = this.lineHeight * ++lineNum;
         char.position.Add( char.xoffset, char.yoffset + char.yadvance );
+        newLineAdvance = false;
       
       }
+
+      if ( tW > w ) w = tW;
+      if ( tH > h ) h = tH;
 
       char.parent = this;
       char.UpdateMatrices();
       chars.push( char );
     
     }
+
+    this.w = w;
+    this.h = h;
   
   };
 
