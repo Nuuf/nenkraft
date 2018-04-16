@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.1
+* @version     1.0.2
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -4940,6 +4940,7 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.h = 0;
   CoreEntity2D.prototype.bounds = null;
   CoreEntity2D.prototype.boundsDirty = true;
+  CoreEntity2D.prototype.globalPosition = null;
 
   // Methods
   CoreEntity2D.prototype.UpdateTransform = function () {
@@ -4959,7 +4960,18 @@ module.exports = function ( Nenkraft ) {
   CoreEntity2D.prototype.GetWorldPosition = function () {
 
     var wt = this.transform.worldTransform;
-    return Nenkraft.Vector2D( wt.e, wt.f );
+
+    if ( this.globalPosition === null ) {
+
+      this.globalPosition = Nenkraft.Vector2D( wt.e, wt.f );
+    
+    } else {
+
+      this.globalPosition.Set( wt.e, wt.f );
+      
+    }
+
+    return this.globalPosition;
   
   };
 
@@ -6038,7 +6050,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.0.1';
+  Nenkraft.VERSION = '1.0.2';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -10140,13 +10152,9 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  BitmapText.prototype.GetBufferData = function () {
+  BitmapText.prototype.GetBufferData = Nenkraft.Entity.Container2D.prototype.GetBufferData;
 
-  };
-
-  BitmapText.prototype.UpdateInBuffer = function () {
-
-  };
+  BitmapText.prototype.UpdateInBuffer = Nenkraft.Entity.Container2D.prototype.UpdateInBuffer;
 
   BitmapText.prototype.ComputeText = function () {
 
@@ -10161,27 +10169,53 @@ module.exports = function ( Nenkraft ) {
     }
 
     var lineNum = 0;
+    var newLines = 0;
+    var newLineAdvance = false;
+    var w = 0;
+    var h = 0;
+    var tW = 0;
+    var tH = 0;
 
     for ( var i = 0, char, chars = this.chars, prevChar, text = this.text, l = text.length; i < l; ++i ) {
 
-      prevChar = chars[ i - 1 ];
-      char = new Char( this.GetCharData( text.charCodeAt( i ) ) );
+      prevChar = chars[ i - 1 - newLines ];
+      var charCode = text.charCodeAt( i );
+
+      if ( charCode === 10 ) {
+
+        newLines++;
+        newLineAdvance = true;
+        continue;
+      
+      }
+
+      char = new Char( this.GetCharData( charCode ) );
       if ( kernings !== null ) char.ApplyKernings( kernings );
       char.Crunch( prevChar );
 
-      if ( ( char.position.x + char.width ) > this.maxWidth ) {
+      tW = char.position.x + char.width;
+      tH = char.position.y + char.height;
+
+      if ( ( tW ) > this.maxWidth || newLineAdvance === true ) {
 
         char.position.Set( 0 );
         char.yadvance = this.lineHeight * ++lineNum;
         char.position.Add( char.xoffset, char.yoffset + char.yadvance );
+        newLineAdvance = false;
       
       }
+
+      if ( tW > w ) w = tW;
+      if ( tH > h ) h = tH;
 
       char.parent = this;
       char.UpdateMatrices();
       chars.push( char );
     
     }
+
+    this.w = w;
+    this.h = h;
   
   };
 

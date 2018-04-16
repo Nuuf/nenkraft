@@ -52,35 +52,40 @@ module.exports = function () {
     
     } );
 
-    var test = null;
+    // var test = null;
     var test2 = null;
 
     function Go () {
 
       if ( done > 1 ) {
 
-        test = new nk.BitmapText(
-          0,
-          0,
-          imgloader.GetBasicTexture( 'fontimg' ),
-          xhrloader.GetData( 'fontdataxml' ),
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-        );
-        console.log( test );
-        test.maxWidth = window.innerWidth;
-        // stage.AddChild( test );
-        test.ComputeText();
+        /*
+         * test = new nk.BitmapText(
+         * 0,
+         * 0,
+         * imgloader.GetBasicTexture( 'fontimg' ),
+         * xhrloader.GetData( 'fontdataxml' ),
+         * 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+         * );
+         * console.log( test );
+         * test.maxWidth = window.innerWidth;
+         * stage.AddChild( test );
+         *test.ComputeText(); 
+         */
 
         test2 = nk.BitmapText(
           0, 0,
           imgloader.GetBasicTexture( 'fontNoK' ),
           xhrloader.GetData( 'fontNoK' ),
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+          'Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         );
         test2.maxWidth = window.innerWidth * 0.6;
         test2.lineHeight = 40;
         test2.AttachTo( stage );
         test2.ComputeText();
+        console.log( test2 );
+
+        stage.AddChild( nk.Graphic2D( 0, 0, nk.Path.AABB2D( 0, 0, test2.width, test2.height ) ) ).alpha = 0.5;
       
       }
     
