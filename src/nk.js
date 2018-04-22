@@ -16,6 +16,7 @@ require( './nk-utils/nk-browser-utils' )( namespace );
 require( './nk-utils/nk-color' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
+require( './nk-utils/nk-maker' )( namespace );
 require( './nk-utils/nk-canvas-manager' )( namespace );
 require( './nk-style/nk-fill' )( namespace );
 require( './nk-style/nk-shadow' )( namespace );

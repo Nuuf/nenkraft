@@ -96,22 +96,6 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Cache.prototype.Get = function ( _item ) {
-
-    for ( var i = 0, items = this.items, l = items.length; i < l; ++i ) {
-
-      if ( items[ i ] === _item ) {
-
-        return _item;
-      
-      }
-    
-    }
-
-    return null;
-  
-  };
-
   Cache.prototype.GetById = function ( _id ) {
 
     for ( var i = 0, items = this.items, l = items.length, item = items[ i ]; i < l; item = items[ ++i ] ) {
