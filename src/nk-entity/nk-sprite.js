@@ -309,7 +309,7 @@ module.exports = function ( Nenkraft ) {
     this.texture = _texture;
     this.ClipReconfigure( 0, 0, _texture.w, _texture.h );
     this.shape.SetC( this.clip );
-    this.originalShape.SetC( this.clip );
+    this.originalShape.SetC( this.shape );
   
   };
 

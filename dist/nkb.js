@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.2
+* @version     1.0.3
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,7 +67,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 137);
+/******/ 	return __webpack_require__(__webpack_require__.s = 139);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -204,6 +204,60 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  function LocalListener ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
+
+    if ( !( this instanceof LocalListener ) ) return new LocalListener( _holderContext, _listenerContext, _handle, _removeOnNextCall );
+    this.context = _listenerContext;
+    this.holderContext = _holderContext;
+    this.handle = _handle;
+    this.removeOnNextCall = _removeOnNextCall;
+  
+  }
+
+  LocalListener.prototype = Object.create( null );
+  LocalListener.prototype.constructor = LocalListener;
+  // Static
+
+  // Members
+
+  // Methods
+  LocalListener.prototype.Execute = function () {
+
+    this.handle.apply( this.context, arguments );
+
+    if ( this.removeOnNextCall === true ) {
+
+      this.Remove();
+    
+    }
+  
+  };
+
+  LocalListener.prototype.Remove = function () {
+
+    this.holderContext.Remove( this.handle, this.context );
+  
+  };
+
+  Nenkraft.Event.LocalListener = LocalListener;
+  Nenkraft.LocalListener = LocalListener;
+
+};
+
+
+/***/ }),
+
+/***/ 11:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
   function LocalEvent () {
 
     if ( !( this instanceof LocalEvent ) ) return new LocalEvent();
@@ -319,7 +373,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 11:
+/***/ 12:
 /***/ (function(module, exports) {
 
 /**
@@ -446,7 +500,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 12:
+/***/ 13:
 /***/ (function(module, exports) {
 
 /**
@@ -1058,7 +1112,15 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 13:
+/***/ 139:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(140);
+
+
+/***/ }),
+
+/***/ 14:
 /***/ (function(module, exports) {
 
 /**
@@ -1290,15 +1352,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 137:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(138);
-
-
-/***/ }),
-
-/***/ 138:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1308,7 +1362,7 @@ module.exports = __webpack_require__(138);
 var namespace = Object.create( null );
 
 __webpack_require__( 1 )();
-__webpack_require__( 139 )( namespace );
+__webpack_require__( 141 )( namespace );
 __webpack_require__( 2 )( namespace );
 __webpack_require__( 3 )( namespace );
 __webpack_require__( 4 )( namespace );
@@ -1319,33 +1373,34 @@ __webpack_require__( 8 )( namespace );
 __webpack_require__( 9 )( namespace );
 __webpack_require__( 10 )( namespace );
 __webpack_require__( 11 )( namespace );
-__webpack_require__( 140 )( namespace );
 __webpack_require__( 12 )( namespace );
+__webpack_require__( 142 )( namespace );
 __webpack_require__( 13 )( namespace );
 __webpack_require__( 14 )( namespace );
 __webpack_require__( 15 )( namespace );
-__webpack_require__( 21 )( namespace );
+__webpack_require__( 16 )( namespace );
 __webpack_require__( 22 )( namespace );
 __webpack_require__( 23 )( namespace );
-__webpack_require__( 16 )( namespace );
+__webpack_require__( 24 )( namespace );
 __webpack_require__( 17 )( namespace );
 __webpack_require__( 18 )( namespace );
 __webpack_require__( 19 )( namespace );
 __webpack_require__( 20 )( namespace );
-__webpack_require__( 24 )( namespace );
+__webpack_require__( 21 )( namespace );
 __webpack_require__( 25 )( namespace );
 __webpack_require__( 26 )( namespace );
 __webpack_require__( 27 )( namespace );
 __webpack_require__( 28 )( namespace );
 __webpack_require__( 29 )( namespace );
 __webpack_require__( 30 )( namespace );
+__webpack_require__( 31 )( namespace );
 
 module.exports = namespace;
 
 
 /***/ }),
 
-/***/ 139:
+/***/ 141:
 /***/ (function(module, exports) {
 
 /**
@@ -1361,7 +1416,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '1.0.2';
+  Nenkraft.VERSION = '1.0.3';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -1374,62 +1429,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 14:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Basetransform2D ( _x, _y ) {
-
-    if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D( _x, _y );
-    this.position = Nenkraft.Vector2D( _x, _y );
-    this.scale = Nenkraft.Vector2D( 1, 1 );
-    this.localTransform = Nenkraft.Vector2D( 0, 0 );
-    this.worldTransform = Nenkraft.Vector2D( 0, 0 );
-  
-  }
-
-  Basetransform2D.prototype = Object.create( null );
-  Basetransform2D.prototype.constructor = Basetransform2D;
-  // Static
-
-  // Members
-
-  // Methods
-  Basetransform2D.prototype.UpdateLocal = function () {
-
-    this.localTransform.SetV( this.position );
-  
-  };
-
-  Basetransform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
-
-    var localTransform = this.localTransform;
-    localTransform.SetV( this.position );
-    this.worldTransform.Set( _parentWorldTransform.e + localTransform.x, _parentWorldTransform.f + localTransform.y );
-  
-  };
-
-  Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
-
-    _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
-  
-  };
-
-  Nenkraft.Math.Basetransform2D = Basetransform2D;
-
-};
-
-
-/***/ }),
-
-/***/ 140:
+/***/ 142:
 /***/ (function(module, exports) {
 
 /**
@@ -1557,6 +1557,61 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  function Basetransform2D ( _x, _y ) {
+
+    if ( !( this instanceof Basetransform2D ) ) return new Basetransform2D( _x, _y );
+    this.position = Nenkraft.Vector2D( _x, _y );
+    this.scale = Nenkraft.Vector2D( 1, 1 );
+    this.localTransform = Nenkraft.Vector2D( 0, 0 );
+    this.worldTransform = Nenkraft.Vector2D( 0, 0 );
+  
+  }
+
+  Basetransform2D.prototype = Object.create( null );
+  Basetransform2D.prototype.constructor = Basetransform2D;
+  // Static
+
+  // Members
+
+  // Methods
+  Basetransform2D.prototype.UpdateLocal = function () {
+
+    this.localTransform.SetV( this.position );
+  
+  };
+
+  Basetransform2D.prototype.UpdateWorld = function ( _parentWorldTransform ) {
+
+    var localTransform = this.localTransform;
+    localTransform.SetV( this.position );
+    this.worldTransform.Set( _parentWorldTransform.e + localTransform.x, _parentWorldTransform.f + localTransform.y );
+  
+  };
+
+  Basetransform2D.prototype.ApplyWorld = function ( _rc ) {
+
+    _rc.setTransform( this.scale.x, 0, 0, this.scale.y, this.worldTransform.x, this.worldTransform.y );
+  
+  };
+
+  Nenkraft.Math.Basetransform2D = Basetransform2D;
+
+};
+
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
   function Transform2D ( _x, _y ) {
 
     if ( !( this instanceof Transform2D ) ) return new Transform2D( _x, _y );
@@ -1647,7 +1702,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports) {
 
 /**
@@ -1802,7 +1857,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 17:
+/***/ 18:
 /***/ (function(module, exports) {
 
 /**
@@ -1986,7 +2041,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 18:
+/***/ 19:
 /***/ (function(module, exports) {
 
 /**
@@ -2465,152 +2520,6 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 19:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  var RF = Nenkraft.Utils.RandomFloat;
-  var RI = Nenkraft.Utils.RandomInteger;
-
-  function Circle ( _x, _y, _radius ) {
-
-    if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
-    this.center = Nenkraft.Vector2D( _x, _y );
-    this.radius = _radius === undefined ? 32 : _radius;
-  
-  }
-
-  Circle.prototype = Object.create( null );
-  Circle.prototype.constructor = Circle;
-  // Static
-  Circle.TYPE = 2;
-
-  Circle.GenerateRandomPoints = function( _circle, _amount, _int, _outside ) {
-
-    if ( _outside == null ) _outside = false;
-
-    var randFunc = RF;
-    var tl = Nenkraft.Vector2D( _circle.x - _circle.radius, _circle.y - _circle.radius );
-    var br = Nenkraft.Vector2D( _circle.x + _circle.radius, _circle.y + _circle.radius );
-    var points = [];
-
-    if ( _int === true ) randFunc = RI;
-
-    for ( var i = 0; i < _amount; ++i ) {
-      
-      var point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
-
-      while ( _circle.IntersectsPoint( point ) === _outside ) {
-
-        point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
-
-      }
-
-      points.push( point );
-
-    }
-
-    return points;
-
-  };
-
-  // Members
-  Circle.prototype.TYPE = Circle.TYPE;
-  Circle.prototype.diameter = 0;
-  Circle.prototype.w = 0;
-  Circle.prototype.h = 0;
-  Circle.prototype.radiusSquared = 0;
-  Circle.prototype.radiusUnsquared = 0;
-  Circle.prototype.area = 0;
-  Circle.prototype.belongsTo = null;
-
-  // Methods
-  Circle.prototype.Set = function ( _x, _y, _radius ) {
-
-    this.center.Set( _x, _y );
-    this.radius = _radius;
-  
-  };
-
-  Circle.prototype.SetC = function ( _circle ) {
-
-    this.center.SetV( _circle );
-    this.radius = _circle.radius;
-  
-  };
-
-  Circle.prototype.Scale = function ( _scale ) {
-
-    this.radius *= _scale;
-  
-  };
-
-  Circle.prototype.IntersectsCircle = function ( _circle ) {
-
-    var radii = this.radius + _circle.radius;
-    return ( radii * radii >= this.center.GetDistanceSquaredV( _circle.center ) );
-  
-  };
-
-  Circle.prototype.IntersectsPoint = function ( _v ) {
-
-    return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _v ) );
-  
-  };
-
-  Object.defineProperty( Circle.prototype, 'x', {
-    set: function ( _value ) {
-
-      this.center.x = _value;
-    
-    },
-    get: function () {
-
-      return this.center.x;
-    
-    }
-  } );
-  Object.defineProperty( Circle.prototype, 'y', {
-    set: function ( _value ) {
-
-      this.center.y = _value;
-    
-    },
-    get: function () {
-
-      return this.center.y;
-    
-    }
-  } );
-  Object.defineProperty( Circle.prototype, 'radius', {
-    set: function ( _value ) {
-
-      this.radiusUnsquared = _value;
-      this.radiusSquared = _value * _value;
-      this.diameter = this.w = this.h = _value * 2;
-      this.area = Math.PI * _value * _value;
-    
-    },
-    get: function () {
-
-      return this.radiusUnsquared;
-    
-    }
-  } );
-  Nenkraft.Geom.Circle = Circle;
-
-};
-
-
-/***/ }),
-
 /***/ 2:
 /***/ (function(module, exports) {
 
@@ -2810,6 +2719,152 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 
 /***/ 20:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
+  var RF = Nenkraft.Utils.RandomFloat;
+  var RI = Nenkraft.Utils.RandomInteger;
+
+  function Circle ( _x, _y, _radius ) {
+
+    if ( !( this instanceof Circle ) ) return new Circle( _x, _y, _radius );
+    this.center = Nenkraft.Vector2D( _x, _y );
+    this.radius = _radius === undefined ? 32 : _radius;
+  
+  }
+
+  Circle.prototype = Object.create( null );
+  Circle.prototype.constructor = Circle;
+  // Static
+  Circle.TYPE = 2;
+
+  Circle.GenerateRandomPoints = function( _circle, _amount, _int, _outside ) {
+
+    if ( _outside == null ) _outside = false;
+
+    var randFunc = RF;
+    var tl = Nenkraft.Vector2D( _circle.x - _circle.radius, _circle.y - _circle.radius );
+    var br = Nenkraft.Vector2D( _circle.x + _circle.radius, _circle.y + _circle.radius );
+    var points = [];
+
+    if ( _int === true ) randFunc = RI;
+
+    for ( var i = 0; i < _amount; ++i ) {
+      
+      var point = Nenkraft.Vector2D( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      while ( _circle.IntersectsPoint( point ) === _outside ) {
+
+        point.Set( randFunc( tl.x, br.x ), randFunc( tl.y, br.y ) );
+
+      }
+
+      points.push( point );
+
+    }
+
+    return points;
+
+  };
+
+  // Members
+  Circle.prototype.TYPE = Circle.TYPE;
+  Circle.prototype.diameter = 0;
+  Circle.prototype.w = 0;
+  Circle.prototype.h = 0;
+  Circle.prototype.radiusSquared = 0;
+  Circle.prototype.radiusUnsquared = 0;
+  Circle.prototype.area = 0;
+  Circle.prototype.belongsTo = null;
+
+  // Methods
+  Circle.prototype.Set = function ( _x, _y, _radius ) {
+
+    this.center.Set( _x, _y );
+    this.radius = _radius;
+  
+  };
+
+  Circle.prototype.SetC = function ( _circle ) {
+
+    this.center.SetV( _circle );
+    this.radius = _circle.radius;
+  
+  };
+
+  Circle.prototype.Scale = function ( _scale ) {
+
+    this.radius *= _scale;
+  
+  };
+
+  Circle.prototype.IntersectsCircle = function ( _circle ) {
+
+    var radii = this.radius + _circle.radius;
+    return ( radii * radii >= this.center.GetDistanceSquaredV( _circle.center ) );
+  
+  };
+
+  Circle.prototype.IntersectsPoint = function ( _v ) {
+
+    return ( this.radiusSquared >= this.center.GetDistanceSquaredV( _v ) );
+  
+  };
+
+  Object.defineProperty( Circle.prototype, 'x', {
+    set: function ( _value ) {
+
+      this.center.x = _value;
+    
+    },
+    get: function () {
+
+      return this.center.x;
+    
+    }
+  } );
+  Object.defineProperty( Circle.prototype, 'y', {
+    set: function ( _value ) {
+
+      this.center.y = _value;
+    
+    },
+    get: function () {
+
+      return this.center.y;
+    
+    }
+  } );
+  Object.defineProperty( Circle.prototype, 'radius', {
+    set: function ( _value ) {
+
+      this.radiusUnsquared = _value;
+      this.radiusSquared = _value * _value;
+      this.diameter = this.w = this.h = _value * 2;
+      this.area = Math.PI * _value * _value;
+    
+    },
+    get: function () {
+
+      return this.radiusUnsquared;
+    
+    }
+  } );
+  Nenkraft.Geom.Circle = Circle;
+
+};
+
+
+/***/ }),
+
+/***/ 21:
 /***/ (function(module, exports) {
 
 /**
@@ -3272,7 +3327,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports) {
 
 /**
@@ -3342,7 +3397,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 /**
@@ -3463,7 +3518,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 23:
+/***/ 24:
 /***/ (function(module, exports) {
 
 /**
@@ -3628,7 +3683,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 25:
 /***/ (function(module, exports) {
 
 /**
@@ -3909,7 +3964,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 25:
+/***/ 26:
 /***/ (function(module, exports) {
 
 /**
@@ -3977,26 +4032,33 @@ module.exports = function ( Nenkraft ) {
 
   CoreEntity2D.prototype.ComputeBounds = function ( _anchor ) {
 
-    var ax = ( _anchor && _anchor.x ) ? _anchor.x : 0;
-    var ay = ( _anchor && _anchor.y ) ? _anchor.y : 0;
+    var wtax = 0;
+    var htay = 0;
+
+    if ( _anchor != null ) {
+
+      wtax = this.width * _anchor.x;
+      htay = this.height * _anchor.y;
+    
+    }
 
     if ( this.bounds === null ) {
 
       this.bounds = Nenkraft.Geom.AABB2D(
-        this.x - this.width * ax,
-        this.y - this.height * ay,
-        this.x + this.width,
-        this.y + this.height
+        this.x - wtax,
+        this.y - htay,
+        this.x + this.width - wtax,
+        this.y + this.height - htay
       );
       this.bounds.belongsTo = this;
     
     } else {
 
       this.bounds.Set(
-        this.x - this.width * ax,
-        this.y - this.height * ay,
-        this.x + this.width,
-        this.y + this.height
+        this.x - wtax,
+        this.y - htay,
+        this.x + this.width - wtax,
+        this.y + this.height - htay
       );
     
     }
@@ -4095,7 +4157,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /***/ (function(module, exports) {
 
 /**
@@ -4512,7 +4574,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 27:
+/***/ 28:
 /***/ (function(module, exports) {
 
 /**
@@ -4579,7 +4641,7 @@ module.exports = function ( Nenkraft ) {
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /***/ (function(module, exports) {
 
 /**
@@ -4621,203 +4683,6 @@ module.exports = function ( Nenkraft ) {
   };
 
   Nenkraft.CP.Option = Option;
-
-};
-
-
-/***/ }),
-
-/***/ 29:
-/***/ (function(module, exports) {
-
-/**
- * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
- */
-
-module.exports = function ( Nenkraft ) {
-
-  'use strict';
-
-  function Command ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
-
-    if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
-
-    this.id = _id.split( ' ' );
-    this.handle = _handle;
-    this.info = _info;
-    this.data = {};
-    this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
-    this.dsCopy = [];
-    if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
-  
-  }
-
-  Command.prototype = Object.create( null );
-  Command.prototype.constructor = Command;
-  // Static
-  Command.OPTION_PREFIX = '';
-  // Members
-  Command.prototype.dataSeparator = '=';
-  Command.prototype.options = null;
-  Command.prototype.allOptionIds = null;
-  Command.prototype.fullInfo = null;
-  Command.prototype.optionPrefix = null;
-  Command.prototype.continueToPrime = true;
-  Command.prototype.dsCopy = null;
-  Command.prototype.register = null;
-
-  // Methods
-  Command.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
-
-    this.HandleData( _dataStrs, _data );
-
-    if ( this.HandleOptions( _dataStrs, _data, _staticData ) === true ) {
-
-      this.handle( _dataStrs, _data, _staticData );
-    
-    }
-  
-  };
-
-  Command.prototype.AddOption = function ( _id, _handle, _info, _priority, _breakIfExecuted, _optionPrefix ) {
-
-    _optionPrefix = _optionPrefix === undefined ? this.optionPrefix : _optionPrefix;
-    if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
-    if ( this.options === null ) this.options = [];
-    _priority = _priority === undefined ? 0 : _priority;
-    var opt = Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
-    opt.command = this;
-
-    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
-
-      option = options[ i ];
-
-      if ( option.priority <= _priority ) {
-
-        options.splice( i, 0, opt );
-        this.allOptionIds = this.GetAllOptionIds();
-        return this;
-      
-      }
-    
-    }
-
-    this.options.push( opt );
-    this.allOptionIds = this.GetAllOptionIds();
-    return this;
-  
-  };
-
-  Command.prototype.HandleData = function ( _dataStrs, _data ) {
-
-    var dsCopy = this.dsCopy;
-    dsCopy.push.apply( dsCopy, _dataStrs );
-
-    for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
-
-      str = dsCopy[ i ];
-      data = str.split( ds );
-
-      if ( data.length === 2 ) {
-
-        _dataStrs.fickleSplice( i );
-        _data[ data[ 0 ] ] = data[ 1 ];
-      
-      }
-    
-    }
-
-    dsCopy.length = 0;
-  
-  };
-
-  Command.prototype.HandleOptions = function ( _dataStrs, _data, _staticData ) {
-
-    if ( _dataStrs.length === 0 ) {
-
-      return this.continueToPrime;
-    
-    }
-
-    var matchingOptionIds = this.GetAndRemoveMatchingOptionIds( _dataStrs );
-    if ( matchingOptionIds === null ) return this.continueToPrime;
-
-    for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
-
-      option = this.GetOptionById( matchingOptionIds[ i ] );
-      if ( option.Execute( _dataStrs, _data, _staticData ) === true ) return false;
-    
-    }
-
-    return this.continueToPrime;
-  
-  };
-
-  Command.prototype.GetOptionById = function ( _id ) {
-
-    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
-
-      option = options[ i ];
-      if ( option.id.indexOf( _id ) !== -1 ) return option;
-    
-    }
-
-    return null;
-  
-  };
-
-  Command.prototype.GetAllOptionIds = function () {
-
-    var allOptionIds = [];
-
-    for ( var i = 0, options = this.options, l = options.length; i < l; ++i ) {
-
-      allOptionIds.push.apply( allOptionIds, options[ i ].id );
-    
-    }
-
-    return allOptionIds;
-  
-  };
-
-  Command.prototype.GetAndRemoveMatchingOptionIds = function ( _dataStrs ) {
-
-    var allOptionIds = this.allOptionIds;
-    if ( allOptionIds === null ) return null;
-    var optionIds = [];
-
-    for ( var i = 0, l = allOptionIds.length; i < l; ++i ) {
-
-      var ix = _dataStrs.indexOf( allOptionIds[ i ] );
-
-      if ( ix !== -1 ) {
-
-        optionIds.push( _dataStrs.fickleSplice( ix ) );
-      
-      }
-    
-    }
-
-    return optionIds;
-  
-  };
-
-  Command.prototype.GenerateInfoString = function () {
-
-    var str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
-
-    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
-
-      option = options[ i ];
-      str += 'OPTION: ' + option.id.join( ', ' ) + ' -> ' + option.info + '\n';
-    
-    }
-
-    return str;
-  
-  };
-
-  Nenkraft.CP.Command = Command;
 
 };
 
@@ -5214,6 +5079,203 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
+  function Command ( _id, _handle, _info, _continueToPrime, _optionPrefix ) {
+
+    if ( !( this instanceof Command ) ) return new Command( _id, _handle, _info, _continueToPrime, _optionPrefix );
+
+    this.id = _id.split( ' ' );
+    this.handle = _handle;
+    this.info = _info;
+    this.data = {};
+    this.optionPrefix = _optionPrefix === undefined ? Command.OPTION_PREFIX : _optionPrefix;
+    this.dsCopy = [];
+    if ( _continueToPrime !== undefined ) this.continueToPrime = _continueToPrime;
+  
+  }
+
+  Command.prototype = Object.create( null );
+  Command.prototype.constructor = Command;
+  // Static
+  Command.OPTION_PREFIX = '';
+  // Members
+  Command.prototype.dataSeparator = '=';
+  Command.prototype.options = null;
+  Command.prototype.allOptionIds = null;
+  Command.prototype.fullInfo = null;
+  Command.prototype.optionPrefix = null;
+  Command.prototype.continueToPrime = true;
+  Command.prototype.dsCopy = null;
+  Command.prototype.register = null;
+
+  // Methods
+  Command.prototype.Execute = function ( _dataStrs, _data, _staticData ) {
+
+    this.HandleData( _dataStrs, _data );
+
+    if ( this.HandleOptions( _dataStrs, _data, _staticData ) === true ) {
+
+      this.handle( _dataStrs, _data, _staticData );
+    
+    }
+  
+  };
+
+  Command.prototype.AddOption = function ( _id, _handle, _info, _priority, _breakIfExecuted, _optionPrefix ) {
+
+    _optionPrefix = _optionPrefix === undefined ? this.optionPrefix : _optionPrefix;
+    if ( _optionPrefix !== null ) _id = _id.replace( /\S+/g, _optionPrefix + '$&' );
+    if ( this.options === null ) this.options = [];
+    _priority = _priority === undefined ? 0 : _priority;
+    var opt = Nenkraft.CP.Option( _id, _handle, _info, _priority, _breakIfExecuted );
+    opt.command = this;
+
+    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
+
+      option = options[ i ];
+
+      if ( option.priority <= _priority ) {
+
+        options.splice( i, 0, opt );
+        this.allOptionIds = this.GetAllOptionIds();
+        return this;
+      
+      }
+    
+    }
+
+    this.options.push( opt );
+    this.allOptionIds = this.GetAllOptionIds();
+    return this;
+  
+  };
+
+  Command.prototype.HandleData = function ( _dataStrs, _data ) {
+
+    var dsCopy = this.dsCopy;
+    dsCopy.push.apply( dsCopy, _dataStrs );
+
+    for ( var i = 0, l = dsCopy.length, str, data, ds = this.dataSeparator; i < l; ++i ) {
+
+      str = dsCopy[ i ];
+      data = str.split( ds );
+
+      if ( data.length === 2 ) {
+
+        _dataStrs.fickleSplice( i );
+        _data[ data[ 0 ] ] = data[ 1 ];
+      
+      }
+    
+    }
+
+    dsCopy.length = 0;
+  
+  };
+
+  Command.prototype.HandleOptions = function ( _dataStrs, _data, _staticData ) {
+
+    if ( _dataStrs.length === 0 ) {
+
+      return this.continueToPrime;
+    
+    }
+
+    var matchingOptionIds = this.GetAndRemoveMatchingOptionIds( _dataStrs );
+    if ( matchingOptionIds === null ) return this.continueToPrime;
+
+    for ( var i = 0, l = matchingOptionIds.length, option; i < l; ++i ) {
+
+      option = this.GetOptionById( matchingOptionIds[ i ] );
+      if ( option.Execute( _dataStrs, _data, _staticData ) === true ) return false;
+    
+    }
+
+    return this.continueToPrime;
+  
+  };
+
+  Command.prototype.GetOptionById = function ( _id ) {
+
+    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
+
+      option = options[ i ];
+      if ( option.id.indexOf( _id ) !== -1 ) return option;
+    
+    }
+
+    return null;
+  
+  };
+
+  Command.prototype.GetAllOptionIds = function () {
+
+    var allOptionIds = [];
+
+    for ( var i = 0, options = this.options, l = options.length; i < l; ++i ) {
+
+      allOptionIds.push.apply( allOptionIds, options[ i ].id );
+    
+    }
+
+    return allOptionIds;
+  
+  };
+
+  Command.prototype.GetAndRemoveMatchingOptionIds = function ( _dataStrs ) {
+
+    var allOptionIds = this.allOptionIds;
+    if ( allOptionIds === null ) return null;
+    var optionIds = [];
+
+    for ( var i = 0, l = allOptionIds.length; i < l; ++i ) {
+
+      var ix = _dataStrs.indexOf( allOptionIds[ i ] );
+
+      if ( ix !== -1 ) {
+
+        optionIds.push( _dataStrs.fickleSplice( ix ) );
+      
+      }
+    
+    }
+
+    return optionIds;
+  
+  };
+
+  Command.prototype.GenerateInfoString = function () {
+
+    var str = 'COMMAND: ' + this.id.join( ', ' ) + ' -> ' + this.info + '\n';
+
+    for ( var i = 0, options = this.options, l = options.length, option; i < l; ++i ) {
+
+      option = options[ i ];
+      str += 'OPTION: ' + option.id.join( ', ' ) + ' -> ' + option.info + '\n';
+    
+    }
+
+    return str;
+  
+  };
+
+  Nenkraft.CP.Command = Command;
+
+};
+
+
+/***/ }),
+
+/***/ 31:
+/***/ (function(module, exports) {
+
+/**
+ * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
+ */
+
+module.exports = function ( Nenkraft ) {
+
+  'use strict';
+
   function Register ( _options ) {
 
     if ( !( this instanceof Register ) ) return new Register( _options );
@@ -5495,22 +5557,6 @@ module.exports = function ( Nenkraft ) {
     }
 
     return this.Store( _item );
-  
-  };
-
-  Cache.prototype.Get = function ( _item ) {
-
-    for ( var i = 0, items = this.items, l = items.length; i < l; ++i ) {
-
-      if ( items[ i ] === _item ) {
-
-        return _item;
-      
-      }
-    
-    }
-
-    return null;
   
   };
 
@@ -6107,43 +6153,110 @@ module.exports = function ( Nenkraft ) {
 
   'use strict';
 
-  function LocalListener ( _holderContext, _listenerContext, _handle, _removeOnNextCall ) {
+  var NESTED = Nenkraft.Utils.Nested;
 
-    if ( !( this instanceof LocalListener ) ) return new LocalListener( _holderContext, _listenerContext, _handle, _removeOnNextCall );
-    this.context = _listenerContext;
-    this.holderContext = _holderContext;
-    this.handle = _handle;
-    this.removeOnNextCall = _removeOnNextCall;
+  function Maker () {
+
+    if ( !( this instanceof Maker ) ) return new Maker();
+    this.orders = [];
   
   }
 
-  LocalListener.prototype = Object.create( null );
-  LocalListener.prototype.constructor = LocalListener;
+  Maker.prototype = Object.create( null );
+  Maker.prototype.constructor = Maker;
   // Static
 
   // Members
+  Maker.prototype.orders = null;
+  Maker.prototype.classUsed = null;
+  Maker.prototype.amount = 1;
 
   // Methods
-  LocalListener.prototype.Execute = function () {
 
-    this.handle.apply( this.context, arguments );
+  Maker.prototype.Many = function( _amount ) {
 
-    if ( this.removeOnNextCall === true ) {
+    this.amount = _amount;
+    return this;
+  
+  };
 
-      this.Remove();
+  Maker.prototype.Make = function( _class ) {
+
+    this.orders.length = 0;
+    this.classUsed = _class;
+
+    for ( var i = 0; i < this.amount; ++i ) {
+
+      this.orders.push(
+        new ( Function.prototype.bind.apply( _class, arguments ) )()
+      );
+      
+    }
+
+    return this;
+  
+  };
+
+  Maker.prototype.Call = function( _function, _args ) {
+
+    var orders = this.orders;
+
+    for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
+
+      var context = NESTED( order, _function, true );
+      var f = NESTED( order, _function );
+
+      for ( var j = 0; j < _args.length; ++j ) {
+
+        if ( typeof _args[j] === 'string' && _args[j][0] === '$' ) {
+
+          _args[j] = order[_args[j].slice( 1 )];
+      
+        }
+    
+      }
+
+      f.apply( context, _args );
     
     }
+
+    return this;
   
   };
 
-  LocalListener.prototype.Remove = function () {
+  Maker.prototype.Set = function( _key, _value ) {
 
-    this.holderContext.Remove( this.handle, this.context );
+    var orders = this.order;
+
+    for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
+
+      if ( typeof _value === 'string' && _value[0] === '$' ) {
+
+        _value = NESTED( order, _value );
+      
+      }
+  
+      NESTED( order, _key, false, true, _value );
+    
+    }
+
+    return this;
   
   };
 
-  Nenkraft.Event.LocalListener = LocalListener;
-  Nenkraft.LocalListener = LocalListener;
+  Maker.prototype.Done = function() {
+
+    return this.orders[0];
+  
+  };
+
+  Maker.prototype.Mass = function() {
+
+    return this.orders;
+
+  };
+  
+  Nenkraft.Utils.Maker = Maker;
 
 };
 

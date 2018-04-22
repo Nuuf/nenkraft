@@ -13,6 +13,7 @@ require( './nk-utils/nk-cache' )( namespace );
 require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-flag-list' )( namespace );
 require( './nk-utils/nk-flag-enum' )( namespace );
+require( './nk-utils/nk-maker' )( namespace );
 require( './nk-event/nk-local-listener' )( namespace );
 require( './nk-event/nk-local-event' )( namespace );
 require( './nk-time/nk-timer/nk-timer' )( namespace );
