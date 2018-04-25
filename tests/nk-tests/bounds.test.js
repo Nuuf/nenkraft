@@ -80,12 +80,12 @@ module.exports = function () {
         .Call( 'onStart.Add', [ function() {
 
           console.log( 'start' );
-          stage.onProcess.Dump();
         
         } ] )
         .Call( 'onFinish.Add', [ function(){
 
           console.log( 'finish' );
+          stage.onProcess.Dump();
 
         } ] )
         .Call( 'Start' )
