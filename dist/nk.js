@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.3
+* @version     1.0.4
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1576,6 +1576,14 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Maker.prototype.Bind = function( _object, _reset ) {
+
+    if ( _reset ) this.orders.length = 0;
+    this.orders.push( _object );
+    return this;
+  
+  };
+
   Maker.prototype.Make = function( _class ) {
 
     this.orders.length = 0;
@@ -1602,14 +1610,18 @@ module.exports = function ( Nenkraft ) {
       var context = NESTED( order, _function, true );
       var f = NESTED( order, _function );
 
-      for ( var j = 0; j < _args.length; ++j ) {
+      if ( _args != null && _args.length > 0 ) {
 
-        if ( typeof _args[j] === 'string' && _args[j][0] === '$' ) {
+        for ( var j = 0; j < _args.length; ++j ) {
 
-          _args[j] = order[_args[j].slice( 1 )];
+          if ( typeof _args[j] === 'string' && _args[j][0] === '$' ) {
+  
+            _args[j] = order[_args[j].slice( 1 )];
+        
+          }
       
         }
-    
+      
       }
 
       f.apply( context, _args );
@@ -1620,7 +1632,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Maker.prototype.Set = function( _key, _value ) {
+  Maker.prototype.Cast = function( _key, _value ) {
 
     var orders = this.order;
 
@@ -1642,12 +1654,14 @@ module.exports = function ( Nenkraft ) {
 
   Maker.prototype.Done = function() {
 
+    this.amount = 1;
     return this.orders[0];
   
   };
 
   Maker.prototype.Mass = function() {
 
+    this.amount = 1;
     return this.orders;
 
   };
@@ -6162,7 +6176,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.0.3';
+  Nenkraft.VERSION = '1.0.4';
 
   Nenkraft.PRINT_VERSION = function() {
 

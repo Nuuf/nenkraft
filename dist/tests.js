@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.3
+* @version     1.0.4
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -543,7 +543,11 @@ module.exports = function () {
 
       var s1 = stage.AddChild( factory
         .Make( nk.Sprite, 100, 100 ) // Create 1 of these
-        .Call( 'anchor.Set', [ 0.5 ] ) // Then call this function 
+        .Call( 'anchor.Set', [ 0.5 ] ) // Then call this function
+        /*
+         * .Cast('anchor.x', [0.5])
+         * .Cast('anchor.y', [0.5])
+         */
         .Call( 'ComputeBounds', [ '$anchor' ] ) // And this one, $anchor means this.anchor
         .Done() // And return first element
       );
@@ -573,6 +577,28 @@ module.exports = function () {
       stage.AddChildren( stuff );
 
       var dragger = null;
+
+      var timer = factory
+        .Make( nk.Timer, 180 )
+        .Call( 'onStart.Add', [ function() {
+
+          console.log( 'start' );
+          stage.onProcess.Dump();
+        
+        } ] )
+        .Call( 'onFinish.Add', [ function(){
+
+          console.log( 'finish' );
+
+        } ] )
+        .Call( 'Start' )
+        .Done();
+      
+      stage.onProcess.Add( function() {
+
+        timer.Process();
+      
+      } );
 
       stage.mouse.onMove.Add( function ( _event ) {
 
