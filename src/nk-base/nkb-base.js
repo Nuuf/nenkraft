@@ -11,7 +11,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '1.0.4';
+  Nenkraft.VERSION = '1.0.5';
 
   Nenkraft.PRINT_VERSION = function() {
 

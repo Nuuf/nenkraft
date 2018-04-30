@@ -67,6 +67,43 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Char.prototype.Draw = function( _rc ) {
+
+    _rc.drawImage(
+      this.texture.image,
+      this.cx, this.cy,
+      this.width, this.height,
+      this.position.x, this.position.y,
+      this.width, this.height
+    );
+  
+  };
+
+  Char.prototype.GLDrawAuto = function( _pc, _tintChannel ) {
+
+    this.UpdateMatrices();
+    _pc.Execute(
+      this.transform.worldTransform.AsArray( true ),
+      this.translation.AsArray( true ),
+      this.transformation.AsArray( true ),
+      _tintChannel,
+      0
+    );
+  
+  };
+
+  Char.prototype.GLDraw = function( _pc, _tintChannel ) {
+
+    _pc.Execute(
+      this.transform.worldTransform.AsArray( true ),
+      this.translation.AsArray( true ),
+      this.transformation.AsArray( true ),
+      _tintChannel,
+      0
+    );
+  
+  };
+
   Char.prototype.Crunch = function ( _prevChar ) {
 
     this.position.Set( 0 );
