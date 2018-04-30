@@ -36,6 +36,7 @@ module.exports = function ( Nenkraft ) {
   BitmapText.prototype.text = '';
   BitmapText.prototype.chars = null;
   BitmapText.prototype.lineHeight = 0;
+  BitmapText.prototype.autoUpdateChars = true;
 
   // Methods
   BitmapText.prototype.Draw = function ( _rc ) {
@@ -110,16 +111,9 @@ module.exports = function ( Nenkraft ) {
 
   BitmapText.prototype.DrawText = function ( _rc ) {
 
-    for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
+    for ( var i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-      char = chars[ i ];
-      _rc.drawImage(
-        this.texture.image,
-        char.cx, char.cy,
-        char.width, char.height,
-        char.position.x, char.position.y,
-        char.width, char.height
-      );
+      chars[i].Draw( _rc );
     
     }
   
@@ -127,16 +121,23 @@ module.exports = function ( Nenkraft ) {
 
   BitmapText.prototype.GLDrawText = function () {
 
-    for ( var i = 0, chars = this.chars, char, l = chars.length; i < l; ++i ) {
+    var i, chars, l;
 
-      char = chars[ i ];
-      this.programController.Execute(
-        char.transform.worldTransform.AsArray( true ),
-        char.translation.AsArray( true ),
-        char.transformation.AsArray( true ),
-        this.tint.channel,
-        0
-      );
+    if ( this.autoUpdateChars === true ) {
+
+      for ( i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
+
+        chars[i].GLDrawAuto( this.programController, this.tint.channel );
+      
+      }
+    
+    } else {
+
+      for ( i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
+
+        chars[i].GLDraw( this.programController, this.tint.channel );
+      
+      }
     
     }
   
@@ -206,6 +207,16 @@ module.exports = function ( Nenkraft ) {
 
     this.w = w;
     this.h = h;
+  
+  };
+
+  BitmapText.prototype.UpdateChars = function() {
+
+    for ( var i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
+
+      chars[i].UpdateMatrices();
+    
+    }
   
   };
 
