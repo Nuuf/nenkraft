@@ -67,10 +67,10 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Char.prototype.Draw = function( _rc ) {
+  Char.prototype.Draw = function( _rc, _image ) {
 
     _rc.drawImage(
-      this.texture.image,
+      _image,
       this.cx, this.cy,
       this.width, this.height,
       this.position.x, this.position.y,
