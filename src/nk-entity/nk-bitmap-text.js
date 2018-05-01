@@ -111,9 +111,11 @@ module.exports = function ( Nenkraft ) {
 
   BitmapText.prototype.DrawText = function ( _rc ) {
 
+    var image = this.texture.image;
+
     for ( var i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-      chars[i].Draw( _rc );
+      chars[i].Draw( _rc, image );
     
     }
   

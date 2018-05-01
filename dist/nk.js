@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.5
+* @version     1.0.6
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -6176,7 +6176,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.0.5';
+  Nenkraft.VERSION = '1.0.6';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -10076,10 +10076,10 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Char.prototype.Draw = function( _rc ) {
+  Char.prototype.Draw = function( _rc, _image ) {
 
     _rc.drawImage(
-      this.texture.image,
+      _image,
       this.cx, this.cy,
       this.width, this.height,
       this.position.x, this.position.y,
@@ -10284,9 +10284,11 @@ module.exports = function ( Nenkraft ) {
 
   BitmapText.prototype.DrawText = function ( _rc ) {
 
+    var image = this.texture.image;
+
     for ( var i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-      chars[i].Draw( _rc );
+      chars[i].Draw( _rc, image );
     
     }
   
