@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.6
+* @version     1.0.7
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -67,25 +67,25 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 90);
+/******/ 	return __webpack_require__(__webpack_require__.s = 91);
 /******/ })
 /************************************************************************/
-/******/ (Array(90).concat([
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(91);
-
-
-/***/ }),
+/******/ (Array(91).concat([
 /* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__( 92 );
+module.exports = __webpack_require__(92);
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__( 93 );
 
 var tests = [];
 
-var context = __webpack_require__(93);
+var context = __webpack_require__(94);
 
 context.keys().forEach( function ( file ) {
 
@@ -103,60 +103,60 @@ for ( var i = 0, l = tests.length; i < l; ++i ) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./aabbcollision.test": 94,
-	"./animation.test": 95,
-	"./bitmapfont.test": 96,
-	"./bounds.test": 97,
-	"./butterflyish.test": 98,
-	"./camera.test": 99,
-	"./cli.test": 100,
-	"./clock.test": 101,
-	"./editor.test": 102,
-	"./elasticcollision.test": 104,
-	"./field.test": 105,
-	"./fractree.test": 106,
-	"./grabndrag.test": 107,
-	"./grid.test": 108,
-	"./invaders.test": 109,
-	"./magnet.test": 110,
-	"./motion.test": 111,
-	"./multiplecanvases.test": 112,
-	"./nightsky.test": 113,
-	"./particles.test": 114,
-	"./particlesystem.test": 115,
-	"./platformer.test": 116,
-	"./playground.test": 117,
-	"./polygoncollision.test": 118,
-	"./polyline.test": 119,
-	"./quadtree.test": 120,
-	"./rain.test": 121,
-	"./raycasting.test": 122,
-	"./reflectivecollision.test": 123,
-	"./scaling.test": 124,
-	"./sprite.test": 125,
-	"./stresstest.test": 126,
-	"./text.test": 127,
-	"./themask.test": 128,
-	"./tilesprite.test": 129,
-	"./webglanimation.test": 130,
-	"./webglbitmapfont.test": 131,
-	"./webglcircle.test": 132,
-	"./webglline2d.test": 133,
-	"./webglpixelbatch.test": 134,
-	"./webglrectangle.test": 135,
-	"./webglstresstest.test": 136,
-	"./webgltexturebatch.test": 137,
-	"./webgltilesprite.test": 138
+	"./aabbcollision.test": 95,
+	"./animation.test": 96,
+	"./bitmapfont.test": 97,
+	"./bounds.test": 98,
+	"./butterflyish.test": 99,
+	"./camera.test": 100,
+	"./cli.test": 101,
+	"./clock.test": 102,
+	"./editor.test": 103,
+	"./elasticcollision.test": 105,
+	"./field.test": 106,
+	"./fractree.test": 107,
+	"./grabndrag.test": 108,
+	"./grid.test": 109,
+	"./invaders.test": 110,
+	"./magnet.test": 111,
+	"./motion.test": 112,
+	"./multiplecanvases.test": 113,
+	"./nightsky.test": 114,
+	"./particles.test": 115,
+	"./particlesystem.test": 116,
+	"./platformer.test": 117,
+	"./playground.test": 118,
+	"./polygoncollision.test": 119,
+	"./polyline.test": 120,
+	"./quadtree.test": 121,
+	"./rain.test": 122,
+	"./raycasting.test": 123,
+	"./reflectivecollision.test": 124,
+	"./scaling.test": 125,
+	"./sprite.test": 126,
+	"./stresstest.test": 127,
+	"./text.test": 128,
+	"./themask.test": 129,
+	"./tilesprite.test": 130,
+	"./webglanimation.test": 131,
+	"./webglbitmapfont.test": 132,
+	"./webglcircle.test": 133,
+	"./webglline2d.test": 134,
+	"./webglpixelbatch.test": 135,
+	"./webglrectangle.test": 136,
+	"./webglstresstest.test": 137,
+	"./webgltexturebatch.test": 138,
+	"./webgltilesprite.test": 139
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -172,10 +172,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 93;
+webpackContext.id = 94;
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -304,7 +304,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -394,7 +394,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -498,7 +498,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -646,7 +646,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -766,7 +766,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -836,7 +836,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1068,7 +1068,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1152,12 +1152,12 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function () {
 
-  __webpack_require__( 103 );
+  __webpack_require__( 104 );
 
   var buttonContainer = document.getElementById( 'buttons' );
   var button = document.createElement( 'input' );
@@ -1549,13 +1549,13 @@ module.exports = function () {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1739,7 +1739,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1853,7 +1853,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1959,7 +1959,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2069,7 +2069,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2158,7 +2158,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -2833,7 +2833,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3001,7 +3001,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3078,7 +3078,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3181,7 +3181,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3302,7 +3302,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3398,7 +3398,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3556,7 +3556,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3815,7 +3815,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -3955,6 +3955,32 @@ module.exports = function () {
     
     }() );
 
+    nk.Glob.Create( 'GAME' );
+
+    var GAME = window.GAME;
+
+    var FUNC = nk.Glob.FUNCTION, VAL = nk.Glob.VALUE, CONST = nk.Glob.CONSTANT, ARR = nk.Glob.LIST, OBJ = nk.Glob.OBJECT;
+
+    GAME.Mark( FUNC, 'myFunc' );
+    GAME.Set( FUNC, 'myFunc', function(){} );
+
+    GAME.Mark( VAL, 'myValue' );
+    GAME.Set( VAL, 'myValue', 'SOME_VALUE' );
+    GAME.Mark( VAL, 'myValue' );
+    GAME.Set( VAL, 'myValue', 'NEW_VALUE' );
+
+    GAME.Mark( CONST, 'myConstant' );
+    GAME.Set( CONST, 'myConstant', 'CONSTANT' );
+    // window.GAME.Mark( CONST, 'myConstant' );
+
+    GAME.Mark( ARR, 'myList' );
+    GAME.Set( ARR, 'myList', [] );
+
+    GAME.Mark( OBJ, 'myObject' );
+    GAME.Set( OBJ, 'myObject', {} );
+
+    console.log( GAME, GAME.Get( VAL, 'myValue' ) );
+
     document.body.removeChild( buttonContainer );
   
   }
@@ -3963,7 +3989,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4117,7 +4143,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4192,7 +4218,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4262,7 +4288,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4365,7 +4391,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4561,7 +4587,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4739,7 +4765,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4813,7 +4839,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -4940,7 +4966,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5089,7 +5115,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5140,7 +5166,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5261,7 +5287,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5321,7 +5347,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5474,7 +5500,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5563,7 +5589,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5687,7 +5713,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5757,7 +5783,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5850,7 +5876,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -5955,7 +5981,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -6142,7 +6168,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -6253,7 +6279,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
