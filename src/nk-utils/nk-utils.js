@@ -32,6 +32,12 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Nenkraft.Utils.IsArray = function( _value ) {
+
+    return Object.prototype.toString.call( _value ) === '[object Array]';
+  
+  };
+
   Nenkraft.Utils.Sign = function( _value, _1IfZero ) {
 
     if ( _value === 0 ) {

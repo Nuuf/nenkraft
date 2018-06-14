@@ -10,6 +10,7 @@ require( './nk-shader/nk-load-shaders' )( namespace );
 require( './nk-math/nk-math' )( namespace );
 require( './nk-utils/nk-assert' )( namespace );
 require( './nk-utils/nk-pool' )( namespace );
+require( './nk-utils/nk-glob' )( namespace );
 require( './nk-utils/nk-cache' )( namespace );
 require( './nk-utils/nk-utils' )( namespace );
 require( './nk-utils/nk-browser-utils' )( namespace );

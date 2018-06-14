@@ -135,6 +135,32 @@ module.exports = function () {
     
     }() );
 
+    nk.Glob.Create( 'GAME' );
+
+    var GAME = window.GAME;
+
+    var FUNC = nk.Glob.FUNCTION, VAL = nk.Glob.VALUE, CONST = nk.Glob.CONSTANT, ARR = nk.Glob.LIST, OBJ = nk.Glob.OBJECT;
+
+    GAME.Mark( FUNC, 'myFunc' );
+    GAME.Set( FUNC, 'myFunc', function(){} );
+
+    GAME.Mark( VAL, 'myValue' );
+    GAME.Set( VAL, 'myValue', 'SOME_VALUE' );
+    GAME.Mark( VAL, 'myValue' );
+    GAME.Set( VAL, 'myValue', 'NEW_VALUE' );
+
+    GAME.Mark( CONST, 'myConstant' );
+    GAME.Set( CONST, 'myConstant', 'CONSTANT' );
+    // window.GAME.Mark( CONST, 'myConstant' );
+
+    GAME.Mark( ARR, 'myList' );
+    GAME.Set( ARR, 'myList', [] );
+
+    GAME.Mark( OBJ, 'myObject' );
+    GAME.Set( OBJ, 'myObject', {} );
+
+    console.log( GAME, GAME.Get( VAL, 'myValue' ) );
+
     document.body.removeChild( buttonContainer );
   
   }
