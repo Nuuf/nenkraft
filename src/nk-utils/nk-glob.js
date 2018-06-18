@@ -24,9 +24,27 @@ module.exports = function ( Nenkraft ) {
   // Static
   Glob.Create = function( _id ) {
 
-    if ( window[_id] !== undefined ) throw new Error( 'window.' + _id + ' already exists!' );
+    if ( window == null ) {
 
-    window[_id] = new Glob();
+      if ( global != null ) {
+
+        if ( global[_id] !== undefined ) throw new Error( 'global.' + _id + ' already exists!' );
+
+        global[_id] = new Glob();
+      
+      } else {
+
+        throw new Error( 'Neither window nor global exists!' );
+      
+      }
+
+    } else {
+
+      if ( window[_id] !== undefined ) throw new Error( 'window.' + _id + ' already exists!' );
+
+      window[_id] = new Glob();
+    
+    }
   
   };
 
