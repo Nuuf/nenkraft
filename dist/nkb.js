@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.8
+* @version     1.0.9
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1320,7 +1320,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '1.0.8';
+  Nenkraft.VERSION = '1.0.9';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -5596,9 +5596,9 @@ module.exports = function ( Nenkraft ) {
 /***/ }),
 
 /***/ 5:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
+/* WEBPACK VAR INJECTION */(function(global) {/**
  * @author Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
  */
 
@@ -5624,9 +5624,27 @@ module.exports = function ( Nenkraft ) {
   // Static
   Glob.Create = function( _id ) {
 
-    if ( window[_id] !== undefined ) throw new Error( 'window.' + _id + ' already exists!' );
+    if ( window == null ) {
 
-    window[_id] = new Glob();
+      if ( global != null ) {
+
+        if ( global[_id] !== undefined ) throw new Error( 'global.' + _id + ' already exists!' );
+
+        global[_id] = new Glob();
+      
+      } else {
+
+        throw new Error( 'Neither window nor global exists!' );
+      
+      }
+
+    } else {
+
+      if ( window[_id] !== undefined ) throw new Error( 'window.' + _id + ' already exists!' );
+
+      window[_id] = new Glob();
+    
+    }
   
   };
 
@@ -5747,6 +5765,7 @@ module.exports = function ( Nenkraft ) {
 
 };
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
