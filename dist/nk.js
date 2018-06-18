@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.7
+* @version     1.0.8
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -910,6 +910,13 @@ module.exports = function ( Nenkraft ) {
   Glob.prototype.lists = null;
 
   // Methods
+  Glob.prototype.Define = function( _type, _id, _value ) {
+
+    this.Mark( _type, _id );
+    this.Set( _type, _id, _value );
+  
+  };
+
   Glob.prototype.Mark = function( _type, _id ) {
 
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );
@@ -6330,7 +6337,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.0.7';
+  Nenkraft.VERSION = '1.0.8';
 
   Nenkraft.PRINT_VERSION = function() {
 
