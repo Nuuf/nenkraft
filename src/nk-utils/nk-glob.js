@@ -46,6 +46,13 @@ module.exports = function ( Nenkraft ) {
   Glob.prototype.lists = null;
 
   // Methods
+  Glob.prototype.Define = function( _type, _id, _value ) {
+
+    this.Mark( _type, _id );
+    this.Set( _type, _id, _value );
+  
+  };
+
   Glob.prototype.Mark = function( _type, _id ) {
 
     if ( typeof _type !== 'string' ) throw new Error( 'Type needs to be a string!' );
