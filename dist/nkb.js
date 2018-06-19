@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.0
+* @version     1.1.1
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -221,6 +221,7 @@ module.exports = function ( Nenkraft ) {
   Maker.prototype.orders = null;
   Maker.prototype.classUsed = null;
   Maker.prototype.amount = 1;
+  Maker.prototype.locked = false;
 
   // Methods
 
@@ -240,6 +241,10 @@ module.exports = function ( Nenkraft ) {
   };
 
   Maker.prototype.Make = function( _class ) {
+
+    if ( this.locked === true ) throw new Error( 'Make called twice before end!' );
+
+    this.locked = true;
 
     this.orders.length = 0;
     this.classUsed = _class;
@@ -310,6 +315,7 @@ module.exports = function ( Nenkraft ) {
   Maker.prototype.Done = function() {
 
     this.amount = 1;
+    this.locked = false;
     return this.orders[0];
   
   };
@@ -317,6 +323,7 @@ module.exports = function ( Nenkraft ) {
   Maker.prototype.Mass = function() {
 
     this.amount = 1;
+    this.locked = false;
     return this.orders;
 
   };
@@ -1320,7 +1327,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '1.1.0';
+  Nenkraft.VERSION = '1.1.1';
 
   Nenkraft.PRINT_VERSION = function() {
 
