@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.9
+* @version     1.1.0
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -918,6 +918,7 @@ module.exports = function ( Nenkraft ) {
   Glob.COMPONENT = 'components';
   Glob.OBJECT = 'objects';
   Glob.LIST = 'lists';
+  Glob.AllowGetNullUndefined = false;
 
   // Members
   Glob.prototype.functions = null;
@@ -958,6 +959,12 @@ module.exports = function ( Nenkraft ) {
     if ( typeof _id !== 'string' ) throw new Error( 'Id needs to be a string!' );
 
     if ( this[_type] == null ) throw new Error( 'Type does not exist' );
+
+    if ( Glob.AllowGetNullUndefined === false ) {
+
+      if ( this[_type][_id] == null ) throw new Error( 'Null or undefined!' );
+    
+    }
 
     return this[_type][_id];
   
@@ -6356,7 +6363,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.0.9';
+  Nenkraft.VERSION = '1.1.0';
 
   Nenkraft.PRINT_VERSION = function() {
 

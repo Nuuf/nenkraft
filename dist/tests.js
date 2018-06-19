@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.0.9
+* @version     1.1.0
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3959,7 +3959,7 @@ module.exports = function () {
 
     var GAME = window.GAME;
 
-    var FUNC = nk.Glob.FUNCTION, VAL = nk.Glob.VALUE, CONST = nk.Glob.CONSTANT, ARR = nk.Glob.LIST, OBJ = nk.Glob.OBJECT;
+    var FUNC = nk.Glob.FUNCTION, VAL = nk.Glob.VALUE, CONST = nk.Glob.CONSTANT, ARR = nk.Glob.LIST, OBJ = nk.Glob.OBJECT, COMP = nk.Glob.COMPONENT;
 
     GAME.Mark( FUNC, 'myFunc' );
     GAME.Set( FUNC, 'myFunc', function(){} );
@@ -3978,6 +3978,22 @@ module.exports = function () {
 
     GAME.Mark( OBJ, 'myObject' );
     GAME.Set( OBJ, 'myObject', {} );
+
+    GAME.Define( COMP, 'MyComp', function(){} );
+    GAME.Get( COMP, 'MyComp' );
+
+    GAME.Mark( VAL, 'nullVal' );
+
+    // nk.Glob.AllowGetNullUndefined = true;
+    try {
+
+      GAME.Get( VAL, 'nullVal' );
+    
+    } catch ( error ) {
+
+      console.log( error );
+    
+    }
 
     console.log( GAME, GAME.Get( VAL, 'myValue' ) );
 
