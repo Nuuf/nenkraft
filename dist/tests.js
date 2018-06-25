@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.1
+* @version     1.1.2
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3045,8 +3045,8 @@ module.exports = function () {
       motObj.AttachTo( stage );
   
       var mm = new nk.MotionManager( motObj );
-      var xM = mm.Create( 'x', 'x' );
-      var yM = mm.Create( 'y', 'y' );
+      var xM = mm.Create( 'x', 'x', 0, 60, 'CircInOut' );
+      var yM = mm.Create( 'y', 'y', 0, 60, 'CircInOut' );
       mm.Create( 'sx', 'scale.x', 1, 10 );
       mm.Create( 'sy', 'scale.y', 1, 10 );
   
@@ -3055,10 +3055,11 @@ module.exports = function () {
         if ( xM.running ) xM.Stop();
         if ( yM.running ) yM.Stop();
         mm.ResetMultiple( 'sx sy' );
-        xM.Reconfigure( undefined, _event.data.position.x, 60 );
-        yM.Reconfigure( undefined, _event.data.position.y, 60 );
+
+        xM.NewVal( _event.data.position.x );
+        yM.NewVal( _event.data.position.y );
   
-        mm.StartMultiple( 'x y sx sy' );
+        mm.StartMultiple( 'sx sy' );
   
       }, stage );
   

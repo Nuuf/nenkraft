@@ -95,6 +95,13 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Motion.prototype.NewVal = function( _value ) {
+
+    this.value = _value;
+    this.Start();
+
+  };
+
   Motion.prototype.Reset = function () {
 
     if ( this.propertyObject === null || this.property === null ) return false;
