@@ -600,6 +600,6 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.Vector2D = Vector2D;
   Nenkraft.Vector2D = Vector2D;
 
-  Vector2D.Pool.Flood( function () {}, 100000 );
+  Vector2D.Pool.Flood( function () {}, 5000 );
 
 };
