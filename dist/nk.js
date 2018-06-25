@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.2
+* @version     1.1.3
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -2774,7 +2774,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.Vector2D = Vector2D;
   Nenkraft.Vector2D = Vector2D;
 
-  Vector2D.Pool.Flood( function () {}, 100000 );
+  Vector2D.Pool.Flood( function () {}, 5000 );
 
 };
 
@@ -6402,7 +6402,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.1.2';
+  Nenkraft.VERSION = '1.1.3';
 
   Nenkraft.PRINT_VERSION = function() {
 
