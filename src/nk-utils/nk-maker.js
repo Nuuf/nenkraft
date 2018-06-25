@@ -44,7 +44,7 @@ module.exports = function ( Nenkraft ) {
 
   Maker.prototype.Make = function( _class ) {
 
-    if ( this.locked === true ) throw new Error( 'Make called twice before end!' );
+    if ( this.locked === true ) throw new Error( '"Make" called twice before end!' );
 
     this.locked = true;
 

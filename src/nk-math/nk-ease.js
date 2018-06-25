@@ -9,6 +9,7 @@ module.exports = function ( Nenkraft ) {
 
   var Sin = Math.sin;
   var Cos = Math.cos;
+  var Sqrt = Math.sqrt;
   var PI = Math.PI;
 
   Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
@@ -55,6 +56,30 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.Ease.SineInOut = function ( _time, _startValue, _amplitude, _duration ) {
 
     return -_amplitude * 0.5 * ( Cos( PI * _time / _duration ) - 1 ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.CircIn = function( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration;
+    return -_amplitude * ( Sqrt( 1 - _time * _time ) - 1 ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.CircOut = function( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration;
+    _time--;
+    return _amplitude * Sqrt( 1 - _time * _time ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.CircInOut = function( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration * 0.5;
+    if ( _time < 1 ) return -_amplitude * 0.5 * ( Sqrt( 1 - _time * _time ) - 1 ) + _startValue;
+    _time -= 2;
+    return _amplitude * 0.5 * ( Sqrt( 1 - _time * _time ) + 1 ) + _startValue;
   
   };
 

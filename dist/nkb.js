@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.1
+* @version     1.1.2
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -242,7 +242,7 @@ module.exports = function ( Nenkraft ) {
 
   Maker.prototype.Make = function( _class ) {
 
-    if ( this.locked === true ) throw new Error( 'Make called twice before end!' );
+    if ( this.locked === true ) throw new Error( '"Make" called twice before end!' );
 
     this.locked = true;
 
@@ -1327,7 +1327,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Event = Object.create( null );
   Nenkraft.Time = Object.create( null );
   Nenkraft.CP = Object.create( null );
-  Nenkraft.VERSION = '1.1.1';
+  Nenkraft.VERSION = '1.1.2';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -3484,6 +3484,7 @@ module.exports = function ( Nenkraft ) {
 
   var Sin = Math.sin;
   var Cos = Math.cos;
+  var Sqrt = Math.sqrt;
   var PI = Math.PI;
 
   Nenkraft.Math.Ease.Linear = function ( _time, _startValue, _amplitude, _duration ) {
@@ -3530,6 +3531,30 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.Math.Ease.SineInOut = function ( _time, _startValue, _amplitude, _duration ) {
 
     return -_amplitude * 0.5 * ( Cos( PI * _time / _duration ) - 1 ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.CircIn = function( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration;
+    return -_amplitude * ( Sqrt( 1 - _time * _time ) - 1 ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.CircOut = function( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration;
+    _time--;
+    return _amplitude * Sqrt( 1 - _time * _time ) + _startValue;
+  
+  };
+
+  Nenkraft.Math.Ease.CircInOut = function( _time, _startValue, _amplitude, _duration ) {
+
+    _time /= _duration * 0.5;
+    if ( _time < 1 ) return -_amplitude * 0.5 * ( Sqrt( 1 - _time * _time ) - 1 ) + _startValue;
+    _time -= 2;
+    return _amplitude * 0.5 * ( Sqrt( 1 - _time * _time ) + 1 ) + _startValue;
   
   };
 
@@ -3638,6 +3663,13 @@ module.exports = function ( Nenkraft ) {
     this.easing = Nenkraft.Math.Ease[ _easing === undefined ? Motion.DEFAULT_EASING : _easing ];
     this.onReconfigure.Dispatch( this, null );
   
+  };
+
+  Motion.prototype.NewVal = function( _value ) {
+
+    this.value = _value;
+    this.Start();
+
   };
 
   Motion.prototype.Reset = function () {
