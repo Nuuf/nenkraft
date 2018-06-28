@@ -73,6 +73,9 @@ module.exports = function () {
         },
         lifespan: 500,
         fade: true,
+        scale: {
+          xy: 0.4
+        },
         oscillation: {
           offset: {
             min: 0,

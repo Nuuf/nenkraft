@@ -74,6 +74,7 @@ module.exports = function ( Nenkraft ) {
     this.growth = Nenkraft.Vector2D( 1, 1 );
     this.acceleration = Nenkraft.Vector2D( 1, 1 );
     this.gravity = Nenkraft.Vector2D();
+    this.initialScale = Nenkraft.Vector2D( 1, 1 );
     this.Renew( _options );
   
   }
@@ -106,6 +107,7 @@ module.exports = function ( Nenkraft ) {
   Particle.prototype.spin = null;
   Particle.prototype.growth = null;
   Particle.prototype.acceleration = null;
+  Particle.prototype.initialScale = null;
   Particle.prototype.fade = false;
   Particle.prototype.deflate = false;
   Particle.prototype.gravity = null;
@@ -143,7 +145,10 @@ module.exports = function ( Nenkraft ) {
 
       if ( this.deflate === true ) {
 
-        entity.scale.Set( lifespanPerc );
+        entity.scale.Set( 
+          lifespanPerc * this.initialScale.x,
+          lifespanPerc * this.initialScale.y
+        );
       
       } else {
 
@@ -340,6 +345,10 @@ module.exports = function ( Nenkraft ) {
 
     this.RenewVector( _options.growth, this.growth );
 
+    this.RenewVector( _options.scale, entity.scale );
+
+    this.RenewVector( _options.scale, this.initialScale );
+
     if ( _options.rotation != null ) {
 
       entity.rotation = MinMaxOrValue( _options.rotation );
@@ -531,18 +540,22 @@ module.exports = function ( Nenkraft ) {
 
         _vector.SetV( RandomInArray( _object.points ) );
         
+      } else if ( _object.xy != null ) {
+
+        _vector.x = _vector.y = MinMaxOrValue( _object.xy );
+
       } else {
 
         if ( _object.x != null ) {
 
           _vector.x = MinMaxOrValue( _object.x );
-        
+          
         }
-  
+    
         if ( _object.y != null ) {
-  
+    
           _vector.y = MinMaxOrValue( _object.y );
-        
+          
         }
       
       }

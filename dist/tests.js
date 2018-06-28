@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.3
+* @version     1.1.4
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3517,6 +3517,12 @@ module.exports = function () {
           min: -RADIAN * 360,
           max: RADIAN * 360
         },
+        scale: {
+          xy: {
+            min: 1,
+            max: 3
+          }
+        },
         oscillation: {
           gravity: {
             y: {
@@ -3894,6 +3900,9 @@ module.exports = function () {
         },
         lifespan: 500,
         fade: true,
+        scale: {
+          xy: 0.4
+        },
         oscillation: {
           offset: {
             min: 0,

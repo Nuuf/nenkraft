@@ -113,6 +113,12 @@ module.exports = function () {
           min: -RADIAN * 360,
           max: RADIAN * 360
         },
+        scale: {
+          xy: {
+            min: 1,
+            max: 3
+          }
+        },
         oscillation: {
           gravity: {
             y: {
