@@ -116,7 +116,7 @@ module.exports = function () {
         scale: {
           xy: {
             min: 1,
-            max: 3
+            max: 2
           }
         },
         oscillation: {
@@ -158,18 +158,61 @@ module.exports = function () {
           xy: 1
         }
       };
+
+      var nps = [];
+
+      for ( var i = 0; i <= 360; i += 12 ) {
+
+        nps.push( {
+          x: Math.cos( nk.Math.DTR( i ) ) * 1,
+          y: Math.sin( nk.Math.DTR( i ) ) * 1
+        } );
+      
+      }
+
+      var ydata = {
+        texture: pcon,
+        anchor: 0.5,
+        amount: nps.length,
+        rotation: {
+          min: 0,
+          max: RADIAN * 360
+        },
+        position: {
+          xy: 0
+        },
+        lifespan: 150,
+        velocity: {
+          points: nps,
+          moduloWrapper: nps.length - 1
+        },
+        fade: true,
+        scale: {
+          xy: 1
+        }
+      };
   
       var ps = nk.ParticleSystem();
   
       scene.AddChild( ps );
+
+      var pulseTimer = nk.Timer( 20 );
+      pulseTimer.onFinish.Add( function(){
+
+        ps.Emit( xdata );
+        ps.Emit( ydata );
+        pulseTimer.Start();
+      
+      } );
+      pulseTimer.Start();
   
       stage.onProcess.Add( function() {
 
-        ps.Emit( xdata );
+        ps.Process();
 
         ps.Emit( pdata );
 
-        ps.Process();
+        pulseTimer.Process();
       
       } );
   
