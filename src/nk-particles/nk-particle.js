@@ -33,6 +33,7 @@ module.exports = function ( Nenkraft ) {
   Oscillation.prototype.growthY = null;
   Oscillation.prototype.gravityX = null;
   Oscillation.prototype.gravityY = null;
+  Oscillation.prototype.active = true;
 
   // Methods
   Oscillation.prototype.CreateOscillatingObject = function( _key, _from, _to, _amplitude ) {
@@ -42,7 +43,8 @@ module.exports = function ( Nenkraft ) {
     this[_key] = {
       from: _from,
       to: _to,
-      amplitude: _amplitude
+      amplitude: _amplitude,
+      active: true
     };
   
   };
@@ -60,6 +62,17 @@ module.exports = function ( Nenkraft ) {
     obj.from = _from;
     obj.to = _to;
     obj.amplitude = _amplitude;
+    obj.active = true;
+  
+  };
+
+  Oscillation.prototype.Nullify = function( _key ) {
+
+    if ( this[_key] != null ) {
+
+      this[_key].active = false;
+    
+    }
   
   };
 
@@ -158,11 +171,11 @@ module.exports = function ( Nenkraft ) {
 
       entity.rotation += this.spin;
 
-      if ( osc !== null ) {
+      if ( osc !== null && osc.active === true ) {
 
         var oscTime = this.lifespan + this.oscillationOffset;
 
-        if ( osc.torque != null ) {
+        if ( osc.torque != null && osc.torque.active === true ) {
 
           this.torque = Oscillate(
             oscTime, 
@@ -173,7 +186,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.spin != null ) {
+        if ( osc.spin != null && osc.spin.active === true ) {
 
           this.spin = Oscillate(
             oscTime, 
@@ -184,7 +197,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.velocityX != null ) {
+        if ( osc.velocityX != null && osc.velocityX.active === true ) {
 
           this.velocity.x = Oscillate(
             oscTime, 
@@ -195,7 +208,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.velocityY != null ) {
+        if ( osc.velocityY != null && osc.velocityY.active === true ) {
 
           this.velocity.y = Oscillate(
             oscTime, 
@@ -206,7 +219,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.gravityX != null ) {
+        if ( osc.gravityX != null && osc.gravityX.active === true ) {
 
           this.gravity.x = Oscillate(
             oscTime, 
@@ -217,7 +230,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.gravityY != null ) {
+        if ( osc.gravityY != null && osc.gravityY.active === true ) {
 
           this.gravity.y = Oscillate(
             oscTime, 
@@ -228,7 +241,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.accelerationX != null ) {
+        if ( osc.accelerationX != null && osc.accelerationX.active === true ) {
 
           this.acceleration.x = Oscillate(
             oscTime, 
@@ -239,7 +252,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.accelerationY != null ) {
+        if ( osc.accelerationY != null && osc.accelerationY.active === true ) {
 
           this.acceleration.y = Oscillate(
             oscTime, 
@@ -250,7 +263,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.growthX != null ) {
+        if ( osc.growthX != null && osc.growthX.active === true ) {
 
           this.growth.x = Oscillate(
             oscTime, 
@@ -261,7 +274,7 @@ module.exports = function ( Nenkraft ) {
         
         }
 
-        if ( osc.growthY != null ) {
+        if ( osc.growthY != null && osc.growthY.active === true ) {
 
           this.growth.y = Oscillate(
             oscTime, 
@@ -290,23 +303,11 @@ module.exports = function ( Nenkraft ) {
     this.dead = false;
     var entity = this.entity;
 
-    if ( _options.path != null ) {
-
-      if ( entity === null ) {
-
-        entity = this.entity = Nenkraft.Graphic2D( 0, 0, _options.path );
-      
-      } else {
-
-        this.ResetEntity();
-      
-      }
-
-    } else if ( _options.texture != null ) {
+    if ( _options.texture != null ) {
 
       if ( entity === null ) {
       
-        entity = this.entity = Nenkraft.Sprite( 0, 0, _options.texture );
+        entity = this.entity = Nenkraft.Sprite( 0, 0, _options.texture, _options.unitId );
         
         if ( _options.anchor != null ) {
 
@@ -317,7 +318,7 @@ module.exports = function ( Nenkraft ) {
 
       } else {
 
-        this.ResetEntity();
+        this.ResetEntity( _options.unitId );
     
       }
 
@@ -331,27 +332,31 @@ module.exports = function ( Nenkraft ) {
 
     } else {
 
-      throw new Error( 'Path or Texture needed!' );
+      throw new Error( 'No texture or controller provided!' );
     
     }
 
-    this.RenewVector( _options.position, entity.position );
+    this.RenewVector( _options.position, entity.position, 0, 0 );
 
-    this.RenewVector( _options.velocity, this.velocity );
+    this.RenewVector( _options.velocity, this.velocity, 0, 0 );
 
-    this.RenewVector( _options.gravity, this.gravity );
+    this.RenewVector( _options.gravity, this.gravity, 0, 0 );
 
-    this.RenewVector( _options.acceleration, this.acceleration );
+    this.RenewVector( _options.acceleration, this.acceleration, 1, 1 );
 
-    this.RenewVector( _options.growth, this.growth );
+    this.RenewVector( _options.growth, this.growth, 1, 1 );
 
-    this.RenewVector( _options.scale, entity.scale );
+    this.RenewVector( _options.scale, entity.scale, 1, 1 );
 
-    this.RenewVector( _options.scale, this.initialScale );
+    this.RenewVector( _options.scale, this.initialScale, 1, 1 );
 
     if ( _options.rotation != null ) {
 
       entity.rotation = MinMaxOrValue( _options.rotation );
+    
+    } else {
+
+      entity.rotation = 0;
     
     }
 
@@ -359,11 +364,19 @@ module.exports = function ( Nenkraft ) {
 
       this.SetLifespan( _options.lifespan );
     
+    } else {
+
+      this.SetLifespan( 0 );
+    
     }
 
     if ( _options.torque != null ) {
 
       this.torque = MinMaxOrValue( _options.torque );
+    
+    } else {
+
+      this.torque = 0;
     
     }
 
@@ -371,17 +384,29 @@ module.exports = function ( Nenkraft ) {
 
       this.spin = MinMaxOrValue( _options.spin );
     
+    } else {
+
+      this.spin = 0;
+    
     }
 
     if ( _options.fade != null ) {
 
       this.fade = _options.fade;
     
+    } else {
+
+      this.fade = false;
+    
     }
 
     if ( _options.deflate != null ) {
 
       this.deflate = _options.deflate;
+    
+    } else {
+
+      this.deflate = false;
     
     }
 
@@ -396,10 +421,16 @@ module.exports = function ( Nenkraft ) {
       
       }
 
+      osc.active = true;
+
       if ( optOsc.offset != null ) {
         
         this.oscillationOffset = MinMaxOrValue( optOsc.offset );
 
+      } else {
+
+        this.oscillationOffset = 0;
+      
       }
 
       if ( optOsc.torque != null ) {
@@ -411,6 +442,10 @@ module.exports = function ( Nenkraft ) {
           optOsc.torque.amplitude
         );
         
+      } else {
+
+        osc.Nullify( 'torque' );
+      
       }
 
       if ( optOsc.spin != null ) {
@@ -422,6 +457,10 @@ module.exports = function ( Nenkraft ) {
           optOsc.spin.amplitude
         );
         
+      } else {
+
+        osc.Nullify( 'spin' );
+      
       }
 
       if ( optOsc.velocity != null ) {
@@ -436,6 +475,11 @@ module.exports = function ( Nenkraft ) {
           );
 
         }
+        else {
+
+          osc.Nullify( 'velocityX' );
+        
+        }
 
         if ( optOsc.velocity.y != null ) {
 
@@ -446,6 +490,11 @@ module.exports = function ( Nenkraft ) {
             optOsc.velocity.y.amplitude
           );
 
+        }
+        else {
+
+          osc.Nullify( 'velocityY' );
+        
         }
       
       }
@@ -461,6 +510,10 @@ module.exports = function ( Nenkraft ) {
             optOsc.gravity.x.amplitude
           );
 
+        } else {
+
+          osc.Nullify( 'gravityX' );
+        
         }
 
         if ( optOsc.gravity.y != null ) {
@@ -472,6 +525,10 @@ module.exports = function ( Nenkraft ) {
             optOsc.gravity.y.amplitude
           );
 
+        } else {
+
+          osc.Nullify( 'gravityY' );
+        
         }
       
       }
@@ -487,6 +544,10 @@ module.exports = function ( Nenkraft ) {
             optOsc.acceleration.x.amplitude
           );
 
+        } else {
+
+          osc.Nullify( 'accelerationX' );
+        
         }
 
         if ( optOsc.acceleration.y != null ) {
@@ -498,6 +559,10 @@ module.exports = function ( Nenkraft ) {
             optOsc.acceleration.y.amplitude
           );
 
+        } else {
+
+          osc.Nullify( 'accelerationY' );
+        
         }
       
       }
@@ -513,6 +578,10 @@ module.exports = function ( Nenkraft ) {
             optOsc.growth.x.amplitude
           );
 
+        } else {
+
+          osc.Nullify( 'growthX' );
+        
         }
 
         if ( optOsc.growth.y != null ) {
@@ -524,15 +593,23 @@ module.exports = function ( Nenkraft ) {
             optOsc.growth.y.amplitude
           );
 
+        } else {
+
+          osc.Nullify( 'growthY' );
+        
         }
       
       }
 
+    } else if ( this.oscillation !== null ) {
+
+      this.oscillation.active = false;
+    
     }
 
   };
 
-  Particle.prototype.RenewVector = function( _object, _vector ) {
+  Particle.prototype.RenewVector = function( _object, _vector, _rx, _ry ) {
 
     if ( _object != null ) {
 
@@ -542,7 +619,7 @@ module.exports = function ( Nenkraft ) {
         
       } else if ( _object.xy != null ) {
 
-        _vector.x = _vector.y = MinMaxOrValue( _object.xy );
+        _vector.Set( MinMaxOrValue( _object.xy ) );
 
       } else {
 
@@ -550,15 +627,27 @@ module.exports = function ( Nenkraft ) {
 
           _vector.x = MinMaxOrValue( _object.x );
           
+        } else {
+
+          _vector.x = _rx;
+        
         }
     
         if ( _object.y != null ) {
     
           _vector.y = MinMaxOrValue( _object.y );
           
+        } else {
+
+          _vector.y = _ry;
+        
         }
       
       }
+    
+    } else {
+
+      _vector.Set( _rx, _ry );
     
     }
   
@@ -571,9 +660,16 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Particle.prototype.ResetEntity = function() {
+  Particle.prototype.ResetEntity = function( _unitId ) {
 
     var entity = this.entity;
+
+    if ( _unitId != null ) {
+
+      entity.SetTexture( entity.programController['originalTexture' + _unitId] );
+    
+    }
+
     entity.scale.Set( 1 );
     entity.alpha = 1;
     entity.display = true;
