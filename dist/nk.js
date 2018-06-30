@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.5
+* @version     1.1.6
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -6402,7 +6402,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.1.5';
+  Nenkraft.VERSION = '1.1.6';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -10815,7 +10815,7 @@ module.exports = function ( Nenkraft ) {
 
   /** Oscillation */
 
-  function Particle ( _options ) {
+  function Particle ( _options, _index ) {
 
     if ( !( this instanceof Particle ) ) return new Particle( _options );
     this.velocity = Nenkraft.Vector2D();
@@ -10825,7 +10825,7 @@ module.exports = function ( Nenkraft ) {
     this.acceleration = Nenkraft.Vector2D( 1, 1 );
     this.gravity = Nenkraft.Vector2D();
     this.initialScale = Nenkraft.Vector2D( 1, 1 );
-    this.Renew( _options );
+    this.Renew( _options, _index );
   
   }
 
@@ -10835,7 +10835,7 @@ module.exports = function ( Nenkraft ) {
   Particle.Pool = Nenkraft.Utils.Pool( Particle );
   Particle.Oscillation = Oscillation;
 
-  Particle.Pool.Retrieve = function( _options ) {
+  Particle.Pool.Retrieve = function( _options, _index ) {
 
     if ( this.objects.length === 0 ) {
 
@@ -10844,7 +10844,7 @@ module.exports = function ( Nenkraft ) {
     }
 
     var p = this.objects.pop();
-    p.Renew( _options );
+    p.Renew( _options, _index );
     return p;
   
   };
@@ -11033,7 +11033,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Particle.prototype.Renew = function( _options ) {
+  Particle.prototype.Renew = function( _options, _index ) {
 
     if ( _options == null ) return;
 
@@ -11073,19 +11073,19 @@ module.exports = function ( Nenkraft ) {
     
     }
 
-    this.RenewVector( _options.position, entity.position, 0, 0 );
+    this.RenewVector( _options.position, entity.position, _index, 0, 0 );
 
-    this.RenewVector( _options.velocity, this.velocity, 0, 0 );
+    this.RenewVector( _options.velocity, this.velocity, _index, 0, 0 );
 
-    this.RenewVector( _options.gravity, this.gravity, 0, 0 );
+    this.RenewVector( _options.gravity, this.gravity, _index, 0, 0 );
 
-    this.RenewVector( _options.acceleration, this.acceleration, 1, 1 );
+    this.RenewVector( _options.acceleration, this.acceleration, _index, 1, 1 );
 
-    this.RenewVector( _options.growth, this.growth, 1, 1 );
+    this.RenewVector( _options.growth, this.growth, _index, 1, 1 );
 
-    this.RenewVector( _options.scale, entity.scale, 1, 1 );
+    this.RenewVector( _options.scale, entity.scale, _index, 1, 1 );
 
-    this.RenewVector( _options.scale, this.initialScale, 1, 1 );
+    this.RenewVector( _options.scale, this.initialScale, _index, 1, 1 );
 
     if ( _options.rotation != null ) {
 
@@ -11346,13 +11346,27 @@ module.exports = function ( Nenkraft ) {
 
   };
 
-  Particle.prototype.RenewVector = function( _object, _vector, _rx, _ry ) {
+  Particle.prototype.RenewVector = function( _object, _vector, _index, _rx, _ry ) {
 
     if ( _object != null ) {
 
       if ( _object.points != null ) {
 
-        _vector.SetV( RandomInArray( _object.points ) );
+        if ( _object.moduloWrapper != null ) {
+
+          if ( _object.indexGap != null ) {
+
+            _index += _object.indexGap;
+          
+          }
+
+          _vector.SetV( _object.points[_index % _object.moduloWrapper] );
+
+        } else {
+
+          _vector.SetV( RandomInArray( _object.points ) );
+        
+        }
         
       } else if ( _object.xy != null ) {
 
@@ -11548,11 +11562,11 @@ module.exports = function ( Nenkraft ) {
 
       if ( Particle.USE_POOL === true ) {
 
-        this.AddParticle( Particle.Pool.Retrieve( _options ) );
+        this.AddParticle( Particle.Pool.Retrieve( _options, i ) );
       
       } else {
 
-        this.AddParticle( Particle( _options ) );
+        this.AddParticle( Particle( _options, i ) );
 
       }
 

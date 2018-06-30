@@ -97,11 +97,11 @@ module.exports = function ( Nenkraft ) {
 
       if ( Particle.USE_POOL === true ) {
 
-        this.AddParticle( Particle.Pool.Retrieve( _options ) );
+        this.AddParticle( Particle.Pool.Retrieve( _options, i ) );
       
       } else {
 
-        this.AddParticle( Particle( _options ) );
+        this.AddParticle( Particle( _options, i ) );
 
       }
 
