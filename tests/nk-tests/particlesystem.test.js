@@ -134,16 +134,42 @@ module.exports = function () {
           }
         }
       };
+
+      var xdata = {
+        texture: pcon,
+        anchor: 0.5,
+        amount: 23,
+        rotation: {
+          min: 0,
+          max: RADIAN * 360
+        },
+        position: {
+          points: points
+        },
+        lifespan: 150,
+        velocity: {
+          x: {
+            min: 0,
+            max: 25
+          }
+        },
+        fade: true,
+        scale: {
+          xy: 1
+        }
+      };
   
       var ps = nk.ParticleSystem();
   
       scene.AddChild( ps );
   
       stage.onProcess.Add( function() {
-  
-        ps.Process();
-  
+
+        ps.Emit( xdata );
+
         ps.Emit( pdata );
+
+        ps.Process();
       
       } );
   
