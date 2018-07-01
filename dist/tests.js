@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.6
+* @version     1.1.7
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -4020,6 +4020,22 @@ module.exports = function () {
       console.log( copy === x, x, copy );
 
       copy.t.p = 1;
+
+      ( function() {
+
+        var points = nk.Geom.Circle.PerimeterPoints( nk.Geom.Circle( 0, 0, 360 ), 180, 2 );
+  
+        points.forEach( function( point ) {
+  
+          var s = nk.Sprite( point.x, point.y, pcon );
+          anim.frames[0].Apply( s );
+          s.scale.Set( 0.1 );
+          s.rotation = nk.Utils.RandomFloat( 0, nk.Math.PII );
+          scene.AddChild( s );
+        
+        } );
+      
+      }() );
     
     } );
 

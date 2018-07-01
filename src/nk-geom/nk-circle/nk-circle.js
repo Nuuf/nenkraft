@@ -8,6 +8,7 @@ module.exports = function ( Nenkraft ) {
 
   var RF = Nenkraft.Utils.RandomFloat;
   var RI = Nenkraft.Utils.RandomInteger;
+  var DTR = Nenkraft.Math.DTR;
 
   function Circle ( _x, _y, _radius ) {
 
@@ -49,6 +50,26 @@ module.exports = function ( Nenkraft ) {
 
     return points;
 
+  };
+
+  Circle.PerimeterPoints = function( _circle, _amount, _margin ) {
+
+    _amount *= _margin;
+    var points = [];
+
+    for ( var i = 0; i < _amount; i += _margin ) {
+
+      points.push(
+        Nenkraft.Vector2D(
+          _circle.x + Math.cos( DTR( i ) ) * _circle.radius,
+          _circle.y + Math.sin( DTR( i ) ) * _circle.radius
+        )
+      );
+    
+    }
+
+    return points;
+  
   };
 
   // Members

@@ -80,7 +80,7 @@ module.exports = function ( Nenkraft ) {
 
   function Particle ( _options, _index ) {
 
-    if ( !( this instanceof Particle ) ) return new Particle( _options );
+    if ( !( this instanceof Particle ) ) return new Particle( _options, _index );
     this.velocity = Nenkraft.Vector2D();
     this.torque = 0;
     this.spin = 0;
