@@ -8,10 +8,10 @@ module.exports = function ( Nenkraft ) {
   var Super = Nenkraft.Entity.Sprite;
   var Char = Nenkraft.Entity.Char;
 
-  function BitmapText ( _x, _y, _texture, _data, _text ) {
+  function BitmapText ( _x, _y, _texture, _data, _text, _unitId ) {
 
-    if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
-    Super.call( this, _x, _y, _texture );
+    if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text, _unitId );
+    Super.call( this, _x, _y, _texture, _unitId );
     this.fontData = _data;
     this.lineHeight = _data.font.common.attributes.lineHeight;
 

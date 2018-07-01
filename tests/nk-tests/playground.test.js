@@ -124,6 +124,22 @@ module.exports = function () {
       console.log( copy === x, x, copy );
 
       copy.t.p = 1;
+
+      ( function() {
+
+        var points = nk.Geom.Circle.PerimeterPoints( nk.Geom.Circle( 0, 0, 360 ), 180, 2 );
+  
+        points.forEach( function( point ) {
+  
+          var s = nk.Sprite( point.x, point.y, pcon );
+          anim.frames[0].Apply( s );
+          s.scale.Set( 0.1 );
+          s.rotation = nk.Utils.RandomFloat( 0, nk.Math.PII );
+          scene.AddChild( s );
+        
+        } );
+      
+      }() );
     
     } );
 

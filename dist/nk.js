@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.6
+* @version     1.1.7
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -3993,6 +3993,7 @@ module.exports = function ( Nenkraft ) {
 
   var RF = Nenkraft.Utils.RandomFloat;
   var RI = Nenkraft.Utils.RandomInteger;
+  var DTR = Nenkraft.Math.DTR;
 
   function Circle ( _x, _y, _radius ) {
 
@@ -4034,6 +4035,26 @@ module.exports = function ( Nenkraft ) {
 
     return points;
 
+  };
+
+  Circle.PerimeterPoints = function( _circle, _amount, _margin ) {
+
+    _amount *= _margin;
+    var points = [];
+
+    for ( var i = 0; i < _amount; i += _margin ) {
+
+      points.push(
+        Nenkraft.Vector2D(
+          _circle.x + Math.cos( DTR( i ) ) * _circle.radius,
+          _circle.y + Math.sin( DTR( i ) ) * _circle.radius
+        )
+      );
+    
+    }
+
+    return points;
+  
   };
 
   // Members
@@ -6402,7 +6423,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.1.6';
+  Nenkraft.VERSION = '1.1.7';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -10407,10 +10428,10 @@ module.exports = function ( Nenkraft ) {
   var Super = Nenkraft.Entity.Sprite;
   var Char = Nenkraft.Entity.Char;
 
-  function BitmapText ( _x, _y, _texture, _data, _text ) {
+  function BitmapText ( _x, _y, _texture, _data, _text, _unitId ) {
 
-    if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text );
-    Super.call( this, _x, _y, _texture );
+    if ( !( this instanceof BitmapText ) ) return new BitmapText( _x, _y, _texture, _data, _text, _unitId );
+    Super.call( this, _x, _y, _texture, _unitId );
     this.fontData = _data;
     this.lineHeight = _data.font.common.attributes.lineHeight;
 
@@ -10817,7 +10838,7 @@ module.exports = function ( Nenkraft ) {
 
   function Particle ( _options, _index ) {
 
-    if ( !( this instanceof Particle ) ) return new Particle( _options );
+    if ( !( this instanceof Particle ) ) return new Particle( _options, _index );
     this.velocity = Nenkraft.Vector2D();
     this.torque = 0;
     this.spin = 0;
