@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.7
+* @version     1.1.8
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -6423,7 +6423,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.1.7';
+  Nenkraft.VERSION = '1.1.8';
 
   Nenkraft.PRINT_VERSION = function() {
 
@@ -10335,7 +10335,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Char.prototype.GLDrawAuto = function( _pc, _tintChannel ) {
+  Char.prototype.GLDrawAuto = function( _pc, _tintChannel, _unitId ) {
 
     this.UpdateMatrices();
     _pc.Execute(
@@ -10343,19 +10343,19 @@ module.exports = function ( Nenkraft ) {
       this.translation.AsArray( true ),
       this.transformation.AsArray( true ),
       _tintChannel,
-      0
+      _unitId
     );
   
   };
 
-  Char.prototype.GLDraw = function( _pc, _tintChannel ) {
+  Char.prototype.GLDraw = function( _pc, _tintChannel, _unitId ) {
 
     _pc.Execute(
       this.transform.worldTransform.AsArray( true ),
       this.translation.AsArray( true ),
       this.transformation.AsArray( true ),
       _tintChannel,
-      0
+      _unitId
     );
   
   };
@@ -10549,7 +10549,7 @@ module.exports = function ( Nenkraft ) {
 
       for ( i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-        chars[i].GLDrawAuto( this.programController, this.tint.channel );
+        chars[i].GLDrawAuto( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
@@ -10557,7 +10557,7 @@ module.exports = function ( Nenkraft ) {
 
       for ( i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-        chars[i].GLDraw( this.programController, this.tint.channel );
+        chars[i].GLDraw( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
