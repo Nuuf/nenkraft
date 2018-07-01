@@ -79,7 +79,7 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Char.prototype.GLDrawAuto = function( _pc, _tintChannel ) {
+  Char.prototype.GLDrawAuto = function( _pc, _tintChannel, _unitId ) {
 
     this.UpdateMatrices();
     _pc.Execute(
@@ -87,19 +87,19 @@ module.exports = function ( Nenkraft ) {
       this.translation.AsArray( true ),
       this.transformation.AsArray( true ),
       _tintChannel,
-      0
+      _unitId
     );
   
   };
 
-  Char.prototype.GLDraw = function( _pc, _tintChannel ) {
+  Char.prototype.GLDraw = function( _pc, _tintChannel, _unitId ) {
 
     _pc.Execute(
       this.transform.worldTransform.AsArray( true ),
       this.translation.AsArray( true ),
       this.transformation.AsArray( true ),
       _tintChannel,
-      0
+      _unitId
     );
   
   };

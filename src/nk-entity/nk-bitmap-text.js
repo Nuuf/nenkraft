@@ -129,7 +129,7 @@ module.exports = function ( Nenkraft ) {
 
       for ( i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-        chars[i].GLDrawAuto( this.programController, this.tint.channel );
+        chars[i].GLDrawAuto( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
@@ -137,7 +137,7 @@ module.exports = function ( Nenkraft ) {
 
       for ( i = 0, chars = this.chars, l = chars.length; i < l; ++i ) {
 
-        chars[i].GLDraw( this.programController, this.tint.channel );
+        chars[i].GLDraw( this.programController, this.tint.channel, this.texture.uniformId );
       
       }
     
