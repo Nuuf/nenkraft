@@ -5730,11 +5730,11 @@ module.exports = function ( Nenkraft ) {
 
     if ( _g ) {
 
-      _g.FUNCTION = Glob.FUNCTION;
-      _g.VALUE = Glob.VALUE;
-      _g.CONSTANT = Glob.CONSTANT;
-      _g.COMPONENT = Glob.COMPONENT;
-      _g.OBJECT = Glob.OBJECT;
+      _g.FUNC = Glob.FUNCTION;
+      _g.VAL = Glob.VALUE;
+      _g.CONST = Glob.CONSTANT;
+      _g.COMP = Glob.COMPONENT;
+      _g.OBJ = Glob.OBJECT;
       _g.LIST = Glob.LIST;
     
     } else {
