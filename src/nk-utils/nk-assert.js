@@ -337,7 +337,7 @@ module.exports = function ( Nenkraft ) {
 
       _g = window;
     
-    } else if ( global && _g ) {
+    } else if ( global && !_g ) {
 
       _g = global;
     

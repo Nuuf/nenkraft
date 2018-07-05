@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.8
+* @version     1.1.9
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -729,7 +729,7 @@ module.exports = function ( Nenkraft ) {
 
       _g = window;
     
-    } else if ( global && _g ) {
+    } else if ( global && !_g ) {
 
       _g = global;
     
@@ -920,6 +920,35 @@ module.exports = function ( Nenkraft ) {
   Glob.LIST = 'lists';
   Glob.AllowGetNullUndefined = false;
 
+  Glob.Assign = function( _g ) {
+
+    if ( window && !_g ) {
+
+      _g = window;
+    
+    } else if ( global && !_g ) {
+
+      _g = global;
+    
+    }
+
+    if ( _g ) {
+
+      _g.FUNCTION = Glob.FUNCTION;
+      _g.VALUE = Glob.VALUE;
+      _g.CONSTANT = Glob.CONSTANT;
+      _g.COMPONENT = Glob.COMPONENT;
+      _g.OBJECT = Glob.OBJECT;
+      _g.LIST = Glob.LIST;
+    
+    } else {
+
+      throw new Error( 'No global namespace' );
+    
+    }
+  
+  };
+
   // Members
   Glob.prototype.functions = null;
   Glob.prototype.values = null;
@@ -992,20 +1021,29 @@ module.exports = function ( Nenkraft ) {
 
         this.values[_id] = _value;
         break;
+
       case Glob.CONSTANT:
         if ( _value instanceof Object ) throw new Error( 'Objects are not allowed!' );
   
         if ( this.constants[_id] !== null ) throw new Error( 'No mark!' );
 
-        this.constants[_id] = _value;
-
+        Object.defineProperty( this.constants, _id, {
+          writable: false,
+          configurable: false,
+          value: _value
+        } );
         break;
+
       case Glob.COMPONENT:
         if ( typeof _value !== 'function' ) throw new Error( 'Needs to be a function!' );
   
         if ( this.components[_id] !== null ) throw new Error( 'No mark!' );
 
-        this.components[_id] = _value;
+        Object.defineProperty( this.components, _id, {
+          writable: false,
+          configurable: false,
+          value: _value
+        } );
         break;
       
       case Glob.OBJECT:
@@ -1016,6 +1054,7 @@ module.exports = function ( Nenkraft ) {
 
         this.objects[_id] = _value;
         break;
+
       case Glob.LIST:
         if ( Nenkraft.Utils.IsArray( _value ) === false ) throw new Error( 'Needs to be an array!' );
 
@@ -6423,7 +6462,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.1.8';
+  Nenkraft.VERSION = '1.1.9';
 
   Nenkraft.PRINT_VERSION = function() {
 
