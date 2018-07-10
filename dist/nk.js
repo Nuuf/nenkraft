@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.1.9
+* @version     1.2.0
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1819,8 +1819,30 @@ module.exports = function ( Nenkraft ) {
     this.orders.length = 0;
     this.classUsed = _class;
 
-    for ( var i = 0; i < this.amount; ++i ) {
+    var iteratorIndex;
+    var i;
 
+    for ( i = 0; i < arguments.length; ++i ) {
+
+      if ( typeof arguments[i] === 'string' && arguments[i][0] === '$' ) {
+
+        switch ( arguments[i].slice( 1 ) ) {
+
+          case 'i' :
+            iteratorIndex = i;
+            break;
+          default: 
+            break;
+        
+        }
+
+      } 
+    
+    }
+
+    for ( i = 0; i < this.amount; ++i ) {
+
+      if ( iteratorIndex ) arguments[iteratorIndex] = i;
       this.orders.push(
         new ( Function.prototype.bind.apply( _class, arguments ) )()
       );
@@ -1834,19 +1856,33 @@ module.exports = function ( Nenkraft ) {
   Maker.prototype.Call = function( _function, _args ) {
 
     var orders = this.orders;
+    var context, f, arg, args;
 
     for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
 
-      var context = NESTED( order, _function, true );
-      var f = NESTED( order, _function );
+      context = NESTED( order, _function, true );
+      f = NESTED( order, _function );
 
       if ( _args != null && _args.length > 0 ) {
 
-        for ( var j = 0; j < _args.length; ++j ) {
+        args = _args.slice();
 
-          if ( typeof _args[j] === 'string' && _args[j][0] === '$' ) {
+        for ( var j = 0; j < args.length; ++j ) {
+
+          if ( typeof args[j] === 'string' && args[j][0] === '$' ) {
   
-            _args[j] = order[_args[j].slice( 1 )];
+            arg = args[j].slice( 1 );
+
+            switch ( arg ) {
+
+              case 'i':
+                args[j] = i;
+                break;
+              default: 
+                args[j] = order[arg];
+                break;
+            
+            }
         
           }
       
@@ -1854,7 +1890,7 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-      f.apply( context, _args );
+      f.apply( context, args );
     
     }
 
@@ -6462,7 +6498,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.1.9';
+  Nenkraft.VERSION = '1.2.0';
 
   Nenkraft.PRINT_VERSION = function() {
 
