@@ -17,6 +17,23 @@ module.exports = function () {
 
     function go() {
 
+      function TestClass( num ) {
+
+        console.log( arguments );
+        this.num = num;
+      
+      }
+
+      TestClass.prototype = Object.create( null );
+      TestClass.prototype.constructor = TestClass;
+
+      TestClass.prototype.Add = function( num ) {
+
+        console.log( num );
+        this.num += num;
+      
+      };
+
       var c = document.getElementsByTagName( 'canvas' )[ 0 ];
       c.setAttribute( 'width', window.innerWidth );
       c.setAttribute( 'height', window.innerHeight );
@@ -72,6 +89,13 @@ module.exports = function () {
       } );
 
       stage.AddChildren( stuff );
+
+      console.log( factory
+        .Many( 10 )
+        .Make( TestClass, '$i' )
+        .Call( 'Add', [ '$i' ] )
+        .Mass().slice()
+      );
 
       var dragger = null;
 
