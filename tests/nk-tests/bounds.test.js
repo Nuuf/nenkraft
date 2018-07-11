@@ -92,9 +92,10 @@ module.exports = function () {
       stage.AddChildren( stuff );
 
       console.log( factory
-        .Many( 10 )
+        .Many( 11 )
         .Make( TestClass, '@i(*|10)' )
         .Call( 'Add', [ '@i(*|10)', '$more' ] )
+        .Call( nk.Math.Spread, [ 0, 11, 5, '@i' ], 'x' )
         .Mass().slice()
       );
 

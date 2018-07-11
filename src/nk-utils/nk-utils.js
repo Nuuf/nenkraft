@@ -445,7 +445,7 @@ module.exports = function ( Nenkraft ) {
 
         if ( arg.indexOf( _pre ) === 0 ) {
 
-          _args[i] = _object[arg.slice( _pre.length )];
+          _args[i] = NESTED( _object, arg.slice( _pre.length ) );
 
         }
 

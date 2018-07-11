@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.2.1
+* @version     1.2.2
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -595,9 +595,10 @@ module.exports = function () {
       stage.AddChildren( stuff );
 
       console.log( factory
-        .Many( 10 )
+        .Many( 11 )
         .Make( TestClass, '@i(*|10)' )
         .Call( 'Add', [ '@i(*|10)', '$more' ] )
+        .Call( nk.Math.Spread, [ 0, 11, 5, '@i' ], 'x' )
         .Mass().slice()
       );
 

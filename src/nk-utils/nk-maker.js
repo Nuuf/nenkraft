@@ -112,12 +112,15 @@ module.exports = function ( Nenkraft ) {
   
   };
 
-  Maker.prototype.Call = function( _function, _args ) {
+  Maker.prototype.Call = function( _function, _args, _prop ) {
 
     var orders = this.orders;
-    var context, f, args, ias;
+    var context, f, args, ias, isArray, isString;
 
-    if ( _args != null && _args.length > 0 ) {
+    isArray = Array.isArray( _args );
+    isString = typeof _function === 'string';
+
+    if ( isArray === true ) {
 
       ias = CIA( _args, '@', 'i' );
 
@@ -125,10 +128,7 @@ module.exports = function ( Nenkraft ) {
 
     for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
 
-      context = NESTED( order, _function, true );
-      f = NESTED( order, _function );
-
-      if ( _args != null && _args.length > 0 ) {
+      if ( isArray === true ) {
 
         args = _args.slice();
 
@@ -138,7 +138,18 @@ module.exports = function ( Nenkraft ) {
       
       }
 
-      f.apply( context, args );
+      if ( isString === false ) {
+
+        NESTED( order, _prop, false, true, _function.apply( null, args ) );
+
+      } else {
+
+        context = NESTED( order, _function, true );
+        f = NESTED( order, _function );
+  
+        f.apply( context, args );
+      
+      }
     
     }
 
@@ -148,11 +159,11 @@ module.exports = function ( Nenkraft ) {
 
   Maker.prototype.Cast = function( _key, _value ) {
 
-    var orders = this.order;
+    var orders = this.order, isString = typeof _value === 'string';
 
     for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
 
-      if ( typeof _value === 'string' && _value[0] === '$' ) {
+      if ( isString === true && _value[0] === '$' ) {
 
         _value = NESTED( order, _value );
       
