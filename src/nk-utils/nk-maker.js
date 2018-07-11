@@ -7,6 +7,51 @@ module.exports = function ( Nenkraft ) {
   'use strict';
 
   var NESTED = Nenkraft.Utils.Nested;
+  var CIA = Nenkraft.Utils.CreateIteratorArgs;
+  var RAWOB = Nenkraft.Utils.ReplaceArgumentWithObjectValue;
+
+  function IteratorArgsLookup( _args, _ias, _index ) {
+
+    if ( _ias != null ) {
+
+      for ( var j = 0, l = _ias.length, ia = _ias[j]; j < l; ia = _ias[++j] ) {
+
+        if ( ia.iteratorIndex !== -1 ) {
+
+          if ( ia.mod && ia.val ) {
+
+            switch ( ia.mod ) {
+
+              case '+':
+                _args[ia.iteratorIndex] = _index + parseInt( ia.val );
+                break;
+              case '*':
+                _args[ia.iteratorIndex] = _index * parseInt( ia.val );
+                break;
+              case '-':
+                _args[ia.iteratorIndex] = _index - parseInt( ia.val );
+                break;
+              case '/':
+                _args[ia.iteratorIndex] = _index / parseInt( ia.val );
+                break;
+              default:
+                throw new Error( 'Bad mod!' );
+          
+            }
+          
+          } else {
+
+            _args[ia.iteratorIndex] = _index;
+        
+          }
+
+        }
+      
+      }
+
+    }
+  
+  }
 
   function Maker () {
 
@@ -51,30 +96,12 @@ module.exports = function ( Nenkraft ) {
     this.orders.length = 0;
     this.classUsed = _class;
 
-    var iteratorIndex;
-    var i;
+    var ias = CIA( arguments, '@', 'i' );
 
-    for ( i = 0; i < arguments.length; ++i ) {
+    for ( var i = 0; i < this.amount; ++i ) {
 
-      if ( typeof arguments[i] === 'string' && arguments[i][0] === '$' ) {
+      IteratorArgsLookup( arguments, ias, i );
 
-        switch ( arguments[i].slice( 1 ) ) {
-
-          case 'i' :
-            iteratorIndex = i;
-            break;
-          default: 
-            break;
-        
-        }
-
-      } 
-    
-    }
-
-    for ( i = 0; i < this.amount; ++i ) {
-
-      if ( iteratorIndex ) arguments[iteratorIndex] = i;
       this.orders.push(
         new ( Function.prototype.bind.apply( _class, arguments ) )()
       );
@@ -88,7 +115,13 @@ module.exports = function ( Nenkraft ) {
   Maker.prototype.Call = function( _function, _args ) {
 
     var orders = this.orders;
-    var context, f, arg, args;
+    var context, f, args, ias;
+
+    if ( _args != null && _args.length > 0 ) {
+
+      ias = CIA( _args, '@', 'i' );
+
+    }
 
     for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
 
@@ -99,26 +132,9 @@ module.exports = function ( Nenkraft ) {
 
         args = _args.slice();
 
-        for ( var j = 0; j < args.length; ++j ) {
+        RAWOB( order, args, '$' );
 
-          if ( typeof args[j] === 'string' && args[j][0] === '$' ) {
-  
-            arg = args[j].slice( 1 );
-
-            switch ( arg ) {
-
-              case 'i':
-                args[j] = i;
-                break;
-              default: 
-                args[j] = order[arg];
-                break;
-            
-            }
-        
-          }
-      
-        }
+        IteratorArgsLookup( args, ias, i );
       
       }
 
