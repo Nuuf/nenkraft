@@ -389,4 +389,70 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Nenkraft.Utils.CreateIteratorArgs = function( _args, _pre, _post ) {
+
+    var ias = [], arg, i, mod, val, pipe;
+
+    for ( i = 0; i < _args.length; ++i ) {
+
+      arg = _args[i];
+
+      if ( typeof arg === 'string' ) {
+
+        if ( arg.indexOf( _pre ) === 0 && arg.indexOf( _post ) === _pre.length ) {
+
+          pipe = arg.indexOf( '|' );
+
+          if ( pipe !== -1 ) {
+
+            mod = arg.slice( arg.indexOf( '(' ) + 1, pipe );
+            val = arg.slice( pipe + 1, arg.indexOf( ')' ) );
+            ias.push(
+              {
+                mod: mod,
+                val: val,
+                iteratorIndex: i
+              }
+            );
+          
+          } else {
+
+            ias.push( {
+              iteratorIndex: i
+            } );
+
+          }
+
+        }
+      
+      }
+
+    }
+
+    return ias;
+  
+  };
+
+  Nenkraft.Utils.ReplaceArgumentWithObjectValue = function( _object, _args, _pre ) {
+
+    var arg, i;
+
+    for ( i = 0; i < _args.length; ++i ) {
+
+      arg = _args[i];
+
+      if ( typeof arg === 'string' ) {
+
+        if ( arg.indexOf( _pre ) === 0 ) {
+
+          _args[i] = _object[arg.slice( _pre.length )];
+
+        }
+
+      }
+
+    }
+
+  };
+
 };

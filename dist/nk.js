@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.2.0
+* @version     1.2.1
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -1651,6 +1651,72 @@ module.exports = function ( Nenkraft ) {
   
   };
 
+  Nenkraft.Utils.CreateIteratorArgs = function( _args, _pre, _post ) {
+
+    var ias = [], arg, i, mod, val, pipe;
+
+    for ( i = 0; i < _args.length; ++i ) {
+
+      arg = _args[i];
+
+      if ( typeof arg === 'string' ) {
+
+        if ( arg.indexOf( _pre ) === 0 && arg.indexOf( _post ) === _pre.length ) {
+
+          pipe = arg.indexOf( '|' );
+
+          if ( pipe !== -1 ) {
+
+            mod = arg.slice( arg.indexOf( '(' ) + 1, pipe );
+            val = arg.slice( pipe + 1, arg.indexOf( ')' ) );
+            ias.push(
+              {
+                mod: mod,
+                val: val,
+                iteratorIndex: i
+              }
+            );
+          
+          } else {
+
+            ias.push( {
+              iteratorIndex: i
+            } );
+
+          }
+
+        }
+      
+      }
+
+    }
+
+    return ias;
+  
+  };
+
+  Nenkraft.Utils.ReplaceArgumentWithObjectValue = function( _object, _args, _pre ) {
+
+    var arg, i;
+
+    for ( i = 0; i < _args.length; ++i ) {
+
+      arg = _args[i];
+
+      if ( typeof arg === 'string' ) {
+
+        if ( arg.indexOf( _pre ) === 0 ) {
+
+          _args[i] = _object[arg.slice( _pre.length )];
+
+        }
+
+      }
+
+    }
+
+  };
+
 };
 
 
@@ -1775,6 +1841,51 @@ module.exports = function ( Nenkraft ) {
   'use strict';
 
   var NESTED = Nenkraft.Utils.Nested;
+  var CIA = Nenkraft.Utils.CreateIteratorArgs;
+  var RAWOB = Nenkraft.Utils.ReplaceArgumentWithObjectValue;
+
+  function IteratorArgsLookup( _args, _ias, _index ) {
+
+    if ( _ias != null ) {
+
+      for ( var j = 0, l = _ias.length, ia = _ias[j]; j < l; ia = _ias[++j] ) {
+
+        if ( ia.iteratorIndex !== -1 ) {
+
+          if ( ia.mod && ia.val ) {
+
+            switch ( ia.mod ) {
+
+              case '+':
+                _args[ia.iteratorIndex] = _index + parseInt( ia.val );
+                break;
+              case '*':
+                _args[ia.iteratorIndex] = _index * parseInt( ia.val );
+                break;
+              case '-':
+                _args[ia.iteratorIndex] = _index - parseInt( ia.val );
+                break;
+              case '/':
+                _args[ia.iteratorIndex] = _index / parseInt( ia.val );
+                break;
+              default:
+                throw new Error( 'Bad mod!' );
+          
+            }
+          
+          } else {
+
+            _args[ia.iteratorIndex] = _index;
+        
+          }
+
+        }
+      
+      }
+
+    }
+  
+  }
 
   function Maker () {
 
@@ -1819,30 +1930,12 @@ module.exports = function ( Nenkraft ) {
     this.orders.length = 0;
     this.classUsed = _class;
 
-    var iteratorIndex;
-    var i;
+    var ias = CIA( arguments, '@', 'i' );
 
-    for ( i = 0; i < arguments.length; ++i ) {
+    for ( var i = 0; i < this.amount; ++i ) {
 
-      if ( typeof arguments[i] === 'string' && arguments[i][0] === '$' ) {
+      IteratorArgsLookup( arguments, ias, i );
 
-        switch ( arguments[i].slice( 1 ) ) {
-
-          case 'i' :
-            iteratorIndex = i;
-            break;
-          default: 
-            break;
-        
-        }
-
-      } 
-    
-    }
-
-    for ( i = 0; i < this.amount; ++i ) {
-
-      if ( iteratorIndex ) arguments[iteratorIndex] = i;
       this.orders.push(
         new ( Function.prototype.bind.apply( _class, arguments ) )()
       );
@@ -1856,7 +1949,13 @@ module.exports = function ( Nenkraft ) {
   Maker.prototype.Call = function( _function, _args ) {
 
     var orders = this.orders;
-    var context, f, arg, args;
+    var context, f, args, ias;
+
+    if ( _args != null && _args.length > 0 ) {
+
+      ias = CIA( _args, '@', 'i' );
+
+    }
 
     for ( var i = 0, order = orders[i]; i < orders.length; order = orders[++i] ) {
 
@@ -1867,26 +1966,9 @@ module.exports = function ( Nenkraft ) {
 
         args = _args.slice();
 
-        for ( var j = 0; j < args.length; ++j ) {
+        RAWOB( order, args, '$' );
 
-          if ( typeof args[j] === 'string' && args[j][0] === '$' ) {
-  
-            arg = args[j].slice( 1 );
-
-            switch ( arg ) {
-
-              case 'i':
-                args[j] = i;
-                break;
-              default: 
-                args[j] = order[arg];
-                break;
-            
-            }
-        
-          }
-      
-        }
+        IteratorArgsLookup( args, ias, i );
       
       }
 
@@ -6498,7 +6580,7 @@ module.exports = function ( Nenkraft ) {
   Nenkraft.CP = Object.create( null );
   Nenkraft.Load = Object.create( null );
   Nenkraft.Animator = Object.create( null );        
-  Nenkraft.VERSION = '1.2.0';
+  Nenkraft.VERSION = '1.2.1';
 
   Nenkraft.PRINT_VERSION = function() {
 

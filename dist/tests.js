@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.2.0
+* @version     1.2.1
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -524,16 +524,17 @@ module.exports = function () {
 
         console.log( arguments );
         this.num = num;
+        this.toAdd = Math.random();
+        this.more = 12;
       
       }
 
       TestClass.prototype = Object.create( null );
       TestClass.prototype.constructor = TestClass;
 
-      TestClass.prototype.Add = function( num ) {
+      TestClass.prototype.Add = function( num, more ) {
 
-        console.log( num );
-        this.num += num;
+        this.num += num + more;
       
       };
 
@@ -595,8 +596,8 @@ module.exports = function () {
 
       console.log( factory
         .Many( 10 )
-        .Make( TestClass, '$i' )
-        .Call( 'Add', [ '$i' ] )
+        .Make( TestClass, '@i(*|10)' )
+        .Call( 'Add', [ '@i(*|10)', '$more' ] )
         .Mass().slice()
       );
 
