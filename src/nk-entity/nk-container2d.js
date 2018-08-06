@@ -269,23 +269,18 @@ module.exports = function ( Nenkraft ) {
 
   Container2D.prototype.SendToFront = function () {
 
-    if ( this.parent !== null ) {
-
-      var pChildren = this.parent.children;
-      var ix = pChildren.indexOf( this );
-
-      if ( ix !== -1 ) {
-
-        pChildren.push( pChildren.fickleSplice( ix ) );
-      
-      }
-    
-    }
+    this.Swap( -1 );
   
   };
 
   Container2D.prototype.SendToBack = function () {
 
+    this.Swap( 0 );
+
+  };
+
+  Container2D.prototype.Swap = function( _index ) {
+
     if ( this.parent !== null ) {
 
       var pChildren = this.parent.children;
@@ -293,17 +288,34 @@ module.exports = function ( Nenkraft ) {
 
       if ( ix !== -1 ) {
 
-        pChildren.unshift( pChildren.fickleSplice( ix ) );
-      
+        if ( _index === -1 ) {
+
+          _index = pChildren.length - 1;
+
+        }
+
+        var sibling = pChildren[_index];
+
+        pChildren[_index] = this;
+        pChildren[ix] = sibling; 
+
       }
-    
+
     }
-  
+
   };
 
   Container2D.prototype.Dump = function () {
 
-    this.children.length = 0;
+    var children = this.children;
+
+    for ( var i = 0, l = children.length; i < l; ++i ) {
+
+      children[i].parent = null;
+
+    }
+
+    children.length = 0;
   
   };
 

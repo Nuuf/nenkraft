@@ -1,7 +1,7 @@
 /**
 * @package     Nenkraft
 * @author      Gustav 'Nuuf' Åberg <gustavrein@gmail.com>
-* @version     1.2.2
+* @version     1.2.3
 * @copyright   (C) 2017-2018 Gustav 'Nuuf' Åberg
 * @license     {@link https://github.com/Nuuf/nenkraft/blob/master/LICENSE}
 */
@@ -2067,7 +2067,7 @@ module.exports = function () {
 
           _event.stopPropagation = true;
 
-          dragger.SendToBack();
+          dragger.SendToFront();
           break;
         
         }
